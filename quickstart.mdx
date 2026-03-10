@@ -1,80 +1,99 @@
 ---
 title: "Quickstart"
-description: "Start building awesome documentation in minutes"
+description: "Send your first Nudgen campaign in about 5 minutes"
 ---
 
-## Get started in three steps
+## What this guide helps you do
 
-Get your documentation site running locally and make your first customization.
+You'll sign up, upload a small contact list, set your brand tone, create a campaign, and send it. No credit card required for the free trial.
 
-### Step 1: Set up your local environment
+## Before you start
 
-<AccordionGroup>
-  <Accordion icon="copy" title="Clone your docs locally">
-    During the onboarding process, you created a GitHub repository with your docs content if you didn't already have one. You can find a link to this repository in your [dashboard](https://dashboard.mintlify.com).
-    
-    To clone the repository locally so that you can make and preview changes to your docs, follow the [Cloning a repository](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository) guide in the GitHub docs.
-  </Accordion>
-  <Accordion icon="rectangle-terminal" title="Start the preview server">
-    1. Install the Mintlify CLI: `npm i -g mint`
-    2. Navigate to your docs directory and run: `mint dev`
-    3. Open `http://localhost:3000` to see your docs live!
-    
-    <Tip>Your preview updates automatically as you edit files.</Tip>
-  </Accordion>
-</AccordionGroup>
-
-### Step 2: Deploy your changes
-
-<AccordionGroup>
-  <Accordion icon="github" title="Install our GitHub app">
-    Install the Mintlify GitHub app from your [dashboard](https://dashboard.mintlify.com/settings/organization/github-app).
-    
-    Our GitHub app automatically deploys your changes to your docs site, so you don't need to manage deployments yourself.
-</Accordion>
-<Accordion icon="palette" title="Update your site name and colors">
-    For a first change, let's update the name and colors of your docs site.
-
-    1. Open `docs.json` in your editor.
-    2. Change the `"name"` field to your project name.
-    3. Update the `"colors"` to match your brand.
-    4. Save and see your changes instantly at `http://localhost:3000`.
-
-    <Tip>Try changing the primary color to see an immediate difference!</Tip>
-  </Accordion>
-</AccordionGroup>
-
-### Step 3: Go live
-
-<Accordion icon="rocket" title="Publish your docs">
-  1. Commit and push your changes.
-  2. Your docs will update and be live in moments!
-</Accordion>
-
-## Next steps
-
-Now that you have your docs running, explore these key features:
-
-<CardGroup cols={2}>
-
-<Card title="Write Content" icon="pen-to-square" href="/essentials/markdown">
-  Learn MDX syntax and start writing your documentation.
-</Card>
-
-<Card title="Customize style" icon="palette" href="/essentials/settings">
-  Make your docs match your brand perfectly.
-</Card>
-
-<Card title="Add code examples" icon="square-code" href="/essentials/code">
-  Include syntax-highlighted code blocks.
-</Card>
-
-<Card title="API documentation" icon="code" href="/api-reference/introduction">
-  Auto-generate API docs from OpenAPI specs.
-</Card>
-
-</CardGroup>
+- A CSV file with at least one contact (email required, name optional)
+- About 5 minutes
 
 <Note>
-  **Need help?** See our [full documentation](https://mintlify.com/docs) or join our [community](https://mintlify.com/community).
+New accounts get a **7-day trial** with up to 10 contacts and 20 emails. Enough to run your first campaign.
 </Note>
+
+## Step 1: Sign up
+
+1. Go to [nudgen.net](https://nudgen.net).
+2. Click **Start Free Trial** or **Sign in**.
+3. Sign up with Google or email. No credit card needed.
+
+## Step 2: Upload your first contacts
+
+1. In the dashboard, open **Contacts** from the sidebar.
+2. Click **Upload CSV**.
+3. Upload a CSV with an `email` column (and optionally `name`).
+4. Add tags if you want (e.g. `trial`, `inactive`).
+5. Confirm. Contacts are encrypted and stored. You'll see masked emails like `j***@g***.com` until you reveal them.
+
+<Card title="CSV format" icon="file-csv" href="/contacts/upload">
+  Need details on column names, validation, and size limits? See the full upload guide.
+</Card>
+
+## Step 3: Configure brand tone
+
+1. Go to **Brand** (or **Settings** → **Brand**).
+2. Pick a preset: **Friendly**, **Professional**, **Playful**, or **Urgent**.
+3. Optionally add a custom prompt or example emails.
+4. Save. This tone applies to AI-generated content in your campaigns.
+
+<Card title="Brand configuration" icon="palette" href="/brand/overview">
+  Learn how presets, custom prompts, and examples affect AI output.
+</Card>
+
+## Step 4: Create and preview your campaign
+
+1. Go to **Campaigns** and click **New campaign**.
+2. Select your audience (all contacts or by tags).
+3. Choose your brand config.
+4. Enter a campaign goal (e.g. "Re-engage users who haven't logged in for 7 days").
+5. Click **Generate**. AI creates the subject line and email body.
+6. Use the **Desktop** and **Mobile** preview toggle to check how it looks.
+7. Click **Send test** to email yourself a copy before launching.
+
+## Step 5: Send (or schedule)
+
+1. Choose **Send now** or **Schedule**.
+2. If scheduling, pick date and time.
+3. Confirm. Emails go out via Postmark with open and click tracking.
+
+## What happens next
+
+- The dashboard shows sent, delivered, opened, and clicked counts.
+- If you set auto-stop rules (e.g. stop on click), users who engage will not receive later steps in a drip.
+- You can edit draft campaigns anytime. Once sent, content is locked but you can still view analytics.
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="I don't see my contacts after upload">
+    Check that your CSV has an `email` column and valid email formats. Names are optional. See the [upload guide](/contacts/upload) for format details.
+  </Accordion>
+  <Accordion title="Can I change the generated email?">
+    Yes. After generation, you can edit the subject and body in the editor before sending.
+  </Accordion>
+  <Accordion title="How do I stop a campaign?">
+    From the campaign list or detail page, use **Stop campaign**. Already-sent emails cannot be recalled.
+  </Accordion>
+</AccordionGroup>
+
+## Related docs
+
+<CardGroup cols={2}>
+  <Card title="Contacts overview" icon="users" href="/contacts/overview">
+    Encrypted storage, masking, tags, and segmentation.
+  </Card>
+  <Card title="Create campaigns" icon="paper-plane" href="/campaigns/create">
+    Full campaign wizard, preview, and test send.
+  </Card>
+  <Card title="Campaign analytics" icon="chart-line" href="/campaigns/analytics">
+    Metrics, delivery rates, and recipient activity.
+  </Card>
+  <Card title="Billing & plans" icon="credit-card" href="/billing/overview">
+    Trial limits, plan tiers, and usage meters.
+  </Card>
+</CardGroup>

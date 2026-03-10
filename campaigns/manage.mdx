@@ -1,0 +1,88 @@
+---
+title: "Manage campaigns"
+description: "Edit, send, schedule, and stop campaigns"
+---
+
+## What this page helps you do
+
+Edit draft campaigns, send or schedule them, and stop active campaigns. You'll also understand what you can and cannot change once a campaign has been sent.
+
+## Before you start
+
+- At least one campaign (draft or sent)
+- Owner or team member with edit permissions
+
+## Editing a campaign
+
+**You can edit only draft campaigns.** Once a campaign is sent, its content and audience are locked.
+
+For drafts, you can change:
+
+- Audience (all contacts or tags)
+- Brand config
+- Campaign goal and AI-generated content
+- Schedule (date and time)
+- Auto-stop rules (for drip sequences)
+
+1. Go to **Campaigns**.
+2. Open the campaign (click the name or **Edit**).
+3. Make changes in the wizard.
+4. Save. If you had scheduled it, the new schedule applies.
+
+## Send immediately
+
+1. Open a draft campaign.
+2. Click **Send now**.
+3. Confirm. Emails are queued and sent within minutes.
+
+<Note>
+Sending is irreversible. Double-check your audience and content before confirming.
+</Note>
+
+## Schedule for later
+
+1. Open a draft campaign.
+2. Choose **Schedule** and pick date and time.
+3. Save. The campaign status becomes **Scheduled**.
+4. At the scheduled time, emails send automatically.
+
+You can edit or cancel a scheduled campaign before it runs.
+
+## Stop a campaign
+
+Use **Stop campaign** when you want to halt sends immediately. This applies to:
+
+- Campaigns currently **Sending**
+- **Scheduled** campaigns (cancels the send)
+- **Drip sequences** — stops future steps for contacts who haven't received them yet
+
+Already-sent emails cannot be recalled. Recipients who got an email before you stopped will keep it.
+
+## Draft vs sent: what can change
+
+| Action                    | Draft | Scheduled | Sent |
+| ------------------------- | ----- | --------- | ---- |
+| Edit content              | Yes   | Yes       | No   |
+| Change audience           | Yes   | Yes       | No   |
+| Change schedule           | Yes   | Yes       | N/A  |
+| Send now                  | Yes   | Yes       | N/A  |
+| Stop                      | N/A   | Yes       | Yes* |
+| View analytics            | No    | No        | Yes  |
+
+\*Stopping a sent campaign only prevents future steps (e.g. in a drip). Past emails are not affected.
+
+## What happens next
+
+- After sending, check [campaign analytics](/campaigns/analytics) for delivery rates, opens, and clicks.
+- Create a new campaign if you need to send a different message.
+
+## Related docs
+
+<CardGroup cols={2}>
+  <Card title="Create campaigns" icon="paper-plane" href="/campaigns/create">
+    Campaign wizard and test send.
+  </Card>
+  <Card title="Campaign analytics" icon="chart-line" href="/campaigns/analytics">
+    Metrics and recipient activity.
+  </Card>
+</CardGroup>

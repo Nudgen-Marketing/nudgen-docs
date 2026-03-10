@@ -1,0 +1,76 @@
+---
+title: "Team settings"
+description: "Invite members, manage roles, and handle invitations"
+---
+
+## What this page helps you do
+
+Add team members to your Nudgen workspace, assign roles, and manage pending or expired invitations. You'll understand roles and permissions so you can collaborate safely.
+
+## Before you start
+
+- Owner or admin access
+- Email addresses of people you want to invite
+
+## Roles and permissions
+
+| Role   | Can do                                                                 |
+| ------ | ---------------------------------------------------------------------- |
+| **Owner** | Full access. Manage billing, team, and workspace. Cannot be removed. |
+| **Admin** | Invite and manage members. Edit campaigns, contacts, brand. No billing. |
+| **Member** | Create and edit campaigns, upload contacts, use brand configs. Limited team access. |
+
+<Note>
+Only owners and admins can invite new members or change roles. Members can view the team list but cannot modify it.
+</Note>
+
+## Invite a team member
+
+1. Go to **Settings** → **Team**.
+2. Click **Invite member**.
+3. Enter email and select role (**Admin** or **Member**).
+4. Send. The invitee receives an email with a link to accept.
+
+## Invitation statuses
+
+| Status     | Meaning                                                         |
+| ---------- | --------------------------------------------------------------- |
+| **Pending**  | Invitation sent. Recipient can accept via the link in the email. |
+| **Accepted** | Recipient joined. They appear in the team list with their role. |
+| **Expired**  | Invitation link timed out. Resend if needed.                   |
+| **Cancelled** | Invitation was cancelled before acceptance.                    |
+
+## Change or remove a member
+
+- **Change role:** Open the member, select a new role, save. Only owners and admins can change roles.
+- **Remove member:** Use **Remove** and confirm. They lose access immediately. Their past actions remain in logs.
+
+## What happens next
+
+- New members can [upload contacts](/contacts/upload), [create campaigns](/campaigns/create), and use shared brand configs.
+- Owners retain control over billing and critical settings.
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="Invitee didn't receive the email">
+    Ask them to check spam. Resend the invitation from the team page. Ensure the email address is correct.
+  </Accordion>
+  <Accordion title="Invitation expired">
+    Invitations expire after a set period. Create a new invitation with the same email.
+  </Accordion>
+  <Accordion title="Can a member see all contacts?">
+    Yes. Team members with access share the same workspace and contact list. Use tags and campaigns to organize work.
+  </Accordion>
+</AccordionGroup>
+
+## Related docs
+
+<CardGroup cols={2}>
+  <Card title="Account settings" icon="gear" href="/settings/account">
+    Overview of all settings.
+  </Card>
+  <Card title="Signatures" icon="pen-fancy" href="/settings/signatures">
+    Email signatures for campaigns.
+  </Card>
+</CardGroup>
