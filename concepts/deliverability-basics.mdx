@@ -1,0 +1,31 @@
+---
+title: "Deliverability basics"
+description: "How we keep your emails out of spam"
+---
+
+## What is deliverability?
+
+**Deliverability** means your emails reach the inbox instead of spam or being blocked. It depends on sender reputation, content, and recipient engagement. Nudgen and the delivery provider (Postmark) work to keep your campaigns deliverable.
+
+## What we do
+
+- **Sending via Postmark** — Emails are sent through a trusted delivery provider with good infrastructure and reputation.
+- **Validation and suppression** — We validate addresses and sync with the provider’s suppression list (bounces, complaints). We don’t resend to addresses that have hard bounced or been marked as spam.
+- **Content checks** — Before send, we can run basic checks (e.g. spam-prone wording) so you can fix issues. Signatures and HTML are sanitized to avoid injection and risky content.
+- **Tracking and unsubscribe** — Opens and clicks use tracking pixels and signed links. Every campaign includes an unsubscribe link so recipients can opt out; we honor that and stop sending to them.
+
+## What you can do
+
+- **Keep your list clean** — Remove or fix bounced and invalid addresses. Don’t buy lists or add contacts who didn’t opt in.
+- **Respect unsubscribes** — Don’t manually re-add unsubscribed users to campaigns without consent.
+- **Use a clear From name and reply-to** — Set brand identity (Settings → Brand) so recipients recognize you.
+- **Avoid spammy content** — Write clear, relevant copy and avoid aggressive sales language or misleading subject lines.
+- **Watch your metrics** — High bounce or complaint rates hurt reputation. Use the [Dashboard](/dashboard/overview) and [Campaign analytics](/campaigns/analytics) to spot problems.
+
+## Bounces and complaints
+
+- **Soft bounce** — Temporary failure (mailbox full, server down). The provider may retry; repeated soft bounces can lead to suppression.
+- **Hard bounce** — Permanent failure (invalid address, domain doesn’t exist). We suppress these immediately.
+- **Spam complaint** — Recipient marked the email as spam. Too many complaints damage reputation; we suppress complainers and you should review content and targeting.
+
+For more on contact status and suppression, see [Contact lifecycle](/contacts/lifecycle) and [Contacts overview](/contacts/overview). For sending issues, see [Troubleshooting: deliverability](/troubleshooting/deliverability).

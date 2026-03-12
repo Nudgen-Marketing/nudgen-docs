@@ -5,28 +5,30 @@ description: "AI-powered email retention that stops spam and starts converting"
 
 ## What Nudgen does
 
-Nudgen helps you re-engage inactive users with AI-crafted emails that feel human, not robotic. Instead of generic newsletters that nobody opens, you send personalized, Duolingo-style retention campaigns that convert.
+Nudgen is a SaaS platform for creating, sending, and analyzing retention and lifecycle email campaigns. You re-engage inactive users with AI-crafted emails that feel human, not robotic—personalized, on-brand campaigns that convert instead of generic newsletters nobody opens.
 
-**Three steps:**
+**How it works:**
 
-1. **Upload** — Import a CSV of contacts. We encrypt every email and name with AES-256 before it reaches our database.
-2. **AI generates** — Set your brand tone (friendly, professional, playful, or urgent). GPT-powered AI creates unique email content for each campaign.
-3. **Track & auto-stop** — Send via Postmark, track opens and clicks, and stop automatically when users engage. No more over-emailing.
+1. **Pick the right audience** — Import contacts, use a segment (tags or manual selection), or send to everyone. You see a reach estimate before launch.
+2. **Generate, edit, and test** — Set your brand tone and campaign goal. AI creates subject and body; you refine in the editor, preview, and send test emails before going live.
+3. **Launch with guardrails** — Send once or run a drip sequence with stop rules (e.g. stop on click or open). Track opens, clicks, bounces, unsubscribes, and recipient outcomes in real time.
+
+We send via Postmark, apply sanitization and deliverability checks, and handle unsubscribes and suppression so your reputation stays healthy.
 
 ## Why Nudgen
 
 <CardGroup cols={2}>
   <Card title="PII encryption" icon="lock">
-    Emails and names are encrypted at rest. Only you can reveal real contact data. We never see or store plaintext PII.
+    Contact emails and names are encrypted at rest. Data is masked in the UI and revealed only on demand. We never see or store plaintext PII.
   </Card>
   <Card title="Auto-stop rules" icon="stop">
-    Stop sending when a user clicks, opens X times, or unsubscribes. Campaigns pause themselves when goals are met.
+    Stop sending when a user clicks, opens, or unsubscribes. Drip campaigns pause themselves when goals are met so you don't over-email.
   </Card>
   <Card title="Smart analytics" icon="chart-line">
-    Delivery success rates, opens, clicks, and per-recipient activity. Know exactly what's working.
+    Campaign-level and recipient-level metrics: sent, delivered, opens, clicks, CTR, bounces, spam complaints, and unsubscribes.
   </Card>
   <Card title="Your brand voice" icon="palette">
-    Preset tones plus custom prompts. AI-generated emails sound like you, not a generic template.
+    Preset tones plus custom prompts and example emails. AI-generated copy sounds like you, not a generic template.
   </Card>
 </CardGroup>
 
@@ -38,22 +40,37 @@ Nudgen helps you re-engage inactive users with AI-crafted emails that feel human
   href="/quickstart"
   horizontal
 >
-  Sign up, upload contacts, and send your first campaign in about 5 minutes.
+  Sign up, upload contacts, configure brand and signatures, and send your first campaign in about 5 minutes.
+</Card>
+
+<Card
+  title="Onboarding checklist"
+  icon="list-check"
+  href="/getting-started/checklist"
+  horizontal
+>
+  A first-week checklist: workspace, contacts, brand, first campaign, and team.
 </Card>
 
 ## Next steps
 
 <CardGroup cols={2}>
-  <Card title="Upload contacts" icon="users" href="/contacts/overview">
-    Learn how we encrypt and mask your contact data.
+  <Card title="Contacts" icon="users" href="/contacts/overview">
+    Encrypted storage, masking, tags, and segmentation.
   </Card>
-  <Card title="Create campaigns" icon="paper-plane" href="/campaigns/overview">
-    One-shot or drip sequences. AI generates content; you preview and send.
+  <Card title="Campaigns" icon="paper-plane" href="/campaigns/overview">
+    One-time or drip. AI generates; you preview, edit, and send.
   </Card>
-  <Card title="Configure brand" icon="wand-magic-sparkles" href="/brand/overview">
-    Set your tone and custom prompts for consistent brand voice.
+  <Card title="Brand" icon="wand-magic-sparkles" href="/brand/overview">
+    Tone presets and custom prompts for consistent voice.
+  </Card>
+  <Card title="Dashboard" icon="chart-line" href="/dashboard/overview">
+    Overview metrics, time-series charts, and campaign list.
   </Card>
   <Card title="Billing & plans" icon="credit-card" href="/billing/overview">
-    Trial, Starter, Growth, Pro, and Enterprise. Usage meters and limits.
+    Trial, plans, usage meters, and limits.
+  </Card>
+  <Card title="Security & privacy" icon="shield-check" href="/security/privacy-and-data">
+    PII handling, tracking, and third-party providers.
   </Card>
 </CardGroup>

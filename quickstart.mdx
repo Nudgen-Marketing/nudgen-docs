@@ -5,7 +5,7 @@ description: "Send your first Nudgen campaign in about 5 minutes"
 
 ## What this guide helps you do
 
-You'll sign up, upload a small contact list, set your brand tone, create a campaign, and send it. No credit card required for the free trial.
+You'll sign up, upload a small contact list, set your brand tone and at least one signature, create a campaign with the wizard, and send it. No credit card required for the free trial.
 
 ## Before you start
 
@@ -13,68 +13,73 @@ You'll sign up, upload a small contact list, set your brand tone, create a campa
 - About 5 minutes
 
 <Note>
-New accounts get a **7-day trial** with up to 10 contacts and 20 emails. Enough to run your first campaign.
+New accounts get a **trial** with limited contacts and emails—enough to run your first campaign. Exact limits depend on your plan; see [Billing](/billing/overview) or the live [pricing page](https://nudgen.net/pricing) for current numbers.
 </Note>
+
+**Prerequisites for sending:** You need at least one active contact, at least one brand config, and at least one email signature. The app will prompt you if any are missing.
 
 ## Step 1: Sign up
 
 1. Go to [nudgen.net](https://nudgen.net).
 2. Click **Start Free Trial** or **Sign in**.
-3. Sign up with Google or email. No credit card needed.
+3. Sign in with Google. You're synced to the app and redirected to the **Dashboard**.
 
 ## Step 2: Upload your first contacts
 
-1. In the dashboard, open **Contacts** from the sidebar.
-2. Click **Upload CSV**.
-3. Upload a CSV with an `email` column (and optionally `name`).
-4. Add tags if you want (e.g. `trial`, `inactive`).
-5. Confirm. Contacts are encrypted and stored. You'll see masked emails like `j***@g***.com` until you reveal them.
+1. In the sidebar, open **Contacts**.
+2. Click **Upload CSV** (or add a single contact if you prefer).
+3. Upload a CSV with an `email` column (and optionally `name`). Add tags if you want (e.g. `trial`, `inactive`).
+4. Confirm. Contacts are encrypted and stored. You'll see masked emails (e.g. `j***@g***.com`) until you reveal them.
 
 <Card title="CSV format" icon="file-csv" href="/contacts/upload">
-  Need details on column names, validation, and size limits? See the full upload guide.
+  Column names, validation rules, and size limits are in the upload guide.
 </Card>
 
-## Step 3: Configure brand tone
+## Step 3: Configure brand and signature
 
-1. Go to **Brand** (or **Settings** → **Brand**).
-2. Pick a preset: **Friendly**, **Professional**, **Playful**, or **Urgent**.
-3. Optionally add a custom prompt or example emails.
-4. Save. This tone applies to AI-generated content in your campaigns.
+1. Go to **Brand** in the sidebar. Create or pick a brand config: choose a preset tone (e.g. Friendly, Professional) and optionally add a custom prompt or example emails. Save.
+2. Go to **Settings** → **Signatures**. Create at least one signature; you'll attach it when creating a campaign. Save.
+
+These are required so the campaign wizard can generate on-brand copy and append a signature to emails.
 
 <Card title="Brand configuration" icon="palette" href="/brand/overview">
-  Learn how presets, custom prompts, and examples affect AI output.
+  How presets, custom prompts, and examples affect AI output.
 </Card>
 
-## Step 4: Create and preview your campaign
+<Card title="Signatures" icon="pen-nib" href="/settings/signatures">
+  Create, edit, and attach signatures to campaigns.
+</Card>
+
+## Step 4: Create your campaign (wizard)
+
+The campaign flow has three steps: **Campaign Setup**, **Content Generation**, and **Finalize**.
 
 1. Go to **Campaigns** and click **New campaign**.
-2. Select your audience (all contacts or by tags).
-3. Choose your brand config.
-4. Enter a campaign goal (e.g. "Re-engage users who haven't logged in for 7 days").
-5. Click **Generate**. AI creates the subject line and email body.
-6. Use the **Desktop** and **Mobile** preview toggle to check how it looks.
-7. Click **Send test** to email yourself a copy before launching.
+2. **Campaign Setup:** Choose campaign type (one-time or drip). Select audience: all contacts, by tags, or manual selection. Optionally add a CTA link (tracked). Pick brand config and signature, and enter a campaign goal (e.g. "Re-engage users who haven't logged in for 7 days"). Check the reach estimate; fix audience if it's zero.
+3. **Content Generation:** Click **Generate**. AI creates subject and body. Edit in the editor if needed, use **Desktop** / **Mobile** preview, and **Send test** to email yourself a copy.
+4. **Finalize:** Review the summary. For drip, set stop rules (e.g. stop on click or open) if desired. Choose **Send now** or **Schedule** (date and time), then confirm. Emails go out via Postmark with open and click tracking.
 
-## Step 5: Send (or schedule)
+## Step 5: Check the dashboard
 
-1. Choose **Send now** or **Schedule**.
-2. If scheduling, pick date and time.
-3. Confirm. Emails go out via Postmark with open and click tracking.
+After sending, the **Dashboard** shows overview metrics (sent, delivered, opens, clicks, CTR, bounces, complaints) and a campaigns table. Use the campaign detail page for recipient-level activity and time-series.
 
 ## What happens next
 
-- The dashboard shows sent, delivered, opened, and clicked counts.
-- If you set auto-stop rules (e.g. stop on click), users who engage will not receive later steps in a drip.
-- You can edit draft campaigns anytime. Once sent, content is locked but you can still view analytics.
+- Draft campaigns can be edited until you send or schedule. Once sent, content is locked but you can view analytics and stop drip steps.
+- If you set auto-stop rules, recipients who meet the rule (e.g. click) won't receive later steps in the sequence.
+- For more structure, use the [onboarding checklist](/getting-started/checklist).
 
 ## Troubleshooting
 
 <AccordionGroup>
   <Accordion title="I don't see my contacts after upload">
-    Check that your CSV has an `email` column and valid email formats. Names are optional. See the [upload guide](/contacts/upload) for format details.
+    Ensure your CSV has an `email` column and valid formats. See the [upload guide](/contacts/upload) for rules and limits.
+  </Accordion>
+  <Accordion title="The wizard says I have no active contacts">
+    Upload or add at least one contact and ensure they're not suppressed or unsubscribed. Check [Contacts overview](/contacts/overview).
   </Accordion>
   <Accordion title="Can I change the generated email?">
-    Yes. After generation, you can edit the subject and body in the editor before sending.
+    Yes. After generation, edit the subject and body in the editor before you finalize and send.
   </Accordion>
   <Accordion title="How do I stop a campaign?">
     From the campaign list or detail page, use **Stop campaign**. Already-sent emails cannot be recalled.
@@ -84,16 +89,22 @@ New accounts get a **7-day trial** with up to 10 contacts and 20 emails. Enough 
 ## Related docs
 
 <CardGroup cols={2}>
+  <Card title="Onboarding checklist" icon="list-check" href="/getting-started/checklist">
+    First-week steps: workspace, contacts, brand, first campaign, team.
+  </Card>
   <Card title="Contacts overview" icon="users" href="/contacts/overview">
     Encrypted storage, masking, tags, and segmentation.
   </Card>
   <Card title="Create campaigns" icon="paper-plane" href="/campaigns/create">
-    Full campaign wizard, preview, and test send.
+    Full wizard, audience, preview, and test send.
   </Card>
-  <Card title="Campaign analytics" icon="chart-line" href="/campaigns/analytics">
-    Metrics, delivery rates, and recipient activity.
+  <Card title="Dashboard" icon="chart-line" href="/dashboard/overview">
+    Overview metrics, charts, and campaign list.
   </Card>
   <Card title="Billing & plans" icon="credit-card" href="/billing/overview">
     Trial limits, plan tiers, and usage meters.
+  </Card>
+  <Card title="Troubleshooting" icon="wrench" href="/troubleshooting">
+    Common issues and FAQ.
   </Card>
 </CardGroup>

@@ -16,16 +16,16 @@ Understand how your campaigns perform: how many emails were sent, delivered, ope
 
 On the campaign detail page, you'll see:
 
-| Metric            | Meaning                                                      |
-| ----------------- | ------------------------------------------------------------ |
-| **Emails Sent**   | Total emails submitted to the delivery provider.             |
-| **Emails Delivered** | Successfully delivered to recipient mailboxes.           |
-| **Total Opens**   | How many times the email was opened (tracking pixel).         |
-| **Total Clicks**  | How many times links were clicked.                           |
-| **CTR**           | Click-through rate: (clicks / delivered) × 100.              |
-| **Spam Complaints** | Recipients marked the email as spam.                      |
-| **Hard Bounce**   | Permanent failure (invalid address, domain doesn't exist).    |
-| **Soft Bounce**   | Temporary failure (mailbox full, server down).               |
+| Metric            | Meaning                                                                 |
+| ----------------- | ----------------------------------------------------------------------- |
+| **Emails Sent**   | Total send attempts (including API or network failures).                |
+| **Emails Delivered** | Emails successfully accepted by the recipient's mail server.        |
+| **Total Opens**   | Number of times the email was opened (tracking pixel).                  |
+| **Total Clicks**  | Number of times links were clicked.                                    |
+| **CTR**           | Click-through rate: (Total Clicks / Total Sent) × 100.                 |
+| **Spam Complaints** | Number of times recipients marked the email as spam.                 |
+| **Soft Bounce**   | Temporary delivery issues (mailbox full, throttling, transient errors).  |
+| **Hard Bounce**   | Permanent delivery failures (invalid address, blocked domain).          |
 
 ## Delivery success and failure
 

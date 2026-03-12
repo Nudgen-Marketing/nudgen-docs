@@ -32,7 +32,9 @@ A multi-step campaign with delays between emails (e.g. Day 1, Day 3, Day 7). Use
 - Follow up with non-openers or non-clickers
 - Build a Duolingo-style retention flow
 
-Each step has its own goal, subject, and AI-generated body. Contacts move to the next step only after the delay. You can set **auto-stop rules** so that users who engage (click, open, etc.) stop receiving later steps.
+Each step has its own goal, subject, and AI-generated body. Contacts move to the next step only after the delay. You can set **auto-stop rules** (e.g. stop when a recipient clicks, or when they open the email) so that users who engage stop receiving later steps.
+
+**Audience types:** When creating a campaign you choose who receives it: **All contacts**, **By tags** (only contacts with selected tags), or **Manual** (hand-pick recipients). The wizard shows a reach estimate before you launch.
 
 ## Campaign statuses
 
@@ -40,9 +42,9 @@ Each step has its own goal, subject, and AI-generated body. Contacts move to the
 | ---------- | ----------------------------------------------------------------------- |
 | **Draft**  | Not sent. You can edit goals, audience, content, and schedule.         |
 | **Scheduled** | Send time is set. Emails will go out at the scheduled time.        |
-| **Sending**   | Emails are being sent. Progress appears in the dashboard.          |
-| **Sent**      | All emails have been sent. Content is locked; you can view analytics. |
-| **Stopped**   | Campaign was manually stopped. Some contacts may have already received emails. |
+| **Active** / **Sending** | Emails are being sent. Progress appears in the dashboard.     |
+| **Sent**   | All emails have been sent. Content is locked; you can view analytics.  |
+| **Stopped**| Campaign was manually stopped. Some contacts may have already received emails; future drip steps are cancelled. |
 
 <Note>
 Once a campaign is sent, you cannot edit its content or resend. Create a new campaign to send a different message.

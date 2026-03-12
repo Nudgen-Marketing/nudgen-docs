@@ -24,9 +24,9 @@ We also store a one-way hash of each email for deduplication. Duplicate emails i
 
 ## Masked view
 
-By default, the contact list shows masked values like `j***@g***.com` instead of real addresses. This protects your data from shoulder-surfing and limits exposure if someone else has access to your screen.
+By default, the contact list shows masked values like `j***@g***.com` instead of real addresses. PII is encrypted at rest; we never see or store plaintext emails or names. Masking protects your data from shoulder-surfing and limits exposure if someone else has access to your screen.
 
-**Revealing a contact:** Only the account owner (and team members with access) can click **Reveal** to show the real email. After you navigate away or refresh, it masks again. We never display decrypted data in analytics or logs.
+**Revealing a contact:** You (and other workspace members with access) can click **Reveal** to show the real email and name in the UI. Decryption happens only in your browser when you reveal; after you navigate away or refresh, values mask again. We never display decrypted PII in analytics, logs, or exports.
 
 ## Tags and segmentation
 
@@ -42,9 +42,9 @@ When creating a campaign, you choose an audience: all contacts, or only those wi
 
 Contacts can have one of these statuses:
 
-- **Active** — Can receive campaigns
-- **Unsubscribed** — Opted out. They will not receive future emails unless you manually change status.
-- **Bounced** — Email delivery failed (invalid address, full mailbox, etc.). Automatically removed from future sends.
+- **Active** — Can receive campaigns. Default for newly imported contacts.
+- **Unsubscribed** — Opted out via the unsubscribe link or manually. They will not receive future campaign emails unless you change their status.
+- **Suppressed / Bounced** — Delivery failed (invalid address, mailbox full, or provider suppression list). These contacts are automatically excluded from future sends to protect deliverability. Our system syncs with the delivery provider's suppression list.
 
 ## What happens next
 

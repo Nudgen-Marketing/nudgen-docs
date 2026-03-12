@@ -7,7 +7,7 @@
     "light": "#07C983",
     "dark": "#15803D"
   },
-  "favicon": "/favicon.svg",
+  "favicon": "/favicons/favicon.ico",
   "navigation": {
     "tabs": [
       {
@@ -15,11 +15,11 @@
         "groups": [
           {
             "group": "Getting started",
-            "pages": ["index", "quickstart"]
+            "pages": ["index", "quickstart", "getting-started/checklist", "roadmap", "connect"]
           },
           {
             "group": "Contacts",
-            "pages": ["contacts/overview", "contacts/upload"]
+            "pages": ["contacts/overview", "contacts/upload", "contacts/lifecycle"]
           },
           {
             "group": "Campaigns",
@@ -35,8 +35,8 @@
             "pages": ["brand/overview"]
           },
           {
-            "group": "Billing",
-            "pages": ["billing/overview"]
+            "group": "Dashboard",
+            "pages": ["dashboard/overview"]
           },
           {
             "group": "Settings",
@@ -45,6 +45,32 @@
               "settings/team",
               "settings/signatures"
             ]
+          },
+          {
+            "group": "Billing",
+            "pages": ["billing/overview"]
+          },
+          {
+            "group": "Concepts",
+            "pages": [
+              "concepts/contact-lifecycle",
+              "concepts/workspaces-and-roles",
+              "concepts/deliverability-basics",
+              "concepts/developers-and-apis"
+            ]
+          },
+          {
+            "group": "Troubleshooting & FAQ",
+            "pages": [
+              "troubleshooting/index",
+              "troubleshooting/deliverability",
+              "troubleshooting/billing",
+              "troubleshooting/access"
+            ]
+          },
+          {
+            "group": "Security & privacy",
+            "pages": ["security/privacy-and-data"]
           }
         ]
       }

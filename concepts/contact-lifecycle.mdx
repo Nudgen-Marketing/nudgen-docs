@@ -1,0 +1,35 @@
+---
+title: "Contact lifecycle"
+description: "How contacts move through import, engagement, and suppression"
+---
+
+Contacts in Nudgen move through a simple lifecycle from import to active sending, and sometimes to unsubscribed or suppressed. Understanding this helps you keep lists clean and stay within limits.
+
+## From import to active
+
+When you **import** contacts (CSV or add one-by-one), they are validated, encrypted, and stored. Duplicates in the same workspace are merged. New contacts are **active** and can be selected as campaign recipients.
+
+## Receiving campaigns
+
+**Active** contacts are eligible for campaigns. When you choose an audience (all contacts, by tags, or manual), the app counts only active, non-suppressed contacts and shows a reach estimate. Sends, opens, clicks, bounces, and unsubscribes are recorded and drive both analytics and status changes.
+
+## Status changes
+
+- **Unsubscribed** — Recipient used the unsubscribe link (or was marked unsubscribed manually). They are excluded from future campaign sends.
+- **Suppressed / Bounced** — The delivery provider reported a bounce or added the address to a suppression list. We sync with that list and exclude these contacts from future sends to protect deliverability.
+
+## Updates and removal
+
+You can **update** contacts (name, tags) in the UI or by re-uploading a CSV with the same email. **Deleting** a contact removes them from the workspace; they no longer count toward your contact limit and cannot receive campaigns.
+
+## Summary
+
+| State | Can receive campaigns? | Counts toward limit? |
+| ----- | ----------------------- | --------------------- |
+| Active | Yes | Yes |
+| Unsubscribed | No | Yes* |
+| Suppressed / Bounced | No | Yes* |
+
+\*Unsubscribed and suppressed contacts still count toward your plan’s contact limit; you can delete them to free space.
+
+For step-by-step lifecycle details, see [Contact lifecycle (Contacts)](/contacts/lifecycle). For encryption and masking, see [Contacts overview](/contacts/overview).
