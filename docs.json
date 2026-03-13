@@ -15,7 +15,7 @@
         "groups": [
           {
             "group": "Getting started",
-            "pages": ["index", "quickstart", "getting-started/checklist", "roadmap", "connect"]
+            "pages": ["index", "quickstart", "getting-started/checklist", "roadmap", "community"]
           },
           {
             "group": "Contacts",
