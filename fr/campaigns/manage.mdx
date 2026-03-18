@@ -1,0 +1,77 @@
+---
+title: "Gérer les campagnes"
+description: "Modifier, envoyer, programmer et arrêter des campagnes"
+---
+
+## Ce que cette page vous aide à faire
+Modifier les campagnes en brouillon, les envoyer ou les programmer, et arrêter les campagnes actives si nécessaire. Vous verrez aussi ce que vous pouvez encore modifier une fois une campagne envoyée.
+
+## Avant de commencer
+- Au moins une campagne, en brouillon ou déjà envoyée
+- Des autorisations suffisantes pour modifier les campagnes
+
+## Modifier une campagne
+**Seules les campagnes en brouillon sont modifiables.** Une fois envoyée, une campagne verrouille son contenu et son audience.
+
+Pour une campagne en brouillon, vous pouvez modifier :
+- l’audience
+- la configuration de marque
+- l’objectif et le contenu généré par l’IA
+- la programmation
+- les règles d’arrêt automatique pour une séquence drip
+
+1. Ouvrez **Campagnes**.
+2. Ouvrez la campagne en cliquant sur son nom ou sur **Modifier**.
+3. Apportez vos changements dans l’assistant.
+4. Enregistrez.
+
+Si la campagne était déjà programmée, la nouvelle configuration s’appliquera.
+
+## Envoyer immédiatement
+1. Ouvrez une campagne en brouillon.
+2. Cliquez sur **Envoyer maintenant**.
+3. Confirmez. Les e-mails seront placés en file d’attente puis envoyés dans les minutes suivantes.
+
+<Note>
+L’envoi est irréversible. Vérifiez bien l’audience et le contenu avant de confirmer.
+</Note>
+
+## Programmer pour plus tard
+1. Ouvrez une campagne en brouillon.
+2. Choisissez **Programmer** puis sélectionnez la date et l’heure.
+3. Enregistrez. Le statut passe à **Programmée**.
+4. À l’heure prévue, les e-mails sont envoyés automatiquement.
+
+Vous pouvez modifier ou annuler une campagne programmée avant son exécution.
+
+## Arrêter une campagne
+Utilisez **Arrêter la campagne** lorsque vous souhaitez interrompre immédiatement les envois. Cela s’applique à :
+- une campagne en cours d’**envoi**
+- une campagne **programmée**, ce qui annule l’envoi
+- une **séquence drip**, afin d’empêcher les étapes futures pour les contacts qui ne les ont pas encore reçues
+
+Les e-mails déjà envoyés ne peuvent pas être rappelés.
+
+## Brouillon ou envoyé : ce qui peut changer
+| Action | Brouillon | Programmée | Envoyée |
+| --- | --- | --- | --- |
+| Modifier le contenu | Oui | Oui | Non |
+| Changer l’audience | Oui | Oui | Non |
+| Modifier la programmation | Oui | Oui | Non applicable |
+| Envoyer maintenant | Oui | Oui | Non applicable |
+| Arrêter la campagne | Non applicable | Oui | Oui, mais uniquement pour les étapes futures |
+| Voir les analyses | Non | Non | Oui |
+
+## Que se passe-t-il ensuite
+- Après l’envoi, consultez l’[analyse de campagne](/fr/campaigns/analytics) pour suivre la délivrabilité, les ouvertures et les clics.
+- Si vous devez envoyer un message différent, créez une nouvelle campagne.
+
+## Documents associés
+<CardGroup cols={2}>
+  <Card title="Créer des campagnes" icon="paper-plane" href="/fr/campaigns/create">
+    Assistant de campagne et envoi de test.
+  </Card>
+  <Card title="Analyse de campagne" icon="chart-line" href="/fr/campaigns/analytics">
+    Métriques et activité des destinataires.
+  </Card>
+</CardGroup>

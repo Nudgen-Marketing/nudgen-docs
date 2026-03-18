@@ -9,108 +9,721 @@
   },
   "favicon": "/favicons/favicon.ico",
   "navigation": {
-    "tabs": [
+    "languages": [
       {
-        "tab": "Guides",
-        "groups": [
+        "language": "en",
+        "tabs": [
           {
-            "group": "Getting started",
-            "pages": ["index", "quickstart", "getting-started/checklist", "roadmap", "community"]
-          },
-          {
-            "group": "Contacts",
-            "pages": ["contacts/overview", "contacts/upload", "contacts/lifecycle"]
-          },
-          {
-            "group": "Campaigns",
-            "pages": [
-              "campaigns/overview",
-              "campaigns/create",
-              "campaigns/manage",
-              "campaigns/analytics"
+            "tab": "Guides",
+            "groups": [
+              {
+                "group": "Getting started",
+                "pages": [
+                  "en/index",
+                  "en/quickstart",
+                  "en/getting-started/checklist",
+                  "en/roadmap",
+                  "en/community"
+                ]
+              },
+              {
+                "group": "Contacts",
+                "pages": [
+                  "en/contacts/overview",
+                  "en/contacts/upload",
+                  "en/contacts/lifecycle"
+                ]
+              },
+              {
+                "group": "Campaigns",
+                "pages": [
+                  "en/campaigns/overview",
+                  "en/campaigns/create",
+                  "en/campaigns/manage",
+                  "en/campaigns/analytics"
+                ]
+              },
+              {
+                "group": "Brand",
+                "pages": [
+                  "en/brand/overview"
+                ]
+              },
+              {
+                "group": "Dashboard",
+                "pages": [
+                  "en/dashboard/overview"
+                ]
+              },
+              {
+                "group": "Settings",
+                "pages": [
+                  "en/settings/account",
+                  "en/settings/team",
+                  "en/settings/signatures"
+                ]
+              },
+              {
+                "group": "Billing",
+                "pages": [
+                  "en/billing/overview"
+                ]
+              },
+              {
+                "group": "Concepts",
+                "pages": [
+                  "en/concepts/contact-lifecycle",
+                  "en/concepts/workspaces-and-roles",
+                  "en/concepts/deliverability-basics",
+                  "en/concepts/developers-and-apis"
+                ]
+              },
+              {
+                "group": "Troubleshooting & FAQ",
+                "pages": [
+                  "en/troubleshooting/index",
+                  "en/troubleshooting/deliverability",
+                  "en/troubleshooting/billing",
+                  "en/troubleshooting/access"
+                ]
+              },
+              {
+                "group": "Security & privacy",
+                "pages": [
+                  "en/security/privacy-and-data"
+                ]
+              }
             ]
-          },
-          {
-            "group": "Brand",
-            "pages": ["brand/overview"]
-          },
-          {
-            "group": "Dashboard",
-            "pages": ["dashboard/overview"]
-          },
-          {
-            "group": "Settings",
-            "pages": [
-              "settings/account",
-              "settings/team",
-              "settings/signatures"
-            ]
-          },
-          {
-            "group": "Billing",
-            "pages": ["billing/overview"]
-          },
-          {
-            "group": "Concepts",
-            "pages": [
-              "concepts/contact-lifecycle",
-              "concepts/workspaces-and-roles",
-              "concepts/deliverability-basics",
-              "concepts/developers-and-apis"
-            ]
-          },
-          {
-            "group": "Troubleshooting & FAQ",
-            "pages": [
-              "troubleshooting/index",
-              "troubleshooting/deliverability",
-              "troubleshooting/billing",
-              "troubleshooting/access"
-            ]
-          },
-          {
-            "group": "Security & privacy",
-            "pages": ["security/privacy-and-data"]
           }
-        ]
-      }
-    ],
-    "global": {
-      "anchors": [
-        {
-          "anchor": "Home",
-          "href": "https://nudgen.net",
-          "icon": "house"
+        ],
+        "global": {
+          "anchors": [
+            {
+              "anchor": "Home",
+              "href": "https://nudgen.net",
+              "icon": "house"
+            },
+            {
+              "anchor": "Pricing",
+              "href": "https://nudgen.net/pricing",
+              "icon": "tag"
+            }
+          ]
         },
-        {
-          "anchor": "Pricing",
-          "href": "https://nudgen.net/pricing",
-          "icon": "tag"
+        "navbar": {
+          "links": [
+            {
+              "label": "Pricing",
+              "href": "https://nudgen.net/pricing"
+            },
+            {
+              "label": "Contact",
+              "href": "mailto:contact@nudgen.net"
+            }
+          ],
+          "primary": {
+            "type": "button",
+            "label": "Open app",
+            "href": "https://nudgen.net"
+          }
         }
-      ]
-    }
+      },
+      {
+        "language": "es",
+        "tabs": [
+          {
+            "tab": "Guías",
+            "groups": [
+              {
+                "group": "Primeros pasos",
+                "pages": [
+                  "es/index",
+                  "es/quickstart",
+                  "es/getting-started/checklist",
+                  "es/roadmap",
+                  "es/community"
+                ]
+              },
+              {
+                "group": "Contactos",
+                "pages": [
+                  "es/contacts/overview",
+                  "es/contacts/upload",
+                  "es/contacts/lifecycle"
+                ]
+              },
+              {
+                "group": "Campañas",
+                "pages": [
+                  "es/campaigns/overview",
+                  "es/campaigns/create",
+                  "es/campaigns/manage",
+                  "es/campaigns/analytics"
+                ]
+              },
+              {
+                "group": "Marca",
+                "pages": [
+                  "es/brand/overview"
+                ]
+              },
+              {
+                "group": "Panel",
+                "pages": [
+                  "es/dashboard/overview"
+                ]
+              },
+              {
+                "group": "Configuración",
+                "pages": [
+                  "es/settings/account",
+                  "es/settings/team",
+                  "es/settings/signatures"
+                ]
+              },
+              {
+                "group": "Facturación",
+                "pages": [
+                  "es/billing/overview"
+                ]
+              },
+              {
+                "group": "Conceptos",
+                "pages": [
+                  "es/concepts/contact-lifecycle",
+                  "es/concepts/workspaces-and-roles",
+                  "es/concepts/deliverability-basics",
+                  "es/concepts/developers-and-apis"
+                ]
+              },
+              {
+                "group": "Solución de problemas y preguntas frecuentes",
+                "pages": [
+                  "es/troubleshooting/index",
+                  "es/troubleshooting/deliverability",
+                  "es/troubleshooting/billing",
+                  "es/troubleshooting/access"
+                ]
+              },
+              {
+                "group": "Seguridad y privacidad",
+                "pages": [
+                  "es/security/privacy-and-data"
+                ]
+              }
+            ]
+          }
+        ],
+        "global": {
+          "anchors": [
+            {
+              "anchor": "Inicio",
+              "href": "https://nudgen.net",
+              "icon": "house"
+            },
+            {
+              "anchor": "Precios",
+              "href": "https://nudgen.net/pricing",
+              "icon": "tag"
+            }
+          ]
+        },
+        "navbar": {
+          "links": [
+            {
+              "label": "Precios",
+              "href": "https://nudgen.net/pricing"
+            },
+            {
+              "label": "Contacto",
+              "href": "mailto:contact@nudgen.net"
+            }
+          ],
+          "primary": {
+            "type": "button",
+            "label": "Abrir app",
+            "href": "https://nudgen.net"
+          }
+        }
+      },
+      {
+        "language": "fr",
+        "tabs": [
+          {
+            "tab": "Guides",
+            "groups": [
+              {
+                "group": "Premiers pas",
+                "pages": [
+                  "fr/index",
+                  "fr/quickstart",
+                  "fr/getting-started/checklist",
+                  "fr/roadmap",
+                  "fr/community"
+                ]
+              },
+              {
+                "group": "Contacts",
+                "pages": [
+                  "fr/contacts/overview",
+                  "fr/contacts/upload",
+                  "fr/contacts/lifecycle"
+                ]
+              },
+              {
+                "group": "Campagnes",
+                "pages": [
+                  "fr/campaigns/overview",
+                  "fr/campaigns/create",
+                  "fr/campaigns/manage",
+                  "fr/campaigns/analytics"
+                ]
+              },
+              {
+                "group": "Marque",
+                "pages": [
+                  "fr/brand/overview"
+                ]
+              },
+              {
+                "group": "Tableau de bord",
+                "pages": [
+                  "fr/dashboard/overview"
+                ]
+              },
+              {
+                "group": "Paramètres",
+                "pages": [
+                  "fr/settings/account",
+                  "fr/settings/team",
+                  "fr/settings/signatures"
+                ]
+              },
+              {
+                "group": "Facturation",
+                "pages": [
+                  "fr/billing/overview"
+                ]
+              },
+              {
+                "group": "Concepts",
+                "pages": [
+                  "fr/concepts/contact-lifecycle",
+                  "fr/concepts/workspaces-and-roles",
+                  "fr/concepts/deliverability-basics",
+                  "fr/concepts/developers-and-apis"
+                ]
+              },
+              {
+                "group": "Dépannage et FAQ",
+                "pages": [
+                  "fr/troubleshooting/index",
+                  "fr/troubleshooting/deliverability",
+                  "fr/troubleshooting/billing",
+                  "fr/troubleshooting/access"
+                ]
+              },
+              {
+                "group": "Sécurité et confidentialité",
+                "pages": [
+                  "fr/security/privacy-and-data"
+                ]
+              }
+            ]
+          }
+        ],
+        "global": {
+          "anchors": [
+            {
+              "anchor": "Accueil",
+              "href": "https://nudgen.net",
+              "icon": "house"
+            },
+            {
+              "anchor": "Tarifs",
+              "href": "https://nudgen.net/pricing",
+              "icon": "tag"
+            }
+          ]
+        },
+        "navbar": {
+          "links": [
+            {
+              "label": "Tarifs",
+              "href": "https://nudgen.net/pricing"
+            },
+            {
+              "label": "Contact",
+              "href": "mailto:contact@nudgen.net"
+            }
+          ],
+          "primary": {
+            "type": "button",
+            "label": "Ouvrir l’app",
+            "href": "https://nudgen.net"
+          }
+        }
+      },
+      {
+        "language": "cn",
+        "tabs": [
+          {
+            "tab": "指南",
+            "groups": [
+              {
+                "group": "入门",
+                "pages": [
+                  "cn/index",
+                  "cn/quickstart",
+                  "cn/getting-started/checklist",
+                  "cn/roadmap",
+                  "cn/community"
+                ]
+              },
+              {
+                "group": "联系人",
+                "pages": [
+                  "cn/contacts/overview",
+                  "cn/contacts/upload",
+                  "cn/contacts/lifecycle"
+                ]
+              },
+              {
+                "group": "营销活动",
+                "pages": [
+                  "cn/campaigns/overview",
+                  "cn/campaigns/create",
+                  "cn/campaigns/manage",
+                  "cn/campaigns/analytics"
+                ]
+              },
+              {
+                "group": "品牌",
+                "pages": [
+                  "cn/brand/overview"
+                ]
+              },
+              {
+                "group": "仪表盘",
+                "pages": [
+                  "cn/dashboard/overview"
+                ]
+              },
+              {
+                "group": "设置",
+                "pages": [
+                  "cn/settings/account",
+                  "cn/settings/team",
+                  "cn/settings/signatures"
+                ]
+              },
+              {
+                "group": "账单",
+                "pages": [
+                  "cn/billing/overview"
+                ]
+              },
+              {
+                "group": "概念",
+                "pages": [
+                  "cn/concepts/contact-lifecycle",
+                  "cn/concepts/workspaces-and-roles",
+                  "cn/concepts/deliverability-basics",
+                  "cn/concepts/developers-and-apis"
+                ]
+              },
+              {
+                "group": "故障排查与常见问题",
+                "pages": [
+                  "cn/troubleshooting/index",
+                  "cn/troubleshooting/deliverability",
+                  "cn/troubleshooting/billing",
+                  "cn/troubleshooting/access"
+                ]
+              },
+              {
+                "group": "安全与隐私",
+                "pages": [
+                  "cn/security/privacy-and-data"
+                ]
+              }
+            ]
+          }
+        ],
+        "global": {
+          "anchors": [
+            {
+              "anchor": "主页",
+              "href": "https://nudgen.net",
+              "icon": "house"
+            },
+            {
+              "anchor": "定价",
+              "href": "https://nudgen.net/pricing",
+              "icon": "tag"
+            }
+          ]
+        },
+        "navbar": {
+          "links": [
+            {
+              "label": "定价",
+              "href": "https://nudgen.net/pricing"
+            },
+            {
+              "label": "联系",
+              "href": "mailto:contact@nudgen.net"
+            }
+          ],
+          "primary": {
+            "type": "button",
+            "label": "打开应用",
+            "href": "https://nudgen.net"
+          }
+        }
+      },
+      {
+        "language": "jp",
+        "tabs": [
+          {
+            "tab": "ガイド",
+            "groups": [
+              {
+                "group": "はじめに",
+                "pages": [
+                  "jp/index",
+                  "jp/quickstart",
+                  "jp/getting-started/checklist",
+                  "jp/roadmap",
+                  "jp/community"
+                ]
+              },
+              {
+                "group": "連絡先",
+                "pages": [
+                  "jp/contacts/overview",
+                  "jp/contacts/upload",
+                  "jp/contacts/lifecycle"
+                ]
+              },
+              {
+                "group": "キャンペーン",
+                "pages": [
+                  "jp/campaigns/overview",
+                  "jp/campaigns/create",
+                  "jp/campaigns/manage",
+                  "jp/campaigns/analytics"
+                ]
+              },
+              {
+                "group": "ブランド",
+                "pages": [
+                  "jp/brand/overview"
+                ]
+              },
+              {
+                "group": "ダッシュボード",
+                "pages": [
+                  "jp/dashboard/overview"
+                ]
+              },
+              {
+                "group": "設定",
+                "pages": [
+                  "jp/settings/account",
+                  "jp/settings/team",
+                  "jp/settings/signatures"
+                ]
+              },
+              {
+                "group": "請求",
+                "pages": [
+                  "jp/billing/overview"
+                ]
+              },
+              {
+                "group": "コンセプト",
+                "pages": [
+                  "jp/concepts/contact-lifecycle",
+                  "jp/concepts/workspaces-and-roles",
+                  "jp/concepts/deliverability-basics",
+                  "jp/concepts/developers-and-apis"
+                ]
+              },
+              {
+                "group": "トラブルシューティングとFAQ",
+                "pages": [
+                  "jp/troubleshooting/index",
+                  "jp/troubleshooting/deliverability",
+                  "jp/troubleshooting/billing",
+                  "jp/troubleshooting/access"
+                ]
+              },
+              {
+                "group": "セキュリティとプライバシー",
+                "pages": [
+                  "jp/security/privacy-and-data"
+                ]
+              }
+            ]
+          }
+        ],
+        "global": {
+          "anchors": [
+            {
+              "anchor": "ホーム",
+              "href": "https://nudgen.net",
+              "icon": "house"
+            },
+            {
+              "anchor": "料金",
+              "href": "https://nudgen.net/pricing",
+              "icon": "tag"
+            }
+          ]
+        },
+        "navbar": {
+          "links": [
+            {
+              "label": "料金",
+              "href": "https://nudgen.net/pricing"
+            },
+            {
+              "label": "お問い合わせ",
+              "href": "mailto:contact@nudgen.net"
+            }
+          ],
+          "primary": {
+            "type": "button",
+            "label": "アプリを開く",
+            "href": "https://nudgen.net"
+          }
+        }
+      },
+      {
+        "language": "vi",
+        "tabs": [
+          {
+            "tab": "Hướng dẫn",
+            "groups": [
+              {
+                "group": "Bắt đầu",
+                "pages": [
+                  "vi/index",
+                  "vi/quickstart",
+                  "vi/getting-started/checklist",
+                  "vi/roadmap",
+                  "vi/community"
+                ]
+              },
+              {
+                "group": "Danh bạ",
+                "pages": [
+                  "vi/contacts/overview",
+                  "vi/contacts/upload",
+                  "vi/contacts/lifecycle"
+                ]
+              },
+              {
+                "group": "Chiến dịch",
+                "pages": [
+                  "vi/campaigns/overview",
+                  "vi/campaigns/create",
+                  "vi/campaigns/manage",
+                  "vi/campaigns/analytics"
+                ]
+              },
+              {
+                "group": "Thương hiệu",
+                "pages": [
+                  "vi/brand/overview"
+                ]
+              },
+              {
+                "group": "Bảng điều khiển",
+                "pages": [
+                  "vi/dashboard/overview"
+                ]
+              },
+              {
+                "group": "Cài đặt",
+                "pages": [
+                  "vi/settings/account",
+                  "vi/settings/team",
+                  "vi/settings/signatures"
+                ]
+              },
+              {
+                "group": "Thanh toán",
+                "pages": [
+                  "vi/billing/overview"
+                ]
+              },
+              {
+                "group": "Khái niệm",
+                "pages": [
+                  "vi/concepts/contact-lifecycle",
+                  "vi/concepts/workspaces-and-roles",
+                  "vi/concepts/deliverability-basics",
+                  "vi/concepts/developers-and-apis"
+                ]
+              },
+              {
+                "group": "Khắc phục sự cố và câu hỏi thường gặp",
+                "pages": [
+                  "vi/troubleshooting/index",
+                  "vi/troubleshooting/deliverability",
+                  "vi/troubleshooting/billing",
+                  "vi/troubleshooting/access"
+                ]
+              },
+              {
+                "group": "Bảo mật và quyền riêng tư",
+                "pages": [
+                  "vi/security/privacy-and-data"
+                ]
+              }
+            ]
+          }
+        ],
+        "global": {
+          "anchors": [
+            {
+              "anchor": "Trang chủ",
+              "href": "https://nudgen.net",
+              "icon": "house"
+            },
+            {
+              "anchor": "Bảng giá",
+              "href": "https://nudgen.net/pricing",
+              "icon": "tag"
+            }
+          ]
+        },
+        "navbar": {
+          "links": [
+            {
+              "label": "Bảng giá",
+              "href": "https://nudgen.net/pricing"
+            },
+            {
+              "label": "Liên hệ",
+              "href": "mailto:contact@nudgen.net"
+            }
+          ],
+          "primary": {
+            "type": "button",
+            "label": "Mở ứng dụng",
+            "href": "https://nudgen.net"
+          }
+        }
+      }
+    ]
   },
   "logo": {
     "light": "/logo/logo-light.svg",
     "dark": "/logo/logo-dark.svg",
     "href": "https://nudgen.net"
-  },
-  "navbar": {
-    "links": [
-      {
-        "label": "Pricing",
-        "href": "https://nudgen.net/pricing"
-      },
-      {
-        "label": "Contact",
-        "href": "mailto:contact@nudgen.net"
-      }
-    ],
-    "primary": {
-      "type": "button",
-      "label": "Open app",
-      "href": "https://nudgen.net"
-    }
   },
   "contextual": {
     "options": [

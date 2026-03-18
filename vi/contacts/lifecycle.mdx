@@ -1,0 +1,49 @@
+---
+title: "Vòng đời danh bạ"
+description: "Nhập dữ liệu, cập nhật, hủy đăng ký và chặn gửi"
+---
+
+## Trang này giúp bạn làm gì
+
+Hiểu cách một liên hệ đi từ lúc được nhập vào cho đến khi tương tác, hủy đăng ký hoặc bị chặn gửi. Điều này giúp bạn giữ danh sách sạch và tránh gửi đến địa chỉ không phù hợp.
+
+## Các giai đoạn chính
+
+### Nhập và lưu trữ
+
+- Danh bạ được thêm qua **Upload CSV** hoặc **Add contact**
+- Email và tên được xác thực rồi mã hóa
+- Bản ghi trùng email trong cùng workspace sẽ được gộp
+- Liên hệ mới bắt đầu ở trạng thái **active**
+
+### Hoạt động và nhận email
+
+- Liên hệ **active** được tính vào giới hạn gói
+- Họ có thể được đưa vào các nhóm đối tượng trong chiến dịch
+- Lượt mở, nhấp và bounce sẽ được ghi nhận
+
+### Hủy đăng ký
+
+- Khi người nhận nhấp **unsubscribe**, họ được đánh dấu là **unsubscribed**
+- Họ sẽ bị loại khỏi các chiến dịch sau này trừ khi bạn đổi trạng thái
+
+### Bounce và suppression
+
+- **Soft bounce** có thể được thử gửi lại
+- **Hard bounce** sẽ bị chặn ngay
+- Các liên hệ bị suppress hoặc bounce sẽ bị loại khỏi các lần gửi tiếp theo
+
+### Cập nhật và xóa
+
+- Bạn có thể chỉnh tên, tag hoặc tải lại CSV với cùng email để cập nhật
+- Nếu xóa một liên hệ, họ không còn tính vào giới hạn và không thể nhận chiến dịch
+
+## Ảnh hưởng đến chiến dịch
+
+Khi chọn đối tượng, chỉ những liên hệ **active** và không bị suppress mới được tính vào reach estimate. Các chiến dịch drip sẽ bỏ qua những người đã hủy đăng ký hoặc bị suppress ở bước trước.
+
+## Bước tiếp theo
+
+- [Tổng quan danh bạ](/vi/contacts/overview)
+- [Tải danh bạ lên](/vi/contacts/upload)
+- [Kiến thức cơ bản về khả năng gửi đến](/vi/concepts/deliverability-basics)

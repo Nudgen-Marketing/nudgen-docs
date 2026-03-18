@@ -1,0 +1,56 @@
+---
+title: "Resumen de contactos"
+description: "Cómo Nudgen almacena, cifra y muestra tus datos de contacto"
+---
+
+## Qué te ayuda a hacer esta página
+Entender cómo se almacenan los contactos, por qué aparecen ocultos y cómo usar etiquetas para segmentarlos. Esto te ayuda a subir contactos y crear campañas con más confianza.
+
+## Antes de empezar
+- Una cuenta de Nudgen
+- Un archivo CSV con al menos una dirección de correo electrónico. Consulta la [guía de carga](/es/contacts/upload) para ver el formato.
+
+## Cómo se almacenan los datos de contacto
+Nudgen cifra cada dato de identificación personal antes de guardarlo:
+
+- **Correos electrónicos**: cifrados con AES-256. No podemos leerlos.
+- **Nombres**: se cifran si los incluyes. Son opcionales en tu CSV.
+- **Metadatos personalizados**: cualquier columna adicional que subas también se cifra.
+
+También almacenamos un hash unidireccional de cada correo para deduplicación. Los correos duplicados dentro de la misma lista se fusionan automáticamente.
+
+## Vista enmascarada
+Por defecto, la lista de contactos muestra valores ocultos como `j***@g***.com` en lugar de las direcciones reales. La PII se mantiene cifrada en reposo; nunca vemos ni almacenamos correos o nombres en texto plano. Este enmascaramiento protege tus datos frente a miradas ajenas y reduce la exposición si otra persona puede ver tu pantalla.
+
+**Mostrar un contacto:** tú, y otros miembros del workspace con acceso, podéis hacer clic en **Mostrar** para ver el correo y el nombre reales en la interfaz. El descifrado ocurre solo en tu navegador cuando los revelas; al cambiar de página o actualizar, los valores vuelven a ocultarse. Nunca mostramos PII descifrada en analítica, registros o exportaciones.
+
+## Etiquetas y segmentación
+Puedes asignar etiquetas al subir contactos o editarlos más tarde. Usa las etiquetas para dirigirte a segmentos concretos en tus campañas:
+
+- `inactive`: usuarios que no han iniciado sesión en más de 30 días
+- `vip`: clientes premium o de alto valor
+- `trial`: personas en periodo de prueba
+
+Al crear una campaña, eliges una audiencia: todos los contactos o solo los que tienen determinadas etiquetas. Las etiquetas facilitan ejecutar secuencias distintas para segmentos diferentes.
+
+## Estados del contacto
+Los contactos pueden tener uno de estos estados:
+
+- **Activo**: puede recibir campañas. Es el estado por defecto para los contactos recién importados.
+- **Dado de baja**: se dio de baja mediante el enlace de cancelación o manualmente. No recibirá futuros correos de campaña a menos que cambies su estado.
+- **Suprimido / rebotado**: la entrega falló (dirección no válida, buzón lleno o lista de supresión del proveedor). Estos contactos se excluyen automáticamente de futuros envíos para proteger la entregabilidad. Nuestro sistema sincroniza la lista de supresión del proveedor de envío.
+
+## Qué ocurre después
+- [Sube un CSV](/es/contacts/upload) para añadir contactos.
+- [Crea una campaña](/es/campaigns/create) y selecciona tu audiencia por etiquetas o entre todos los contactos.
+- Revisa los [límites del plan](/es/billing/overview) para ver el máximo de contactos por plan.
+
+## Documentación relacionada
+<CardGroup cols={2}>
+  <Card title="Subir contactos" icon="file-upload" href="/es/contacts/upload">
+    Formato CSV, validación y asignación de etiquetas.
+  </Card>
+  <Card title="Crear campañas" icon="paper-plane" href="/es/campaigns/create">
+    Elige la audiencia y lanza tu primera campaña.
+  </Card>
+</CardGroup>

@@ -1,0 +1,51 @@
+---
+title: "Cycle de vie du contact"
+description: "Import, mises à jour, désabonnements et suppression"
+---
+
+## Ce que cette page vous aide à faire
+
+Comprendre comment un contact passe de l’import à l’engagement, puis éventuellement au désabonnement ou à la suppression. Cela vous aide à garder une base saine et à éviter les envois vers des adresses invalides ou désinscrites.
+
+## Étapes du cycle de vie
+
+### Import et stockage
+
+- Vous ajoutez des contacts via **Upload CSV** ou **Add contact**.
+- Les emails et les noms sont validés puis chiffrés au repos.
+- Les doublons, c’est-à-dire le même email dans le même espace de travail, sont fusionnés lors de l’import.
+- Les nouveaux contacts commencent avec le statut **active**.
+
+### Actif et réception des campagnes
+
+- Les contacts **active** comptent dans la limite de votre plan.
+- Ils peuvent être inclus dans les audiences de campagne, que ce soit tous les contacts, par tags ou en sélection manuelle.
+- Les ouvertures, clics et rebonds sont enregistrés et apparaissent dans l’analytique.
+
+### Désabonnement
+
+- Lorsqu’un destinataire clique sur le lien **unsubscribe**, il passe au statut **unsubscribed**.
+- Il est alors exclu des futurs envois marketing, sauf si vous modifiez manuellement son statut.
+
+### Rebonds et suppression
+
+- Les **soft bounces** peuvent être réessayés par le fournisseur.
+- Les **hard bounces** sont supprimés immédiatement des envois futurs.
+- Les contacts supprimés ou en échec de livraison sont exclus des prochains envois pour protéger votre réputation d’expéditeur.
+
+### Mise à jour et suppression
+
+- Vous pouvez modifier les détails d’un contact, comme son nom ou ses tags.
+- Réimporter un CSV avec la même adresse email met le contact à jour.
+- Supprimer un contact le retire de l’espace de travail. Il ne compte plus dans vos limites et ne peut plus recevoir de campagne.
+
+## Impact sur les campagnes
+
+- Quand vous choisissez une audience, seuls les contacts **active** et non supprimés sont pris en compte dans l’estimation de portée.
+- Les campagnes drip sautent les étapes suivantes pour les contacts désabonnés ou supprimés après une étape précédente.
+
+## Ce qui se passe ensuite
+
+- [Vue d’ensemble des contacts](/fr/contacts/overview)
+- [Importer des contacts](/fr/contacts/upload)
+- [Bases de la délivrabilité](/fr/concepts/deliverability-basics)

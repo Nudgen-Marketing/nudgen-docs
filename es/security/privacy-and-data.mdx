@@ -1,0 +1,61 @@
+---
+title: "Privacidad y datos"
+description: "Cómo gestionamos la PII, el seguimiento y los proveedores externos"
+---
+
+## Qué cubre esta página
+Un resumen breve y orientado al usuario sobre cómo Nudgen trata los datos personales y de contacto, cómo funciona el seguimiento en los correos y qué proveedores externos utilizamos. Para consultar el texto legal completo, revisa la [Política de privacidad](https://nudgen.net/privacy) y los [Términos del servicio](https://nudgen.net/terms) en el sitio principal.
+
+## PII y datos de contacto
+**Cifrado en reposo**
+
+- Los datos de contacto que subes, como correos, nombres y campos personalizados, se **cifran** antes de almacenarse. Usamos AES-256-GCM; no vemos ni guardamos PII en texto plano.
+- Los correos también se **hashean** de forma unidireccional para la deduplicación, de modo que podamos fusionar duplicados sin almacenar la dirección original en claro.
+
+**Enmascarado y visualización**
+
+- En la aplicación, los correos y nombres de los contactos se muestran **ocultos** por defecto, por ejemplo `j***@g***.com`. Esto limita la exposición en pantallas compartidas y registros.
+- Cuando haces clic en **Mostrar**, el valor real se descifra solo en tu navegador y se enseña temporalmente. Si cambias de página o actualizas, vuelve a ocultarse. Nunca exponemos PII descifrada en analítica, logs o exportaciones.
+
+**Quién puede ver los datos de contacto**
+
+- Solo las personas de tu **workspace** con acceso a Contactos pueden ver la lista. La opción de mostrar está disponible para cualquiera que pueda ver contactos dentro de ese workspace. La facturación y los límites del plan se aplican por workspace.
+
+## Seguimiento en los correos
+Usamos el seguimiento para medir el rendimiento de las campañas y respetar las bajas.
+
+- **Aperturas**: un pequeño píxel de seguimiento se carga cuando el destinatario abre el mensaje. Registramos el evento, y una hora aproximada, para analítica. Algunos clientes de correo bloquean imágenes, así que el recuento de aperturas puede quedarse corto.
+- **Clics**: los enlaces del correo pueden envolverse como **enlaces firmados de seguimiento**. Cuando el destinatario hace clic, registramos ese clic y luego lo redirigimos a la URL real. La firma y la validación ayudan a prevenir abusos.
+- **Baja**: cada correo de campaña incluye un **enlace de baja**. Cuando el destinatario lo usa, lo marcamos como dado de baja y queda excluido de futuros envíos de campaña. No enviamos más marketing a esa dirección a menos que cambies su estado.
+
+Cuando estas herramientas están activas, podemos procesar datos como detalles del navegador o dispositivo, ubicación aproximada a partir de la IP, cliente de correo y marcas de tiempo. Esto se usa para analítica y para operar el servicio.
+
+## Proveedores externos
+El servicio depende de los siguientes tipos de proveedores. La lista exacta puede cambiar con el tiempo.
+
+| Proveedor | Propósito |
+| --- | --- |
+| **Google / Firebase** | Autenticación, por ejemplo inicio de sesión con Google, y analítica de la aplicación. |
+| **Polar** | Gestión de suscripciones, checkout, portal de facturación y procesamiento de pagos. |
+| **Proveedor de entrega de correo** | Entrega de emails, gestión de rebotes y quejas, y sincronización de listas de supresión. |
+| **OpenAI** | Generación asistida por IA para correos, objetivos de campaña, tono de marca y prompts. |
+| **MaxMind** | Geolocalización aproximada, por ejemplo a partir de la IP, para analítica y operación. |
+
+Los datos se comparten con estos proveedores solo cuando es necesario para prestar el servicio. No vendemos tus datos ni tus listas de contactos a terceros para su propio marketing.
+
+## Prácticas de seguridad
+- El acceso dentro del producto es **por roles** dentro de cada workspace: owner, admin y member.
+- Usamos **enlaces firmados y validación** en el seguimiento y otros flujos sensibles para reducir abusos.
+- Aplicamos **rate limiting** y controles de uso para proteger la plataforma y hacer cumplir los límites del plan.
+- Ningún sistema de transmisión o almacenamiento es 100 % seguro; aplicamos medidas razonables, pero no garantizamos seguridad absoluta.
+
+## Conservación de datos y tus derechos
+- Conservamos los datos el tiempo razonablemente necesario para prestar el servicio, mantener la seguridad y la operación, cumplir con la ley y hacer valer nuestros acuerdos. Los periodos de retención pueden variar según el tipo de dato, por ejemplo cuenta, facturación, supresión o registros.
+- Según dónde vivas, puedes tener derecho a acceder, corregir, borrar o limitar ciertos datos personales. Los destinatarios de correos enviados con Nudgen pueden usar el enlace de **baja**; para otras solicitudes, escribe a [contact@nudgen.net](mailto:contact@nudgen.net).
+- Si eres **destinatario** de una campaña, y no titular de la cuenta, normalmente el remitente es quien se responsabiliza de ese envío; puedes contactar con él o usar el enlace de baja.
+
+## Políticas completas
+- **Política de privacidad:** [nudgen.net/privacy](https://nudgen.net/privacy)
+- **Términos del servicio:** [nudgen.net/terms](https://nudgen.net/terms)
+
+Para ver el comportamiento específico del producto, consulta [Resumen de contactos](/es/contacts/overview), [Ciclo de vida del contacto](/es/contacts/lifecycle) y [Fundamentos de entregabilidad](/es/concepts/deliverability-basics).

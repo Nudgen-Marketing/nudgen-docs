@@ -1,0 +1,28 @@
+---
+title: "Ciclo de vida del contacto"
+description: "Cómo pasan los contactos por importación, interacción y supresión"
+---
+
+Los contactos en Nudgen siguen un ciclo de vida sencillo: pasan de la importación al envío activo y, en algunos casos, al estado de baja o de supresión. Entender este recorrido te ayuda a mantener tu lista limpia y a trabajar dentro de los límites del plan.
+
+## De la importación al estado activo
+Cuando **importas** contactos, ya sea mediante CSV o añadiéndolos uno a uno, se validan, se cifran y se almacenan. Los duplicados dentro del mismo workspace se fusionan automáticamente. Los contactos nuevos pasan a estado **activo** y pueden seleccionarse como destinatarios de campañas.
+
+## Recepción de campañas
+Los contactos **activos** pueden recibir campañas. Cuando eliges una audiencia, ya sea todos los contactos, por etiquetas o de forma manual, la aplicación solo cuenta los contactos activos que no estén suprimidos y muestra una estimación de alcance. Los envíos, aperturas, clics, rebotes y bajas se registran y afectan tanto a la analítica como a los cambios de estado.
+
+## Cambios de estado
+- **Dado de baja**: el destinatario utilizó el enlace de baja, o fue marcado manualmente como dado de baja. Queda excluido de futuros envíos de campaña.
+- **Suprimido / rebotado**: el proveedor de entrega registró un rebote o añadió la dirección a una lista de supresión. Sincronizamos ese estado y excluimos esos contactos de los próximos envíos para proteger la entregabilidad.
+
+## Actualizaciones y eliminación
+Puedes **actualizar** un contacto desde la interfaz, por ejemplo su nombre o sus etiquetas, o volver a subir un CSV con el mismo correo para reemplazar sus datos. Si **eliminas** un contacto, se quita del workspace, deja de contar para el límite y ya no puede recibir campañas.
+
+## Resumen
+| Estado | ¿Puede recibir campañas? | ¿Cuenta para el límite? |
+| --- | --- | --- |
+| **Activo** | Sí | Sí |
+| **Dado de baja** | No | Sí |
+| **Suprimido / rebotado** | No | Sí |
+
+Si quieres ver el proceso paso a paso con más detalle, consulta [Ciclo de vida del contacto](/es/contacts/lifecycle). Para cifrado y enmascarado, revisa [Resumen de contactos](/es/contacts/overview).

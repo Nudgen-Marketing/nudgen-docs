@@ -1,0 +1,49 @@
+---
+title: "Vue d’ensemble des contacts"
+description: "Comment Nudgen stocke, chiffre et affiche vos données de contact"
+---
+
+## Ce que cette page vous aide à faire
+
+Comprendre comment les contacts sont stockés, pourquoi ils apparaissent masqués et comment utiliser les tags pour segmenter votre audience. Cela vous aide à importer vos contacts et à créer vos campagnes avec confiance.
+
+## Avant de commencer
+
+- Un compte Nudgen
+- Un fichier CSV contenant au moins une adresse email
+
+## Stockage des données de contact
+
+Nudgen chiffre chaque donnée personnelle avant son enregistrement :
+
+- **Emails** — Chiffrés en AES-256
+- **Names** — Chiffrés lorsqu’ils sont fournis
+- **Custom metadata** — Les colonnes supplémentaires sont également chiffrées
+
+Nous stockons aussi un hash à sens unique de chaque email pour éviter les doublons. Les emails dupliqués dans le même espace de travail sont fusionnés automatiquement.
+
+## Vue masquée
+
+Par défaut, la liste des contacts affiche des valeurs masquées comme `j***@g***.com` au lieu des adresses réelles. Cela limite l’exposition des données sur des écrans partagés.
+
+**Révéler un contact :** vous pouvez cliquer sur **Reveal** pour afficher l’email et le nom réel dans l’interface. Le déchiffrement se fait uniquement dans votre navigateur, puis les données sont de nouveau masquées après actualisation ou changement de page.
+
+## Tags et segmentation
+
+Vous pouvez attribuer des tags lors de l’import ou les modifier ensuite. Les tags permettent de cibler des segments précis, par exemple :
+
+- `inactive` — Utilisateurs qui ne se sont pas connectés depuis 30 jours ou plus
+- `vip` — Clients premium ou à forte valeur
+- `trial` — Utilisateurs en période d’essai
+
+## Statuts des contacts
+
+- **Active** — Le contact peut recevoir des campagnes
+- **Unsubscribed** — Le contact s’est désabonné et ne recevra plus d’emails marketing
+- **Suppressed / Bounced** — Le contact est exclu des envois futurs pour protéger la délivrabilité
+
+## Ce qui se passe ensuite
+
+- [Importez un CSV](/fr/contacts/upload)
+- [Créez une campagne](/fr/campaigns/create)
+- Vérifiez [les limites du plan](/fr/billing/overview)

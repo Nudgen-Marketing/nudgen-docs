@@ -1,0 +1,33 @@
+---
+title: "Cycle de vie du contact"
+description: "Comment les contacts évoluent entre import, engagement et suppression"
+---
+
+Dans Nudgen, les contacts suivent un cycle simple : import, statut actif, puis éventuellement désabonnement ou suppression. Comprendre ce parcours vous aide à garder une liste propre et à rester dans les limites de votre plan.
+
+## De l’import au statut actif
+
+Quand vous **importez** des contacts, par CSV ou un par un, ils sont validés, chiffrés puis stockés. Les doublons dans un même espace de travail sont fusionnés. Les nouveaux contacts deviennent **active** et peuvent être sélectionnés comme destinataires.
+
+## Réception des campagnes
+
+Seuls les contacts **active** peuvent recevoir des campagnes. Lorsque vous choisissez une audience, l’application ne compte que les contacts actifs et non supprimés pour calculer la portée estimée. Les envois, ouvertures, clics, rebonds et désabonnements alimentent ensuite l’analytique et les changements de statut.
+
+## Changements de statut
+
+- **Unsubscribed** — Le destinataire a utilisé le lien de désabonnement ou a été marqué manuellement comme désabonné.
+- **Suppressed / Bounced** — Le fournisseur de livraison a signalé un rebond ou ajouté l’adresse à sa liste de suppression.
+
+## Mise à jour et suppression
+
+Vous pouvez mettre à jour les contacts, par exemple leur nom ou leurs tags, dans l’interface ou via un nouvel import CSV avec la même adresse email. Supprimer un contact le retire de l’espace de travail, l’exclut des campagnes et le sort de votre quota de contacts.
+
+## Résumé
+
+| État | Peut recevoir des campagnes ? | Compte dans la limite ? |
+| ---- | ----------------------------- | ----------------------- |
+| Active | Oui | Oui |
+| Unsubscribed | Non | Oui* |
+| Suppressed / Bounced | Non | Oui* |
+
+\*Les contacts désabonnés ou supprimés comptent toujours dans la limite du plan tant qu’ils ne sont pas supprimés définitivement.

@@ -1,0 +1,83 @@
+---
+title: "オンボーディングチェックリスト"
+description: "ワークスペース初週の設定手順"
+---
+
+このチェックリストを使えば、ワークスペースの初期設定と最初のキャンペーン準備を進められます。各項目から関連ガイドに移動できます。
+
+## 1. サインインしてワークスペースを確認する
+
+- [ ] [nudgen.net](https://nudgen.net) にアクセスし、Google でサインインします。
+- [ ] **Dashboard** に移動したら、サイドバー上部のワークスペース、またはチームが目的のものか確認します。複数ある場合は team switcher で切り替えてください。
+
+<Card title="ワークスペースとロール" icon="users" href="/jp/concepts/workspaces-and-roles">
+  チーム、メンバー、権限の仕組みを確認できます。
+</Card>
+
+## 2. チームを招待する、必要に応じて
+
+- [ ] **Settings** → **Team** に移動します。
+- [ ] メンバーをメールで招待します。必要なら招待リンクをコピーしたり再送したりします。
+- [ ] ロールを割り当て、必要に応じてアクセス権を変更または削除します。
+
+<Card title="チーム設定" icon="user-group" href="/jp/settings/team">
+  ロール、招待、メンバー管理を確認できます。
+</Card>
+
+## 3. 連絡先をアップロードする
+
+- [ ] **Contacts** を開き、CSV をアップロードするか、連絡先を手動で追加します。メールアドレスは必須で、名前は任意です。
+- [ ] セグメントを使う場合は `trial` や `churned` のようなタグを追加します。
+- [ ] 連絡先が一覧に表示され、プラン上限内に収まっていることを確認します。
+
+<Card title="連絡先の概要" icon="users" href="/jp/contacts/overview">
+  暗号化、マスキング、セグメント管理について説明します。
+</Card>
+<Card title="CSV アップロード" icon="file-csv" href="/jp/contacts/upload">
+  形式、検証ルール、サイズ制限を確認できます。
+</Card>
+
+## 4. ブランドと署名を設定する
+
+- [ ] **Brand** に移動し、ブランド設定を作成または選択します。プリセットトーンを選び、必要ならカスタムプロンプトやサンプルメールを追加します。
+- [ ] **Settings** → **Signatures** に移動し、少なくとも 1 つの署名を作成します。これはキャンペーン作成時に添付されます。
+- [ ] 必要に応じて **Settings** → **Brand** でブランド名、reply-to メール、ロゴなどのブランド情報も設定します。これは差出人表示や AI の文脈にも使われます。
+
+<Card title="ブランド概要" icon="palette" href="/jp/brand/overview">
+  プリセットトーンとカスタムプロンプトの使い方。
+</Card>
+<Card title="署名" icon="pen-nib" href="/jp/settings/signatures">
+  署名の作成方法とキャンペーンへの追加方法。
+</Card>
+
+## 5. 最初のキャンペーンを送る
+
+- [ ] **Campaigns** → **New campaign** に移動します。
+- [ ] **Campaign Setup** でタイプ、オーディエンス、CTA リンク、ブランド、署名、目標を設定します。
+- [ ] **Content Generation** で本文を生成し、必要に応じて編集し、プレビューしてからテスト送信します。
+- [ ] **Finalize** で必要ならドリップの停止ルールを設定し、**Send now** または **Schedule** を選びます。
+
+<Card title="クイックスタート" icon="rocket" href="/jp/quickstart">
+  約 5 分で進められるステップガイド。
+</Card>
+<Card title="キャンペーンを作成" icon="paper-plane" href="/jp/campaigns/create">
+  ウィザード全体と利用できるオプション。
+</Card>
+
+## 6. 分析を確認する
+
+- [ ] **Dashboard** を開き、概要指標とキャンペーンテーブルを確認します。
+- [ ] キャンペーン詳細ページを開いて、受信者単位の統計と時系列データを確認します。
+
+<Card title="ダッシュボード概要" icon="chart-line" href="/jp/dashboard/overview">
+  指標とチャートの見方を説明します。
+</Card>
+<Card title="キャンペーン分析" icon="chart-line" href="/jp/campaigns/analytics">
+  キャンペーンごとの指標と受信者アクティビティ。
+</Card>
+
+## 次のステップ
+
+- [Billing](/jp/billing/overview) でプラン上限と利用状況を確認します。
+- [Troubleshooting](/jp/troubleshooting) でよくある問題を確認します。
+- [Security & privacy](/jp/security/privacy-and-data) でデータの扱いと外部プロバイダーを確認します。

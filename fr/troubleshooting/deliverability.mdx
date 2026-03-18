@@ -1,0 +1,39 @@
+---
+title: "Envoi et délivrabilité"
+description: "Emails non envoyés, rebonds et spam"
+---
+
+## Les e-mails ne sont pas envoyés
+**Campagne bloquée ou « en cours d'envoi » depuis longtemps**
+- Les envois sont mis en file d'attente et traités par lots. Les grandes campagnes peuvent prendre du temps. Actualiser le tableau de bord ; si le statut reste « Envoi » pendant des heures, contactez l'assistance.
+- Vérifiez que vous n'avez pas atteint votre **limite de courrier électronique quotidienne ou mensuelle**. L’application bloque les nouveaux envois lorsque vous dépassez le plafond. Voir [Facturation](/fr/billing/overview) et [Dépannage : facturation](/fr/troubleshooting/billing).
+**L'e-mail de test n'est pas arrivé**
+- Vérifiez le spam/courrier indésirable. Ajoutez l'expéditeur à vos contacts ou expéditeurs approuvés.
+- Confirmez que l'**adresse e-mail du compte** (où les tests sont envoyés) est correcte dans votre profil.
+- Attendez quelques minutes ; la livraison peut être retardée. Réessayez ou envoyez à une autre adresse.
+**« Aucun contact actif » ou la portée est nulle**
+- Téléchargez ou ajoutez au moins un contact et assurez-vous qu'il est **actif** (non désabonné ou supprimé). Voir [Présentation des contacts](/fr/contacts/overview) et [Cycle de vie des contacts](/fr/contacts/lifecycle).
+- Si vous avez choisi « Par balises », assurez-vous que certains contacts disposent des balises sélectionnées.
+## Rebonds et plaintes
+**Taux de rebond élevé**
+- Les **Rebonds durs** (adresse invalide, domaine n'existe pas) sont automatiquement supprimés. Supprimez ou corrigez les mauvaises adresses de votre liste ; évitez les listes achetées ou supprimées.
+- Les **rebonds logiciels** (boîte aux lettres pleine, serveur en panne) peuvent être réessayés par le fournisseur. Des rebonds doux et répétés peuvent entraîner une suppression. Nettoyez votre liste et évitez les adresses de rôle (par exemple info@) à moins qu'il ne s'agisse de boîtes de réception valides.
+- Maintenez un taux de rebond faible (par exemple inférieur à 2 %) pour protéger la réputation de l'expéditeur. Utilisez le [Tableau de bord](/fr/dashboard/overview) et les [Analyses de campagne](/fr/campaigns/analytics) pour surveiller.
+**Plaintes pour spam**
+- Les destinataires ont marqué l'e-mail comme spam. Nous supprimons les plaignants et ils ne recevront plus de campagnes futures. Trop de plaintes nuisent à la réputation.
+- Améliorer le contenu : lignes d'objet claires, copie pertinente, lien de désabonnement évident. N'envoyez pas à des personnes qui ne se sont pas inscrites. Voir [Bases de la délivrabilité] (/fr/concepts/deliverability-basics).
+**Désabonnements**
+- Les liens de désabonnement sont obligatoires et honorés. Les contacts désabonnés sont exclus des futurs envois. Ceci est normal et vous permet de rester conforme.
+## Suivi et métriques
+**Les ouvertures ou clics ne sont pas mis à jour**
+- Le suivi utilise un pixel (ouvertures) et des liens signés (clics). Certains clients bloquent les images ou suppriment le suivi ; les mesures peuvent être sous-estimées.
+- Les données peuvent mettre un certain temps à apparaître. Actualisez la page de détails ou le tableau de bord de la campagne.
+- Si une campagne affiche zéro ouverture/clic longtemps après l'envoi, vérifiez que les liens et les images dans l'e-mail sont intacts et que la campagne a bien été envoyée (cochez « Emails envoyés » et « Emails livrés »).
+**Les analyses semblent erronées**
+- Assurez-vous que la **plage de dates** inclut la date d'envoi. Les pages de détails du tableau de bord et de la campagne sont filtrées par plage sélectionnée.
+- « Emails envoyés » inclut toutes les tentatives ; « E-mails livrés » correspond à une livraison réussie. Le CTR est (Total de clics / Total envoyé) × 100. Voir [Analyses de campagne] (/fr/campaigns/analytics) et [Présentation du tableau de bord] (/fr/dashboard/overview).
+## Ce que nous faisons pour protéger la délivrabilité
+- Nous envoyons via notre fournisseur de messagerie et synchronisons avec leur liste de suppression afin de ne pas renvoyer aux adresses renvoyées ou faisant l'objet d'une plainte.
+- Les contacts sont validés et nous évitons les envois à des contacts désabonnés ou supprimés.
+- Le contenu et les signatures sont nettoyés ; nous pouvons signaler les formulations sujettes au spam lorsque cela est possible.
+Pour en savoir plus, consultez [Bases de la délivrabilité] (/fr/concepts/deliverability-basics) et [Cycle de vie des contacts] (/fr/contacts/lifecycle).

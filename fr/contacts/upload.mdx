@@ -1,0 +1,55 @@
+---
+title: "Importer des contacts"
+description: "Format CSV, règles de validation et attribution des tags pour l’import de contacts"
+---
+
+## Ce que cette page vous aide à faire
+
+Importer un fichier CSV de contacts pour lancer vos campagnes. Vous y trouverez les colonnes requises, les règles de validation, les limites de taille et la manière d’ajouter des tags pendant l’import.
+
+## Avant de commencer
+
+- Un compte Nudgen
+- Un fichier CSV avec au moins une colonne `email`
+- Un volume de contacts inférieur à la limite de votre forfait
+
+## Étape 1 : Préparez votre CSV
+
+Votre CSV doit inclure :
+
+| Colonne | Obligatoire | Description |
+| ------- | ----------- | ----------- |
+| `email` | Oui | Adresse email valide et unique |
+| `name` | Non | Nom à afficher pour la personnalisation |
+
+Vous pouvez ajouter d’autres colonnes comme `company` ou `segment`. Elles seront elles aussi stockées de manière chiffrée.
+
+## Étape 2 : Vérifiez le format
+
+- Encodage recommandé : UTF-8
+- Délimiteur : virgule `,`
+- La première ligne doit contenir les noms de colonnes
+- Les doublons dans un même fichier sont fusionnés
+
+<Warning>
+Les emails invalides sont ignorés. Consultez le résumé d’import pour voir combien de lignes ont été importées ou ignorées.
+</Warning>
+
+## Étape 3 : Importez dans Nudgen
+
+1. Ouvrez **Contacts** dans la barre latérale.
+2. Cliquez sur **Upload CSV**.
+3. Sélectionnez votre fichier.
+4. Choisissez les tags à appliquer à tous les contacts importés.
+5. Vérifiez l’aperçu puis confirmez.
+
+## Limites de taille
+
+- **Taille de fichier :** respectez la limite affichée dans l’application
+- **Contacts par espace de travail :** dépend de votre forfait
+
+## Ce qui se passe ensuite
+
+- Les contacts apparaîtront dans la liste avec des emails masqués
+- Vous pourrez utiliser les tags pour segmenter l’audience dans [campagnes](/fr/campaigns/create)
+- Vous pourrez [révéler](/fr/contacts/overview) certains contacts si vous avez les droits nécessaires

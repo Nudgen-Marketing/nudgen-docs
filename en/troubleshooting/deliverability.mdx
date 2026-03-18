@@ -1,0 +1,60 @@
+---
+title: "Sending and deliverability"
+description: "Emails not sending, bounces, and spam"
+---
+
+## Emails not sending
+
+**Campaign stuck or “sending” for a long time**
+
+- Sends are queued and processed in batches. Large campaigns can take time. Refresh the dashboard; if status stays “Sending” for hours, contact support.
+- Check that you haven’t hit your **daily or monthly email limit**. The app blocks new sends when you’re over cap. See [Billing](/en/billing/overview) and [Troubleshooting: billing](/en/troubleshooting/billing).
+
+**Test email didn’t arrive**
+
+- Check spam/junk. Add the sender to your contacts or safe senders.
+- Confirm the **account email** (where tests are sent) is correct in your profile.
+- Wait a few minutes; delivery can be delayed. Try again or send to a different address.
+
+**“No active contacts” or reach is zero**
+
+- Upload or add at least one contact and ensure they’re **active** (not unsubscribed or suppressed). See [Contacts overview](/en/contacts/overview) and [Contact lifecycle](/en/contacts/lifecycle).
+- If you chose “By tags,” ensure some contacts have the selected tags.
+
+## Bounces and complaints
+
+**High bounce rate**
+
+- **Hard bounces** (invalid address, domain doesn’t exist) are automatically suppressed. Remove or fix bad addresses in your list; avoid bought or scraped lists.
+- **Soft bounces** (mailbox full, server down) may be retried by the provider. Repeated soft bounces can lead to suppression. Clean your list and avoid role addresses (e.g. info@) unless they’re valid inboxes.
+- Keep bounce rate low (e.g. under 2%) to protect sender reputation. Use the [Dashboard](/en/dashboard/overview) and [Campaign analytics](/en/campaigns/analytics) to monitor.
+
+**Spam complaints**
+
+- Recipients marked the email as spam. We suppress complainers and they won’t receive future campaigns. Too many complaints hurt reputation.
+- Improve content: clear subject lines, relevant copy, obvious unsubscribe link. Don’t send to people who didn’t opt in. See [Deliverability basics](/en/concepts/deliverability-basics).
+
+**Unsubscribes**
+
+- Unsubscribe links are required and honored. Unsubscribed contacts are excluded from future sends. This is normal and keeps you compliant.
+
+## Tracking and metrics
+
+**Opens or clicks not updating**
+
+- Tracking uses a pixel (opens) and signed links (clicks). Some clients block images or strip tracking; metrics can be undercounted.
+- Data can take a short time to appear. Refresh the campaign detail page or dashboard.
+- If a campaign shows zero opens/clicks for a long time after sends, check that links and images in the email are intact and that the campaign actually sent (check “Emails Sent” and “Emails Delivered”).
+
+**Analytics look wrong**
+
+- Ensure the **date range** includes the send date. Dashboard and campaign detail pages filter by selected range.
+- “Emails Sent” includes all attempts; “Emails Delivered” is successful delivery. CTR is (Total Clicks / Total Sent) × 100. See [Campaign analytics](/en/campaigns/analytics) and [Dashboard overview](/en/dashboard/overview).
+
+## What we do to protect deliverability
+
+- We send via our email provider and sync with their suppression list so we don’t resend to bounced or complained addresses.
+- Contacts are validated and we avoid sending to unsubscribed or suppressed contacts.
+- Content and signatures are sanitized; we may flag spam-prone wording when possible.
+
+For more, see [Deliverability basics](/en/concepts/deliverability-basics) and [Contact lifecycle](/en/contacts/lifecycle).

@@ -1,0 +1,47 @@
+---
+title: "送信と到達率"
+description: "未送信、バウンス、迷惑メールに関する問題"
+---
+
+## メールが送信されない
+
+**キャンペーンが長時間 Sending のまま**
+
+- 送信はキューで処理されます。大きなキャンペーンは時間がかかることがあります
+- 日次または月次の送信上限に達していないか確認してください
+
+**テストメールが届かない**
+
+- spam や junk を確認してください
+- アカウントメールが正しいか確認してください
+- 数分待ってから再試行してください
+
+**No active contacts または reach が 0**
+
+- 少なくとも 1 件の active な連絡先が必要です
+- **By tags** を使う場合は選択したタグを持つ連絡先が存在するか確認してください
+
+## Bounce と complaint
+
+**bounce が多い**
+
+- Hard bounce は自動的に suppress されます
+- Soft bounce が繰り返されると suppress されることがあります
+- 購入リストや質の低いリストは避けてください
+
+**spam complaint が多い**
+
+- complaint を出した受信者は将来の送信から除外されます
+- 件名や本文を見直し、明確な unsubscribe を含めてください
+
+## Tracking と指標
+
+**開封やクリックが更新されない**
+
+- 画像ブロックやトラッキング除去により過少計測になることがあります
+- 少し時間を置いてからダッシュボードを更新してください
+
+**Analytics が変に見える**
+
+- date range に送信日が含まれているか確認してください
+- [Campaign analytics](/jp/campaigns/analytics) と [Dashboard overview](/jp/dashboard/overview) を参照してください

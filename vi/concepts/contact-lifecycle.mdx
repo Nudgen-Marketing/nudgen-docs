@@ -1,0 +1,33 @@
+---
+title: "Vòng đời danh bạ"
+description: "Cách danh bạ đi qua các giai đoạn nhập dữ liệu, tương tác và chặn gửi"
+---
+
+Danh bạ trong Nudgen đi qua một vòng đời đơn giản: được nhập vào, trở thành active, rồi có thể chuyển sang unsubscribed hoặc suppressed. Hiểu vòng đời này giúp bạn giữ danh sách gọn và nằm trong giới hạn gói.
+
+## Từ lúc nhập đến active
+
+Khi bạn **import** danh bạ bằng CSV hoặc thêm thủ công, dữ liệu sẽ được xác thực, mã hóa và lưu lại. Những bản ghi trùng trong cùng workspace sẽ được gộp. Liên hệ mới ở trạng thái **active** và có thể được dùng trong chiến dịch.
+
+## Khi nhận chiến dịch
+
+Chỉ liên hệ **active** mới đủ điều kiện nhận email. Khi chọn đối tượng, ứng dụng chỉ tính các liên hệ active và không bị suppress để tạo reach estimate.
+
+## Thay đổi trạng thái
+
+- **Unsubscribed** — Người nhận đã dùng liên kết hủy đăng ký hoặc bị đánh dấu thủ công
+- **Suppressed / Bounced** — Nhà cung cấp gửi thư báo bounce hoặc thêm địa chỉ vào suppression list
+
+## Cập nhật và xóa
+
+Bạn có thể cập nhật tên hoặc tag trong giao diện hoặc bằng cách tải lại CSV với cùng email. Khi **xóa** liên hệ, bản ghi đó sẽ không còn tính vào giới hạn danh bạ và không thể nhận chiến dịch.
+
+## Tóm tắt
+
+| Trạng thái | Có thể nhận chiến dịch? | Có tính vào giới hạn? |
+| ---------- | ----------------------- | --------------------- |
+| Active | Có | Có |
+| Unsubscribed | Không | Có* |
+| Suppressed / Bounced | Không | Có* |
+
+\*Bạn có thể xóa liên hệ unsubscribed hoặc suppressed để giải phóng chỗ.

@@ -1,0 +1,71 @@
+---
+title: "Subir contactos"
+description: "Formato CSV, reglas de validación y asignación de etiquetas para la carga de contactos"
+---
+
+## Qué te ayuda a hacer esta página
+Subir un CSV de contactos para poder lanzar campañas. Aquí verás qué columnas son obligatorias, qué reglas de validación se aplican, cuáles son los límites de tamaño y cómo añadir etiquetas durante la carga.
+
+## Antes de empezar
+- Una cuenta de Nudgen
+- Un archivo CSV con al menos una columna `email`
+- Tus contactos deben estar dentro del límite de tu plan. Consulta [Facturación](/es/billing/overview).
+
+## Paso 1: prepara tu CSV
+Tu CSV debe incluir como mínimo:
+
+| Columna | Obligatoria | Descripción |
+| --- | --- | --- |
+| `email` | Sí | Dirección de correo válida. Debe ser única. |
+| `name` | No | Nombre visible para personalización. |
+
+Puedes añadir otras columnas, como `company` o `segment`. Se almacenan cifradas y pueden usarse para etiquetas o lógica de segmentación.
+
+## Paso 2: valida el formato
+- **Codificación:** se recomienda UTF-8.
+- **Separador:** coma (`,`).
+- **Fila de encabezado:** la primera fila debe contener los nombres de columna. `email` y `name` se reconocen sin distinguir mayúsculas y minúsculas.
+- **Correos duplicados:** los duplicados dentro del mismo archivo se fusionan. Los contactos existentes con el mismo correo se actualizan.
+
+<Warning>
+Los correos inválidos, mal formados o sin `@`, se omiten. Revisa el resumen de carga para ver cuántas filas se importaron y cuántas se descartaron.
+</Warning>
+
+## Paso 3: súbelo en Nudgen
+1. Ve a **Contactos** en la barra lateral.
+2. Haz clic en **Subir CSV**.
+3. Selecciona tu archivo.
+4. Elige las etiquetas que quieras aplicar a todos los contactos importados, por ejemplo `inactive` o `re-engage`.
+5. Revisa la vista previa y confirma.
+
+## Límites de tamaño
+- **Tamaño del archivo:** respeta el límite que aparece en pantalla, normalmente unos pocos MB. Las listas grandes pueden tardar más en procesarse.
+- **Contactos por workspace:** depende de tu plan. La app aplica el límite en el momento de la carga; si lo superas, la importación se rechaza. Consulta [Facturación](/es/billing/overview) y la [página de precios](https://nudgen.net/pricing) para los límites actuales.
+
+## Qué ocurre después
+- Los contactos aparecen en la lista con los correos ocultos, por ejemplo `j***@g***.com`.
+- Usa etiquetas para segmentar audiencias en [campañas](/es/campaigns/create).
+- Puedes [mostrar](/es/contacts/overview) contactos individuales si eres owner de la cuenta.
+
+## Solución de problemas
+<AccordionGroup>
+  <Accordion title="Se omitieron algunas filas">
+    Comprueba que cada fila tenga un correo válido en la columna `email`. Las filas vacías o con direcciones mal formadas se omiten.
+  </Accordion>
+  <Accordion title="La carga falló: se supera el límite del plan">
+    El número de contactos superaría el límite de tu plan. Mejora tu plan o elimina contactos existentes.
+  </Accordion>
+  <Accordion title="No se reconoce una columna">
+    Asegúrate de que la fila de encabezado incluye `email`, o `Email`. Las demás columnas son opcionales.
+  </Accordion>
+</AccordionGroup>
+
+## Documentación relacionada
+<CardGroup cols={2}>
+  <Card title="Resumen de contactos" icon="users" href="/es/contacts/overview">
+    Cifrado, enmascarado y segmentación.
+  </Card>
+  <Card title="Crear campañas" icon="paper-plane" href="/es/campaigns/create">
+    Selecciona tu audiencia y lanza una campaña.
+  </Card>
+</CardGroup>

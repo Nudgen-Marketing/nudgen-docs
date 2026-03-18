@@ -1,0 +1,63 @@
+---
+title: "Analytique des campagnes"
+description: "Métriques, taux de livraison, graphiques temporels et activité des destinataires"
+---
+
+## Ce que cette page vous aide à faire
+Comprendre les performances de vos campagnes : combien d’e-mails ont été envoyés, livrés, ouverts et cliqués. Vous y verrez aussi les taux de réussite et d’échec, ainsi que l’activité par destinataire.
+
+## Avant de commencer
+- Au moins une campagne déjà envoyée, ou en cours d’envoi
+- Un accès à la page de détail de la campagne
+
+## Cartes de métriques
+Sur la page de détail d’une campagne, vous verrez notamment :
+
+| Métrique | Signification |
+| --- | --- |
+| **E-mails envoyés** | Nombre total de tentatives d’envoi, y compris les échecs d’API ou de réseau. |
+| **E-mails livrés** | Nombre d’e-mails acceptés par le serveur du destinataire. |
+| **Total des ouvertures** | Nombre total d’ouvertures de l’e-mail. |
+| **Total de clics** | Nombre total de clics sur les liens. |
+| **CTR** | Taux de clics : `(total des clics / total envoyé) × 100`. |
+| **Plaintes pour spam** | Nombre de fois où les destinataires ont marqué l’e-mail comme spam. |
+| **Rebond doux** | Problèmes temporaires de livraison, comme une boîte pleine ou une erreur transitoire. |
+| **Rebond dur** | Échecs permanents de livraison, comme une adresse invalide ou un domaine bloqué. |
+
+## Réussite et échec de la livraison
+- **Taux de réussite** = `(livrés / envoyés) × 100`
+- **Taux d’échec** = `(rebonds + échecs) / envoyés × 100`
+
+Un taux d’échec élevé peut nuire à votre réputation d’expéditeur. Corrigez ou supprimez les adresses en échec et évitez les contacts invalides.
+
+## Graphique temporel
+Le graphique de performance montre les métriques dans le temps, par jour, semaine ou mois. Utilisez le sélecteur de granularité pour changer de vue et afficher uniquement les métriques qui vous intéressent.
+
+## Sélecteur de plage de dates
+Filtrez les métriques et le graphique selon une plage de dates. Par défaut, la période complète de la campagne est généralement affichée.
+
+## Tableau d’activité des destinataires
+Vous pouvez voir, pour chaque contact :
+- le contact, avec e-mail masqué sauf si vous le révélez
+- le statut du dernier événement, comme envoyé, livré, ouvert, cliqué ou rebondi
+- les horodatages d’envoi, de livraison, d’ouverture et de clic
+
+Ce tableau est utile pour :
+- repérer les utilisateurs engagés à relancer
+- identifier les rebonds à nettoyer
+- déboguer les problèmes de livraison sur des adresses précises
+
+## Que se passe-t-il ensuite
+- Utilisez ces informations pour affiner vos futures campagnes, notamment l’objet, le ton et le bon moment d’envoi.
+- Supprimez les contacts en rebond de votre liste pour protéger la délivrabilité.
+- Consultez la [facturation](/fr/billing/overview) si vous approchez des limites de votre forfait.
+
+## Documents associés
+<CardGroup cols={2}>
+  <Card title="Gérer les campagnes" icon="pen-to-square" href="/fr/campaigns/manage">
+    Modifier, envoyer, programmer et arrêter.
+  </Card>
+  <Card title="Facturation et utilisation" icon="credit-card" href="/fr/billing/overview">
+    Limites du forfait et compteurs d’usage.
+  </Card>
+</CardGroup>

@@ -1,0 +1,49 @@
+---
+title: "Tổng quan danh bạ"
+description: "Cách Nudgen lưu trữ, mã hóa và hiển thị dữ liệu danh bạ của bạn"
+---
+
+## Trang này giúp bạn làm gì
+
+Hiểu cách danh bạ được lưu trữ, vì sao thông tin bị che và cách dùng tag để phân khúc. Điều này giúp bạn tự tin hơn khi tải danh bạ lên và xây dựng chiến dịch.
+
+## Trước khi bắt đầu
+
+- Một tài khoản Nudgen
+- Một file CSV có ít nhất một địa chỉ email
+
+## Cách dữ liệu danh bạ được lưu
+
+Nudgen mã hóa mọi thông tin nhận dạng cá nhân trước khi lưu:
+
+- **Emails** — Được mã hóa AES-256
+- **Names** — Được mã hóa nếu bạn cung cấp
+- **Custom metadata** — Các cột bổ sung cũng được mã hóa
+
+Chúng tôi cũng lưu hash một chiều của email để chống trùng lặp. Các email trùng trong cùng một workspace sẽ được gộp lại.
+
+## Chế độ che thông tin
+
+Mặc định, danh sách liên hệ hiển thị dạng che như `j***@g***.com`. Điều này giúp giảm rủi ro lộ dữ liệu trên màn hình dùng chung.
+
+**Hiển thị thông tin thật:** Bạn có thể nhấn **Reveal** để xem email và tên thật trong giao diện. Việc giải mã chỉ diễn ra trong trình duyệt của bạn và thông tin sẽ lại bị che sau khi bạn tải lại trang hoặc rời đi.
+
+## Tag và phân khúc
+
+Bạn có thể thêm tag khi tải danh bạ lên hoặc chỉnh sau đó. Tag giúp nhắm đến từng nhóm cụ thể như:
+
+- `inactive` — Người dùng không đăng nhập hơn 30 ngày
+- `vip` — Khách hàng giá trị cao
+- `trial` — Người đang dùng thử
+
+## Trạng thái liên hệ
+
+- **Active** — Có thể nhận chiến dịch
+- **Unsubscribed** — Đã hủy đăng ký và sẽ không nhận email tiếp theo
+- **Suppressed / Bounced** — Không được gửi tiếp để bảo vệ khả năng gửi đến
+
+## Bước tiếp theo
+
+- [Tải CSV lên](/vi/contacts/upload) để thêm danh bạ
+- [Tạo chiến dịch](/vi/campaigns/create) và chọn tệp người nhận
+- Xem [Billing](/vi/billing/overview) để biết giới hạn danh bạ theo gói

@@ -1,0 +1,77 @@
+---
+title: "Analíticas de campaña"
+description: "Métricas, tasas de entrega, gráficos temporales y actividad de destinatarios"
+---
+
+## Qué te ayuda a hacer esta página
+
+Entender cómo están funcionando tus campañas: cuántos correos se enviaron, entregaron, abrieron y recibieron clics. También verás tasas de éxito y fallo en la entrega, además de actividad por destinatario.
+
+## Antes de empezar
+
+- Al menos una campaña ya enviada, o actualmente enviándose
+- Acceso a la página de detalle de la campaña
+
+## Tarjetas de métricas
+
+En la página de detalle verás:
+
+| Métrica | Significado |
+| ------- | ----------- |
+| **Emails Sent** | Total de intentos de envío, incluidos fallos de API o de red. |
+| **Emails Delivered** | Correos aceptados correctamente por el servidor del destinatario. |
+| **Total Opens** | Número de veces que se abrió el correo, medido con píxel de seguimiento. |
+| **Total Clicks** | Número de clics en enlaces. |
+| **CTR** | Click-through rate: (clics totales / envíos totales) × 100. |
+| **Spam Complaints** | Número de veces que un destinatario marcó el correo como spam. |
+| **Soft Bounce** | Problemas temporales de entrega, como buzón lleno, limitación o errores transitorios. |
+| **Hard Bounce** | Fallos permanentes de entrega, como dirección inválida o dominio bloqueado. |
+
+## Éxito y fallo en la entrega
+
+- **Success rate** = (entregados / enviados) × 100
+- **Failure rate** = (rebotes + fallos) / enviados × 100
+
+Una tasa alta de fallos puede dañar tu reputación como remitente. Conviene corregir o eliminar direcciones con rebote y evitar contactos inválidos.
+
+## Gráfico temporal
+
+El gráfico de rendimiento muestra métricas a lo largo del tiempo, por día, semana o mes. Usa el selector de granularidad para cambiar la vista. También puedes activar o desactivar métricas concretas para centrarte en aperturas, clics o entrega.
+
+## Selector de rango de fechas
+
+Filtra las métricas y el gráfico por rango de fechas. Lo habitual es que el valor por defecto abarque todo el período de la campaña, pero puedes ajustarlo para comparar semanas concretas o centrarte en actividad reciente.
+
+## Tabla de actividad por destinatario
+
+Puedes ver el estado por contacto:
+
+- **Contact** — Email, enmascarado salvo que se revele, y nombre
+- **Status** — Último evento: enviado, entregado, abierto, clicado o rebotado
+- **Sent at** — Momento en que se envió el correo
+- **Delivered at** — Momento de confirmación de entrega, si está disponible
+- **Opened at** — Marca de tiempo de la primera apertura
+- **Clicked at** — Marca de tiempo del primer clic
+
+Esto te sirve para:
+
+- Identificar usuarios implicados para seguimiento
+- Detectar rebotes y limpiar la lista
+- Investigar problemas de entrega en direcciones concretas
+
+## Qué ocurre después
+
+- Usa estos datos para mejorar campañas futuras, por ejemplo asunto, tono o momento de envío.
+- Elimina contactos con rebote para proteger la entregabilidad.
+- Consulta [billing](/es/billing/overview) si te estás acercando al límite de envíos del plan.
+
+## Documentación relacionada
+
+<CardGroup cols={2}>
+  <Card title="Gestionar campañas" icon="pen-to-square" href="/es/campaigns/manage">
+    Edita, envía, programa y detén campañas.
+  </Card>
+  <Card title="Facturación y uso" icon="credit-card" href="/es/billing/overview">
+    Límites del plan y medidores de uso.
+  </Card>
+</CardGroup>

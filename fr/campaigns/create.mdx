@@ -1,0 +1,86 @@
+---
+title: "Créer des campagnes"
+description: "Assistant pas à pas, génération par IA, aperçu et envoi de test"
+---
+
+## Ce que cette page vous aide à faire
+Créer une campagne ponctuelle ou une séquence drip de bout en bout. Vous choisissez l’audience, définissez l’objectif, laissez l’IA générer le contenu, puis vous le prévisualisez avant de l’envoyer ou de le programmer.
+
+## Avant de commencer
+- Des [contacts importés](/fr/contacts/upload)
+- Une [voix de marque configurée](/fr/brand/overview)
+- Un objectif clair, par exemple : « Réengager les utilisateurs qui ne se sont pas connectés depuis 7 jours »
+
+## Étape 1 : Nouvelle campagne
+1. Ouvrez **Campagnes** puis cliquez sur **Nouvelle campagne**.
+2. Choisissez **Ponctuelle** ou **Séquence drip**.
+
+## Étape 2 : Sélectionner l’audience
+- **Tous les contacts** : tous les contacts de votre liste, dans la limite de votre forfait
+- **Par tags** : uniquement les contacts ayant les tags sélectionnés, par exemple `inactive` ou `vip`
+- **Manuel** : sélectionnez manuellement des contacts précis
+
+L’assistant affiche une **estimation de portée**, c’est-à-dire le nombre de contacts uniques qui recevront la campagne. Si cette estimation est à zéro, ajoutez ou importez des contacts, ou ajustez votre segment.
+
+Vous pouvez aussi ajouter un **lien CTA** facultatif. Les liens dans l’e-mail peuvent être suivis, et le CTA peut servir au suivi des clics ainsi qu’aux règles d’arrêt sur clic.
+
+## Étape 3 : Choisir la marque, la signature et l’objectif
+1. Sélectionnez la **configuration de marque** à utiliser pour cette campagne
+2. Choisissez la **signature** à ajouter à l’e-mail. Si besoin, créez-en une dans **Paramètres** → **Signatures**
+3. Saisissez l’**objectif de la campagne**, c’est-à-dire une courte description de ce que vous voulez obtenir. Exemples :
+   - « Réengager les utilisateurs qui ne se sont pas connectés depuis 7 jours »
+   - « Inciter les utilisateurs en essai à terminer l’onboarding »
+   - « Promouvoir notre nouvelle fonctionnalité auprès des clients payants »
+
+L’IA s’appuie sur cet objectif et sur la voix de votre marque pour générer l’objet et le corps du message. Le contenu peut aussi être vérifié pour repérer certaines formulations à risque côté spam.
+
+## Étape 4 : Générer le contenu
+1. Cliquez sur **Générer**
+2. Vérifiez l’objet et le corps de l’e-mail
+3. Modifiez le texte si nécessaire. Vous pouvez aussi régénérer le contenu
+4. Pour une séquence drip, répétez l’opération pour chaque étape, par exemple Jour 1, Jour 3, etc.
+
+## Étape 5 : Aperçu
+- Utilisez les bascules **Desktop** et **Mobile** pour voir le rendu de l’e-mail sur différents appareils
+- Vérifiez les liens, les images et la mise en forme
+- Assurez-vous que le CTA et le ton correspondent bien à votre objectif
+
+<Tip>
+Envoyez toujours un **e-mail de test** avant de lancer la campagne. Une copie est envoyée à l’adresse e-mail de votre compte pour que vous puissiez la vérifier dans une vraie boîte de réception.
+</Tip>
+
+## Étape 6 : Envoyer ou programmer
+- **Envoyer maintenant** : les e-mails partent immédiatement, généralement en quelques minutes selon la file d’attente
+- **Programmer** : choisissez une date et une heure. Les e-mails seront envoyés automatiquement à ce moment-là
+- **Enregistrer comme brouillon** : vous pourrez terminer plus tard. Vous pouvez modifier tant que la campagne n’est pas envoyée
+
+## Que se passe-t-il ensuite
+- Les e-mails sont envoyés via notre infrastructure avec suivi des ouvertures et des clics
+- La [page d’analyse de campagne](/fr/campaigns/analytics) affiche les statistiques, comme les envois, la délivrabilité, les ouvertures, les clics et les taux de réussite ou d’échec de livraison
+- Si vous définissez des règles d’arrêt automatique, les contacts déjà engagés ne recevront pas les étapes suivantes
+
+## Dépannage
+<AccordionGroup>
+  <Accordion title="Le contenu généré par l’IA ne correspond pas à mon ton">
+    Affinez votre configuration de marque avec un prompt personnalisé ou des exemples d’e-mails, puis régénérez le contenu de la campagne.
+  </Accordion>
+  <Accordion title="L’e-mail de test n’est pas arrivé">
+    Vérifiez le dossier spam ou courrier indésirable. Assurez-vous aussi que l’adresse e-mail de votre compte est correcte. Attendez quelques minutes, la livraison peut être légèrement retardée.
+  </Accordion>
+  <Accordion title="Puis-je modifier l’audience après la génération ?">
+    Oui, tant que la campagne est encore en brouillon. Gardez simplement en tête qu’un changement d’audience peut modifier qui recevra les e-mails.
+  </Accordion>
+</AccordionGroup>
+
+## Documents associés
+<CardGroup cols={2}>
+  <Card title="Aperçu des campagnes" icon="list" href="/fr/campaigns/overview">
+    Ponctuelle ou drip, et états de campagne.
+  </Card>
+  <Card title="Gérer les campagnes" icon="pen-to-square" href="/fr/campaigns/manage">
+    Modifier, envoyer, programmer ou arrêter une campagne.
+  </Card>
+  <Card title="Analyse de campagne" icon="chart-line" href="/fr/campaigns/analytics">
+    Métriques et activité des destinataires.
+  </Card>
+</CardGroup>

@@ -1,0 +1,55 @@
+---
+title: "Tải danh bạ lên"
+description: "Định dạng CSV, quy tắc xác thực và gán thẻ khi tải danh bạ lên"
+---
+
+## Trang này giúp bạn làm gì
+
+Tải một file CSV danh bạ lên để chạy chiến dịch. Bạn sẽ biết các cột bắt buộc, quy tắc xác thực, giới hạn kích thước và cách thêm tag trong lúc tải lên.
+
+## Trước khi bắt đầu
+
+- Một tài khoản Nudgen
+- Một file CSV có ít nhất cột `email`
+- Số lượng liên hệ phải nằm trong giới hạn gói
+
+## Bước 1: Chuẩn bị file CSV
+
+CSV của bạn phải có:
+
+| Cột | Bắt buộc | Mô tả |
+| --- | -------- | ----- |
+| `email` | Có | Địa chỉ email hợp lệ và duy nhất |
+| `name` | Không | Tên hiển thị để cá nhân hóa |
+
+Bạn có thể thêm các cột khác như `company` hoặc `segment`. Các dữ liệu này cũng sẽ được mã hóa.
+
+## Bước 2: Kiểm tra định dạng
+
+- Nên dùng mã hóa UTF-8
+- Dấu phân cách là dấu phẩy `,`
+- Dòng đầu tiên phải là tiêu đề cột
+- Email trùng trong cùng file sẽ được gộp
+
+<Warning>
+Những email không hợp lệ sẽ bị bỏ qua. Hãy xem bản tóm tắt sau khi tải lên để biết số dòng đã nhập và số dòng bị bỏ qua.
+</Warning>
+
+## Bước 3: Tải lên trong Nudgen
+
+1. Mở **Contacts** ở thanh bên.
+2. Nhấn **Upload CSV**.
+3. Chọn file của bạn.
+4. Chọn tag áp dụng cho toàn bộ liên hệ vừa tải lên.
+5. Xem trước rồi xác nhận.
+
+## Giới hạn kích thước
+
+- **Dung lượng file:** theo giới hạn hiển thị trong ứng dụng
+- **Số liên hệ mỗi workspace:** phụ thuộc vào gói của bạn
+
+## Bước tiếp theo
+
+- Danh bạ sẽ xuất hiện dưới dạng email bị che
+- Bạn có thể dùng tag để phân khúc đối tượng trong [campaigns](/vi/campaigns/create)
+- Bạn có thể [reveal](/vi/contacts/overview) từng liên hệ nếu có quyền

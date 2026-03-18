@@ -1,0 +1,62 @@
+---
+title: "Firmas de correo"
+description: "Crea, edita y usa firmas en campañas"
+---
+
+## Qué te ayuda a hacer esta página
+Crear firmas de correo reutilizables y adjuntarlas a tus campañas. Las firmas aparecen al final de los correos generados por IA para que los destinatarios vean tu nombre, cargo y datos de contacto.
+
+## Antes de empezar
+- Una cuenta de Nudgen
+- Acceso como owner, admin o member
+
+## Crear una firma
+1. Ve a **Configuración** → **Firmas**.
+2. Haz clic en **Nueva firma** o **Añadir firma**.
+3. Introduce un **nombre** para identificarla fácilmente, por ejemplo “Predeterminada”, “Ventas” o “Soporte”.
+4. Añade el contenido de la firma. Puedes usar:
+   - Texto plano
+   - Formato básico, como negrita, enlaces y saltos de línea
+   - HTML, si está permitido
+5. Guarda los cambios.
+
+## Usar una firma en campañas
+Al crear o editar una campaña, elige qué firma quieres adjuntar. La firma se añade al cuerpo del correo cuando se envía la campaña. Puedes tener varias firmas y escoger la más adecuada para cada caso, por ejemplo una para ventas y otra para soporte.
+
+## Editar o eliminar
+- **Editar:** abre la firma, cambia el contenido o el nombre y guarda.
+- **Eliminar:** quita la firma. Las campañas ya enviadas conservan el contenido enviado, pero las futuras necesitarán otra firma seleccionada.
+
+<Warning>
+Si eliminas una firma que todavía está seleccionada en una campaña en borrador, tendrás que elegir otra antes de enviar.
+</Warning>
+
+## Recomendaciones de contenido y seguridad
+- Mantén las firmas concisas. Las firmas largas pueden activar filtros de spam o dar una imagen poco profesional.
+- Evita imágenes grandes o diseños complejos. Un texto sencillo con uno o dos enlaces suele funcionar mejor.
+- Incluye tu nombre, cargo y una forma de contacto, como correo o enlace. El nombre de la empresa y el logo son opcionales.
+- Las firmas se sanitizan antes de añadirse al correo para evitar inyecciones. Solo se permiten HTML y enlaces seguros; el contenido riesgoso se elimina.
+
+## Qué ocurre después
+- [Crea una campaña](/es/campaigns/create) y selecciona tu firma antes de enviarla.
+- Crea varias firmas para distintos equipos o casos de uso.
+
+## Solución de problemas
+<AccordionGroup>
+  <Accordion title="La firma no aparece en el correo">
+    Asegúrate de haber seleccionado la firma al crear o editar la campaña. Revisa la vista previa antes de enviar.
+  </Accordion>
+  <Accordion title="El formato se ve mal">
+    Intenta usar un formato sencillo. El HTML complejo puede no renderizarse igual en todos los clientes de correo.
+  </Accordion>
+</AccordionGroup>
+
+## Documentación relacionada
+<CardGroup cols={2}>
+  <Card title="Crear campañas" icon="paper-plane" href="/es/campaigns/create">
+    Añade una firma al crear una campaña.
+  </Card>
+  <Card title="Configuración de la cuenta" icon="gear" href="/es/settings/account">
+    Resumen de todos los ajustes.
+  </Card>
+</CardGroup>

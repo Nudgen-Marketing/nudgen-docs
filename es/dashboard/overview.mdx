@@ -1,0 +1,54 @@
+---
+title: "Resumen del panel"
+description: "Métricas, gráficos y resumen de campañas"
+---
+
+## Qué te ayuda a hacer esta página
+Entender la vista principal del **panel**: métricas agregadas de tu workspace, un gráfico temporal de actividad y una tabla paginada de campañas con estadísticas clave. Úsala para supervisar de un vistazo la salud de tus envíos y su rendimiento.
+
+## Antes de empezar
+- Una cuenta de Nudgen con al menos un workspace
+- Opcional: campañas enviadas o programadas para que las métricas y el gráfico tengan datos
+
+## Tarjetas de métricas
+El panel muestra tarjetas resumen para el rango de fechas seleccionado:
+
+| Métrica | Significado |
+| --- | --- |
+| **Correos enviados** | Número total de intentos de envío, incluidos fallos de API o red. |
+| **Correos entregados** | Número de correos aceptados correctamente por el servidor del destinatario. |
+| **Aperturas totales** | Cuántas veces se abrieron los correos. |
+| **Clics totales** | Cuántas veces se hizo clic en los enlaces. |
+| **CTR** | Tasa de clics: `(clics totales / correos enviados) × 100`. |
+| **Quejas de spam** | Número de veces que los destinatarios marcaron tu correo como spam. |
+| **Rebote blando** | Problemas temporales de entrega, como buzón lleno o limitación temporal. |
+| **Rebote duro** | Fallos permanentes de entrega, como destinatarios inválidos o dominios bloqueados. |
+
+Estas métricas te ayudan a evaluar entregabilidad y engagement. Un número alto de rebotes o quejas puede dañar la reputación del remitente.
+
+## Gráfico temporal
+Un gráfico de líneas muestra cómo cambian las métricas en el rango de fechas seleccionado. Puedes ajustar el rango con el selector de fechas. Úsalo para detectar tendencias, como una caída en aperturas o un pico de rebotes, y relacionarlas con el lanzamiento de campañas.
+
+## Tabla de campañas
+Una tabla paginada enumera las campañas con columnas como nombre, tipo (envío único o drip), estado y conteos de enviados, entregados, aperturas, clics, rebotes y quejas. Puedes recorrerla por páginas y hacer clic en una campaña para abrir su detalle y ver la actividad por destinatario.
+
+## Rango de fechas
+El rango predeterminado suele ser los últimos 7 días. Cámbialo para centrarte en un periodo concreto o comparar semanas distintas. Las estadísticas y el gráfico se actualizan según el rango elegido.
+
+## Qué ocurre después
+- Abre una fila de campaña para ver la [analítica de campaña](/es/campaigns/analytics): actividad de destinatarios y métricas detalladas.
+- Revisa [Facturación](/es/billing/overview) para comparar el uso con los límites de tu plan.
+- Usa [Solución de problemas](/es/troubleshooting) si las métricas parecen incorrectas o los correos no se están enviando.
+
+## Documentación relacionada
+<CardGroup cols={2}>
+  <Card title="Analítica de campaña" icon="chart-line" href="/es/campaigns/analytics">
+    Métricas por campaña y actividad de los destinatarios.
+  </Card>
+  <Card title="Resumen de campañas" icon="list" href="/es/campaigns/overview">
+    Tipos y estados de campaña.
+  </Card>
+  <Card title="Fundamentos de entregabilidad" icon="shield" href="/es/concepts/deliverability-basics">
+    Cómo evitamos que tus correos acaben en spam.
+  </Card>
+</CardGroup>

@@ -1,0 +1,67 @@
+---
+title: "Configuración del equipo"
+description: "Invita miembros, gestiona roles y administra invitaciones"
+---
+
+## Qué te ayuda a hacer esta página
+Añadir miembros a tu workspace de Nudgen, asignarles roles y gestionar invitaciones pendientes o caducadas. Aquí entenderás qué permisos tiene cada rol para colaborar de forma segura.
+
+## Antes de empezar
+- Acceso como owner o admin
+- Las direcciones de correo de las personas que quieres invitar
+
+## Roles y permisos
+| Rol | Qué puede hacer |
+| --- | --- |
+| **Owner** | Acceso completo. Gestiona facturación, equipo y workspace. No puede ser eliminado. |
+| **Admin** | Invita y gestiona miembros. Edita campañas, contactos y marca. Sin acceso a facturación. |
+| **Member** | Crea y edita campañas, sube contactos y usa configuraciones de marca. Tiene acceso limitado al equipo. |
+
+<Note>
+Solo los owners y admins pueden invitar a nuevos miembros o cambiar roles. Los members pueden ver la lista del equipo, pero no modificarla.
+</Note>
+
+## Invitar a un miembro del equipo
+1. Ve a **Configuración** → **Equipo**.
+2. Haz clic en **Invitar miembro**.
+3. Introduce el correo y selecciona el rol (**Admin** o **Member**).
+4. Envía la invitación. La persona recibirá un correo con un enlace para aceptarla.
+
+## Estados de invitación
+| Estado | Significado |
+| --- | --- |
+| **Pendiente** | La invitación se ha enviado y el destinatario puede aceptarla desde el enlace del correo. |
+| **Aceptada** | El destinatario ya se ha unido y aparece en la lista del equipo con su rol. |
+| **Caducada** | El enlace de invitación ha vencido. Puedes reenviarla si hace falta. |
+| **Cancelada** | La invitación se canceló antes de ser aceptada. |
+
+## Cambiar o eliminar a un miembro
+- **Cambiar rol:** abre el miembro, selecciona un nuevo rol y guarda. Solo owners y admins pueden hacerlo.
+- **Eliminar miembro:** usa **Eliminar** y confirma. La persona pierde acceso de inmediato. Sus acciones anteriores siguen apareciendo en los registros.
+
+## Qué ocurre después
+- Los nuevos miembros pueden [subir contactos](/es/contacts/upload), [crear campañas](/es/campaigns/create) y usar configuraciones de marca compartidas.
+- Los owners siguen teniendo el control sobre facturación y ajustes críticos.
+
+## Solución de problemas
+<AccordionGroup>
+  <Accordion title="La persona invitada no recibió el correo">
+    Pídele que revise la carpeta de spam. Reenvía la invitación desde la página del equipo y confirma que la dirección sea correcta.
+  </Accordion>
+  <Accordion title="La invitación caducó">
+    Las invitaciones caducan tras un tiempo determinado. Crea una nueva invitación con el mismo correo.
+  </Accordion>
+  <Accordion title="¿Un miembro puede ver todos los contactos?">
+    Sí. Los miembros con acceso comparten el mismo workspace y la misma lista de contactos. Usa etiquetas y campañas para organizar el trabajo.
+  </Accordion>
+</AccordionGroup>
+
+## Documentación relacionada
+<CardGroup cols={2}>
+  <Card title="Configuración de la cuenta" icon="gear" href="/es/settings/account">
+    Resumen de todos los ajustes.
+  </Card>
+  <Card title="Firmas" icon="pen-fancy" href="/es/settings/signatures">
+    Firmas de correo para campañas.
+  </Card>
+</CardGroup>

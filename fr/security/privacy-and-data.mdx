@@ -1,0 +1,66 @@
+---
+title: "Confidentialité et données"
+description: "Comment nous gérons les données personnelles, le suivi et les fournisseurs tiers"
+---
+
+## Ce que couvre cette page
+Cette page résume, de manière simple, comment Nudgen traite les données personnelles et les données de contact, comment le suivi fonctionne dans les e-mails, et quels fournisseurs tiers sont utilisés. Pour le texte juridique complet, consultez la [Politique de confidentialité](https://nudgen.net/privacy) et les [Conditions d'utilisation](https://nudgen.net/terms).
+
+## Données personnelles et données de contact
+**Chiffrement au repos**
+
+- Les données de contact que vous importez, comme les adresses e-mail, les noms et les champs personnalisés, sont **chiffrées** avant d’être stockées.
+- Les adresses e-mail sont aussi **hachées** de manière unidirectionnelle pour la déduplication, afin que nous puissions fusionner les doublons sans stocker l’adresse brute en clair.
+
+**Masquage et affichage**
+
+- Dans l’application, les e-mails et noms des contacts sont **masqués** par défaut, par exemple `j***@g***.com`.
+- Lorsque vous cliquez sur **Révéler**, la valeur réelle est déchiffrée uniquement dans votre navigateur et affichée temporairement.
+- Si vous changez de page ou actualisez, elle est à nouveau masquée.
+- Nous n’exposons jamais de données personnelles déchiffrées dans les analyses, les journaux ou les exportations.
+
+**Qui peut voir les données de contact**
+
+- Seules les personnes de votre **workspace** ayant accès aux contacts peuvent voir la liste.
+- L’action **Révéler** est disponible pour toute personne autorisée à consulter les contacts dans ce workspace.
+- Les limites du forfait et la facturation s’appliquent par workspace.
+
+## Suivi dans les e-mails
+Nous utilisons le suivi pour mesurer la performance des campagnes et respecter les désabonnements.
+
+- **Ouvertures** : un petit pixel de suivi se charge quand le destinataire ouvre l’e-mail. Nous enregistrons l’événement, ainsi qu’une heure approximative, à des fins d’analyse. Certains clients de messagerie bloquent les images, donc le nombre d’ouvertures peut être sous-estimé.
+- **Clics** : les liens des e-mails peuvent être enveloppés dans des **liens de suivi signés**. Quand le destinataire clique, nous enregistrons le clic puis le redirigeons vers l’URL réelle.
+- **Désabonnement** : chaque e-mail de campagne inclut un **lien de désabonnement**. Quand le destinataire l’utilise, nous le marquons comme désabonné et l’excluons des futurs envois de campagne.
+
+Lorsque ces mécanismes fonctionnent, nous pouvons traiter certaines données comme les détails du navigateur ou de l’appareil, une localisation approximative basée sur l’IP, le client de messagerie ou les horodatages. Ces données servent à l’analyse et à l’exploitation du service.
+
+## Fournisseurs tiers
+Le service repose sur plusieurs types de fournisseurs tiers. La liste exacte peut évoluer dans le temps.
+
+| Fournisseur | Rôle |
+| --- | --- |
+| **Google / Firebase** | Authentification, par exemple connexion avec Google, et analyse de l’application. |
+| **Polar** | Gestion des abonnements, paiement, portail de facturation et traitement des paiements. |
+| **Fournisseur d’envoi d’e-mails** | Envoi des e-mails, gestion des rebonds et plaintes, et synchronisation des listes de suppression. |
+| **OpenAI** | Génération assistée par IA pour les objectifs de campagne, la voix de marque et les prompts. |
+| **MaxMind** | Géolocalisation approximative, par exemple à partir de l’adresse IP, à des fins analytiques et opérationnelles. |
+
+Les données ne sont partagées avec ces fournisseurs que lorsque cela est nécessaire pour fournir le service. Nous ne vendons pas vos données ni vos listes de contacts à des tiers à des fins marketing.
+
+## Pratiques de sécurité
+- L’accès dans le produit est **basé sur les rôles** à l’échelle du workspace : owner, admin et member.
+- Nous utilisons des **liens signés** et des mécanismes de validation dans les flux sensibles pour limiter les abus.
+- Nous appliquons du **rate limiting** et d’autres protections d’usage pour protéger la plateforme et faire respecter les limites du forfait.
+- Aucun système de transmission ou de stockage n’est sécurisé à 100 %. Nous appliquons des mesures raisonnables, sans garantir une sécurité absolue.
+
+## Conservation des données et vos droits
+- Nous conservons les données aussi longtemps que nécessaire pour fournir le service, maintenir la sécurité et l’exploitation, respecter la loi et faire respecter nos accords.
+- Selon votre lieu de résidence, vous pouvez avoir des droits d’accès, de rectification, de suppression ou de limitation sur certaines données personnelles.
+- Les destinataires d’e-mails envoyés via Nudgen peuvent utiliser le lien de **désabonnement**. Pour toute autre demande, vous pouvez écrire à [contact@nudgen.net](mailto:contact@nudgen.net).
+- Si vous êtes **destinataire** d’une campagne, et non titulaire du compte, l’expéditeur est généralement responsable de cet envoi. Vous pouvez le contacter ou utiliser le lien de désabonnement.
+
+## Politiques complètes
+- [Politique de confidentialité](https://nudgen.net/privacy)
+- [Conditions d'utilisation](https://nudgen.net/terms)
+
+Pour des comportements spécifiques au produit, consultez [Aperçu des contacts](/fr/contacts/overview), [Cycle de vie des contacts](/fr/contacts/lifecycle) et [Bases de la délivrabilité](/fr/concepts/deliverability-basics).

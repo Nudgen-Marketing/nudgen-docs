@@ -1,0 +1,39 @@
+---
+title: "Ciclo de vida del contacto"
+description: "Importación, actualizaciones, cancelaciones de suscripción y supresión"
+---
+
+## Qué te ayuda a hacer esta página
+Entender cómo pasan los contactos de la importación a la interacción y, en algunos casos, a la supresión. Esto te ayuda a mantener sana tu lista y a evitar envíos a direcciones erróneas o dadas de baja.
+
+## Fases del ciclo de vida
+### Importación y almacenamiento
+- Añades contactos mediante **Subir CSV** o **Añadir contacto**. Los correos y nombres se validan y se cifran en reposo.
+- Los duplicados, es decir el mismo correo dentro del mismo workspace, se fusionan durante la carga; los contactos existentes pueden actualizarse.
+- Los nuevos contactos empiezan como **activos** y pueden recibir campañas hasta que algo cambie su estado.
+
+### Activos y recibiendo
+- Los contactos **activos** cuentan para el límite de tu plan y pueden incluirse en las audiencias de campaña, ya sea todos, por etiquetas o manual.
+- Reciben correos cuando envías o ejecutas una secuencia drip. Las aperturas, clics y rebotes se registran y se reflejan en la analítica y en la supresión.
+
+### Baja
+- Cuando un destinatario hace clic en el enlace de **baja** dentro de un correo, queda marcado como **dado de baja** y se excluye de futuros envíos de campaña.
+- Aun así, puedes seguir viéndolo en la lista de contactos. Algunas empresas vuelven a suscribir manualmente en casos concretos, pero la aplicación respeta el estado de baja salvo que tú lo cambies.
+
+### Rebotes y supresión
+- Los **rebotes blandos**, como buzón lleno o fallo temporal, pueden volver a intentarse por parte del proveedor de entrega. Si se repiten, pueden acabar en supresión.
+- Los **rebotes duros**, como dirección inválida o dominio inexistente, se suprimen de inmediato. Sincronizamos la lista de supresión del proveedor para no volver a usar esas direcciones.
+- Los contactos suprimidos o con rebote quedan excluidos de futuros envíos para proteger tu reputación y la entregabilidad.
+
+### Actualizaciones y eliminación
+- Puedes editar los datos del contacto, como nombre o etiquetas, desde la lista. Si vuelves a subir un CSV con el mismo correo, ese contacto se actualiza.
+- Eliminar un contacto lo quita del workspace. Deja de contar para los límites y ya no puede recibir campañas.
+
+## Cómo afecta esto a las campañas
+- Cuando eliges una audiencia, ya sea todos, etiquetas o manual, solo se incluyen los contactos **activos** que no estén suprimidos. La estimación de alcance del asistente refleja esto.
+- Las campañas drip omiten pasos posteriores para los contactos que se dieron de baja o fueron suprimidos después de una etapa previa.
+
+## Qué ocurre después
+- [Resumen de contactos](/es/contacts/overview): cifrado, enmascarado y etiquetas.
+- [Subir contactos](/es/contacts/upload): formato CSV y validación.
+- [Conceptos básicos de entregabilidad](/es/concepts/deliverability-basics): rebotes y reputación del remitente.

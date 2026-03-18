@@ -1,0 +1,91 @@
+---
+title: "Vue d’ensemble de la facturation"
+description: "Forfaits, compteurs d’usage, paiement et portail client"
+---
+
+## Ce que cette page vous aide à faire
+Comprendre les niveaux tarifaires de Nudgen, ce que comprend chaque forfait, comment l’usage est mesuré et comment mettre à niveau ou gérer votre abonnement.
+
+## Avant de commencer
+- Un compte Nudgen
+- Un accès à **Facturation** dans le tableau de bord
+
+## Niveaux de forfait
+Les forfaits incluent généralement **Trial**, **Starter**, **Growth**, **Pro** et **Enterprise**.
+
+### Comparaison des forfaits
+| Plan | Prix | Contacts | E-mails / jour | E-mails / mois | Séquences drip |
+| --- | --- | --- | --- | --- | --- |
+| **Trial** | Gratuit | 50 | 20 | 50 | 3 |
+| **Starter** | 29 $ / mois | 1 000 | 100 | 2 000 | 5 |
+| **Growth** | 59 $ / mois | 2 000 | 250 | 5 000 | 10 |
+| **Pro** | 99 $ / mois | 5 000 | 750 | 15 000 | Illimité |
+| **Enterprise** | Contacter l’équipe commerciale | Illimité | Illimité | Illimité | Illimité |
+
+### Points forts
+- **Trial** : génération d’e-mails par IA, campagnes ponctuelles et suivi de base des ouvertures et des clics
+- **Starter** : séquences drip en 5 étapes, audiences par tags et règles d’arrêt automatique
+- **Growth** : tout Starter, plus 10 étapes drip, voix de marque personnalisée et analyses en temps réel
+- **Pro** : tout Growth, plus séquences drip illimitées, analyses avancées et meilleure visibilité sur la délivrabilité
+- **Enterprise** : tout Pro, plus limites personnalisées, intégrations dédiées et support renforcé
+
+Les comptes d’essai disposent d’une période limitée, généralement 7 jours, avec des plafonds réduits pour tester le produit. Les forfaits payants se renouvellent mensuellement, sauf annulation.
+
+<Note>
+Les prix exacts, plafonds de contacts et limites d’e-mails peuvent évoluer. Vérifiez toujours la [page tarifaire](https://nudgen.net/pricing) et la section **Facturation** de l’application pour obtenir les informations les plus à jour.
+</Note>
+
+## Compteurs d’utilisation
+Sur la page **Facturation**, vous verrez généralement :
+- le nombre de **contacts utilisés** par rapport à la limite du forfait
+- le nombre d’**e-mails envoyés ce mois-ci**
+- le nombre de **séquences drip utilisées**, si applicable
+
+Les limites du forfait sont vérifiées avant l’action. Vous ne pouvez pas importer plus de contacts que permis ni envoyer au-delà de votre plafond quotidien ou mensuel.
+
+## Quand vous atteignez les limites
+- **Limite de contacts** : les nouveaux imports ou ajouts sont bloqués jusqu’à suppression de contacts ou mise à niveau du forfait
+- **Limite d’e-mails** : l’envoi est bloqué jusqu’au prochain cycle de facturation, sauf si vous mettez à niveau
+- **Limites de débit** : un trop grand nombre de requêtes ou d’envois peut être temporairement limité pour protéger le service
+
+## Mettre à niveau ou changer de forfait
+1. Ouvrez **Facturation**.
+2. Repérez votre forfait actuel puis cliquez sur **Mettre à niveau** ou **Changer de forfait**.
+3. Vous serez redirigé vers le paiement, géré par Polar.
+4. Finalisez le paiement. Le nouveau forfait et ses limites s’appliquent ensuite selon les règles du fournisseur.
+
+## Portail client
+Utilisez **Gérer l’abonnement** ou le **Portail de facturation** pour :
+- mettre à jour votre moyen de paiement
+- afficher et télécharger vos factures
+- annuler ou modifier votre abonnement
+
+## Enterprise
+Pour des limites personnalisées, un SLA ou un support dédié, contactez [contact@nudgen.net](mailto:contact@nudgen.net).
+
+## Que se passe-t-il ensuite
+- Surveillez votre usage pour éviter les imports ou envois bloqués.
+- Si vous êtes encore en essai, pensez à mettre le forfait à niveau avant la fin de la période.
+
+## Dépannage
+<AccordionGroup>
+  <Accordion title="J’ai atteint ma limite de contacts">
+    Mettez à niveau votre forfait ou supprimez des contacts inactifs pour revenir sous la limite.
+  </Accordion>
+  <Accordion title="Les e-mails envoyés sont remis à zéro">
+    L’usage est réinitialisé à chaque cycle de facturation, généralement tous les mois. Vérifiez votre période sur la page de facturation.
+  </Accordion>
+  <Accordion title="Comment annuler ?">
+    Utilisez le portail de facturation pour annuler. Vous conserverez l’accès jusqu’à la fin de la période en cours.
+  </Accordion>
+</AccordionGroup>
+
+## Documents associés
+<CardGroup cols={2}>
+  <Card title="Démarrage rapide" icon="rocket" href="/fr/quickstart">
+    Limites d’essai et première campagne.
+  </Card>
+  <Card title="Importer des contacts" icon="file-upload" href="/fr/contacts/upload">
+    Limites de contacts et import CSV.
+  </Card>
+</CardGroup>

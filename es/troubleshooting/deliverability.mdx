@@ -1,0 +1,56 @@
+---
+title: "Envío y entregabilidad"
+description: "Correos que no se envían, rebotes y spam"
+---
+
+## Correos que no se envían
+**La campaña se queda atascada o en “enviando” durante mucho tiempo**
+
+- Los envíos entran en cola y se procesan por lotes. Las campañas grandes pueden tardar. Actualiza el panel; si el estado sigue en “Enviando” durante horas, contacta con soporte.
+- Comprueba que no hayas alcanzado tu **límite diario o mensual de correos**. La aplicación bloquea nuevos envíos cuando superas el tope. Consulta [Facturación](/es/billing/overview) y [Solución de problemas: facturación](/es/troubleshooting/billing).
+
+**El correo de prueba no llegó**
+
+- Revisa spam o correo no deseado. Añade al remitente a tus contactos o remitentes seguros.
+- Confirma que el **correo de la cuenta**, donde se envían las pruebas, sea correcto en tu perfil.
+- Espera unos minutos; la entrega puede retrasarse. Inténtalo de nuevo o prueba con otra dirección.
+
+**“No hay contactos activos” o el alcance es cero**
+
+- Sube o añade al menos un contacto y asegúrate de que esté **activo**, es decir, que no esté dado de baja ni suprimido. Consulta [Resumen de contactos](/es/contacts/overview) y [Ciclo de vida del contacto](/es/contacts/lifecycle).
+- Si elegiste “Por etiquetas”, comprueba que algunos contactos tengan las etiquetas seleccionadas.
+
+## Rebotes y quejas
+**Alta tasa de rebote**
+
+- Los **rebotes duros** (dirección inválida o dominio inexistente) se suprimen automáticamente. Elimina o corrige las direcciones erróneas de tu lista y evita listas compradas o scrapeadas.
+- Los **rebotes blandos** (buzón lleno o servidor caído) pueden ser reintentados por el proveedor. Si se repiten, pueden acabar en supresión. Limpia tu lista y evita direcciones genéricas, como `info@`, salvo que sean buzones válidos.
+- Mantén la tasa de rebote baja, por ejemplo por debajo del 2 %, para proteger la reputación del remitente. Usa el [Panel](/es/dashboard/overview) y la [Analítica de campaña](/es/campaigns/analytics) para supervisarlo.
+
+**Quejas por spam**
+
+- Los destinatarios marcaron el correo como spam. Suprimimos a quienes se quejan y no recibirán campañas futuras. Demasiadas quejas dañan la reputación.
+- Mejora el contenido: asuntos claros, texto relevante y enlace de baja visible. No envíes correos a personas que no dieron su consentimiento. Consulta [Fundamentos de entregabilidad](/es/concepts/deliverability-basics).
+
+**Bajas**
+
+- Los enlaces de baja son obligatorios y se respetan. Los contactos dados de baja se excluyen de futuros envíos. Esto es normal y te ayuda a mantener el cumplimiento.
+
+## Seguimiento y métricas
+**Las aperturas o los clics no se actualizan**
+
+- El seguimiento usa un píxel para aperturas y enlaces firmados para clics. Algunos clientes bloquean imágenes o eliminan el seguimiento, así que las métricas pueden quedarse cortas.
+- Los datos pueden tardar un poco en aparecer. Actualiza la página de detalle de campaña o el panel.
+- Si una campaña muestra cero aperturas o clics durante mucho tiempo después del envío, comprueba que los enlaces e imágenes del correo estén correctos y que la campaña realmente se haya enviado, revisando “Correos enviados” y “Correos entregados”.
+
+**La analítica parece incorrecta**
+
+- Asegúrate de que el **rango de fechas** incluya la fecha de envío. El panel y las páginas de detalle filtran según el rango seleccionado.
+- “Correos enviados” incluye todos los intentos; “Correos entregados” refleja solo las entregas correctas. El CTR se calcula como `(clics totales / correos enviados) × 100`. Consulta [Analítica de campaña](/es/campaigns/analytics) y [Resumen del panel](/es/dashboard/overview).
+
+## Qué hacemos para proteger la entregabilidad
+- Enviamos a través de nuestro proveedor de correo y sincronizamos su lista de supresión para no reenviar a direcciones con rebotes o quejas.
+- Validamos los contactos y evitamos enviar a quienes están dados de baja o suprimidos.
+- El contenido y las firmas se sanitizan; además, cuando es posible, marcamos expresiones propensas a spam.
+
+Para más información, consulta [Fundamentos de entregabilidad](/es/concepts/deliverability-basics) y [Ciclo de vida del contacto](/es/contacts/lifecycle).
