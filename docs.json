@@ -107,6 +107,11 @@
               "anchor": "Pricing",
               "href": "https://nudgen.net/pricing",
               "icon": "tag"
+            },
+            {
+              "anchor": "Status",
+              "href": "https://stats.uptimerobot.com/fGg8sPgh7G",
+              "icon": "signal"
             }
           ]
         },
@@ -115,6 +120,10 @@
             {
               "label": "Pricing",
               "href": "https://nudgen.net/pricing"
+            },
+            {
+              "label": "Status",
+              "href": "https://stats.uptimerobot.com/fGg8sPgh7G"
             },
             {
               "label": "Contact",
@@ -225,6 +234,11 @@
               "anchor": "Precios",
               "href": "https://nudgen.net/pricing",
               "icon": "tag"
+            },
+            {
+              "anchor": "Estado",
+              "href": "https://stats.uptimerobot.com/fGg8sPgh7G",
+              "icon": "signal"
             }
           ]
         },
@@ -233,6 +247,10 @@
             {
               "label": "Precios",
               "href": "https://nudgen.net/pricing"
+            },
+            {
+              "label": "Estado",
+              "href": "https://stats.uptimerobot.com/fGg8sPgh7G"
             },
             {
               "label": "Contacto",
@@ -343,6 +361,11 @@
               "anchor": "Tarifs",
               "href": "https://nudgen.net/pricing",
               "icon": "tag"
+            },
+            {
+              "anchor": "Statut",
+              "href": "https://stats.uptimerobot.com/fGg8sPgh7G",
+              "icon": "signal"
             }
           ]
         },
@@ -351,6 +374,10 @@
             {
               "label": "Tarifs",
               "href": "https://nudgen.net/pricing"
+            },
+            {
+              "label": "Statut",
+              "href": "https://stats.uptimerobot.com/fGg8sPgh7G"
             },
             {
               "label": "Contact",
@@ -461,6 +488,11 @@
               "anchor": "定价",
               "href": "https://nudgen.net/pricing",
               "icon": "tag"
+            },
+            {
+              "anchor": "状态",
+              "href": "https://stats.uptimerobot.com/fGg8sPgh7G",
+              "icon": "signal"
             }
           ]
         },
@@ -469,6 +501,10 @@
             {
               "label": "定价",
               "href": "https://nudgen.net/pricing"
+            },
+            {
+              "label": "状态",
+              "href": "https://stats.uptimerobot.com/fGg8sPgh7G"
             },
             {
               "label": "联系",
@@ -579,6 +615,11 @@
               "anchor": "料金",
               "href": "https://nudgen.net/pricing",
               "icon": "tag"
+            },
+            {
+              "anchor": "ステータス",
+              "href": "https://stats.uptimerobot.com/fGg8sPgh7G",
+              "icon": "signal"
             }
           ]
         },
@@ -587,6 +628,10 @@
             {
               "label": "料金",
               "href": "https://nudgen.net/pricing"
+            },
+            {
+              "label": "ステータス",
+              "href": "https://stats.uptimerobot.com/fGg8sPgh7G"
             },
             {
               "label": "お問い合わせ",
@@ -697,6 +742,11 @@
               "anchor": "Bảng giá",
               "href": "https://nudgen.net/pricing",
               "icon": "tag"
+            },
+            {
+              "anchor": "Trạng thái",
+              "href": "https://stats.uptimerobot.com/fGg8sPgh7G",
+              "icon": "signal"
             }
           ]
         },
@@ -705,6 +755,10 @@
             {
               "label": "Bảng giá",
               "href": "https://nudgen.net/pricing"
+            },
+            {
+              "label": "Trạng thái",
+              "href": "https://stats.uptimerobot.com/fGg8sPgh7G"
             },
             {
               "label": "Liên hệ",
