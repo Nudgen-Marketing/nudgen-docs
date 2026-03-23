@@ -59,6 +59,7 @@
                 "group": "Settings",
                 "pages": [
                   "en/settings/account",
+                  "en/settings/brand",
                   "en/settings/team",
                   "en/settings/signatures"
                 ]
@@ -186,6 +187,7 @@
                 "group": "Configuración",
                 "pages": [
                   "es/settings/account",
+                  "es/settings/brand",
                   "es/settings/team",
                   "es/settings/signatures"
                 ]
@@ -313,6 +315,7 @@
                 "group": "Paramètres",
                 "pages": [
                   "fr/settings/account",
+                  "fr/settings/brand",
                   "fr/settings/team",
                   "fr/settings/signatures"
                 ]
@@ -440,6 +443,7 @@
                 "group": "设置",
                 "pages": [
                   "cn/settings/account",
+                  "cn/settings/brand",
                   "cn/settings/team",
                   "cn/settings/signatures"
                 ]
@@ -567,6 +571,7 @@
                 "group": "設定",
                 "pages": [
                   "jp/settings/account",
+                  "jp/settings/brand",
                   "jp/settings/team",
                   "jp/settings/signatures"
                 ]
@@ -694,6 +699,7 @@
                 "group": "Cài đặt",
                 "pages": [
                   "vi/settings/account",
+                  "vi/settings/brand",
                   "vi/settings/team",
                   "vi/settings/signatures"
                 ]
