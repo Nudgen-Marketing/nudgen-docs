@@ -1,0 +1,62 @@
+---
+title: "Dashboard overview"
+description: "Metrics, charts, and campaign summary"
+---
+
+## What this page helps you do
+
+Understand the main **Dashboard** view: aggregate metrics for your workspace, a time-series chart of activity, and a paginated table of campaigns with key stats. Use it to monitor sending health and performance at a glance.
+
+## Before you start
+
+- A Nudgen account with at least one workspace
+- Optional: sent or scheduled campaigns so metrics and the chart have data
+
+## Metric cards
+
+The dashboard shows summary cards for the selected date range:
+
+| Metric | Meaning |
+| ------ | ------- |
+| **Emails Sent** | Total number of all send attempts (including API or network failures). |
+| **Emails Delivered** | Number of emails successfully accepted by the recipient's mail server. |
+| **Total Opens** | How many times emails were opened (tracking pixel). |
+| **Total Clicks** | How many times links were clicked. |
+| **CTR** | Click-through rate: (Total Clicks / Total Sent) × 100. |
+| **Spam Complaints** | Number of times recipients marked your email as spam. |
+| **Soft Bounce** | Temporary delivery issues (mailbox full, throttling, transient server problems). |
+| **Hard Bounce** | Permanent delivery failures (invalid recipients, blocked domains). |
+
+Use these to judge deliverability (delivered vs sent, bounces) and engagement (opens, clicks, CTR). High spam complaints or bounces can hurt sender reputation.
+
+## Time-series chart
+
+A line chart shows how metrics change over the selected date range. You can adjust the range with the date picker. Use it to spot trends (e.g. opens dropping, bounces spiking) and correlate with campaign launches.
+
+## Campaigns table
+
+A paginated table lists campaigns with columns such as name, type (one-time or drip), status, and counts (sent, delivered, opened, clicked, bounces, complaints). Use pagination to browse; click a campaign to open its detail page for recipient-level activity and per-campaign time-series.
+
+## Date range
+
+The default range is often the last 7 days. Change the range to focus on a specific period or compare different weeks. Stats and the chart update to reflect the selected range.
+
+## What happens next
+
+- Open a campaign row to see [campaign analytics](/en/campaigns/analytics): recipient activity and detailed metrics.
+- Check [Billing](/en/billing/overview) for usage vs plan limits.
+- Use [Troubleshooting](/en/troubleshooting) if metrics look wrong or emails aren’t sending.
+
+## Related docs
+
+<CardGroup cols={2}>
+  <Card title="Campaign analytics" icon="chart-line" href="/en/campaigns/analytics">
+    Per-campaign metrics and recipient activity.
+  </Card>
+  <Card title="Campaigns overview" icon="list" href="/en/campaigns/overview">
+    Campaign types and statuses.
+  </Card>
+  <Card title="Deliverability basics" icon="shield" href="/en/concepts/deliverability-basics">
+    How we keep emails out of spam.
+  </Card>
+</CardGroup>

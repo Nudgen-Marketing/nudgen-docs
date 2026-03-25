@@ -1,0 +1,97 @@
+---
+title: "Create campaigns"
+description: "Step-by-step campaign wizard, AI generation, preview, and test send"
+---
+
+## What this page helps you do
+
+Create a one-shot or drip campaign from start to finish. You'll choose the audience, set the campaign goal, let AI generate the content, preview it, and send or schedule.
+
+## Before you start
+
+- [Contacts uploaded](/en/contacts/upload)
+- [Brand tone configured](/en/brand/overview)
+- A clear goal (e.g. "Re-engage users who haven't logged in for 7 days")
+
+## Step 1: New campaign
+
+1. Go to **Campaigns** and click **New campaign**.
+2. Choose **One-shot** or **Drip sequence**.
+
+## Step 2: Select audience
+
+- **All contacts** — Everyone in your contact list (within plan limits).
+- **By tags** — Only contacts with selected tags (e.g. `inactive`, `vip`).
+- **Manual** — Hand-pick specific contacts.
+
+The wizard shows a **reach estimate** (how many unique contacts will receive the campaign). If it shows zero, add or import contacts or adjust your segment.
+
+Optionally add a **CTA link** (call-to-action URL). Links in the email can be tracked; the CTA is used for click tracking and stop-on-click rules.
+
+## Step 3: Choose brand, signature, and goal
+
+1. Select the **brand config** (tone) for this campaign.
+2. Select the **signature** to append to the email (create one under **Settings** → **Signatures** if needed).
+3. Enter the **campaign goal** — a short description of what you want to achieve. Examples:
+   - "Re-engage users who haven't logged in for 7 days"
+   - "Get trial users to complete onboarding"
+   - "Promote our new feature to paying customers"
+
+The AI uses this goal and your brand tone to generate subject lines and email bodies. Content may be checked for spam-prone wording; the app will flag issues when possible.
+
+## Step 4: Generate content
+
+1. Click **Generate**.
+2. Review the subject line and email body.
+3. Edit if needed. You can regenerate or tweak the text.
+4. For drip sequences: repeat for each step (Day 1, Day 3, etc.).
+
+## Step 5: Preview
+
+- Use the **Desktop** and **Mobile** toggle to see how the email looks on different devices.
+- Check links, images, and formatting.
+- Ensure the CTA and tone match your goal.
+
+<Tip>
+Always **Send test** before launching. We email a copy to your account email so you can verify it in your real inbox.
+</Tip>
+
+## Step 6: Send or schedule
+
+- **Send now** — Emails go out immediately (within minutes, depending on queue).
+- **Schedule** — Pick date and time. Emails send automatically at that time.
+- **Save as draft** — Finish later. You can edit until you send.
+
+## What happens next
+
+- Emails are sent via our email infrastructure with open and click tracking.
+- The [campaign detail page](/en/campaigns/analytics) shows metrics: sent, delivered, opened, clicked, and delivery success/failure rates.
+- If you set auto-stop rules, engaged contacts will not receive later drip steps.
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="AI content doesn't match my tone">
+    Refine your brand config with a custom prompt or example emails. Regenerate the campaign content after updating.
+  </Accordion>
+  <Accordion title="Test email didn't arrive">
+    Check spam/junk. Ensure your account email is correct in settings. Wait a few minutes — delivery can be delayed.
+  </Accordion>
+  <Accordion title="Can I change the audience after generating?">
+    Yes, as long as the campaign is still in draft. Changing the audience may affect who receives the emails.
+  </Accordion>
+</AccordionGroup>
+
+## Related docs
+
+<CardGroup cols={2}>
+  <Card title="Campaigns overview" icon="list" href="/en/campaigns/overview">
+    One-shot vs drip, statuses.
+  </Card>
+  <Card title="Manage campaigns" icon="pen-to-square" href="/en/campaigns/manage">
+    Edit, send, schedule, stop.
+  </Card>
+  <Card title="Campaign analytics" icon="chart-line" href="/en/campaigns/analytics">
+    Metrics and recipient activity.
+  </Card>
+</CardGroup>

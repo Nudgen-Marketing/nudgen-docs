@@ -1,0 +1,80 @@
+---
+title: "Upload contacts"
+description: "CSV format, validation rules, and tag assignment for contact uploads"
+---
+
+## What this page helps you do
+
+Upload a CSV of contacts so you can run campaigns. You'll learn the required columns, validation rules, size limits, and how to add tags during upload.
+
+## Before you start
+
+- A Nudgen account
+- A CSV file with at least an `email` column
+- Contacts must be under your plan limit (see [billing](/en/billing/overview))
+
+## Step 1: Prepare your CSV
+
+Your CSV must include:
+
+| Column   | Required | Description                          |
+| -------- | -------- | ------------------------------------ |
+| `email`  | Yes      | Valid email address. Must be unique. |
+| `name`   | No       | Display name for personalization.   |
+
+You can add other columns (e.g. `company`, `segment`). They are stored encrypted and can be used in tags or segmentation logic.
+
+## Step 2: Validate format
+
+- **Encoding:** UTF-8 recommended.
+- **Delimiter:** Comma (`,`).
+- **Header row:** First row must contain column names. `email` and `name` are recognized case-insensitively.
+- **Duplicate emails:** Duplicates in the same file are merged. Existing contacts with the same email are updated.
+
+<Warning>
+Invalid emails (malformed, missing `@`, etc.) are skipped. Check the upload summary to see how many rows were imported vs skipped.
+</Warning>
+
+## Step 3: Upload in Nudgen
+
+1. Go to **Contacts** in the sidebar.
+2. Click **Upload CSV**.
+3. Select your file.
+4. Choose tags to apply to all uploaded contacts (e.g. `inactive`, `re-engage`).
+5. Review the preview and confirm.
+
+## Size limits
+
+- **File size:** Follow the on-screen limit (typically a few MB). Large lists may take longer to process.
+- **Contacts per workspace:** Depends on your plan. The app enforces the limit at upload time; if you exceed it, the upload is rejected. See [Billing](/en/billing/overview) and the live [pricing page](https://nudgen.net/pricing) for current limits.
+
+## What happens next
+
+- Contacts appear in the list with masked emails (`j***@g***.com`).
+- Use tags to segment audiences in [campaigns](/en/campaigns/create).
+- You can [reveal](/en/contacts/overview) individual contacts as the account owner.
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="Some rows were skipped">
+    Check that each row has a valid email in the `email` column. Empty rows or malformed addresses are skipped.
+  </Accordion>
+  <Accordion title="Upload failed: plan limit exceeded">
+    Your contact count would exceed your plan limit. Upgrade your plan or remove existing contacts.
+  </Accordion>
+  <Accordion title="Column not recognized">
+    Ensure the header row includes `email` (or `Email`). Other columns are optional.
+  </Accordion>
+</AccordionGroup>
+
+## Related docs
+
+<CardGroup cols={2}>
+  <Card title="Contacts overview" icon="users" href="/en/contacts/overview">
+    Encryption, masking, and segmentation.
+  </Card>
+  <Card title="Create campaigns" icon="paper-plane" href="/en/campaigns/create">
+    Select your audience and launch a campaign.
+  </Card>
+</CardGroup>

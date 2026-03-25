@@ -1,76 +1,87 @@
 ---
 title: "Démarrage rapide"
-description: "Envoyez votre première campagne Nudgen en environ 5 minutes"
+description: "Lancez votre première campagne Nudgen en quelques minutes"
 ---
 
-## Ce que ce guide vous aide à faire
-Vous allez créer un compte, importer une petite liste de contacts, définir le ton de votre marque et au moins une signature, créer une campagne avec l’assistant puis l’envoyer. Aucun paiement par carte n’est requis pour l’essai gratuit.
+## Configuration en un clin d’œil
+
+Nudgen est conçu pour les gérants de boutiques et les PME en croissance qui cherchent à booster la valeur vie client avec l’automatisation d’e-mails de rétention propulsée par l’IA. Vous allez vous inscrire, importer vos contacts, définir le ton de votre marque et lancer votre première campagne avec un suivi automatisé. Aucune carte de crédit n’est requise.
 
 ## Avant de commencer
-- Un fichier CSV avec au moins un contact, avec `email` obligatoire et `name` facultatif
+
+- Un fichier CSV avec au moins un contact (`email` obligatoire, `name` facultatif)
 - Environ 5 minutes
 
 <Note>
 Les nouveaux comptes bénéficient d’un **essai** avec un nombre limité de contacts et d’emails, suffisant pour lancer une première campagne. Les limites exactes dépendent de votre forfait. Consultez [Facturation](/fr/billing/overview) ou la [page tarifaire](https://nudgen.net/pricing) pour les chiffres à jour.
 </Note>
 
-**Conditions requises pour l’envoi :** vous devez disposer d’au moins un contact actif, d’une configuration de marque et d’une signature email. L’application vous le signalera si l’un de ces éléments manque.
+**Conditions requises pour l’envoi :** Vous devez disposer d’au moins un contact actif, d’une configuration de marque et d’une signature email. L’application vous signalera si l’un de ces éléments manque.
 
 ## Étape 1 : Inscrivez-vous
+
 1. Rendez-vous sur [nudgen.net](https://nudgen.net).
 2. Cliquez sur **Démarrer l’essai gratuit** ou **Se connecter**.
-3. Connectez-vous avec Google. L’application se synchronise puis vous redirige vers le **Tableau de bord**.
+3. Connectez-vous avec Google. Vous serez synchronisé avec l’application puis redirigé vers le **Tableau de bord**.
 
 ## Étape 2 : Importez vos premiers contacts
+
 1. Dans la barre latérale, ouvrez **Contacts**.
 2. Cliquez sur **Importer un CSV**, ou ajoutez un contact manuellement si vous préférez.
 3. Importez un CSV avec une colonne `email` et, si besoin, une colonne `name`. Vous pouvez aussi ajouter des tags comme `trial` ou `inactive`.
-4. Confirmez. Les contacts sont chiffrés et stockés. Les adresses email apparaissent masquées, par exemple `j***@g***.com`, jusqu’à ce que vous les révéliez.
+4. Confirmez. Les contacts sont chiffrés et stockés. Les adresses email apparaissent masquées jusqu’à ce que vous les révéliez.
 
 <Card title="Format CSV" icon="file-csv" href="/fr/contacts/upload">
   Le guide d’import détaille les noms de colonnes, les règles de validation et les limites de taille.
 </Card>
 
 ## Étape 3 : Configurez la marque et la signature
-1. Ouvrez **Marque** dans la barre latérale. Créez ou choisissez une configuration de marque : sélectionnez un ton prédéfini, comme Friendly ou Professional, puis ajoutez si besoin un prompt personnalisé ou des emails d’exemple. Enregistrez.
-2. Ouvrez **Paramètres** → **Signatures**. Créez au moins une signature ; vous l’ajouterez lors de la création d’une campagne. Enregistrez.
 
-Ces éléments sont nécessaires pour que l’assistant de campagne génère un contenu cohérent avec votre marque et ajoute une signature à l’email.
+1. Ouvrez **Marque** dans la barre latérale. Créez ou choisissez une configuration de ton : sélectionnez un ton prédéfini (ex: Amical, Professionnel) et ajoutez si besoin un prompt personnalisé. Enregistrez.
+2. Ouvrez [**Paramètres** → **Marque**](/fr/settings/brand) pour définir le nom de votre marque, l’email de réponse et la langue par défaut. Importez votre logo.
+3. Ouvrez **Paramètres** → **Signatures**. Créez au moins une signature ; vous l’ajouterez lors de la création d’une campagne.
 
-<Card title="Configuration de marque" icon="palette" href="/fr/brand/overview">
-  Comprenez comment les presets, les prompts personnalisés et les exemples influencent le contenu généré par l’IA.
-</Card>
+Ces étapes permettent à l’assistant de campagne de générer un contenu fidèle à votre marque, d’utiliser les bonnes informations d’expéditeur et d’ajouter une signature à chaque envoi.
 
-<Card title="Signatures" icon="pen-nib" href="/fr/settings/signatures">
-  Créez, modifiez et rattachez des signatures à vos campagnes.
-</Card>
+<CardGroup cols={2}>
+  <Card title="Ton de marque" icon="palette" href="/fr/brand/overview">
+    Presets, prompts et exemples.
+  </Card>
+  <Card title="Identité de marque" icon="id-card" href="/fr/settings/brand">
+    Nom, email, logo et langue.
+  </Card>
+</CardGroup>
 
-## Étape 4 : Créez votre campagne avec l’assistant
-Le flux de campagne comporte trois étapes : **Configuration de campagne**, **Génération du contenu** et **Finalisation**.
+## Étape 4 : Créez votre campagne (le processus en 3 étapes)
 
-1. Ouvrez **Campagnes** puis cliquez sur **Nouvelle campagne**.
-2. **Configuration de campagne :** choisissez le type de campagne, envoi unique ou drip. Sélectionnez l’audience : tous les contacts, par tags ou sélection manuelle. Vous pouvez aussi ajouter un lien CTA suivi. Choisissez la configuration de marque et la signature, puis saisissez l’objectif de la campagne, par exemple : « Réengager les utilisateurs qui ne se sont pas connectés depuis 7 jours ». Vérifiez l’estimation de portée et ajustez l’audience si elle est à zéro.
-3. **Génération du contenu :** cliquez sur **Générer**. L’IA crée l’objet et le contenu de l’email. Vous pouvez ensuite les modifier, utiliser l’aperçu **Ordinateur** / **Mobile** et envoyer un **test** pour recevoir une copie.
-4. **Finalisation :** relisez le résumé. Pour une campagne drip, définissez des règles d’arrêt si nécessaire, par exemple arrêt au clic ou à l’ouverture. Choisissez ensuite **Envoyer maintenant** ou **Programmer**, indiquez la date et l’heure, puis confirmez. Les emails sont envoyés via notre infrastructure avec suivi des ouvertures et des clics.
+Le flux de création de campagne de Nudgen est conçu pour être simple et explicite :
+
+1. **Choisissez le groupe de clients :** Choisissez le type de campagne (envoi unique ou drip). Sélectionnez votre audience : tous les contacts, par tags ou sélection manuelle. Choisissez votre configuration de marque et votre signature, puis saisissez votre objectif. Vérifiez l’**estimation de portée** avant de continuer.
+2. **Révisez le brouillon IA :** Cliquez sur **Générer**. L’IA crée un objet et un corps de message personnalisés selon votre objectif et votre ton de marque. Modifiez si besoin, utilisez l’aperçu **Ordinateur** / **Mobile** et faites un **Envoi de test** pour vérifier la mise en page.
+3. **Laissez l’automatisation faire le reste :** Relisez le résumé. Pour les campagnes drip, définissez des **règles d’arrêt** (ex: arrêt automatique après un achat ou un clic) pour que l’automatisation reste utile sans devenir envahissante. Choisissez **Envoyer maintenant** ou **Programmer**, puis confirmez.
 
 ## Étape 5 : Consultez le tableau de bord
-Après l’envoi, le **Tableau de bord** affiche les métriques globales comme les emails envoyés, délivrés, ouverts, cliqués, le CTR, les rebonds et les plaintes, ainsi qu’un tableau des campagnes. La page de détail d’une campagne permet de voir l’activité par destinataire et dans le temps.
+
+Après le lancement, le **Tableau de bord** affiche des rapports clairs pour que vous sachiez quels parcours stimulent la croissance. Vous pouvez suivre les envois, les délivraisons, les ouvertures, les clics et le CTR, ainsi que l’activité par destinataire.
 
 ## Ce qui se passe ensuite
-- Les campagnes en brouillon restent modifiables tant que vous ne les avez pas envoyées ou programmées. Une fois envoyées, leur contenu est verrouillé, mais vous pouvez toujours consulter les analyses et arrêter les étapes drip.
-- Si vous définissez des règles d’arrêt automatique, les destinataires qui remplissent la condition, par exemple un clic, ne recevront pas les étapes suivantes de la séquence.
+
+- **Tout reste fidèle à la marque :** Les brouillons IA sont cohérents avec votre ton et vous gardez le contrôle avec les aperçus et les modifications.
+- **L’arrêt automatique gère le suivi :** Si vous définissez des règles d’arrêt, Nudgen arrêtera automatiquement les relances futures une fois que le client aura agi.
+- **Les brouillons sont modifiables :** Les campagnes peuvent être affinées tant qu’elles n’ont pas été envoyées ou programmées.
 - Pour une approche plus structurée, utilisez la [checklist de démarrage](/fr/getting-started/checklist).
 
 ## Dépannage
+
 <AccordionGroup>
   <Accordion title="Je ne vois pas mes contacts après l’import">
     Vérifiez que votre CSV contient une colonne `email` et des formats valides. Consultez le [guide d’import](/fr/contacts/upload) pour les règles et limites.
   </Accordion>
   <Accordion title="L’assistant indique que je n’ai aucun contact actif">
-    Importez ou ajoutez au moins un contact, et vérifiez qu’il n’est ni supprimé ni désabonné. Consultez [Contacts](/fr/contacts/overview).
+    Importez ou ajoutez au moins un contact, et vérifiez qu’il n’est ni supprimé ni désabonné. Consultez l’[Aperçu des contacts](/fr/contacts/overview).
   </Accordion>
   <Accordion title="Puis-je modifier l’email généré ?">
-    Oui. Après génération, vous pouvez modifier l’objet et le contenu dans l’éditeur avant de finaliser et d’envoyer.
+    Oui. Nudgen rédige la première version, mais vous gardez le contrôle. Vous pouvez modifier le texte et envoyer des tests avant de lancer.
   </Accordion>
   <Accordion title="Comment arrêter une campagne ?">
     Depuis la liste des campagnes ou la page de détail, utilisez **Arrêter la campagne**. Les emails déjà envoyés ne peuvent pas être rappelés.
@@ -78,9 +89,10 @@ Après l’envoi, le **Tableau de bord** affiche les métriques globales comme l
 </AccordionGroup>
 
 ## Documentation associée
+
 <CardGroup cols={2}>
   <Card title="Checklist de démarrage" icon="list-check" href="/fr/getting-started/checklist">
-    Les tâches à terminer pendant la première semaine : workspace, contacts, marque, première campagne et équipe.
+    Les tâches de la première semaine : workspace, contacts, marque, première campagne et équipe.
   </Card>
   <Card title="Aperçu des contacts" icon="users" href="/fr/contacts/overview">
     Chiffrement, masquage, tags et segmentation.

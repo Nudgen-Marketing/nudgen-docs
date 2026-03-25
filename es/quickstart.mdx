@@ -1,11 +1,11 @@
 ---
 title: "Inicio rápido"
-description: "Envía tu primera campaña de Nudgen en unos 5 minutos"
+description: "Lanza tu primera campaña de Nudgen en minutos"
 ---
 
-## Qué te ayuda a hacer esta guía
+## Configuración en un abrir y cerrar de ojos
 
-Te registrarás, subirás una pequeña lista de contactos, configurarás el tono de tu marca y al menos una firma, crearás una campaña con el asistente y la enviarás. La prueba gratuita no requiere tarjeta de crédito.
+Nudgen está diseñado para dueños de tiendas y PYMES en crecimiento que quieren impulsar el valor de vida del cliente con la automatización de emails de retención apoyada por IA. Te registrarás, subirás tu lista de contactos, configurarás el tono de tu marca y lanzarás tu primera campaña con seguimiento automatizado. No se requiere tarjeta de crédito.
 
 ## Antes de empezar
 
@@ -16,20 +16,20 @@ Te registrarás, subirás una pequeña lista de contactos, configurarás el tono
 Las cuentas nuevas incluyen una **prueba** con contactos y correos limitados, suficiente para lanzar tu primera campaña. Los límites exactos dependen de tu plan; consulta [Facturación](/es/billing/overview) o la [página de precios](https://nudgen.net/pricing) para ver los valores actuales.
 </Note>
 
-**Requisitos para enviar:** necesitas al menos un contacto activo, una configuración de marca y una firma de correo. La app te avisará si falta alguno de estos elementos.
+**Requisitos para enviar:** Necesitas al menos un contacto activo, una configuración de marca y una firma de correo. La app te avisará si falta alguno de estos elementos.
 
 ## Paso 1: Regístrate
 
 1. Ve a [nudgen.net](https://nudgen.net).
-2. Haz clic en **Empezar prueba gratis** o **Iniciar sesin**.
-3. Inicia sesión con Google. La app se sincroniza y te redirige al **Panel**.
+2. Haz clic en **Empezar prueba gratis** o **Iniciar sesión**.
+3. Inicia sesión con Google. Te sincronizarás con la app y serás redirigido al **Panel**.
 
 ## Paso 2: Sube tus primeros contactos
 
 1. En la barra lateral, abre **Contactos**.
 2. Haz clic en **Subir CSV** o añade un contacto manualmente si lo prefieres.
-3. Sube un CSV con una columna `email` y, si quieres, también `name`. Puedes añadir etiquetas como `trial` o `inactive`.
-4. Confirma. Los contactos se cifran y se almacenan. Verás los correos enmascarados, por ejemplo `j***@g***.com`, hasta que los reveles.
+3. Sube un CSV con una columna `email` y, opcionalmente, `name`. Puedes añadir etiquetas como `trial` o `inactive`.
+4. Confirma. Los contactos se cifran y almacenan. Verás los correos enmascarados hasta que decidas revelarlos.
 
 <Card title="Formato CSV" icon="file-csv" href="/es/contacts/upload">
   En la guía de carga encontrarás nombres de columnas, reglas de validación y límites de tamaño.
@@ -37,37 +37,39 @@ Las cuentas nuevas incluyen una **prueba** con contactos y correos limitados, su
 
 ## Paso 3: Configura la marca y la firma
 
-1. Ve a **Marca** en la barra lateral. Crea o selecciona una configuración de marca: elige un tono predefinido, como Friendly o Professional, y añade si quieres un prompt personalizado o correos de ejemplo. Guarda los cambios.
-2. Ve a **Configuración** → **Firmas**. Crea al menos una firma; la adjuntarás al crear la campaña. Guarda los cambios.
+1. Ve a **Marca** en la barra lateral. Crea o selecciona una configuración de tono: elige un tono predefinido (ej. Cercano, Profesional) y añade opcionalmente un prompt personalizado. Guarda los cambios.
+2. Ve a [**Configuración** → **Marca**](/es/settings/brand) y establece el nombre de tu marca, el correo de respuesta y el idioma por defecto. Sube tu logo.
+3. Ve a **Configuración** → **Firmas**. Crea al menos una firma; la adjuntarás al crear la campaña.
 
-Esto es necesario para que el asistente de campañas genere contenido alineado con tu marca y añada la firma al correo.
+Estos pasos aseguran que el asistente de campañas genere contenido fiel a tu marca, use la información de remitente correcta y añada una firma a cada envío.
 
-<Card title="Configuración de marca" icon="palette" href="/es/brand/overview">
-  Cómo influyen los tonos predefinidos, los prompts personalizados y los ejemplos en el resultado de la IA.
-</Card>
+<CardGroup cols={2}>
+  <Card title="Tono de marca" icon="palette" href="/es/brand/overview">
+    Tonos predefinidos, prompts y ejemplos.
+  </Card>
+  <Card title="Identidad de marca" icon="id-card" href="/es/settings/brand">
+    Nombre, correo, logo e idioma.
+  </Card>
+</CardGroup>
 
-<Card title="Firmas" icon="pen-nib" href="/es/settings/signatures">
-  Crea, edita y adjunta firmas a tus campañas.
-</Card>
+## Paso 4: Crea tu campaña (el proceso de 3 pasos)
 
-## Paso 4: Crea tu campaña con el asistente
+El flujo de campaña de Nudgen está diseñado para ser simple y explícito:
 
-El flujo de campaña tiene tres pasos: **Configuración de la campaña**, **Generación de contenido** y **Finalizar**.
-
-1. Ve a **Campañas** y haz clic en **Nueva campaña**.
-2. **Configuración de la campaña:** elige el tipo de campaña, una sola vez o drip. Selecciona la audiencia: todos los contactos, por etiquetas o selección manual. Si quieres, añade un enlace CTA con seguimiento. Elige la configuración de marca y la firma, y escribe el objetivo de la campaña, por ejemplo: "Reactivar a usuarios que no han iniciado sesión en 7 días". Revisa la estimación de alcance y ajusta la audiencia si aparece en cero.
-3. **Generación de contenido:** haz clic en **Generar**. La IA crea el asunto y el cuerpo del correo. Si hace falta, edítalos, usa la vista **Escritorio** / **Móvil** y prueba **Enviar prueba** para enviarte una copia.
-4. **Finalizar:** revisa el resumen. Si es una campaña drip, configura reglas de parada si lo necesitas, por ejemplo detener al hacer clic o al abrir. Luego elige **Enviar ahora** o **Programar**, indica fecha y hora, y confirma. Los correos se envían a través de nuestra infraestructura con seguimiento de aperturas y clics.
+1. **Elige el grupo de clientes:** Elige el tipo de campaña (una sola vez o drip). Selecciona tu audiencia: todos los contactos, por etiquetas o selección manual. Elige la configuración de marca y la firma, luego escribe tu objetivo. Revisa la **estimación de alcance** antes de continuar.
+2. **Revisa el borrador de la IA:** Haz clic en **Generar**. La IA crea un asunto y un cuerpo de mensaje personalizados según tu objetivo y tono de marca. Edita si es necesario, usa la vista previa en **Escritorio** / **Móvil** y haz un **Envío de prueba** para revisar el diseño.
+3. **Deja que la automatización haga el resto:** Revisa el resumen. Para campañas drip, configura **reglas de parada** (ej. auto-detener tras una compra o clic) para que la automatización sea útil y no molesta. Elige **Enviar ahora** o **Programar**, y confirma.
 
 ## Paso 5: Revisa el panel
 
-Después de enviar, el **Panel** muestra métricas generales como enviados, entregados, aperturas, clics, CTR, rebotes y quejas, además de una tabla de campañas. Usa la página de detalle de la campaña para revisar actividad por destinatario y series temporales.
+Después del lanzamiento, el **Panel** muestra informes claros para que sepas qué trayectorias están impulsando el crecimiento. Puedes rastrear enviados, entregados, aperturas, clics y CTR, además de la actividad por destinatario.
 
 ## Qué ocurre después
 
-- Puedes editar las campañas en borrador hasta que las envíes o programes. Una vez enviadas, el contenido queda bloqueado, pero todavía puedes consultar la analítica y detener pasos drip.
-- Si configuras reglas de parada automática, los destinatarios que cumplan la condición, por ejemplo hacer clic, no recibirán los pasos siguientes de la secuencia.
-- Si quieres una guía más estructurada, usa el [checklist de inicio](/es/getting-started/checklist).
+- **Todo se mantiene fiel a la marca:** Los borradores de la IA son coherentes con tu tono y tú mantienes el control con vistas previas y ediciones.
+- **La parada automática gestiona el seguimiento:** Si configuras reglas de parada, Nudgen detendrá automáticamente los futuros recordatorios cuando el cliente ya haya actuado.
+- **Los borradores se pueden editar:** Las campañas se pueden refinar hasta que se envíen o programen.
+- Para una estructura más definida, usa el [checklist de inicio](/es/getting-started/checklist).
 
 ## Solución de problemas
 
@@ -76,10 +78,10 @@ Después de enviar, el **Panel** muestra métricas generales como enviados, entr
     Asegúrate de que tu CSV tenga una columna `email` y un formato válido. Consulta la [guía de carga](/es/contacts/upload) para ver reglas y límites.
   </Accordion>
   <Accordion title="El asistente dice que no tengo contactos activos">
-    Sube o añade al menos un contacto y comprueba que no esté suprimido ni dado de baja. Revisa [Contactos](/es/contacts/overview).
+    Sube o añade al menos un contacto y comprueba que no esté suprimido ni dado de baja. Revisa la [Vista general de contactos](/es/contacts/overview).
   </Accordion>
   <Accordion title="¿Puedo cambiar el correo generado?">
-    Sí. Después de generarlo, puedes editar el asunto y el cuerpo en el editor antes de finalizar y enviar.
+    Sí. Nudgen redacta la primera versión, pero tú mantienes el control. Puedes editar el texto y enviar pruebas antes de lanzar.
   </Accordion>
   <Accordion title="¿Cómo detengo una campaña?">
     Desde la lista de campañas o la página de detalle, usa **Detener campaña**. Los correos ya enviados no se pueden recuperar.
@@ -89,10 +91,10 @@ Después de enviar, el **Panel** muestra métricas generales como enviados, entr
 ## Documentación relacionada
 
 <CardGroup cols={2}>
-  <Card title="Checklist de onboarding" icon="list-check" href="/es/getting-started/checklist">
+  <Card title="Checklist de inicio" icon="list-check" href="/es/getting-started/checklist">
     Pasos de la primera semana: espacio de trabajo, contactos, marca, primera campaña y equipo.
   </Card>
-  <Card title="Resumen de contactos" icon="users" href="/es/contacts/overview">
+  <Card title="Vista general de contactos" icon="users" href="/es/contacts/overview">
     Almacenamiento cifrado, enmascarado, etiquetas y segmentación.
   </Card>
   <Card title="Crear campañas" icon="paper-plane" href="/es/campaigns/create">

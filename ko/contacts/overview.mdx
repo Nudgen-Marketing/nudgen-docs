@@ -1,0 +1,64 @@
+---
+title: "Contacts overview"
+description: "How Nudgen stores, encrypts, and displays your contact data"
+---
+
+## What this page helps you do
+
+Understand how contacts are stored, why they appear masked, and how to use tags for segmentation. This sets you up to upload contacts and build campaigns confidently.
+
+## Before you start
+
+- A Nudgen account
+- A CSV file with at least one email address (see [upload guide](/en/contacts/upload) for format)
+
+## How contact data is stored
+
+Nudgen encrypts every piece of personally identifiable information (PII) before it is saved:
+
+- **Emails** — AES-256 encrypted. We cannot read them.
+- **Names** — Encrypted if provided. Optional in your CSV.
+- **Custom metadata** — Any extra columns you upload are encrypted as well.
+
+We also store a one-way hash of each email for deduplication. Duplicate emails in the same list are merged automatically.
+
+## Masked view
+
+By default, the contact list shows masked values like `j***@g***.com` instead of real addresses. PII is encrypted at rest; we never see or store plaintext emails or names. Masking protects your data from shoulder-surfing and limits exposure if someone else has access to your screen.
+
+**Revealing a contact:** You (and other workspace members with access) can click **Reveal** to show the real email and name in the UI. Decryption happens only in your browser when you reveal; after you navigate away or refresh, values mask again. We never display decrypted PII in analytics, logs, or exports.
+
+## Tags and segmentation
+
+Assign tags when you upload contacts or edit them later. Use tags to target specific segments in campaigns:
+
+- `inactive` — Users who haven't logged in for 30+ days
+- `vip` — High-value or premium customers
+- `trial` — People on a free trial
+
+When creating a campaign, you choose an audience: all contacts, or only those with certain tags. Tags make it easy to run different sequences for different segments.
+
+## Contact statuses
+
+Contacts can have one of these statuses:
+
+- **Active** — Can receive campaigns. Default for newly imported contacts.
+- **Unsubscribed** — Opted out via the unsubscribe link or manually. They will not receive future campaign emails unless you change their status.
+- **Suppressed / Bounced** — Delivery failed (invalid address, mailbox full, or provider suppression list). These contacts are automatically excluded from future sends to protect deliverability. Our system syncs with the delivery provider's suppression list.
+
+## What happens next
+
+- [Upload a CSV](/en/contacts/upload) to add contacts.
+- [Create a campaign](/en/campaigns/create) and select your audience by tags or all contacts.
+- Check [plan limits](/en/billing/overview) for max contacts per plan.
+
+## Related docs
+
+<CardGroup cols={2}>
+  <Card title="Upload contacts" icon="file-upload" href="/en/contacts/upload">
+    CSV format, validation, and tag assignment.
+  </Card>
+  <Card title="Create campaigns" icon="paper-plane" href="/en/campaigns/create">
+    Choose audience and launch your first campaign.
+  </Card>
+</CardGroup>

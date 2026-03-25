@@ -139,6 +139,390 @@
         }
       },
       {
+        "language": "ar",
+        "tabs": [
+          {
+            "tab": "الأدلة",
+            "groups": [
+              {
+                "group": "البداية",
+                "pages": [
+                  "ar/index",
+                  "ar/quickstart",
+                  "ar/getting-started/checklist",
+                  "ar/roadmap",
+                  "ar/community"
+                ]
+              },
+              {
+                "group": "جهات الاتصال",
+                "pages": [
+                  "ar/contacts/overview",
+                  "ar/contacts/upload",
+                  "ar/contacts/lifecycle"
+                ]
+              },
+              {
+                "group": "الحملات",
+                "pages": [
+                  "ar/campaigns/overview",
+                  "ar/campaigns/create",
+                  "ar/campaigns/manage",
+                  "ar/campaigns/analytics"
+                ]
+              },
+              {
+                "group": "العلامة التجارية",
+                "pages": [
+                  "ar/brand/overview"
+                ]
+              },
+              {
+                "group": "لوحة التحكم",
+                "pages": [
+                  "ar/dashboard/overview"
+                ]
+              },
+              {
+                "group": "الإعدادات",
+                "pages": [
+                  "ar/settings/account",
+                  "ar/settings/brand",
+                  "ar/settings/team",
+                  "ar/settings/signatures"
+                ]
+              },
+              {
+                "group": "الفواتير",
+                "pages": [
+                  "ar/billing/overview"
+                ]
+              },
+              {
+                "group": "المفاهيم",
+                "pages": [
+                  "ar/concepts/contact-lifecycle",
+                  "ar/concepts/workspaces-and-roles",
+                  "ar/concepts/deliverability-basics",
+                  "ar/concepts/developers-and-apis"
+                ]
+              },
+              {
+                "group": "استكشاف الأخطاء",
+                "pages": [
+                  "ar/troubleshooting/index",
+                  "ar/troubleshooting/deliverability",
+                  "ar/troubleshooting/billing",
+                  "ar/troubleshooting/access"
+                ]
+              },
+              {
+                "group": "الأمن والخصوصية",
+                "pages": [
+                  "ar/security/privacy-and-data"
+                ]
+              }
+            ]
+          }
+        ],
+        "global": {
+          "anchors": [
+            {
+              "anchor": "الرئيسية",
+              "href": "https://nudgen.net",
+              "icon": "house"
+            },
+            {
+              "anchor": "الأسعار",
+              "href": "https://nudgen.net/pricing",
+              "icon": "tag"
+            },
+            {
+              "anchor": "الحالة",
+              "href": "https://stats.uptimerobot.com/fGg8sPgh7G",
+              "icon": "signal"
+            }
+          ]
+        },
+        "navbar": {
+          "links": [
+            {
+              "label": "الأسعار",
+              "href": "https://nudgen.net/pricing"
+            },
+            {
+              "label": "الحالة",
+              "href": "https://stats.uptimerobot.com/fGg8sPgh7G"
+            },
+            {
+              "label": "اتصل بنا",
+              "href": "mailto:contact@nudgen.net"
+            }
+          ],
+          "primary": {
+            "type": "button",
+            "label": "افتح التطبيق",
+            "href": "https://nudgen.net"
+          }
+        }
+      },
+      {
+        "language": "cn",
+        "tabs": [
+          {
+            "tab": "指南",
+            "groups": [
+              {
+                "group": "入门",
+                "pages": [
+                  "cn/index",
+                  "cn/quickstart",
+                  "cn/getting-started/checklist",
+                  "cn/roadmap",
+                  "cn/community"
+                ]
+              },
+              {
+                "group": "联系人",
+                "pages": [
+                  "cn/contacts/overview",
+                  "cn/contacts/upload",
+                  "cn/contacts/lifecycle"
+                ]
+              },
+              {
+                "group": "营销活动",
+                "pages": [
+                  "cn/campaigns/overview",
+                  "cn/campaigns/create",
+                  "cn/campaigns/manage",
+                  "cn/campaigns/analytics"
+                ]
+              },
+              {
+                "group": "品牌",
+                "pages": [
+                  "cn/brand/overview"
+                ]
+              },
+              {
+                "group": "仪表盘",
+                "pages": [
+                  "cn/dashboard/overview"
+                ]
+              },
+              {
+                "group": "设置",
+                "pages": [
+                  "cn/settings/account",
+                  "cn/settings/brand",
+                  "cn/settings/team",
+                  "cn/settings/signatures"
+                ]
+              },
+              {
+                "group": "账单",
+                "pages": [
+                  "cn/billing/overview"
+                ]
+              },
+              {
+                "group": "概念",
+                "pages": [
+                  "cn/concepts/contact-lifecycle",
+                  "cn/concepts/workspaces-and-roles",
+                  "cn/concepts/deliverability-basics",
+                  "cn/concepts/developers-and-apis"
+                ]
+              },
+              {
+                "group": "故障排查与常见问题",
+                "pages": [
+                  "cn/troubleshooting/index",
+                  "cn/troubleshooting/deliverability",
+                  "cn/troubleshooting/billing",
+                  "cn/troubleshooting/access"
+                ]
+              },
+              {
+                "group": "安全与隐私",
+                "pages": [
+                  "cn/security/privacy-and-data"
+                ]
+              }
+            ]
+          }
+        ],
+        "global": {
+          "anchors": [
+            {
+              "anchor": "主页",
+              "href": "https://nudgen.net",
+              "icon": "house"
+            },
+            {
+              "anchor": "定价",
+              "href": "https://nudgen.net/pricing",
+              "icon": "tag"
+            },
+            {
+              "anchor": "状态",
+              "href": "https://stats.uptimerobot.com/fGg8sPgh7G",
+              "icon": "signal"
+            }
+          ]
+        },
+        "navbar": {
+          "links": [
+            {
+              "label": "定价",
+              "href": "https://nudgen.net/pricing"
+            },
+            {
+              "label": "状态",
+              "href": "https://stats.uptimerobot.com/fGg8sPgh7G"
+            },
+            {
+              "label": "联系",
+              "href": "mailto:contact@nudgen.net"
+            }
+          ],
+          "primary": {
+            "type": "button",
+            "label": "打开应用",
+            "href": "https://nudgen.net"
+          }
+        }
+      },
+      {
+        "language": "de",
+        "tabs": [
+          {
+            "tab": "Anleitungen",
+            "groups": [
+              {
+                "group": "Erste Schritte",
+                "pages": [
+                  "de/index",
+                  "de/quickstart",
+                  "de/getting-started/checklist",
+                  "de/roadmap",
+                  "de/community"
+                ]
+              },
+              {
+                "group": "Kontakte",
+                "pages": [
+                  "de/contacts/overview",
+                  "de/contacts/upload",
+                  "de/contacts/lifecycle"
+                ]
+              },
+              {
+                "group": "Kampagnen",
+                "pages": [
+                  "de/campaigns/overview",
+                  "de/campaigns/create",
+                  "de/campaigns/manage",
+                  "de/campaigns/analytics"
+                ]
+              },
+              {
+                "group": "Marke",
+                "pages": [
+                  "de/brand/overview"
+                ]
+              },
+              {
+                "group": "Dashboard",
+                "pages": [
+                  "de/dashboard/overview"
+                ]
+              },
+              {
+                "group": "Einstellungen",
+                "pages": [
+                  "de/settings/account",
+                  "de/settings/brand",
+                  "de/settings/team",
+                  "de/settings/signatures"
+                ]
+              },
+              {
+                "group": "Abrechnung",
+                "pages": [
+                  "de/billing/overview"
+                ]
+              },
+              {
+                "group": "Konzepte",
+                "pages": [
+                  "de/concepts/contact-lifecycle",
+                  "de/concepts/workspaces-and-roles",
+                  "de/concepts/deliverability-basics",
+                  "de/concepts/developers-and-apis"
+                ]
+              },
+              {
+                "group": "Fehlerbehebung",
+                "pages": [
+                  "de/troubleshooting/index",
+                  "de/troubleshooting/deliverability",
+                  "de/troubleshooting/billing",
+                  "de/troubleshooting/access"
+                ]
+              },
+              {
+                "group": "Sicherheit & Datenschutz",
+                "pages": [
+                  "de/security/privacy-and-data"
+                ]
+              }
+            ]
+          }
+        ],
+        "global": {
+          "anchors": [
+            {
+              "anchor": "Startseite",
+              "href": "https://nudgen.net",
+              "icon": "house"
+            },
+            {
+              "anchor": "Preise",
+              "href": "https://nudgen.net/pricing",
+              "icon": "tag"
+            },
+            {
+              "anchor": "Status",
+              "href": "https://stats.uptimerobot.com/fGg8sPgh7G",
+              "icon": "signal"
+            }
+          ]
+        },
+        "navbar": {
+          "links": [
+            {
+              "label": "Preise",
+              "href": "https://nudgen.net/pricing"
+            },
+            {
+              "label": "Status",
+              "href": "https://stats.uptimerobot.com/fGg8sPgh7G"
+            },
+            {
+              "label": "Kontakt",
+              "href": "mailto:contact@nudgen.net"
+            }
+          ],
+          "primary": {
+            "type": "button",
+            "label": "App öffnen",
+            "href": "https://nudgen.net"
+          }
+        }
+      },
+      {
         "language": "es",
         "tabs": [
           {
@@ -395,87 +779,87 @@
         }
       },
       {
-        "language": "cn",
+        "language": "id",
         "tabs": [
           {
-            "tab": "指南",
+            "tab": "Panduan",
             "groups": [
               {
-                "group": "入门",
+                "group": "Mulai",
                 "pages": [
-                  "cn/index",
-                  "cn/quickstart",
-                  "cn/getting-started/checklist",
-                  "cn/roadmap",
-                  "cn/community"
+                  "id/index",
+                  "id/quickstart",
+                  "id/getting-started/checklist",
+                  "id/roadmap",
+                  "id/community"
                 ]
               },
               {
-                "group": "联系人",
+                "group": "Kontak",
                 "pages": [
-                  "cn/contacts/overview",
-                  "cn/contacts/upload",
-                  "cn/contacts/lifecycle"
+                  "id/contacts/overview",
+                  "id/contacts/upload",
+                  "id/contacts/lifecycle"
                 ]
               },
               {
-                "group": "营销活动",
+                "group": "Kampanye",
                 "pages": [
-                  "cn/campaigns/overview",
-                  "cn/campaigns/create",
-                  "cn/campaigns/manage",
-                  "cn/campaigns/analytics"
+                  "id/campaigns/overview",
+                  "id/campaigns/create",
+                  "id/campaigns/manage",
+                  "id/campaigns/analytics"
                 ]
               },
               {
-                "group": "品牌",
+                "group": "Merek",
                 "pages": [
-                  "cn/brand/overview"
+                  "id/brand/overview"
                 ]
               },
               {
-                "group": "仪表盘",
+                "group": "Dasbor",
                 "pages": [
-                  "cn/dashboard/overview"
+                  "id/dashboard/overview"
                 ]
               },
               {
-                "group": "设置",
+                "group": "Pengaturan",
                 "pages": [
-                  "cn/settings/account",
-                  "cn/settings/brand",
-                  "cn/settings/team",
-                  "cn/settings/signatures"
+                  "id/settings/account",
+                  "id/settings/brand",
+                  "id/settings/team",
+                  "id/settings/signatures"
                 ]
               },
               {
-                "group": "账单",
+                "group": "Penagihan",
                 "pages": [
-                  "cn/billing/overview"
+                  "id/billing/overview"
                 ]
               },
               {
-                "group": "概念",
+                "group": "Konsep",
                 "pages": [
-                  "cn/concepts/contact-lifecycle",
-                  "cn/concepts/workspaces-and-roles",
-                  "cn/concepts/deliverability-basics",
-                  "cn/concepts/developers-and-apis"
+                  "id/concepts/contact-lifecycle",
+                  "id/concepts/workspaces-and-roles",
+                  "id/concepts/deliverability-basics",
+                  "id/concepts/developers-and-apis"
                 ]
               },
               {
-                "group": "故障排查与常见问题",
+                "group": "Troubleshooting",
                 "pages": [
-                  "cn/troubleshooting/index",
-                  "cn/troubleshooting/deliverability",
-                  "cn/troubleshooting/billing",
-                  "cn/troubleshooting/access"
+                  "id/troubleshooting/index",
+                  "id/troubleshooting/deliverability",
+                  "id/troubleshooting/billing",
+                  "id/troubleshooting/access"
                 ]
               },
               {
-                "group": "安全与隐私",
+                "group": "Keamanan & Privasi",
                 "pages": [
-                  "cn/security/privacy-and-data"
+                  "id/security/privacy-and-data"
                 ]
               }
             ]
@@ -484,17 +868,17 @@
         "global": {
           "anchors": [
             {
-              "anchor": "主页",
+              "anchor": "Beranda",
               "href": "https://nudgen.net",
               "icon": "house"
             },
             {
-              "anchor": "定价",
+              "anchor": "Harga",
               "href": "https://nudgen.net/pricing",
               "icon": "tag"
             },
             {
-              "anchor": "状态",
+              "anchor": "Status",
               "href": "https://stats.uptimerobot.com/fGg8sPgh7G",
               "icon": "signal"
             }
@@ -503,21 +887,21 @@
         "navbar": {
           "links": [
             {
-              "label": "定价",
+              "label": "Harga",
               "href": "https://nudgen.net/pricing"
             },
             {
-              "label": "状态",
+              "label": "Status",
               "href": "https://stats.uptimerobot.com/fGg8sPgh7G"
             },
             {
-              "label": "联系",
+              "label": "Kontak",
               "href": "mailto:contact@nudgen.net"
             }
           ],
           "primary": {
             "type": "button",
-            "label": "打开应用",
+            "label": "Buka aplikasi",
             "href": "https://nudgen.net"
           }
         }
@@ -646,6 +1030,390 @@
           "primary": {
             "type": "button",
             "label": "アプリを開く",
+            "href": "https://nudgen.net"
+          }
+        }
+      },
+      {
+        "language": "ko",
+        "tabs": [
+          {
+            "tab": "가이드",
+            "groups": [
+              {
+                "group": "시작하기",
+                "pages": [
+                  "ko/index",
+                  "ko/quickstart",
+                  "ko/getting-started/checklist",
+                  "ko/roadmap",
+                  "ko/community"
+                ]
+              },
+              {
+                "group": "연락처",
+                "pages": [
+                  "ko/contacts/overview",
+                  "ko/contacts/upload",
+                  "ko/contacts/lifecycle"
+                ]
+              },
+              {
+                "group": "캠페인",
+                "pages": [
+                  "ko/campaigns/overview",
+                  "ko/campaigns/create",
+                  "ko/campaigns/manage",
+                  "ko/campaigns/analytics"
+                ]
+              },
+              {
+                "group": "브랜드",
+                "pages": [
+                  "ko/brand/overview"
+                ]
+              },
+              {
+                "group": "대시보드",
+                "pages": [
+                  "ko/dashboard/overview"
+                ]
+              },
+              {
+                "group": "설정",
+                "pages": [
+                  "ko/settings/account",
+                  "ko/settings/brand",
+                  "ko/settings/team",
+                  "ko/settings/signatures"
+                ]
+              },
+              {
+                "group": "결제",
+                "pages": [
+                  "ko/billing/overview"
+                ]
+              },
+              {
+                "group": "개념",
+                "pages": [
+                  "ko/concepts/contact-lifecycle",
+                  "ko/concepts/workspaces-and-roles",
+                  "ko/concepts/deliverability-basics",
+                  "ko/concepts/developers-and-apis"
+                ]
+              },
+              {
+                "group": "문제 해결",
+                "pages": [
+                  "ko/troubleshooting/index",
+                  "ko/troubleshooting/deliverability",
+                  "ko/troubleshooting/billing",
+                  "ko/troubleshooting/access"
+                ]
+              },
+              {
+                "group": "보안 및 개인 정보",
+                "pages": [
+                  "ko/security/privacy-and-data"
+                ]
+              }
+            ]
+          }
+        ],
+        "global": {
+          "anchors": [
+            {
+              "anchor": "홈",
+              "href": "https://nudgen.net",
+              "icon": "house"
+            },
+            {
+              "anchor": "요금제",
+              "href": "https://nudgen.net/pricing",
+              "icon": "tag"
+            },
+            {
+              "anchor": "상태",
+              "href": "https://stats.uptimerobot.com/fGg8sPgh7G",
+              "icon": "signal"
+            }
+          ]
+        },
+        "navbar": {
+          "links": [
+            {
+              "label": "요금제",
+              "href": "https://nudgen.net/pricing"
+            },
+            {
+              "label": "상태",
+              "href": "https://stats.uptimerobot.com/fGg8sPgh7G"
+            },
+            {
+              "label": "문의하기",
+              "href": "mailto:contact@nudgen.net"
+            }
+          ],
+          "primary": {
+            "type": "button",
+            "label": "앱 열기",
+            "href": "https://nudgen.net"
+          }
+        }
+      },
+      {
+        "language": "ru",
+        "tabs": [
+          {
+            "tab": "Руководства",
+            "groups": [
+              {
+                "group": "Начало работы",
+                "pages": [
+                  "ru/index",
+                  "ru/quickstart",
+                  "ru/getting-started/checklist",
+                  "ru/roadmap",
+                  "ru/community"
+                ]
+              },
+              {
+                "group": "Контакты",
+                "pages": [
+                  "ru/contacts/overview",
+                  "ru/contacts/upload",
+                  "ru/contacts/lifecycle"
+                ]
+              },
+              {
+                "group": "Кампании",
+                "pages": [
+                  "ru/campaigns/overview",
+                  "ru/campaigns/create",
+                  "ru/campaigns/manage",
+                  "ru/campaigns/analytics"
+                ]
+              },
+              {
+                "group": "Бреند",
+                "pages": [
+                  "ru/brand/overview"
+                ]
+              },
+              {
+                "group": "Панель управления",
+                "pages": [
+                  "ru/dashboard/overview"
+                ]
+              },
+              {
+                "group": "Настройки",
+                "pages": [
+                  "ru/settings/account",
+                  "ru/settings/brand",
+                  "ru/settings/team",
+                  "ru/settings/signatures"
+                ]
+              },
+              {
+                "group": "Биллинг",
+                "pages": [
+                  "ru/billing/overview"
+                ]
+              },
+              {
+                "group": "Концепции",
+                "pages": [
+                  "ru/concepts/contact-lifecycle",
+                  "ru/concepts/workspaces-and-roles",
+                  "ru/concepts/deliverability-basics",
+                  "ru/concepts/developers-and-apis"
+                ]
+              },
+              {
+                "group": "Устранение неполадок",
+                "pages": [
+                  "ru/troubleshooting/index",
+                  "ru/troubleshooting/deliverability",
+                  "ru/troubleshooting/billing",
+                  "ru/troubleshooting/access"
+                ]
+              },
+              {
+                "group": "Безопасность",
+                "pages": [
+                  "ru/security/privacy-and-data"
+                ]
+              }
+            ]
+          }
+        ],
+        "global": {
+          "anchors": [
+            {
+              "anchor": "Главная",
+              "href": "https://nudgen.net",
+              "icon": "house"
+            },
+            {
+              "anchor": "Цены",
+              "href": "https://nudgen.net/pricing",
+              "icon": "tag"
+            },
+            {
+              "anchor": "Статус",
+              "href": "https://stats.uptimerobot.com/fGg8sPgh7G",
+              "icon": "signal"
+            }
+          ]
+        },
+        "navbar": {
+          "links": [
+            {
+              "label": "Цены",
+              "href": "https://nudgen.net/pricing"
+            },
+            {
+              "label": "Статус",
+              "href": "https://stats.uptimerobot.com/fGg8sPgh7G"
+            },
+            {
+              "label": "Контакт",
+              "href": "mailto:contact@nudgen.net"
+            }
+          ],
+          "primary": {
+            "type": "button",
+            "label": "Открыть приложение",
+            "href": "https://nudgen.net"
+          }
+        }
+      },
+      {
+        "language": "tr",
+        "tabs": [
+          {
+            "tab": "Kılavuzlar",
+            "groups": [
+              {
+                "group": "Başlangıç",
+                "pages": [
+                  "tr/index",
+                  "tr/quickstart",
+                  "tr/getting-started/checklist",
+                  "tr/roadmap",
+                  "tr/community"
+                ]
+              },
+              {
+                "group": "Kişiler",
+                "pages": [
+                  "tr/contacts/overview",
+                  "tr/contacts/upload",
+                  "tr/contacts/lifecycle"
+                ]
+              },
+              {
+                "group": "Kampanyalar",
+                "pages": [
+                  "tr/campaigns/overview",
+                  "tr/campaigns/create",
+                  "tr/campaigns/manage",
+                  "tr/campaigns/analytics"
+                ]
+              },
+              {
+                "group": "Marka",
+                "pages": [
+                  "tr/brand/overview"
+                ]
+              },
+              {
+                "group": "Panel",
+                "pages": [
+                  "tr/dashboard/overview"
+                ]
+              },
+              {
+                "group": "Ayarlar",
+                "pages": [
+                  "tr/settings/account",
+                  "tr/settings/brand",
+                  "tr/settings/team",
+                  "tr/settings/signatures"
+                ]
+              },
+              {
+                "group": "Faturalandırma",
+                "pages": [
+                  "tr/billing/overview"
+                ]
+              },
+              {
+                "group": "Kavramlar",
+                "pages": [
+                  "tr/concepts/contact-lifecycle",
+                  "tr/concepts/workspaces-and-roles",
+                  "tr/concepts/deliverability-basics",
+                  "tr/concepts/developers-and-apis"
+                ]
+              },
+              {
+                "group": "Sorun Giderme",
+                "pages": [
+                  "tr/troubleshooting/index",
+                  "tr/troubleshooting/deliverability",
+                  "tr/troubleshooting/billing",
+                  "tr/troubleshooting/access"
+                ]
+              },
+              {
+                "group": "Güvenlik ve Gizlilik",
+                "pages": [
+                  "tr/security/privacy-and-data"
+                ]
+              }
+            ]
+          }
+        ],
+        "global": {
+          "anchors": [
+            {
+              "anchor": "Ana Sayfa",
+              "href": "https://nudgen.net",
+              "icon": "house"
+            },
+            {
+              "anchor": "Fiyatlandırma",
+              "href": "https://nudgen.net/pricing",
+              "icon": "tag"
+            },
+            {
+              "anchor": "Durum",
+              "href": "https://stats.uptimerobot.com/fGg8sPgh7G",
+              "icon": "signal"
+            }
+          ]
+        },
+        "navbar": {
+          "links": [
+            {
+              "label": "Fiyatlandırma",
+              "href": "https://nudgen.net/pricing"
+            },
+            {
+              "label": "Durum",
+              "href": "https://stats.uptimerobot.com/fGg8sPgh7G"
+            },
+            {
+              "label": "İletişim",
+              "href": "mailto:contact@nudgen.net"
+            }
+          ],
+          "primary": {
+            "type": "button",
+            "label": "Uygulamayı aç",
             "href": "https://nudgen.net"
           }
         }

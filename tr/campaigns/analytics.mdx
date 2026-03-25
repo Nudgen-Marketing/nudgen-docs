@@ -1,0 +1,77 @@
+---
+title: "Campaign analytics"
+description: "Metrics, delivery rates, time-series charts, and recipient activity"
+---
+
+## What this page helps you do
+
+Understand how your campaigns perform: how many emails were sent, delivered, opened, and clicked. You'll also see delivery success and failure rates, plus per-recipient activity.
+
+## Before you start
+
+- At least one campaign that has been sent (or is sending)
+- Access to the campaign detail page
+
+## Metric cards
+
+On the campaign detail page, you'll see:
+
+| Metric            | Meaning                                                                 |
+| ----------------- | ----------------------------------------------------------------------- |
+| **Emails Sent**   | Total send attempts (including API or network failures).                |
+| **Emails Delivered** | Emails successfully accepted by the recipient's mail server.        |
+| **Total Opens**   | Number of times the email was opened (tracking pixel).                  |
+| **Total Clicks**  | Number of times links were clicked.                                    |
+| **CTR**           | Click-through rate: (Total Clicks / Total Sent) × 100.                 |
+| **Spam Complaints** | Number of times recipients marked the email as spam.                 |
+| **Soft Bounce**   | Temporary delivery issues (mailbox full, throttling, transient errors).  |
+| **Hard Bounce**   | Permanent delivery failures (invalid address, blocked domain).          |
+
+## Delivery success and failure
+
+- **Success rate** = (delivered / sent) × 100
+- **Failure rate** = (bounced + failed) / sent × 100
+
+A high failure rate can hurt your sender reputation. Remove or correct bounced addresses and avoid invalid contacts.
+
+## Time-series chart
+
+The performance chart shows metrics over time (by day, week, or month). Use the granularity toggle to switch views. Toggle individual metrics on/off to focus on opens, clicks, or delivery.
+
+## Date range picker
+
+Filter metrics and the chart by date range. Default is usually the full campaign period. Adjust to compare specific weeks or focus on recent activity.
+
+## Recipient activity table
+
+See per-contact status:
+
+- **Contact** — Email (masked unless revealed) and name
+- **Status** — Latest event: sent, delivered, opened, clicked, bounced
+- **Sent at** — When the email was sent
+- **Delivered at** — When delivery was confirmed (if available)
+- **Opened at** — First open timestamp
+- **Clicked at** — First click timestamp
+
+Use this to:
+
+- Find engaged users for follow-up
+- Identify bounces for list cleanup
+- Debug delivery issues for specific addresses
+
+## What happens next
+
+- Use insights to refine future campaigns (subject lines, tone, timing).
+- Remove bounced contacts from your list to protect deliverability.
+- Check [billing](/en/billing/overview) for email send limits if you're approaching your plan cap.
+
+## Related docs
+
+<CardGroup cols={2}>
+  <Card title="Manage campaigns" icon="pen-to-square" href="/en/campaigns/manage">
+    Edit, send, schedule, stop.
+  </Card>
+  <Card title="Billing & usage" icon="credit-card" href="/en/billing/overview">
+    Plan limits and usage meters.
+  </Card>
+</CardGroup>

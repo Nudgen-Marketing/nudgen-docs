@@ -1,11 +1,11 @@
 ---
 title: "Quickstart"
-description: "Send your first Nudgen campaign in about 5 minutes"
+description: "Launch your first Nudgen campaign in minutes"
 ---
 
-## What this guide helps you do
+## Setup in a heartbeat
 
-You'll sign up, upload a small contact list, set your brand tone and at least one signature, create a campaign with the wizard, and send it. No credit card required for the free trial.
+Nudgen is built for shop owners and growing SMEs who want to boost customer lifetime value with AI-powered retention email automation. You'll sign up, upload your contact list, set your brand tone, and launch your first campaign with automated follow-up. No credit card required.
 
 ## Before you start
 
@@ -29,7 +29,7 @@ New accounts get a **trial** with limited contacts and emails—enough to run yo
 1. In the sidebar, open **Contacts**.
 2. Click **Upload CSV** (or add a single contact if you prefer).
 3. Upload a CSV with an `email` column (and optionally `name`). Add tags if you want (e.g. `trial`, `inactive`).
-4. Confirm. Contacts are encrypted and stored. You'll see masked emails (e.g. `j***@g***.com`) until you reveal them.
+4. Confirm. Contacts are encrypted and stored. You'll see masked emails until you reveal them.
 
 <Card title="CSV format" icon="file-csv" href="/en/contacts/upload">
   Column names, validation rules, and size limits are in the upload guide.
@@ -37,11 +37,11 @@ New accounts get a **trial** with limited contacts and emails—enough to run yo
 
 ## Step 3: Configure brand settings and signature
 
-1. Go to **Brand** in the sidebar. Create or pick a brand tone config: choose a preset tone (e.g. Friendly, Professional) and optionally add a custom prompt or example emails. Save.
-2. Go to [**Settings** → **Brand**](/en/settings/brand) and set your brand name, reply-to email, and default email language. Upload your logo. Save.
-3. Go to **Settings** → **Signatures**. Create at least one signature; you'll attach it when creating a campaign. Save.
+1. Go to **Brand** in the sidebar. Create or pick a brand tone config: choose a preset tone (e.g. Friendly, Professional) and optionally add a custom prompt. Save.
+2. Go to [**Settings** → **Brand**](/en/settings/brand) and set your brand name, reply-to email, and default language. Upload your logo.
+3. Go to **Settings** → **Signatures**. Create at least one signature; you'll attach it when creating a campaign.
 
-These are required so the campaign wizard can generate on-brand copy, use the correct sender info, and append a signature to emails.
+These steps ensure the campaign wizard can generate on-brand copy, use the correct sender info, and append a signature to every send.
 
 <CardGroup cols={2}>
   <Card title="Brand tone" icon="palette" href="/en/brand/overview">
@@ -52,27 +52,23 @@ These are required so the campaign wizard can generate on-brand copy, use the co
   </Card>
 </CardGroup>
 
-<Card title="Signatures" icon="pen-nib" href="/en/settings/signatures">
-  Create, edit, and attach signatures to campaigns.
-</Card>
+## Step 4: Create your campaign (the 3-step process)
 
-## Step 4: Create your campaign (wizard)
+The Nudgen campaign flow is designed to be simple and explicit:
 
-The campaign flow has three steps: **Campaign Setup**, **Content Generation**, and **Finalize**.
-
-1. Go to **Campaigns** and click **New campaign**.
-2. **Campaign Setup:** Choose campaign type (one-time or drip). Select audience: all contacts, by tags, or manual selection. Optionally add a CTA link (tracked). Pick brand config and signature, and enter a campaign goal (e.g. "Re-engage users who haven't logged in for 7 days"). Check the reach estimate; fix audience if it's zero.
-3. **Content Generation:** Click **Generate**. AI creates subject and body. Edit in the editor if needed, use **Desktop** / **Mobile** preview, and **Send test** to email yourself a copy.
-4. **Finalize:** Review the summary. For drip, set stop rules (e.g. stop on click or open) if desired. Choose **Send now** or **Schedule** (date and time), then confirm. Emails go out via our email infrastructure with open and click tracking.
+1. **Choose the customer group:** Choose campaign type (one-time or drip). Select your audience: all contacts, by tags, or manual selection. Pick your brand config and signature, then enter a goal. Check the **reach estimate** before moving on.
+2. **Review the AI draft:** Click **Generate**. AI creates a personalized subject and body draft based on your goal and brand voice. Edit if needed, use **Desktop** / **Mobile** preview, and **Send test** to check the layout.
+3. **Let the automation do the rest:** Review the summary. For drip campaigns, set **stop rules** (e.g. auto-stop after purchase or click) so the automation stays helpful instead of noisy. Choose **Send now** or **Schedule**, then confirm.
 
 ## Step 5: Check the dashboard
 
-After sending, the **Dashboard** shows overview metrics (sent, delivered, opens, clicks, CTR, bounces, complaints) and a campaigns table. Use the campaign detail page for recipient-level activity and time-series.
+After launching, the **Dashboard** shows clear reporting so you know which journeys are driving growth. You can track sent, delivered, opens, clicks, and CTR, plus recipient-level activity.
 
 ## What happens next
 
-- Draft campaigns can be edited until you send or schedule. Once sent, content is locked but you can view analytics and stop drip steps.
-- If you set auto-stop rules, recipients who meet the rule (e.g. click) won't receive later steps in the sequence.
+- **Everything stays on-brand:** AI drafts are consistent with your tone, and you stay in control with previews and edits.
+- **Auto-stop handles the follow-up:** If you set stop rules, Nudgen automatically stops future nudges once the customer has acted.
+- **Drafts can be edited:** Campaigns can be refined until they are sent or scheduled.
 - For more structure, use the [onboarding checklist](/en/getting-started/checklist).
 
 ## Troubleshooting
@@ -85,7 +81,7 @@ After sending, the **Dashboard** shows overview metrics (sent, delivered, opens,
     Upload or add at least one contact and ensure they're not suppressed or unsubscribed. Check [Contacts overview](/en/contacts/overview).
   </Accordion>
   <Accordion title="Can I change the generated email?">
-    Yes. After generation, edit the subject and body in the editor before you finalize and send.
+    Yes. Nudgen drafts the first version, but you stay in control. You can edit the copy and send tests before launching.
   </Accordion>
   <Accordion title="How do I stop a campaign?">
     From the campaign list or detail page, use **Stop campaign**. Already-sent emails cannot be recalled.
@@ -114,3 +110,4 @@ After sending, the **Dashboard** shows overview metrics (sent, delivered, opens,
     Common issues and FAQ.
   </Card>
 </CardGroup>
+
