@@ -1,88 +1,88 @@
 ---
-title: "Manage campaigns"
-description: "Edit, send, schedule, and stop campaigns"
+title: "Kampanyaları yönet"
+description: "Düzenle, gönder, planla ve durdur kampanyaları"
 ---
 
-## What this page helps you do
+## Bu sayfa size ne konuda yardımcı olur?
 
-Edit draft campaigns, send or schedule them, and stop active campaigns. You'll also understand what you can and cannot change once a campaign has been sent.
+Taslak kampanyaları düzenleyin, gönderin veya planlayın ve aktif kampanyaları durdurun. Ayrıca kampanya gönderildikten sonra neleri değiştirebileceğinizi ve neleri değiştiremeyeceğinizi anlayın.
 
-## Before you start
+## Başlamadan önce
 
-- At least one campaign (draft or sent)
-- Owner or team member with edit permissions
+- En az bir kampanya (taslak veya gönderilmiş)
+- Düzenleme izinlerine sahip sahip (owner) veya ekip üyesi
 
-## Editing a campaign
+## Bir kampanyayı düzenleme
 
-**You can edit only draft campaigns.** Once a campaign is sent, its content and audience are locked.
+**Yalnızca taslak (draft) kampanyaları düzenleyebilirsiniz.** Bir kampanya gönderildikten sonra içeriği ve hedef kitlesi kilitlenir.
 
-For drafts, you can change:
+Taslaklar için şunları değiştirebilirsiniz:
 
-- Audience (all contacts or tags)
-- Brand config
-- Campaign goal and AI-generated content
-- Schedule (date and time)
-- Auto-stop rules (for drip sequences)
+- Hedef kitle (tüm kişiler veya etiketler)
+- Marka yapılandırması
+- Kampanya hedefi ve AI tarafından oluşturulan içerik
+- Zamanlama (tarih ve saat)
+- Otomatik durdurma kuralları (drip sekansları için)
 
-1. Go to **Campaigns**.
-2. Open the campaign (click the name or **Edit**).
-3. Make changes in the wizard.
-4. Save. If you had scheduled it, the new schedule applies.
+1. **Kampanyalar (Campaigns)** sayfasına gidin.
+2. Kampanyayı açın (isme veya **Düzenle (Edit)** seçeneğine tıklayın).
+3. Sihirbazda değişiklikleri yapın.
+4. Kaydedin. Planladıysanız, yeni plan geçerli olur.
 
-## Send immediately
+## Hemen gönder
 
-1. Open a draft campaign.
-2. Click **Send now**.
-3. Confirm. Emails are queued and sent within minutes.
+1. Bir taslak kampanyayı açın.
+2. **Şimdi gönder (Send now)** seçeneğine tıklayın.
+3. Onaylayın. E-postalar kuyruğa alınır ve birkaç dakika içinde gönderilir.
 
 <Note>
-Sending is irreversible. Double-check your audience and content before confirming.
+Gönderim geri alınamaz. Onaylamadan önce hedef kitlenizi ve içeriğinizi tekrar kontrol edin.
 </Note>
 
-## Schedule for later
+## Daha sonrası için planla
 
-1. Open a draft campaign.
-2. Choose **Schedule** and pick date and time.
-3. Save. The campaign status becomes **Scheduled**.
-4. At the scheduled time, emails send automatically.
+1. Bir taslak kampanyayı açın.
+2. **Planla (Schedule)** seçeneğini belirleyin ve tarih-saat seçin.
+3. Kaydedin. Kampanya durumu **Planlandı (Scheduled)** olur.
+4. Planlanan zamanda e-postalar otomatik olarak gönderilir.
 
-You can edit or cancel a scheduled campaign before it runs.
+Çalışmadan önce planlanan bir kampanyayı düzenleyebilir veya iptal edebilirsiniz.
 
-## Stop a campaign
+## Bir kampanyayı durdurma
 
-Use **Stop campaign** when you want to halt sends immediately. This applies to:
+Gönderimleri hemen durdurmak istediğinizde **Kampanyayı durdur (Stop campaign)** seçeneğini kullanın. Bu aşağıdakiler için geçerlidir:
 
-- Campaigns currently **Sending**
-- **Scheduled** campaigns (cancels the send)
-- **Drip sequences** — stops future steps for contacts who haven't received them yet
+- Şu an **Gönderiliyor (Sending)** olan kampanyalar
+- **Planlanmış (Scheduled)** kampanyalar (gönderimi iptal eder)
+- **Drip sekansları** — Henüz almamış olan kişiler için gelecekteki adımları durdurur
 
-Already-sent emails cannot be recalled. Recipients who got an email before you stopped will keep it.
+Halihazırda gönderilmiş e-postalar geri çağrılamaz. Alıcılar durdurmadan önce e-postayı alanlar onu saklar.
 
-## Draft vs sent: what can change
+## Taslak vs Gönderildi: ne değişebilir
 
-| Action                    | Draft | Scheduled | Sent |
-| ------------------------- | ----- | --------- | ---- |
-| Edit content              | Yes   | Yes       | No   |
-| Change audience           | Yes   | Yes       | No   |
-| Change schedule           | Yes   | Yes       | N/A  |
-| Send now                  | Yes   | Yes       | N/A  |
-| Stop                      | N/A   | Yes       | Yes* |
-| View analytics            | No    | No        | Yes  |
+| İşlem                      | Taslak | Planlandı | Gönderildi |
+| -------------------------- | ------ | --------- | ---------- |
+| İçeriği düzenle            | Evet   | Evet      | Hayır      |
+| Hedef kitleyi değiştir     | Evet   | Evet      | Hayır      |
+| Zamanlamayı değiştir       | Evet   | Evet      | Yok        |
+| Şimdi gönder               | Evet   | Evet      | Yok        |
+| Durdur                     | Yok    | Evet      | Evet*      |
+| Analizleri görüntüle       | Hayır  | Hayır     | Evet       |
 
-\*Stopping a sent campaign only prevents future steps (e.g. in a drip). Past emails are not affected.
+\*Gönderilen bir kampanyayı durdurmak yalnızca gelecekteki adımları (örneğin bir drip'te) engeller. Geçmiş e-postalar etkilenmez.
 
-## What happens next
+## Sırada ne var?
 
-- After sending, check [campaign analytics](/en/campaigns/analytics) for delivery rates, opens, and clicks.
-- Create a new campaign if you need to send a different message.
+- Gönderdikten sonra teslimat oranları, açılmalar ve tıklamalar için [kampanya analizlerini](/tr/campaigns/analytics) kontrol edin.
+- Farklı bir mesaj göndermeniz gerekiyorsa yeni bir kampanya oluşturun.
 
-## Related docs
+## İlgili dokümanlar
 
 <CardGroup cols={2}>
-  <Card title="Create campaigns" icon="paper-plane" href="/en/campaigns/create">
-    Campaign wizard and test send.
+  <Card title="Kampanya oluştur" icon="paper-plane" href="/tr/campaigns/create">
+    Kampanya sihirbazı ve test gönderimi.
   </Card>
-  <Card title="Campaign analytics" icon="chart-line" href="/en/campaigns/analytics">
-    Metrics and recipient activity.
+  <Card title="Kampanya analizleri" icon="chart-line" href="/tr/campaigns/analytics">
+    Metrikler ve alıcı aktivitesi.
   </Card>
 </CardGroup>

@@ -1,60 +1,60 @@
 ---
-title: "Sending and deliverability"
-description: "Emails not sending, bounces, and spam"
+title: "Pengiriman dan Keterkiriman"
+description: "Email tidak terkirim, pantulan (bounce), dan spam"
 ---
 
-## Emails not sending
+## Email tidak terkirim
 
-**Campaign stuck or “sending” for a long time**
+**Kampanye tertahan atau berstatus “mengirim” (sending) dalam waktu lama**
 
-- Sends are queued and processed in batches. Large campaigns can take time. Refresh the dashboard; if status stays “Sending” for hours, contact support.
-- Check that you haven’t hit your **daily or monthly email limit**. The app blocks new sends when you’re over cap. See [Billing](/en/billing/overview) and [Troubleshooting: billing](/en/troubleshooting/billing).
+- Pengiriman dimasukkan ke dalam antrean dan diproses secara bertahap. Kampanye besar dapat memakan waktu lebih lama. Segarkan (refresh) dasbor; jika status tetap “Mengirim” selama berjam-jam, hubungi tim dukungan.
+- Pastikan Anda belum mencapai **batas email harian atau bulanan**. Aplikasi memblokir pengiriman baru saat Anda telah melebihi kuota. Lihat [Penagihan](/id/billing/overview) dan [Penyelesaian masalah penagihan](/id/troubleshooting/billing).
 
-**Test email didn’t arrive**
+**Email uji coba tidak sampai**
 
-- Check spam/junk. Add the sender to your contacts or safe senders.
-- Confirm the **account email** (where tests are sent) is correct in your profile.
-- Wait a few minutes; delivery can be delayed. Try again or send to a different address.
+- Periksa folder spam/sampah. Tambahkan pengirim ke kontak Anda atau daftar pengirim yang aman.
+- Pastikan **email akun** (tempat pengiriman uji coba dilakukan) sudah benar di profil Anda.
+- Tunggu beberapa menit; pengiriman dapat tertunda. Coba lagi atau kirim ke alamat yang berbeda.
 
-**“No active contacts” or reach is zero**
+**“Tidak ada kontak aktif” atau jangkauan nol**
 
-- Upload or add at least one contact and ensure they’re **active** (not unsubscribed or suppressed). See [Contacts overview](/en/contacts/overview) and [Contact lifecycle](/en/contacts/lifecycle).
-- If you chose “By tags,” ensure some contacts have the selected tags.
+- Unggah atau tambahkan setidaknya satu kontak dan pastikan mereka berstatus **aktif** (tidak berhenti berlangganan atau ditekan). Lihat [Ikhtisar kontak](/id/contacts/overview) dan [Siklus hidup kontak](/id/contacts/lifecycle).
+- Jika Anda memilih “Berdasarkan tag” (By tags), pastikan beberapa kontak memiliki tag yang dipilih tersebut.
 
-## Bounces and complaints
+## Pantulan (Bounce) dan keluhan
 
-**High bounce rate**
+**Rasio pantulan (bounce rate) tinggi**
 
-- **Hard bounces** (invalid address, domain doesn’t exist) are automatically suppressed. Remove or fix bad addresses in your list; avoid bought or scraped lists.
-- **Soft bounces** (mailbox full, server down) may be retried by the provider. Repeated soft bounces can lead to suppression. Clean your list and avoid role addresses (e.g. info@) unless they’re valid inboxes.
-- Keep bounce rate low (e.g. under 2%) to protect sender reputation. Use the [Dashboard](/en/dashboard/overview) and [Campaign analytics](/en/campaigns/analytics) to monitor.
+- **Hard bounces** (alamat tidak valid, domain tidak ada) secara otomatis ditekan (suppressed). Hapus atau perbaiki alamat yang buruk dalam daftar Anda; hindari daftar hasil beli atau hasil scraping.
+- **Soft bounces** (kotak surat penuh, server mati) dapat dicoba lagi oleh penyedia. Soft bounce yang berulang dapat menyebabkan penekanan (suppression). Bersihkan daftar Anda dan hindari alamat peran (misal: info@) kecuali jika kotak masuknya benar-benar valid.
+- Jaga agar rasio pantulan tetap rendah (misal: di bawah 2%) untuk melindungi reputasi pengirim. Gunakan [Dasbor](/id/dashboard/overview) dan [Analitik kampanye](/id/campaigns/analytics) untuk memantau.
 
-**Spam complaints**
+**Keluhan spam**
 
-- Recipients marked the email as spam. We suppress complainers and they won’t receive future campaigns. Too many complaints hurt reputation.
-- Improve content: clear subject lines, relevant copy, obvious unsubscribe link. Don’t send to people who didn’t opt in. See [Deliverability basics](/en/concepts/deliverability-basics).
+- Penerima menandai email sebagai spam. Kami menekan alamat pengeluh tersebut dan mereka tidak akan menerima kampanye di masa mendatang. Terlalu banyak keluhan merusak reputasi.
+- Tingkatkan konten: baris subjek yang jelas, teks yang relevan, tautan berhenti berlangganan yang terlihat jelas. Jangan mengirim kepada orang yang tidak memberikan persetujuan (opt-in). Lihat [Dasar-dasar keterkiriman](/id/concepts/deliverability-basics).
 
-**Unsubscribes**
+**Berhenti berlangganan**
 
-- Unsubscribe links are required and honored. Unsubscribed contacts are excluded from future sends. This is normal and keeps you compliant.
+- Tautan berhenti berlangganan bersifat wajib dan harus dihormati. Kontak yang berhenti berlangganan dikeluarkan dari pengiriman masa depan. Hal ini normal dan menjaga Anda tetap patuh pada aturan.
 
-## Tracking and metrics
+## Pelacakan dan metrik
 
-**Opens or clicks not updating**
+**Jumlah dibuka atau klik tidak diperbarui**
 
-- Tracking uses a pixel (opens) and signed links (clicks). Some clients block images or strip tracking; metrics can be undercounted.
-- Data can take a short time to appear. Refresh the campaign detail page or dashboard.
-- If a campaign shows zero opens/clicks for a long time after sends, check that links and images in the email are intact and that the campaign actually sent (check “Emails Sent” and “Emails Delivered”).
+- Pelacakan menggunakan pixel (dibuka) dan tautan bertanda tangan (diklik). Beberapa aplikasi email memblokir gambar atau menghapus pelacakan; metrik mungkin terhitung lebih rendah.
+- Data mungkin membutuhkan waktu singkat untuk muncul. Segarkan halaman detail kampanye atau dasbor.
+- Jika kampanye menunjukkan angka nol untuk dibuka/diklik dalam waktu lama setelah pengiriman, pastikan tautan dan gambar dalam email masih utuh dan kampanye benar-benar terkirim (periksa “Email Terkirim” dan “Email Sampai”).
 
-**Analytics look wrong**
+**Analitik terlihat salah**
 
-- Ensure the **date range** includes the send date. Dashboard and campaign detail pages filter by selected range.
-- “Emails Sent” includes all attempts; “Emails Delivered” is successful delivery. CTR is (Total Clicks / Total Sent) × 100. See [Campaign analytics](/en/campaigns/analytics) and [Dashboard overview](/en/dashboard/overview).
+- Pastikan **rentang tanggal** menyertakan tanggal pengiriman. Halaman dasbor dan detail kampanye memfilter data berdasarkan rentang yang dipilih.
+- “Email Terkirim” mencakup semua upaya pengiriman; “Email Sampai” adalah pengiriman yang berhasil. CTR adalah (Total Klik / Total Terkirim) × 100. Lihat [Analitik kampanye](/id/campaigns/analytics) dan [Ikhtisar dasbor](/id/dashboard/overview).
 
-## What we do to protect deliverability
+## Apa yang kami lakukan untuk melindungi keterkiriman
 
-- We send via our email provider and sync with their suppression list so we don’t resend to bounced or complained addresses.
-- Contacts are validated and we avoid sending to unsubscribed or suppressed contacts.
-- Content and signatures are sanitized; we may flag spam-prone wording when possible.
+- Kami mengirim melalui penyedia email kami dan menyinkronkan dengan daftar penekanan mereka sehingga kami tidak mengirim ulang ke alamat yang memantul (bounce) atau melakukan keluhan.
+- Kontak divalidasi dan kami menghindari pengiriman ke kontak yang telah berhenti berlangganan atau ditekan.
+- Konten dan tanda tangan dibersihkan; kami mungkin menandai kata-kata yang rentan dianggap spam jika memungkinkan.
 
-For more, see [Deliverability basics](/en/concepts/deliverability-basics) and [Contact lifecycle](/en/contacts/lifecycle).
+Untuk informasi selengkapnya, lihat [Dasar-dasar keterkiriman](/id/concepts/deliverability-basics) dan [Siklus hidup kontak](/id/concepts/contact-lifecycle).

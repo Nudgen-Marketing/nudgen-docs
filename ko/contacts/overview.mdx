@@ -1,64 +1,58 @@
 ---
-title: "Contacts overview"
-description: "How Nudgen stores, encrypts, and displays your contact data"
+title: "연락처 개요"
+description: "Nudgen이 연락처 데이터를 저장, 암호화 및 표시하는 방법"
 ---
 
-## What this page helps you do
+## 이 페이지의 도움말
+연락처가 어떻게 저장되는지, 왜 마스킹되어 표시되는지, 세그먼트화를 위해 태그를 어떻게 사용하는지 설명합니다. 이를 통해 안심하고 연락처를 업로드하고 캠페인을 빌드할 수 있습니다.
 
-Understand how contacts are stored, why they appear masked, and how to use tags for segmentation. This sets you up to upload contacts and build campaigns confidently.
+## 시작하기 전에
+- Nudgen 계정
+- 최소 하나의 이메일 주소가 포함된 CSV 파일 (형식은 [업로드 가이드](/ko/contacts/upload) 참조)
 
-## Before you start
+## 연락처 데이터 저장 방식
+Nudgen은 저장되는 모든 개인 식별 정보(PII)를 저장 전 암호화합니다:
 
-- A Nudgen account
-- A CSV file with at least one email address (see [upload guide](/en/contacts/upload) for format)
+- **이메일** — AES-256 암호화. 저희도 읽을 수 없습니다.
+- **이름** — 제공된 경우 암호화됩니다. CSV에서 선택 사항입니다.
+- **사용자 정의 메타데이터** — 업로드하는 모든 추가 컬럼도 함께 암호화됩니다.
 
-## How contact data is stored
+또한 중복 방지를 위해 각 이메일의 단방향 해시를 저장합니다. 동일한 리스트 내의 중복 이메일은 자동으로 통합됩니다.
 
-Nudgen encrypts every piece of personally identifiable information (PII) before it is saved:
+## 마스킹 뷰 (Masked View)
+기본적으로 연락처 리스트는 실제 주소 대신 `j***@g***.com`과 같은 마스킹된 값을 보여줍니다. 개인 식별 정보는 저장 시 암호화되며, 저희는 평문 이메일이나 이름을 보거나 저장하지 않습니다. 마스킹은 주변 사람들에게 데이터가 노출되는 것을 방지하고, 화면 공유 시의 노출 위험을 줄여줍니다.
 
-- **Emails** — AES-256 encrypted. We cannot read them.
-- **Names** — Encrypted if provided. Optional in your CSV.
-- **Custom metadata** — Any extra columns you upload are encrypted as well.
+**연락처 확인:** 귀하(및 접근 권한이 있는 워크스페이스 멤버)는 **확인(Reveal)** 버튼을 클릭하여 UI에서 실제 이메일과 이름을 볼 수 있습니다. 복호화는 확인 버튼을 누를 때 브라우저 내에서만 발생하며, 페이지를 이동하거나 새로고침하면 다시 마스킹됩니다. 분석, 로그 또는 내보내기 파일에서는 복호화된 개인 정보를 절대 표시하지 않습니다.
 
-We also store a one-way hash of each email for deduplication. Duplicate emails in the same list are merged automatically.
+## 태그 및 세그먼트화
+연락처를 업로드하거나 나중에 수정할 때 태그를 지정하세요. 캠페인에서 특정 세그먼트를 타겟팅할 때 태그를 사용합니다:
 
-## Masked view
+- `inactive` — 30일 이상 로그인하지 않은 사용자
+- `vip` — 가치가 높거나 프리미엄 서비스를 이용하는 고객
+- `trial` — 무료 체험 중인 사용자
 
-By default, the contact list shows masked values like `j***@g***.com` instead of real addresses. PII is encrypted at rest; we never see or store plaintext emails or names. Masking protects your data from shoulder-surfing and limits exposure if someone else has access to your screen.
+캠페인을 생성할 때 전체 연락처 또는 특정 태그가 있는 연락처 중에서 대상을 선택할 수 있습니다. 태그를 사용하면 세그먼트별로 서로 다른 시퀀스를 쉽게 운영할 수 있습니다.
 
-**Revealing a contact:** You (and other workspace members with access) can click **Reveal** to show the real email and name in the UI. Decryption happens only in your browser when you reveal; after you navigate away or refresh, values mask again. We never display decrypted PII in analytics, logs, or exports.
+## 연락처 상태
 
-## Tags and segmentation
+연락처는 다음 중 하나의 상태를 가집니다:
 
-Assign tags when you upload contacts or edit them later. Use tags to target specific segments in campaigns:
+- **Active (활성)** — 캠페인을 수신할 수 있는 상태입니다. 새로 가져온 연락처의 기본 설정입니다.
+- **Unsubscribed (수신 거부)** — 수신 거부 링크를 통하거나 수동으로 거부한 상태입니다. 상태를 변경하지 않는 한 이후의 캠페인 이메일을 받지 않습니다.
+- **Suppressed / Bounced (도달 불가)** — 전송 실패(잘못된 주소, 편지함 가득 참 또는 차단 리스트 포함)된 상태입니다. 도달률 보호를 위해 향후 발송 대상에서 자동으로 제외됩니다. 저희 시스템은 발송 대행사의 차단 리스트와 실시간으로 동기화됩니다.
 
-- `inactive` — Users who haven't logged in for 30+ days
-- `vip` — High-value or premium customers
-- `trial` — People on a free trial
+## 다음 단계
+- [CSV 업로드](/ko/contacts/upload)에서 연락처를 추가하세요.
+- [캠페인 생성](/ko/campaigns/create)에서 태그 또는 전체 연락처를 대상으로 선택하세요.
+- 플랜별 최대 연락처 수는 [요금제 안내](/ko/billing/overview)를 확인하세요.
 
-When creating a campaign, you choose an audience: all contacts, or only those with certain tags. Tags make it easy to run different sequences for different segments.
-
-## Contact statuses
-
-Contacts can have one of these statuses:
-
-- **Active** — Can receive campaigns. Default for newly imported contacts.
-- **Unsubscribed** — Opted out via the unsubscribe link or manually. They will not receive future campaign emails unless you change their status.
-- **Suppressed / Bounced** — Delivery failed (invalid address, mailbox full, or provider suppression list). These contacts are automatically excluded from future sends to protect deliverability. Our system syncs with the delivery provider's suppression list.
-
-## What happens next
-
-- [Upload a CSV](/en/contacts/upload) to add contacts.
-- [Create a campaign](/en/campaigns/create) and select your audience by tags or all contacts.
-- Check [plan limits](/en/billing/overview) for max contacts per plan.
-
-## Related docs
+## 관련 문서
 
 <CardGroup cols={2}>
-  <Card title="Upload contacts" icon="file-upload" href="/en/contacts/upload">
-    CSV format, validation, and tag assignment.
+  <Card title="연락처 업로드" icon="file-upload" href="/ko/contacts/upload">
+    CSV 형식, 유효성 검사 및 태그 지정 안내.
   </Card>
-  <Card title="Create campaigns" icon="paper-plane" href="/en/campaigns/create">
-    Choose audience and launch your first campaign.
+  <Card title="캠페인 생성" icon="paper-plane" href="/ko/campaigns/create">
+    오디언스를 선택하고 첫 번째 캠페인을 시작해 보세요.
   </Card>
 </CardGroup>

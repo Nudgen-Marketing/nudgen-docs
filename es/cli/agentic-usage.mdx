@@ -1,0 +1,52 @@
+---
+title: "Uso por Agentes de IA"
+description: "Cómo usar la CLI de Nudgen como interfaz para agentes de IA."
+---
+
+## Resumen
+
+La CLI de Nudgen está diseñada con un enfoque **AI-First**. Aunque ofrece una TUI atractiva para humanos, cada comando también está optimizado para la comunicación entre máquinas.
+
+### El Patrón Agéntico
+
+Cuando un agente de IA (como Claude, GPT o un agente de automatización especializado) utiliza la CLI, debe seguir estos patrones:
+
+1. **Salida JSON**: Añada `--json` a cada comando para obtener datos procesables por máquinas.
+2. **Conciencia del Contexto**: Verifique siempre el contexto del equipo antes de realizar operaciones.
+3. **No interactivo**: Use indicadores para omitir los avisos interactivos de la TUI.
+
+## Automatización con JSON
+
+Cada comando de lista y estado admite el indicador `--json`. Esto devuelve una estructura JSON limpia en lugar de una tabla con formato.
+
+```bash
+# Obtener todas las campañas como JSON
+nudgen campaigns list --json
+
+# Obtener contactos del equipo actual
+nudgen contacts list --json
+```
+
+## Flujo de Trabajo Multi-inquilino para Agentes
+
+Dado que Nudgen admite múltiples equipos, un agente debe asegurarse de estar operando en el equipo correcto antes de crear o actualizar recursos.
+
+**Flujo de trabajo recomendado:**
+
+1. **Verificar Equipo Actual**:
+   ```bash
+   nudgen teams current --json
+   ```
+2. **Cambiar de Equipo (si es necesario)**:
+   Si el `id` del paso anterior no coincide con el equipo de destino, cámbielo:
+   ```bash
+   nudgen teams switch <id-del-equipo-objetivo>
+   ```
+3. **Ejecutar Comando de Datos**:
+   Proceda con los comandos `campaigns`, `contacts` o `brand`.
+
+## Mejores Prácticas para Desarrolladores de Agentes
+
+- **Manejo de Errores**: Supervise el código de salida. Un código de salida distinto de cero indica un error (validación, red o autenticación).
+- **Límite de Velocidad (Rate Limiting)**: La CLI se comunica con la API de Nudgen. Asegúrese de que sus scripts de agente manejen los posibles límites de velocidad de forma adecuada.
+- **Modo Silencioso**: Si un comando no admite un indicador específico para cada aviso, asegúrese de que su agente pueda manejar los flujos stdout/stderr sin quedar atascado en un bucle de la TUI.

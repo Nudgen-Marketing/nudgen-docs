@@ -1,68 +1,68 @@
 ---
-title: "Privacy and data"
-description: "How we handle PII, tracking, and third-party providers"
+title: "الخصوصية والبيانات"
+description: "كيف نتعامل مع معلومات الهوية الشخصية (PII)، التتبع، والمزودين الخارجيين"
 ---
 
-## What this page covers
+## ما الذي تغطيه هذه الصفحة
 
-A short, user-facing summary of how Nudgen handles personal and contact data, how tracking works in emails, and which third-party providers we use. For the full legal text, see the [Privacy Policy](https://nudgen.net/privacy) and [Terms of Service](https://nudgen.net/terms) on the main site.
+ملخص قصير موجه للمستخدم حول كيفية تعامل Nudgen مع البيانات الشخصية وبيانات جهات الاتصال، وكيف يعمل التتبع في رسائل البريد الإلكتروني، ومن هم المزودون الخارجيون الذين نستخدمهم. للحصول على النص القانوني الكامل، راجع [سياسة الخصوصية](https://nudgen.net/privacy) و [شروط الخدمة](https://nudgen.net/terms) على الموقع الرئيسي.
 
-## PII and contact data
+## معلومات الهوية الشخصية (PII) وبيانات جهات الاتصال
 
-**Encryption at rest**
+**التشفير عند التخزين**
 
-- Contact data you upload (email addresses, names, and any custom fields) is **encrypted** before it is stored. We use AES-256-GCM; we do not see or store plaintext PII.
-- Emails are also **hashed** (one-way) for deduplication so we can merge duplicates without storing the raw address in plain form.
+- بيانات جهات الاتصال التي ترفعها (عناوين البريد الإلكتروني، الأسماء، وأي حقول مخصصة) يتم **تشفيرها** قبل حفظها. نحن نستخدم معيار AES-256-GCM؛ ولا نرى أو نخزن معلومات الهوية الشخصية بنصوص صريحة.
+- رسائل البريد الإلكتروني يتم أيضاً تحويلها إلى **كود هاش (Hash)** أحادي الاتجاه لمنع التكرار، بحيث يمكننا دمج التكرارات دون تخزين العنوان الأصلي بشكل صريح.
 
-**Masking and reveal**
+**الإخفاء والكشف (Masking and reveal)**
 
-- In the app, contact emails and names are shown **masked** by default (e.g. `j***@g***.com`). That limits exposure on shared screens and in logs.
-- When you click **Reveal**, the real value is decrypted only in your browser and shown temporarily. After you navigate away or refresh, it masks again. We never expose decrypted PII in analytics, logs, or exports.
+- في التطبيق، تظهر رسائل البريد والأسماء بشكل **مخفي** افتراضياً (مثل `j***@g***.com`). هذا يحد من التعرض للمخاطر على الشاشات المشتركة وفي السجلات.
+- عندما تنقر على **كشف (Reveal)**، يتم فك تشفير القيمة الحقيقية فقط في متصفحك وتظهر مؤقتاً. بعد مغادرة الصفحة أو تحديثها، تعود للاختفاء. نحن لا نكشف أبداً عن معلومات الهوية الشخصية غير المشفرة في التحليلات، السجلات، أو الصادرات.
 
-**Who can see contact data**
+**من يمكنه رؤية بيانات جهات الاتصال**
 
-- Only people in your **workspace** with access to Contacts can see the list. Reveal is available to anyone who can view contacts in that workspace. Billing and plan limits are per workspace.
+- فقط الأشخاص في **مساحة عملك** الذين يملكون صلاحية الوصول إلى "جهات الاتصال" يمكنهم رؤية القائمة. ميزة الكشف متاحة لأي شخص يمكنه عرض جهات الاتصال في تلك المساحة. الفواتير وحدود الباقة تكون لكل مساحة عمل على حدة.
 
-## Tracking in emails
+## التتبع في رسائل البريد الإلكتروني
 
-We use tracking to measure campaign performance and honor unsubscribes.
+نستخدم التتبع لقياس أداء الحملة واحترام طلبات إلغاء الاشتراك.
 
-- **Opens** — A small tracking pixel in the email loads when the recipient opens the message. We record the event (and approximate time) for analytics. Some email clients block images, so open counts can be undercounted.
-- **Clicks** — Links in the email can be wrapped as **signed tracking links**. When the recipient clicks, we record the click and then redirect them to the real URL. Signing and validation help prevent abuse.
-- **Unsubscribe** — Every campaign email includes an **unsubscribe link**. When the recipient uses it, we mark them as unsubscribed and they are excluded from future campaign sends. We do not send further marketing to that address unless you change their status.
+- **الفتحات (Opens)** — يتم تحميل بكسل تتبع صغير في البريد الإلكتروني عند فتح المستلم للرسالة. نسجل الحدث (والوقت التقريبي) للتحليلات. بعض تطبيقات البريد تمنع تحميل الصور، لذا قد تكون أرقام الفتح أقل من الواقع.
+- **النقرات (Clicks)** — يمكن تغليف الروابط في البريد كـ **روابط تتبع موقعة**. عندما ينقر المستلم، نسجل النقرة ثم نعيد توجيهه إلى الرابط الحقيقي. التوقيع والتحقق يساعدان في منع الإساءة.
+- **إلغاء الاشتراك (Unsubscribe)** — تشمل كل رسالة حملة **رابط إلغاء اشتراك**. عندما يستخدمه المستلم، نميزه كـ "ملغي الاشتراك" ويتم استبعاده من الحملات المستقبلية. نحن لا نرسل مزيداً من الرسائل التسويقية لذلك العنوان ما لم تقم بتغيير حالته.
 
-When these tools run, we may process data such as browser/device details, approximate location (from IP), email client, and timestamps. This is used for analytics and to operate the service.
+عند تشغيل هذه الأدوات، قد نعالج بيانات مثل تفاصيل المتصفح/الجهاز، الموقع التقريبي (عبر IP)، تطبيق البريد المستخدم، والطوابع الزمنية. يُستخدم هذا للتحليلات وتشغيل الخدمة.
 
-## Third-party providers
+## المزودون الخارجيون
 
-The service relies on the following types of providers. The exact list may change over time.
+تعتمد الخدمة على أنواع المزودين التالية. قد تتغير القائمة الدقيقة بمرور الوقت.
 
-| Provider | Purpose |
+| المزود | الغرض |
 | -------- | ------- |
-| **Google / Firebase** | Authentication (e.g. sign-in with Google) and application analytics. |
-| **Polar** | Subscription management, checkout, billing portal, and payment processing. |
-| **Email delivery provider** | Email delivery, bounce and complaint handling, and suppression list sync. |
-| **OpenAI** | AI-assisted email generation (campaign goals, brand voice, prompts). |
-| **MaxMind** | Approximate geolocation (e.g. from IP) for analytics and operational purposes. |
+| **Google / Firebase** | المصادقة (مثلاً تسجيل الدخول بـ Google) وتحليلات التطبيق. |
+| **Polar** | إدارة الاشتراكات، الدفع، بوابة الفواتير، ومعالجة المدفوعات. |
+| **مزود خدمة الإرسال** | تسليم البريد الإلكتروني، التعامل مع الارتدادات والشكاوى، ومزامنة قوائم الحظر. |
+| **OpenAI** | إنشاء البريد الإلكتروني بمساعدة الذكاء الاصطناعي (أهداف الحملة، صوت العلامة، المطالبات). |
+| **MaxMind** | الموقع الجغرافي التقريبي (مثلاً من IP) للتحليلات والأغراض التشغيلية. |
 
-Data is shared with these providers only as needed to run the service. We do not sell your data or contact lists to third parties for their own marketing.
+تتم مشاركة البيانات مع هؤلاء المزودين فقط حسب الحاجة لتشغيل الخدمة. نحن لا نبيع بياناتك أو قوائم جهات اتصالك لأطراف ثالثة لأغراضهم التسويقية الخاصة.
 
-## Security practices
+## الممارسات الأمنية
 
-- Access inside the product is **role-based** (owner, admin, member) per workspace.
-- We use **signed links and validation** in tracking and other sensitive flows to reduce abuse.
-- We apply **rate limiting** and usage guards to protect the platform and enforce plan limits.
-- No transmission or storage is 100% secure; we use reasonable measures but do not guarantee absolute security.
+- الوصول داخل المنتج يعتمد على **الأدوار** (مالك، مشرف، عضو) لكل مساحة عمل.
+- نستخدم **الروابط الموقعة والتحقق** في التتبع والعمليات الحساسة الأخرى لتقليل الإساءة.
+- نطبق **تقييد المعدل (Rate limiting)** وحواجز حماية الاستخدام لحماية المنصة وفرض حدود الباقة.
+- لا يوجد نقل أو تخزين آمن بنسبة 100%؛ نحن نستخدم تدابير معقولة ولكن لا نضمن الأمان المطلق.
 
-## Data retention and your rights
+## الاحتفاظ بالبيانات وحقوقك
 
-- We retain data as long as reasonably necessary to provide the service, maintain security and operations, comply with law, and enforce our agreements. Retention can differ by data type (e.g. account, billing, suppression, logs).
-- Depending on where you live, you may have rights to access, correct, delete, or restrict certain personal data. Recipients of emails sent through Nudgen can use the **unsubscribe** link; for other requests, contact [contact@nudgen.net](mailto:contact@nudgen.net).
-- If you are a **recipient** of a campaign (not the account holder), the sender is generally responsible for that outreach; you can contact them or use the unsubscribe link.
+- نحتفظ بالبيانات للمدة اللازمة بشكل معقول لتقديم الخدمة، الحفاظ على الأمان والعمليات، الامتثال للقانون، وفرض اتفاقياتنا. قد تختلف مدة الاحتفاظ حسب نوع البيانات (مثل الحساب، الفواتير، الحظر، السجلات).
+- بناءً على مكان إقامتك، قد تملك حقوقاً في الوصول إلى بيانات شخصية معينة أو تصحيحها أو حذفها أو تقييدها. يمكن لمستلمي البريد المرسل عبر Nudgen استخدام رابط **إلغاء الاشتراك**؛ وللطلبات الأخرى، تواصل مع [contact@nudgen.net](mailto:contact@nudgen.net).
+- إذا كنت **مستلماً** لحملة (ولست صاحب الحساب)، فإن المرسل هو المسؤول بشكل عام عن ذلك التواصل؛ يمكنك التواصل معه أو استخدام رابط إلغاء الاشتراك.
 
-## Full policies
+## السياسات الكاملة
 
-- **Privacy Policy:** [nudgen.net/privacy](https://nudgen.net/privacy)  
-- **Terms of Service:** [nudgen.net/terms](https://nudgen.net/terms)
+- **سياسة الخصوصية:** [nudgen.net/privacy](https://nudgen.net/privacy)  
+- **شروط الخدمة:** [nudgen.net/terms](https://nudgen.net/terms)
 
-For product-specific behavior, see [Contacts overview](/en/contacts/overview) (encryption and masking), [Contact lifecycle](/en/contacts/lifecycle) (suppression and unsubscribes), and [Deliverability basics](/en/concepts/deliverability-basics).
+لسلوكيات المنتج المحددة، راجع [نظرة عامة على جهات الاتصال](/ar/contacts/overview) (التشفير والإخفاء)، [دورة حياة جهة الاتصال](/ar/contacts/lifecycle) (الحظر وإلغاء الاشتراك)، و [أساسيات قابلية التسليم](/ar/concepts/deliverability-basics).

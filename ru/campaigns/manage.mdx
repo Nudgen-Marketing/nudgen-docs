@@ -1,88 +1,88 @@
 ---
-title: "Manage campaigns"
-description: "Edit, send, schedule, and stop campaigns"
+title: "Управление кампаниями"
+description: "Редактирование, отправка, планирование и остановка кампаний"
 ---
 
-## What this page helps you do
+## Что вы узнаете на этой странице
 
-Edit draft campaigns, send or schedule them, and stop active campaigns. You'll also understand what you can and cannot change once a campaign has been sent.
+Вы узнаете, как редактировать черновики, отправлять или планировать их, а также останавливать активные кампании. Вы также поймете, что можно, а что нельзя изменять после того, как кампания была отправлена.
 
-## Before you start
+## Перед началом работы
 
-- At least one campaign (draft or sent)
-- Owner or team member with edit permissions
+- Хотя бы одна кампания (черновик или отправленная).
+- Статус Владельца или Участника команды с правами на редактирование.
 
-## Editing a campaign
+## Редактирование кампании
 
-**You can edit only draft campaigns.** Once a campaign is sent, its content and audience are locked.
+**Редактировать можно только черновики (Drafts).** После отправки кампании ее содержание и аудитория блокируются.
 
-For drafts, you can change:
+Для черновиков вы можете изменять:
 
-- Audience (all contacts or tags)
-- Brand config
-- Campaign goal and AI-generated content
-- Schedule (date and time)
-- Auto-stop rules (for drip sequences)
+- Аудиторию (все контакты или теги).
+- Конфигурацию бренда.
+- Цель кампании и сгенерированный ИИ контент.
+- Расписание (дату и время).
+- Правила автостопа (для капельных последовательностей).
 
-1. Go to **Campaigns**.
-2. Open the campaign (click the name or **Edit**).
-3. Make changes in the wizard.
-4. Save. If you had scheduled it, the new schedule applies.
+1. Перейдите в раздел **Кампании (Campaigns)**.
+2. Откройте нужную кампанию (нажав на название или кнопку **Edit**).
+3. Внесите изменения в мастере настройки.
+4. Сохраните. Если кампания была запланирована, будет применено новое расписание.
 
-## Send immediately
+## Мгновенная отправка
 
-1. Open a draft campaign.
-2. Click **Send now**.
-3. Confirm. Emails are queued and sent within minutes.
+1. Откройте черновик кампании.
+2. Нажмите **Send now (Отправить сейчас)**.
+3. Подтвердите. Письма будут поставлены в очередь и отправлены в течение нескольких минут.
 
 <Note>
-Sending is irreversible. Double-check your audience and content before confirming.
+Отправка необратима. Тщательно проверьте аудиторию и контент перед подтверждением.
 </Note>
 
-## Schedule for later
+## Планирование на потом
 
-1. Open a draft campaign.
-2. Choose **Schedule** and pick date and time.
-3. Save. The campaign status becomes **Scheduled**.
-4. At the scheduled time, emails send automatically.
+1. Откройте черновик кампании.
+2. Выберите **Schedule (Запланировать)** и укажите дату и время.
+3. Сохраните. Статус кампании изменится на **Scheduled (Запланирована)**.
+4. В назначенное время письма будут отправлены автоматически.
 
-You can edit or cancel a scheduled campaign before it runs.
+Вы можете отредактировать или отменить запланированную кампанию до момента ее запуска.
 
-## Stop a campaign
+## Остановка кампании
 
-Use **Stop campaign** when you want to halt sends immediately. This applies to:
+Используйте **Stop campaign**, если хотите немедленно прекратить отправку. Это применимо к:
 
-- Campaigns currently **Sending**
-- **Scheduled** campaigns (cancels the send)
-- **Drip sequences** — stops future steps for contacts who haven't received them yet
+- Кампаниям в статусе **Sending (Отправляется)**.
+- **Scheduled (Запланированным)** кампаниям (отменяет отправку).
+- **Drip sequences (Капельным последовательностям)** — останавливает будущие шаги для тех контактов, которые их еще не получили.
 
-Already-sent emails cannot be recalled. Recipients who got an email before you stopped will keep it.
+Уже отправленные письма отозвать невозможно. Получатели, которым письмо ушло до остановки, все равно его получат.
 
-## Draft vs sent: what can change
+## Черновик или Отправленная: что можно изменить
 
-| Action                    | Draft | Scheduled | Sent |
-| ------------------------- | ----- | --------- | ---- |
-| Edit content              | Yes   | Yes       | No   |
-| Change audience           | Yes   | Yes       | No   |
-| Change schedule           | Yes   | Yes       | N/A  |
-| Send now                  | Yes   | Yes       | N/A  |
-| Stop                      | N/A   | Yes       | Yes* |
-| View analytics            | No    | No        | Yes  |
+| Действие                     | Черновик | Запланирована | Отправлена |
+| ---------------------------- | -------- | ------------- | ---------- |
+| Редактировать контент        | Да       | Да            | Нет        |
+| Изменить аудиторию           | Да       | Да            | Нет        |
+| Изменить расписание          | Да       | Да            | Н/Д        |
+| Отправить сейчас             | Да       | Да            | Н/Д        |
+| Остановить                   | Н/Д       | Да            | Да*        |
+| Просмотреть аналитику        | Нет      | Нет           | Да         |
 
-\*Stopping a sent campaign only prevents future steps (e.g. in a drip). Past emails are not affected.
+\*Остановка отправленной кампании предотвращает только будущие шаги (например, в капельной последовательности). Уже отправленные письма не затрагиваются.
 
-## What happens next
+## Что дальше
 
-- After sending, check [campaign analytics](/en/campaigns/analytics) for delivery rates, opens, and clicks.
-- Create a new campaign if you need to send a different message.
+- После отправки проверьте [аналитику кампании](/ru/campaigns/analytics) на наличие показателей доставки, открытий и кликов.
+- Создайте новую кампанию, если вам нужно отправить другое сообщение.
 
-## Related docs
+## Связанные документы
 
 <CardGroup cols={2}>
-  <Card title="Create campaigns" icon="paper-plane" href="/en/campaigns/create">
-    Campaign wizard and test send.
+  <Card title="Создание кампаний" icon="paper-plane" href="/ru/campaigns/create">
+    Мастер настройки и тестовая отправка.
   </Card>
-  <Card title="Campaign analytics" icon="chart-line" href="/en/campaigns/analytics">
-    Metrics and recipient activity.
+  <Card title="Аналитика кампаний" icon="chart-line" href="/ru/campaigns/analytics">
+    Метрики и активность получателей.
   </Card>
 </CardGroup>

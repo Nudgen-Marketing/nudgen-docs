@@ -1,31 +1,31 @@
 ---
-title: "Deliverability basics"
-description: "How we keep your emails out of spam"
+title: "Teslim edilebilirlik temelleri"
+description: "E-postalarınızı nasıl spam kutusundan uzak tutuyoruz?"
 ---
 
-## What is deliverability?
+## Teslim edilebilirlik (deliverability) nedir?
 
-**Deliverability** means your emails reach the inbox instead of spam or being blocked. It depends on sender reputation, content, and recipient engagement. Nudgen and the delivery provider work to keep your campaigns deliverable.
+**Teslim edilebilirlik**, e-postalarınızın spam kutusuna veya engellenmek yerine gelen kutusuna ulaşması anlamına gelir. Bu, gönderici itibarına, içeriğe ve alıcı etkileşimine bağlıdır. Nudgen ve teslimat sağlayıcısı, kampanyalarınızın teslim edilebilir kalmasını sağlamak için çalışır.
 
-## What we do
+## Biz ne yapıyoruz?
 
-- **Sending via our email provider** — Emails are sent through a trusted delivery provider with good infrastructure and reputation.
-- **Validation and suppression** — We validate addresses and sync with the provider’s suppression list (bounces, complaints). We don’t resend to addresses that have hard bounced or been marked as spam.
-- **Content checks** — Before send, we can run basic checks (e.g. spam-prone wording) so you can fix issues. Signatures and HTML are sanitized to avoid injection and risky content.
-- **Tracking and unsubscribe** — Opens and clicks use tracking pixels and signed links. Every campaign includes an unsubscribe link so recipients can opt out; we honor that and stop sending to them.
+- **E-posta sağlayıcımız üzerinden gönderim** — E-postalar, iyi altyapı ve itibara sahip güvenilir bir teslimat sağlayıcısı üzerinden gönderilir.
+- **Doğrulama ve engelleme** — Adresleri doğrularız ve sağlayıcının engelleme listesiyle (bounce'lar, şikayetler) senkronize oluruz. Hard bounce (kalıcı hata) olmuş veya spam olarak işaretlenmiş adreslere yeniden gönderim yapmayız.
+- **İçerik kontrolleri** — Gönderimden önce, sorunları düzeltebilmeniz için temel kontroller (örneğin spam eğilimli sözcükler) yapabiliriz. İmzalar ve HTML, enjeksiyon ve riskli içerikten kaçınmak için temizlenir.
+- **Takip ve abonelikten ayrılma** — Açılmalar ve tıklamalar takip pikselleri ve imzalı bağlantılar kullanır. Her kampanyada bir abonelikten ayrılma bağlantısı bulunur; buna saygı duyuyoruz ve ayrılanlara gönderimi durduruyoruz.
 
-## What you can do
+## Siz ne yapabilirsiniz?
 
-- **Keep your list clean** — Remove or fix bounced and invalid addresses. Don’t buy lists or add contacts who didn’t opt in.
-- **Respect unsubscribes** — Don’t manually re-add unsubscribed users to campaigns without consent.
-- **Use a clear From name and reply-to** — Set brand identity (Settings → Brand) so recipients recognize you.
-- **Avoid spammy content** — Write clear, relevant copy and avoid aggressive sales language or misleading subject lines.
-- **Watch your metrics** — High bounce or complaint rates hurt reputation. Use the [Dashboard](/en/dashboard/overview) and [Campaign analytics](/en/campaigns/analytics) to spot problems.
+- **Listenizi temiz tutun** — Bounce olmuş ve geçersiz adresleri kaldırın veya düzeltin. Liste satın almayın veya izin vermeyen kişileri eklemeyin.
+- **Abonelikten ayrılmalara saygı gösterin** — Abonelikten ayrılmış kullanıcıları rızaları olmadan manuel olarak kampanyalara yeniden eklemeyin.
+- **Net bir Gönderen Adı ve yanıt e-postası kullanın** — Alıcıların sizi tanıması için marka kimliğini (Settings → Brand) ayarlayın.
+- **Spam içeriklerden kaçının** — Net, ilgili metinler yazın ve agresif satış dili veya yanıltıcı konu satırlarından kaçının.
+- **Metriklerinizi izleyin** — Yüksek bounce veya şikayet oranları itibara zarar verir. Sorunları tespit etmek için [Paneli (Dashboard)](/tr/dashboard/overview) ve [Kampanya analizlerini](/tr/campaigns/analytics) kullanın.
 
-## Bounces and complaints
+## Bounce'lar (Geri Dönenler) ve Şikayetler
 
-- **Soft bounce** — Temporary failure (mailbox full, server down). The provider may retry; repeated soft bounces can lead to suppression.
-- **Hard bounce** — Permanent failure (invalid address, domain doesn’t exist). We suppress these immediately.
-- **Spam complaint** — Recipient marked the email as spam. Too many complaints damage reputation; we suppress complainers and you should review content and targeting.
+- **Soft bounce** — Geçici hata (posta kutusu dolu, sunucu kapalı). Sağlayıcı yeniden deneyebilir; tekrarlanan hatalar engellemeye yol açabilir.
+- **Hard bounce** — Kalıcı hata (geçersiz adres, alan adı mevcut değil). Bunları anında engelliyoruz.
+- **Spam şikayeti** — Alıcı e-postayı spam olarak işaretledi. Çok fazla şikayet itibara zarar verir; şikayetçileri engelliyoruz, siz de içeriğinizi ve hedeflemenizi gözden geçirmelisiniz.
 
-For more on contact status and suppression, see [Contact lifecycle](/en/contacts/lifecycle) and [Contacts overview](/en/contacts/overview). For sending issues, see [Troubleshooting: deliverability](/en/troubleshooting/deliverability).
+Kişi durumu ve engelleme hakkında daha fazlası için [Kişi yaşam döngüsü](/tr/concepts/contact-lifecycle) ve [Kişilere genel bakış](/tr/contacts/overview) bölümlerine bakın. Gönderim sorunları için [Sorun Giderme: teslim edilebilirlik](/tr/troubleshooting/deliverability) bölümüne bakın.

@@ -1,64 +1,64 @@
 ---
-title: "Contacts overview"
-description: "How Nudgen stores, encrypts, and displays your contact data"
+title: "نظرة عامة على جهات الاتصال"
+description: "كيف يقوم Nudgen بتخزين وتشفير وعرض بيانات جهات اتصالك"
 ---
 
-## What this page helps you do
+## ما الذي تساعدك هذه الصفحة على القيام به
 
-Understand how contacts are stored, why they appear masked, and how to use tags for segmentation. This sets you up to upload contacts and build campaigns confidently.
+فهم كيفية تخزين جهات الاتصال، ولماذا تظهر بشكل مخفي، وكيفية استخدام الوسوم (Tags) لتقسيم الجمهور. يهيئك هذا لرفع جهات الاتصال وبناء الحملات بثقة.
 
-## Before you start
+## قبل أن تبدأ
 
-- A Nudgen account
-- A CSV file with at least one email address (see [upload guide](/en/contacts/upload) for format)
+- حساب Nudgen
+- ملف CSV يحتوي على عنوان بريد إلكتروني واحد على الأقل (راجع [دليل الرفع](/ar/contacts/upload) لمعرفة التنسيق)
 
-## How contact data is stored
+## كيفية تخزين بيانات جهات الاتصال
 
-Nudgen encrypts every piece of personally identifiable information (PII) before it is saved:
+يقوم Nudgen بتشفير كل قطعة من معلومات الهوية الشخصية (PII) قبل حفظها:
 
-- **Emails** — AES-256 encrypted. We cannot read them.
-- **Names** — Encrypted if provided. Optional in your CSV.
-- **Custom metadata** — Any extra columns you upload are encrypted as well.
+- **رسائل البريد الإلكتروني** — مشفرة بمعيار AES-256. نحن لا نستطيع قراءتها.
+- **الأسماء** — مشفرة إذا تم توفيرها. اختيارية في ملف CSV الخاص بك.
+- **البيانات الوصفية المخصصة** — أي أعمدة إضافية تقوم برفعها يتم تشفيرها أيضاً.
 
-We also store a one-way hash of each email for deduplication. Duplicate emails in the same list are merged automatically.
+نقوم أيضاً بتخزين كود هاش (Hash) أحادي الاتجاه لكل بريد إلكتروني لمنع التكرار. يتم دمج عناوين البريد الإلكتروني المكررة في نفس القائمة تلقائياً.
 
-## Masked view
+## العرض المخفي (Masked view)
 
-By default, the contact list shows masked values like `j***@g***.com` instead of real addresses. PII is encrypted at rest; we never see or store plaintext emails or names. Masking protects your data from shoulder-surfing and limits exposure if someone else has access to your screen.
+بشكل افتراضي، تعرض قائمة جهات الاتصال قيماً مخفية مثل `j***@g***.com` بدلاً من العناوين الحقيقية. معلومات الهوية الشخصية تكون مشفرة عند التخزين؛ نحن لا نرى أو نخزن رسائل البريد أو الأسماء بنصوص صريحة. الإخفاء يحمي بياناتك من المتلصصين ويقلل من التعرض للمخاطر إذا كان شخص آخر يرى شاشتك.
 
-**Revealing a contact:** You (and other workspace members with access) can click **Reveal** to show the real email and name in the UI. Decryption happens only in your browser when you reveal; after you navigate away or refresh, values mask again. We never display decrypted PII in analytics, logs, or exports.
+**كشف جهة الاتصال:** يمكنك (وأعضاء الفريق الآخرين الذين لديهم صلاحية الوصول) النقر على **كشف (Reveal)** لإظهار البريد الإلكتروني والاسم الحقيقيين في واجهة المستخدم. عملية فك التشفير تتم فقط في متصفحك عند الكشف؛ وبعد مغادرة الصفحة أو تحديثها، تعود القيم للاختفاء مرة أخرى. نحن لا نعرض معلومات الهوية الشخصية غير المشفرة في التحليلات، السجلات، أو الصادرات.
 
-## Tags and segmentation
+## الوسوم وتقسيم الجمهور (Tags and segmentation)
 
-Assign tags when you upload contacts or edit them later. Use tags to target specific segments in campaigns:
+قم بتعيين وسوم (Tags) عند رفع جهات الاتصال أو تعديلها لاحقاً. استخدم الوسوم لاستهداف أقسام محددة في حملاتك:
 
-- `inactive` — Users who haven't logged in for 30+ days
-- `vip` — High-value or premium customers
-- `trial` — People on a free trial
+- `inactive` — المستخدمون الذين لم يسجلوا دخولاً منذ 30 يوماً أو أكثر.
+- `vip` — العملاء المميزون أو ذوو القيمة العالية.
+- `trial` — الأشخاص في الفترة التجريبية المجانية.
 
-When creating a campaign, you choose an audience: all contacts, or only those with certain tags. Tags make it easy to run different sequences for different segments.
+عند إنشاء حملة، تختار الجمهور: إما جميع جهات الاتصال، أو فقط أولئك الذين يحملون وسوماً معينة. تسهل الوسوم تشغيل تسلسلات مختلفة لأجزاء مختلفة من جمهورك.
 
-## Contact statuses
+## حالات جهة الاتصال
 
-Contacts can have one of these statuses:
+يمكن لجهات الاتصال أن تكون في إحدى هذه الحالات:
 
-- **Active** — Can receive campaigns. Default for newly imported contacts.
-- **Unsubscribed** — Opted out via the unsubscribe link or manually. They will not receive future campaign emails unless you change their status.
-- **Suppressed / Bounced** — Delivery failed (invalid address, mailbox full, or provider suppression list). These contacts are automatically excluded from future sends to protect deliverability. Our system syncs with the delivery provider's suppression list.
+- **نشط (Active)** — يمكنه تلقي الحملات. الحالة الافتراضية لجهات الاتصال المستوردة حديثاً.
+- **ملغي الاشتراك (Unsubscribed)** — انسحب عبر رابط إلغاء الاشتراك أو يدوياً. لن يتلقوا رسائل الحملات المستقبلية ما لم تقم بتغيير حالتهم.
+- **محظور / مرتد (Suppressed / Bounced)** — فشل التسليم (عنوان غير صالح، صندوق بريد ممتلئ، أو قائمة حظر المزود). يتم استبعاد جهات الاتصال هذه تلقائياً من الإرسال المستقبلي لحماية سمعة الإرسال. نظامنا يتزامن مع قائمة الحظر الخاصة بمزود الخدمة.
 
-## What happens next
+## ماذا يحدث بعد ذلك؟
 
-- [Upload a CSV](/en/contacts/upload) to add contacts.
-- [Create a campaign](/en/campaigns/create) and select your audience by tags or all contacts.
-- Check [plan limits](/en/billing/overview) for max contacts per plan.
+- [رفع ملف CSV](/ar/contacts/upload) لإضافة جهات الاتصال.
+- [إنشاء حملة](/ar/campaigns/create) واختيار جمهورك عن طريق الوسوم أو جميع جهات الاتصال.
+- تحقق من [حدود الباقة](/ar/billing/overview) لمعرفة الحد الأقصى لجهات الاتصال في كل باقة.
 
-## Related docs
+## مستندات ذات صلة
 
 <CardGroup cols={2}>
-  <Card title="Upload contacts" icon="file-upload" href="/en/contacts/upload">
-    CSV format, validation, and tag assignment.
+  <Card title="رفع جهات الاتصال" icon="file-upload" href="/ar/contacts/upload">
+    تنسيق CSV، التحقق من الصحة، وتعيين الوسوم.
   </Card>
-  <Card title="Create campaigns" icon="paper-plane" href="/en/campaigns/create">
-    Choose audience and launch your first campaign.
+  <Card title="إنشاء الحملات" icon="paper-plane" href="/ar/campaigns/create">
+    اختيار الجمهور وإطلاق أول حملة لك.
   </Card>
 </CardGroup>

@@ -1,76 +1,76 @@
 ---
-title: "Team settings"
-description: "Invite members, manage roles, and handle invitations"
+title: "Team-Einstellungen"
+description: "Mitglieder einladen, Rollen verwalten und Einladungen bearbeiten"
 ---
 
-## What this page helps you do
+## Was diese Seite Ihnen bietet
 
-Add team members to your Nudgen workspace, assign roles, and manage pending or expired invitations. You'll understand roles and permissions so you can collaborate safely.
+Fügen Sie Teammitglieder zu Ihrem Nudgen-Workspace hinzu, weisen Sie Rollen zu und verwalten Sie ausstehende oder abgelaufene Einladungen. Verstehen Sie Rollen und Berechtigungen, um sicher zusammenzuarbeiten.
 
-## Before you start
+## Bevor Sie beginnen
 
-- Owner or admin access
-- Email addresses of people you want to invite
+- Zugriff als Inhaber oder Administrator erforderlich
+- E-Mail-Adressen der Personen, die Sie einladen möchten
 
-## Roles and permissions
+## Rollen und Berechtigungen
 
-| Role   | Can do                                                                 |
-| ------ | ---------------------------------------------------------------------- |
-| **Owner** | Full access. Manage billing, team, and workspace. Cannot be removed. |
-| **Admin** | Invite and manage members. Edit campaigns, contacts, brand. No billing. |
-| **Member** | Create and edit campaigns, upload contacts, use brand configs. Limited team access. |
+| Rolle   | Berechtigungen                                                         |
+| :------ | :--------------------------------------------------------------------- |
+| **Inhaber (Owner)** | Voller Zugriff. Verwaltung von Abrechnung, Team und Workspace. Kann nicht entfernt werden. |
+| **Administrator (Admin)** | Mitglieder einladen und verwalten. Kampagnen, Kontakte, Brand bearbeiten. Keine Abrechnung. |
+| **Mitglied (Member)** | Kampagnen erstellen/bearbeiten, Kontakte hochladen, Brand-Konfigurationen nutzen. Eingeschränkter Team-Zugriff. |
 
 <Note>
-Only owners and admins can invite new members or change roles. Members can view the team list but cannot modify it.
+Nur Inhaber und Administratoren können neue Mitglieder einladen oder Rollen ändern. Mitglieder können die Teamliste einsehen, aber nicht bearbeiten.
 </Note>
 
-## Invite a team member
+## Ein Teammitglied einladen
 
-1. Go to **Settings** → **Team**.
-2. Click **Invite member**.
-3. Enter email and select role (**Admin** or **Member**).
-4. Send. The invitee receives an email with a link to accept.
+1. Gehen Sie zu **Einstellungen** → **Team**.
+2. Klicken Sie auf **Invite member** (Mitglied einladen).
+3. Geben Sie die E-Mail-Adresse ein und wählen Sie die Rolle (**Admin** oder **Member**).
+4. Senden. Der Eingeladene erhält eine E-Mail mit einem Link zur Bestätigung.
 
-## Invitation statuses
+## Status der Einladung
 
-| Status     | Meaning                                                         |
-| ---------- | --------------------------------------------------------------- |
-| **Pending**  | Invitation sent. Recipient can accept via the link in the email. |
-| **Accepted** | Recipient joined. They appear in the team list with their role. |
-| **Expired**  | Invitation link timed out. Resend if needed.                   |
-| **Cancelled** | Invitation was cancelled before acceptance.                    |
+| Status     | Bedeutung                                                         |
+| :--------- | :---------------------------------------------------------------- |
+| **Ausstehend (Pending)** | Einladung gesendet. Empfänger kann über den Link in der E-Mail annehmen. |
+| **Angenommen (Accepted)** | Empfänger ist beigetreten. Er erscheint in der Teamliste mit seiner Rolle. |
+| **Abgelaufen (Expired)** | Der Einladungslink ist zeitlich abgelaufen. Bei Bedarf erneut senden. |
+| **Abgebrochen (Cancelled)** | Die Einladung wurde vor der Annahme durch das Team storniert. |
 
-## Change or remove a member
+## Ein Mitglied ändern oder entfernen
 
-- **Change role:** Open the member, select a new role, save. Only owners and admins can change roles.
-- **Remove member:** Use **Remove** and confirm. They lose access immediately. Their past actions remain in logs.
+- **Rolle ändern:** Öffnen Sie das Mitglied, wählen Sie eine neue Rolle und speichern Sie. Nur Inhaber und Administratoren können Rollen ändern.
+- **Mitglied entfernen:** Verwenden Sie **Remove** (Entfernen) und bestätigen Sie. Der Zugriff wird sofort entzogen. Vergangene Aktionen bleiben in den Protokollen erhalten.
 
-## What happens next
+## Nächste Schritte
 
-- New members can [upload contacts](/en/contacts/upload), [create campaigns](/en/campaigns/create), and use shared brand configs.
-- Owners retain control over billing and critical settings.
+- Neue Mitglieder können [Kontakte hochladen](/de/contacts/upload), [Kampagnen erstellen](/de/campaigns/create) und geteilte Markenkonfigurationen nutzen.
+- Inhaber behalten die Kontrolle über die Abrechnung und kritische Einstellungen.
 
-## Troubleshooting
+## Fehlerbehebung
 
 <AccordionGroup>
-  <Accordion title="Invitee didn't receive the email">
-    Ask them to check spam. Resend the invitation from the team page. Ensure the email address is correct.
+  <Accordion title="Eingeladene Person hat keine E-Mail erhalten">
+    Bitten Sie sie, den Spam-Ordner zu prüfen. Senden Sie die Einladung von der Team-Seite aus erneut. Stellen Sie sicher, dass die E-Mail-Adresse korrekt ist.
   </Accordion>
-  <Accordion title="Invitation expired">
-    Invitations expire after a set period. Create a new invitation with the same email.
+  <Accordion title="Einladung abgelaufen">
+    Einladungen laufen nach einem bestimmten Zeitraum ab. Erstellen Sie eine neue Einladung für dieselbe E-Mail-Adresse.
   </Accordion>
-  <Accordion title="Can a member see all contacts?">
-    Yes. Team members with access share the same workspace and contact list. Use tags and campaigns to organize work.
+  <Accordion title="Kann ein normales Mitglied alle Kontakte sehen?">
+    Ja. Teammitglieder mit Zugriff teilen sich denselben Workspace und dieselbe Kontaktliste. Nutzen Sie Tags und Kampagnen, um die Arbeit zu organisieren.
   </Accordion>
 </AccordionGroup>
 
-## Related docs
+## Verwandte Dokumente
 
 <CardGroup cols={2}>
-  <Card title="Account settings" icon="gear" href="/en/settings/account">
-    Overview of all settings.
+  <Card title="Konto-Einstellungen" icon="gear" href="/de/settings/account">
+    Übersicht über alle Einstellungen.
   </Card>
-  <Card title="Signatures" icon="pen-fancy" href="/en/settings/signatures">
-    Email signatures for campaigns.
+  <Card title="Signaturen" icon="pen-fancy" href="/de/settings/signatures">
+    E-Mail-Signaturen für Kampagnen.
   </Card>
 </CardGroup>

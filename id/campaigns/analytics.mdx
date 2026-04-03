@@ -1,77 +1,77 @@
 ---
-title: "Campaign analytics"
-description: "Metrics, delivery rates, time-series charts, and recipient activity"
+title: "Analitik Kampanye"
+description: "Metrik, tingkat pengiriman, bagan deret waktu (time-series), dan aktivitas penerima"
 ---
 
-## What this page helps you do
+## Apa yang dapat Anda lakukan di halaman ini
 
-Understand how your campaigns perform: how many emails were sent, delivered, opened, and clicked. You'll also see delivery success and failure rates, plus per-recipient activity.
+Memahami kinerja kampanye Anda: berapa banyak email yang dikirim, sampai, dibuka, dan diklik. Anda juga akan melihat tingkat keberhasilan dan kegagalan pengiriman, serta aktivitas per penerima.
 
-## Before you start
+## Sebelum memulai
 
-- At least one campaign that has been sent (or is sending)
-- Access to the campaign detail page
+- Memiliki setidaknya satu kampanye yang telah dikirim (atau sedang mengirim)
+- Akses ke halaman detail kampanye
 
-## Metric cards
+## Kartu metrik
 
-On the campaign detail page, you'll see:
+Di halaman detail kampanye, Anda akan melihat:
 
-| Metric            | Meaning                                                                 |
+| Metrik            | Arti                                                                 |
 | ----------------- | ----------------------------------------------------------------------- |
-| **Emails Sent**   | Total send attempts (including API or network failures).                |
-| **Emails Delivered** | Emails successfully accepted by the recipient's mail server.        |
-| **Total Opens**   | Number of times the email was opened (tracking pixel).                  |
-| **Total Clicks**  | Number of times links were clicked.                                    |
-| **CTR**           | Click-through rate: (Total Clicks / Total Sent) × 100.                 |
-| **Spam Complaints** | Number of times recipients marked the email as spam.                 |
-| **Soft Bounce**   | Temporary delivery issues (mailbox full, throttling, transient errors).  |
-| **Hard Bounce**   | Permanent delivery failures (invalid address, blocked domain).          |
+| **Email Terkirim** | Total upaya pengiriman (termasuk kegagalan API atau jaringan).       |
+| **Email Sampai**  | Email yang berhasil diterima oleh server email penerima.           |
+| **Total Dibuka**  | Jumlah berapa kali email dibuka (dilacak melalui tracking pixel).    |
+| **Total Diklik**  | Jumlah berapa kali tautan dalam email diklik.                         |
+| **CTR**           | Rasio Klik-Tayang (Click-through rate): (Total Klik / Total Terkirim) × 100. |
+| **Keluhan Spam**  | Jumlah berapa kali penerima menandai email sebagai spam.             |
+| **Soft Bounce**   | Masalah pengiriman sementara (kotak surat penuh, pembatasan kecepatan, kesalahan transien). |
+| **Hard Bounce**   | Kegagalan pengiriman permanen (alamat tidak valid, domain diblokir). |
 
-## Delivery success and failure
+## Keberhasilan dan kegagalan pengiriman
 
-- **Success rate** = (delivered / sent) × 100
-- **Failure rate** = (bounced + failed) / sent × 100
+- **Tingkat keberhasilan** = (sampai / terkirim) × 100
+- **Tingkat kegagalan** = (bounced + gagal) / terkirim × 100
 
-A high failure rate can hurt your sender reputation. Remove or correct bounced addresses and avoid invalid contacts.
+Tingkat kegagalan yang tinggi dapat merusak reputasi pengirim Anda. Hapus atau koreksi alamat yang terpental (bounce) dan hindari kontak yang tidak valid.
 
-## Time-series chart
+## Bagan deret waktu (Time-series)
 
-The performance chart shows metrics over time (by day, week, or month). Use the granularity toggle to switch views. Toggle individual metrics on/off to focus on opens, clicks, or delivery.
+Bagan kinerja menunjukkan metrik dari waktu ke waktu (berdasarkan hari, minggu, atau bulan). Gunakan tombol beralih granularitas untuk mengubah tampilan. Aktifkan/nonaktifkan metrik individual untuk fokus pada jumlah dibuka, klik, atau pengiriman.
 
-## Date range picker
+## Pemilih rentang tanggal
 
-Filter metrics and the chart by date range. Default is usually the full campaign period. Adjust to compare specific weeks or focus on recent activity.
+Filter metrik dan bagan berdasarkan rentang tanggal. Defaultnya biasanya adalah periode penuh kampanye. Sesuaikan untuk membandingkan minggu tertentu atau fokus pada aktivitas terbaru.
 
-## Recipient activity table
+## Tabel aktivitas penerima
 
-See per-contact status:
+Lihat status per kontak:
 
-- **Contact** — Email (masked unless revealed) and name
-- **Status** — Latest event: sent, delivered, opened, clicked, bounced
-- **Sent at** — When the email was sent
-- **Delivered at** — When delivery was confirmed (if available)
-- **Opened at** — First open timestamp
-- **Clicked at** — First click timestamp
+- **Kontak** — Email (disamarkan kecuali diungkapkan) dan nama
+- **Status** — Aktivitas terbaru: terkirim, sampai, dibuka, diklik, terpental (bounce)
+- **Dikirim pada** — Kapan email dikirim
+- **Sampai pada** — Kapan pengiriman dikonfirmasi (jika tersedia)
+- **Dibuka pada** — Stempel waktu pertama kali dibuka
+- **Diklik pada** — Stempel waktu pertama kali diklik
 
-Use this to:
+Gunakan tabel ini untuk:
 
-- Find engaged users for follow-up
-- Identify bounces for list cleanup
-- Debug delivery issues for specific addresses
+- Menemukan pengguna yang terlibat (engaged) untuk tindak lanjut
+- Mengidentifikasi alamat yang terpental untuk pembersihan daftar
+- Mendeteksi masalah pengiriman untuk alamat tertentu
 
-## What happens next
+## Langkah selanjutnya
 
-- Use insights to refine future campaigns (subject lines, tone, timing).
-- Remove bounced contacts from your list to protect deliverability.
-- Check [billing](/en/billing/overview) for email send limits if you're approaching your plan cap.
+- Gunakan wawasan ini untuk menyempurnakan kampanye di masa depan (baris subjek, nada, waktu pengiriman).
+- Hapus kontak yang terpental dari daftar Anda untuk melindungi tingkat keterkiriman.
+- Periksa [penagihan](/id/billing/overview) untuk batas pengiriman email jika Anda mendekati kuota paket.
 
-## Related docs
+## Dokumen terkait
 
 <CardGroup cols={2}>
-  <Card title="Manage campaigns" icon="pen-to-square" href="/en/campaigns/manage">
-    Edit, send, schedule, stop.
+  <Card title="Kelola kampanye" icon="pen-to-square" href="/id/campaigns/manage">
+    Edit, kirim, jadwalkan, hentikan.
   </Card>
-  <Card title="Billing & usage" icon="credit-card" href="/en/billing/overview">
-    Plan limits and usage meters.
+  <Card title="Penagihan & penggunaan" icon="credit-card" href="/id/billing/overview">
+    Batas paket dan meteran penggunaan.
   </Card>
 </CardGroup>

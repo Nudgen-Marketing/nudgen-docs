@@ -1,0 +1,52 @@
+---
+title: "Penggunaan oleh Agen AI"
+description: "Bagaimana cara menggunakan Nudgen CLI sebagai antarmuka untuk agen AI."
+---
+
+## Ringkasan
+
+Nudgen CLI dirancang dengan pendekatan **AI-First**. Sambil menawarkan TUI yang indah untuk manusia, setiap perintah juga dioptimalkan untuk komunikasi antar mesin.
+
+### Pola Agentic
+
+Saat agen AI (seperti Claude, GPT, atau agen otomatisasi khusus) menggunakan CLI, mereka harus mengikuti pola berikut:
+
+1. **Output JSON**: Tambahkan `--json` ke setiap perintah untuk mendapatkan data yang dapat ditafsirkan mesin.
+2. **Kesadaran Konteks**: Selalu verifikasi konteks tim sebelum melakukan operasi.
+3. **Non-interaktif**: Gunakan flag yang sesuai untuk melewati permintaan TUI interaktif.
+
+## Otomatisasi JSON
+
+Setiap perintah daftar dan status mendukung flag `--json`. Ini mengembalikan struktur JSON yang bersih, bukan tabel yang diformat.
+
+```bash
+# Ambil semua kampanye dalam JSON
+nudgen campaigns list --json
+
+# Ambil kontak tim saat ini
+nudgen contacts list --json
+```
+
+## Alur Kerja Multi-Tenant untuk Agen
+
+Karena Nudgen mendukung banyak tim, agen harus memastikan mereka beroperasi pada tim yang benar sebelum membuat atau memperbarui sumber daya.
+
+**Alur Kerja yang Direkomendasikan:**
+
+1. **Periksa Tim Saat Ini**:
+   ```bash
+   nudgen teams current --json
+   ```
+2. **Ganti Tim (Jika Diperlukan)**:
+   Jika `id` dari langkah sebelumnya tidak cocok dengan tim target:
+   ```bash
+   nudgen teams switch <target-team-id>
+   ```
+3. **Jalankan Perintah Data**:
+   Lanjutkan dengan perintah `campaigns`, `contacts`, atau `brand`.
+
+## Praktik Terbaik untuk Pengembang Agen
+
+- **Penanganan Kesalahan**: Pantau kode keluar. Kode keluar non-nol menunjukkan kesalahan (validasi, jaringan, atau autentikasi).
+- **Pembatasan Laju (Rate Limiting)**: CLI berkomunikasi dengan API Nudgen. Pastikan skrip agen Anda menangani batas laju dengan anggun.
+- **Mode Senyap**: Jika perintah tidak menawarkan flag khusus untuk setiap prompt, pastikan agen Anda dapat menangani aliran stdout/stderr tanpa terjebak dalam perulangan TUI.

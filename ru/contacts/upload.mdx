@@ -1,80 +1,80 @@
 ---
-title: "Upload contacts"
-description: "CSV format, validation rules, and tag assignment for contact uploads"
+title: "Загрузка контактов"
+description: "Формат CSV, правила проверки и назначение тегов при загрузке контактов"
 ---
 
-## What this page helps you do
+## Что вы узнаете на этой странице
 
-Upload a CSV of contacts so you can run campaigns. You'll learn the required columns, validation rules, size limits, and how to add tags during upload.
+Вы научитесь загружать CSV-файл с контактами для запуска кампаний. Вы узнаете об обязательных колонках, правилах проверки, ограничениях по размеру и о том, как добавлять теги во время загрузки.
 
-## Before you start
+## Перед началом работы
 
-- A Nudgen account
-- A CSV file with at least an `email` column
-- Contacts must be under your plan limit (see [billing](/en/billing/overview))
+- Аккаунт Nudgen.
+- CSV-файл, содержащий как минимум колонку `email`.
+- Количество контактов не должно превышать лимит вашего тарифа (см. [Биллинг](/ru/billing/overview)).
 
-## Step 1: Prepare your CSV
+## Шаг 1: Подготовка CSV-файла
 
-Your CSV must include:
+Ваш CSV должен содержать следующие колонки:
 
-| Column   | Required | Description                          |
-| -------- | -------- | ------------------------------------ |
-| `email`  | Yes      | Valid email address. Must be unique. |
-| `name`   | No       | Display name for personalization.   |
+| Колонка   | Обязательно | Описание                          |
+| -------- | ----------- | ------------------------------------ |
+| `email`  | Да          | Действующий адрес электронной почты. Должен быть уникальным. |
+| `name`   | Нет         | Отображаемое имя для персонализации. |
 
-You can add other columns (e.g. `company`, `segment`). They are stored encrypted and can be used in tags or segmentation logic.
+Вы можете добавить и другие колонки (например: `company`, `segment`). Они будут храниться в зашифрованном виде и могут использоваться в тегах или логике сегментации.
 
-## Step 2: Validate format
+## Шаг 2: Проверка формата
 
-- **Encoding:** UTF-8 recommended.
-- **Delimiter:** Comma (`,`).
-- **Header row:** First row must contain column names. `email` and `name` are recognized case-insensitively.
-- **Duplicate emails:** Duplicates in the same file are merged. Existing contacts with the same email are updated.
+- **Кодировка:** Рекомендуется UTF-8.
+- **Разделитель:** Запятая (`,`).
+- **Строка заголовка:** Первая строка должна содержать названия колонок. Названия `email` и `name` распознаются без учета регистра.
+- **Дубликаты email:** Дубликаты в одном файле объединяются. Существующие контакты с тем же адресом электронной почты будут обновлены.
 
 <Warning>
-Invalid emails (malformed, missing `@`, etc.) are skipped. Check the upload summary to see how many rows were imported vs skipped.
+Некорректные адреса (с ошибками, без символа `@` и т.д.) будут пропущены. Проверьте сводку после загрузки, чтобы увидеть, сколько строк было импортировано, а сколько пропущено.
 </Warning>
 
-## Step 3: Upload in Nudgen
+## Шаг 3: Загрузка в Nudgen
 
-1. Go to **Contacts** in the sidebar.
-2. Click **Upload CSV**.
-3. Select your file.
-4. Choose tags to apply to all uploaded contacts (e.g. `inactive`, `re-engage`).
-5. Review the preview and confirm.
+1. Перейдите в раздел **Контакты (Contacts)** в боковой панели.
+2. Нажмите **Upload CSV (Загрузить CSV)**.
+3. Выберите файл.
+4. Выберите теги, которые нужно применить ко всем загружаемым контактам (например: `inactive`, `re-engage`).
+5. Просмотрите превью и подтвердите загрузку.
 
-## Size limits
+## Ограничения
 
-- **File size:** Follow the on-screen limit (typically a few MB). Large lists may take longer to process.
-- **Contacts per workspace:** Depends on your plan. The app enforces the limit at upload time; if you exceed it, the upload is rejected. See [Billing](/en/billing/overview) and the live [pricing page](https://nudgen.net/pricing) for current limits.
+- **Размер файла:** Следуйте указаниям на экране (обычно несколько МБ). Обработка больших списков может занять больше времени.
+- **Контакты в рабочем пространстве:** Зависит от вашего тарифного плана. Приложение проверяет лимит в момент загрузки; если он будет превышен, загрузка будет отклонена. Актуальные лимиты можно найти на странице [Биллинга](/ru/billing/overview) и в [таблице цен](https://nudgen.net/pricing).
 
-## What happens next
+## Что дальше
 
-- Contacts appear in the list with masked emails (`j***@g***.com`).
-- Use tags to segment audiences in [campaigns](/en/campaigns/create).
-- You can [reveal](/en/contacts/overview) individual contacts as the account owner.
+- Контакты появятся в списке со скрытыми email-адресами (`j***@g***.com`).
+- Используйте теги для сегментации аудитории в [кампаниях](/ru/campaigns/create).
+- Как владелец аккаунта, вы можете [отобразить (reveal)](/ru/contacts/overview) данные отдельных контактов.
 
-## Troubleshooting
+## Устранение неполадок
 
 <AccordionGroup>
-  <Accordion title="Some rows were skipped">
-    Check that each row has a valid email in the `email` column. Empty rows or malformed addresses are skipped.
+  <Accordion title="Некоторые строки были пропущены">
+    Убедитесь, что в каждой строке в колонке `email` указан корректный адрес. Пустые строки или некорректные адреса пропускаются.
   </Accordion>
-  <Accordion title="Upload failed: plan limit exceeded">
-    Your contact count would exceed your plan limit. Upgrade your plan or remove existing contacts.
+  <Accordion title="Ошибка загрузки: превышен лимит тарифа">
+    Количество контактов превысит доступный лимит. Перейдите на более высокий тариф или удалите существующие контакты.
   </Accordion>
-  <Accordion title="Column not recognized">
-    Ensure the header row includes `email` (or `Email`). Other columns are optional.
+  <Accordion title="Колонка не распознана">
+    Убедитесь, что в строке заголовка есть колонка `email` (или `Email`). Остальные колонки необязательны.
   </Accordion>
 </AccordionGroup>
 
-## Related docs
+## Связанные документы
 
 <CardGroup cols={2}>
-  <Card title="Contacts overview" icon="users" href="/en/contacts/overview">
-    Encryption, masking, and segmentation.
+  <Card title="Обзор контактов" icon="users" href="/ru/contacts/overview">
+    Шифрование, маскирование и сегментация.
   </Card>
-  <Card title="Create campaigns" icon="paper-plane" href="/en/campaigns/create">
-    Select your audience and launch a campaign.
+  <Card title="Создание кампаний" icon="paper-plane" href="/ru/campaigns/create">
+    Выберите аудиторию и запустите кампанию.
   </Card>
 </CardGroup>

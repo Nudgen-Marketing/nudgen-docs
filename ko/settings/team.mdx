@@ -1,76 +1,71 @@
 ---
-title: "Team settings"
-description: "Invite members, manage roles, and handle invitations"
+title: "팀 설정"
+description: "멤버 초대, 역할 관리 및 초대 상태 확인"
 ---
 
-## What this page helps you do
+## 이 페이지의 도움말
+Nudgen 워크스페이스에 팀 멤버를 추가하고, 역할을 부여하며, 대기 중이거나 만료된 초대를 관리하는 방법을 설명합니다. 역할을 이해함으로써 안전하고 효율적인 협업 환경을 구축할 수 있습니다.
 
-Add team members to your Nudgen workspace, assign roles, and manage pending or expired invitations. You'll understand roles and permissions so you can collaborate safely.
+## 시작하기 전에
+- 소유자(Owner) 또는 관리자(Admin) 권한
+- 초대하려는 멤버의 이메일 주소
 
-## Before you start
+## 역할 및 권한
 
-- Owner or admin access
-- Email addresses of people you want to invite
-
-## Roles and permissions
-
-| Role   | Can do                                                                 |
-| ------ | ---------------------------------------------------------------------- |
-| **Owner** | Full access. Manage billing, team, and workspace. Cannot be removed. |
-| **Admin** | Invite and manage members. Edit campaigns, contacts, brand. No billing. |
-| **Member** | Create and edit campaigns, upload contacts, use brand configs. Limited team access. |
+| 역할 | 권한 |
+| :--- | :--- |
+| **Owner (소유자)** | 모든 권한을 가집니다. 결제, 팀 및 워크스페이스를 관리합니다. 삭제할 수 없습니다. |
+| **Admin (관리자)** | 멤버 초대 및 관리, 캠페인/연락처/브랜드 편집이 가능합니다. 결제 관리는 불가능합니다. |
+| **Member (멤버)** | 캠페인 생성 및 편집, 연락처 업로드, 브랜드 설정 사용이 가능합니다. 팀 관리 권한은 제한됩니다. |
 
 <Note>
-Only owners and admins can invite new members or change roles. Members can view the team list but cannot modify it.
+소유자와 관리자만 새로운 멤버를 초대하거나 역할을 변경할 수 있습니다. 멤버는 팀 목록을 볼 수는 있지만 수정할 수는 없습니다.
 </Note>
 
-## Invite a team member
+## 팀 멤버 초대하기
+1. **설정(Settings)** → **팀(Team)** 메뉴로 이동합니다.
+2. **멤버 초대(Invite member)** 버튼을 클릭합니다.
+3. 이메일 주소를 입력하고 역할(**Admin** 또는 **Member**)을 선택합니다.
+4. 발송합니다. 초대받은 사람은 이메일의 수락 링크를 통해 가입할 수 있습니다.
 
-1. Go to **Settings** → **Team**.
-2. Click **Invite member**.
-3. Enter email and select role (**Admin** or **Member**).
-4. Send. The invitee receives an email with a link to accept.
+## 초대 상태
 
-## Invitation statuses
+| 상태 | 의미 |
+| :--- | :--- |
+| **Pending (대기 중)** | 초대가 발송되었습니다. 수신자가 이메일 내 링크를 통해 수락할 수 있습니다. |
+| **Accepted (수락됨)** | 수신자가 가입했습니다. 해당 역할로 팀 목록에 표시됩니다. |
+| **Expired (만료됨)** | 초대 링크가 시간이 초과되어 만료되었습니다. 필요한 경우 다시 발송하세요. |
+| **Cancelled (취소됨)** | 수락하기 전에 초대가 취소되었습니다. |
 
-| Status     | Meaning                                                         |
-| ---------- | --------------------------------------------------------------- |
-| **Pending**  | Invitation sent. Recipient can accept via the link in the email. |
-| **Accepted** | Recipient joined. They appear in the team list with their role. |
-| **Expired**  | Invitation link timed out. Resend if needed.                   |
-| **Cancelled** | Invitation was cancelled before acceptance.                    |
+## 멤버 변경 또는 삭제
+- **역할 변경:** 멤버를 선택하고 새로운 역할을 고른 후 저장하세요. 소유자와 관리자만 변경 가능합니다.
+- **멤버 삭제:** **삭제(Remove)**를 클릭하고 확인하세요. 해당 멤버의 접근 권한은 즉시 상실됩니다. 과거의 활동 기록은 로그에 유지됩니다.
 
-## Change or remove a member
+## 다음 단계
+- 새로운 멤버는 [연락처 업로드](/ko/contacts/upload) 및 [캠페인 생성](/ko/campaigns/create)이 가능하며 공유된 브랜드 설정을 사용할 수 있습니다.
+- 소유자는 결제 및 주요 설정에 대한 최종 제어권을 유지합니다.
 
-- **Change role:** Open the member, select a new role, save. Only owners and admins can change roles.
-- **Remove member:** Use **Remove** and confirm. They lose access immediately. Their past actions remain in logs.
-
-## What happens next
-
-- New members can [upload contacts](/en/contacts/upload), [create campaigns](/en/campaigns/create), and use shared brand configs.
-- Owners retain control over billing and critical settings.
-
-## Troubleshooting
+## 문제 해결
 
 <AccordionGroup>
-  <Accordion title="Invitee didn't receive the email">
-    Ask them to check spam. Resend the invitation from the team page. Ensure the email address is correct.
+  <Accordion title="초대 이메일을 받지 못했습니다">
+    스팸함을 확인해 보라고 요청하세요. 팀 페이지에서 초대를 다시 발송해 보세요. 이메일 주소가 정확한지 확인하세요.
   </Accordion>
-  <Accordion title="Invitation expired">
-    Invitations expire after a set period. Create a new invitation with the same email.
+  <Accordion title="초대가 만료되었습니다">
+    초대 링크는 일정 기간이 지나면 만료됩니다. 동일한 이메일로 새 초대를 생성하세요.
   </Accordion>
-  <Accordion title="Can a member see all contacts?">
-    Yes. Team members with access share the same workspace and contact list. Use tags and campaigns to organize work.
+  <Accordion title="멤버가 모든 연락처를 볼 수 있나요?">
+    네. 같은 워크스페이스의 팀 멤버는 연락처 목록을 공유합니다. 태그와 캠페인을 사용하여 작업을 체계적으로 관리하세요.
   </Accordion>
 </AccordionGroup>
 
-## Related docs
+## 관련 문서
 
 <CardGroup cols={2}>
-  <Card title="Account settings" icon="gear" href="/en/settings/account">
-    Overview of all settings.
+  <Card title="계정 설정" icon="gear" href="/ko/settings/account">
+    모든 설정 메뉴 개요.
   </Card>
-  <Card title="Signatures" icon="pen-fancy" href="/en/settings/signatures">
-    Email signatures for campaigns.
+  <Card title="서명 설정" icon="pen-fancy" href="/ko/settings/signatures">
+    캠페인 이메일용 서명 관리.
   </Card>
 </CardGroup>

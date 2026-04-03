@@ -1,0 +1,52 @@
+---
+title: "AI Agent Usage"
+description: "How to use Nudgen CLI as an interface for AI Agents."
+---
+
+## Overview
+
+The Nudgen CLI is designed with an **AI-First** approach. While it provides a beautiful TUI for humans, every command is also optimized for machine-to-machine communication.
+
+### The Agentic Pattern
+
+When an AI agent (like a Claude, GPT, or specialized automation agent) uses the CLI, it should follow these patterns:
+
+1. **JSON Output**: Append `--json` to every command to get machine-parseable data.
+2. **Context Awareness**: Always verify the team context before performing operations.
+3. **Non-Interactive**: Use flags to bypass interactive TUI prompts.
+
+## JSON Automation
+
+Every list and status command supports a `--json` flag. This returns a clean JSON structure instead of a formatted table.
+
+```bash
+# Get all campaigns as JSON
+nudgen campaigns list --json
+
+# Get contacts in current team
+nudgen contacts list --json
+```
+
+## Multi-tenant Workflow for Agents
+
+Since Nudgen supports multiple teams, an agent must ensure it is operating on the correct team before creating or updating resources.
+
+**Recommended Workflow:**
+
+1. **Check Current Team**:
+   ```bash
+   nudgen teams current --json
+   ```
+2. **Switch Team (if needed)**:
+   If the `id` from the previous step doesn't match the target team, switch:
+   ```bash
+   nudgen teams switch <target-team-id>
+   ```
+3. **Execute Data Command**:
+   Proceed with `campaigns`, `contacts`, or `brand` commands.
+
+## Best Practices for Agent Developers
+
+- **Error Handling**: Monitor the exit code of CLI commands. A non-zero exit code indicates an error (validation, network, or auth).
+- **Rate Limiting**: The CLI communicates with the Nudgen API. Ensure your agent scripts handle potential rate limits gracefully.
+- **Silent Mode**: If a command doesn't support a specific flag for every prompt, ensure your agent can handle stdout/stderr streams without getting stuck in a TUI loop.

@@ -1,60 +1,60 @@
 ---
-title: "Sending and deliverability"
-description: "Emails not sending, bounces, and spam"
+title: "Gönderim ve teslim edilebilirlik"
+description: "E-postalar gönderilmiyor, bounce'lar ve spam"
 ---
 
-## Emails not sending
+## E-postalar gönderilmiyor
 
-**Campaign stuck or “sending” for a long time**
+**Kampanya takıldı veya uzun süredir "gönderiliyor" durumunda**
 
-- Sends are queued and processed in batches. Large campaigns can take time. Refresh the dashboard; if status stays “Sending” for hours, contact support.
-- Check that you haven’t hit your **daily or monthly email limit**. The app blocks new sends when you’re over cap. See [Billing](/en/billing/overview) and [Troubleshooting: billing](/en/troubleshooting/billing).
+- Gönderimler kuyruğa alınır ve partiler halinde işlenir. Büyük kampanyalar zaman alabilir. Paneli yenileyin; durum saatlerce "Gönderiliyor (Sending)" olarak kalırsa destekle iletişime geçin.
+- **Günlük veya aylık e-posta limitinize** ulaşmadığınızdan emin olun. Limit aşıldığında uygulama yeni gönderimleri engeller. Bkz. [Faturalandırma](/tr/billing/overview) ve [Sorun Giderme: faturalandırma](/tr/troubleshooting/billing).
 
-**Test email didn’t arrive**
+**Test e-postası gelmedi**
 
-- Check spam/junk. Add the sender to your contacts or safe senders.
-- Confirm the **account email** (where tests are sent) is correct in your profile.
-- Wait a few minutes; delivery can be delayed. Try again or send to a different address.
+- Spam/Gereksiz klasörünü kontrol edin. Göndereni kişilerinize veya güvenli gönderenlere ekleyin.
+- Hesabınızın **e-posta adresinin** (testlerin gönderildiği yer) profilinizde doğru olduğunu onaylayın.
+- Birkaç dakika bekleyin; teslimat gecikebilir. Tekrar deneyin veya farklı bir adrese gönderin.
 
-**“No active contacts” or reach is zero**
+**"Aktif kişi yok" veya erişim sıfır**
 
-- Upload or add at least one contact and ensure they’re **active** (not unsubscribed or suppressed). See [Contacts overview](/en/contacts/overview) and [Contact lifecycle](/en/contacts/lifecycle).
-- If you chose “By tags,” ensure some contacts have the selected tags.
+- En az bir kişi yükleyin veya ekleyin ve onların **aktif** olduğundan (abonelikten ayrılmamış veya engellenmemiş) emin olun. Bkz. [Kişilere genel bakış](/tr/contacts/overview) ve [Kişi yaşam döngüsü](/tr/contacts/lifecycle).
+- "Etiketlere göre (By tags)" seçeneğini seçtiyseniz, bazı kişilerin seçilen etiketlere sahip olduğundan emin olun.
 
-## Bounces and complaints
+## Bounce'lar (Geri Dönenler) ve Şikayetler
 
-**High bounce rate**
+**Yüksek bounce oranı**
 
-- **Hard bounces** (invalid address, domain doesn’t exist) are automatically suppressed. Remove or fix bad addresses in your list; avoid bought or scraped lists.
-- **Soft bounces** (mailbox full, server down) may be retried by the provider. Repeated soft bounces can lead to suppression. Clean your list and avoid role addresses (e.g. info@) unless they’re valid inboxes.
-- Keep bounce rate low (e.g. under 2%) to protect sender reputation. Use the [Dashboard](/en/dashboard/overview) and [Campaign analytics](/en/campaigns/analytics) to monitor.
+- **Hard bounce**'lar (geçersiz adres, alan adı mevcut değil) otomatik olarak engellenir. Listenizdeki kötü adresleri kaldırın veya düzeltin; satın alınmış veya kazınmış (scraped) listelerden kaçının.
+- **Soft bounce**'lar (posta kutusu dolu, sunucu kapalı) sağlayıcı tarafından yeniden denenebilir. Tekrarlanan hatalar engellemeye yol açabilir. Listenizi temizleyin ve geçerli olduklarından emin olmadıkça genel (info@ gibi) adreslerden kaçının.
+- Gönderici itibarını korumak için bounce oranını düşük tutun (örneğin %2'nin altında). İzlemek için [Paneli (Dashboard)](/tr/dashboard/overview) ve [Kampanya analizlerini](/tr/campaigns/analytics) kullanın.
 
-**Spam complaints**
+**Spam şikayetleri**
 
-- Recipients marked the email as spam. We suppress complainers and they won’t receive future campaigns. Too many complaints hurt reputation.
-- Improve content: clear subject lines, relevant copy, obvious unsubscribe link. Don’t send to people who didn’t opt in. See [Deliverability basics](/en/concepts/deliverability-basics).
+- Alıcılar e-postayı spam olarak işaretledi. Şikayetçileri engelliyoruz ve gelecekteki kampanyaları almayacaklar. Çok fazla şikayet itibara zarar verir.
+- İçeriği iyileştirin: net konu satırları, ilgili metinler, belirgin abonelikten ayrılma bağlantısı. İzni (opt-in) olmayan kişilere göndermeyin. Bkz. [Teslim edilebilirlik temelleri](/tr/concepts/deliverability-basics).
 
-**Unsubscribes**
+**Abonelikten Ayrılmalar (Unsubscribes)**
 
-- Unsubscribe links are required and honored. Unsubscribed contacts are excluded from future sends. This is normal and keeps you compliant.
+- Abonelikten ayrılma bağlantıları zorunludur ve bunlara saygı duyulur. Abonelikten ayrılan kişiler gelecekteki gönderimlerden hariç tutulur. Bu normaldir ve sizi uyumlu tutar.
 
-## Tracking and metrics
+## Takip ve metrikler
 
-**Opens or clicks not updating**
+**Açılmalar veya tıklamalar güncellenmiyor**
 
-- Tracking uses a pixel (opens) and signed links (clicks). Some clients block images or strip tracking; metrics can be undercounted.
-- Data can take a short time to appear. Refresh the campaign detail page or dashboard.
-- If a campaign shows zero opens/clicks for a long time after sends, check that links and images in the email are intact and that the campaign actually sent (check “Emails Sent” and “Emails Delivered”).
+- Takip için bir piksel (açılmalar) ve imzalı bağlantılar (tıklamalar) kullanılır. Bazı istemciler görselleri engeller veya takibi kaldırır; metrikler olduğundan az görünebilir.
+- Verilerin görünmesi kısa bir zaman alabilir. Kampanya detay sayfasını veya paneli yenileyin.
+- Gönderimlerden sonra bir kampanya uzun süre sıfır açılma/tıklama gösterirse, e-postadaki bağlantıların ve görsellerin sağlam olduğunu ve kampanyanın gerçekten gönderildiğini kontrol edin ("E-postalar Gönderildi" ve "E-postalar Teslim Edildi" kısmına bakın).
 
-**Analytics look wrong**
+**Analizler yanlış görünüyor**
 
-- Ensure the **date range** includes the send date. Dashboard and campaign detail pages filter by selected range.
-- “Emails Sent” includes all attempts; “Emails Delivered” is successful delivery. CTR is (Total Clicks / Total Sent) × 100. See [Campaign analytics](/en/campaigns/analytics) and [Dashboard overview](/en/dashboard/overview).
+- **Tarih aralığının** gönderim tarihini kapsadığından emin olun. Panel ve kampanya detay sayfaları seçilen aralığa göre filtreleme yapar.
+- "E-postalar Gönderildi" tüm girişimleri kapsar; "E-postalar Teslim Edildi" başarılı teslimattır. CTR: (Toplam Tıklama / Toplam Gönderim) × 100 kadardır. Bkz. [Kampanya analizleri](/tr/campaigns/analytics) ve [Panele genel bakış](/tr/dashboard/overview).
 
-## What we do to protect deliverability
+## Teslim edilebilirliği korumak için ne yapıyoruz?
 
-- We send via our email provider and sync with their suppression list so we don’t resend to bounced or complained addresses.
-- Contacts are validated and we avoid sending to unsubscribed or suppressed contacts.
-- Content and signatures are sanitized; we may flag spam-prone wording when possible.
+- E-posta sağlayıcımız üzerinden gönderim yapıyor ve onların engelleme listesiyle senkronize oluyoruz, böylece bounce olmuş veya şikayet etmiş adreslere yeniden gönderim yapmıyoruz.
+- Kişiler doğrulanır ve abonelikten ayrılmış veya engellenmiş kişilere gönderim yapılmaz.
+- İçerik ve imzalar temizlenir (sanitization); mümkün olduğunda spam eğilimli sözcükleri işaretleyebiliriz.
 
-For more, see [Deliverability basics](/en/concepts/deliverability-basics) and [Contact lifecycle](/en/contacts/lifecycle).
+Daha fazlası için bkz. [Teslim edilebilirlik temelleri](/tr/concepts/deliverability-basics) ve [Kişi yaşam döngüsü](/tr/concepts/contact-lifecycle).

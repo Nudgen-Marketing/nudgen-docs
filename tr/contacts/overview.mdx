@@ -1,64 +1,64 @@
 ---
-title: "Contacts overview"
-description: "How Nudgen stores, encrypts, and displays your contact data"
+title: "Kişilere genel bakış"
+description: "Nudgen kişi verilerinizi nasıl saklar, şifreler ve görüntüler"
 ---
 
-## What this page helps you do
+## Bu sayfa size ne konuda yardımcı olur?
 
-Understand how contacts are stored, why they appear masked, and how to use tags for segmentation. This sets you up to upload contacts and build campaigns confidently.
+Kişilerin nasıl saklandığını, neden maskeli göründüklerini ve segmentasyon için etiketlerin nasıl kullanılacağını anlayın. Bu, güvenle kişi yüklemenize ve kampanya oluşturmanıza yardımcı olur.
 
-## Before you start
+## Başlamadan önce
 
-- A Nudgen account
-- A CSV file with at least one email address (see [upload guide](/en/contacts/upload) for format)
+- Bir Nudgen hesabı
+- En az bir e-posta adresi içeren bir CSV dosyası (format için [yükleme kılavuzuna](/tr/contacts/upload) bakın)
 
-## How contact data is stored
+## Kişi verileri nasıl saklanır?
 
-Nudgen encrypts every piece of personally identifiable information (PII) before it is saved:
+Nudgen, kişisel olarak tanımlanabilir her bilgiyi (PII) kaydedilmeden önce şifreler:
 
-- **Emails** — AES-256 encrypted. We cannot read them.
-- **Names** — Encrypted if provided. Optional in your CSV.
-- **Custom metadata** — Any extra columns you upload are encrypted as well.
+- **E-postalar** — AES-256 ile şifrelenmiştir. Biz onları okuyamayız.
+- **İsimler** — Sağlanmışsa şifrelenir. CSV dosyanızda isteğe bağlıdır.
+- **Özel meta veriler** — Yüklediğiniz her ek sütun da şifrelenir.
 
-We also store a one-way hash of each email for deduplication. Duplicate emails in the same list are merged automatically.
+Ayrıca, tekilleştirme (deduplication) için her e-postanın tek yönlü bir özetini (hash) saklıyoruz. Aynı listedeki yinelenen e-postalar otomatik olarak birleştirilir.
 
-## Masked view
+## Maskeli görünüm
 
-By default, the contact list shows masked values like `j***@g***.com` instead of real addresses. PII is encrypted at rest; we never see or store plaintext emails or names. Masking protects your data from shoulder-surfing and limits exposure if someone else has access to your screen.
+Varsayılan olarak, kişi listesi gerçek adresler yerine `j***@g***.com` gibi maskeli değerler gösterir. PII, veri tabanında şifrelenmiş olarak tutulur; biz asla açık metin e-postaları veya isimleri görmeyiz veya saklamayız. Maskeleme, verilerinizi omuz üzerinden izlemeye (shoulder-surfing) karşı korur ve bir başkasının ekranınıza erişimi olması durumunda maruz kalmayı sınırlar.
 
-**Revealing a contact:** You (and other workspace members with access) can click **Reveal** to show the real email and name in the UI. Decryption happens only in your browser when you reveal; after you navigate away or refresh, values mask again. We never display decrypted PII in analytics, logs, or exports.
+**Bir kişiyi ortaya çıkarma (reveal):** Siz (ve erişimi olan diğer çalışma alanı üyeleri), kullanıcı arayüzünde gerçek e-postayı ve adı görmek için **Göster (Reveal)** seçeneğine tıklayabilirsiniz. Şifre çözme işlemi yalnızca gösterdiğinizde tarayıcınızda gerçekleşir; sayfadan ayrıldığınızda veya yenilediğinizde değerler tekrar maskelenir. Analizlerde, günlüklerde veya dışa aktarımlarda asla şifresi çözülmüş PII görüntülemeyiz.
 
-## Tags and segmentation
+## Etiketler (Tags) ve segmentasyon
 
-Assign tags when you upload contacts or edit them later. Use tags to target specific segments in campaigns:
+Kişileri yüklerken veya daha sonra düzenlerken etiketler atayın. Kampanyalarda belirli segmentleri hedeflemek için etiketleri kullanın:
 
-- `inactive` — Users who haven't logged in for 30+ days
-- `vip` — High-value or premium customers
-- `trial` — People on a free trial
+- `inactive` — Son 30+ gündür giriş yapmamış kullanıcılar
+- `vip` — Yüksek değerli veya premium müşteriler
+- `trial` — Ücretsiz denemedeki kişiler
 
-When creating a campaign, you choose an audience: all contacts, or only those with certain tags. Tags make it easy to run different sequences for different segments.
+Bir kampanya oluştururken bir hedef kitle seçersiniz: tüm kişiler veya yalnızca belirli etiketlere sahip olanlar. Etiketler, farklı segmentler için farklı sekanslar yürütmeyi kolaylaştırır.
 
-## Contact statuses
+## Kişi durumları
 
-Contacts can have one of these statuses:
+Kişiler şu durumlardan birine sahip olabilir:
 
-- **Active** — Can receive campaigns. Default for newly imported contacts.
-- **Unsubscribed** — Opted out via the unsubscribe link or manually. They will not receive future campaign emails unless you change their status.
-- **Suppressed / Bounced** — Delivery failed (invalid address, mailbox full, or provider suppression list). These contacts are automatically excluded from future sends to protect deliverability. Our system syncs with the delivery provider's suppression list.
+- **Aktif (Active)** — Kampanyaları alabilir. Yeni içe aktarılan kişiler için varsayılan durumdur.
+- **Abonelikten Ayrıldı (Unsubscribed)** — Abonelikten ayrılma bağlantısı yoluyla veya manuel olarak ayrıldı. Siz durumlarını değiştirmedikçe gelecekteki kampanya e-postalarını almazlar.
+- **Engellenmiş / Bounce (Suppressed / Bounced)** — Teslimat başarısız oldu (geçersiz adres, posta kutusu dolu veya sağlayıcı engelleme listesi). Bu kişiler, teslim edilebilirliği korumak için gelecekteki gönderimlerden otomatik olarak hariç tutulur. Sistemimiz, teslimat sağlayıcısının engelleme listesiyle senkronize çalışır.
 
-## What happens next
+## Sırada ne var?
 
-- [Upload a CSV](/en/contacts/upload) to add contacts.
-- [Create a campaign](/en/campaigns/create) and select your audience by tags or all contacts.
-- Check [plan limits](/en/billing/overview) for max contacts per plan.
+- Kişi eklemek için bir [CSV yükleyin](/tr/contacts/upload).
+- Bir [kampanya oluşturun](/tr/campaigns/create) ve hedef kitlenizi etiketlere veya tüm kişilere göre seçin.
+- Plan başına maksimum kişi sayısı için [plan limitlerini](/tr/billing/overview) kontrol edin.
 
-## Related docs
+## İlgili dokümanlar
 
 <CardGroup cols={2}>
-  <Card title="Upload contacts" icon="file-upload" href="/en/contacts/upload">
-    CSV format, validation, and tag assignment.
+  <Card title="Kişileri yükle" icon="file-upload" href="/tr/contacts/upload">
+    CSV formatı, doğrulama ve etiket atama.
   </Card>
-  <Card title="Create campaigns" icon="paper-plane" href="/en/campaigns/create">
-    Choose audience and launch your first campaign.
+  <Card title="Kampanya oluştur" icon="paper-plane" href="/tr/campaigns/create">
+    Hedef kitleyi seçin ve ilk kampanyayı başlatın.
   </Card>
 </CardGroup>

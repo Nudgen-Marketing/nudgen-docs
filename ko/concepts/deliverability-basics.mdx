@@ -1,31 +1,27 @@
 ---
-title: "Deliverability basics"
-description: "How we keep your emails out of spam"
+title: "이메일 도달률 기초"
+description: "이메일이 스팸함에 빠지지 않도록 관리하는 방법"
 ---
 
-## What is deliverability?
+## 도달률(Deliverability)이란 무엇인가요?
+**도달률**은 발송한 이메일이 스팸함으로 분류되거나 차단되지 않고 수신자의 편지함(인박스)에 성공적으로 도착하는 것을 의미합니다. 이는 발신자 평판, 메일 내용 및 수신자의 참여도에 따라 결정됩니다. Nudgen과 발송 대행사는 귀하의 캠페인이 원활하게 도달될 수 있도록 다양한 기술적 지원을 제공합니다.
 
-**Deliverability** means your emails reach the inbox instead of spam or being blocked. It depends on sender reputation, content, and recipient engagement. Nudgen and the delivery provider work to keep your campaigns deliverable.
+## Nudgen이 하는 일
+- **신뢰할 수 있는 이메일 제공업체를 통한 발송** — 우수한 인프라와 평판을 가진 검증된 발송 대행사를 통해 이메일을 보냅니다.
+- **유효성 검사 및 전송 차단** — 이메일 주소의 유효성을 검사하고 대행사의 차단 리스트(바운스, 신고 등)와 실시간으로 동기화합니다. 영구적으로 발송 실패(Hard bounce)했거나 스팸으로 신고된 주소로는 다시 발송하지 않습니다.
+- **콘텐츠 검사** — 발송 전 스팸으로 오인받을 수 있는 표현이 있는지 기본적인 검사를 수행하여 문제를 해결할 수 있도록 돕습니다. 서명과 HTML은 보안 및 안정성을 위해 정제(Sanitize)된 후 전송됩니다.
+- **추적 및 수신 거부** — 오픈 및 클릭 추적 시 보안이 적용된 픽셀과 서명된 링크를 사용합니다. 모든 캠페인에는 수신 거부 링크가 포함되어 있으며, 수신 거부 의사를 밝힌 사용자에게는 더 이상 메일을 보내지 않습니다.
 
-## What we do
+## 사용자가 할 수 있는 일
+- **리스트 청결 유지** — 바운스되거나 유효하지 않은 주소는 정기적으로 정리하세요. 동의 없이 수집된 연락처나 구매한 리스트를 사용하지 마세요.
+- **수신 거부 존중** — 수신을 거부한 사용자를 동의 없이 다시 캠페인 대상으로 추가하지 마세요.
+- **명확한 발신자 정보 사용** — 수신자가 누구로부터 온 메일인지 쉽게 알 수 있도록 브랜드 정체성(**설정** → **브랜드**)을 명확히 설정하세요.
+- **스팸성 콘텐츠 지양** — 본문은 명확하고 관련성 있게 작성하세요. 자극적인 영업용 문구나 오해를 불러일으키는 제목은 피하는 것이 좋습니다.
+- **주요 지표 모니터링** — 높은 바운스율이나 신고율은 발신자 평판을 떨어뜨립니다. [대시보드](/ko/dashboard/overview)와 [캠페인 분석](/ko/campaigns/analytics)을 통해 문제를 조기에 발견하세요.
 
-- **Sending via our email provider** — Emails are sent through a trusted delivery provider with good infrastructure and reputation.
-- **Validation and suppression** — We validate addresses and sync with the provider’s suppression list (bounces, complaints). We don’t resend to addresses that have hard bounced or been marked as spam.
-- **Content checks** — Before send, we can run basic checks (e.g. spam-prone wording) so you can fix issues. Signatures and HTML are sanitized to avoid injection and risky content.
-- **Tracking and unsubscribe** — Opens and clicks use tracking pixels and signed links. Every campaign includes an unsubscribe link so recipients can opt out; we honor that and stop sending to them.
+## 바운스(Bounces) 및 신고(Complaints)
+- **Soft bounce (일시적 실패)** — 편지함 가득 참이나 서버 다운과 같은 일시적인 이유입니다. 대행사가 재시도할 수 있으나, 지속적으로 실패하면 전송 차단 대상이 될 수 있습니다.
+- **Hard bounce (영구적 실패)** — 잘못된 주소 혹은 존재하지 않는 도메인과 같은 영구적인 이유입니다. 즉시 전송 차단 목록에 등록됩니다.
+- **Spam complaint (스팸 신고)** — 수신자가 해당 이메일을 스팸으로 표시한 경우입니다. 신고가 너무 많으면 평판에 치명적입니다. 신고한 사용자는 즉시 차단되며, 발송인은 타겟팅과 콘텐츠를 재검토해야 합니다.
 
-## What you can do
-
-- **Keep your list clean** — Remove or fix bounced and invalid addresses. Don’t buy lists or add contacts who didn’t opt in.
-- **Respect unsubscribes** — Don’t manually re-add unsubscribed users to campaigns without consent.
-- **Use a clear From name and reply-to** — Set brand identity (Settings → Brand) so recipients recognize you.
-- **Avoid spammy content** — Write clear, relevant copy and avoid aggressive sales language or misleading subject lines.
-- **Watch your metrics** — High bounce or complaint rates hurt reputation. Use the [Dashboard](/en/dashboard/overview) and [Campaign analytics](/en/campaigns/analytics) to spot problems.
-
-## Bounces and complaints
-
-- **Soft bounce** — Temporary failure (mailbox full, server down). The provider may retry; repeated soft bounces can lead to suppression.
-- **Hard bounce** — Permanent failure (invalid address, domain doesn’t exist). We suppress these immediately.
-- **Spam complaint** — Recipient marked the email as spam. Too many complaints damage reputation; we suppress complainers and you should review content and targeting.
-
-For more on contact status and suppression, see [Contact lifecycle](/en/contacts/lifecycle) and [Contacts overview](/en/contacts/overview). For sending issues, see [Troubleshooting: deliverability](/en/troubleshooting/deliverability).
+연락처 상태 및 차단 관리에 대한 자세한 내용은 [연락처 생애주기](/ko/contacts/lifecycle) 및 [연락처 개요](/ko/contacts/overview)를 참조하세요. 발송 문제가 발생하는 경우 [문제 해결: 도달률 관련](/ko/troubleshooting/deliverability) 가이드를 확인하세요.

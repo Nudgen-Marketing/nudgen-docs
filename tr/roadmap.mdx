@@ -1,46 +1,30 @@
 ---
-title: "Roadmap"
-description: "Upcoming features and product direction"
+title: "Yol Haritası"
+description: "Gelecek özellikler ve ürün yönü"
 ---
 
-Planned features, in priority order. Dates and scope may change as we build.
+Öncelik sırasına göre planlanan özellikler. Tarihler ve kapsam geliştirme sürecinde değişebilir.
 
-## 1. Email templates
+## 1. E-posta şablonları
 
-Reusable email templates so you can save layouts and copy and reuse them across campaigns. Create a template once, then select it when creating a campaign and customize as needed. We also support **dynamic variables** using Jinja templates—e.g. contact name, product name, and other per-recipient or per-campaign data—so each send can be personalized. Reduces repetition and keeps branding consistent.
+Düzenleri kaydedebileceğiniz ve kampanyalar arasında yeniden kullanabileceğiniz e-posta şablonları. Şablonu bir kez oluşturun, ardından bir kampanya oluştururken seçin ve gerektiğinde özelleştirin. Ayrıca her gönderimin kişiselleştirilebilmesi için Jinja şablonlarını kullanan **dinamik değişkenleri** (örneğin kişi adı, ürün adı ve diğer kişi veya kampanya başına veriler) destekliyoruz. Tekrarları azaltır ve marka bilincini tutarlı tutar.
 
-## 2. Export CSV/Excel report
+## 2. Kampanya A/B testleri
 
-Export campaign and contact data as CSV or Excel. Download overview metrics, recipient-level activity, or contact lists for reporting, backup, or use in other tools.
+Konu satırları veya e-posta içeriği üzerinde A/B testleri yapın. Varyantları hedef kitlenizin segmentlerine gönderin ve performansı (açılma, tıklama, dönüşüm) karşılaştırın. Sonuçları bir kazanan seçmek veya en iyi varyantı listenizin geri kalanına sunmak için kullanın.
 
-## 3. Campaign A/B testing
+## 3. CRM API entegrasyonu
 
-Run A/B tests on subject lines or email content. Send variants to segments of your audience and compare performance (opens, clicks, conversions). Use the results to pick a winner or roll out the best variant to the rest of your list.
+Nudgen'i API aracılığıyla CRM'inizle entegre edin: kişileri senkronize edin, CRM etkinliklerinden kampanyaları tetikleyin veya kampanya sonuçlarını geri gönderin. Programatik iş akışlarını mümkün kılar ve kişi verilerini sistemler arasında senkronize tutar.
 
-## 4. Mobile version support
+## 4. Daha fazla birleşik durdurma kuralı desteği
 
-A mobile-optimized experience so you can check the dashboard, review campaigns, and take key actions from phones and tablets. Responsive layouts and touch-friendly controls for on-the-go use.
+Durdurma kuralları için daha fazla koşul ekleyeceğiz ve bunları birleştirmenize olanak tanıyacağız. Birleşik koşullar karşılandığında kampanya otomatik olarak duraklar veya durur; bu da size daha ince kontrol ve teslim edilebilirlik ile liste sağlığı için daha iyi koruma sağlar.
 
-## 5. CRM API integration
+## 5. Veri içgörülerine dayalı kampanya için yapay zeka önerisi
 
-Integrate Nudgen with your CRM via API: sync contacts, trigger campaigns from CRM events, or push campaign results back. Enables programmatic workflows and keeps contact data in sync across systems.
-
-## 6. MCP support
-
-**MCP (Model Context Protocol) support** so LLMs—such as OpenClaw and other MCP-enabled assistants—can connect to Nudgen and control campaigns. Create, launch, pause, or monitor campaigns from your preferred AI environment with a consistent, tool-based interface.
-
-## 7. Support more combined stop rules
-
-We will add more conditions for stop rules and allow you to combine them. When the combined conditions are met, the campaign automatically pauses or stops, giving you finer control and better protection for deliverability and list health.
-
-## 8. AI recommendation for campaign based on data insight
-
-Recommendations driven by your campaign and contact data: suggested send times, subject lines, or segments based on past performance and engagement. Use data-backed suggestions to improve opens, clicks, and conversions without guesswork.
-
-## 9. Multi-language support (i18n)
-
-Full internationalization support across the entire Nudgen ecosystem. We are bringing multiple language options to the landing page, documentation site, and the main application dashboard to provide a seamless experience for our global user base.
+Kampanya ve iletişim verilerinizden güç alan öneriler: geçmiş performansa ve etkileşime dayalı olarak önerilen gönderim süreleri, konu satırları veya segmentler. Tahmin yürütmeden açılmaları, tıklamaları ve dönüşümleri iyileştirmek için veriye dayalı önerileri kullanın.
 
 ---
 
-Want to influence the roadmap? Reach out at [contact@nudgen.net](mailto:contact@nudgen.net).
+Yol haritasını etkilemek mi istiyorsunuz? [contact@nudgen.net](mailto:contact@nudgen.net) adresinden bize ulaşın.

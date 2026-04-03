@@ -1,80 +1,80 @@
 ---
-title: "Upload contacts"
-description: "CSV format, validation rules, and tag assignment for contact uploads"
+title: "رفع جهات الاتصال"
+description: "تنسيق CSV، قواعد التحقق، وتعيين الوسوم لرفع جهات الاتصال"
 ---
 
-## What this page helps you do
+## ما الذي تساعدك هذه الصفحة على القيام به
 
-Upload a CSV of contacts so you can run campaigns. You'll learn the required columns, validation rules, size limits, and how to add tags during upload.
+رفع ملف CSV لجهات الاتصال لتتمكن من تشغيل الحملات. ستتعلم الأعمدة المطلوبة، قواعد التحقق، حدود الحجم، وكيفية إضافة الوسوم أثناء الرفع.
 
-## Before you start
+## قبل أن تبدأ
 
-- A Nudgen account
-- A CSV file with at least an `email` column
-- Contacts must be under your plan limit (see [billing](/en/billing/overview))
+- حساب Nudgen
+- ملف CSV يحتوي على عمود `email` على الأقل.
+- يجب أن يكون عدد جهات الاتصال ضمن حد باقتك (راجع [الفواتير](/ar/billing/overview))
 
-## Step 1: Prepare your CSV
+## الخطوة 1: تجهيز ملف CSV الخاص بك
 
-Your CSV must include:
+يجب أن يتضمن ملف CSV الخاص بك ما يلي:
 
-| Column   | Required | Description                          |
+| العمود   | مطلوب | الوصف                          |
 | -------- | -------- | ------------------------------------ |
-| `email`  | Yes      | Valid email address. Must be unique. |
-| `name`   | No       | Display name for personalization.   |
+| `email`  | نعم      | عنوان بريد إلكتروني صالح. يجب أن يكون فريداً. |
+| `name`   | لا       | الاسم الذي يظهر للتخصيص.   |
 
-You can add other columns (e.g. `company`, `segment`). They are stored encrypted and can be used in tags or segmentation logic.
+يمكنك إضافة أعمدة أخرى (مثلاً: `company` ، `segment`). يتم تخزينها مشفرة ويمكن استخدامها في الوسوم أو منطق التقسيم.
 
-## Step 2: Validate format
+## الخطوة 2: التحقق من التنسيق
 
-- **Encoding:** UTF-8 recommended.
-- **Delimiter:** Comma (`,`).
-- **Header row:** First row must contain column names. `email` and `name` are recognized case-insensitively.
-- **Duplicate emails:** Duplicates in the same file are merged. Existing contacts with the same email are updated.
+- **الترميز (Encoding):** يُنصح باستخدام UTF-8.
+- **الفواصل (Delimiter):** الفاصلة (`,`).
+- **صف الرأس (Header row):** يجب أن يحتوي الصف الأول على أسماء الأعمدة. يتم التعرف على `email` و `name` بغض النظر عن حالة الأحرف.
+- **رسائل البريد المكررة:** يتم دمج التكرارات في نفس الملف. ويتم تحديث جهات الاتصال الموجودة مسبقاً التي تحمل نفس البريد الإلكتروني.
 
 <Warning>
-Invalid emails (malformed, missing `@`, etc.) are skipped. Check the upload summary to see how many rows were imported vs skipped.
+يتم تجاوز رسائل البريد غير الصالحة (بسبب خطأ في التنسيق، نقص علامة `@` ، إلخ). تحقق من ملخص الرفع لمعرفة عدد الصفوف التي تم استيرادها مقابل التي تم تجاوزها.
 </Warning>
 
-## Step 3: Upload in Nudgen
+## الخطوة 3: الرفع في Nudgen
 
-1. Go to **Contacts** in the sidebar.
-2. Click **Upload CSV**.
-3. Select your file.
-4. Choose tags to apply to all uploaded contacts (e.g. `inactive`, `re-engage`).
-5. Review the preview and confirm.
+1. اذهب إلى **جهات الاتصال (Contacts)** في الشريط الجانبي.
+2. انقر على **رفع ملف CSV (Upload CSV)**.
+3. اختر ملفك.
+4. اختر الوسوم (Tags) التي تريد تطبيقها على جميع جهات الاتصال المرفوعة في هذا الملف (مثلاً: `inactive` ، `re-engage`).
+5. راجع المعاينة ثم أكد الإرسال.
 
-## Size limits
+## حدود الحجم
 
-- **File size:** Follow the on-screen limit (typically a few MB). Large lists may take longer to process.
-- **Contacts per workspace:** Depends on your plan. The app enforces the limit at upload time; if you exceed it, the upload is rejected. See [Billing](/en/billing/overview) and the live [pricing page](https://nudgen.net/pricing) for current limits.
+- **حجم الملف:** اتبع الحد الموضح على الشاشة (عادةً ما يكون بضعة ميجابايت). قد تستغرق القوائم الضخمة وقتاً أطول في المعالجة.
+- **جهات الاتصال لكل مساحة عمل:** يعتمد على باقتك. يفرض التطبيق الحد عند وقت الرفع؛ وإذا تجاوزته، فسيتم رفض عملية الرفع. راجع [الفواتير](/ar/billing/overview) و [صفحة الأسعار](https://nudgen.net/pricing) المباشرة للحدود الحالية.
 
-## What happens next
+## ماذا يحدث بعد ذلك؟
 
-- Contacts appear in the list with masked emails (`j***@g***.com`).
-- Use tags to segment audiences in [campaigns](/en/campaigns/create).
-- You can [reveal](/en/contacts/overview) individual contacts as the account owner.
+- تظهر جهات الاتصال في القائمة مع إخفاء رسائل البريد الإلكتروني (`j***@g***.com`).
+- استخدم الوسوم لتقسيم الجمهور في [الحملات](/ar/campaigns/create).
+- يمكنك [كشف (Reveal)](/ar/contacts/overview) جهات الاتصال الفردية بصفتك مالك الحساب.
 
-## Troubleshooting
+## حل المشكلات
 
 <AccordionGroup>
-  <Accordion title="Some rows were skipped">
-    Check that each row has a valid email in the `email` column. Empty rows or malformed addresses are skipped.
+  <Accordion title="تم تجاوز بعض الصفوف">
+    تأكد من أن كل صف يحتوي على بريد إلكتروني صالح في عمود `email`. يتم تجاوز الصفوف الفارغة أو العناوين غير الصحيحة.
   </Accordion>
-  <Accordion title="Upload failed: plan limit exceeded">
-    Your contact count would exceed your plan limit. Upgrade your plan or remove existing contacts.
+  <Accordion title="فشل الرفع: تم تجاوز حد الباقة">
+    سيؤدي عدد جهات الاتصال المرفوع لتجاوز حد باقتك. قم بترقية باقتك أو إزالة جهات اتصال موجودة.
   </Accordion>
-  <Accordion title="Column not recognized">
-    Ensure the header row includes `email` (or `Email`). Other columns are optional.
+  <Accordion title="لم يتم التعرف على العمود">
+    تأكد من أن صف الرأس يتضمن `email` (أو `Email`). الأعمدة الأخرى اختيارية.
   </Accordion>
 </AccordionGroup>
 
-## Related docs
+## مستندات ذات صلة
 
 <CardGroup cols={2}>
-  <Card title="Contacts overview" icon="users" href="/en/contacts/overview">
-    Encryption, masking, and segmentation.
+  <Card title="نظرة عامة على جهات الاتصال" icon="users" href="/ar/contacts/overview">
+    التشفير، الإخفاء، والتقسيم.
   </Card>
-  <Card title="Create campaigns" icon="paper-plane" href="/en/campaigns/create">
-    Select your audience and launch a campaign.
+  <Card title="إنشاء الحملات" icon="paper-plane" href="/ar/campaigns/create">
+    اختر جمهورك وأطلق حملة.
   </Card>
 </CardGroup>

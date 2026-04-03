@@ -1,35 +1,35 @@
 ---
-title: "Contact lifecycle"
-description: "How contacts move through import, engagement, and suppression"
+title: "Siklus Hidup Kontak"
+description: "Bagaimana kontak berpindah melalui proses impor, keterlibatan, dan penekanan (suppression)"
 ---
 
-Contacts in Nudgen move through a simple lifecycle from import to active sending, and sometimes to unsubscribed or suppressed. Understanding this helps you keep lists clean and stay within limits.
+Kontak di Nudgen melewati siklus hidup sederhana mulai dari impor hingga pengiriman aktif, dan terkadang hingga berhenti berlangganan atau ditekan (suppressed). Memahami hal ini membantu Anda menjaga daftar tetap bersih dan tetap berada dalam batas paket.
 
-## From import to active
+## Dari impor ke aktif
 
-When you **import** contacts (CSV or add one-by-one), they are validated, encrypted, and stored. Duplicates in the same workspace are merged. New contacts are **active** and can be selected as campaign recipients.
+Saat Anda **mengimpor** kontak (CSV atau menambah satu per satu), mereka divalidasi, dienkripsi, dan disimpan. Duplikat dalam ruang kerja yang sama akan digabungkan. Kontak baru berstatus **aktif** dan dapat dipilih sebagai penerima kampanye.
 
-## Receiving campaigns
+## Menerima kampanye
 
-**Active** contacts are eligible for campaigns. When you choose an audience (all contacts, by tags, or manual), the app counts only active, non-suppressed contacts and shows a reach estimate. Sends, opens, clicks, bounces, and unsubscribes are recorded and drive both analytics and status changes.
+Kontak **Aktif** memenuhi syarat untuk menerima kampanye. Saat Anda memilih audiens (semua kontak, berdasarkan tag, atau manual), aplikasi hanya menghitung kontak aktif yang tidak ditekan (non-suppressed) dan menunjukkan perkiraan jangkauan. Pengiriman, pembukaan, klik, pantulan (bounce), dan penghentian berlangganan dicatat dan mendorong perubahan analitik serta status.
 
-## Status changes
+## Perubahan status
 
-- **Unsubscribed** — Recipient used the unsubscribe link (or was marked unsubscribed manually). They are excluded from future campaign sends.
-- **Suppressed / Bounced** — The delivery provider reported a bounce or added the address to a suppression list. We sync with that list and exclude these contacts from future sends to protect deliverability.
+- **Berhenti Berlangganan (Unsubscribed)** — Penerima menggunakan tautan berhenti berlangganan (atau ditandai berhenti berlangganan secara manual). Mereka dikeluarkan dari pengiriman kampanye di masa mendatang.
+- **Ditekan / Terpental (Suppressed / Bounced)** — Penyedia pengiriman melaporkan adanya pantulan (bounce) atau menambahkan alamat tersebut ke daftar penekanan (suppression list). Kami menyinkronkan dengan daftar tersebut dan mengeluarkan kontak ini dari pengiriman di masa mendatang untuk melindungi tingkat keterkiriman.
 
-## Updates and removal
+## Pembaruan dan penghapusan
 
-You can **update** contacts (name, tags) in the UI or by re-uploading a CSV with the same email. **Deleting** a contact removes them from the workspace; they no longer count toward your contact limit and cannot receive campaigns.
+Anda dapat **memperbarui** kontak (nama, tag) di Antarmuka Pengguna (UI) atau dengan mengunggah kembali CSV dengan email yang sama. **Menghapus** kontak akan menghilangkannya dari ruang kerja; mereka tidak lagi dihitung dalam batas kontak Anda dan tidak dapat menerima kampanye.
 
-## Summary
+## Ringkasan
 
-| State | Can receive campaigns? | Counts toward limit? |
+| Keadaan | Dapat menerima kampanye? | Dihitung dalam batas? |
 | ----- | ----------------------- | --------------------- |
-| Active | Yes | Yes |
-| Unsubscribed | No | Yes* |
-| Suppressed / Bounced | No | Yes* |
+| Aktif | Ya | Ya |
+| Berhenti Berlangganan | Tidak | Ya* |
+| Ditekan / Terpental | Tidak | Ya* |
 
-\*Unsubscribed and suppressed contacts still count toward your plan’s contact limit; you can delete them to free space.
+\*Kontak yang berhenti berlangganan dan ditekan tetap dihitung dalam batas kontak paket Anda; Anda dapat menghapusnya untuk mengosongkan ruang.
 
-For step-by-step lifecycle details, see [Contact lifecycle (Contacts)](/en/contacts/lifecycle). For encryption and masking, see [Contacts overview](/en/contacts/overview).
+Untuk detail siklus hidup langkah demi langkah, lihat [Siklus hidup kontak (Kontak)](/id/contacts/lifecycle). Untuk enkripsi dan penyamaran, lihat [Ikhtisar kontak](/id/contacts/overview).

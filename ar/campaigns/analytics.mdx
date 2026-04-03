@@ -1,77 +1,77 @@
 ---
-title: "Campaign analytics"
-description: "Metrics, delivery rates, time-series charts, and recipient activity"
+title: "تحليلات الحملة"
+description: "المقاييس، معدلات التسليم، المخططات الزمنية، ونشاط المستلمين"
 ---
 
-## What this page helps you do
+## ما الذي تساعدك هذه الصفحة على القيام به
 
-Understand how your campaigns perform: how many emails were sent, delivered, opened, and clicked. You'll also see delivery success and failure rates, plus per-recipient activity.
+فهم أداء حملاتك: عدد رسائل البريد الإلكتروني التي تم إرسالها، وتسليمها، وفتحها، والنقر عليها. ستشاهد أيضاً معدلات نجاح وفشل التسليم، بالإضافة إلى النشاط لكل مستلم.
 
-## Before you start
+## قبل أن تبدأ
 
-- At least one campaign that has been sent (or is sending)
-- Access to the campaign detail page
+- وجود حملة واحدة على الأقل تم إرسالها (أو جاري إرسالها)
+- الوصول إلى صفحة تفاصيل الحملة
 
-## Metric cards
+## بطاقات المقاييس
 
-On the campaign detail page, you'll see:
+في صفحة تفاصيل الحملة، ستشاهد:
 
-| Metric            | Meaning                                                                 |
+| المقياس            | المعنى                                                                 |
 | ----------------- | ----------------------------------------------------------------------- |
-| **Emails Sent**   | Total send attempts (including API or network failures).                |
-| **Emails Delivered** | Emails successfully accepted by the recipient's mail server.        |
-| **Total Opens**   | Number of times the email was opened (tracking pixel).                  |
-| **Total Clicks**  | Number of times links were clicked.                                    |
-| **CTR**           | Click-through rate: (Total Clicks / Total Sent) × 100.                 |
-| **Spam Complaints** | Number of times recipients marked the email as spam.                 |
-| **Soft Bounce**   | Temporary delivery issues (mailbox full, throttling, transient errors).  |
-| **Hard Bounce**   | Permanent delivery failures (invalid address, blocked domain).          |
+| **الرسائل المرسلة**   | إجمالي محاولات الإرسال (بما في ذلك حالات فشل الواجهة البرمجية أو الشبكة). |
+| **الرسائل المسلمة** | الرسائل التي قبلها خادم بريد المستلم بنجاح.        |
+| **إجمالي الفتح**   | عدد المرات التي تم فيها فتح البريد الإلكتروني (عبر بكسل التتبع).                  |
+| **إجمالي النقر**  | عدد المرات التي تم فيها النقر على الروابط.                                    |
+| **معدل النقر (CTR)**           | معدل النقر مقارنة بالإرسال: (إجمالي النقرات / إجمالي المرسل) × 100.                 |
+| **شكاوى السبام** | عدد المرات التي قام فيها المستلمون بتمييز البريد كرسائل مزعجة.                 |
+| **الارتداد الناعم (Soft Bounce)**   | مشكلات تسليم مؤقتة (صندوق البريد ممتلئ، تقييد الإرسال، أخطاء عارضة).  |
+| **الارتداد القاسي (Hard Bounce)**   | فشل تسليم دائم (عنوان غير صالح، نطاق محظور).          |
 
-## Delivery success and failure
+## نجاح وفشل التسليم
 
-- **Success rate** = (delivered / sent) × 100
-- **Failure rate** = (bounced + failed) / sent × 100
+- **معدل النجاح** = (المسلمة / المرسلة) × 100
+- **معدل الفشل** = (المرتدة + الفاشلة) / المرسلة × 100
 
-A high failure rate can hurt your sender reputation. Remove or correct bounced addresses and avoid invalid contacts.
+يمكن أن يؤدي ارتفاع معدل الفشل إلى الإضرار بسمعة المرسل الخاصة بك. قم بإزالة أو تصحيح العناوين المرتدة وتجنب جهات الاتصال غير الصالحة.
 
-## Time-series chart
+## المخطط الزمني
 
-The performance chart shows metrics over time (by day, week, or month). Use the granularity toggle to switch views. Toggle individual metrics on/off to focus on opens, clicks, or delivery.
+يظهر مخطط الأداء المقاييس بمرور الوقت (حسب اليوم، الأسبوع، أو الشهر). استخدم مفتاح تبديل الدقة لتغيير العرض. يمكنك تشغيل/إيقاف المقاييس الفردية للتركيز على الفتح، أو النقر، أو التسليم.
 
-## Date range picker
+## أداة اختيار النطاق الزمني
 
-Filter metrics and the chart by date range. Default is usually the full campaign period. Adjust to compare specific weeks or focus on recent activity.
+قم بتصفية المقاييس والمخطط حسب النطاق الزمني. الخيار الافتراضي هو عادةً كامل فترة الحملة. قم بتعديله لمقارنة أسابيع محددة أو التركيز على النشاط الأخير.
 
-## Recipient activity table
+## جدول نشاط المستلمين
 
-See per-contact status:
+اطلع على حالة كل جهة اتصال:
 
-- **Contact** — Email (masked unless revealed) and name
-- **Status** — Latest event: sent, delivered, opened, clicked, bounced
-- **Sent at** — When the email was sent
-- **Delivered at** — When delivery was confirmed (if available)
-- **Opened at** — First open timestamp
-- **Clicked at** — First click timestamp
+- **جهة الاتصال** — البريد الإلكتروني (مخفي ما لم يتم كشفه) والاسم
+- **الحالة** — آخر حدث: مرسل، مسلم، مفتوح، تم النقر، مرتد
+- **وقت الإرسال** — متى تم إرسال البريد الإلكتروني
+- **وقت التسليم** — متى تم تأكيد التسليم (إن وجد)
+- **وقت الفتح** — أول طابع زمني للفتح
+- **وقت النقر** — أول طابع زمني للنقر
 
-Use this to:
+استخدم هذا الجدول من أجل:
 
-- Find engaged users for follow-up
-- Identify bounces for list cleanup
-- Debug delivery issues for specific addresses
+- العثور على المستخدمين المتفاعلين للمتابعة معهم
+- تحديد العناوين المرتدة لتنظيف القائمة
+- تصحيح مشكلات التسليم لعناوين محددة
 
-## What happens next
+## ماذا يحدث بعد ذلك؟
 
-- Use insights to refine future campaigns (subject lines, tone, timing).
-- Remove bounced contacts from your list to protect deliverability.
-- Check [billing](/en/billing/overview) for email send limits if you're approaching your plan cap.
+- استخدم الرؤى المستخلصة لتحسين الحملات المستقبلية (أسطر الموضوع، النبرة، التوقيت).
+- قم بإزالة جهات الاتصال المرتدة من قائمتك لحماية قابلية التسليم.
+- تحقق من [الفواتير](/ar/billing/overview) لمعرفة حدود إرسال البريد الإلكتروني إذا كنت تقترب من سقف باقتك.
 
-## Related docs
+## مستندات ذات صلة
 
 <CardGroup cols={2}>
-  <Card title="Manage campaigns" icon="pen-to-square" href="/en/campaigns/manage">
-    Edit, send, schedule, stop.
+  <Card title="إدارة الحملات" icon="pen-to-square" href="/ar/campaigns/manage">
+    التعديل، الإرسال، الجدولة، الإيقاف.
   </Card>
-  <Card title="Billing & usage" icon="credit-card" href="/en/billing/overview">
-    Plan limits and usage meters.
+  <Card title="الفواتير والاستخدام" icon="credit-card" href="/ar/billing/overview">
+    حدود الباقة وعدادات الاستخدام.
   </Card>
 </CardGroup>

@@ -1,31 +1,27 @@
 ---
-title: "Workspaces and roles"
-description: "Teams, members, and permissions"
+title: "워크스페이스 및 역할"
+description: "팀, 멤버 및 권한 체계 안내"
 ---
 
-## What is a workspace?
+## 워크스페이스란 무엇인가요?
+**워크스페이스**(팀)는 Nudgen에서 모든 공유 데이터를 담는 컨테이너입니다. 연락처, 캠페인, 브랜드 설정, 이메일 서명 및 결제 정보가 여기에 포함됩니다. 각 워크스페이스는 고유한 구독 및 사용량 한도를 가집니다. 하나의 계정은 여러 개의 워크스페이스에 소속될 수 있으며, 사이드바의 **팀 전환기(team switcher)**를 통해 워크스페이스를 오갈 수 있습니다.
 
-A **workspace** (team) is the container for all shared data in Nudgen: contacts, campaigns, brand configs, signatures, and billing. Each workspace has its own subscription and usage limits. Your account can belong to multiple workspaces; you switch between them with the **team switcher** in the sidebar.
+## 역할 및 권한
 
-## Roles and permissions
+| 역할 | 부여된 권한 |
+| :--- | :--- |
+| **Owner (소유자)** | 모든 권한을 가집니다. 결제, 팀 및 워크스페이스 설정을 관리합니다. 삭제할 수 없으며 소유권 이전만 가능합니다. |
+| **Admin (관리자)** | 멤버 초대 및 관리, 캠페인/연락처/브랜드 편집이 가능합니다. 결제 접근 권한은 없습니다. |
+| **Member (멤버)** | 캠페인 생성 및 편집, 연락처 업로드, 브랜드 설정 및 서명 사용이 가능합니다. 팀 목록을 볼 수는 있지만 초대하거나 역할을 수정할 수는 없습니다. |
 
-| Role | Capabilities |
-| ---- | ------------- |
-| **Owner** | Full access. Manages billing, team, and workspace settings. Cannot be removed; can transfer ownership. |
-| **Admin** | Invite and manage members, edit campaigns, contacts, and brand. No billing access. |
-| **Member** | Create and edit campaigns, upload contacts, use brand configs and signatures. Can view the team list but not invite or change roles. |
+소유자와 관리자만 새로운 멤버를 초대하거나 역할을 변경할 수 있습니다. 결제 관리(업그레이드, 결제 수단, 포털 접근)는 소유자에게만 허용됩니다.
 
-Only owners and admins can invite new members or change roles. Billing (upgrade, payment method, portal) is restricted to owners.
+## 멤버 초대 (Invitations)
+관리자와 소유자는 이메일을 통해 **초대장**을 발송하며, 수신자는 메일 내의 링크를 통해 수락하여 워크스페이스에 합류할 수 있습니다. 초대는 대기 중, 수락됨, 만료됨, 취소됨의 상태를 가집니다. 필요 시 **설정(Settings)** → **팀(Team)** 메뉴에서 다시 발송할 수 있습니다.
 
-## Invitations
+## 활성 워크스페이스 (Active workspace)
+사이드바 헤더에 표시되는 워크스페이스가 현재 **활성화된** 워크스페이스입니다. 모든 페이지(대시보드, 연락처, 캠페인, 브랜드, 결제, 설정)는 해당 워크스페이스의 데이터를 보여줍니다. 다른 팀의 작업을 수행하려면 워크스페이스를 전환하세요. 귀하의 프로필(이름, 이메일, 아바타)은 워크스페이스를 전환해도 동일하게 유지됩니다.
 
-Admins and owners send **invitations** by email. The invitee receives a link to accept and join the workspace. Invitations can be pending, accepted, expired, or cancelled. Resend from **Settings** → **Team** if needed.
-
-## Active workspace
-
-The workspace shown in the sidebar header is your **active** workspace. All pages (Dashboard, Contacts, Campaigns, Brand, Billing, Settings) show data for that workspace. Switch workspace to work in a different team; your profile (name, email, avatar) stays the same across workspaces.
-
-## What happens next
-
-- [Team settings](/en/settings/team) — Invite members, assign roles, manage invitations.
-- [Account settings](/en/settings/account) — Overview of settings and workspace vs account.
+## 다음 단계
+- [팀 설정](/ko/settings/team) — 멤버 초대, 역할 지정 및 초대 관리.
+- [계정 설정](/ko/settings/account) — 설정 메뉴 개요 및 워크스페이스와 계정의 차이점.

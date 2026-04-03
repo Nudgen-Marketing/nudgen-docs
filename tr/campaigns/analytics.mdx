@@ -1,77 +1,77 @@
 ---
-title: "Campaign analytics"
-description: "Metrics, delivery rates, time-series charts, and recipient activity"
+title: "Kampanya analizleri"
+description: "Metrikler, teslimat oranları, zaman serisi grafikleri ve alıcı aktivitesi"
 ---
 
-## What this page helps you do
+## Bu sayfa size ne konuda yardımcı olur?
 
-Understand how your campaigns perform: how many emails were sent, delivered, opened, and clicked. You'll also see delivery success and failure rates, plus per-recipient activity.
+Kampanyalarınızın nasıl performans gösterdiğini anlayın: Kaç e-posta gönderildi, teslim edildi, açıldı ve tıklandı. Ayrıca teslimat başarı ve hata oranlarını, ayrıca alıcı bazlı aktiviteyi göreceksiniz.
 
-## Before you start
+## Başlamadan önce
 
-- At least one campaign that has been sent (or is sending)
-- Access to the campaign detail page
+- Gönderilmiş (veya gönderilen) en az bir kampanya
+- Kampanya detay sayfasına erişim
 
-## Metric cards
+## Metrik kartları
 
-On the campaign detail page, you'll see:
+Kampanya detay sayfasında şunları görürsünüz:
 
-| Metric            | Meaning                                                                 |
-| ----------------- | ----------------------------------------------------------------------- |
-| **Emails Sent**   | Total send attempts (including API or network failures).                |
-| **Emails Delivered** | Emails successfully accepted by the recipient's mail server.        |
-| **Total Opens**   | Number of times the email was opened (tracking pixel).                  |
-| **Total Clicks**  | Number of times links were clicked.                                    |
-| **CTR**           | Click-through rate: (Total Clicks / Total Sent) × 100.                 |
-| **Spam Complaints** | Number of times recipients marked the email as spam.                 |
-| **Soft Bounce**   | Temporary delivery issues (mailbox full, throttling, transient errors).  |
-| **Hard Bounce**   | Permanent delivery failures (invalid address, blocked domain).          |
+| Metrik             | Anlamı                                                                  |
+| ------------------ | ----------------------------------------------------------------------- |
+| **E-postalar Gönderildi** | Toplam gönderim girişimleri (API veya ağ hataları dahil).               |
+| **E-postalar Teslim Edildi** | Alıcının posta sunucusu tarafından başarıyla kabul edilen e-postalar.   |
+| **Toplam Açılmalar** | E-postanın kaç kez açıldığı (takip pikseli).                            |
+| **Toplam Tıklamalar** | Bağlantıların kaç kez tıklandığı.                                      |
+| **CTR**            | Tıklama oranı: (Toplam Tıklama / Toplam Gönderim) × 100.                |
+| **Spam Şikayetleri** | Alıcıların e-postayı kaç kez spam olarak işaretlediği.                  |
+| **Soft Bounce**    | Geçici teslimat sorunları (posta kutusu dolu, hız sınırlaması, vb.).    |
+| **Hard Bounce**    | Kalıcı teslimat hataları (geçersiz adres, engellenen alan adı).         |
 
-## Delivery success and failure
+## Teslimat başarısı ve hatası
 
-- **Success rate** = (delivered / sent) × 100
-- **Failure rate** = (bounced + failed) / sent × 100
+- **Başarı oranı** = (teslim edilen / gönderilen) × 100
+- **Hata oranı** = (bounced + failed) / gönderilen × 100
 
-A high failure rate can hurt your sender reputation. Remove or correct bounced addresses and avoid invalid contacts.
+Yüksek bir hata oranı, gönderici itibarınıza zarar verebilir. Bounce olmuş (geri dönen) adresleri kaldırın veya düzeltin ve geçersiz kişilerden kaçının.
 
-## Time-series chart
+## Zaman serisi grafiği
 
-The performance chart shows metrics over time (by day, week, or month). Use the granularity toggle to switch views. Toggle individual metrics on/off to focus on opens, clicks, or delivery.
+Performans grafiği zaman içindeki metrikleri gösterir (günlük, haftalık veya aylık). Görünümleri değiştirmek için ayrıntı düzeyini (granularity) kullanın. Açılmalara, tıklamalara veya teslimata odaklanmak için bireysel metrikleri açıp kapatabilirsiniz.
 
-## Date range picker
+## Tarih aralığı seçici
 
-Filter metrics and the chart by date range. Default is usually the full campaign period. Adjust to compare specific weeks or focus on recent activity.
+Metrikleri ve grafiği tarih aralığına göre filtreleyin. Varsayılan genellikle tam kampanya dönemidir. Belirli haftaları karşılaştırmak veya son aktiviteye odaklanmak için ayarlayın.
 
-## Recipient activity table
+## Alıcı aktivitesi tablosu
 
-See per-contact status:
+Kişi bazlı durumları görün:
 
-- **Contact** — Email (masked unless revealed) and name
-- **Status** — Latest event: sent, delivered, opened, clicked, bounced
-- **Sent at** — When the email was sent
-- **Delivered at** — When delivery was confirmed (if available)
-- **Opened at** — First open timestamp
-- **Clicked at** — First click timestamp
+- **Kişi** — E-posta (gizlenmiş olabilir) ve ad
+- **Durum** — Son olay: gönderildi, teslim edildi, açıldı, tıklandı, bouncy
+- **Gönderilme Tarihi** — E-postanın gönderildiği zaman
+- **Teslim Tarihi** — Teslimatın onaylandığı zaman (varsa)
+- **Açılma Tarihi** — İlk açılma zaman damgası
+- **Tıklanma Tarihi** — İlk tıklama zaman damgası
 
-Use this to:
+Bunu şunlar için kullanın:
 
-- Find engaged users for follow-up
-- Identify bounces for list cleanup
-- Debug delivery issues for specific addresses
+- Takip etmek için aktif kullanıcıları bulmak
+- Liste temizliği için bounce olanları belirlemek
+- Belirli adresler için teslimat sorunlarını ayıklamak
 
-## What happens next
+## Sırada ne var?
 
-- Use insights to refine future campaigns (subject lines, tone, timing).
-- Remove bounced contacts from your list to protect deliverability.
-- Check [billing](/en/billing/overview) for email send limits if you're approaching your plan cap.
+- Gelecek kampanyaları (konu satırları, ton, zamanlama) iyileştirmek için içgörüleri kullanın.
+- Teslim edilebilirliği korumak için bounce olan kişileri listenizden kaldırın.
+- Plan sınırınıza yaklaşıyorsanız e-posta gönderim limitleri için [faturalandırmayı](/tr/billing/overview) kontrol edin.
 
-## Related docs
+## İlgili dokümanlar
 
 <CardGroup cols={2}>
-  <Card title="Manage campaigns" icon="pen-to-square" href="/en/campaigns/manage">
-    Edit, send, schedule, stop.
+  <Card title="Kampanyaları yönet" icon="pen-to-square" href="/tr/campaigns/manage">
+    Düzenle, gönder, planla, durdur.
   </Card>
-  <Card title="Billing & usage" icon="credit-card" href="/en/billing/overview">
-    Plan limits and usage meters.
+  <Card title="Faturalandırma ve kullanım" icon="credit-card" href="/tr/billing/overview">
+    Plan limitleri ve kullanım sayaçları.
   </Card>
 </CardGroup>

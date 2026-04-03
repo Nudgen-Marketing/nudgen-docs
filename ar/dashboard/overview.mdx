@@ -1,62 +1,62 @@
 ---
-title: "Dashboard overview"
-description: "Metrics, charts, and campaign summary"
+title: "نظرة عامة على لوحة التحكم"
+description: "المقاييس، المخططات، وملخص الحملات"
 ---
 
-## What this page helps you do
+## ما الذي تساعدك هذه الصفحة على القيام به
 
-Understand the main **Dashboard** view: aggregate metrics for your workspace, a time-series chart of activity, and a paginated table of campaigns with key stats. Use it to monitor sending health and performance at a glance.
+فهم العرض الرئيسي لـ **لوحة التحكم (Dashboard)**: المقاييس الإجمالية لمساحة العمل الخاصة بك، مخطط زمني للنشاط، وجدول مرقّم للحملات مع إحصائيات رئيسية. استخدمها لمراقبة صحة الإرسال والأداء بلمحة سريعة.
 
-## Before you start
+## قبل أن تبدأ
 
-- A Nudgen account with at least one workspace
-- Optional: sent or scheduled campaigns so metrics and the chart have data
+- حساب Nudgen مع مساحة عمل واحدة على الأقل.
+- اختياري: وجود حملات مرسلة أو مجدولة حتى تحتوي المقاييس والمخطط على بيانات.
 
-## Metric cards
+## بطاقات المقاييس
 
-The dashboard shows summary cards for the selected date range:
+تعرض لوحة التحكم بطاقات ملخصة للنطاق الزمني المحدد:
 
-| Metric | Meaning |
+| المقياس | المعنى |
 | ------ | ------- |
-| **Emails Sent** | Total number of all send attempts (including API or network failures). |
-| **Emails Delivered** | Number of emails successfully accepted by the recipient's mail server. |
-| **Total Opens** | How many times emails were opened (tracking pixel). |
-| **Total Clicks** | How many times links were clicked. |
-| **CTR** | Click-through rate: (Total Clicks / Total Sent) × 100. |
-| **Spam Complaints** | Number of times recipients marked your email as spam. |
-| **Soft Bounce** | Temporary delivery issues (mailbox full, throttling, transient server problems). |
-| **Hard Bounce** | Permanent delivery failures (invalid recipients, blocked domains). |
+| **الرسائل المرسلة** | إجمالي عدد محاولات الإرسال (بما في ذلك حالات فشل الواجهة البرمجية أو الشبكة). |
+| **الرسائل المسلمة** | عدد الرسائل التي قبلها خادم بريد المستلم بنجاح. |
+| **إجمالي الفتح** | عدد المرات التي تم فيها فتح الرسائل (عبر بكسل التتبع). |
+| **إجمالي النقر** | عدد المرات التي تم فيها النقر على الروابط. |
+| **معدل النقر (CTR)** | معدل النقر: (إجمالي النقرات / إجمالي المرسل) × 100. |
+| **شكاوى السبام** | عدد المرات التي قام فيها المستلمون بتمييز بريدك كرسائل مزعجة. |
+| **الارتداد الناعم (Soft Bounce)** | مشكلات تسليم مؤقتة (صندوق البريد ممتلئ، تقييد الإرسال، مشكلات عارضة في الخادم). |
+| **الارتداد القاسي (Hard Bounce)** | فشل تسليم دائم (مستلمون غير صالحين، نطاقات محظورة). |
 
-Use these to judge deliverability (delivered vs sent, bounces) and engagement (opens, clicks, CTR). High spam complaints or bounces can hurt sender reputation.
+استخدم هذه البطاقات للحكم على قابلية التسليم (المسلمة مقابل المرسلة، الارتدادات) والتفاعل (الفتحات، النقرات، معدل النقر). كثرة شكاوى السبام أو الارتدادات قد تضر بسمعة المرسل.
 
-## Time-series chart
+## المخطط الزمني
 
-A line chart shows how metrics change over the selected date range. You can adjust the range with the date picker. Use it to spot trends (e.g. opens dropping, bounces spiking) and correlate with campaign launches.
+يظهر مخطط خطي كيف تتغير المقاييس خلال النطاق الزمني المحدد. يمكنك تعديل النطاق باستخدام أداة اختيار التاريخ. استخدمه لاكتشاف التوجهات (مثلاً: انخفاض الفتحات، ارتفاع الارتدادات) وربطها بإطلاق الحملات.
 
-## Campaigns table
+## جدول الحملات
 
-A paginated table lists campaigns with columns such as name, type (one-time or drip), status, and counts (sent, delivered, opened, clicked, bounces, complaints). Use pagination to browse; click a campaign to open its detail page for recipient-level activity and per-campaign time-series.
+يسرد جدول مرقّم الحملات مع أعمدة مثل الاسم، النوع (لمرة واحدة أو تنقيط)، الحالة، والأرقام (المرسلة، المسلمة، المفتوحة، التي تم النقر عليها، الارتدادات، الشكاوى). استخدم الترقيم للتصفح؛ وانقر على حملة لفتح صفحة التفاصيل الخاصة بها لعرض النشاط على مستوى المستلمين والمخطط الزمني الخاص بكل حملة.
 
-## Date range
+## النطاق الزمني
 
-The default range is often the last 7 days. Change the range to focus on a specific period or compare different weeks. Stats and the chart update to reflect the selected range.
+النطاق الافتراضي غالباً ما يكون لآخر 7 أيام. قم بتغيير النطاق للتركيز على فترة محددة أو مقارنة أسابيع مختلفة. يتم تحديث الإحصائيات والمخطط ليعكس النطاق المختار.
 
-## What happens next
+## ماذا يحدث بعد ذلك؟
 
-- Open a campaign row to see [campaign analytics](/en/campaigns/analytics): recipient activity and detailed metrics.
-- Check [Billing](/en/billing/overview) for usage vs plan limits.
-- Use [Troubleshooting](/en/troubleshooting) if metrics look wrong or emails aren’t sending.
+- افتح صفاً من جدول الحملات لعرض [تحليلات الحملة](/ar/campaigns/analytics): نشاط المستلمين ومقاييس مفصلة.
+- تحقق من [الفواتير](/ar/billing/overview) لمعرفة الاستخدام مقابل حدود الباقة.
+- استخدم [حل المشكلات](/ar/troubleshooting) إذا بدت المقاييس غير صحيحة أو إذا كانت الرسائل لا تُرسل.
 
-## Related docs
+## مستندات ذات صلة
 
 <CardGroup cols={2}>
-  <Card title="Campaign analytics" icon="chart-line" href="/en/campaigns/analytics">
-    Per-campaign metrics and recipient activity.
+  <Card title="تحليلات الحملة" icon="chart-line" href="/ar/campaigns/analytics">
+    المقاييس لكل حملة ونشاط المستلمين.
   </Card>
-  <Card title="Campaigns overview" icon="list" href="/en/campaigns/overview">
-    Campaign types and statuses.
+  <Card title="نظرة عامة على الحملات" icon="list" href="/ar/campaigns/overview">
+    أنواع الحملات وحالاتها.
   </Card>
-  <Card title="Deliverability basics" icon="shield" href="/en/concepts/deliverability-basics">
-    How we keep emails out of spam.
+  <Card title="أساسيات قابلية التسليم" icon="shield" href="/ar/concepts/deliverability-basics">
+    كيف نحافظ على الرسائل بعيداً عن مجلد السبام.
   </Card>
 </CardGroup>

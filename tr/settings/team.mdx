@@ -1,76 +1,76 @@
 ---
-title: "Team settings"
-description: "Invite members, manage roles, and handle invitations"
+title: "Ekip ayarları"
+description: "Üyeleri davet edin, roller atayın ve davetleri yönetin"
 ---
 
-## What this page helps you do
+## Bu sayfa size ne konuda yardımcı olur?
 
-Add team members to your Nudgen workspace, assign roles, and manage pending or expired invitations. You'll understand roles and permissions so you can collaborate safely.
+Çalışma alanınızda iş birliği yapabilmeleri için ekip üyelerini davet edin. Nudgen'daki üç rolü (Sahip, Yönetici, Üye) ve izinlerin nasıl farklılık gösterdiğini anlayın.
 
-## Before you start
+## Başlamadan önce
 
-- Owner or admin access
-- Email addresses of people you want to invite
+- Bir Nudgen hesabı
+- Sahip (Owner) veya yönetici (Admin) rolü
 
-## Roles and permissions
+## Roller ve izinler
 
-| Role   | Can do                                                                 |
-| ------ | ---------------------------------------------------------------------- |
-| **Owner** | Full access. Manage billing, team, and workspace. Cannot be removed. |
-| **Admin** | Invite and manage members. Edit campaigns, contacts, brand. No billing. |
-| **Member** | Create and edit campaigns, upload contacts, use brand configs. Limited team access. |
+| Rol         | Yapabilir                                                               |
+| ----------- | ---------------------------------------------------------------------- |
+| **Sahip (Owner)** | Tam erişim. Faturalandırmayı, ekibi ve çalışma alanını yönetir. Kaldırılamaz. |
+| **Yönetici (Admin)** | Üyeleri davet eder ve yönetir. Kampanyaları, kişileri, markayı düzenler. Faturalandırma yetkisi yoktur. |
+| **Üye (Member)** | Kampanya oluşturur ve düzenler, kişi yükler, marka yapılandırmalarını kullanır. Kısıtlı ekip erişimi. |
 
 <Note>
-Only owners and admins can invite new members or change roles. Members can view the team list but cannot modify it.
+Yalnızca sahipler ve yöneticiler yeni üye davet edebilir veya rolleri değiştirebilir. Üyeler ekip listesini görebilir ancak onda değişiklik yapamazlar.
 </Note>
 
-## Invite a team member
+## Bir ekip üyesini davet etme
 
-1. Go to **Settings** → **Team**.
-2. Click **Invite member**.
-3. Enter email and select role (**Admin** or **Member**).
-4. Send. The invitee receives an email with a link to accept.
+1. **Ayarlar (Settings)** → **Ekip (Team)** bölümüne gidin.
+2. **Üye davet et (Invite member)** seçeneğine tıklayın.
+3. E-posta adresini girin ve bir rol (**Yönetici** veya **Üye**) seçin.
+4. Gönderin. Davet edilen kişi, kabul etmek için bir bağlantı içeren bir e-posta alır.
 
-## Invitation statuses
+## Davetiye durumları
 
-| Status     | Meaning                                                         |
-| ---------- | --------------------------------------------------------------- |
-| **Pending**  | Invitation sent. Recipient can accept via the link in the email. |
-| **Accepted** | Recipient joined. They appear in the team list with their role. |
-| **Expired**  | Invitation link timed out. Resend if needed.                   |
-| **Cancelled** | Invitation was cancelled before acceptance.                    |
+| Durum       | Anlamı                                                          |
+| ----------- | --------------------------------------------------------------- |
+| **Beklemede (Pending)** | Davetiye gönderildi. Alıcı e-postadaki bağlantı ile kabul edebilir. |
+| **Kabul Edildi (Accepted)** | Alıcı katıldı. Ekip listesinde kendi rolüyle görünür.           |
+| **Süresi Doldu (Expired)** | Davet bağlantısının süresi doldu. Gerekiyorsa yeniden gönderin. |
+| **İptal Edildi (Cancelled)** | Davetiye kabul edilmeden önce iptal edildi.                    |
 
-## Change or remove a member
+## Bir üyeyi değiştirme veya kaldırma
 
-- **Change role:** Open the member, select a new role, save. Only owners and admins can change roles.
-- **Remove member:** Use **Remove** and confirm. They lose access immediately. Their past actions remain in logs.
+- **Rolü değiştir:** Üyeyi açın, yeni bir rol seçin ve kaydedin. Yalnızca sahipler ve yöneticiler rolleri değiştirebilir.
+- **Üyeyi kaldır:** **Kaldır (Remove)** seçeneğini kullanın ve onaylayın. Erişimleri anında sonlandırılır. Geçmiş eylemleri günlüklerde (logs) kalır.
 
-## What happens next
+## Sırada ne var?
 
-- New members can [upload contacts](/en/contacts/upload), [create campaigns](/en/campaigns/create), and use shared brand configs.
-- Owners retain control over billing and critical settings.
+- Yeni üyeler [kişi yükleyebilir](/tr/contacts/upload), [kampanya oluşturabilir](/tr/campaigns/create) ve paylaşılan marka yapılandırmalarını kullanabilirler.
+- Sahipler faturalandırma ve kritik ayarlar üzerindeki kontrollerini korurlar.
 
-## Troubleshooting
+## Sorun Giderme
 
 <AccordionGroup>
-  <Accordion title="Invitee didn't receive the email">
-    Ask them to check spam. Resend the invitation from the team page. Ensure the email address is correct.
+  <Accordion title="Davet edilen kişi e-postayı almadı">
+    Spam/Gereksiz klasörünü kontrol etmelerini isteyin. Ekip sayfasından davetiyeyi yeniden gönderin. E-posta adresinin doğru olduğundan emin olun.
   </Accordion>
-  <Accordion title="Invitation expired">
-    Invitations expire after a set period. Create a new invitation with the same email.
+  <Accordion title="Davetiyenin süresi doldu">
+    Davetiyelerin belirli bir süresi vardır. Aynı e-posta ile yeni bir davetiye oluşturun.
   </Accordion>
-  <Accordion title="Can a member see all contacts?">
-    Yes. Team members with access share the same workspace and contact list. Use tags and campaigns to organize work.
+  <Accordion title="Bir üye tüm kişileri görebilir mi?">
+    Evet. Erişimi olan ekip üyeleri aynı çalışma alanını ve kişi listesini paylaşır. İşleri organize etmek için etiketleri ve kampanyaları kullanın.
   </Accordion>
 </AccordionGroup>
 
-## Related docs
+## İlgili dokümanlar
 
 <CardGroup cols={2}>
-  <Card title="Account settings" icon="gear" href="/en/settings/account">
-    Overview of all settings.
+  <Card title="Hesap ayarları" icon="gear" href="/tr/settings/account">
+    Tüm ayarlara genel bakış.
   </Card>
-  <Card title="Signatures" icon="pen-fancy" href="/en/settings/signatures">
-    Email signatures for campaigns.
+  <Card title="İmzalar" icon="pen-fancy" href="/tr/settings/signatures">
+    Kampanyalar için e-posta imzaları.
   </Card>
 </CardGroup>

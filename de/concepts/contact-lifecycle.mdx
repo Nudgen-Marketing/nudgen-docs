@@ -1,35 +1,35 @@
 ---
-title: "Contact lifecycle"
-description: "How contacts move through import, engagement, and suppression"
+title: "Kontakt-Lebenszyklus"
+description: "Wie Kontakte Import, Engagement und Unterdrückung durchlaufen"
 ---
 
-Contacts in Nudgen move through a simple lifecycle from import to active sending, and sometimes to unsubscribed or suppressed. Understanding this helps you keep lists clean and stay within limits.
+Kontakte in Nudgen durchlaufen einen einfachen Lebenszyklus, vom Import über den aktiven Versand bis hin zur Abmeldung oder Unterdrückung. Das Verständnis dieses Prozesses hilft Ihnen, Listen sauber zu halten und innerhalb Ihrer Plangrenzen zu bleiben.
 
-## From import to active
+## Vom Import zum aktiven Status
 
-When you **import** contacts (CSV or add one-by-one), they are validated, encrypted, and stored. Duplicates in the same workspace are merged. New contacts are **active** and can be selected as campaign recipients.
+Wenn Sie Kontakte **importieren** (per CSV oder einzeln hinzufügen), werden diese validiert, verschlüsselt und gespeichert. Duplikate im selben Workspace werden zusammengeführt. Neue Kontakte sind **aktiv** (active) und können als Kampagnenempfänger ausgewählt werden.
 
-## Receiving campaigns
+## Kampagnen erhalten
 
-**Active** contacts are eligible for campaigns. When you choose an audience (all contacts, by tags, or manual), the app counts only active, non-suppressed contacts and shows a reach estimate. Sends, opens, clicks, bounces, and unsubscribes are recorded and drive both analytics and status changes.
+**Aktive** Kontakte sind für Kampagnen berechtigt. Wenn Sie eine Zielgruppe wählen (alle Kontakte, nach Tags oder manuell), zählt die App nur aktive, nicht unterdrückte Kontakte und zeigt eine Reichweitenschätzung an. Versendungen, Öffnungen, Klicks, Bounces und Abmeldungen werden erfasst und führen sowohl zu Analysen als auch zu Statusänderungen.
 
-## Status changes
+## Statusänderungen
 
-- **Unsubscribed** — Recipient used the unsubscribe link (or was marked unsubscribed manually). They are excluded from future campaign sends.
-- **Suppressed / Bounced** — The delivery provider reported a bounce or added the address to a suppression list. We sync with that list and exclude these contacts from future sends to protect deliverability.
+- **Abgemeldet (Unsubscribed)** — Der Empfänger hat den Abmelde-Link genutzt (oder wurde manuell als abgemeldet markiert). Er wird von zukünftigen Kampagnensendungen ausgeschlossen.
+- **Unterdrückt / Gebounct (Suppressed / Bounced)** — Der Zustellanbieter hat einen Bounce gemeldet oder die Adresse zu einer Sperrliste hinzugefügt. Wir synchronisieren uns mit dieser Liste und schließen diese Kontakte von zukünftigen Sendungen aus, um die Zustellbarkeit zu schützen.
 
-## Updates and removal
+## Aktualisierungen und Entfernung
 
-You can **update** contacts (name, tags) in the UI or by re-uploading a CSV with the same email. **Deleting** a contact removes them from the workspace; they no longer count toward your contact limit and cannot receive campaigns.
+Sie können Kontakte in der Benutzeroberfläche **aktualisieren** (Name, Tags) oder eine CSV mit derselben E-Mail-Adresse erneut hochladen. Das **Löschen** eines Kontakts entfernt ihn aus dem Workspace; er zählt nicht mehr zu Ihrem Kontaktlimit und kann keine Kampagnen mehr erhalten.
 
-## Summary
+## Zusammenfassung
 
-| State | Can receive campaigns? | Counts toward limit? |
-| ----- | ----------------------- | --------------------- |
-| Active | Yes | Yes |
-| Unsubscribed | No | Yes* |
-| Suppressed / Bounced | No | Yes* |
+| Status | Kann Kampagnen erhalten? | Zählt zum Limit? |
+| :--- | :--- | :--- |
+| Aktiv | Ja | Ja |
+| Abgemeldet | Nein | Ja* |
+| Unterdrückt / Gebounct | Nein | Ja* |
 
-\*Unsubscribed and suppressed contacts still count toward your plan’s contact limit; you can delete them to free space.
+\*Abgemeldete und unterdrückte Kontakte zählen weiterhin zu Ihrem Kontaktlimit; Sie können sie löschen, um Platz freizugeben.
 
-For step-by-step lifecycle details, see [Contact lifecycle (Contacts)](/en/contacts/lifecycle). For encryption and masking, see [Contacts overview](/en/contacts/overview).
+Detaillierte Schritt-für-Schritt-Informationen finden Sie unter [Kontakt-Lebenszyklus (Kontakte)](/de/contacts/lifecycle). Informationen zu Verschlüsselung und Maskierung finden Sie in der [Kontakte-Übersicht](/de/contacts/overview).

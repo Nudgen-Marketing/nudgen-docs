@@ -1,0 +1,66 @@
+---
+title: "CLIコマンド"
+description: "Nudgen CLIの全コマンドのリファレンス。"
+---
+
+## 概要
+
+Nudgen CLIで使用可能なコアコマンドを紹介します。ほとんどのコマンドはリソースタイプ（キャンペーン、連絡先、チームなど）ごとにグループ化されています。
+
+### 認証とアイデンティティ
+
+| コマンド | 説明 |
+| :--- | :--- |
+| `nudgen login` | 個人アクセスアクセストークン（PAT）で認証します。 |
+| `nudgen whoami` | 現在のトークン所有者とユーザー情報を表示します。 |
+| `nudgen logout` | ローカルの認証情報をクリアします。 |
+
+### チーム管理
+
+| コマンド | 説明 |
+| :--- | :--- |
+| `nudgen teams list` | 所属しているすべてのチームをリストします。 |
+| `nudgen teams current` | 現在のアクティブなチームコンテキストを表示します。 |
+| `nudgen teams switch <id>` | 特定のチームに切り替えます。 |
+
+### キャンペーン
+
+アクティブなチーム内のマーケティング活動を管理します。
+
+| コマンド | 説明 |
+| :--- | :--- |
+| `nudgen campaigns list` | カレントチームのアクティブなキャンペーンをリストします。 |
+| `nudgen campaigns create` | 対話型作成ウィザード。 |
+| `nudgen campaigns update <id>` | 既存のキャンペーン設定を変更します。 |
+| `nudgen campaigns delete <id>` | キャンペーンレコードを削除します。 |
+
+### 連絡先（リード管理）
+
+| コマンド | 説明 |
+| :--- | :--- |
+| `nudgen contacts list` | カレントチームのすべてのリードをリストします。 |
+| `nudgen contacts create` | リードレコードを手動で追加します。 |
+| `nudgen contacts import` | バルク取り込み用の対話型CSVマッパー。 |
+| `nudgen contacts update <id>` | リードの詳細を編集します。 |
+| `nudgen contacts delete <id>` | 連絡先レコードを削除します。 |
+
+### ブランドアイデンティティ
+
+| コマンド | 説明 |
+| :--- | :--- |
+| `nudgen brand list` | チームの全ブランドボイス（トーン）をリストします。 |
+| `nudgen brand create` | 新しいブランドボイスを初期化するウィザード。 |
+| `nudgen brand update <id>` | ブランド設定を編集します。 |
+| `nudgen brand delete <id>` | ブランドアイデンティティを削除します。 |
+
+### アフィリエイトと収益
+
+| コマンド | 説明 |
+| :--- | :--- |
+| `nudgen referral stats` | アフィリエイトのハイレベルなパフォーマンス概要を表示します。 |
+| `nudgen referral link` | あなた独自の紹介リンクを取得します。 |
+| `nudgen referral activity` | 最近のクリック履歴とサインアップを表示します。 |
+| `nudgen referral referrals` | あなたが紹介したチームとそのステータスをリストします。 |
+| `nudgen referral payouts` | 支払いリクエストの履歴とステータスを表示します。 |
+
+次に、[AIエージェント](/jp/cli/agentic-usage)での使用方法を確認しましょう。

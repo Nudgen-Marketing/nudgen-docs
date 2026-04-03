@@ -1,60 +1,60 @@
 ---
-title: "Sending and deliverability"
-description: "Emails not sending, bounces, and spam"
+title: "الإرسال وقابلية التسليم"
+description: "الرسائل لا تُرسل، الارتدادات، والسبام"
 ---
 
-## Emails not sending
+## الرسائل لا تُرسل
 
-**Campaign stuck or “sending” for a long time**
+**الحملة عالقة أو حالة "جاري الإرسال" (sending) مستمرة لفترة طويلة**
 
-- Sends are queued and processed in batches. Large campaigns can take time. Refresh the dashboard; if status stays “Sending” for hours, contact support.
-- Check that you haven’t hit your **daily or monthly email limit**. The app blocks new sends when you’re over cap. See [Billing](/en/billing/overview) and [Troubleshooting: billing](/en/troubleshooting/billing).
+- يتم وضع عمليات الإرسال في طابور ومعالجتها على دفعات. الحملات الكبيرة قد تستغرق وقتاً. حدّث لوحة التحكم؛ وإذا استمرت الحالة "جاري الإرسال" لساعات، فتواصل مع الدعم.
+- تأكد من أنك لم تتجاوز **حد البريد الإلكتروني اليومي أو الشهري**. يمنع التطبيق الإرسال الجديد عندما تتجاوز السقف. راجع [الفواتير](/ar/billing/overview) و [حل مشكلات الفواتير](/ar/troubleshooting/billing).
 
-**Test email didn’t arrive**
+**رسالة الاختبار لم تصل**
 
-- Check spam/junk. Add the sender to your contacts or safe senders.
-- Confirm the **account email** (where tests are sent) is correct in your profile.
-- Wait a few minutes; delivery can be delayed. Try again or send to a different address.
+- تحقق من مجلد الرسائل المزعجة (Spam/Junk). أضف المرسل لجهات اتصالك أو لقائمة المرسلين الآمنين.
+- تأكد من أن **بريد الحساب** (الذي تُرسل إليه الاختبارات) صحيح في ملفك الشخصي.
+- انتظر بضع دقائق؛ قد يتأخر التسليم قليلاً. حاول مرة أخرى أو أرسل لعنوان مختلف.
 
-**“No active contacts” or reach is zero**
+**"لا توجد جهات اتصال نشطة" أو تقدير الوصول صفر**
 
-- Upload or add at least one contact and ensure they’re **active** (not unsubscribed or suppressed). See [Contacts overview](/en/contacts/overview) and [Contact lifecycle](/en/contacts/lifecycle).
-- If you chose “By tags,” ensure some contacts have the selected tags.
+- ارفع أو أضف جهة اتصال واحدة على الأقل وتأكد من أنها **نشطة** (ليست ملغية الاشتراك أو محظورة). راجع [نظرة عامة على جهات الاتصال](/ar/contacts/overview) و [دورة حياة جهة الاتصال](/ar/contacts/lifecycle).
+- إذا اخترت "حسب الوسوم" (By tags)، فتأكد من أن بعض جهات الاتصال تحمل الوسوم المختارة.
 
-## Bounces and complaints
+## الارتدادات والشكاوى
 
-**High bounce rate**
+**ارتفاع معدل الارتداد (Bounce rate)**
 
-- **Hard bounces** (invalid address, domain doesn’t exist) are automatically suppressed. Remove or fix bad addresses in your list; avoid bought or scraped lists.
-- **Soft bounces** (mailbox full, server down) may be retried by the provider. Repeated soft bounces can lead to suppression. Clean your list and avoid role addresses (e.g. info@) unless they’re valid inboxes.
-- Keep bounce rate low (e.g. under 2%) to protect sender reputation. Use the [Dashboard](/en/dashboard/overview) and [Campaign analytics](/en/campaigns/analytics) to monitor.
+- **الارتدادات القاسية (Hard bounces)** (عنوان غير صالح، النطاق غير موجود) يتم حظرها تلقائياً. قم بإزالة أو تصحيح العناوين السيئة في قائمتك؛ وتجنب القوائم المشتراة أو المسحوبة من الويب.
+- **الارتدادات الناعمة (Soft bounces)** (صندوق البريد ممتلئ، الخادم معطل) قد يحاول المزود إعادة إرسالها. الارتداد الناعم المتكرر قد يؤدي للحظر. نظّف قائمتك وتجنب عناوين الأدوار (مثل info@) ما لم تكن صناديق بريد صالحة.
+- حافظ على معدل ارتداد منخفض (مثلاً أقل من 2%) لحماية سمعة المرسل. استخدم [لوحة التحكم](/ar/dashboard/overview) و [تحليلات الحملة](/ar/campaigns/analytics) للمراقبة.
 
-**Spam complaints**
+**شكاوى السبام (Spam complaints)**
 
-- Recipients marked the email as spam. We suppress complainers and they won’t receive future campaigns. Too many complaints hurt reputation.
-- Improve content: clear subject lines, relevant copy, obvious unsubscribe link. Don’t send to people who didn’t opt in. See [Deliverability basics](/en/concepts/deliverability-basics).
+- عندما يميز المستلم البريد كرسائل مزعجة، نقوم بحظره ولن يتلقى حملات مستقبلية. كثرة الشكاوى تضر بالسمعة.
+- حسن المحتوى: أسطر موضوع واضحة، نصوص ذات صلة، ورابط إلغاء اشتراك واضح. لا ترسل لأشخاص لم يوافقوا على الاشتراك. راجع [أساسيات قابلية التسليم](/ar/concepts/deliverability-basics).
 
-**Unsubscribes**
+**إلغاء الاشتراك (Unsubscribes)**
 
-- Unsubscribe links are required and honored. Unsubscribed contacts are excluded from future sends. This is normal and keeps you compliant.
+- روابط إلغاء الاشتراك مطلوبة ويتم احترامها. يتم استبعاد جهات الاتصال ملغية الاشتراك من الإرسال المستقبلي. هذا أمر طبيعي ويبقيك ممتثلاً للقوانين.
 
-## Tracking and metrics
+## التتبع والمقاييس
 
-**Opens or clicks not updating**
+**الفتحات أو النقرات لا تتحدث**
 
-- Tracking uses a pixel (opens) and signed links (clicks). Some clients block images or strip tracking; metrics can be undercounted.
-- Data can take a short time to appear. Refresh the campaign detail page or dashboard.
-- If a campaign shows zero opens/clicks for a long time after sends, check that links and images in the email are intact and that the campaign actually sent (check “Emails Sent” and “Emails Delivered”).
+- يستخدم التتبع بكسلاً (للفتحات) وروابط موقعة (للنقرات). بعض التطبيقات تمنع الصور أو تجرد التتبع؛ لذا قد تكون الأرقام أقل من الواقع.
+- قد تستغرق البيانات وقتاً قصيراً لتظهر. حدّث صفحة تفاصيل الحملة أو لوحة التحكم.
+- إذا أظهرت الحملة "صفر فتحات/نقرات" لفترة طويلة بعد الإرسال، فتأكد من سلامة الروابط والصور في البريد، وأن الحملة تم إرسالها فعلياً (تحقق من "الرسائل المرسلة" و "الرسائل المسلمة").
 
-**Analytics look wrong**
+**التحليلات تبدو خاطئة**
 
-- Ensure the **date range** includes the send date. Dashboard and campaign detail pages filter by selected range.
-- “Emails Sent” includes all attempts; “Emails Delivered” is successful delivery. CTR is (Total Clicks / Total Sent) × 100. See [Campaign analytics](/en/campaigns/analytics) and [Dashboard overview](/en/dashboard/overview).
+- تأكد من أن **النطاق الزمني** يتضمن تاريخ الإرسال. لوحة التحكم وصفحات تفاصيل الحملة تقوم بالتصفية حسب النطاق المختار.
+- "الرسائل المرسلة" تشمل جميع المحاولات؛ "الرسائل المسلمة" هي التي تم تسليمها بنجاح. معدل النقر (CTR) هو (إجمالي النقرات / إجمالي المرسل) × 100. راجع [تحليلات الحملة](/ar/campaigns/analytics) و [نظرة عامة على لوحة التحكم](/ar/dashboard/overview).
 
-## What we do to protect deliverability
+## ما نفعله لحماية قابلية التسليم
 
-- We send via our email provider and sync with their suppression list so we don’t resend to bounced or complained addresses.
-- Contacts are validated and we avoid sending to unsubscribed or suppressed contacts.
-- Content and signatures are sanitized; we may flag spam-prone wording when possible.
+- نرسل عبر مزود البريد الخاص بنا ونتزامن مع قائمة الحظر لديهم حتى لا نعيد الإرسال للعناوين المرتدة أو المشتكية.
+- يتم التحقق من صحة جهات الاتصال ونتجنب الإرسال لمن ألغوا اشتراكهم أو تم حظرهم.
+- يتم تنقية المحتوى والتوقيعات؛ وقد ننبّهك للكلمات المحفزة للسبام عند الإمكان.
 
-For more, see [Deliverability basics](/en/concepts/deliverability-basics) and [Contact lifecycle](/en/contacts/lifecycle).
+لمزيد من المعلومات، راجع [أساسيات قابلية التسليم](/ar/concepts/deliverability-basics) و [دورة حياة جهة الاتصال](/ar/contacts/lifecycle).

@@ -1,62 +1,62 @@
 ---
-title: "Dashboard overview"
-description: "Metrics, charts, and campaign summary"
+title: "Panele genel bakış"
+description: "Metrikler, grafikler ve kampanya özeti"
 ---
 
-## What this page helps you do
+## Bu sayfa size ne konuda yardımcı olur?
 
-Understand the main **Dashboard** view: aggregate metrics for your workspace, a time-series chart of activity, and a paginated table of campaigns with key stats. Use it to monitor sending health and performance at a glance.
+Ana **Panel (Dashboard)** görünümünü anlayın: Çalışma alanınız için toplam metrikler, aktivite için zaman serisi grafiği ve temel istatistikleri içeren sayfalandırılmış kampanya tablosu. Gönderim sağlığını ve performansını bir bakışta izlemek için kullanın.
 
-## Before you start
+## Başlamadan önce
 
-- A Nudgen account with at least one workspace
-- Optional: sent or scheduled campaigns so metrics and the chart have data
+- En az bir çalışma alanına sahip bir Nudgen hesabı
+- İsteğe bağlı: Metriklerin ve grafiğin veriye sahip olması için gönderilmiş veya planlanmış kampanyalar
 
-## Metric cards
+## Metrik kartları
 
-The dashboard shows summary cards for the selected date range:
+Panel, seçilen tarih aralığı için özet kartları gösterir:
 
-| Metric | Meaning |
-| ------ | ------- |
-| **Emails Sent** | Total number of all send attempts (including API or network failures). |
-| **Emails Delivered** | Number of emails successfully accepted by the recipient's mail server. |
-| **Total Opens** | How many times emails were opened (tracking pixel). |
-| **Total Clicks** | How many times links were clicked. |
-| **CTR** | Click-through rate: (Total Clicks / Total Sent) × 100. |
-| **Spam Complaints** | Number of times recipients marked your email as spam. |
-| **Soft Bounce** | Temporary delivery issues (mailbox full, throttling, transient server problems). |
-| **Hard Bounce** | Permanent delivery failures (invalid recipients, blocked domains). |
+| Metrik             | Anlamı                                                                  |
+| ------------------ | ----------------------------------------------------------------------- |
+| **E-postalar Gönderildi** | Tüm gönderim girişimlerinin toplam sayısı (API veya ağ hataları dahil). |
+| **E-postalar Teslim Edildi** | Alıcının posta sunucusu tarafından başarıyla kabul edilen e-posta sayısı. |
+| **Toplam Açılmalar** | E-postaların kaç kez açıldığı (takip pikseli).                          |
+| **Toplam Tıklamalar** | Bağlantıların kaç kez tıklandığı.                                      |
+| **CTR**            | Tıklama oranı: (Toplam Tıklama / Toplam Gönderim) × 100.                |
+| **Spam Şikayetleri** | Alıcıların e-postayı kaç kez spam olarak işaretlediği.                  |
+| **Soft Bounce**    | Geçici teslimat sorunları (posta kutusu dolu, hız sınırlaması, geçici sunucu problemleri). |
+| **Hard Bounce**    | Kalıcı teslimat hataları (geçersiz alıcılar, engellenen alan adları).   |
 
-Use these to judge deliverability (delivered vs sent, bounces) and engagement (opens, clicks, CTR). High spam complaints or bounces can hurt sender reputation.
+Teslim edilebilirliği (teslim edilen vs gönderilen, bounce'lar) ve etkileşimi (açılmalar, tıklamalar, CTR) değerlendirmek için bunları kullanın. Yüksek spam şikayetleri veya bounce'lar gönderici itibarına zarar verebilir.
 
-## Time-series chart
+## Zaman serisi grafiği
 
-A line chart shows how metrics change over the selected date range. You can adjust the range with the date picker. Use it to spot trends (e.g. opens dropping, bounces spiking) and correlate with campaign launches.
+Bir çizgi grafik, metriklerin seçilen tarih aralığında nasıl değiştiğini gösterir. Tarih seçici ile aralığı ayarlayabilirsiniz. Eğilimleri (örneğin açılmaların düşmesi, bounce'ların fırlaması) tespit etmek ve kampanya lansmanları ile ilişkilendirmek için kullanın.
 
-## Campaigns table
+## Kampanyalar tablosu
 
-A paginated table lists campaigns with columns such as name, type (one-time or drip), status, and counts (sent, delivered, opened, clicked, bounces, complaints). Use pagination to browse; click a campaign to open its detail page for recipient-level activity and per-campaign time-series.
+Sayfalandırılmış bir tablo; kampanya adı, türü (tek seferlik veya drip), durumu ve sayıları (gönderilen, teslim edilen, açılan, tıklanan, bounce'lar, şikayetler) içeren sütunlarla listeler. Gezinmek için sayfalandırmayı kullanın; alıcı düzeyindeki aktivite ve kampanya bazlı zaman serileri için kampanya detay sayfasını açmak üzere bir kampanyaya tıklayın.
 
-## Date range
+## Tarih aralığı
 
-The default range is often the last 7 days. Change the range to focus on a specific period or compare different weeks. Stats and the chart update to reflect the selected range.
+Varsayılan aralık genellikle son 7 gündür. Belirli bir döneme odaklanmak veya farklı haftaları karşılaştırmak için aralığı değiştirin. İstatistikler ve grafik, seçilen aralığı yansıtacak şekilde güncellenir.
 
-## What happens next
+## Sırada ne var?
 
-- Open a campaign row to see [campaign analytics](/en/campaigns/analytics): recipient activity and detailed metrics.
-- Check [Billing](/en/billing/overview) for usage vs plan limits.
-- Use [Troubleshooting](/en/troubleshooting) if metrics look wrong or emails aren’t sending.
+- Alıcı aktivitesini ve detaylı metrikleri görmek için bir kampanya satırını açarak [kampanya analizlerine](/tr/campaigns/analytics) bakın.
+- Kullanım ve plan limitleri için [Faturalandırma](/tr/billing/overview) bölümünü kontrol edin.
+- Metrikler yanlış görünüyorsa veya e-postalar gönderilmiyorsa [Sorun Giderme](/tr/troubleshooting) bölümüne bakın.
 
-## Related docs
+## İlgili dokümanlar
 
 <CardGroup cols={2}>
-  <Card title="Campaign analytics" icon="chart-line" href="/en/campaigns/analytics">
-    Per-campaign metrics and recipient activity.
+  <Card title="Kampanya analizleri" icon="chart-line" href="/tr/campaigns/analytics">
+    Kampanya bazlı metrikler ve alıcı aktivitesi.
   </Card>
-  <Card title="Campaigns overview" icon="list" href="/en/campaigns/overview">
-    Campaign types and statuses.
+  <Card title="Kampanyalara genel bakış" icon="list" href="/tr/campaigns/overview">
+    Kampanya türleri ve durumları.
   </Card>
-  <Card title="Deliverability basics" icon="shield" href="/en/concepts/deliverability-basics">
-    How we keep emails out of spam.
+  <Card title="Teslim edilebilirlik temelleri" icon="shield" href="/tr/concepts/deliverability-basics">
+    E-postaları spam kutusundan nasıl uzak tutuyoruz?
   </Card>
 </CardGroup>

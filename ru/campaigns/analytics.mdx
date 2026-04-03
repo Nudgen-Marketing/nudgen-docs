@@ -1,77 +1,77 @@
 ---
-title: "Campaign analytics"
-description: "Metrics, delivery rates, time-series charts, and recipient activity"
+title: "Аналитика кампаний"
+description: "Метрики, показатели доставки, графики по времени и активность получателей"
 ---
 
-## What this page helps you do
+## Что вы узнаете на этой странице
 
-Understand how your campaigns perform: how many emails were sent, delivered, opened, and clicked. You'll also see delivery success and failure rates, plus per-recipient activity.
+Вы узнаете, как работают ваши кампании: сколько писем было отправлено, доставлено, открыто и сколько было кликов. Вы также увидите показатели успешности и ошибок доставки, а также активность по каждому получателю.
 
-## Before you start
+## Перед началом работы
 
-- At least one campaign that has been sent (or is sending)
-- Access to the campaign detail page
+- Хотя бы одна кампания, которая была отправлена (или находится в процессе отправки).
+- Доступ к детальной странице кампании.
 
-## Metric cards
+## Карточки метрик
 
-On the campaign detail page, you'll see:
+На детальной странице кампании вы увидите:
 
-| Metric            | Meaning                                                                 |
-| ----------------- | ----------------------------------------------------------------------- |
-| **Emails Sent**   | Total send attempts (including API or network failures).                |
-| **Emails Delivered** | Emails successfully accepted by the recipient's mail server.        |
-| **Total Opens**   | Number of times the email was opened (tracking pixel).                  |
-| **Total Clicks**  | Number of times links were clicked.                                    |
-| **CTR**           | Click-through rate: (Total Clicks / Total Sent) × 100.                 |
-| **Spam Complaints** | Number of times recipients marked the email as spam.                 |
-| **Soft Bounce**   | Temporary delivery issues (mailbox full, throttling, transient errors).  |
-| **Hard Bounce**   | Permanent delivery failures (invalid address, blocked domain).          |
+| Метрика            | Значение                                                                 |
+| ----------------- | -------------------------------------------------------------------------- |
+| **Emails Sent**   | Общее количество попыток отправки (включая ошибки API или сети). |
+| **Emails Delivered** | Письма, успешно принятые почтовым сервером получателя. |
+| **Total Opens**   | Количество открытий письма (отслеживается пикселем). |
+| **Total Clicks**  | Количество кликов по ссылкам. |
+| **CTR**           | Показатель кликабельности: (Всего кликов / Всего отправлено) × 100. |
+| **Spam Complaints** | Количество раз, когда получатели пометили письмо как спам. |
+| **Soft Bounce**   | Временные проблемы с доставкой (ящик переполнен, ограничения провайдера, временные ошибки). |
+| **Hard Bounce**   | Критические ошибки доставки (неверный адрес, заблокированный домен). |
 
-## Delivery success and failure
+## Успех и ошибки доставки
 
-- **Success rate** = (delivered / sent) × 100
-- **Failure rate** = (bounced + failed) / sent × 100
+- **Success rate (Успешность)** = (доставлено / отправлено) × 100
+- **Failure rate (Ошибки)** = (возвраты + ошибки) / отправлено × 100
 
-A high failure rate can hurt your sender reputation. Remove or correct bounced addresses and avoid invalid contacts.
+Высокий процент ошибок (failure rate) может испортить вашу репутацию отправителя. Удаляйте или исправляйте адреса с жестким возвратом и избегайте недействительных контактов.
 
-## Time-series chart
+## График эффективности
 
-The performance chart shows metrics over time (by day, week, or month). Use the granularity toggle to switch views. Toggle individual metrics on/off to focus on opens, clicks, or delivery.
+График показывает изменение метрик со временем (по дням, неделям или месяцам). Используйте переключатель детализации, чтобы изменить вид. Можно включать и выключать отдельные метрики, чтобы сфокусироваться на открытиях, кликах или доставке.
 
-## Date range picker
+## Выбор диапазона дат
 
-Filter metrics and the chart by date range. Default is usually the full campaign period. Adjust to compare specific weeks or focus on recent activity.
+Фильтруйте метрики и график по датам. По умолчанию обычно отображается весь период кампании. Изменяйте диапазон, чтобы сравнить конкретные недели или посмотреть на недавнюю активность.
 
-## Recipient activity table
+## Таблица активности получателей
 
-See per-contact status:
+Здесь можно увидеть статус по каждому контакту:
 
-- **Contact** — Email (masked unless revealed) and name
-- **Status** — Latest event: sent, delivered, opened, clicked, bounced
-- **Sent at** — When the email was sent
-- **Delivered at** — When delivery was confirmed (if available)
-- **Opened at** — First open timestamp
-- **Clicked at** — First click timestamp
+- **Contact (Контакт)** — Email (маскированный, пока не будет открыт) и имя.
+- **Status (Статус)** — Последнее событие: отправлено, доставлено, открыто, клик, возврат.
+- **Sent at (Отправлено)** — Когда было отправлено письмо.
+- **Delivered at (Доставлено)** — Когда доставка была подтверждена (если доступно).
+- **Opened at (Открыто)** — Время первого открытия.
+- **Clicked at (Клик)** — Время первого клика.
 
-Use this to:
+Используйте это, чтобы:
 
-- Find engaged users for follow-up
-- Identify bounces for list cleanup
-- Debug delivery issues for specific addresses
+- Найти вовлеченных пользователей для последующей связи.
+- Выявить адреса с ошибками доставки для очистки списка.
+- Разобраться в проблемах доставки для конкретных адресов.
 
-## What happens next
+## Что дальше
 
-- Use insights to refine future campaigns (subject lines, tone, timing).
-- Remove bounced contacts from your list to protect deliverability.
-- Check [billing](/en/billing/overview) for email send limits if you're approaching your plan cap.
+- Используйте полученные данные для улучшения будущих кампаний (темы, тон, время отправки).
+- Удаляйте контакты с ошибками доставки, чтобы защитить свою репутацию отправителя.
+- Следите за лимитами в разделе [Оплата (Billing)](/ru/billing/overview), если вы приближаетесь к ограничениям своего тарифа.
 
-## Related docs
+## Связанные документы
 
 <CardGroup cols={2}>
-  <Card title="Manage campaigns" icon="pen-to-square" href="/en/campaigns/manage">
-    Edit, send, schedule, stop.
+  <Card title="Управление кампаниями" icon="pen-to-square" href="/ru/campaigns/manage">
+    Редактирование, отправка, планирование, остановка.
   </Card>
-  <Card title="Billing & usage" icon="credit-card" href="/en/billing/overview">
-    Plan limits and usage meters.
+  <Card title="Биллинг и использование" icon="credit-card" href="/ru/billing/overview">
+    Лимиты планов и счетчики использования.
   </Card>
 </CardGroup>

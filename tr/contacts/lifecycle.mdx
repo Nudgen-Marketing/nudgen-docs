@@ -1,48 +1,48 @@
 ---
-title: "Contact lifecycle"
-description: "Import, updates, unsubscribes, and suppression"
+title: "Kişi yaşam döngüsü"
+description: "İçe aktarma, güncellemeler, abonelik iptali ve engelleme"
 ---
 
-## What this page helps you do
+## Bu sayfa size ne konuda yardımcı olur?
 
-Understand how contacts move from import through engagement and suppression. This helps you keep your list healthy and avoid sending to bad or opted-out addresses.
+Kişilerin içe aktarma işleminden etkileşim ve engellemeye kadar nasıl ilerlediğini anlayın. Bu, listenizi sağlıklı tutmanıza ve hatalı veya abonelikten çıkmış adreslere e-posta göndermekten kaçınmanıza yardımcı olur.
 
-## Lifecycle stages
+## Yaşam döngüsü aşamaları
 
-### Import and storage
+### İçe aktarma ve saklama
 
-- You add contacts via **Upload CSV** or **Add contact**. Emails and names are validated and encrypted at rest.
-- Duplicates (same email in the same workspace) are merged on upload; existing contacts may be updated.
-- New contacts start as **active** and can receive campaigns until something changes their status.
+- **CSV Yükle (Upload CSV)** veya **Kişi Ekle (Add contact)** yoluyla kişileri eklersiniz. E-postalar ve isimler doğrulanır ve veri tabanında şifrelenmiş olarak saklanır.
+- Aynı çalışma alanındaki yinelenenler (aynı e-posta) yükleme sırasında birleştirilir; mevcut kişiler güncellenebilir.
+- Yeni kişiler **aktif** olarak başlar ve durumlarını değiştiren bir şey olana kadar kampanya alabilirler.
 
-### Active and receiving
+### Aktif ve alıcı
 
-- **Active** contacts count toward your plan limit and can be included in campaign audiences (all, by tags, or manual).
-- They receive emails when you send or run a drip. Opens, clicks, and bounces are recorded and reflected in analytics and suppression.
+- **Aktif** kişiler plan limitinize sayılır ve kampanya hedef kitlelerine (tümü, etiketlere göre veya manuel) dahil edilebilirler.
+- Gönderim yaptığınızda veya bir drip sekansı çalıştırdığınızda e-posta alırlar. Açılmalar, tıklamalar ve bounce'lar (geri dönenler) kaydedilir ve analizlere ve engellemelere yansıtılır.
 
-### Unsubscribe
+### Abonelikten Ayrılma
 
-- When a recipient clicks the **unsubscribe** link in an email, they are marked **unsubscribed** and are excluded from future campaign sends.
-- You can still see them in the contact list. Some teams manually re-subscribe in rare cases; the app respects the unsubscribed status unless you change it.
+- Bir alıcı e-postadaki **abonelikten ayrıl (unsubscribe)** bağlantısına tıkladığında, **abonelikten ayrıldı (unsubscribed)** olarak işaretlenir ve gelecekteki kampanya gönderimlerinden hariç tutulur.
+- Onları hala kişi listesinde görebilirsiniz. Bazı ekipler nadir durumlarda manuel olarak tekrar abone yapar; uygulama, siz durumunu değiştirmedikçe abonelikten ayrılma durumuna saygı gösterir.
 
-### Bounces and suppression
+### Bounce'lar (Geri Dönenler) ve Engelleme
 
-- **Soft bounces** (e.g. mailbox full, temporary failure) may be retried by the delivery provider. Repeated failures can lead to suppression.
-- **Hard bounces** (invalid address, domain doesn’t exist) are suppressed immediately. We sync with the delivery provider’s suppression list so those addresses are not used again.
-- Suppressed or bounced contacts are excluded from future sends to protect your sender reputation and deliverability.
+- **Soft bounce**'lar (örneğin posta kutusu dolu, geçici hata) teslimat sağlayıcısı tarafından yeniden denenebilir. Tekrarlanan hatalar engellemeye yol açabilir.
+- **Hard bounce**'lar (geçersiz adres, alan adı mevcut değil) anında engellenir. Teslimat sağlayıcısının engelleme listesiyle senkronizasyon yapıyoruz, böylece bu adresler tekrar kullanılmaz.
+- Engellenen veya bounce olan kişiler, gönderici itibarınızı ve teslim edilebilirliğinizi korumak için gelecekteki gönderimlerden hariç tutulur.
 
-### Updates and deletion
+### Güncellemeler ve silme
 
-- You can edit contact details (e.g. name, tags) in the contact list. Re-uploading a CSV with the same email updates that contact.
-- Deleting a contact removes them from the workspace. They no longer count toward limits and cannot receive campaigns.
+- Kişi detaylarını (örneğin isim, etiketler) kişi listesinde düzenleyebilirsiniz. Aynı e-postaya sahip bir CSV'yi yeniden yüklemek o kişiyi günceller.
+- Bir kişiyi silmek onu çalışma alanından kaldırır. Artık limitlere dahil edilmez ve kampanya alamazlar.
 
-## How this affects campaigns
+## Bu kampanyaları nasıl etkiler?
 
-- When you pick an audience (all, tags, or manual), only **active** contacts that are not suppressed are included. The wizard’s reach estimate reflects that.
-- Drip campaigns skip later steps for contacts who unsubscribed or were suppressed after an earlier step.
+- Bir hedef kitle seçtiğinizde (tümü, etiketler veya manuel), yalnızca engellenmemiş olan **aktif** kişiler dahil edilir. Sihirbazın erişim tahmini bunu yansıtır.
+- Drip kampanyaları, daha önceki bir adımdan sonra abonelikten ayrılan veya engellenen kişiler için sonraki adımları atlar.
 
-## What happens next
+## Sırada ne var?
 
-- [Contacts overview](/en/contacts/overview) — Encryption, masking, and tags.
-- [Upload contacts](/en/contacts/upload) — CSV format and validation.
-- [Deliverability basics](/en/concepts/deliverability-basics) — Bounces and sender reputation.
+- [Kişilere genel bakış](/tr/contacts/overview) — Şifreleme, maskeleme ve etiketler.
+- [Kişileri yükle](/tr/contacts/upload) — CSV formatı ve doğrulama.
+- [Teslim edilebilirlik temelleri](/tr/concepts/deliverability-basics) — Bounce'lar ve gönderici itibarı.

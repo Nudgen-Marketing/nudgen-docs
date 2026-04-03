@@ -1,71 +1,64 @@
 ---
-title: "Email signatures"
-description: "Create, edit, and use signatures in campaigns"
+title: "이메일 서명"
+description: "캠페인에서 사용할 서명 생성, 편집 및 관리"
 ---
 
-## What this page helps you do
+## 이 페이지의 도움말
+재사용 가능한 이메일 서명을 만들고 캠페인에 첨부하는 방법을 설명합니다. 서명은 AI가 생성한 이메일 하단에 표시되어 수신자가 귀하의 이름, 직함 및 연락처 정보를 확인할 수 있게 합니다.
 
-Create reusable email signatures and attach them to campaigns. Signatures appear at the bottom of AI-generated emails so recipients see your name, title, and contact details.
+## 시작하기 전에
+- Nudgen 계정
+- 소유자(Owner), 관리자(Admin) 또는 멤버(Member) 권한
 
-## Before you start
+## 서명 생성하기
+1. **설정(Settings)** → **서명(Signatures)** 메뉴로 이동합니다.
+2. **새 서명(New signature)** 또는 **서명 추가(Add signature)**를 클릭합니다.
+3. 선택 시 식별할 수 있도록 **서명 이름**(예: "기본", "영업팀", "지원팀")을 입력합니다.
+4. 서명 내용을 작성하세요. 다음 형식을 사용할 수 있습니다:
+   - 일반 텍스트
+   - 기본 서식 (굵게, 링크, 줄 바꿈)
+   - 지원되는 경우 HTML
+5. 저장합니다.
 
-- A Nudgen account
-- Owner, admin, or member access
+## 캠페인에서 서명 사용하기
+캠페인을 생성하거나 편집할 때 첨부할 서명을 선택하세요. 캠페인이 발송될 때 이메일 본문 하단에 서명이 추가됩니다. 여러 개의 서명을 만들어 두고 캠페인의 목적(예: 영업 vs 상담)에 맞는 서명을 골라 사용할 수 있습니다.
 
-## Create a signature
-
-1. Go to **Settings** → **Signatures**.
-2. Click **New signature** or **Add signature**.
-3. Enter a **name** (e.g. "Default", "Sales", "Support") so you can identify it when selecting.
-4. Add your signature content. You can use:
-   - Plain text
-   - Basic formatting (bold, links, line breaks)
-   - HTML if supported
-5. Save.
-
-## Use a signature in campaigns
-
-When creating or editing a campaign, choose which signature to attach. The signature is appended to the email body when the campaign is sent. You can have multiple signatures and pick the right one per campaign (e.g. sales vs support).
-
-## Edit or delete
-
-- **Edit:** Open the signature, change the content or name, save.
-- **Delete:** Remove the signature. Campaigns that already used it keep the content that was sent; future campaigns will need a different signature selected.
+## 수정 및 삭제
+- **수정:** 서명을 열어 내용이나 이름을 변경한 후 저장하세요.
+- **삭제:** 서명을 제거합니다. 이미 해당 서명으로 발송된 캠페인의 내용은 유지되지만, 향후 캠페인에는 다른 서명을 선택해야 합니다.
 
 <Warning>
-If you delete a signature that's still selected in a draft campaign, you'll need to pick another signature before sending.
+초안 캠페인에서 선택된 서명을 삭제하는 경우, 발송 전 반드시 다른 서명을 다시 선택해야 합니다.
 </Warning>
 
-## Content expectations and safety
+## 권장 사항 및 유의 사항
+- 서명은 간결하게 유지하는 것이 좋습니다. 너무 긴 서명은 스팸 필터에 걸리거나 전문성이 떨어져 보일 수 있습니다.
+- 너무 큰 이미지나 복잡한 레이아웃은 피하세요. 한두 개의 링크가 포함된 심플한 텍스트가 가장 효과적입니다.
+- 이름, 직함, 연락 방법(이메일 또는 링크)을 포함하세요. 회사 이름이나 로고는 선택 사항입니다.
+- 서명은 이메일에 추가되기 전에 보안 검사를 거칩니다. 위험한 콘텐츠는 자동으로 제거되며 안전한 HTML과 링크만 허용됩니다.
 
-- Keep signatures concise. Long signatures can trigger spam filters or look unprofessional.
-- Avoid large images or complex layouts. Simple text with a link or two works best.
-- Include your name, title, and contact method (email or link). Optional: company name, logo.
-- Signatures are sanitized before being appended to emails to prevent injection. Only safe HTML and links are allowed; risky content is stripped.
+## 다음 단계
+- [캠페인 생성](/ko/campaigns/create) 시 발송 전 서명을 선택하세요.
+- 각 팀이나 용도에 맞게 여러 개의 서명을 만들어 활용해 보세요.
 
-## What happens next
-
-- [Create a campaign](/en/campaigns/create) and select your signature before sending.
-- Create multiple signatures for different teams or use cases.
-
-## Troubleshooting
+## 문제 해결
 
 <AccordionGroup>
-  <Accordion title="Signature doesn't appear in the email">
-    Ensure you selected the signature when creating or editing the campaign. Check the preview before sending.
+  <Accordion title="이메일에 서명이 보이지 않습니다">
+    캠페인을 생성하거나 편집할 때 서명을 선택했는지 확인하세요. 발송 전 미리보기를 통해 다시 점검해 보시기 바랍니다.
   </Accordion>
-  <Accordion title="Formatting looks wrong">
-    Stick to simple formatting. Complex HTML may not render consistently across email clients.
+  <Accordion title="서식이 깨져 보입니다">
+    가급적 심플한 서식을 사용하세요. 복잡한 HTML은 이메일 클라이언트에 따라 일관되게 표시되지 않을 수 있습니다.
   </Accordion>
 </AccordionGroup>
 
-## Related docs
+## 관련 문서
 
 <CardGroup cols={2}>
-  <Card title="Create campaigns" icon="paper-plane" href="/en/campaigns/create">
-    Attach a signature when creating a campaign.
+  <Card title="캠페인 생성" icon="paper-plane" href="/ko/campaigns/create">
+    캠페인 생성 시 서명을 첨부하는 방법.
   </Card>
-  <Card title="Account settings" icon="gear" href="/en/settings/account">
-    Overview of all settings.
+  <Card title="계정 설정" icon="gear" href="/ko/settings/account">
+    모든 설정 메뉴 개요.
   </Card>
 </CardGroup>

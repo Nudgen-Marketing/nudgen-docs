@@ -1,35 +1,35 @@
 ---
-title: "Contact lifecycle"
-description: "How contacts move through import, engagement, and suppression"
+title: "دورة حياة جهة الاتصال"
+description: "كيف تنتقل جهات الاتصال عبر الاستيراد، التفاعل، والحظر"
 ---
 
-Contacts in Nudgen move through a simple lifecycle from import to active sending, and sometimes to unsubscribed or suppressed. Understanding this helps you keep lists clean and stay within limits.
+تنتقل جهات الاتصال في Nudgen عبر دورة حياة بسيطة من الاستيراد إلى الإرسال النشط، وأحياناً إلى إلغاء الاشتراك أو الحظر. فهم هذه العملية يساعدك في الحفاظ على نظافة قوائمك والبقاء ضمن الحدود المسموحة.
 
-## From import to active
+## من الاستيراد إلى النشاط
 
-When you **import** contacts (CSV or add one-by-one), they are validated, encrypted, and stored. Duplicates in the same workspace are merged. New contacts are **active** and can be selected as campaign recipients.
+عندما تقوم بـ **استيراد** جهات الاتصال (عبر ملف CSV أو الإضافة الفردية)، يتم التحقق من صحتها وتشفيرها وتخزينها. يتم دمج التكرارات في نفس مساحة العمل. جهات الاتصال الجديدة تكون **نشطة (Active)** ويمكن اختيارها كمستلمين للحملات.
 
-## Receiving campaigns
+## تلقي الحملات
 
-**Active** contacts are eligible for campaigns. When you choose an audience (all contacts, by tags, or manual), the app counts only active, non-suppressed contacts and shows a reach estimate. Sends, opens, clicks, bounces, and unsubscribes are recorded and drive both analytics and status changes.
+تكون جهات الاتصال **النشطة** مؤهلة لتلقي الحملات. عندما تختار جمهوراً (جميع جهات الاتصال، حسب الوسوم، أو يدوياً)، يحسب التطبيق فقط جهات الاتصال النشطة وغير المحظورة ويظهر تقديراً لمدى الوصول. يتم تسجيل عمليات الإرسال، والفتح، والنقرات، والارتدادات، وإلغاءات الاشتراك، وهي التي تقود كلاً من التحليلات وتغييرات الحالة.
 
-## Status changes
+## تغييرات الحالة
 
-- **Unsubscribed** — Recipient used the unsubscribe link (or was marked unsubscribed manually). They are excluded from future campaign sends.
-- **Suppressed / Bounced** — The delivery provider reported a bounce or added the address to a suppression list. We sync with that list and exclude these contacts from future sends to protect deliverability.
+- **ملغي الاشتراك (Unsubscribed)** — استخدم المستلم رابط إلغاء الاشتراك (أو تم تمييزه يدوياً كملغى الاشتراك). يتم استبعادهم من إرسال الحملات المستقبلية.
+- **محظور / مرتد (Suppressed / Bounced)** — أبلغ مزود خدمة الإرسال عن ارتداد الرسالة أو أضاف العنوان إلى قائمة الحظر. نحن نتزامن مع تلك القائمة ونستبعد هذه الأسماء من الإرسال المستقبلي لحماية سمعة الإرسال (deliverability).
 
-## Updates and removal
+## التحديثات والإزالة
 
-You can **update** contacts (name, tags) in the UI or by re-uploading a CSV with the same email. **Deleting** a contact removes them from the workspace; they no longer count toward your contact limit and cannot receive campaigns.
+يمكنك **تحديث** بيانات جهات الاتصال (الاسم، الوسوم) في واجهة المستخدم أو عبر إعادة رفع ملف CSV بنفس البريد الإلكتروني. **حذف** جهة الاتصال يزيلها من مساحة العمل؛ ولا تعد تُحسب ضمن حد جهات الاتصال لباقتك ولا يمكنها تلقي حملات.
 
-## Summary
+## ملخص
 
-| State | Can receive campaigns? | Counts toward limit? |
+| الحالة | هل يمكن تلقي الحملات؟ | هل تُحسب ضمن الحد؟ |
 | ----- | ----------------------- | --------------------- |
-| Active | Yes | Yes |
-| Unsubscribed | No | Yes* |
-| Suppressed / Bounced | No | Yes* |
+| نشط (Active) | نعم | نعم |
+| ملغي الاشتراك (Unsubscribed) | لا | نعم* |
+| محظور / مرتد (Suppressed / Bounced) | لا | نعم* |
 
-\*Unsubscribed and suppressed contacts still count toward your plan’s contact limit; you can delete them to free space.
+\* جهات الاتصال ملغية الاشتراك والمحظورة تظل تُحسب ضمن حد جهات الاتصال لباقتك؛ يمكنك حذفهم لتوفر مساحة.
 
-For step-by-step lifecycle details, see [Contact lifecycle (Contacts)](/en/contacts/lifecycle). For encryption and masking, see [Contacts overview](/en/contacts/overview).
+لتفاصيل أكثر عن دورة الحياة خطوة بخطوة، راجع [دورة حياة جهة الاتصال (جهات الاتصال)](/ar/contacts/lifecycle). وللتشفير وإخفاء البيانات، راجع [نظرة عامة على جهات الاتصال](/ar/contacts/overview).

@@ -1,48 +1,48 @@
 ---
-title: "Contact lifecycle"
-description: "Import, updates, unsubscribes, and suppression"
+title: "دورة حياة جهة الاتصال"
+description: "الاستيراد، التحديثات، إلغاء الاشتراك، والحظر"
 ---
 
-## What this page helps you do
+## ما الذي تساعدك هذه الصفحة على القيام به
 
-Understand how contacts move from import through engagement and suppression. This helps you keep your list healthy and avoid sending to bad or opted-out addresses.
+فهم كيفية انتقال جهات الاتصال من الاستيراد عبر التفاعل والوصول إلى الحظر. يساعدك هذا في الحفاظ على صحة قائمتك وتجنب الإرسال إلى عناوين سيئة أو من سحبوا موافقتهم.
 
-## Lifecycle stages
+## مراحل دورة الحياة
 
-### Import and storage
+### الاستيراد والتخزين
 
-- You add contacts via **Upload CSV** or **Add contact**. Emails and names are validated and encrypted at rest.
-- Duplicates (same email in the same workspace) are merged on upload; existing contacts may be updated.
-- New contacts start as **active** and can receive campaigns until something changes their status.
+- تقوم بإضافة جهات الاتصال عبر **رفع ملف CSV (Upload CSV)** أو **إضافة جهة اتصال (Add contact)** بشكل يدوي. يتم التحقق من صحة الأسماء ورسائل البريد وتشفيرها عند التخزين.
+- يتم دمج التكرارات (نفس البريد في نفس مساحة العمل) عند الرف؛ وقد يتم تحديث جهات الاتصال الموجودة مسبقاً.
+- تبدأ جهات الاتصال الجديدة كـ **نشطة (Active)** ويمكنها تلقي الحملات حتى تتغير حالتها لسبب ما.
 
-### Active and receiving
+### النشاط والتلقي
 
-- **Active** contacts count toward your plan limit and can be included in campaign audiences (all, by tags, or manual).
-- They receive emails when you send or run a drip. Opens, clicks, and bounces are recorded and reflected in analytics and suppression.
+- جهات الاتصال **النشطة** تُحسب ضمن حد باقتك ويمكن تضمينها في جمهور الحملة (الكل، حسب الوسوم، أو يدوياً).
+- يتلقون رسائل البريد الإلكتروني عندما ترسل حملة أو تشغل تسلسل تنقيط. يتم تسجيل عمليات الفتح والنقر والارتداد وتنعكس في التحليلات والحظر.
 
-### Unsubscribe
+### إلغاء الاشتراك (Unsubscribe)
 
-- When a recipient clicks the **unsubscribe** link in an email, they are marked **unsubscribed** and are excluded from future campaign sends.
-- You can still see them in the contact list. Some teams manually re-subscribe in rare cases; the app respects the unsubscribed status unless you change it.
+- عندما ينقر المستلم على رابط **إلغاء الاشتراك** في البريد الإلكتروني، يتم تمييزه كـ **ملغي الاشتراك (Unsubscribed)** ويتم استبعاده من إرسال الحملات المستقبلية.
+- لا يمكنك رؤيتهم في قائمة جهات الاتصال. بعض الفرق تقوم بإعادة الاشتراك يدوياً في حالات نادرة؛ ويحترم التطبيق حالة إلغاء الاشتراك ما لم تقم بتغييرها.
 
-### Bounces and suppression
+### الارتداد والحظر (Bounces and suppression)
 
-- **Soft bounces** (e.g. mailbox full, temporary failure) may be retried by the delivery provider. Repeated failures can lead to suppression.
-- **Hard bounces** (invalid address, domain doesn’t exist) are suppressed immediately. We sync with the delivery provider’s suppression list so those addresses are not used again.
-- Suppressed or bounced contacts are excluded from future sends to protect your sender reputation and deliverability.
+- **الارتداد الناعم (Soft bounce)** (مثلاً: صندوق بريد ممتلئ، فشل مؤقت) قد يحاول مزود الخدمة إعادة إرساله. الفشل المتكرر قد يؤدي للحظر.
+- **الارتداد القاسي (Hard bounce)** (عنوان غير صالح، النطاق غير موجود) يتم حظره فوراً. نحن نتزامن مع قائمة الحظر الخاصة بمزود الخدمة بحيث لا يتم استخدام تلك العناوين مرة أخرى.
+- يتم استبعاد جهات الاتصال المحظورة أو المرتدة من الإرسال المستقبلي لحماية سمعة الإرسال الخاصة بك.
 
-### Updates and deletion
+### التحديثات والحذف
 
-- You can edit contact details (e.g. name, tags) in the contact list. Re-uploading a CSV with the same email updates that contact.
-- Deleting a contact removes them from the workspace. They no longer count toward limits and cannot receive campaigns.
+- يمكنك تعديل تفاصيل جهة الاتصال (مثل الاسم، الوسوم) في قائمة جهات الاتصال. إعادة رفع ملف CSV بنفس البريد الإلكتروني تؤدي لتحديث تلك البيانات.
+- حذف جهة الاتصال يزيلها من مساحة العمل. ولن تعود تُحسب ضمن حدود الباقة ولا يمكنها تلقي حملات.
 
-## How this affects campaigns
+## كيف يؤثر ذلك على الحملات
 
-- When you pick an audience (all, tags, or manual), only **active** contacts that are not suppressed are included. The wizard’s reach estimate reflects that.
-- Drip campaigns skip later steps for contacts who unsubscribed or were suppressed after an earlier step.
+- عندما تختار جمهوراً (الكل، الوسوم، أو يدوياً)، يتم تضمين جهات الاتصال **النشطة** فقط والتي لم يتم حظرها. يعكس تقدير مدى الوصول في المعالج هذا الأمر.
+- تتجاوز حملات التنقيط الخطوات اللاحقة لجهات الاتصال الذين ألغوا اشتراكهم أو تم حظرهم بعد خطوة سابقة.
 
-## What happens next
+## ماذا يحدث بعد ذلك؟
 
-- [Contacts overview](/en/contacts/overview) — Encryption, masking, and tags.
-- [Upload contacts](/en/contacts/upload) — CSV format and validation.
-- [Deliverability basics](/en/concepts/deliverability-basics) — Bounces and sender reputation.
+- [نظرة عامة على جهات الاتصال](/ar/contacts/overview) — التشفير، إخفاء البيانات، والوسوم.
+- [رفع جهات الاتصال](/ar/contacts/upload) — تنسيق CSV والتحقق من الصحة.
+- [أساسيات قابلية التسليم](/ar/concepts/deliverability-basics) — الارتدادات وسمعة المرسل.

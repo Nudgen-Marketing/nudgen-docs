@@ -1,0 +1,64 @@
+---
+title: "Instalación de la CLI"
+description: "Comience con la CLI de Nudgen en macOS, Linux o Windows."
+---
+
+## Instalación Rápida
+
+La forma más fácil de instalar la CLI de Nudgen es utilizando nuestro script de instalación de una sola línea.
+
+### macOS y Linux
+
+Ejecute el siguiente comando en su terminal:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/Nudgen-Marketing/nudgen-cli/main/scripts/install.sh | bash
+```
+
+### Desde el Código Fuente
+
+Si tiene Go 1.22+ instalado, puede compilarlo desde el código fuente:
+
+```bash
+git clone https://github.com/Nudgen-Marketing/nudgen-cli.git
+cd nudgen-cli
+make build
+```
+
+El binario estará disponible en `./bin/nudgen`.
+
+## Configuración Inicial
+
+Una vez instalado, verifique la instalación consultando la versión:
+
+```bash
+nudgen version
+```
+
+### Autenticación
+
+Para comenzar a usar la CLI, debe autenticarse con un Token de Acceso Personal (PAT).
+
+1. Ejecute el comando de inicio de sesión:
+   ```bash
+   nudgen login
+   ```
+2. Siga las instrucciones interactivas para ingresar su token.
+3. Verifique su identidad:
+   ```bash
+   nudgen whoami
+   ```
+
+### Actualización
+
+Para actualizar a la última versión, simplemente ejecute el script de instalación nuevamente o use el comando de actualización integrado:
+
+```bash
+nudgen update
+```
+
+## Seguridad
+
+La CLI de Nudgen utiliza el llavero del sistema para almacenar su PAT de forma segura. Nunca registramos ni mostramos tokens sin procesar en la salida de los comandos.
+
+A continuación, explore los [comandos principales](/es/cli/commands).

@@ -1,48 +1,48 @@
 ---
-title: "Contact lifecycle"
-description: "Import, updates, unsubscribes, and suppression"
+title: "Жизненный цикл контакта"
+description: "Импорт, обновления, отписки и исключения"
 ---
 
-## What this page helps you do
+## Что вы узнаете на этой странице
 
-Understand how contacts move from import through engagement and suppression. This helps you keep your list healthy and avoid sending to bad or opted-out addresses.
+Вы поймете, как контакты проходят путь от импорта до вовлечения и возможного исключения. Это поможет вам поддерживать «здоровье» списка и избегать отправки по некорректным адресам или тем, кто отказался от рассылки.
 
-## Lifecycle stages
+## Этапы жизненного цикла
 
-### Import and storage
+### Импорт и хранение
 
-- You add contacts via **Upload CSV** or **Add contact**. Emails and names are validated and encrypted at rest.
-- Duplicates (same email in the same workspace) are merged on upload; existing contacts may be updated.
-- New contacts start as **active** and can receive campaigns until something changes their status.
+- Вы добавляете контакты через **Upload CSV (Загрузить CSV)** или **Add contact (Добавить контакт)**. Email-адреса и имена проверяются и шифруются при хранении.
+- Дубликаты (один и тот же email в одном рабочем пространстве) объединяются при загрузке; данные существующих контактов могут быть обновлены.
+- Новые контакты начинают свою историю со статусом **«Активен»** и могут получать рассылки, пока что-то не изменит их статус.
 
-### Active and receiving
+### Статус «Активен» и получение писем
 
-- **Active** contacts count toward your plan limit and can be included in campaign audiences (all, by tags, or manual).
-- They receive emails when you send or run a drip. Opens, clicks, and bounces are recorded and reflected in analytics and suppression.
+- **Активные (Active)** контакты учитываются в лимите вашего тарифа и могут быть включены в аудиторию кампаний (все, по тегам или вручную).
+- Они получают письма при разовой отправке или в рамках капельной кампании. Открытия, клики и возвраты (bounces) фиксируются и отображаются в аналитике и списках исключений.
 
-### Unsubscribe
+### Отписка
 
-- When a recipient clicks the **unsubscribe** link in an email, they are marked **unsubscribed** and are excluded from future campaign sends.
-- You can still see them in the contact list. Some teams manually re-subscribe in rare cases; the app respects the unsubscribed status unless you change it.
+- Когда получатель нажимает на ссылку **отписаться (unsubscribe)** в письме, он помечается как **отписавшийся (unsubscribed)** и исключается из последующих кампаний.
+- Вы по-прежнему видите их в списке контактов. В редких случаях команды могут возобновить подписку вручную; приложение уважает статус отписки до тех пор, пока вы его не измените.
 
-### Bounces and suppression
+### Возвраты и исключения (Suppression)
 
-- **Soft bounces** (e.g. mailbox full, temporary failure) may be retried by the delivery provider. Repeated failures can lead to suppression.
-- **Hard bounces** (invalid address, domain doesn’t exist) are suppressed immediately. We sync with the delivery provider’s suppression list so those addresses are not used again.
-- Suppressed or bounced contacts are excluded from future sends to protect your sender reputation and deliverability.
+- **Мягкие возвраты (Soft bounces)** (например: ящик переполнен, временная ошибка) могут быть повторены провайдером доставки. Повторяющиеся ошибки могут привести к исключению адреса.
+- **Жесткие возвраты (Hard bounces)** (недействительный адрес, домен не существует) исключаются немедленно. Мы синхронизируемся со списком исключений провайдера доставки, чтобы эти адреса больше не использовались.
+- Исключенные адреса или адреса с возвратами не получают письма в будущем для защиты вашей репутации отправителя и обеспечения доставляемости.
 
-### Updates and deletion
+### Обновление и удаление
 
-- You can edit contact details (e.g. name, tags) in the contact list. Re-uploading a CSV with the same email updates that contact.
-- Deleting a contact removes them from the workspace. They no longer count toward limits and cannot receive campaigns.
+- Вы можете редактировать данные контакта (например: имя, теги) в списке контактов. Повторная загрузка CSV-файла с тем же адресом email приведет к обновлению этого контакта.
+- Удаление контакта полностью убирает его из рабочего пространства. Такие контакты больше не учитываются в лимитах и не могут получать рассылки.
 
-## How this affects campaigns
+## Как это влияет на кампании
 
-- When you pick an audience (all, tags, or manual), only **active** contacts that are not suppressed are included. The wizard’s reach estimate reflects that.
-- Drip campaigns skip later steps for contacts who unsubscribed or were suppressed after an earlier step.
+- При выборе аудитории (все, теги или вручную) учитываются только **активные (active)** контакты, не попавшие в списки исключений. Предполагаемый охват в мастере настройки строится с учетом этих правил.
+- Капельные кампании пропускают последующие шаги для контактов, которые отписались или были исключены после одного из предыдущих шагов.
 
-## What happens next
+## Что дальше
 
-- [Contacts overview](/en/contacts/overview) — Encryption, masking, and tags.
-- [Upload contacts](/en/contacts/upload) — CSV format and validation.
-- [Deliverability basics](/en/concepts/deliverability-basics) — Bounces and sender reputation.
+- [Обзор контактов](/ru/contacts/overview) — Шифрование, маскирование и теги.
+- [Загрузка контактов](/ru/contacts/upload) — Формат CSV и правила проверки.
+- [Основы доставляемости](/ru/concepts/deliverability-basics) — Возвраты и репутация отправителя.

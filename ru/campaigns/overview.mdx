@@ -1,71 +1,71 @@
 ---
-title: "Campaigns overview"
-description: "One-shot vs drip campaigns and campaign statuses"
+title: "Обзор кампаний"
+description: "Разовые кампании против капельных последовательностей и статусы кампаний"
 ---
 
-## What this page helps you do
+## Что вы узнаете на этой странице
 
-Understand the two campaign types and what each status means. This helps you choose the right campaign type and interpret your campaign list.
+Вы поймете разницу между двумя типами кампаний и значение каждого статуса. Это поможет вам правильно выбрать тип рассылки и ориентироваться в списке кампаний.
 
-## Before you start
+## Перед началом работы
 
-- Contacts uploaded in Nudgen
-- A brand config (preset tone or custom prompt)
+- Загрузите контакты в Nudgen.
+- Настройте конфигурацию бренда (готовый тон или пользовательский промпт).
 
-## Campaign types
+## Типы кампаний
 
-### One-shot campaigns
+### Разовые кампании (One-shot)
 
-A single email sent once to your selected audience. Use this when you want to:
+Одиночное письмо, которое отправляется один раз выбранной аудитории. Используйте этот тип, когда хотите:
 
-- Announce a feature or event
-- Send a one-time re-engagement blast
-- Test a message before building a longer sequence
+- Объявить о новой функции или событии.
+- Провести разовую рассылку для вовлечения.
+- Протестировать сообщение перед созданием длинной последовательности.
 
-You choose the audience, AI generates the content, you preview and send (or schedule).
+Вы выбираете аудиторию, ИИ генерирует контент, вы просматриваете его и отправляете (или планируете отправку).
 
-### Drip sequences
+### Капельные последовательности (Drip sequences)
 
-A multi-step campaign with delays between emails (e.g. Day 1, Day 3, Day 7). Use this when you want to:
+Многошаговая кампания с задержками между письмами (например: День 1, День 3, День 7). Используйте этот тип, когда хотите:
 
-- Nudge inactive users over several days
-- Follow up with non-openers or non-clickers
-- Build a Duolingo-style retention flow
+- Плавного «подталкивать» (nudge) неактивных пользователей в течение нескольких дней.
+- Напоминать о себе тем, кто не открыл или не кликнул по первому письму.
+- Создать поток удержания (retention flow) в стиле Duolingo.
 
-Each step has its own goal, subject, and AI-generated body. Contacts move to the next step only after the delay. You can set **auto-stop rules** (e.g. stop when a recipient clicks, or when they open the email) so that users who engage stop receiving later steps.
+У каждого шага есть своя цель, тема и текст, созданный ИИ. Контакты переходят к следующему шагу только после истечения задержки. Вы можете установить **правила автостопа** (например: остановить рассылку, если получатель кликнул или открыл письмо), чтобы не беспокоить тех, кто уже вовлекся.
 
-**Audience types:** When creating a campaign you choose who receives it: **All contacts**, **By tags** (only contacts with selected tags), or **Manual** (hand-pick recipients). The wizard shows a reach estimate before you launch.
+**Типы аудитории:** При создании кампании вы выбираете, кто ее получит: **Все контакты (All contacts)**, **По тегам (By tags)** (только контакты с выбранными тегами) или **Вручную (Manual)** (выбор конкретных получателей). Мастер настройки показывает предполагаемый охват перед запуском.
 
-## Campaign statuses
+## Статусы кампаний
 
-| Status     | Meaning                                                                 |
-| ---------- | ----------------------------------------------------------------------- |
-| **Draft**  | Not sent. You can edit goals, audience, content, and schedule.         |
-| **Scheduled** | Send time is set. Emails will go out at the scheduled time.        |
-| **Active** / **Sending** | Emails are being sent. Progress appears in the dashboard.     |
-| **Sent**   | All emails have been sent. Content is locked; you can view analytics.  |
-| **Stopped**| Campaign was manually stopped. Some contacts may have already received emails; future drip steps are cancelled. |
+| Статус     | Значение                                                                 |
+| ---------- | -------------------------------------------------------------------------- |
+| **Черновик (Draft)**  | Не отправлена. Вы можете редактировать цели, аудиторию, контент и расписание. |
+| **Запланирована (Scheduled)** | Установлено время отправки. Письма уйдут в назначенное время. |
+| **Активна (Active)** / **Отправляется (Sending)** | Идет процесс отправки писем. Прогресс отображается в дашборде. |
+| **Отправлена (Sent)**   | Все письма отправлены. Контент заблокирован; вы можете просматривать аналитику. |
+| **Остановлена (Stopped)**| Кампания была остановлена вручную. Некоторые контакты могли успеть получить письма; будущие шаги капельной рассылки отменены. |
 
 <Note>
-Once a campaign is sent, you cannot edit its content or resend. Create a new campaign to send a different message.
+После того как кампания была отправлена, вы не сможете редактировать ее содержание или отправить ее повторно. Для отправки другого сообщения создайте новую кампанию.
 </Note>
 
-## What happens next
+## Что дальше
 
-- [Create a campaign](/en/campaigns/create) — walk through the wizard and send your first email.
-- [Manage campaigns](/en/campaigns/manage) — edit drafts, send, schedule, or stop.
-- [View analytics](/en/campaigns/analytics) — opens, clicks, delivery rates, and recipient activity.
+- [Создание кампании](/ru/campaigns/create) — пройдите через мастер настройки и отправьте свое первое письмо.
+- [Управление кампаниями](/ru/campaigns/manage) — редактируйте черновики, отправляйте, планируйте или останавливайте рассылки.
+- [Просмотр аналитики](/ru/campaigns/analytics) — открытия, клики, показатели доставки и активность получателей.
 
-## Related docs
+## Связанные документы
 
 <CardGroup cols={2}>
-  <Card title="Create campaigns" icon="paper-plane" href="/en/campaigns/create">
-    Step-by-step campaign wizard.
+  <Card title="Создание кампаний" icon="paper-plane" href="/ru/campaigns/create">
+    Пошаговый мастер настройки кампаний.
   </Card>
-  <Card title="Manage campaigns" icon="pen-to-square" href="/en/campaigns/manage">
-    Edit, send, schedule, and stop.
+  <Card title="Управление кампаниями" icon="pen-to-square" href="/ru/campaigns/manage">
+    Редактирование, отправка, планирование и остановка.
   </Card>
-  <Card title="Campaign analytics" icon="chart-line" href="/en/campaigns/analytics">
-    Metrics and recipient activity.
+  <Card title="Аналитика кампаний" icon="chart-line" href="/ru/campaigns/analytics">
+    Метрики и активность получателей.
   </Card>
 </CardGroup>

@@ -1,60 +1,60 @@
 ---
-title: "Sending and deliverability"
-description: "Emails not sending, bounces, and spam"
+title: "Versand und Zustellbarkeit"
+description: "E-Mails werden nicht versendet, Bounces und Spam"
 ---
 
-## Emails not sending
+## E-Mails werden nicht versendet
 
-**Campaign stuck or “sending” for a long time**
+**Kampagne hängt oder steht lange auf „Versand (sending)“**
 
-- Sends are queued and processed in batches. Large campaigns can take time. Refresh the dashboard; if status stays “Sending” for hours, contact support.
-- Check that you haven’t hit your **daily or monthly email limit**. The app blocks new sends when you’re over cap. See [Billing](/en/billing/overview) and [Troubleshooting: billing](/en/troubleshooting/billing).
+- Sendungen werden in Warteschlangen gestellt und in Stapeln (Batches) verarbeitet. Große Kampagnen können Zeit in Anspruch nehmen. Aktualisieren Sie das Dashboard; wenn der Status über Stunden auf „Sending“ bleibt, kontaktieren Sie den Support.
+- Prüfen Sie, ob Sie Ihr **tägliches oder monatliches E-Mail-Limit** erreicht haben. Die App blockiert neue Sendungen, wenn Sie über dem Limit liegen. Siehe [Abrechnung](/de/billing/overview) und [Fehlerbehebung: Abrechnung](/de/troubleshooting/billing).
 
-**Test email didn’t arrive**
+**Test-E-Mail ist nicht angekommen**
 
-- Check spam/junk. Add the sender to your contacts or safe senders.
-- Confirm the **account email** (where tests are sent) is correct in your profile.
-- Wait a few minutes; delivery can be delayed. Try again or send to a different address.
+- Prüfen Sie den Spam-/Junk-Ordner. Fügen Sie den Absender zu Ihren Kontakten oder sicheren Absendern hinzu.
+- Bestätigen Sie in Ihrem Profil, dass die **Konto-E-Mail** (an die Tests gesendet werden) korrekt ist.
+- Warten Sie einige Minuten; die Zustellung kann sich verzögern. Versuchen Sie es erneut oder senden Sie an eine andere Adresse.
 
-**“No active contacts” or reach is zero**
+**„Keine aktiven Kontakte“ oder Reichweite ist Null**
 
-- Upload or add at least one contact and ensure they’re **active** (not unsubscribed or suppressed). See [Contacts overview](/en/contacts/overview) and [Contact lifecycle](/en/contacts/lifecycle).
-- If you chose “By tags,” ensure some contacts have the selected tags.
+- Laden Sie mindestens einen Kontakt hoch oder fügen Sie einen hinzu und stellen Sie sicher, dass dieser **aktiv** ist (nicht abgemeldet oder unterdrückt). Siehe [Kontakte-Übersicht](/de/contacts/overview) und [Kontakt-Lebenszyklus](/de/concepts/contact-lifecycle).
+- Wenn Sie „Nach Tags“ gewählt haben, stellen Sie sicher, dass einige Kontakte die ausgewählten Tags besitzen.
 
-## Bounces and complaints
+## Bounces und Beschwerden
 
-**High bounce rate**
+**Hohe Bounce-Rate**
 
-- **Hard bounces** (invalid address, domain doesn’t exist) are automatically suppressed. Remove or fix bad addresses in your list; avoid bought or scraped lists.
-- **Soft bounces** (mailbox full, server down) may be retried by the provider. Repeated soft bounces can lead to suppression. Clean your list and avoid role addresses (e.g. info@) unless they’re valid inboxes.
-- Keep bounce rate low (e.g. under 2%) to protect sender reputation. Use the [Dashboard](/en/dashboard/overview) and [Campaign analytics](/en/campaigns/analytics) to monitor.
+- **Hard Bounces** (ungültige Adresse, Domain existiert nicht) werden automatisch unterdrückt. Entfernen oder korrigieren Sie fehlerhafte Adressen in Ihrer Liste; vermeiden Sie gekaufte oder gescrapte Listen.
+- **Soft Bounces** (Postfach voll, Server ausgefallen) werden vom Anbieter möglicherweise erneut versucht. Wiederholte Soft Bounces können zur Unterdrückung führen. Bereinigen Sie Ihre Liste und vermeiden Sie Funktions-Adressen (z. B. info@), es sei denn, es handelt sich um valide Postfächer.
+- Halten Sie die Bounce-Rate niedrig (z. B. unter 2 %), um den Absenderruf zu schützen. Nutzen Sie das [Dashboard](/de/dashboard/overview) und die [Kampagnen-Analyse](/de/campaigns/analytics) zur Überwachung.
 
-**Spam complaints**
+**Spam-Beschwerden**
 
-- Recipients marked the email as spam. We suppress complainers and they won’t receive future campaigns. Too many complaints hurt reputation.
-- Improve content: clear subject lines, relevant copy, obvious unsubscribe link. Don’t send to people who didn’t opt in. See [Deliverability basics](/en/concepts/deliverability-basics).
+- Empfänger haben die E-Mail als Spam markiert. Wir unterdrücken diese Personen, und sie erhalten keine zukünftigen Kampagnen mehr. Zu viele Beschwerden schaden dem Ruf.
+- Inhalt verbessern: klare Betreffzeilen, relevante Texte, offensichtlicher Abmelde-Link. Senden Sie nicht an Personen, die dem Empfang nicht zugestimmt haben. Siehe [Grundlagen der Zustellbarkeit](/de/concepts/deliverability-basics).
 
-**Unsubscribes**
+**Abmeldungen**
 
-- Unsubscribe links are required and honored. Unsubscribed contacts are excluded from future sends. This is normal and keeps you compliant.
+- Abmelde-Links sind erforderlich und werden respektiert. Abgemeldete Kontakte werden von zukünftigen Sendungen ausgeschlossen. Dies ist normal und stellt sicher, dass Sie konform (compliant) bleiben.
 
-## Tracking and metrics
+## Tracking und Metriken
 
-**Opens or clicks not updating**
+**Öffnungen oder Klicks aktualisieren sich nicht**
 
-- Tracking uses a pixel (opens) and signed links (clicks). Some clients block images or strip tracking; metrics can be undercounted.
-- Data can take a short time to appear. Refresh the campaign detail page or dashboard.
-- If a campaign shows zero opens/clicks for a long time after sends, check that links and images in the email are intact and that the campaign actually sent (check “Emails Sent” and “Emails Delivered”).
+- Das Tracking nutzt ein Pixel (Öffnungen) und signierte Links (Klicks). Einige E-Mail-Clients blockieren Bilder oder entfernen das Tracking; Metriken können daher untererfasst sein.
+- Es kann kurz dauern, bis Daten erscheinen. Aktualisieren Sie die Kampagnen-Detailseite oder das Dashboard.
+- Wenn eine Kampagne lange nach dem Versand Null Öffnungen/Klicks zeigt, prüfen Sie, ob Links und Bilder in der E-Mail intakt sind und ob die Kampagne tatsächlich versendet wurde (prüfen Sie „E-Mails gesendet“ und „E-Mails zugestellt“).
 
-**Analytics look wrong**
+**Analysen wirken fehlerhaft**
 
-- Ensure the **date range** includes the send date. Dashboard and campaign detail pages filter by selected range.
-- “Emails Sent” includes all attempts; “Emails Delivered” is successful delivery. CTR is (Total Clicks / Total Sent) × 100. See [Campaign analytics](/en/campaigns/analytics) and [Dashboard overview](/en/dashboard/overview).
+- Stellen Sie sicher, dass der **Datumsbereich** das Sendedatum einschließt. Dashboard und Kampagnen-Detailseiten filtern nach dem ausgewählten Zeitraum.
+- „E-Mails gesendet“ enthält alle Versuche; „E-Mails zugestellt“ ist die erfolgreiche Zustellung. Die CTR ist (Gesamt-Klicks / Gesamt-Gesendet) × 100. Siehe [Kampagnen-Analyse](/de/campaigns/analytics) und [Dashboard-Übersicht](/de/dashboard/overview).
 
-## What we do to protect deliverability
+## Was wir tun, um die Zustellbarkeit zu schützen
 
-- We send via our email provider and sync with their suppression list so we don’t resend to bounced or complained addresses.
-- Contacts are validated and we avoid sending to unsubscribed or suppressed contacts.
-- Content and signatures are sanitized; we may flag spam-prone wording when possible.
+- Wir versenden über unseren E-Mail-Provider und synchronisieren uns mit dessen Sperrliste, damit wir nicht erneut an gebouncte oder beschwerte Adressen senden.
+- Kontakte werden validiert, und wir vermeiden den Versand an abgemeldete oder unterdrückte Kontakte.
+- Inhalte und Signaturen werden bereinigt; wir markieren nach Möglichkeit Spam-verdächtiges Wording.
 
-For more, see [Deliverability basics](/en/concepts/deliverability-basics) and [Contact lifecycle](/en/contacts/lifecycle).
+Weitere Informationen finden Sie unter [Grundlagen der Zustellbarkeit](/de/concepts/deliverability-basics) und [Kontakt-Lebenszyklus](/de/concepts/contact-lifecycle).

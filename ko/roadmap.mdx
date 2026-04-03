@@ -1,46 +1,30 @@
 ---
-title: "Roadmap"
-description: "Upcoming features and product direction"
+title: "로드맵"
+description: "예정된 기능 및 제품 방향"
 ---
 
-Planned features, in priority order. Dates and scope may change as we build.
+우선순위에 따른 계획된 기능입니다. 일정과 범위는 개발 과정에서 변경될 수 있습니다.
 
-## 1. Email templates
+## 1. 이메일 템플릿
 
-Reusable email templates so you can save layouts and copy and reuse them across campaigns. Create a template once, then select it when creating a campaign and customize as needed. We also support **dynamic variables** using Jinja templates—e.g. contact name, product name, and other per-recipient or per-campaign data—so each send can be personalized. Reduces repetition and keeps branding consistent.
+레이아웃을 저장하고 캠페인 전체에서 재사용할 수 있는 이메일 템플릿입니다. 템플릿을 한 번 만들면 캠페인을 만들 때 선택하여 필요에 따라 맞춤 설정할 수 있습니다. 또한 각 전송을 개인화할 수 있도록 연락처 이름, 제품 이름 및 기타 수신자 또는 캠페인별 데이터와 같은 Jinja 템플릿을 사용하는 **동적 변수**를 지원합니다. 반복을 줄이고 브랜딩의 일관성을 유지합니다.
 
-## 2. Export CSV/Excel report
+## 2. 캠페인 A/B 테스트
 
-Export campaign and contact data as CSV or Excel. Download overview metrics, recipient-level activity, or contact lists for reporting, backup, or use in other tools.
+제목이나 이메일 콘텐츠에 대해 A/B 테스트를 실행합니다. 대상의 세그먼트별로 다른 버전을 보내고 성과(열람, 클릭, 전환)를 비교합니다. 결과를 사용하여 우승 버전을 선택하거나 목록의 나머지 대상에게 가장 좋은 버전을 배포합니다.
 
-## 3. Campaign A/B testing
+## 3. CRM API 연동
 
-Run A/B tests on subject lines or email content. Send variants to segments of your audience and compare performance (opens, clicks, conversions). Use the results to pick a winner or roll out the best variant to the rest of your list.
+API를 통해 Nudgen을 CRM과 연동합니다. 연락처를 동기화하고, CRM 이벤트에서 캠페인을 트리거하거나, 캠페인 결과를 다시 전송합니다. 프로그래밍 방식의 워크플로우를 가능하게 하고 시스템 간에 연락처 데이터를 동기화된 상태로 유지합니다.
 
-## 4. Mobile version support
+## 4. 더 많은 조합된 중지 규칙 지원
 
-A mobile-optimized experience so you can check the dashboard, review campaigns, and take key actions from phones and tablets. Responsive layouts and touch-friendly controls for on-the-go use.
+중지 규칙에 대해 더 많은 조건을 추가하고 이를 조합할 수 있도록 합니다. 조합된 조건이 충족되면 캠페인이 자동으로 일시 중지되거나 중지되어 전송성 및 목록 상태를 더 세밀하게 제어하고 보호할 수 있습니다.
 
-## 5. CRM API integration
+## 5. 데이터 인사이트 기반 캠페인 AI 추천
 
-Integrate Nudgen with your CRM via API: sync contacts, trigger campaigns from CRM events, or push campaign results back. Enables programmatic workflows and keeps contact data in sync across systems.
-
-## 6. MCP support
-
-**MCP (Model Context Protocol) support** so LLMs—such as OpenClaw and other MCP-enabled assistants—can connect to Nudgen and control campaigns. Create, launch, pause, or monitor campaigns from your preferred AI environment with a consistent, tool-based interface.
-
-## 7. Support more combined stop rules
-
-We will add more conditions for stop rules and allow you to combine them. When the combined conditions are met, the campaign automatically pauses or stops, giving you finer control and better protection for deliverability and list health.
-
-## 8. AI recommendation for campaign based on data insight
-
-Recommendations driven by your campaign and contact data: suggested send times, subject lines, or segments based on past performance and engagement. Use data-backed suggestions to improve opens, clicks, and conversions without guesswork.
-
-## 9. Multi-language support (i18n)
-
-Full internationalization support across the entire Nudgen ecosystem. We are bringing multiple language options to the landing page, documentation site, and the main application dashboard to provide a seamless experience for our global user base.
+캠페인 및 연락처 데이터를 기반으로 한 추천입니다. 과거 성과 및 참여도를 기반으로 권장 발송 시간, 제목 또는 세그먼트를 제안합니다. 데이터 기반 제안을 사용하여 추측 없이 열람, 클릭 및 전환을 개선합니다.
 
 ---
 
-Want to influence the roadmap? Reach out at [contact@nudgen.net](mailto:contact@nudgen.net).
+로드맵에 제안하고 싶으신가요? [contact@nudgen.net](mailto:contact@nudgen.net)으로 문의해 주세요.

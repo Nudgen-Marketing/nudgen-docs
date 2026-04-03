@@ -1,80 +1,80 @@
 ---
-title: "Upload contacts"
-description: "CSV format, validation rules, and tag assignment for contact uploads"
+title: "Unggah Kontak"
+description: "Format CSV, aturan validasi, dan penetapan tag untuk mengunggah kontak"
 ---
 
-## What this page helps you do
+## Apa yang dapat Anda lakukan di halaman ini
 
-Upload a CSV of contacts so you can run campaigns. You'll learn the required columns, validation rules, size limits, and how to add tags during upload.
+Mengunggah file CSV kontak agar Anda dapat menjalankan kampanye. Anda akan mempelajari kolom yang diperlukan, aturan validasi, batas ukuran, dan cara menambahkan tag selama proses unggah.
 
-## Before you start
+## Sebelum memulai
 
-- A Nudgen account
-- A CSV file with at least an `email` column
-- Contacts must be under your plan limit (see [billing](/en/billing/overview))
+- Memiliki akun Nudgen
+- File CSV dengan setidaknya satu kolom `email`
+- Jumlah kontak harus berada di bawah batas paket Anda (lihat [penagihan](/id/billing/overview))
 
-## Step 1: Prepare your CSV
+## Langkah 1: Siapkan CSV Anda
 
-Your CSV must include:
+CSV Anda harus menyertakan:
 
-| Column   | Required | Description                          |
-| -------- | -------- | ------------------------------------ |
-| `email`  | Yes      | Valid email address. Must be unique. |
-| `name`   | No       | Display name for personalization.   |
+| Kolom     | Diperlukan | Deskripsi                                |
+| --------- | ---------- | --------------------------------------- |
+| `email`   | Ya         | Alamat email yang valid. Harus unik.    |
+| `name`    | Tidak      | Nama tampilan untuk personalisasi.      |
 
-You can add other columns (e.g. `company`, `segment`). They are stored encrypted and can be used in tags or segmentation logic.
+Anda dapat menambahkan kolom lain (misalnya: `company`, `segment`). Kolom tersebut disimpan secara terenkripsi dan dapat digunakan dalam tag atau logika segmentasi.
 
-## Step 2: Validate format
+## Langkah 2: Validasi Format
 
-- **Encoding:** UTF-8 recommended.
-- **Delimiter:** Comma (`,`).
-- **Header row:** First row must contain column names. `email` and `name` are recognized case-insensitively.
-- **Duplicate emails:** Duplicates in the same file are merged. Existing contacts with the same email are updated.
+- **Pengkodean (Encoding):** Direkomendasikan UTF-8.
+- **Pemisah (Delimiter):** Koma (`,`).
+- **Baris Header:** Baris pertama harus berisi nama kolom. Kolom `email` dan `name` dikenali tanpa membedakan huruf besar-kecil (case-insensitive).
+- **Email Duplikat:** Duplikat dalam file yang sama akan digabungkan. Kontak yang sudah ada dengan email yang sama akan diperbarui.
 
 <Warning>
-Invalid emails (malformed, missing `@`, etc.) are skipped. Check the upload summary to see how many rows were imported vs skipped.
+Email yang tidak valid (salah format, tidak ada `@`, dll.) akan dilewati. Periksa ringkasan unggahan untuk melihat berapa banyak baris yang diimpor vs yang dilewati.
 </Warning>
 
-## Step 3: Upload in Nudgen
+## Langkah 3: Unggah di Nudgen
 
-1. Go to **Contacts** in the sidebar.
-2. Click **Upload CSV**.
-3. Select your file.
-4. Choose tags to apply to all uploaded contacts (e.g. `inactive`, `re-engage`).
-5. Review the preview and confirm.
+1. Buka **Kontak** (Contacts) di bilah sisi.
+2. Klik **Unggah CSV** (Upload CSV).
+3. Pilih file Anda.
+4. Pilih tag yang ingin diterapkan ke semua kontak yang diunggah (misalnya: `inactive`, `re-engage`).
+5. Tinjau pratinjau dan lakukan konfirmasi.
 
-## Size limits
+## Batas Ukuran
 
-- **File size:** Follow the on-screen limit (typically a few MB). Large lists may take longer to process.
-- **Contacts per workspace:** Depends on your plan. The app enforces the limit at upload time; if you exceed it, the upload is rejected. See [Billing](/en/billing/overview) and the live [pricing page](https://nudgen.net/pricing) for current limits.
+- **Ukuran File:** Ikuti batas yang tertera di layar (biasanya beberapa MB). Daftar besar mungkin membutuhkan waktu lebih lama untuk diproses.
+- **Kontak per Ruang Kerja:** Tergantung pada paket Anda. Aplikasi memberlakukan batas saat proses unggah; jika Anda melampauinya, unggahan akan ditolak. Lihat [Penagihan](/id/billing/overview) dan [halaman harga](https://nudgen.net/pricing) untuk batas saat ini.
 
-## What happens next
+## Langkah selanjutnya
 
-- Contacts appear in the list with masked emails (`j***@g***.com`).
-- Use tags to segment audiences in [campaigns](/en/campaigns/create).
-- You can [reveal](/en/contacts/overview) individual contacts as the account owner.
+- Kontak akan muncul dalam daftar dengan email yang disamarkan (`j***@g***.com`).
+- Gunakan tag untuk mensegmentasi audiens dalam [kampanye](/id/campaigns/create).
+- Anda dapat [mengungkapkan (reveal)](/id/contacts/overview) informasi kontak individual sebagai pemilik akun.
 
 ## Troubleshooting
 
 <AccordionGroup>
-  <Accordion title="Some rows were skipped">
-    Check that each row has a valid email in the `email` column. Empty rows or malformed addresses are skipped.
+  <Accordion title="Beberapa baris dilewati">
+    Pastikan setiap baris memiliki email yang valid di kolom `email`. Baris kosong atau alamat dengan format salah akan dilewati.
   </Accordion>
-  <Accordion title="Upload failed: plan limit exceeded">
-    Your contact count would exceed your plan limit. Upgrade your plan or remove existing contacts.
+  <Accordion title="Unggah gagal: batas paket terlampaui">
+    Jumlah kontak Anda akan melebihi batas paket. Tingkatkan paket Anda atau hapus kontak yang sudah ada.
   </Accordion>
-  <Accordion title="Column not recognized">
-    Ensure the header row includes `email` (or `Email`). Other columns are optional.
+  <Accordion title="Kolom tidak dikenali">
+    Pastikan baris header menyertakan `email` (atau `Email`). Kolom lainnya bersifat opsional.
   </Accordion>
 </AccordionGroup>
 
-## Related docs
+## Dokumen terkait
 
 <CardGroup cols={2}>
-  <Card title="Contacts overview" icon="users" href="/en/contacts/overview">
-    Encryption, masking, and segmentation.
+  <Card title="Ikhtisar kontak" icon="users" href="/id/contacts/overview">
+    Enkripsi, penyamaran, dan segmentasi.
   </Card>
-  <Card title="Create campaigns" icon="paper-plane" href="/en/campaigns/create">
-    Select your audience and launch a campaign.
+  <Card title="Buat kampanye" icon="paper-plane" href="/id/campaigns/create">
+    Pilih audiens dan luncurkan kampanye.
   </Card>
 </CardGroup>

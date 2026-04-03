@@ -1,71 +1,66 @@
 ---
-title: "Campaigns overview"
-description: "One-shot vs drip campaigns and campaign statuses"
+title: "캠페인 개요"
+description: "단발성 캠페인 vs 드립 캠페인 및 캠페인 상태 안내"
 ---
 
-## What this page helps you do
+## 이 페이지의 도움말
+두 가지 캠페인 유형과 각 상태의 의미를 설명합니다. 비즈니스 목적에 맞는 올바른 캠페인 유형을 선택하고 캠페인 목록을 해석하는 데 도움이 됩니다.
 
-Understand the two campaign types and what each status means. This helps you choose the right campaign type and interpret your campaign list.
+## 시작하기 전에
+- Nudgen에 업로드된 연락처
+- 브랜드 설정 (사전 정의된 톤 또는 맞춤형 프롬프트)
 
-## Before you start
+## 캠페인 유형
 
-- Contacts uploaded in Nudgen
-- A brand config (preset tone or custom prompt)
+### 단발성 캠페인 (One-shot)
+선택한 오디언스에게 한 번만 발송되는 단일 이메일입니다. 다음과 같은 경우에 사용하세요:
 
-## Campaign types
+- 새로운 기능이나 이벤트 공지
+- 일회성 재참여 유도 메시지 발송
+- 긴 시퀀스를 만들기 전 메시지 테스트
 
-### One-shot campaigns
+오디언스를 선택하면 AI가 콘텐츠를 생성하며, 발송 전 미리보거나 예약할 수 있습니다.
 
-A single email sent once to your selected audience. Use this when you want to:
+### 드립 시퀀스 (Drip sequences)
+이메일 사이에 간격(예: 1일, 3일, 7일)을 두고 진행되는 다단계 캠페인입니다. 다음과 같은 경우에 사용하세요:
 
-- Announce a feature or event
-- Send a one-time re-engagement blast
-- Test a message before building a longer sequence
+- 며칠에 걸쳐 비활성 사용자의 참여 유도
+- 이메일을 열지 않거나 클릭하지 않은 사용자에게 후속 조치
+- 서비스 리텐션을 위한 플로우 구축 (예: 학습 앱의 리마인드 방식)
 
-You choose the audience, AI generates the content, you preview and send (or schedule).
+각 단계에는 각기 다른 목표, 제목, AI 생성 본문이 포함됩니다. 연락처는 설정된 지연 시간이 지난 후에야 다음 단계로 이동합니다. **자동 중단 규칙**(예: 수신자가 클릭하거나 이메일을 열면 중단)을 설정하면 이미 참여한 사용자가 이후 단계의 이메일을 받지 않도록 관리할 수 있습니다.
 
-### Drip sequences
+**오디언스 유형:** 캠페인을 생성할 때 수신 대상을 선택할 수 있습니다. **전체 연락처**, **태그 기준**(선택한 태그가 있는 연락처만), 또는 **수동 선택**(수신자를 직접 지정)이 가능합니다. 캠페인을 시작하기 전 마법사 단계에서 예상 도달 범위를 확인할 수 있습니다.
 
-A multi-step campaign with delays between emails (e.g. Day 1, Day 3, Day 7). Use this when you want to:
+## 캠페인 상태
 
-- Nudge inactive users over several days
-- Follow up with non-openers or non-clickers
-- Build a Duolingo-style retention flow
-
-Each step has its own goal, subject, and AI-generated body. Contacts move to the next step only after the delay. You can set **auto-stop rules** (e.g. stop when a recipient clicks, or when they open the email) so that users who engage stop receiving later steps.
-
-**Audience types:** When creating a campaign you choose who receives it: **All contacts**, **By tags** (only contacts with selected tags), or **Manual** (hand-pick recipients). The wizard shows a reach estimate before you launch.
-
-## Campaign statuses
-
-| Status     | Meaning                                                                 |
-| ---------- | ----------------------------------------------------------------------- |
-| **Draft**  | Not sent. You can edit goals, audience, content, and schedule.         |
-| **Scheduled** | Send time is set. Emails will go out at the scheduled time.        |
-| **Active** / **Sending** | Emails are being sent. Progress appears in the dashboard.     |
-| **Sent**   | All emails have been sent. Content is locked; you can view analytics.  |
-| **Stopped**| Campaign was manually stopped. Some contacts may have already received emails; future drip steps are cancelled. |
+| 상태 | 의미 |
+| :--- | :--- |
+| **Draft (초안)** | 아직 발송되지 않았습니다. 목표, 오디언스, 콘텐츠 및 일정을 수정할 수 있습니다. |
+| **Scheduled (예약됨)** | 발송 시간이 설정되었습니다. 예약된 시간에 이메일이 발송됩니다. |
+| **Active / Sending (발송 중)** | 이메일이 순차적으로 발송되고 있습니다. 대시보드에서 진행 상황을 볼 수 있습니다. |
+| **Sent (발송 완료)** | 모든 이메일이 발송되었습니다. 콘텐츠는 고정되며 분석 데이터를 확인할 수 있습니다. |
+| **Stopped (중단됨)** | 캠페인이 수동으로 중지되었습니다. 일부 연락처는 이미 이메일을 받았을 수 있으나, 이후의 드립 단계는 취소됩니다. |
 
 <Note>
-Once a campaign is sent, you cannot edit its content or resend. Create a new campaign to send a different message.
+캠페인이 이미 발송된 후에는 콘텐츠를 수정하거나 다시 보낼 수 없습니다. 다른 메시지를 보내려면 새 캠페인을 생성하세요.
 </Note>
 
-## What happens next
+## 다음 단계
+- [캠페인 생성하기](/ko/campaigns/create) — 마법사를 따라 첫 번째 이메일을 발송하세요.
+- [캠페인 관리하기](/ko/campaigns/manage) — 초안 수정, 발송, 예약 또는 중지 방법을 알아보세요.
+- [분석 데이터 확인](/ko/campaigns/analytics) — 오픈율, 클릭률, 도달률 및 수신자 활동을 모니터링하세요.
 
-- [Create a campaign](/en/campaigns/create) — walk through the wizard and send your first email.
-- [Manage campaigns](/en/campaigns/manage) — edit drafts, send, schedule, or stop.
-- [View analytics](/en/campaigns/analytics) — opens, clicks, delivery rates, and recipient activity.
-
-## Related docs
+## 관련 문서
 
 <CardGroup cols={2}>
-  <Card title="Create campaigns" icon="paper-plane" href="/en/campaigns/create">
-    Step-by-step campaign wizard.
+  <Card title="캠페인 생성" icon="paper-plane" href="/ko/campaigns/create">
+    단계별 캠페인 생성 가이드.
   </Card>
-  <Card title="Manage campaigns" icon="pen-to-square" href="/en/campaigns/manage">
-    Edit, send, schedule, and stop.
+  <Card title="캠페인 관리" icon="pen-to-square" href="/ko/campaigns/manage">
+    편집, 발송, 예약 및 중단 방법.
   </Card>
-  <Card title="Campaign analytics" icon="chart-line" href="/en/campaigns/analytics">
-    Metrics and recipient activity.
+  <Card title="캠페인 분석" icon="chart-line" href="/ko/campaigns/analytics">
+    주요 지표 및 수신자 활동 상세 분석.
   </Card>
 </CardGroup>

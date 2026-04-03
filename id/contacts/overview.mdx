@@ -1,64 +1,64 @@
 ---
-title: "Contacts overview"
-description: "How Nudgen stores, encrypts, and displays your contact data"
+title: "Ikhtisar Kontak"
+description: "Bagaimana Nudgen menyimpan, mengenkripsi, dan menampilkan data kontak Anda"
 ---
 
-## What this page helps you do
+## Apa yang dapat Anda lakukan di halaman ini
 
-Understand how contacts are stored, why they appear masked, and how to use tags for segmentation. This sets you up to upload contacts and build campaigns confidently.
+Memahami cara penyimpanan kontak, mengapa mereka ditampilkan secara disamarkan (masked), dan cara menggunakan tag untuk segmentasi. Ini mempersiapkan Anda untuk mengunggah kontak dan membangun kampanye dengan percaya diri.
 
-## Before you start
+## Sebelum memulai
 
-- A Nudgen account
-- A CSV file with at least one email address (see [upload guide](/en/contacts/upload) for format)
+- Memiliki akun Nudgen
+- File CSV dengan setidaknya satu alamat email (lihat [panduan unggah](/id/contacts/upload) untuk formatnya)
 
-## How contact data is stored
+## Bagaimana data kontak disimpan
 
-Nudgen encrypts every piece of personally identifiable information (PII) before it is saved:
+Nudgen mengenkripsi setiap bagian informasi pengenal pribadi (PII) sebelum disimpan:
 
-- **Emails** — AES-256 encrypted. We cannot read them.
-- **Names** — Encrypted if provided. Optional in your CSV.
-- **Custom metadata** — Any extra columns you upload are encrypted as well.
+- **Email** — Dienkripsi dengan AES-256. Kami tidak dapat membacanya.
+- **Nama** — Dienkripsi jika tersedia. Opsional di CSV Anda.
+- **Metadata kustom** — Kolom ekstra apa pun yang Anda unggah juga akan dienkripsi.
 
-We also store a one-way hash of each email for deduplication. Duplicate emails in the same list are merged automatically.
+Kami juga menyimpan hash satu arah dari setiap email untuk deduplikasi. Email duplikat dalam daftar yang sama akan digabungkan secara otomatis.
 
-## Masked view
+## Tampilan disamarkan (Masked)
 
-By default, the contact list shows masked values like `j***@g***.com` instead of real addresses. PII is encrypted at rest; we never see or store plaintext emails or names. Masking protects your data from shoulder-surfing and limits exposure if someone else has access to your screen.
+Secara default, daftar kontak menampilkan nilai yang disamarkan seperti `j***@g***.com` dan bukannya alamat asli. PII dienkripsi saat disimpan; kami tidak pernah melihat atau menyimpan email atau nama dalam teks biasa (plaintext). Penyamaran ini melindungi data Anda dari intipan orang di sekitar (shoulder-surfing) dan membatasi paparan jika orang lain memiliki akses ke layar Anda.
 
-**Revealing a contact:** You (and other workspace members with access) can click **Reveal** to show the real email and name in the UI. Decryption happens only in your browser when you reveal; after you navigate away or refresh, values mask again. We never display decrypted PII in analytics, logs, or exports.
+**Mengungkapkan kontak:** Anda (dan anggota ruang kerja lain dengan akses) dapat mengklik **Reveal** (Ungkapkan) untuk menampilkan email dan nama asli di UI. Dekripsi hanya terjadi di browser Anda saat Anda mengungkapkannya; setelah Anda berpindah halaman atau menyegarkan layar, nilai tersebut akan disamarkan kembali. Kami tidak pernah menampilkan PII yang didekripsi dalam analitik, log, atau ekspor.
 
-## Tags and segmentation
+## Tag dan segmentasi
 
-Assign tags when you upload contacts or edit them later. Use tags to target specific segments in campaigns:
+Tetapkan tag saat Anda mengunggah kontak atau mengeditnya nanti. Gunakan tag untuk menargetkan segmen tertentu dalam kampanye:
 
-- `inactive` — Users who haven't logged in for 30+ days
-- `vip` — High-value or premium customers
-- `trial` — People on a free trial
+- `inactive` — Pengguna yang belum masuk selama 30+ hari
+- `vip` — Pelanggan bernilai tinggi atau premium
+- `trial` — Orang yang sedang dalam masa percobaan gratis
 
-When creating a campaign, you choose an audience: all contacts, or only those with certain tags. Tags make it easy to run different sequences for different segments.
+Saat membuat kampanye, Anda dapat memilih audiens: semua kontak, atau hanya mereka dengan tag tertentu. Tag memudahkan Anda menjalankan urutan pesan yang berbeda untuk segmen yang berbeda.
 
-## Contact statuses
+## Status kontak
 
-Contacts can have one of these statuses:
+Kontak dapat memiliki salah satu dari status berikut:
 
-- **Active** — Can receive campaigns. Default for newly imported contacts.
-- **Unsubscribed** — Opted out via the unsubscribe link or manually. They will not receive future campaign emails unless you change their status.
-- **Suppressed / Bounced** — Delivery failed (invalid address, mailbox full, or provider suppression list). These contacts are automatically excluded from future sends to protect deliverability. Our system syncs with the delivery provider's suppression list.
+- **Aktif (Active)** — Dapat menerima kampanye. Ini adalah status default untuk kontak yang baru diimpor.
+- **Berhenti Berlangganan (Unsubscribed)** — Memilih keluar melalui tautan berhenti berlangganan atau secara manual. Mereka tidak akan menerima email kampanye di masa mendatang kecuali Anda mengubah statusnya.
+- **Ditekan / Terpental (Suppressed / Bounced)** — Pengiriman gagal (alamat tidak valid, kotak surat penuh, atau masuk dalam daftar penekanan penyedia). Kontak-kontak ini secara otomatis dikeluarkan dari pengiriman mendatang untuk melindungi tingkat keterkiriman. Sistem kami menyinkronkan dengan daftar penekanan dari penyedia pengiriman.
 
-## What happens next
+## Langkah selanjutnya
 
-- [Upload a CSV](/en/contacts/upload) to add contacts.
-- [Create a campaign](/en/campaigns/create) and select your audience by tags or all contacts.
-- Check [plan limits](/en/billing/overview) for max contacts per plan.
+- [Unggah CSV](/id/contacts/upload) untuk menambahkan kontak.
+- [Buat kampanye](/id/campaigns/create) dan pilih audiens Anda berdasarkan tag atau semua kontak.
+- Periksa [batas paket](/id/billing/overview) untuk mengetahui jumlah kontak maksimum per paket.
 
-## Related docs
+## Dokumen terkait
 
 <CardGroup cols={2}>
-  <Card title="Upload contacts" icon="file-upload" href="/en/contacts/upload">
-    CSV format, validation, and tag assignment.
+  <Card title="Unggah kontak" icon="file-upload" href="/id/contacts/upload">
+    Format CSV, validasi, dan penetapan tag.
   </Card>
-  <Card title="Create campaigns" icon="paper-plane" href="/en/campaigns/create">
-    Choose audience and launch your first campaign.
+  <Card title="Buat kampanye" icon="paper-plane" href="/id/campaigns/create">
+    Pilih audiens dan luncurkan kampanye pertama Anda.
   </Card>
 </CardGroup>

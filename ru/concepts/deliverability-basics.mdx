@@ -1,31 +1,31 @@
 ---
-title: "Deliverability basics"
-description: "How we keep your emails out of spam"
+title: "Основы доставляемости"
+description: "Как мы помогаем вашим письмам не попадать в спам"
 ---
 
-## What is deliverability?
+## Что такое доставляемость?
 
-**Deliverability** means your emails reach the inbox instead of spam or being blocked. It depends on sender reputation, content, and recipient engagement. Nudgen and the delivery provider work to keep your campaigns deliverable.
+**Доставляемость** означает, что ваши электронные письма попадают во «Входящие», а не в спам и не блокируются. Это зависит от репутации отправителя, контента и вовлеченности получателей. Nudgen и провайдер доставки работают вместе, чтобы ваши кампании оставались доставляемыми.
 
-## What we do
+## Что делаем мы
 
-- **Sending via our email provider** — Emails are sent through a trusted delivery provider with good infrastructure and reputation.
-- **Validation and suppression** — We validate addresses and sync with the provider’s suppression list (bounces, complaints). We don’t resend to addresses that have hard bounced or been marked as spam.
-- **Content checks** — Before send, we can run basic checks (e.g. spam-prone wording) so you can fix issues. Signatures and HTML are sanitized to avoid injection and risky content.
-- **Tracking and unsubscribe** — Opens and clicks use tracking pixels and signed links. Every campaign includes an unsubscribe link so recipients can opt out; we honor that and stop sending to them.
+- **Отправка через нашего провайдера** — Письма отправляются через доверенного провайдера с надежной инфраструктурой и хорошей репутацией.
+- **Валидация и фильтрация** — Мы проверяем адреса и синхронизируемся со списком исключений провайдера (возвраты, жалобы). Мы не отправляем письма повторно на адреса с жестким возвратом (hard bounce) или на те, что были отмечены как спам.
+- **Проверка контента** — Перед отправкой мы можем проводить базовые проверки (например, на слова, характерные для спама), чтобы вы могли исправить проблемы. Подписи и HTML очищаются для предотвращения инъекций и рискованного контента.
+- **Отслеживание и отписка** — Открытия и клики отслеживаются с помощью пикселей и подписанных ссылок. Каждая кампания включает ссылку для отписки; мы уважаем этот выбор и прекращаем отправку.
 
-## What you can do
+## Что можете сделать вы
 
-- **Keep your list clean** — Remove or fix bounced and invalid addresses. Don’t buy lists or add contacts who didn’t opt in.
-- **Respect unsubscribes** — Don’t manually re-add unsubscribed users to campaigns without consent.
-- **Use a clear From name and reply-to** — Set brand identity (Settings → Brand) so recipients recognize you.
-- **Avoid spammy content** — Write clear, relevant copy and avoid aggressive sales language or misleading subject lines.
-- **Watch your metrics** — High bounce or complaint rates hurt reputation. Use the [Dashboard](/en/dashboard/overview) and [Campaign analytics](/en/campaigns/analytics) to spot problems.
+- **Держите список в чистоте** — Удаляйте или исправляйте адреса с ошибками и недействительные адреса. Не покупайте базы и не добавляйте контакты, которые не давали согласия на рассылку.
+- **Уважайте отписки** — Не добавляйте вручную отписавшихся пользователей в кампании без их согласия.
+- **Используйте понятное имя «От кого» и email для ответов** — Настройте идентификацию бренда (Settings → Brand), чтобы получатели узнавали вас.
+- **Избегайте спам-контента** — Пишите четкие, релевантные тексты, избегайте агрессивных продаж или вводящих в заблуждение тем писем.
+- **Следите за метриками** — Высокий процент возвратов или жалоб вредит репутации. Используйте [Дашборд](/ru/dashboard/overview) и [Аналитику кампаний](/ru/campaigns/analytics), чтобы вовремя заметить проблемы.
 
-## Bounces and complaints
+## Возвраты и жалобы
 
-- **Soft bounce** — Temporary failure (mailbox full, server down). The provider may retry; repeated soft bounces can lead to suppression.
-- **Hard bounce** — Permanent failure (invalid address, domain doesn’t exist). We suppress these immediately.
-- **Spam complaint** — Recipient marked the email as spam. Too many complaints damage reputation; we suppress complainers and you should review content and targeting.
+- **Мягкий возврат (Soft bounce)** — Временная ошибка (ящик переполнен, сервер недоступен). Провайдер может попробовать отправить письмо снова; частые мягкие возвраты могут привести к блокировке адреса.
+- **Жесткий возврат (Hard bounce)** — Постоянная ошибка (недействительный адрес, домен не существует). Мы немедленно исключаем такие адреса.
+- **Жалоба на спам** — Получатель пометил письмо как спам. Слишком большое количество жалоб портит репутацию; мы прекращаем отправку таким пользователям, а вам следует пересмотреть контент и таргетинг.
 
-For more on contact status and suppression, see [Contact lifecycle](/en/contacts/lifecycle) and [Contacts overview](/en/contacts/overview). For sending issues, see [Troubleshooting: deliverability](/en/troubleshooting/deliverability).
+Подробнее о статусах и исключениях контактов читайте в разделах [Жизненный цикл контакта](/ru/contacts/lifecycle) и [Обзор контактов](/ru/contacts/overview). По вопросам проблем с отправкой см. [Устранение неполадок: доставляемость](/ru/troubleshooting/deliverability).

@@ -1,68 +1,68 @@
 ---
-title: "Privacy and data"
-description: "How we handle PII, tracking, and third-party providers"
+title: "Gizlilik ve veri"
+description: "PII, takip ve üçüncü taraf sağlayıcıları nasıl ele alıyoruz?"
 ---
 
-## What this page covers
+## Bu sayfa neleri kapsıyor?
 
-A short, user-facing summary of how Nudgen handles personal and contact data, how tracking works in emails, and which third-party providers we use. For the full legal text, see the [Privacy Policy](https://nudgen.net/privacy) and [Terms of Service](https://nudgen.net/terms) on the main site.
+Nudgen'ın kişisel ve kişi verilerini nasıl işlediğine, e-postalardaki takibin nasıl çalıştığına ve hangi üçüncü taraf sağlayıcıları kullandığımıza dair kısa, kullanıcı odaklı bir özet. Yasal metnin tamamı için ana sitedeki [Gizlilik Politikası](https://nudgen.net/privacy) ve [Hizmet Şartları](https://nudgen.net/terms) sayfalarına bakın.
 
-## PII and contact data
+## PII ve kişi verileri
 
-**Encryption at rest**
+**Beklemedeki verilerin şifrelenmesi (Encryption at rest)**
 
-- Contact data you upload (email addresses, names, and any custom fields) is **encrypted** before it is stored. We use AES-256-GCM; we do not see or store plaintext PII.
-- Emails are also **hashed** (one-way) for deduplication so we can merge duplicates without storing the raw address in plain form.
+- Yüklediğiniz kişi verileri (e-posta adresleri, isimler ve her türlü özel alan) saklanmadan önce **şifrelenir**. AES-256-GCM kullanıyoruz; açık metin halindeki PII verilerini görmüyoruz ve saklamıyoruz.
+- E-postalar, tekilleştirme (deduplication) için tek yönlü olarak **hash'lenir**, böylece ham adresi açık formda saklamadan yinelenenleri birleştirebiliriz.
 
-**Masking and reveal**
+**Maskeleme ve gösterme**
 
-- In the app, contact emails and names are shown **masked** by default (e.g. `j***@g***.com`). That limits exposure on shared screens and in logs.
-- When you click **Reveal**, the real value is decrypted only in your browser and shown temporarily. After you navigate away or refresh, it masks again. We never expose decrypted PII in analytics, logs, or exports.
+- Uygulamada, kişi e-postaları ve isimleri varsayılan olarak **maskeli** gösterilir (örneğin `j***@g***.com`). Bu, paylaşılan ekranlarda ve günlüklerde (logs) maruz kalmayı sınırlar.
+- **Göster (Reveal)** seçeneğine tıkladığınızda, gerçek değer yalnızca tarayıcınızda çözülür ve geçici olarak gösterilir. Sayfadan ayrıldığınızda veya yenilediğinizde tekrar maskelenir. Analizlerde, günlüklerde veya dışa aktarımlarda asla şifresi çözülmüş PII verilerini açığa çıkarmayız.
 
-**Who can see contact data**
+**Kişi verilerini kimler görebilir?**
 
-- Only people in your **workspace** with access to Contacts can see the list. Reveal is available to anyone who can view contacts in that workspace. Billing and plan limits are per workspace.
+- Kişi listesini yalnızca **çalışma alanınızda** Kişiler erişimi olan kişiler görebilir. Göster (Reveal) özelliği, o çalışma alanındaki kişileri görebilen herkese açıktır. Faturalandırma ve plan limitleri çalışma alanı başınadır.
 
-## Tracking in emails
+## E-postalarda takip
 
-We use tracking to measure campaign performance and honor unsubscribes.
+Kampanya performansını ölçmek ve abonelikten ayrılmaları onurlandırmak için takip (tracking) kullanıyoruz.
 
-- **Opens** — A small tracking pixel in the email loads when the recipient opens the message. We record the event (and approximate time) for analytics. Some email clients block images, so open counts can be undercounted.
-- **Clicks** — Links in the email can be wrapped as **signed tracking links**. When the recipient clicks, we record the click and then redirect them to the real URL. Signing and validation help prevent abuse.
-- **Unsubscribe** — Every campaign email includes an **unsubscribe link**. When the recipient uses it, we mark them as unsubscribed and they are excluded from future campaign sends. We do not send further marketing to that address unless you change their status.
+- **Açılmalar (Opens)** — Alıcı mesajı açtığında e-postadaki küçük bir takip pikseli yüklenir. Analizler için olayı (ve yaklaşık zamanı) kaydederiz. Bazı e-posta istemcileri görselleri engellediği için açılma sayıları olduğundan az görünebilir.
+- **Tıklamalar (Clicks)** — E-postadaki bağlantılar **imzalı takip bağlantıları** olarak sarmalanabilir. Alıcı tıkladığında tıklamayı kaydeder ve ardından onları gerçek URL'ye yönlendiririz. İmzalama ve doğrulama, kötüye kullanımı önlemeye yardımcı olur.
+- **Abonelikten Ayrılma (Unsubscribe)** — Her kampanya e-postası bir **abonelikten ayrılma bağlantısı** içerir. Alıcı bunu kullandığında, onları abonelikten ayrıldı olarak işaretleriz ve gelecekteki kampanya gönderimlerinden hariç tutulurlar. Siz durumlarını değiştirmedikçe o adrese daha fazla pazarlama e-postası göndermeyiz.
 
-When these tools run, we may process data such as browser/device details, approximate location (from IP), email client, and timestamps. This is used for analytics and to operate the service.
+Bu araçlar çalıştığında; tarayıcı/cihaz detayları, yaklaşık konum (IP üzerinden), e-posta istemcisi ve zaman damgaları gibi verileri işleyebiliriz. Bu veriler analizler ve hizmetin işletilmesi için kullanılır.
 
-## Third-party providers
+## Üçüncü taraf sağlayıcılar
 
-The service relies on the following types of providers. The exact list may change over time.
+Hizmet aşağıdaki sağlayıcı türlerine dayanmaktadır. Kesin liste zamanla değişebilir.
 
-| Provider | Purpose |
-| -------- | ------- |
-| **Google / Firebase** | Authentication (e.g. sign-in with Google) and application analytics. |
-| **Polar** | Subscription management, checkout, billing portal, and payment processing. |
-| **Email delivery provider** | Email delivery, bounce and complaint handling, and suppression list sync. |
-| **OpenAI** | AI-assisted email generation (campaign goals, brand voice, prompts). |
-| **MaxMind** | Approximate geolocation (e.g. from IP) for analytics and operational purposes. |
+| Sağlayıcı              | Amaç                                                                   |
+| ---------------------- | ---------------------------------------------------------------------- |
+| **Google / Firebase**  | Kimlik doğrulama (örneğin Google ile giriş) ve uygulama analizleri.     |
+| **Polar**              | Abonelik yönetimi, ödeme, faturalandırma portalı ve ödeme işleme.       |
+| **Email sağlayıcısı**  | E-posta teslimatı, bounce ve şikayet yönetimi, engelleme listesi senk. |
+| **OpenAI**             | AI destekli e-posta oluşturma (hedefler, marka sesi, istemler).        |
+| **MaxMind**            | Analitik ve operasyonel amaçlar için yaklaşık coğrafi konum (IP üzerinden). |
 
-Data is shared with these providers only as needed to run the service. We do not sell your data or contact lists to third parties for their own marketing.
+Veriler, bu sağlayıcılarla yalnızca hizmetin yürütülmesi için gerektiği ölçüde paylaşılır. Verilerinizi veya kişi listelerinizi kendi pazarlama faaliyetleri için üçüncü taraflara satmıyoruz.
 
-## Security practices
+## Güvenlik uygulamaları
 
-- Access inside the product is **role-based** (owner, admin, member) per workspace.
-- We use **signed links and validation** in tracking and other sensitive flows to reduce abuse.
-- We apply **rate limiting** and usage guards to protect the platform and enforce plan limits.
-- No transmission or storage is 100% secure; we use reasonable measures but do not guarantee absolute security.
+- Ürün içindeki erişim, çalışma alanı başına **rol tabanlıdır** (sahip, yönetici, üye).
+- Takip ve diğer hassas akışlarda kötüye kullanımı azaltmak için **imzalı bağlantılar ve doğrulama** kullanıyoruz.
+- Platformu korumak ve plan limitlerini uygulamak için **hız sınırlaması (rate limiting)** ve kullanım korumaları uyguluyoruz.
+- Hiçbir iletim veya depolama %100 güvenli değildir; makul önlemler alıyoruz ancak mutlak güvenlik garantisi vermiyoruz.
 
-## Data retention and your rights
+## Veri saklama ve haklarınız
 
-- We retain data as long as reasonably necessary to provide the service, maintain security and operations, comply with law, and enforce our agreements. Retention can differ by data type (e.g. account, billing, suppression, logs).
-- Depending on where you live, you may have rights to access, correct, delete, or restrict certain personal data. Recipients of emails sent through Nudgen can use the **unsubscribe** link; for other requests, contact [contact@nudgen.net](mailto:contact@nudgen.net).
-- If you are a **recipient** of a campaign (not the account holder), the sender is generally responsible for that outreach; you can contact them or use the unsubscribe link.
+- Verileri; hizmeti sağlamak, güvenliği ve operasyonları sürdürmek, yasalara uymak ve sözleşmelerimizi uygulamak için makul ölçüde gerekli olduğu sürece saklıyoruz. Saklama süresi veri türüne göre (örneğin hesap, faturalandırma, engelleme, günlükler) farklılık gösterebilir.
+- Yaşadığınız yere bağlı olarak, belirli kişisel verilere erişme, bunları düzeltme, silme veya kısıtlama haklarınız olabilir. Nudgen üzerinden gönderilen e-postaların alıcıları **abonelikten ayrılma** bağlantısını kullanabilir; diğer talepler için [contact@nudgen.net](mailto:contact@nudgen.net) ile iletişime geçebilirsiniz.
+- Bir kampanyanın **alıcısıysanız** (hesap sahibi değilseniz), bu iletişimden genellikle gönderen sorumludur; onlarla iletişime geçebilir veya abonelikten ayrılma bağlantısını kullanabilirsiniz.
 
-## Full policies
+## Tam politikalar
 
-- **Privacy Policy:** [nudgen.net/privacy](https://nudgen.net/privacy)  
-- **Terms of Service:** [nudgen.net/terms](https://nudgen.net/terms)
+- **Gizlilik Politikası:** [nudgen.net/privacy](https://nudgen.net/privacy)  
+- **Hizmet Şartları:** [nudgen.net/terms](https://nudgen.net/terms)
 
-For product-specific behavior, see [Contacts overview](/en/contacts/overview) (encryption and masking), [Contact lifecycle](/en/contacts/lifecycle) (suppression and unsubscribes), and [Deliverability basics](/en/concepts/deliverability-basics).
+Ürüne özel davranışlar için [Kişilere genel bakış](/tr/contacts/overview) (şifreleme ve maskeleme), [Kişi yaşam döngüsü](/tr/contacts/lifecycle) (engelleme ve abonelikten ayrılma) ve [Teslim edilebilirlik temelleri](/tr/concepts/deliverability-basics) bölümlerine bakın.

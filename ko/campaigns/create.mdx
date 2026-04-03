@@ -1,97 +1,88 @@
 ---
-title: "Create campaigns"
-description: "Step-by-step campaign wizard, AI generation, preview, and test send"
+title: "캠페인 생성 가이드"
+description: "단계별 캠페인 마법사, AI 콘텐츠 생성, 미리보기 및 테스트 발송 안내"
 ---
 
-## What this page helps you do
+## 이 페이지의 도움말
+단발성 또는 드립 캠페인을 처음부터 끝까지 생성하는 방법을 안내합니다. 오디언스를 선택하고, 캠페인 목표를 설정한 뒤, AI를 통해 콘텐츠를 생성하고 미리본 후 발송하거나 예약할 수 있습니다.
 
-Create a one-shot or drip campaign from start to finish. You'll choose the audience, set the campaign goal, let AI generate the content, preview it, and send or schedule.
+## 시작하기 전에
+- [연락처 업로드 완료](/ko/contacts/upload)
+- [브랜드 톤 설정 완료](/ko/brand/overview)
+- 명확한 캠페인 목표 (예: "7일 동안 로그인하지 않은 사용자 재유치")
 
-## Before you start
+## 1단계: 새 캠페인 시작
+1. **캠페인(Campaigns)** 메뉴에서 **새 캠페인(New campaign)**을 클릭합니다.
+2. **단발성(One-shot)** 또는 **드립 시퀀스(Drip sequence)** 중에서 선택합니다.
 
-- [Contacts uploaded](/en/contacts/upload)
-- [Brand tone configured](/en/brand/overview)
-- A clear goal (e.g. "Re-engage users who haven't logged in for 7 days")
+## 2단계: 오디언스 선택
+- **전체 연락처** — 연락처 목록에 있는 모든 사람 (요금제 한도 내).
+- **태그 기준** — 특정 태그(`inactive`, `vip` 등)가 지정된 연락처만 선택.
+- **수동 선택** — 특정 연락처를 직접 지정.
 
-## Step 1: New campaign
+마법사 단계에서 **예상 도달 범위**(캠페인을 수신할 고유 연락처 수)가 표시됩니다. 0으로 표시된다면 연락처를 추가하거나 세그먼트 조건을 조정해 보세요.
 
-1. Go to **Campaigns** and click **New campaign**.
-2. Choose **One-shot** or **Drip sequence**.
+선택 사항으로 **CTA 링크**(행동 유도 URL)를 추가할 수 있습니다. 이메일 내 링크 클릭 여부를 추적할 수 있으며, 이 링크는 클릭 시 자동 중단 규칙 등에 활용됩니다.
 
-## Step 2: Select audience
+## 3단계: 브랜드, 서명 및 목표 선택
+1. 이 캠페인에 적용할 **브랜드 설정(톤)**을 선택합니다.
+2. 이메일 하단에 추가될 **서명**을 선택합니다 (필요 시 **설정** → **서명**에서 미리 생성하세요).
+3. **캠페인 목표**를 입력합니다. 무엇을 달성하고 싶은지 짧게 기술해 주세요. 예시:
+   - "7일 동안 접속하지 않은 사용자의 재참여 유도"
+   - "무료 체험 사용자의 온보딩 완료 유도"
+   - "유료 고객에게 새로운 기능 홍보"
 
-- **All contacts** — Everyone in your contact list (within plan limits).
-- **By tags** — Only contacts with selected tags (e.g. `inactive`, `vip`).
-- **Manual** — Hand-pick specific contacts.
+AI는 이 목표와 브랜드 톤을 바탕으로 이메일 제목과 본문을 생성합니다. 스팸으로 분류될 수 있는 단어가 포함되어 있는지 기본 검사가 수행되며, 문제 발생 시 앱에서 알림을 제공합니다.
 
-The wizard shows a **reach estimate** (how many unique contacts will receive the campaign). If it shows zero, add or import contacts or adjust your segment.
+## 4단계: 콘텐츠 생성
+1. **생성(Generate)** 버튼을 클릭합니다.
+2. 생성된 제목과 본문을 검토합니다.
+3. 필요한 경우 직접 편집하거나 문구를 수정하여 다시 생성할 수 있습니다.
+4. 드립 시퀀스의 경우 각 단계(1일 차, 3일 차 등)별로 동일한 과정을 반복합니다.
 
-Optionally add a **CTA link** (call-to-action URL). Links in the email can be tracked; the CTA is used for click tracking and stop-on-click rules.
-
-## Step 3: Choose brand, signature, and goal
-
-1. Select the **brand config** (tone) for this campaign.
-2. Select the **signature** to append to the email (create one under **Settings** → **Signatures** if needed).
-3. Enter the **campaign goal** — a short description of what you want to achieve. Examples:
-   - "Re-engage users who haven't logged in for 7 days"
-   - "Get trial users to complete onboarding"
-   - "Promote our new feature to paying customers"
-
-The AI uses this goal and your brand tone to generate subject lines and email bodies. Content may be checked for spam-prone wording; the app will flag issues when possible.
-
-## Step 4: Generate content
-
-1. Click **Generate**.
-2. Review the subject line and email body.
-3. Edit if needed. You can regenerate or tweak the text.
-4. For drip sequences: repeat for each step (Day 1, Day 3, etc.).
-
-## Step 5: Preview
-
-- Use the **Desktop** and **Mobile** toggle to see how the email looks on different devices.
-- Check links, images, and formatting.
-- Ensure the CTA and tone match your goal.
+## 5단계: 미리보기
+- **데스크톱** 및 **모바일** 토글을 사용하여 기기별 이메일 화면을 확인하세요.
+- 링크, 이미지 및 서식이 올바른지 점검합니다.
+- CTA와 톤이 캠페인 목표와 일치하는지 확인합니다.
 
 <Tip>
-Always **Send test** before launching. We email a copy to your account email so you can verify it in your real inbox.
+발송 전 반드시 **테스트 발송**을 해보세요. 실제 편지함에서 어떻게 보이는지 귀하의 계정 이메일로 테스트 메일을 보내드립니다.
 </Tip>
 
-## Step 6: Send or schedule
+## 6단계: 발송 또는 예약
+- **지금 발송** — 즉시 발송 대기열에 추가되어 수 분 내에 발송이 시작됩니다.
+- **예약** — 날짜와 시간을 선택하면 해당 시간에 자동으로 발송됩니다.
+- **초안 저장** — 나중에 이어서 작업할 수 있습니다. 발송 전까지 언제든 수정 가능합니다.
 
-- **Send now** — Emails go out immediately (within minutes, depending on queue).
-- **Schedule** — Pick date and time. Emails send automatically at that time.
-- **Save as draft** — Finish later. You can edit until you send.
+## 다음 단계
+- 이메일은 오픈 및 클릭 추적 기능이 포함된 대행사 인프라를 통해 발송됩니다.
+- [캠페인 상세 페이지](/ko/campaigns/analytics)에서 발송, 도달, 오픈, 클릭 및 성공/실패율을 확인할 수 있습니다.
+- 자동 중단 규칙을 설정한 경우, 이미 참여한 연락처는 이후의 드립 단계를 건너뛰게 됩니다.
 
-## What happens next
-
-- Emails are sent via our email infrastructure with open and click tracking.
-- The [campaign detail page](/en/campaigns/analytics) shows metrics: sent, delivered, opened, clicked, and delivery success/failure rates.
-- If you set auto-stop rules, engaged contacts will not receive later drip steps.
-
-## Troubleshooting
+## 문제 해결
 
 <AccordionGroup>
-  <Accordion title="AI content doesn't match my tone">
-    Refine your brand config with a custom prompt or example emails. Regenerate the campaign content after updating.
+  <Accordion title="AI 콘텐츠가 원하는 브랜드 톤과 다릅니다">
+    브랜드 설정에서 맞춤형 프롬프트나 예시 이메일을 보강해 보세요. 설정을 변경한 뒤 캠페인 콘텐츠를 다시 생성하면 개선된 결과를 얻을 수 있습니다.
   </Accordion>
-  <Accordion title="Test email didn't arrive">
-    Check spam/junk. Ensure your account email is correct in settings. Wait a few minutes — delivery can be delayed.
+  <Accordion title="테스트 이메일이 오지 않습니다">
+    스팸함을 확인해 보세요. 설정에서 계정 이메일 주소가 정확한지 확인하시기 바랍니다. 발송에 수 분 정도 시간이 걸릴 수 있으니 잠시 기다려 주세요.
   </Accordion>
-  <Accordion title="Can I change the audience after generating?">
-    Yes, as long as the campaign is still in draft. Changing the audience may affect who receives the emails.
+  <Accordion title="콘텐츠 생성 후 오디언스를 바꿀 수 있나요?">
+    네, 초안 상태라면 언제든 가능합니다. 다만 오디언스를 변경하면 수신 대상자 수가 달라질 수 있음에 유의하세요.
   </Accordion>
 </AccordionGroup>
 
-## Related docs
+## 관련 문서
 
 <CardGroup cols={2}>
-  <Card title="Campaigns overview" icon="list" href="/en/campaigns/overview">
-    One-shot vs drip, statuses.
+  <Card title="캠페인 개요" icon="list" href="/ko/campaigns/overview">
+    단발성 vs 드립 캠페인, 상태 구분 안내.
   </Card>
-  <Card title="Manage campaigns" icon="pen-to-square" href="/en/campaigns/manage">
-    Edit, send, schedule, stop.
+  <Card title="캠페인 관리" icon="pen-to-square" href="/ko/campaigns/manage">
+    편집, 발송, 예약 및 중단 방법.
   </Card>
-  <Card title="Campaign analytics" icon="chart-line" href="/en/campaigns/analytics">
-    Metrics and recipient activity.
+  <Card title="캠페인 분석" icon="chart-line" href="/ko/campaigns/analytics">
+    상세 지표 및 수신자 활동 모니터링.
   </Card>
 </CardGroup>

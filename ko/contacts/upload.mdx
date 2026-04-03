@@ -1,80 +1,77 @@
 ---
-title: "Upload contacts"
-description: "CSV format, validation rules, and tag assignment for contact uploads"
+title: "연락처 업로드"
+description: "CSV 형식, 유효성 검사 규칙 및 업로드 시 태그 지정 안내"
 ---
 
-## What this page helps you do
+## 이 페이지의 도움말
+캠페인을 실행하기 위해 연락처가 포함된 CSV 파일을 업로드하는 방법을 설명합니다. 필수 컬럼, 유효성 검사 규칙, 용량 제한 및 업로드 시 태그를 추가하는 방법을 알아봅니다.
 
-Upload a CSV of contacts so you can run campaigns. You'll learn the required columns, validation rules, size limits, and how to add tags during upload.
+## 시작하기 전에
+- Nudgen 계정
+- 최소한 `email` 컬럼이 포함된 CSV 파일
+- 연락처 수가 요금제 한도 내에 있어야 합니다 ([결제 안내](/ko/billing/overview) 참조)
 
-## Before you start
+## 1단계: CSV 파일 준비하기
 
-- A Nudgen account
-- A CSV file with at least an `email` column
-- Contacts must be under your plan limit (see [billing](/en/billing/overview))
+CSV 파일에는 다음 정보가 포함되어야 합니다:
 
-## Step 1: Prepare your CSV
+| 컬럼 | 필수 여부 | 설명 |
+| :--- | :--- | :--- |
+| `email` | **필수** | 유효한 이메일 주소입니다. 중복될 수 없습니다. |
+| `name` | 선택 | 개인화된 메시지를 위한 표시 이름입니다. |
 
-Your CSV must include:
+`company`나 `segment`와 같은 다른 컬럼을 추가할 수도 있습니다. 이 정보는 암호화되어 저장되며, 나중에 태그 지정이나 세그먼트화 로직에 사용할 수 있습니다.
 
-| Column   | Required | Description                          |
-| -------- | -------- | ------------------------------------ |
-| `email`  | Yes      | Valid email address. Must be unique. |
-| `name`   | No       | Display name for personalization.   |
+## 2단계: 형식 확인하기
 
-You can add other columns (e.g. `company`, `segment`). They are stored encrypted and can be used in tags or segmentation logic.
-
-## Step 2: Validate format
-
-- **Encoding:** UTF-8 recommended.
-- **Delimiter:** Comma (`,`).
-- **Header row:** First row must contain column names. `email` and `name` are recognized case-insensitively.
-- **Duplicate emails:** Duplicates in the same file are merged. Existing contacts with the same email are updated.
+- **인코딩:** UTF-8 권장.
+- **구분자:** 쉼표(`,`).
+- **헤더 행:** 첫 번째 행에는 반드시 컬럼명이 포함되어야 합니다. `email`과 `name`은 대소문자를 구분하지 않고 인식됩니다.
+- **중복 이메일:** 파일 내의 중복 이메일은 통합됩니다. 기존에 등록된 이메일이 있는 경우 해당 정보가 업데이트됩니다.
 
 <Warning>
-Invalid emails (malformed, missing `@`, etc.) are skipped. Check the upload summary to see how many rows were imported vs skipped.
+잘못된 이메일 형식(예: `@` 누락 등)은 생략됩니다. 업로드 요약 정보를 통해 몇 개의 행을 가져오고 몇 개를 건너뛰었는지 확인하세요.
 </Warning>
 
-## Step 3: Upload in Nudgen
+## 3단계: Nudgen에 업로드하기
 
-1. Go to **Contacts** in the sidebar.
-2. Click **Upload CSV**.
-3. Select your file.
-4. Choose tags to apply to all uploaded contacts (e.g. `inactive`, `re-engage`).
-5. Review the preview and confirm.
+1. 사이드바에서 **연락처(Contacts)**를 선택합니다.
+2. **CSV 업로드(Upload CSV)**를 클릭합니다.
+3. 파일을 선택합니다.
+4. 업로드하는 모든 연락처에 적용할 태그(예: `inactive`, `re-engage`)를 선택합니다.
+5. 미리보기를 확인하고 승인합니다.
 
-## Size limits
+## 용량 및 수량 제한
 
-- **File size:** Follow the on-screen limit (typically a few MB). Large lists may take longer to process.
-- **Contacts per workspace:** Depends on your plan. The app enforces the limit at upload time; if you exceed it, the upload is rejected. See [Billing](/en/billing/overview) and the live [pricing page](https://nudgen.net/pricing) for current limits.
+- **파일 용량:** 화면에 표시된 제한(일반적으로 수 MB)을 따르세요. 대규모 목록은 처리하는 데 시간이 더 걸릴 수 있습니다.
+- **워크스페이스당 연락처 수:** 요금제에 따라 다릅니다. 업로드 시 한도를 초과하면 업로드가 거부됩니다. 현재 한도는 [결제 안내](/ko/billing/overview) 및 실시간 [가격 페이지](https://nudgen.net/pricing)를 확인하세요.
 
-## What happens next
+## 다음 단계
+- 연락처 목록에 마스킹된 이메일(`j***@g***.com`)이 표시됩니다.
+- 태그를 사용하여 [캠페인 생성](/ko/campaigns/create) 시 오디언스를 세그먼트화하세요.
+- 계정 소유자는 개별 연락처의 실제 정보를 [확인(Reveal)](/ko/contacts/overview)할 수 있습니다.
 
-- Contacts appear in the list with masked emails (`j***@g***.com`).
-- Use tags to segment audiences in [campaigns](/en/campaigns/create).
-- You can [reveal](/en/contacts/overview) individual contacts as the account owner.
-
-## Troubleshooting
+## 문제 해결
 
 <AccordionGroup>
-  <Accordion title="Some rows were skipped">
-    Check that each row has a valid email in the `email` column. Empty rows or malformed addresses are skipped.
+  <Accordion title="일부 행이 생략되었습니다">
+    `email` 컬럼에 유효한 이메일 주소가 있는지 확인하세요. 빈 행이나 형식이 잘못된 주소는 건너뜁니다.
   </Accordion>
-  <Accordion title="Upload failed: plan limit exceeded">
-    Your contact count would exceed your plan limit. Upgrade your plan or remove existing contacts.
+  <Accordion title="업로드 실패: 요금제 한도 초과">
+    해당 업로드로 인해 요금제 한도를 초과하게 됩니다. 요금제를 업그레이드하거나 기존 연락처를 먼저 삭제하세요.
   </Accordion>
-  <Accordion title="Column not recognized">
-    Ensure the header row includes `email` (or `Email`). Other columns are optional.
+  <Accordion title="컬럼을 인식하지 못합니다">
+    헤더 행에 `email`(또는 `Email`)이 명시되어 있는지 확인하세요. 다른 컬럼은 선택 사항입니다.
   </Accordion>
 </AccordionGroup>
 
-## Related docs
+## 관련 문서
 
 <CardGroup cols={2}>
-  <Card title="Contacts overview" icon="users" href="/en/contacts/overview">
-    Encryption, masking, and segmentation.
+  <Card title="연락처 개요" icon="users" href="/ko/contacts/overview">
+    암호화, 마스킹 및 세그먼트화 안내.
   </Card>
-  <Card title="Create campaigns" icon="paper-plane" href="/en/campaigns/create">
-    Select your audience and launch a campaign.
+  <Card title="캠페인 생성" icon="paper-plane" href="/ko/campaigns/create">
+    오디언스를 선택하고 캠페인을 시작해 보세요.
   </Card>
 </CardGroup>

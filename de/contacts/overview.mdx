@@ -1,64 +1,64 @@
 ---
-title: "Contacts overview"
-description: "How Nudgen stores, encrypts, and displays your contact data"
+title: "Kontakte Übersicht"
+description: "Wie Nudgen Ihre Kontaktdaten speichert, verschlüsselt und anzeigt"
 ---
 
-## What this page helps you do
+## Was diese Seite Ihnen bietet
 
-Understand how contacts are stored, why they appear masked, and how to use tags for segmentation. This sets you up to upload contacts and build campaigns confidently.
+Erfahren Sie, wie Kontakte gespeichert werden, warum sie maskiert erscheinen und wie Sie Tags zur Segmentierung verwenden. Dies bereitet Sie darauf vor, Kontakte sicher hochzuladen und Kampagnen zu erstellen.
 
-## Before you start
+## Bevor Sie beginnen
 
-- A Nudgen account
-- A CSV file with at least one email address (see [upload guide](/en/contacts/upload) for format)
+- Ein Nudgen-Konto
+- Eine CSV-Datei mit mindestens einer E-Mail-Adresse (siehe [Upload-Anleitung](/de/contacts/upload) für das Format)
 
-## How contact data is stored
+## Wie Kontaktdaten gespeichert werden
 
-Nudgen encrypts every piece of personally identifiable information (PII) before it is saved:
+Nudgen verschlüsselt jede Art von personenbezogenen Daten (PII), bevor sie gespeichert werden:
 
-- **Emails** — AES-256 encrypted. We cannot read them.
-- **Names** — Encrypted if provided. Optional in your CSV.
-- **Custom metadata** — Any extra columns you upload are encrypted as well.
+- **E-Mails** — AES-256 verschlüsselt. Wir können sie nicht lesen.
+- **Namen** — Verschlüsselt, falls angegeben. Optional in Ihrer CSV.
+- **Benutzerdefinierte Metadaten** — Alle zusätzlichen Spalten, die Sie hochladen, werden ebenfalls verschlüsselt.
 
-We also store a one-way hash of each email for deduplication. Duplicate emails in the same list are merged automatically.
+Wir speichern zudem einen Einweg-Hash jeder E-Mail zur Duplikaterkennung. Doppelte E-Mails in derselben Liste werden automatisch zusammengeführt.
 
-## Masked view
+## Maskierte Ansicht
 
-By default, the contact list shows masked values like `j***@g***.com` instead of real addresses. PII is encrypted at rest; we never see or store plaintext emails or names. Masking protects your data from shoulder-surfing and limits exposure if someone else has access to your screen.
+Standardmäßig zeigt die Kontaktliste maskierte Werte wie `j***@g***.com` anstelle der echten Adressen an. PII sind im Ruhezustand verschlüsselt; wir sehen oder speichern niemals Klartext-E-Mails oder -Namen. Die Maskierung schützt Ihre Daten vor Schulterblicken (Shoulder-Surfing) und begrenzt die Bloßstellung, falls jemand anderes Zugriff auf Ihren Bildschirm hat.
 
-**Revealing a contact:** You (and other workspace members with access) can click **Reveal** to show the real email and name in the UI. Decryption happens only in your browser when you reveal; after you navigate away or refresh, values mask again. We never display decrypted PII in analytics, logs, or exports.
+**Einen Kontakt enthüllen:** Sie (und andere Workspace-Mitglieder mit Zugriff) können auf **Reveal** (Enthüllen) klicken, um die echte E-Mail und den Namen in der UI anzuzeigen. Die Entschlüsselung findet nur in Ihrem Browser statt, wenn Sie darauf klicken; sobald Sie die Seite verlassen oder aktualisieren, werden die Werte wieder maskiert. Wir zeigen niemals entschlüsselte PII in Analysen, Protokollen oder Exporten an.
 
-## Tags and segmentation
+## Tags und Segmentierung
 
-Assign tags when you upload contacts or edit them later. Use tags to target specific segments in campaigns:
+Weisen Sie Tags zu, wenn Sie Kontakte hochladen oder sie später bearbeiten. Nutzen Sie Tags, um spezifische Segmente in Kampagnen anzusprechen:
 
-- `inactive` — Users who haven't logged in for 30+ days
-- `vip` — High-value or premium customers
-- `trial` — People on a free trial
+- `inactive` — Benutzer, die sich seit 30+ Tagen nicht angemeldet haben
+- `vip` — Besonders wertvolle oder Premium-Kunden
+- `trial` — Personen in einem kostenlosen Testzeitraum
 
-When creating a campaign, you choose an audience: all contacts, or only those with certain tags. Tags make it easy to run different sequences for different segments.
+Wenn Sie eine Kampagne erstellen, wählen Sie eine Zielgruppe: alle Kontakte oder nur solche mit bestimmten Tags. Tags machen es einfach, unterschiedliche Sequenzen für verschiedene Segmente auszuführen.
 
-## Contact statuses
+## Kontakt-Status
 
-Contacts can have one of these statuses:
+Kontakte können einen dieser Status haben:
 
-- **Active** — Can receive campaigns. Default for newly imported contacts.
-- **Unsubscribed** — Opted out via the unsubscribe link or manually. They will not receive future campaign emails unless you change their status.
-- **Suppressed / Bounced** — Delivery failed (invalid address, mailbox full, or provider suppression list). These contacts are automatically excluded from future sends to protect deliverability. Our system syncs with the delivery provider's suppression list.
+- **Aktiv** — Kann Kampagnen erhalten. Standard für neu importierte Kontakte.
+- **Abgemeldet** — Über den Abmelde-Link oder manuell abgemeldet. Sie erhalten keine weiteren Kampagnen-E-Mails, es sei wenn Sie den Status ändern.
+- **Unterdrückt / Bounced** — Zustellung fehlgeschlagen (ungültige Adresse, Postfach voll oder Provider-Sperrliste). Diese Kontakte werden automatisch von zukünftigen Sendungen ausgeschlossen, um die Zustellbarkeit zu schützen. Unser System synchronisiert sich mit der Sperrliste des Zustellanbieters.
 
-## What happens next
+## Nächste Schritte
 
-- [Upload a CSV](/en/contacts/upload) to add contacts.
-- [Create a campaign](/en/campaigns/create) and select your audience by tags or all contacts.
-- Check [plan limits](/en/billing/overview) for max contacts per plan.
+- [Laden Sie eine CSV hoch](/de/contacts/upload), um Kontakte hinzuzufügen.
+- [Erstellen Sie eine Kampagne](/de/campaigns/create) und wählen Sie Ihre Zielgruppe nach Tags oder alle Kontakte aus.
+- Prüfen Sie die [Plan-Limits](/de/billing/overview) für die maximale Anzahl an Kontakten pro Plan.
 
-## Related docs
+## Verwandte Dokumente
 
 <CardGroup cols={2}>
-  <Card title="Upload contacts" icon="file-upload" href="/en/contacts/upload">
-    CSV format, validation, and tag assignment.
+  <Card title="Kontakte hochladen" icon="file-upload" href="/de/contacts/upload">
+    CSV-Format, Validierung und Tag-Zuweisung.
   </Card>
-  <Card title="Create campaigns" icon="paper-plane" href="/en/campaigns/create">
-    Choose audience and launch your first campaign.
+  <Card title="Kampagnen erstellen" icon="paper-plane" href="/de/campaigns/create">
+    Wählen Sie die Zielgruppe und starten Sie Ihre erste Kampagne.
   </Card>
 </CardGroup>

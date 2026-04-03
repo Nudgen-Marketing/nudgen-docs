@@ -1,80 +1,80 @@
 ---
-title: "Upload contacts"
-description: "CSV format, validation rules, and tag assignment for contact uploads"
+title: "Kontakte hochladen"
+description: "CSV-Format, Validierungsregeln und Tag-Zuweisung für den Kontakt-Upload"
 ---
 
-## What this page helps you do
+## Was diese Seite Ihnen bietet
 
-Upload a CSV of contacts so you can run campaigns. You'll learn the required columns, validation rules, size limits, and how to add tags during upload.
+Laden Sie eine CSV-Datei mit Kontakten hoch, um Kampagnen zu starten. Sie erfahren hier alles über erforderliche Spalten, Validierungsregeln, Größenbeschränkungen und wie Sie beim Upload Tags hinzufügen.
 
-## Before you start
+## Bevor Sie beginnen
 
-- A Nudgen account
-- A CSV file with at least an `email` column
-- Contacts must be under your plan limit (see [billing](/en/billing/overview))
+- Ein Nudgen-Konto
+- Eine CSV-Datei mit mindestens einer `email`-Spalte
+- Die Anzahl der Kontakte muss innerhalb Ihres Plan-Limits liegen (siehe [Abrechnung](/de/billing/overview))
 
-## Step 1: Prepare your CSV
+## Schritt 1: Bereiten Sie Ihre CSV-Datei vor
 
-Your CSV must include:
+Ihre CSV muss folgendes enthalten:
 
-| Column   | Required | Description                          |
-| -------- | -------- | ------------------------------------ |
-| `email`  | Yes      | Valid email address. Must be unique. |
-| `name`   | No       | Display name for personalization.   |
+| Spalte   | Erforderlich | Beschreibung                                     |
+| -------- | ------------ | ------------------------------------------------ |
+| `email`  | Ja           | Gültige E-Mail-Adresse. Muss eindeutig sein.      |
+| `name`   | Nein         | Anzeigename für die Personalisierung.            |
 
-You can add other columns (e.g. `company`, `segment`). They are stored encrypted and can be used in tags or segmentation logic.
+Sie können weitere Spalten hinzufügen (z. B. `company`, `segment`). Diese werden verschlüsselt gespeichert und können in Tags oder in der Segmentierungslogik verwendet werden.
 
-## Step 2: Validate format
+## Schritt 2: Format validieren
 
-- **Encoding:** UTF-8 recommended.
-- **Delimiter:** Comma (`,`).
-- **Header row:** First row must contain column names. `email` and `name` are recognized case-insensitively.
-- **Duplicate emails:** Duplicates in the same file are merged. Existing contacts with the same email are updated.
+- **Codierung:** UTF-8 wird empfohlen.
+- **Trennzeichen:** Komma (`,`).
+- **Kopfzeile:** Die erste Zeile muss die Spaltennamen enthalten. `email` und `name` werden unabhängig von Groß-/Kleinschreibung erkannt.
+- **Doppelte E-Mails:** Duplikate in derselben Datei werden zusammengeführt. Bestehende Kontakte mit derselben E-Mail werden aktualisiert.
 
 <Warning>
-Invalid emails (malformed, missing `@`, etc.) are skipped. Check the upload summary to see how many rows were imported vs skipped.
+Ungültige E-Mails (falsches Format, fehlendes `@` usw.) werden übersprungen. Prüfen Sie die Upload-Zusammenfassung, um zu sehen, wie viele Zeilen importiert vs. übersprungen wurden.
 </Warning>
 
-## Step 3: Upload in Nudgen
+## Schritt 3: In Nudgen hochladen
 
-1. Go to **Contacts** in the sidebar.
-2. Click **Upload CSV**.
-3. Select your file.
-4. Choose tags to apply to all uploaded contacts (e.g. `inactive`, `re-engage`).
-5. Review the preview and confirm.
+1. Gehen Sie in der Seitenleiste auf **Kontakte**.
+2. Klicken Sie auf **Upload CSV**.
+3. Wählen Sie Ihre Datei aus.
+4. Wählen Sie Tags aus, die auf alle hochgeladenen Kontakte angewendet werden sollen (z. B. `inactive`, `re-engage`).
+5. Prüfen Sie die Vorschau und bestätigen Sie den Vorgang.
 
-## Size limits
+## Größenbeschränkungen
 
-- **File size:** Follow the on-screen limit (typically a few MB). Large lists may take longer to process.
-- **Contacts per workspace:** Depends on your plan. The app enforces the limit at upload time; if you exceed it, the upload is rejected. See [Billing](/en/billing/overview) and the live [pricing page](https://nudgen.net/pricing) for current limits.
+- **Dateigröße:** Beachten Sie das Limit auf dem Bildschirm (normalerweise ein paar MB). Große Listen können länger in der Verarbeitung dauern.
+- **Kontakte pro Workspace:** Hängt von Ihrem Plan ab. Die App prüft das Limit beim Upload; wird es überschritten, wird der Upload abgelehnt. Aktuelle Limits finden Sie unter [Abrechnung](/de/billing/overview) und auf der [Preisseite](https://nudgen.net/pricing).
 
-## What happens next
+## Nächste Schritte
 
-- Contacts appear in the list with masked emails (`j***@g***.com`).
-- Use tags to segment audiences in [campaigns](/en/campaigns/create).
-- You can [reveal](/en/contacts/overview) individual contacts as the account owner.
+- Kontakte erscheinen in der Liste mit maskierten E-Mails (`j***@g***.com`).
+- Nutzen Sie Tags, um Zielgruppen in [Kampagnen](/de/campaigns/create) zu segmentieren.
+- Als Account-Inhaber können Sie einzelne Kontakte [enthüllen](/de/contacts/overview).
 
-## Troubleshooting
+## Fehlerbehebung
 
 <AccordionGroup>
-  <Accordion title="Some rows were skipped">
-    Check that each row has a valid email in the `email` column. Empty rows or malformed addresses are skipped.
+  <Accordion title="Einige Zeilen wurden übersprungen">
+    Prüfen Sie, ob jede Zeile eine gültige Adresse in der Spalte `email` hat. Leere Zeilen oder fehlerhafte Adressen werden ignoriert.
   </Accordion>
-  <Accordion title="Upload failed: plan limit exceeded">
-    Your contact count would exceed your plan limit. Upgrade your plan or remove existing contacts.
+  <Accordion title="Upload fehlgeschlagen: Plan-Limit überschritten">
+    Die Anzahl Ihrer Kontakte würde Ihr Plan-Limit überschreiten. Aktualisieren Sie Ihren Plan oder löschen Sie bestehende Kontakte.
   </Accordion>
-  <Accordion title="Column not recognized">
-    Ensure the header row includes `email` (or `Email`). Other columns are optional.
+  <Accordion title="Spalte nicht erkannt">
+    Stellen Sie sicher, dass die Kopfzeile `email` (oder `Email`) enthält. Andere Spalten sind optional.
   </Accordion>
 </AccordionGroup>
 
-## Related docs
+## Verwandte Dokumente
 
 <CardGroup cols={2}>
-  <Card title="Contacts overview" icon="users" href="/en/contacts/overview">
-    Encryption, masking, and segmentation.
+  <Card title="Kontakte Übersicht" icon="users" href="/de/contacts/overview">
+    Verschlüsselung, Maskierung und Segmentierung.
   </Card>
-  <Card title="Create campaigns" icon="paper-plane" href="/en/campaigns/create">
-    Select your audience and launch a campaign.
+  <Card title="Kampagnen erstellen" icon="paper-plane" href="/de/campaigns/create">
+    Wählen Sie die Zielgruppe und starten Sie eine Kampagne.
   </Card>
 </CardGroup>

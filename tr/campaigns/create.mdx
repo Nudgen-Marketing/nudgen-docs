@@ -1,97 +1,95 @@
 ---
-title: "Create campaigns"
-description: "Step-by-step campaign wizard, AI generation, preview, and test send"
+title: "Kampanya oluştur"
+description: "Erişim seçin, AI ile içerik oluşturun, önizleyin ve kampanya başlatın"
 ---
 
-## What this page helps you do
+## Bu sayfa size ne konuda yardımcı olur?
 
-Create a one-shot or drip campaign from start to finish. You'll choose the audience, set the campaign goal, let AI generate the content, preview it, and send or schedule.
+İlk kampanyanızı oluşturmak için sihirbazı kullanın. Nudgen, marka sesinizde kişiselleştirilmiş bir e-posta taslağı yazmanıza yardımcı olur.
 
-## Before you start
+## Başlamadan önce
 
-- [Contacts uploaded](/en/contacts/upload)
-- [Brand tone configured](/en/brand/overview)
-- A clear goal (e.g. "Re-engage users who haven't logged in for 7 days")
+- Nudgen'a yüklenmiş kişiler
+- Bir marka yapılandırması (önceden ayarlanmış ton veya özel istem)
 
-## Step 1: New campaign
+## Adım 1: Kampanya türünü seçin
 
-1. Go to **Campaigns** and click **New campaign**.
-2. Choose **One-shot** or **Drip sequence**.
+1. **Kampanyalar (Campaigns)** sayfasına gidin.
+2. **Yeni Kampanya (New Campaign)** seçeneğine tıklayın.
+3. Seçin:
+   - **Tek Seferlik (One-shot):** Bir kez gönderilecek tek bir e-posta.
+   - **Drip Sekansı (Drip sequence):** Gecikmeli gönderilen (örneğin 1. Gün, 3. Gün) çok adımlı e-postalar.
 
-## Step 2: Select audience
+## Adım 2: Hedef kitlenizi seçin
 
-- **All contacts** — Everyone in your contact list (within plan limits).
-- **By tags** — Only contacts with selected tags (e.g. `inactive`, `vip`).
-- **Manual** — Hand-pick specific contacts.
+Alıcıları seçin:
 
-The wizard shows a **reach estimate** (how many unique contacts will receive the campaign). If it shows zero, add or import contacts or adjust your segment.
+- **Tüm kişiler:** Veritabanınızdaki aktif herkes.
+- **Etiketlere (Tags) göre:** Yalnızca seçilen etiketlere sahip olanlar (örneğin `sepette-kaldı`).
+- **Manuel:** Her alıcıyı ayrı ayrı elle seçin.
 
-Optionally add a **CTA link** (call-to-action URL). Links in the email can be tracked; the CTA is used for click tracking and stop-on-click rules.
+Sihirbaz, alıcı listenize ve plan limitlerinize göre bir erişim tahmini gösterir.
 
-## Step 3: Choose brand, signature, and goal
+## Adım 3: Marka sesinizi ve hedefinizi ayarlayın
 
-1. Select the **brand config** (tone) for this campaign.
-2. Select the **signature** to append to the email (create one under **Settings** → **Signatures** if needed).
-3. Enter the **campaign goal** — a short description of what you want to achieve. Examples:
-   - "Re-engage users who haven't logged in for 7 days"
-   - "Get trial users to complete onboarding"
-   - "Promote our new feature to paying customers"
+Nudgen'ın AI'sı bu ayarları kullanarak kampanya içeriğinizi hazırlar.
 
-The AI uses this goal and your brand tone to generate subject lines and email bodies. Content may be checked for spam-prone wording; the app will flag issues when possible.
+1. **Marka Sesi (Brand Voice):** Kaydedilmiş bir konfigürasyon seçin veya bu kampanya için bir tane ayarlayın.
+2. **Kampanya Hedefi (Campaign Goal):** Ne istiyorsunuz? (Örneğin "sepette bırakılan ürünü satın almalarını sağlamak" veya "yeni bir özellik hakkında bilgi vermek").
 
-## Step 4: Generate content
+## Adım 4: İçerik oluşturun
 
-1. Click **Generate**.
-2. Review the subject line and email body.
-3. Edit if needed. You can regenerate or tweak the text.
-4. For drip sequences: repeat for each step (Day 1, Day 3, etc.).
+1. **Oluştur (Generate)** seçeneğine tıklayın.
+2. Konu satırını ve e-posta gövdesini inceleyin.
+3. Gerekiyorsa düzenleyin. Metni yeniden oluşturabilir veya üzerinde ince ayar yapabilirsiniz.
+4. Drip sekansları için: Her adım için (1. Gün, 3. Gün vb.) işlemi tekrarlayın.
 
-## Step 5: Preview
+## Adım 5: Önizleme
 
-- Use the **Desktop** and **Mobile** toggle to see how the email looks on different devices.
-- Check links, images, and formatting.
-- Ensure the CTA and tone match your goal.
+- E-postanın farklı cihazlarda nasıl göründüğünü görmek için **Masaüstü** ve **Mobil** geçişini kullanın.
+- Bağlantıları, görselleri ve formatı kontrol edin.
+- CTA (Eylem Çağrısı) ve tonun hedefinizle uyuştuğundan emin olun.
 
 <Tip>
-Always **Send test** before launching. We email a copy to your account email so you can verify it in your real inbox.
+Lansman yapmadan önce her zaman **Test gönderimi (Send test)** yapın. Kendi gelen kutunuzda doğrulayabilmeniz için hesap e-postanıza bir kopya göndeririz.
 </Tip>
 
-## Step 6: Send or schedule
+## Adım 6: Gönder veya planla
 
-- **Send now** — Emails go out immediately (within minutes, depending on queue).
-- **Schedule** — Pick date and time. Emails send automatically at that time.
-- **Save as draft** — Finish later. You can edit until you send.
+- **Şimdi gönder:** E-postalar hemen gönderilir (kuyruğa bağlı olarak birkaç dakika içinde).
+- **Planla:** Tarih ve saat seçin. E-postalar o saatte otomatik olarak gönderilir.
+- **Taslak olarak kaydet:** Daha sonra bitirin. Gönderene kadar düzenleyebilirsiniz.
 
-## What happens next
+## Sırada ne var?
 
-- Emails are sent via our email infrastructure with open and click tracking.
-- The [campaign detail page](/en/campaigns/analytics) shows metrics: sent, delivered, opened, clicked, and delivery success/failure rates.
-- If you set auto-stop rules, engaged contacts will not receive later drip steps.
+- E-postalar, açılma ve tıklama takibi ile bizim e-posta altyapımız üzerinden gönderilir.
+- [Kampanya detay sayfası](/tr/campaigns/analytics) metrikleri gösterir: gönderilen, teslim edilen, açılan, tıklanan ve teslimat başarı/hata oranları.
+- Otomatik durdurma kuralları ayarlarsanız, etkileşime geçen kişiler sonraki drip adımlarını almazlar.
 
-## Troubleshooting
+## Sorun Giderme
 
 <AccordionGroup>
-  <Accordion title="AI content doesn't match my tone">
-    Refine your brand config with a custom prompt or example emails. Regenerate the campaign content after updating.
+  <Accordion title="AI içeriği tonumla uyuşmuyor">
+    Marka yapılandırmanızı özel bir istem veya örnek e-postalarla geliştirin. Güncelledikten sonra kampanya içeriğini yeniden oluşturun.
   </Accordion>
-  <Accordion title="Test email didn't arrive">
-    Check spam/junk. Ensure your account email is correct in settings. Wait a few minutes — delivery can be delayed.
+  <Accordion title="Test e-postası gelmedi">
+    Spam/Gereksiz klasörünü kontrol edin. Ayarlarda hesap e-postanızın doğru olduğundan emin olun. Birkaç dakika bekleyin; teslimat gecikebilir.
   </Accordion>
-  <Accordion title="Can I change the audience after generating?">
-    Yes, as long as the campaign is still in draft. Changing the audience may affect who receives the emails.
+  <Accordion title="Oluşturduktan sonra hedef kitleyi değiştirebilir miyim?">
+    Evet, kampanya hala taslak olduğu sürece değiştirebilirsiniz. Hedef kitleyi değiştirmek e-postaların kime gideceğini etkileyebilir.
   </Accordion>
 </AccordionGroup>
 
-## Related docs
+## İlgili dokümanlar
 
 <CardGroup cols={2}>
-  <Card title="Campaigns overview" icon="list" href="/en/campaigns/overview">
-    One-shot vs drip, statuses.
+  <Card title="Kampanyalara genel bakış" icon="list" href="/tr/campaigns/overview">
+    Tek seferlik ve drip, durumlar.
   </Card>
-  <Card title="Manage campaigns" icon="pen-to-square" href="/en/campaigns/manage">
-    Edit, send, schedule, stop.
+  <Card title="Kampanyaları yönet" icon="pen-to-square" href="/tr/campaigns/manage">
+    Düzenle, gönder, planla, durdur.
   </Card>
-  <Card title="Campaign analytics" icon="chart-line" href="/en/campaigns/analytics">
-    Metrics and recipient activity.
+  <Card title="Kampanya analizleri" icon="chart-line" href="/tr/campaigns/analytics">
+    Metrikler ve alıcı aktivitesi.
   </Card>
 </CardGroup>

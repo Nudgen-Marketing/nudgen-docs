@@ -1,77 +1,77 @@
 ---
-title: "Campaign analytics"
-description: "Metrics, delivery rates, time-series charts, and recipient activity"
+title: "Kampagnen-Analyse"
+description: "Metriken, Zustellraten, Zeitreihen-Diagramme und Empfängeraktivität"
 ---
 
-## What this page helps you do
+## Was diese Seite Ihnen bietet
 
-Understand how your campaigns perform: how many emails were sent, delivered, opened, and clicked. You'll also see delivery success and failure rates, plus per-recipient activity.
+Verstehen Sie die Performance Ihrer Kampagnen: Wie viele E-Mails wurden gesendet, zugestellt, geöffnet und angeklickt. Sie sehen zudem die Erfolgs- und Fehlerraten der Zustellung sowie die Aktivität pro Empfänger.
 
-## Before you start
+## Bevor Sie beginnen
 
-- At least one campaign that has been sent (or is sending)
-- Access to the campaign detail page
+- Mindestens eine Kampagne, die gesendet wurde (oder gerade gesendet wird)
+- Zugriff auf die Kampagnen-Detailseite
 
-## Metric cards
+## Metrik-Karten
 
-On the campaign detail page, you'll see:
+Auf der Kampagnen-Detailseite sehen Sie folgende Karten:
 
-| Metric            | Meaning                                                                 |
+| Metrik            | Bedeutung                                                                 |
 | ----------------- | ----------------------------------------------------------------------- |
-| **Emails Sent**   | Total send attempts (including API or network failures).                |
-| **Emails Delivered** | Emails successfully accepted by the recipient's mail server.        |
-| **Total Opens**   | Number of times the email was opened (tracking pixel).                  |
-| **Total Clicks**  | Number of times links were clicked.                                    |
-| **CTR**           | Click-through rate: (Total Clicks / Total Sent) × 100.                 |
-| **Spam Complaints** | Number of times recipients marked the email as spam.                 |
-| **Soft Bounce**   | Temporary delivery issues (mailbox full, throttling, transient errors).  |
-| **Hard Bounce**   | Permanent delivery failures (invalid address, blocked domain).          |
+| **E-Mails gesendet** | Gesamtzahl der Sendeversuche (einschließlich API- oder Netzwerkfehler). |
+| **E-Mails zugestellt** | E-Mails, die erfolgreich vom Mailserver des Empfängers angenommen wurden. |
+| **Gesamt-Öffnungen** | Anzahl der E-Mail-Öffnungen (erfasst über ein Tracking-Pixel).          |
+| **Gesamt-Klicks**  | Anzahl der Klicks auf Links in der E-Mail.                             |
+| **CTR (Klickrate)** | Click-Through-Rate: (Gesamt-Klicks / Gesamt-Gesendet) × 100.           |
+| **Spam-Beschwerden** | Anzahl der Male, bei denen Empfänger die E-Mail als Spam markiert haben. |
+| **Soft Bounce**   | Vorübergehende Zustellprobleme (Postfach voll, Throttling, temporäre Fehler). |
+| **Hard Bounce**   | Dauerhafte Zustellfehler (ungültige Adresse, blockierte Domain).        |
 
-## Delivery success and failure
+## Zustellungserfolg und -fehler
 
-- **Success rate** = (delivered / sent) × 100
-- **Failure rate** = (bounced + failed) / sent × 100
+- **Erfolgsrate** = (zugestellt / gesendet) × 100
+- **Fehlerrate** = (bounced + fehlgeschlagen) / gesendet × 100
 
-A high failure rate can hurt your sender reputation. Remove or correct bounced addresses and avoid invalid contacts.
+Eine hohe Fehlerrate kann Ihrem Absenderruf schaden. Löschen oder korrigieren Sie gebouncte Adressen und vermeiden Sie ungültige Kontakte.
 
-## Time-series chart
+## Zeitreihen-Diagramm
 
-The performance chart shows metrics over time (by day, week, or month). Use the granularity toggle to switch views. Toggle individual metrics on/off to focus on opens, clicks, or delivery.
+Das Performance-Diagramm zeigt Metriken über die Zeit (nach Tag, Woche oder Monat). Nutzen Sie den Granularitäts-Schalter, um die Ansicht zu wechseln. Schalten Sie einzelne Metriken ein oder aus, um sich auf Öffnungen, Klicks oder die Zustellung zu konzentrieren.
 
-## Date range picker
+## Datumsbereich-Auswahl
 
-Filter metrics and the chart by date range. Default is usually the full campaign period. Adjust to compare specific weeks or focus on recent activity.
+Filtern Sie Metriken und das Diagramm nach Datumsbereich. Standardmäßig wird meist der gesamte Zeitraum der Kampagne angezeigt. Passen Sie diesen an, um spezifische Wochen zu vergleichen oder sich auf die jüngste Aktivität zu fokussieren.
 
-## Recipient activity table
+## Empfängeraktivitäts-Tabelle
 
-See per-contact status:
+Hier sehen Sie den Status pro Kontakt:
 
-- **Contact** — Email (masked unless revealed) and name
-- **Status** — Latest event: sent, delivered, opened, clicked, bounced
-- **Sent at** — When the email was sent
-- **Delivered at** — When delivery was confirmed (if available)
-- **Opened at** — First open timestamp
-- **Clicked at** — First click timestamp
+- **Kontakt** — E-Mail (maskiert, außer sie wurde enthüllt) und Name.
+- **Status** — Letztes Ereignis: gesendet, zugestellt, geöffnet, geklickt, gebounct.
+- **Gesendet am** — Zeitpunkt, zu dem die E-Mail versendet wurde.
+- **Zugestellt am** — Zeitpunkt der Zustellbestätigung (falls verfügbar).
+- **Geöffnet am** — Zeitstempel der ersten Öffnung.
+- **Geklickt am** — Zeitstempel des ersten Klicks.
 
-Use this to:
+Nutzen Sie dies, um:
 
-- Find engaged users for follow-up
-- Identify bounces for list cleanup
-- Debug delivery issues for specific addresses
+- Engagierte Nutzer für ein Follow-up zu finden.
+- Bounces für die Bereinigung Ihrer Liste zu identifizieren.
+- Zustellprobleme für spezifische Adressen zu untersuchen (Debug).
 
-## What happens next
+## Nächste Schritte
 
-- Use insights to refine future campaigns (subject lines, tone, timing).
-- Remove bounced contacts from your list to protect deliverability.
-- Check [billing](/en/billing/overview) for email send limits if you're approaching your plan cap.
+- Nutzen Sie die Erkenntnisse, um zukünftige Kampagnen zu verfeinern (Betreffzeilen, Tonalität, Timing).
+- Entfernen Sie gebouncte Kontakte aus Ihrer Liste, um die Zustellbarkeit zu schützen.
+- Prüfen Sie die [Abrechnung](/de/billing/overview) auf E-Mail-Sendelimits, falls Sie sich der Obergrenze Ihres Plans nähern.
 
-## Related docs
+## Verwandte Dokumente
 
 <CardGroup cols={2}>
-  <Card title="Manage campaigns" icon="pen-to-square" href="/en/campaigns/manage">
-    Edit, send, schedule, stop.
+  <Card title="Kampagnen verwalten" icon="pen-to-square" href="/de/campaigns/manage">
+    Bearbeiten, Senden, Planen, Stoppen.
   </Card>
-  <Card title="Billing & usage" icon="credit-card" href="/en/billing/overview">
-    Plan limits and usage meters.
+  <Card title="Abrechnung & Nutzung" icon="credit-card" href="/de/billing/overview">
+    Plan-Limits und Nutzungszähler.
   </Card>
 </CardGroup>

@@ -1,62 +1,55 @@
 ---
-title: "Dashboard overview"
-description: "Metrics, charts, and campaign summary"
+title: "대시보드 개요"
+description: "상세 지표, 차트 및 캠페인 요약"
 ---
 
-## What this page helps you do
+## 이 페이지의 도움말
+기본 **대시보드** 뷰를 설명합니다. 워크스페이스의 전체 지표, 시간별 활동 차트, 주요 통계가 포함된 캠페인 목록을 확인할 수 있습니다. 대시보드를 통해 발송 상태와 성과를 한눈에 모니터링하세요.
 
-Understand the main **Dashboard** view: aggregate metrics for your workspace, a time-series chart of activity, and a paginated table of campaigns with key stats. Use it to monitor sending health and performance at a glance.
+## 시작하기 전에
+- 하나 이상의 워크스페이스가 있는 Nudgen 계정
+- 지표와 차트에 데이터가 표시되려면 발송되었거나 예약된 캠페인이 필요합니다.
 
-## Before you start
+## 지표 카드 (Metric cards)
+선택한 날짜 범위에 대한 요약 카드가 표시됩니다:
 
-- A Nudgen account with at least one workspace
-- Optional: sent or scheduled campaigns so metrics and the chart have data
+| 지표 | 의미 |
+| :--- | :--- |
+| **Emails Sent (발송된 이메일)** | API 또는 네트워크 오류를 포함한 모든 발송 시도 횟수입니다. |
+| **Emails Delivered (도달된 이메일)** | 수신측 메일 서버에서 성공적으로 수락된 이메일 수입니다. |
+| **Total Opens (전체 오픈 수)** | 추적 픽셀을 통해 이메일이 열린 횟수입니다. |
+| **Total Clicks (전체 클릭 수)** | 이메일 본문의 링크가 클릭된 횟수입니다. |
+| **CTR (클릭률)** | (전체 클릭 수 / 전체 발송 수) × 100입니다. |
+| **Spam Complaints (스팸 신고)** | 수신자가 귀하의 이메일을 스팸으로 표시한 횟수입니다. |
+| **Soft Bounce (일시적 수신 거부)** | 일시적인 발송 문제(편지함 가득 참, 트래픽 제한, 일시적 서버 문제)입니다. |
+| **Hard Bounce (영구적 전송 실패)** | 영구적인 발송 실패(잘못된 수신자, 차단된 도메인)입니다. |
 
-## Metric cards
+이 지표들을 통해 도달률(도달 수 vs 발송 수, 바운스)과 참여도(오픈, 클릭, CTR)를 판단할 수 있습니다. 스팸 신고나 바운스 비율이 높으면 발신자 평판에 악영향을 줄 수 있으니 유의하세요.
 
-The dashboard shows summary cards for the selected date range:
+## 시간별 활동 차트
+선택한 날짜 범위 동안 지표가 어떻게 변하는지 라인 차트로 보여줍니다. 날짜 선택기를 사용하여 범위를 조정할 수 있습니다. 트렌드를 파악(예: 오픈율 하락, 바운스 급증)하고 캠페인 런칭 시점과의 상관관계를 분석하는 데 유용합니다.
 
-| Metric | Meaning |
-| ------ | ------- |
-| **Emails Sent** | Total number of all send attempts (including API or network failures). |
-| **Emails Delivered** | Number of emails successfully accepted by the recipient's mail server. |
-| **Total Opens** | How many times emails were opened (tracking pixel). |
-| **Total Clicks** | How many times links were clicked. |
-| **CTR** | Click-through rate: (Total Clicks / Total Sent) × 100. |
-| **Spam Complaints** | Number of times recipients marked your email as spam. |
-| **Soft Bounce** | Temporary delivery issues (mailbox full, throttling, transient server problems). |
-| **Hard Bounce** | Permanent delivery failures (invalid recipients, blocked domains). |
+## 캠페인 목록 테이블
+이름, 유형(단발성 또는 드립), 상태 및 주요 수치(발송, 도달, 오픈, 클릭, 바운스, 신고 수)가 포함된 캠페인 목록을 보여줍니다. 캠페인을 클릭하면 수신자별 활동 및 캠페인별 상세 로그를 확인할 수 있는 상세 페이지가 열립니다.
 
-Use these to judge deliverability (delivered vs sent, bounces) and engagement (opens, clicks, CTR). High spam complaints or bounces can hurt sender reputation.
+## 날짜 범위 설정
+기본 설정은 최근 7일입니다. 특정 기간에 집중하거나 다른 주간 데이터와 비교하려면 범위를 변경하세요. 설정된 범위에 따라 모든 데이터와 차트가 실시간으로 업데이트됩니다.
 
-## Time-series chart
+## 다음 단계
+- 캠페인 행을 클릭하여 [캠페인 분석](/ko/campaigns/analytics)에 접속하세요.
+- [결제(Billing)](/ko/billing/overview)에서 요금제 한도 대비 사용량을 확인하세요.
+- 지표가 이상하거나 이메일이 발송되지 않는 경우 [문제 해결 가이드](/ko/troubleshooting)를 참조하세요.
 
-A line chart shows how metrics change over the selected date range. You can adjust the range with the date picker. Use it to spot trends (e.g. opens dropping, bounces spiking) and correlate with campaign launches.
-
-## Campaigns table
-
-A paginated table lists campaigns with columns such as name, type (one-time or drip), status, and counts (sent, delivered, opened, clicked, bounces, complaints). Use pagination to browse; click a campaign to open its detail page for recipient-level activity and per-campaign time-series.
-
-## Date range
-
-The default range is often the last 7 days. Change the range to focus on a specific period or compare different weeks. Stats and the chart update to reflect the selected range.
-
-## What happens next
-
-- Open a campaign row to see [campaign analytics](/en/campaigns/analytics): recipient activity and detailed metrics.
-- Check [Billing](/en/billing/overview) for usage vs plan limits.
-- Use [Troubleshooting](/en/troubleshooting) if metrics look wrong or emails aren’t sending.
-
-## Related docs
+## 관련 문서
 
 <CardGroup cols={2}>
-  <Card title="Campaign analytics" icon="chart-line" href="/en/campaigns/analytics">
-    Per-campaign metrics and recipient activity.
+  <Card title="캠페인 분석" icon="chart-line" href="/ko/campaigns/analytics">
+    캠페인별 상세 지표 및 수신자 활동.
   </Card>
-  <Card title="Campaigns overview" icon="list" href="/en/campaigns/overview">
-    Campaign types and statuses.
+  <Card title="캠페인 개요" icon="list" href="/ko/campaigns/overview">
+    캠페인 유형 및 상태 설명.
   </Card>
-  <Card title="Deliverability basics" icon="shield" href="/en/concepts/deliverability-basics">
-    How we keep emails out of spam.
+  <Card title="이메일 도달률 기초" icon="shield" href="/ko/concepts/deliverability-basics">
+    이메일이 스팸함에 빠지지 않도록 관리하는 방법.
   </Card>
 </CardGroup>

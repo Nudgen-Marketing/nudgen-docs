@@ -1,60 +1,60 @@
 ---
-title: "Sending and deliverability"
-description: "Emails not sending, bounces, and spam"
+title: "발송 및 도달률 문제 해결"
+description: "이메일 발송 지연, 바운스 및 스팸 처리 관련 해결 방법"
 ---
 
-## Emails not sending
+## 이메일이 발송되지 않음
 
-**Campaign stuck or “sending” for a long time**
+**캠페인이 오랫동안 "발송 중(Sending)" 상태로 멈춰 있는 경우**
 
-- Sends are queued and processed in batches. Large campaigns can take time. Refresh the dashboard; if status stays “Sending” for hours, contact support.
-- Check that you haven’t hit your **daily or monthly email limit**. The app blocks new sends when you’re over cap. See [Billing](/en/billing/overview) and [Troubleshooting: billing](/en/troubleshooting/billing).
+- 발송은 대기열에 추가되어 순차적으로 처리됩니다. 대규모 캠페인의 경우 시간이 다소 걸릴 수 있습니다. 대시보드를 새로고침해 보시고, 수 시간이 지나도 상태가 변하지 않으면 지원팀에 문의해 주세요.
+- **일일 또는 월간 이메일 한도**를 초과하지 않았는지 확인하세요. 한도를 초과하면 새로운 발송이 차단됩니다. [결제 안내](/ko/billing/overview) 및 [결제 문제 해결](/ko/troubleshooting/billing)을 참조하세요.
 
-**Test email didn’t arrive**
+**테스트 이메일이 도착하지 않음**
 
-- Check spam/junk. Add the sender to your contacts or safe senders.
-- Confirm the **account email** (where tests are sent) is correct in your profile.
-- Wait a few minutes; delivery can be delayed. Try again or send to a different address.
+- 스팸함 또는 정크 메일함을 확인하세요. 발신자 주소를 연락처에 추가하거나 안전한 발신자로 등록해 보세요.
+- 프로필 설정에서 테스트 메일이 발송되는 **계정 이메일** 주소가 정확한지 확인하세요.
+- 발송에 수 분 정도 시간이 걸릴 수 있으니 잠시 기다려 주세요. 다시 시도해 보거나 다른 주소로 보내 보시기 바랍니다.
 
-**“No active contacts” or reach is zero**
+**"활성 연락처 없음" 또는 예상 도달 범위가 0인 경우**
 
-- Upload or add at least one contact and ensure they’re **active** (not unsubscribed or suppressed). See [Contacts overview](/en/contacts/overview) and [Contact lifecycle](/en/contacts/lifecycle).
-- If you chose “By tags,” ensure some contacts have the selected tags.
+- 한 명 이상의 연락처를 업로드하거나 추가하고, 해당 연락처가 **활성(Active)** 상태(수신 거부나 차단되지 않음)인지 확인하세요. [연락처 개요](/ko/contacts/overview) 및 [연락처 생애주기](/ko/contacts/lifecycle)를 참조하세요.
+- "태그 기준"으로 대상을 선택한 경우, 해당 태그가 지정된 연락처가 실제 목록에 있는지 확인하세요.
 
-## Bounces and complaints
+## 바운스 및 신고 관리
 
-**High bounce rate**
+**높은 바운스율(Bounce Rate)**
 
-- **Hard bounces** (invalid address, domain doesn’t exist) are automatically suppressed. Remove or fix bad addresses in your list; avoid bought or scraped lists.
-- **Soft bounces** (mailbox full, server down) may be retried by the provider. Repeated soft bounces can lead to suppression. Clean your list and avoid role addresses (e.g. info@) unless they’re valid inboxes.
-- Keep bounce rate low (e.g. under 2%) to protect sender reputation. Use the [Dashboard](/en/dashboard/overview) and [Campaign analytics](/en/campaigns/analytics) to monitor.
+- **Hard bounces (영구적 실패)** (잘못된 주소, 존재하지 않는 도메인)는 자동으로 전송 차단됩니다. 목록에서 잘못된 주소를 삭제하거나 수정하세요. 구매한 리스트나 검증되지 않은 리스트는 사용하지 마세요.
+- **Soft bounces (일시적 실패)** (편지함 가득 참, 서버 다운)는 대행사가 재시도할 수 있습니다. 반복적으로 실패하면 차단 리스트에 오를 수 있습니다. 실제 사용 중인 주소 위주로 관리하고, `info@`와 같은 공용 주소는 실제 관리가 되는 경우에만 사용하세요.
+- 발신자 평판 보호를 위해 바운스율을 낮게(예: 2% 미만) 유지하세요. [대시보드](/ko/dashboard/overview)와 [캠페인 분석](/ko/campaigns/analytics)을 통해 주기적으로 모니터링하세요.
 
-**Spam complaints**
+**스팸 신고(Spam Complaints)**
 
-- Recipients marked the email as spam. We suppress complainers and they won’t receive future campaigns. Too many complaints hurt reputation.
-- Improve content: clear subject lines, relevant copy, obvious unsubscribe link. Don’t send to people who didn’t opt in. See [Deliverability basics](/en/concepts/deliverability-basics).
+- 수신자가 이메일을 스팸으로 표시한 경우입니다. 신고한 사용자는 즉시 차단되어 이후 캠페인을 받지 않게 되지만, 신고가 너무 많으면 전체 도달률이 떨어집니다.
+- 콘텐츠를 개선하세요: 명확한 제목, 관련성 있는 본문, 눈에 띄는 수신 거부 링크를 포함하세요. 동의하지 않은 사람에게 메일을 보내지 마세요. [이메일 도달률 기초](/ko/concepts/deliverability-basics)를 참조하세요.
 
-**Unsubscribes**
+**수신 거부(Unsubscribes)**
 
-- Unsubscribe links are required and honored. Unsubscribed contacts are excluded from future sends. This is normal and keeps you compliant.
+- 수신 거부 링크는 필수이며 반드시 준수되어야 합니다. 수신 거부된 연락처는 향후 발송 대상에서 제외됩니다. 이는 정상적인 동작이며 관련 법규 준수를 위해 필요합니다.
 
-## Tracking and metrics
+## 추적 및 지표 관련
 
-**Opens or clicks not updating**
+**오픈 수 또는 클릭 수가 업데이트되지 않음**
 
-- Tracking uses a pixel (opens) and signed links (clicks). Some clients block images or strip tracking; metrics can be undercounted.
-- Data can take a short time to appear. Refresh the campaign detail page or dashboard.
-- If a campaign shows zero opens/clicks for a long time after sends, check that links and images in the email are intact and that the campaign actually sent (check “Emails Sent” and “Emails Delivered”).
+- 추적은 픽셀(오픈) 및 서명된 링크(클릭)를 사용합니다. 일부 이메일 클라이언트가 이미지를 차단하거나 추적 코드를 제거할 경우 수치가 실제보다 적게 집계될 수 있습니다.
+- 데이터 반영에 시간이 다소 걸릴 수 있습니다. 캠페인 상세 페이지나 대시보드를 새로고침해 보세요.
+- 발송 후 오랜 시간이 지나도 수치가 0이라면, 이메일 내 링크와 이미지가 정상적인지, 실제로 발송 및 도달이 이루어졌는지("발송 수" 및 "도달 수" 확인) 점검해 보세요.
 
-**Analytics look wrong**
+**분석 데이터가 이상하게 보임**
 
-- Ensure the **date range** includes the send date. Dashboard and campaign detail pages filter by selected range.
-- “Emails Sent” includes all attempts; “Emails Delivered” is successful delivery. CTR is (Total Clicks / Total Sent) × 100. See [Campaign analytics](/en/campaigns/analytics) and [Dashboard overview](/en/dashboard/overview).
+- **날짜 범위**가 캠페인 발송일을 포함하고 있는지 확인하세요. 대시보드와 캠페인 상세 페이지는 선택된 범위에 따라 데이터를 필터링합니다.
+- "발송 수(Sent)"는 모든 시도 횟수를, "도달 수(Delivered)"는 성공한 횟수를 의미합니다. 클릭률(CTR)은 (전체 클릭 / 전체 발송) × 100으로 계산됩니다. [캠페인 분석](/ko/campaigns/analytics) 및 [대시보드 개요](/ko/dashboard/overview)를 참조하세요.
 
-## What we do to protect deliverability
+## 도달률 보호를 위해 Nudgen이 하는 일
 
-- We send via our email provider and sync with their suppression list so we don’t resend to bounced or complained addresses.
-- Contacts are validated and we avoid sending to unsubscribed or suppressed contacts.
-- Content and signatures are sanitized; we may flag spam-prone wording when possible.
+- 신뢰할 수 있는 발송 대행사를 사용하며 차단 리스트와 실시간 동기화하여 평판을 관리합니다.
+- 수신 거부되거나 차단된 연락처로의 중복 발송을 원천 차단합니다.
+- 본문 및 서명을 정제하고, 스팸 가능성이 높은 표현을 사전에 점검할 수 있도록 돕습니다.
 
-For more, see [Deliverability basics](/en/concepts/deliverability-basics) and [Contact lifecycle](/en/contacts/lifecycle).
+더 자세한 내용은 [이메일 도달률 기초](/ko/concepts/deliverability-basics) 및 [연락처 생애주기](/ko/contacts/lifecycle)를 확인하세요.

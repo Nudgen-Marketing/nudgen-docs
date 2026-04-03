@@ -1,77 +1,68 @@
 ---
-title: "Campaign analytics"
-description: "Metrics, delivery rates, time-series charts, and recipient activity"
+title: "캠페인 분석"
+description: "각종 지표, 도달률, 시계열 차트 및 수신자 활동 상세 데이터"
 ---
 
-## What this page helps you do
+## 이 페이지의 도움말
+캠페인의 성과를 분석하는 방법을 설명합니다. 얼마나 많은 이메일이 발송되었고, 도달되었으며, 열어보거나 클릭했는지 확인할 수 있습니다. 또한 발송 성공 및 실패율, 수신자별 상세 활동 데이터도 제공합니다.
 
-Understand how your campaigns perform: how many emails were sent, delivered, opened, and clicked. You'll also see delivery success and failure rates, plus per-recipient activity.
+## 시작하기 전에
+- 발송되었거나 발송 중인 캠페인이 최소 하나 이상 있어야 합니다.
+- 해당 캠페인의 상세 페이지에 접근할 수 있어야 합니다.
 
-## Before you start
+## 지표 카드 (Metric cards)
+캠페인 상세 페이지에서 다음 지표를 확인할 수 있습니다:
 
-- At least one campaign that has been sent (or is sending)
-- Access to the campaign detail page
+| 지표 | 의미 |
+| :--- | :--- |
+| **Emails Sent (발송 수)** | API 또는 네트워크 오류를 포함한 전체 발송 시도 횟수입니다. |
+| **Emails Delivered (도달 수)** | 수신자의 메일 서버에서 성공적으로 수락된 이메일 수입니다. |
+| **Total Opens (오픈 수)** | 추적 픽셀을 통해 이메일이 열린 전체 횟수입니다. |
+| **Total Clicks (클릭 수)** | 본문 내 링크가 클릭된 전체 횟수입니다. |
+| **CTR (클릭률)** | (클릭 수 / 발송 수) × 100입니다. |
+| **Spam Complaints (스팸 신고)** | 수신자가 해당 이메일을 스팸으로 표시한 횟수입니다. |
+| **Soft Bounce (일시적 실패)** | 일시적인 발송 문제(편지함 가득 참, 트래픽 제한, 일시적 서버 오류)입니다. |
+| **Hard Bounce (영구적 실패)** | 영구적인 발송 실패(잘못된 주소, 존재하지 않는 도메인)입니다. |
 
-## Metric cards
+## 발송 성공 및 실패 분석
+- **성공률 (Success rate)** = (도달 수 / 발송 수) × 100
+- **실패율 (Failure rate)** = (바운스 + 실패 건수) / 발송 수 × 100
 
-On the campaign detail page, you'll see:
+실패율이 높으면 발신자 평판에 악영향을 줄 수 있습니다. 바운스된 주소는 목록에서 삭제하거나 수정하고, 유효하지 않은 연락처는 정리해 주세요.
 
-| Metric            | Meaning                                                                 |
-| ----------------- | ----------------------------------------------------------------------- |
-| **Emails Sent**   | Total send attempts (including API or network failures).                |
-| **Emails Delivered** | Emails successfully accepted by the recipient's mail server.        |
-| **Total Opens**   | Number of times the email was opened (tracking pixel).                  |
-| **Total Clicks**  | Number of times links were clicked.                                    |
-| **CTR**           | Click-through rate: (Total Clicks / Total Sent) × 100.                 |
-| **Spam Complaints** | Number of times recipients marked the email as spam.                 |
-| **Soft Bounce**   | Temporary delivery issues (mailbox full, throttling, transient errors).  |
-| **Hard Bounce**   | Permanent delivery failures (invalid address, blocked domain).          |
+## 시계열 활동 차트
+일, 주, 월 단위로 캠페인 성과를 보여주는 차트입니다. 보기 방식을 변경하거나 개별 지표를 끄고 켜서 오픈, 클릭, 도달 추이에 집중하여 분석할 수 있습니다.
 
-## Delivery success and failure
+## 날짜 범위 선택기
+특정 기간의 지표와 차트 데이터를 필터링할 수 있습니다. 기본 설정은 캠페인 전체 기간입니다. 특정 주간의 데이터를 비교하거나 최근 활동에 집중하고 싶을 때 유용합니다.
 
-- **Success rate** = (delivered / sent) × 100
-- **Failure rate** = (bounced + failed) / sent × 100
+## 수신자 활동 내역 테이블
+각 연락처별 상태를 상세히 확인할 수 있습니다:
 
-A high failure rate can hurt your sender reputation. Remove or correct bounced addresses and avoid invalid contacts.
+- **Contact (연락처)** — 이메일(확인 전까지 마스킹 처리) 및 이름
+- **Status (상태)** — 최근 활동: 발송, 도달, 오픈, 클릭, 바운스됨
+- **Sent at (발송 시각)** — 이메일이 발송된 시각
+- **Delivered at (도달 시각)** — 도달이 확인된 시각 (확인 가능한 경우)
+- **Opened at (오픈 시각)** — 처음 메일을 열어본 시각
+- **Clicked at (클릭 시각)** — 처음 링크를 클릭한 시각
 
-## Time-series chart
+이 데이터를 활용하여:
+- 후속 조치가 필요한 활발한 참여 사용자를 찾을 수 있습니다.
+- 목록 정리를 위해 바운스된 주소를 식별할 수 있습니다.
+- 특정 주소의 발송 문제를 디버깅할 수 있습니다.
 
-The performance chart shows metrics over time (by day, week, or month). Use the granularity toggle to switch views. Toggle individual metrics on/off to focus on opens, clicks, or delivery.
+## 다음 단계
+- 분석 결과를 바탕으로 향후 캠페인의 제목, 톤, 발송 시점 등을 개선하세요.
+- 도달률 보호를 위해 바운스된 연락처를 목록에서 정리하세요.
+- 요금제 한도에 가까워진 경우 [결제 안내](/ko/billing/overview)에서 전송 한도를 확인하세요.
 
-## Date range picker
-
-Filter metrics and the chart by date range. Default is usually the full campaign period. Adjust to compare specific weeks or focus on recent activity.
-
-## Recipient activity table
-
-See per-contact status:
-
-- **Contact** — Email (masked unless revealed) and name
-- **Status** — Latest event: sent, delivered, opened, clicked, bounced
-- **Sent at** — When the email was sent
-- **Delivered at** — When delivery was confirmed (if available)
-- **Opened at** — First open timestamp
-- **Clicked at** — First click timestamp
-
-Use this to:
-
-- Find engaged users for follow-up
-- Identify bounces for list cleanup
-- Debug delivery issues for specific addresses
-
-## What happens next
-
-- Use insights to refine future campaigns (subject lines, tone, timing).
-- Remove bounced contacts from your list to protect deliverability.
-- Check [billing](/en/billing/overview) for email send limits if you're approaching your plan cap.
-
-## Related docs
+## 관련 문서
 
 <CardGroup cols={2}>
-  <Card title="Manage campaigns" icon="pen-to-square" href="/en/campaigns/manage">
-    Edit, send, schedule, stop.
+  <Card title="캠페인 관리" icon="pen-to-square" href="/ko/campaigns/manage">
+    편집, 발송, 예약 및 중단 방법.
   </Card>
-  <Card title="Billing & usage" icon="credit-card" href="/en/billing/overview">
-    Plan limits and usage meters.
+  <Card title="결제 및 사용량" icon="credit-card" href="/ko/billing/overview">
+    요금제 한도 및 사용량 측정 안내.
   </Card>
 </CardGroup>

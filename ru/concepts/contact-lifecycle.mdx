@@ -1,35 +1,35 @@
 ---
-title: "Contact lifecycle"
-description: "How contacts move through import, engagement, and suppression"
+title: "Жизненный цикл контакта"
+description: "Как контакты проходят путь от импорта до вовлечения и исключения"
 ---
 
-Contacts in Nudgen move through a simple lifecycle from import to active sending, and sometimes to unsubscribed or suppressed. Understanding this helps you keep lists clean and stay within limits.
+Контакты в Nudgen проходят через простой жизненный цикл от импорта до активной рассылки, а иногда до отписки или исключения. Понимание этого поможет вам поддерживать списки в чистоте и оставаться в рамках лимитов.
 
-## From import to active
+## От импорта до статуса «Активен»
 
-When you **import** contacts (CSV or add one-by-one), they are validated, encrypted, and stored. Duplicates in the same workspace are merged. New contacts are **active** and can be selected as campaign recipients.
+Когда вы **импортируете** контакты (CSV или добавив по одному), они проходят проверку, шифруются и сохраняются. Дубликаты в одном рабочем пространстве объединяются. Новые контакты получают статус **«Активен»** и могут быть выбраны в качестве получателей рассылок.
 
-## Receiving campaigns
+## Получение кампаний
 
-**Active** contacts are eligible for campaigns. When you choose an audience (all contacts, by tags, or manual), the app counts only active, non-suppressed contacts and shows a reach estimate. Sends, opens, clicks, bounces, and unsubscribes are recorded and drive both analytics and status changes.
+**Активные** контакты имеют право на участие в кампаниях. Когда вы выбираете аудиторию (все контакты, по тегам или вручную), приложение учитывает только активные адреса, не попавшие в списки исключений, и показывает предполагаемый охват. Отправки, открытия, клики, возвраты и отписки фиксируются и влияют как на аналитику, так и на изменение статуса.
 
-## Status changes
+## Изменения статуса
 
-- **Unsubscribed** — Recipient used the unsubscribe link (or was marked unsubscribed manually). They are excluded from future campaign sends.
-- **Suppressed / Bounced** — The delivery provider reported a bounce or added the address to a suppression list. We sync with that list and exclude these contacts from future sends to protect deliverability.
+- **Отписался (Unsubscribed)** — Получатель перешел по ссылке для отписки (или был помечен как отписавшийся вручную). Он исключается из будущих рассылок.
+- **Исключен / Возврат (Suppressed / Bounced)** — Провайдер доставки сообщил об ошибке (bounce) или добавил адрес в список исключений. Мы синхронизируемся с этим списком и исключаем такие контакты из будущих рассылок для защиты доставляемости.
 
-## Updates and removal
+## Обновления и удаление
 
-You can **update** contacts (name, tags) in the UI or by re-uploading a CSV with the same email. **Deleting** a contact removes them from the workspace; they no longer count toward your contact limit and cannot receive campaigns.
+Вы можете **обновить** данные контакта (имя, теги) в интерфейсе или повторно загрузив CSV с тем же адресом электронной почты. **Удаление** контакта убирает его из рабочего пространства; он больше не учитывается в лимите контактов и не может получать рассылки.
 
-## Summary
+## Резюме
 
-| State | Can receive campaigns? | Counts toward limit? |
-| ----- | ----------------------- | --------------------- |
-| Active | Yes | Yes |
-| Unsubscribed | No | Yes* |
-| Suppressed / Bounced | No | Yes* |
+| Состояние | Может получать рассылки? | Учитывается в лимите? |
+| --------- | ------------------------ | --------------------- |
+| Активен | Да | Да |
+| Отписался | Нет | Да* |
+| Исключен / Возврат | Нет | Да* |
 
-\*Unsubscribed and suppressed contacts still count toward your plan’s contact limit; you can delete them to free space.
+\*Отписавшиеся и исключенные контакты по-прежнему учитываются в лимите вашего тарифного плана; вы можете удалить их, чтобы освободить место.
 
-For step-by-step lifecycle details, see [Contact lifecycle (Contacts)](/en/contacts/lifecycle). For encryption and masking, see [Contacts overview](/en/contacts/overview).
+Подробнее о деталях жизненного цикла читайте в разделе [Жизненный цикл контакта (Раздел Контакты)](/ru/contacts/lifecycle). О шифровании и маскировании данных — в [Обзоре контактов](/ru/contacts/overview).

@@ -1,80 +1,80 @@
 ---
-title: "Upload contacts"
-description: "CSV format, validation rules, and tag assignment for contact uploads"
+title: "Kişileri yükle"
+description: "CSV formatı, doğrulama kuralları ve kişi yüklemeleri için etiket atama"
 ---
 
-## What this page helps you do
+## Bu sayfa size ne konuda yardımcı olur?
 
-Upload a CSV of contacts so you can run campaigns. You'll learn the required columns, validation rules, size limits, and how to add tags during upload.
+Kampanyalarınızı yürütebilmek için bir CSV kişi listesi yükleyin. Gerekli sütunları, doğrulama kurallarını, boyut limitlerini ve yükleme sırasında etiketlerin nasıl ekleneceğini öğreneceksiniz.
 
-## Before you start
+## Başlamadan önce
 
-- A Nudgen account
-- A CSV file with at least an `email` column
-- Contacts must be under your plan limit (see [billing](/en/billing/overview))
+- Bir Nudgen hesabı
+- En az bir `email` sütunu içeren bir CSV dosyası
+- Kişiler, plan limitinizin altında olmalıdır (bkz. [faturalandırma](/tr/billing/overview))
 
-## Step 1: Prepare your CSV
+## Adım 1: CSV dosyanızı hazırlayın
 
-Your CSV must include:
+CSV dosyanız şunları içermelidir:
 
-| Column   | Required | Description                          |
-| -------- | -------- | ------------------------------------ |
-| `email`  | Yes      | Valid email address. Must be unique. |
-| `name`   | No       | Display name for personalization.   |
+| Sütun    | Gerekli | Açıklama                             |
+| -------- | ------- | ------------------------------------ |
+| `email`  | Evet    | Geçerli e-posta adresi. Benzersiz olmalı. |
+| `name`   | Hayır   | Kişiselleştirme için görünen ad.     |
 
-You can add other columns (e.g. `company`, `segment`). They are stored encrypted and can be used in tags or segmentation logic.
+Diğer sütunları (örneğin `company`, `segment`) ekleyebilirsiniz. Bunlar şifrelenmiş olarak saklanır ve etiketlerde veya segmentasyon mantığında kullanılabilir.
 
-## Step 2: Validate format
+## Adım 2: Formatı doğrulayın
 
-- **Encoding:** UTF-8 recommended.
-- **Delimiter:** Comma (`,`).
-- **Header row:** First row must contain column names. `email` and `name` are recognized case-insensitively.
-- **Duplicate emails:** Duplicates in the same file are merged. Existing contacts with the same email are updated.
+- **Kodlama (Encoding):** UTF-8 önerilir.
+- **Ayırıcı (Delimiter):** Virgül (`,`).
+- **Başlık satırı:** İlk satır sütun isimlerini içermelidir. `email` ve `name` büyük/küçük harf duyarsız olarak tanınır.
+- **Yinelenen e-postalar:** Aynı dosyadaki yinelenenler birleştirilir. Aynı e-postaya sahip mevcut kişiler güncellenir.
 
 <Warning>
-Invalid emails (malformed, missing `@`, etc.) are skipped. Check the upload summary to see how many rows were imported vs skipped.
+Geçersiz e-postalar (yanlış biçimlendirilmiş, `@` işareti eksik olanlar vb.) atlanır. Kaç satırın içe aktarıldığını ve kaçının atlandığını görmek için yükleme özetini kontrol edin.
 </Warning>
 
-## Step 3: Upload in Nudgen
+## Adım 3: Nudgen'a yükleyin
 
-1. Go to **Contacts** in the sidebar.
-2. Click **Upload CSV**.
-3. Select your file.
-4. Choose tags to apply to all uploaded contacts (e.g. `inactive`, `re-engage`).
-5. Review the preview and confirm.
+1. Kenar çubuğundaki **Kişiler (Contacts)** bölümüne gidin.
+2. **CSV Yükle (Upload CSV)** seçeneğine tıklayın.
+3. Dosyanızı seçin.
+4. Yüklenen tüm kişilere uygulanacak etiketleri seçin (örneğin `inactive`, `re-engage`).
+5. Önizlemeyi inceleyin ve onaylayın.
 
-## Size limits
+## Boyut limitleri
 
-- **File size:** Follow the on-screen limit (typically a few MB). Large lists may take longer to process.
-- **Contacts per workspace:** Depends on your plan. The app enforces the limit at upload time; if you exceed it, the upload is rejected. See [Billing](/en/billing/overview) and the live [pricing page](https://nudgen.net/pricing) for current limits.
+- **Dosya boyutu:** Ekrandaki limite uyun (genellikle birkaç MB). Büyük listelerin işlenmesi daha uzun sürebilir.
+- **Çalışma alanı başına kişiler:** Planınıza bağlıdır. Uygulama, yükleme sırasında limiti uygular; limiti aşarsanız yükleme reddedilir. Güncel limitler için [Faturalandırma](/tr/billing/overview) ve canlı [fiyatlandırma sayfasına](https://nudgen.net/pricing) bakın.
 
-## What happens next
+## Sırada ne var?
 
-- Contacts appear in the list with masked emails (`j***@g***.com`).
-- Use tags to segment audiences in [campaigns](/en/campaigns/create).
-- You can [reveal](/en/contacts/overview) individual contacts as the account owner.
+- Kişiler, maskeli e-postalarla (`j***@g***.com`) listede görünür.
+- [Kampanyalarda](/tr/campaigns/create) hedef kitleleri segmentlere ayırmak için etiketleri kullanın.
+- Hesap sahibi olarak bireysel kişileri [görebilirsiniz](/tr/contacts/overview).
 
-## Troubleshooting
+## Sorun Giderme
 
 <AccordionGroup>
-  <Accordion title="Some rows were skipped">
-    Check that each row has a valid email in the `email` column. Empty rows or malformed addresses are skipped.
+  <Accordion title="Bazı satırlar atlandı">
+    Her satırın `email` sütununda geçerli bir e-posta adresi olduğundan emin olun. Boş satırlar veya yanlış biçimlendirilmiş adresler atlanır.
   </Accordion>
-  <Accordion title="Upload failed: plan limit exceeded">
-    Your contact count would exceed your plan limit. Upgrade your plan or remove existing contacts.
+  <Accordion title="Yükleme başarısız: plan limiti aşıldı">
+    Kişi sayınız plan limitinizi aşacaktır. Planınızı yükseltin veya mevcut kişileri kaldırın.
   </Accordion>
-  <Accordion title="Column not recognized">
-    Ensure the header row includes `email` (or `Email`). Other columns are optional.
+  <Accordion title="Sütun tanınmadı">
+    Başlık satırının `email` (veya `Email`) içerdiğinden emin olun. Diğer sütunlar isteğe bağlıdır.
   </Accordion>
 </AccordionGroup>
 
-## Related docs
+## İlgili dokümanlar
 
 <CardGroup cols={2}>
-  <Card title="Contacts overview" icon="users" href="/en/contacts/overview">
-    Encryption, masking, and segmentation.
+  <Card title="Kişilere genel bakış" icon="users" href="/tr/contacts/overview">
+    Şifreleme, maskeleme ve segmentasyon.
   </Card>
-  <Card title="Create campaigns" icon="paper-plane" href="/en/campaigns/create">
-    Select your audience and launch a campaign.
+  <Card title="Kampanya oluştur" icon="paper-plane" href="/tr/campaigns/create">
+    Hedef kitleyi seçin ve bir kampanya başlatın.
   </Card>
 </CardGroup>

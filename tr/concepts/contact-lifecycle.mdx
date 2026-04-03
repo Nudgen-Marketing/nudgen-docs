@@ -1,35 +1,35 @@
 ---
-title: "Contact lifecycle"
-description: "How contacts move through import, engagement, and suppression"
+title: "Kişi yaşam döngüsü"
+description: "Kişilerin içe aktarma, etkileşim ve engelleme süreçleri"
 ---
 
-Contacts in Nudgen move through a simple lifecycle from import to active sending, and sometimes to unsubscribed or suppressed. Understanding this helps you keep lists clean and stay within limits.
+Nudgen'daki kişiler içe aktarmadan aktif gönderime, bazen de abonelikten ayrılmaya veya engellenmeye kadar basit bir yaşam döngüsü izler. Bu süreci anlamak, listelerinizi temiz tutmanıza ve limitler dahilinde kalmanıza yardımcı olur.
 
-## From import to active
+## İçe aktarmadan aktife
 
-When you **import** contacts (CSV or add one-by-one), they are validated, encrypted, and stored. Duplicates in the same workspace are merged. New contacts are **active** and can be selected as campaign recipients.
+Kişileri **içe aktardığınızda** (CSV veya tek tek ekleyerek), doğrulanır, şifrelenir ve saklanır. Aynı çalışma alanındaki yinelenenler birleştirilir. Yeni kişiler **aktif** olarak başlar ve kampanya alıcıları olarak seçilebilirler.
 
-## Receiving campaigns
+## Kampanya alma
 
-**Active** contacts are eligible for campaigns. When you choose an audience (all contacts, by tags, or manual), the app counts only active, non-suppressed contacts and shows a reach estimate. Sends, opens, clicks, bounces, and unsubscribes are recorded and drive both analytics and status changes.
+**Aktif** kişiler kampanyalar için uygundur. Bir hedef kitle seçtiğinizde (tüm kişiler, etiketlere göre veya manuel), uygulama yalnızca aktif ve engellenmemiş kişileri sayar ve bir erişim tahmini gösterir. Gönderimler, açılmalar, tıklamalar, bounce'lar ve abonelikten ayrılmalar kaydedilir ve hem analizleri hem de durum değişikliklerini yönlendirir.
 
-## Status changes
+## Durum değişiklikleri
 
-- **Unsubscribed** — Recipient used the unsubscribe link (or was marked unsubscribed manually). They are excluded from future campaign sends.
-- **Suppressed / Bounced** — The delivery provider reported a bounce or added the address to a suppression list. We sync with that list and exclude these contacts from future sends to protect deliverability.
+- **Abonelikten Ayrıldı (Unsubscribed)** — Alıcı abonelikten ayrılma bağlantısını kullandı (veya manuel olarak abonelikten ayrıldı olarak işaretlendi). Gelecekteki kampanya gönderimlerinden hariç tutulur.
+- **Engellenmiş / Bounce (Suppressed / Bounced)** — Teslimat sağlayıcısı bir bounce bildirdi veya adresi bir engelleme listesine ekledi. Biz bu listeyle senkronize oluyoruz ve teslim edilebilirliği korumak için bu kişileri gelecekteki gönderimlerden hariç tutuyoruz.
 
-## Updates and removal
+## Güncellemeler ve kaldırma
 
-You can **update** contacts (name, tags) in the UI or by re-uploading a CSV with the same email. **Deleting** a contact removes them from the workspace; they no longer count toward your contact limit and cannot receive campaigns.
+Kişi detaylarını (isim, etiketler) kullanıcı arayüzünde veya aynı e-posta ile bir CSV'yi yeniden yükleyerek **güncelleyebilirsiniz**. Bir kişiyi **silmek** onu çalışma alanından kaldırır; artık kişi limitine dahil edilmezler ve kampanya alamazlar.
 
-## Summary
+## Özet
 
-| State | Can receive campaigns? | Counts toward limit? |
-| ----- | ----------------------- | --------------------- |
-| Active | Yes | Yes |
-| Unsubscribed | No | Yes* |
-| Suppressed / Bounced | No | Yes* |
+| Durum                      | Kampanyaları alabilir mi? | Limite dahil mi? |
+| -------------------------- | ------------------------- | ---------------- |
+| Aktif (Active)             | Evet                      | Evet             |
+| Abonelikten Ayrıldı (Unsub.) | Hayır                     | Evet*            |
+| Engellenmiş / Bounce       | Hayır                     | Evet*            |
 
-\*Unsubscribed and suppressed contacts still count toward your plan’s contact limit; you can delete them to free space.
+\*Abonelikten ayrılmış ve engellenmiş kişiler hala planınızın kişi limitine dahil edilir; yer açmak için onları silebilirsiniz.
 
-For step-by-step lifecycle details, see [Contact lifecycle (Contacts)](/en/contacts/lifecycle). For encryption and masking, see [Contacts overview](/en/contacts/overview).
+Adım adım yaşam döngüsü detayları için [Kişi yaşam döngüsü (Kişiler)](/tr/contacts/lifecycle) bölümüne bakın. Şifreleme ve maskeleme için [Kişilere genel bakış](/tr/contacts/overview) bölümüne bakın.

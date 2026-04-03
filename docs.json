@@ -71,6 +71,22 @@
                 ]
               },
               {
+                "group": "Affiliate",
+                "pages": [
+                  "en/affiliate/overview",
+                  "en/affiliate/faq"
+                ]
+              },
+              {
+                "group": "CLI",
+                "pages": [
+                  "en/cli/introduction",
+                  "en/cli/installation",
+                  "en/cli/commands",
+                  "en/cli/agentic-usage"
+                ]
+              },
+              {
                 "group": "Concepts",
                 "pages": [
                   "en/concepts/contact-lifecycle",
@@ -110,6 +126,11 @@
               "icon": "tag"
             },
             {
+              "anchor": "Affiliate",
+              "href": "https://nudgen.net/affiliate",
+              "icon": "handshake"
+            },
+            {
               "anchor": "Status",
               "href": "https://stats.uptimerobot.com/fGg8sPgh7G",
               "icon": "signal"
@@ -118,14 +139,6 @@
         },
         "navbar": {
           "links": [
-            {
-              "label": "Pricing",
-              "href": "https://nudgen.net/pricing"
-            },
-            {
-              "label": "Status",
-              "href": "https://stats.uptimerobot.com/fGg8sPgh7G"
-            },
             {
               "label": "Contact",
               "href": "mailto:contact@nudgen.net"
@@ -199,6 +212,22 @@
                 ]
               },
               {
+                "group": "التسويق بالعمولة",
+                "pages": [
+                  "ar/affiliate/overview",
+                  "ar/affiliate/faq"
+                ]
+              },
+              {
+                "group": "CLI",
+                "pages": [
+                  "ar/cli/introduction",
+                  "ar/cli/installation",
+                  "ar/cli/commands",
+                  "ar/cli/agentic-usage"
+                ]
+              },
+              {
                 "group": "المفاهيم",
                 "pages": [
                   "ar/concepts/contact-lifecycle",
@@ -238,6 +267,11 @@
               "icon": "tag"
             },
             {
+              "anchor": "التسويق بالعمولة",
+              "href": "https://nudgen.net/affiliate",
+              "icon": "handshake"
+            },
+            {
               "anchor": "الحالة",
               "href": "https://stats.uptimerobot.com/fGg8sPgh7G",
               "icon": "signal"
@@ -246,14 +280,6 @@
         },
         "navbar": {
           "links": [
-            {
-              "label": "الأسعار",
-              "href": "https://nudgen.net/pricing"
-            },
-            {
-              "label": "الحالة",
-              "href": "https://stats.uptimerobot.com/fGg8sPgh7G"
-            },
             {
               "label": "اتصل بنا",
               "href": "mailto:contact@nudgen.net"
@@ -327,6 +353,22 @@
                 ]
               },
               {
+                "group": "联盟计划",
+                "pages": [
+                  "cn/affiliate/overview",
+                  "cn/affiliate/faq"
+                ]
+              },
+              {
+                "group": "CLI",
+                "pages": [
+                  "cn/cli/introduction",
+                  "cn/cli/installation",
+                  "cn/cli/commands",
+                  "cn/cli/agentic-usage"
+                ]
+              },
+              {
                 "group": "概念",
                 "pages": [
                   "cn/concepts/contact-lifecycle",
@@ -366,6 +408,11 @@
               "icon": "tag"
             },
             {
+              "anchor": "联盟计划",
+              "href": "https://nudgen.net/affiliate",
+              "icon": "handshake"
+            },
+            {
               "anchor": "状态",
               "href": "https://stats.uptimerobot.com/fGg8sPgh7G",
               "icon": "signal"
@@ -374,14 +421,6 @@
         },
         "navbar": {
           "links": [
-            {
-              "label": "定价",
-              "href": "https://nudgen.net/pricing"
-            },
-            {
-              "label": "状态",
-              "href": "https://stats.uptimerobot.com/fGg8sPgh7G"
-            },
             {
               "label": "联系",
               "href": "mailto:contact@nudgen.net"
@@ -455,6 +494,22 @@
                 ]
               },
               {
+                "group": "Affiliate",
+                "pages": [
+                  "de/affiliate/overview",
+                  "de/affiliate/faq"
+                ]
+              },
+              {
+                "group": "CLI",
+                "pages": [
+                  "de/cli/introduction",
+                  "de/cli/installation",
+                  "de/cli/commands",
+                  "de/cli/agentic-usage"
+                ]
+              },
+              {
                 "group": "Konzepte",
                 "pages": [
                   "de/concepts/contact-lifecycle",
@@ -494,6 +549,11 @@
               "icon": "tag"
             },
             {
+              "anchor": "Partnerprogramm",
+              "href": "https://nudgen.net/affiliate",
+              "icon": "handshake"
+            },
+            {
               "anchor": "Status",
               "href": "https://stats.uptimerobot.com/fGg8sPgh7G",
               "icon": "signal"
@@ -502,14 +562,6 @@
         },
         "navbar": {
           "links": [
-            {
-              "label": "Preise",
-              "href": "https://nudgen.net/pricing"
-            },
-            {
-              "label": "Status",
-              "href": "https://stats.uptimerobot.com/fGg8sPgh7G"
-            },
             {
               "label": "Kontakt",
               "href": "mailto:contact@nudgen.net"
@@ -583,6 +635,22 @@
                 ]
               },
               {
+                "group": "Afiliados",
+                "pages": [
+                  "es/affiliate/overview",
+                  "es/affiliate/faq"
+                ]
+              },
+              {
+                "group": "CLI",
+                "pages": [
+                  "es/cli/introduction",
+                  "es/cli/installation",
+                  "es/cli/commands",
+                  "es/cli/agentic-usage"
+                ]
+              },
+              {
                 "group": "Conceptos",
                 "pages": [
                   "es/concepts/contact-lifecycle",
@@ -622,6 +690,11 @@
               "icon": "tag"
             },
             {
+              "anchor": "Afiliados",
+              "href": "https://nudgen.net/affiliate",
+              "icon": "handshake"
+            },
+            {
               "anchor": "Estado",
               "href": "https://stats.uptimerobot.com/fGg8sPgh7G",
               "icon": "signal"
@@ -630,14 +703,6 @@
         },
         "navbar": {
           "links": [
-            {
-              "label": "Precios",
-              "href": "https://nudgen.net/pricing"
-            },
-            {
-              "label": "Estado",
-              "href": "https://stats.uptimerobot.com/fGg8sPgh7G"
-            },
             {
               "label": "Contacto",
               "href": "mailto:contact@nudgen.net"
@@ -711,6 +776,22 @@
                 ]
               },
               {
+                "group": "Affiliation",
+                "pages": [
+                  "fr/affiliate/overview",
+                  "fr/affiliate/faq"
+                ]
+              },
+              {
+                "group": "CLI",
+                "pages": [
+                  "fr/cli/introduction",
+                  "fr/cli/installation",
+                  "fr/cli/commands",
+                  "fr/cli/agentic-usage"
+                ]
+              },
+              {
                 "group": "Concepts",
                 "pages": [
                   "fr/concepts/contact-lifecycle",
@@ -750,6 +831,11 @@
               "icon": "tag"
             },
             {
+              "anchor": "Affiliation",
+              "href": "https://nudgen.net/affiliate",
+              "icon": "handshake"
+            },
+            {
               "anchor": "Statut",
               "href": "https://stats.uptimerobot.com/fGg8sPgh7G",
               "icon": "signal"
@@ -758,14 +844,6 @@
         },
         "navbar": {
           "links": [
-            {
-              "label": "Tarifs",
-              "href": "https://nudgen.net/pricing"
-            },
-            {
-              "label": "Statut",
-              "href": "https://stats.uptimerobot.com/fGg8sPgh7G"
-            },
             {
               "label": "Contact",
               "href": "mailto:contact@nudgen.net"
@@ -839,6 +917,22 @@
                 ]
               },
               {
+                "group": "Afiliasi",
+                "pages": [
+                  "id/affiliate/overview",
+                  "id/affiliate/faq"
+                ]
+              },
+              {
+                "group": "CLI",
+                "pages": [
+                  "id/cli/introduction",
+                  "id/cli/installation",
+                  "id/cli/commands",
+                  "id/cli/agentic-usage"
+                ]
+              },
+              {
                 "group": "Konsep",
                 "pages": [
                   "id/concepts/contact-lifecycle",
@@ -878,6 +972,11 @@
               "icon": "tag"
             },
             {
+              "anchor": "Afiliasi",
+              "href": "https://nudgen.net/affiliate",
+              "icon": "handshake"
+            },
+            {
               "anchor": "Status",
               "href": "https://stats.uptimerobot.com/fGg8sPgh7G",
               "icon": "signal"
@@ -886,14 +985,6 @@
         },
         "navbar": {
           "links": [
-            {
-              "label": "Harga",
-              "href": "https://nudgen.net/pricing"
-            },
-            {
-              "label": "Status",
-              "href": "https://stats.uptimerobot.com/fGg8sPgh7G"
-            },
             {
               "label": "Kontak",
               "href": "mailto:contact@nudgen.net"
@@ -967,6 +1058,22 @@
                 ]
               },
               {
+                "group": "アフィリエイト",
+                "pages": [
+                  "jp/affiliate/overview",
+                  "jp/affiliate/faq"
+                ]
+              },
+              {
+                "group": "CLI",
+                "pages": [
+                  "jp/cli/introduction",
+                  "jp/cli/installation",
+                  "jp/cli/commands",
+                  "jp/cli/agentic-usage"
+                ]
+              },
+              {
                 "group": "コンセプト",
                 "pages": [
                   "jp/concepts/contact-lifecycle",
@@ -1006,6 +1113,11 @@
               "icon": "tag"
             },
             {
+              "anchor": "アフィリエイト",
+              "href": "https://nudgen.net/affiliate",
+              "icon": "handshake"
+            },
+            {
               "anchor": "ステータス",
               "href": "https://stats.uptimerobot.com/fGg8sPgh7G",
               "icon": "signal"
@@ -1014,14 +1126,6 @@
         },
         "navbar": {
           "links": [
-            {
-              "label": "料金",
-              "href": "https://nudgen.net/pricing"
-            },
-            {
-              "label": "ステータス",
-              "href": "https://stats.uptimerobot.com/fGg8sPgh7G"
-            },
             {
               "label": "お問い合わせ",
               "href": "mailto:contact@nudgen.net"
@@ -1095,6 +1199,22 @@
                 ]
               },
               {
+                "group": "제휴",
+                "pages": [
+                  "ko/affiliate/overview",
+                  "ko/affiliate/faq"
+                ]
+              },
+              {
+                "group": "CLI",
+                "pages": [
+                  "ko/cli/introduction",
+                  "ko/cli/installation",
+                  "ko/cli/commands",
+                  "ko/cli/agentic-usage"
+                ]
+              },
+              {
                 "group": "개념",
                 "pages": [
                   "ko/concepts/contact-lifecycle",
@@ -1134,6 +1254,11 @@
               "icon": "tag"
             },
             {
+              "anchor": "제휴",
+              "href": "https://nudgen.net/affiliate",
+              "icon": "handshake"
+            },
+            {
               "anchor": "상태",
               "href": "https://stats.uptimerobot.com/fGg8sPgh7G",
               "icon": "signal"
@@ -1142,14 +1267,6 @@
         },
         "navbar": {
           "links": [
-            {
-              "label": "요금제",
-              "href": "https://nudgen.net/pricing"
-            },
-            {
-              "label": "상태",
-              "href": "https://stats.uptimerobot.com/fGg8sPgh7G"
-            },
             {
               "label": "문의하기",
               "href": "mailto:contact@nudgen.net"
@@ -1223,6 +1340,22 @@
                 ]
               },
               {
+                "group": "Партнерская программа",
+                "pages": [
+                  "ru/affiliate/overview",
+                  "ru/affiliate/faq"
+                ]
+              },
+              {
+                "group": "CLI",
+                "pages": [
+                  "ru/cli/introduction",
+                  "ru/cli/installation",
+                  "ru/cli/commands",
+                  "ru/cli/agentic-usage"
+                ]
+              },
+              {
                 "group": "Концепции",
                 "pages": [
                   "ru/concepts/contact-lifecycle",
@@ -1262,6 +1395,11 @@
               "icon": "tag"
             },
             {
+              "anchor": "Партнерская программа",
+              "href": "https://nudgen.net/affiliate",
+              "icon": "handshake"
+            },
+            {
               "anchor": "Статус",
               "href": "https://stats.uptimerobot.com/fGg8sPgh7G",
               "icon": "signal"
@@ -1270,14 +1408,6 @@
         },
         "navbar": {
           "links": [
-            {
-              "label": "Цены",
-              "href": "https://nudgen.net/pricing"
-            },
-            {
-              "label": "Статус",
-              "href": "https://stats.uptimerobot.com/fGg8sPgh7G"
-            },
             {
               "label": "Контакт",
               "href": "mailto:contact@nudgen.net"
@@ -1351,6 +1481,22 @@
                 ]
               },
               {
+                "group": "Satış ortaklığı",
+                "pages": [
+                  "tr/affiliate/overview",
+                  "tr/affiliate/faq"
+                ]
+              },
+              {
+                "group": "CLI",
+                "pages": [
+                  "tr/cli/introduction",
+                  "tr/cli/installation",
+                  "tr/cli/commands",
+                  "tr/cli/agentic-usage"
+                ]
+              },
+              {
                 "group": "Kavramlar",
                 "pages": [
                   "tr/concepts/contact-lifecycle",
@@ -1390,6 +1536,11 @@
               "icon": "tag"
             },
             {
+              "anchor": "Satış ortaklığı",
+              "href": "https://nudgen.net/affiliate",
+              "icon": "handshake"
+            },
+            {
               "anchor": "Durum",
               "href": "https://stats.uptimerobot.com/fGg8sPgh7G",
               "icon": "signal"
@@ -1398,14 +1549,6 @@
         },
         "navbar": {
           "links": [
-            {
-              "label": "Fiyatlandırma",
-              "href": "https://nudgen.net/pricing"
-            },
-            {
-              "label": "Durum",
-              "href": "https://stats.uptimerobot.com/fGg8sPgh7G"
-            },
             {
               "label": "İletişim",
               "href": "mailto:contact@nudgen.net"
@@ -1479,6 +1622,22 @@
                 ]
               },
               {
+                "group": "Tiếp thị liên kết",
+                "pages": [
+                  "vi/affiliate/overview",
+                  "vi/affiliate/faq"
+                ]
+              },
+              {
+                "group": "CLI",
+                "pages": [
+                  "vi/cli/introduction",
+                  "vi/cli/installation",
+                  "vi/cli/commands",
+                  "vi/cli/agentic-usage"
+                ]
+              },
+              {
                 "group": "Khái niệm",
                 "pages": [
                   "vi/concepts/contact-lifecycle",
@@ -1518,6 +1677,11 @@
               "icon": "tag"
             },
             {
+              "anchor": "Tiếp thị liên kết",
+              "href": "https://nudgen.net/affiliate",
+              "icon": "handshake"
+            },
+            {
               "anchor": "Trạng thái",
               "href": "https://stats.uptimerobot.com/fGg8sPgh7G",
               "icon": "signal"
@@ -1526,14 +1690,6 @@
         },
         "navbar": {
           "links": [
-            {
-              "label": "Bảng giá",
-              "href": "https://nudgen.net/pricing"
-            },
-            {
-              "label": "Trạng thái",
-              "href": "https://stats.uptimerobot.com/fGg8sPgh7G"
-            },
             {
               "label": "Liên hệ",
               "href": "mailto:contact@nudgen.net"

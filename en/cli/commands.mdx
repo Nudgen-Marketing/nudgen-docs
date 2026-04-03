@@ -1,0 +1,66 @@
+---
+title: "CLI Commands"
+description: "Reference for all Nudgen CLI commands."
+---
+
+## Overview
+
+Explore the core commands available in the Nudgen CLI. Most commands are grouped by resource type (campaigns, contacts, teams, etc.).
+
+### Authentication & Identity
+
+| Command | Description |
+| :--- | :--- |
+| `nudgen login` | Authenticate with your Personal Access Token (PAT). |
+| `nudgen whoami` | Show current token owner and user info. |
+| `nudgen logout` | Clear local credentials. |
+
+### Team Management
+
+| Command | Description |
+| :--- | :--- |
+| `nudgen teams list` | List all teams you belong to. |
+| `nudgen teams current` | Show currently active team context. |
+| `nudgen teams switch <id>` | Switch to a specific team. |
+
+### Campaigns
+
+Manage marketing outreach efforts within the active team.
+
+| Command | Description |
+| :--- | :--- |
+| `nudgen campaigns list` | List active campaigns in the current team. |
+| `nudgen campaigns create` | Interactive creation wizard. |
+| `nudgen campaigns update <id>` | Modify existing campaign settings. |
+| `nudgen campaigns delete <id>` | Remove a campaign record. |
+
+### Contacts (Lead Management)
+
+| Command | Description |
+| :--- | :--- |
+| `nudgen contacts list` | List all leads in the current team. |
+| `nudgen contacts create` | Manually add a new lead record. |
+| `nudgen contacts import` | Interactive CSV mapper for bulk ingestion. |
+| `nudgen contacts update <id>` | Edit lead details. |
+| `nudgen contacts delete <id>` | Remove a contact record. |
+
+### Brand Identities
+
+| Command | Description |
+| :--- | :--- |
+| `nudgen brand list` | List all brand voices for the team. |
+| `nudgen brand create` | Wizard to initialize a new brand voice. |
+| `nudgen brand update <id>` | Edit brand configurations. |
+| `nudgen brand delete <id>` | Remove a brand identity. |
+
+### Referrals & Earnings
+
+| Command | Description |
+| :--- | :--- |
+| `nudgen referral stats` | View high-level referral performance summary. |
+| `nudgen referral link` | Get your unique referral link. |
+| `nudgen referral activity` | View recent click history and signups. |
+| `nudgen referral referrals` | List teams referred by you and their status. |
+| `nudgen referral payouts` | View history of payout requests and status. |
+
+Next, see how to use these commands for [AI Agents](/en/cli/agentic-usage).

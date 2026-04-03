@@ -1,106 +1,97 @@
 ---
-title: "Billing overview"
-description: "Plan tiers, usage meters, checkout, and customer portal"
+title: "결제 개요"
+description: "요금제 등급, 사용량 측정, 결제 및 고객 포털"
 ---
 
-## What this page helps you do
+## 이 페이지의 도움말
+Nudgen의 요금제 등급, 각 플랜에 포함된 내용, 사용량 추적 방식, 요금제 업그레이드, 다운그레이드 또는 구독 관리 방법을 안내합니다.
 
-Understand Nudgen's pricing tiers, what each plan includes, how usage is tracked, and how to upgrade, downgrade, or manage your subscription.
+## 시작하기 전에
+- Nudgen 계정
+- 대시보드의 **결제(Billing)** 섹션에 대한 접근 권한
 
-## Before you start
+## 요금제 등급
+요금제는 일반적으로 **Trial**, **Starter**, **Growth**, **Pro**, **Enterprise**로 구성됩니다.
 
-- A Nudgen account
-- Access to **Billing** in the dashboard
+### 요금제 비교
 
-## Plan tiers
-
-Plans typically include **Trial**, **Starter**, **Growth**, **Pro**, and **Enterprise**.
-
-### Plan comparison
-
-| Plan | Price | Contacts | Emails/Day | Emails/Month | Drip Sequences |
+| 요금제 | 가격 | 연락처 | 일일 이메일 | 월간 이메일 | 드립 시퀀스 |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| **Trial** | Free | 50 | 20 | 50 | 3 |
-| **Starter** | $19/mo | 2,000 | 100 | 2,000 | 5 |
-| **Growth** | $39/mo | 6,000 | 300 | 6,000 | 20 |
-| **Pro** | $79/mo | 12,000 | 600 | 12,000 | Unlimited |
-| **Enterprise** | Contact Sales | Unlimited | Unlimited | Unlimited | Unlimited |
+| **Trial** | 무료 | 50명 | 20통 | 50통 | 3개 |
+| **Starter** | 월 $19 | 2,000명 | 100통 | 2,000통 | 5개 |
+| **Growth** | 월 $39 | 6,000명 | 300통 | 6,000통 | 20개 |
+| **Pro** | 월 $79 | 12,000명 | 600통 | 12,000통 | 무제한 |
+| **Enterprise** | 별도 문의 | 무제한 | 무제한 | 무제한 | 무제한 |
 
-### Feature highlights
+### 주요 기능
 
-*   **Trial:** AI email generation, Single-send campaigns, Basic open & click tracking.
-*   **Starter:** 5-step drip sequences, Tag-based audience segments, Auto-stop rules.
-*   **Growth:** Everything in Starter + 20-step drip sequences, Custom brand voice profiles, Real-time analytics.
-*   **Pro:** Everything in Growth + Unlimited drip sequences, Advanced campaign analytics, Custom email domain.
-*   **Enterprise:** Everything in Pro + Unlimited contacts & sends, Custom integrations, Dedicated 24/7 support, SLA guarantee.
+*   **Trial:** AI 이메일 생성, 단발성 캠페인 발송, 기본 오픈 및 클릭 추적.
+*   **Starter:** 5단계 드립 시퀀스, 태그 기반 오디언스 세그먼트, 자동 중단 규칙.
+*   **Growth:** Starter의 모든 기능 + 20단계 드립 시퀀스, 맞춤형 브랜드 보이스 프로필, 실시간 분석.
+*   **Pro:** Growth의 모든 기능 + 무제한 드립 시퀀스, 고급 캠페인 분석, 맞춤 도메인 이메일.
+*   **Enterprise:** Pro의 모든 기능 + 무제한 연락처 및 발송, 맞춤형 통합, 전담 24/7 지원, SLA 보장.
 
-Trial accounts get a time-limited trial (7 days) with small limits so you can run a first campaign. Paid plans renew monthly unless you cancel.
+Trial 계정은 첫 캠페인을 실행할 수 있도록 제한된 한도와 함께 7일간의 체험 기간이 제공됩니다. 유료 요금제는 취소하지 않는 한 매월 자동 갱신됩니다.
 
 <Note>
-**Source of truth:** Exact prices, contact limits, and email caps can change. Always check the [pricing page](https://nudgen.net/pricing) and the **Billing** section in the app for current plans and limits.
+**참고 사항:** 정확한 가격, 연락처 한도 및 이메일 전송 한도는 변경될 수 있습니다. 현재 요금제 및 한도는 항상 [가격 페이지](https://nudgen.net/pricing)와 앱 내 **결제(Billing)** 섹션을 확인하세요.
 </Note>
 
-## Usage meters
+## 사용량 측정
+**결제(Billing)** 페이지에서 다음 내용을 확인할 수 있습니다:
 
-On the **Billing** page you'll see:
+- **사용 중인 연락처** — 현재 연락처 수 vs 요금제 한도
+- **이번 달 발송된 이메일** — 결제 주기마다 초기화
+- **사용 중인 드립 시퀀스** — 활성 시퀀스 vs 한도 (해당되는 경우)
 
-- **Contacts used** — Current count vs your plan limit
-- **Emails sent this month** — Resets each billing cycle
-- **Drip sequences used** — Active sequences vs limit (if applicable)
+요금제 한도는 작업 실행 전에 적용됩니다. 한도를 초과하여 연락처를 업로드하거나 월간/일일 한도를 초과하여 이메일을 발송할 수 없습니다. UI에 사용량이 표시되므로 한도 도달 여부를 미리 알 수 있습니다.
 
-Plan limits are enforced before actions. You cannot upload contacts beyond your limit or send more emails than your monthly or daily cap. The UI shows usage so you know when you're approaching limits.
+## 한도 초과 시
+- **연락처 한도:** 연락처를 삭제하거나 업그레이드하기 전까지 새로운 업로드 또는 추가가 차단됩니다.
+- **이메일 한도:** 다음 결제 주기가 시작되거나 업그레이드할 때까지 발송이 차단됩니다. 이미 대기열에 있는 이메일은 한도 내에서 발송될 수 있습니다.
+- **속도 제한:** 서비스 보호를 위해 너무 많은 요청(예: API 또는 발송)이 발생하는 경우 일시적으로 속도가 제한될 수 있습니다.
 
-## When you hit limits
+## 요금제 업그레이드 또는 변경
+1. **결제(Billing)** 메뉴로 이동합니다.
+2. 현재 요금제를 확인하고 **업그레이드(Upgrade)** 또는 **요금제 변경(Change plan)**을 클릭합니다.
+3. 결제 페이지(Polar 제공)로 이동합니다.
+4. 결제를 완료하면 새로운 요금제와 한도가 즉시 적용됩니다.
 
-- **Contact limit:** New uploads or adds are blocked until you remove contacts or upgrade.
-- **Email cap:** Sending is blocked until the next billing cycle or until you upgrade. Already-queued emails may still send up to the cap.
-- **Rate limits:** Too many requests (e.g. API or sends) can be temporarily rate-limited to protect the service.
+## 고객 포털
+**구독 관리(Manage subscription)** 또는 **결제 포털(Billing portal)** 링크를 통해 다음 작업을 수행할 수 있습니다:
 
-## Upgrade or change plan
+- 결제 수단 업데이트
+- 송장 확인 및 다운로드
+- 구독 취소 또는 변경
 
-1. Go to **Billing**.
-2. Find your current plan and click **Upgrade** or **Change plan**.
-3. You'll be redirected to the checkout (powered by Polar).
-4. Complete payment. Your new plan and limits take effect immediately.
+## Enterprise (기업 전용)
+맞춤형 한도, SLA 또는 전담 지원이 필요한 경우 [contact@nudgen.net](mailto:contact@nudgen.net)으로 문의해 주세요.
 
-## Customer portal
+## 다음 단계
+- 업로드 또는 발송이 차단되지 않도록 한도 내에서 사용하세요.
+- 중단 없이 Nudgen을 계속 사용하려면 Trial이 종료되기 전에 업그레이드하세요.
 
-Use the **Manage subscription** or **Billing portal** link to:
-
-- Update payment method
-- View and download invoices
-- Cancel or change your subscription
-
-## Enterprise
-
-For custom limits, SLA, or dedicated support, contact us at [contact@nudgen.net](mailto:contact@nudgen.net).
-
-## What happens next
-
-- Stay within limits to avoid blocked uploads or sends.
-- Upgrade before trial ends to keep using Nudgen without interruption.
-
-## Troubleshooting
+## 문제 해결
 
 <AccordionGroup>
-  <Accordion title="I hit my contact limit">
-    Upgrade your plan or remove inactive contacts to stay under the limit.
+  <Accordion title="연락처 한도에 도달했습니다">
+    요금제를 업그레이드하거나 비활성 연락처를 삭제하여 한도 내로 유지하세요.
   </Accordion>
-  <Accordion title="Emails sent reset to zero">
-    Usage resets each billing cycle (monthly). Check your billing period on the billing page.
+  <Accordion title="이메일 발송 횟수가 0으로 초기화되었습니다">
+    사용량은 결제 주기(매월)마다 초기화됩니다. 결제 페이지에서 결제 기간을 확인하세요.
   </Accordion>
-  <Accordion title="How do I cancel?">
-    Use the billing portal to cancel. You keep access until the end of the current period.
+  <Accordion title="취소는 어떻게 하나요?">
+    결제 포털을 사용하여 취소할 수 있습니다. 현재 이용 기간이 끝날 때까지 계정 접근 권한은 유지됩니다.
   </Accordion>
 </AccordionGroup>
 
-## Related docs
+## 관련 문서
 
 <CardGroup cols={2}>
-  <Card title="Quickstart" icon="rocket" href="/en/quickstart">
-    Trial limits and first campaign.
+  <Card title="빠른 시작" icon="rocket" href="/ko/quickstart">
+    Trial 한도 및 첫 캠페인 설정.
   </Card>
-  <Card title="Upload contacts" icon="file-upload" href="/en/contacts/upload">
-    Contact limits and CSV upload.
+  <Card title="연락처 업로드" icon="file-upload" href="/ko/contacts/upload">
+    연락처 한도 및 CSV 업로드 안내.
   </Card>
 </CardGroup>

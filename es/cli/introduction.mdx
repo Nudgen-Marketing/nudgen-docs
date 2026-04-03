@@ -1,0 +1,44 @@
+---
+title: "Introducción a la CLI"
+description: "Domine la plataforma de automatización de marketing Nudgen a través de su interfaz de línea de comandos interactiva."
+---
+
+## Resumen
+
+La CLI de Nudgen es una herramienta potente diseñada tanto para humanos como para agentes de IA. Ofrece una forma fluida de gestionar campañas, contactos, identidades de marca y estadísticas de referidos directamente desde su terminal.
+
+Ya sea que sea un desarrollador que busca automatizar sus flujos de trabajo de marketing o un agente de IA que necesita una interacción de alta calidad con la plataforma Nudgen, la CLI es su interfaz principal.
+
+### Características Clave
+
+<CardGroup cols={2}>
+  <Card title="TUI Interactiva" icon="terminal">
+    Interfaz de usuario de terminal atractiva con formularios interactivos y estadísticas en tiempo real.
+  </Card>
+  <Card title="Diseño AI-First" icon="robot">
+    Cada comando admite salida `--json`, lo que facilita la automatización por parte de agentes de IA.
+  </Card>
+  <Card title="Contexto de Equipo" icon="users-gear">
+    Cambie entre diferentes equipos sin esfuerzo y gestione recursos dentro de contextos de equipo específicos.
+  </Card>
+  <Card title="Seguro" icon="lock">
+    Las credenciales se almacenan de forma segura en el llavero de su sistema, protegiendo sus datos.
+  </Card>
+</CardGroup>
+
+## Propósito
+
+La CLI cumple múltiples funciones:
+
+1. **Para Humanos**: Permite listar campañas rápidamente, importar contactos y consultar ganancias sin necesidad de abrir el navegador.
+2. **Para Agentes de IA**: Ofrece una interfaz interpretable por máquinas para automatizar el marketing y la gestión de marca de forma compleja.
+3. **Para Desarrolladores**: Ayudas para el desarrollo local y la gestión del repositorio dentro del ecosistema Nudgen.
+
+## Patrones de Interacción
+
+La CLI sigue el principio de "Interacción sobre API". Utiliza llamadas API RESTful estándar para comunicarse con el backend de Nudgen mientras gestiona el estado de la sesión localmente de forma segura.
+
+- **Estándar JSON**: Todos los comandos admiten `--json`, lo cual es fundamental para la comunicación entre agentes.
+- **Conciencia del Contexto**: Las operaciones se limitan automáticamente a su equipo activo.
+
+A continuación, aprenda cómo [instalar la CLI](/es/cli/installation).

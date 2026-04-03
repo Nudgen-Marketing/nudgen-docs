@@ -1,60 +1,60 @@
 ---
-title: "Sending and deliverability"
-description: "Emails not sending, bounces, and spam"
+title: "Отправка и доставляемость"
+description: "Письма не отправляются, возвраты и спам"
 ---
 
-## Emails not sending
+## Письма не отправляются
 
-**Campaign stuck or “sending” for a long time**
+**Кампания зависла или статус «Sending (Отправляется)» висит слишком долго**
 
-- Sends are queued and processed in batches. Large campaigns can take time. Refresh the dashboard; if status stays “Sending” for hours, contact support.
-- Check that you haven’t hit your **daily or monthly email limit**. The app blocks new sends when you’re over cap. See [Billing](/en/billing/overview) and [Troubleshooting: billing](/en/troubleshooting/billing).
+- Отправки ставятся в очередь и обрабатываются пакетами. Кампании с большим количеством контактов могут занять время. Обновите страницу дашборда; если статус «Sending» не меняется в течение нескольких часов, свяжитесь с поддержкой.
+- Убедитесь, что вы не достигли **дневного или месячного лимита по количеству писем**. Приложение блокирует новые отправки при превышении лимита. См. [Биллинг](/ru/billing/overview) и [Проблемы с оплатой](/ru/troubleshooting/billing).
 
-**Test email didn’t arrive**
+**Тестовое письмо не пришло**
 
-- Check spam/junk. Add the sender to your contacts or safe senders.
-- Confirm the **account email** (where tests are sent) is correct in your profile.
-- Wait a few minutes; delivery can be delayed. Try again or send to a different address.
+- Проверьте папку «Спам». Добавьте адрес отправителя в контакты или список надежных отправителей.
+- Убедитесь, что **email вашего аккаунта** (куда приходят тесты) указан верно в профиле.
+- Подождите несколько минут; доставка может задерживаться. Попробуйте отправить еще раз или укажите другой адрес.
 
-**“No active contacts” or reach is zero**
+**«Нет активных контактов» или охват равен нулю**
 
-- Upload or add at least one contact and ensure they’re **active** (not unsubscribed or suppressed). See [Contacts overview](/en/contacts/overview) and [Contact lifecycle](/en/contacts/lifecycle).
-- If you chose “By tags,” ensure some contacts have the selected tags.
+- Загрузите или добавьте хотя бы один контакт и убедитесь, что он находится в статусе **«Активен»** (не отписался и не исключен). См. [Обзор контактов](/ru/contacts/overview) и [Жизненный цикл контакта](/ru/contacts/lifecycle).
+- Если вы выбрали «По тегам (By tags)», убедитесь, что у контактов из списка есть соответствующие теги.
 
-## Bounces and complaints
+## Возвраты и жалобы
 
-**High bounce rate**
+**Высокий показатель возвратов (Bounce rate)**
 
-- **Hard bounces** (invalid address, domain doesn’t exist) are automatically suppressed. Remove or fix bad addresses in your list; avoid bought or scraped lists.
-- **Soft bounces** (mailbox full, server down) may be retried by the provider. Repeated soft bounces can lead to suppression. Clean your list and avoid role addresses (e.g. info@) unless they’re valid inboxes.
-- Keep bounce rate low (e.g. under 2%) to protect sender reputation. Use the [Dashboard](/en/dashboard/overview) and [Campaign analytics](/en/campaigns/analytics) to monitor.
+- **Жесткие возвраты (Hard bounces)** (неверный адрес, домен не существует) исключаются автоматически. Удаляйте или исправляйте неверные адреса в списке; избегайте купленных баз или баз, собранных автоматически.
+- **Мягкие возвраты (Soft bounces)** (ящик переполнен, сервер недоступен) могут быть повторены провайдером. Повторяющиеся мягкие возвраты могут привести к исключению адреса. Очистите список и избегайте общих адресов (например, info@), если они не являются реальными ящиками.
+- Держите показатель возвратов на низком уровне (например, менее 2%) для защиты репутации отправителя. Следите за этим на [Дашборде](/ru/dashboard/overview) и в [Аналитике кампаний](/ru/campaigns/analytics).
 
-**Spam complaints**
+**Жалобы на спам**
 
-- Recipients marked the email as spam. We suppress complainers and they won’t receive future campaigns. Too many complaints hurt reputation.
-- Improve content: clear subject lines, relevant copy, obvious unsubscribe link. Don’t send to people who didn’t opt in. See [Deliverability basics](/en/concepts/deliverability-basics).
+- Получатели пометили письмо как спам. Мы исключаем таких пользователей из будущих кампаний. Слишком большое количество жалоб портит репутацию.
+- Улучшайте контент: понятные темы, релевантные тексты, очевидная ссылка для отписки. Не делайте рассылок тем, кто не давал согласия. См. [Основы доставляемости](/ru/concepts/deliverability-basics).
 
-**Unsubscribes**
+**Отписки**
 
-- Unsubscribe links are required and honored. Unsubscribed contacts are excluded from future sends. This is normal and keeps you compliant.
+- Ссылки для отписки обязательны и всегда работают. Отписавшиеся контакты исключаются из будущих отправок. Это нормально и соответствует правилам рассылок.
 
-## Tracking and metrics
+## Отслеживание и метрики
 
-**Opens or clicks not updating**
+**Данные об открытиях или кликах не обновляются**
 
-- Tracking uses a pixel (opens) and signed links (clicks). Some clients block images or strip tracking; metrics can be undercounted.
-- Data can take a short time to appear. Refresh the campaign detail page or dashboard.
-- If a campaign shows zero opens/clicks for a long time after sends, check that links and images in the email are intact and that the campaign actually sent (check “Emails Sent” and “Emails Delivered”).
+- Отслеживание открытий работает через пиксель, а кликов — через специальные ссылки. Некоторые почтовые клиенты блокируют изображения или удаляют параметры отслеживания; число метрик может быть занижено.
+- Информация может появляться с небольшой задержкой. Обновите страницу кампании или дашборд.
+- Если кампания долгое время показывает ноль открытий/кликов после отправки, убедитесь, что ссылки и изображения в письме целы и что кампания действительно была отправлена (проверьте счетчики «Отправлено» и «Доставлено»).
 
-**Analytics look wrong**
+**Аналитика выглядит неверно**
 
-- Ensure the **date range** includes the send date. Dashboard and campaign detail pages filter by selected range.
-- “Emails Sent” includes all attempts; “Emails Delivered” is successful delivery. CTR is (Total Clicks / Total Sent) × 100. See [Campaign analytics](/en/campaigns/analytics) and [Dashboard overview](/en/dashboard/overview).
+- Убедитесь, что **выбранный диапазон дат** включает дату отправки. Дашборд и страницы кампаний фильтруют данные по выбранному периоду.
+- «Emails Sent» включает все попытки; «Emails Delivered» — это успешная доставка. CTR (процент кликов) рассчитывается как (Всего кликов / Всего отправлено) × 100. См. [Аналитику кампаний](/ru/campaigns/analytics) и [Обзор дашборда](/ru/dashboard/overview).
 
-## What we do to protect deliverability
+## Что мы делаем для защиты доставляемости
 
-- We send via our email provider and sync with their suppression list so we don’t resend to bounced or complained addresses.
-- Contacts are validated and we avoid sending to unsubscribed or suppressed contacts.
-- Content and signatures are sanitized; we may flag spam-prone wording when possible.
+- Мы работаем через проверенного провайдера и синхронизируемся с его списком исключений, чтобы не отправлять письма по адресам с возвратами или жалобами.
+- Контакты проходят проверку, и мы не делаем рассылок по отписавшимся или исключенным пользователям.
+- Контент и подписи проходят автоматическую очистку; мы указываем на использование слов, характерных для спама, где это возможно.
 
-For more, see [Deliverability basics](/en/concepts/deliverability-basics) and [Contact lifecycle](/en/contacts/lifecycle).
+Подробнее читайте в разделах [Основы доставляемости](/ru/concepts/deliverability-basics) и [Жизненный цикл контакта](/ru/contacts/lifecycle).

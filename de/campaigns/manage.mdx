@@ -1,88 +1,88 @@
 ---
-title: "Manage campaigns"
-description: "Edit, send, schedule, and stop campaigns"
+title: "Kampagnen verwalten"
+description: "Bearbeiten, Senden, Planen und Stoppen von Kampagnen"
 ---
 
-## What this page helps you do
+## Was diese Seite Ihnen bietet
 
-Edit draft campaigns, send or schedule them, and stop active campaigns. You'll also understand what you can and cannot change once a campaign has been sent.
+Bearbeiten Sie Kampagnen-Entwürfe, senden oder planen Sie den Versand und stoppen Sie aktive Kampagnen. Erfahren Sie zudem, was Sie nach dem Versenden einer Kampagne noch ändern können und was nicht.
 
-## Before you start
+## Bevor Sie beginnen
 
-- At least one campaign (draft or sent)
-- Owner or team member with edit permissions
+- Mindestens eine Kampagne (Entwurf oder gesendet) vorhanden
+- Rolle als Inhaber oder Teammitglied mit Bearbeitungsrechten
 
-## Editing a campaign
+## Eine Kampagne bearbeiten
 
-**You can edit only draft campaigns.** Once a campaign is sent, its content and audience are locked.
+**Sie können nur Entwürfe bearbeiten.** Sobald eine Kampagne gesendet wurde, sind Inhalt und Zielgruppe gesperrt.
 
-For drafts, you can change:
+Bei Entwürfen können Sie folgendes ändern:
 
-- Audience (all contacts or tags)
-- Brand config
-- Campaign goal and AI-generated content
-- Schedule (date and time)
-- Auto-stop rules (for drip sequences)
+- Zielgruppe (alle Kontakte oder Tags)
+- Markenkonfiguration (Markenton)
+- Kampagnenziel und KI-generierter Inhalt
+- Zeitplan (Datum und Uhrzeit)
+- Auto-Stop-Regeln (für Drip-Sequenzen)
 
-1. Go to **Campaigns**.
-2. Open the campaign (click the name or **Edit**).
-3. Make changes in the wizard.
-4. Save. If you had scheduled it, the new schedule applies.
+1. Gehen Sie zu **Kampagnen**.
+2. Öffnen Sie die Kampagne (Klick auf den Namen oder **Bearbeiten**).
+3. Nehmen Sie die Änderungen im Assistenten vor.
+4. Speichern. Falls Sie die Kampagne geplant hatten, gilt der neue Zeitplan.
 
-## Send immediately
+## Sofort senden
 
-1. Open a draft campaign.
-2. Click **Send now**.
-3. Confirm. Emails are queued and sent within minutes.
+1. Öffnen Sie eine Entwurfs-Kampagne.
+2. Klicken Sie auf **Jetzt senden (Send now)**.
+3. Bestätigen Sie. E-Mails werden in die Warteschlange gestellt und innerhalb weniger Minuten versendet.
 
 <Note>
-Sending is irreversible. Double-check your audience and content before confirming.
+Das Senden ist unumkehrbar. Überprüfen Sie Zielgruppe und Inhalt sorgfältig, bevor Sie bestätigen.
 </Note>
 
-## Schedule for later
+## Für später planen
 
-1. Open a draft campaign.
-2. Choose **Schedule** and pick date and time.
-3. Save. The campaign status becomes **Scheduled**.
-4. At the scheduled time, emails send automatically.
+1. Öffnen Sie eine Entwurfs-Kampagne.
+2. Wählen Sie **Planen (Schedule)** und legen Sie Datum sowie Uhrzeit fest.
+3. Speichern. Der Kampagnenstatus wechselt zu **Geplant (Scheduled)**.
+4. Zum geplanten Zeitpunkt werden die E-Mails automatisch versendet.
 
-You can edit or cancel a scheduled campaign before it runs.
+Sie können eine geplante Kampagne bearbeiten oder abbrechen, bevor sie ausgeführt wird.
 
-## Stop a campaign
+## Eine Kampagne stoppen
 
-Use **Stop campaign** when you want to halt sends immediately. This applies to:
+Verwenden Sie **Stop campaign**, wenn Sie den Versand sofort anhalten möchten. Dies gilt für:
 
-- Campaigns currently **Sending**
-- **Scheduled** campaigns (cancels the send)
-- **Drip sequences** — stops future steps for contacts who haven't received them yet
+- Kampagnen mit Status **Senden (Sending)**
+- **Geplante** Kampagnen (bricht den Versand ab)
+- **Drip-Sequenzen** — stoppt zukünftige Schritte für Kontakte, die diese noch nicht erhalten haben
 
-Already-sent emails cannot be recalled. Recipients who got an email before you stopped will keep it.
+Bereits versendete E-Mails können nicht zurückgerufen werden. Empfänger, die vor dem Stopp eine E-Mail erhalten haben, behalten diese in ihrem Posteingang.
 
-## Draft vs sent: what can change
+## Entwurf vs. Gesendet: Was sich ändern lässt
 
-| Action                    | Draft | Scheduled | Sent |
-| ------------------------- | ----- | --------- | ---- |
-| Edit content              | Yes   | Yes       | No   |
-| Change audience           | Yes   | Yes       | No   |
-| Change schedule           | Yes   | Yes       | N/A  |
-| Send now                  | Yes   | Yes       | N/A  |
-| Stop                      | N/A   | Yes       | Yes* |
-| View analytics            | No    | No        | Yes  |
+| Aktion                    | Entwurf | Geplant | Gesendet |
+| ------------------------- | :-----: | :-----: | :------: |
+| Inhalt bearbeiten         | Ja      | Ja      | Nein     |
+| Zielgruppe ändern         | Ja      | Ja      | Nein     |
+| Zeitplan ändern           | Ja      | Ja      | N/A      |
+| Jetzt senden              | Ja      | Ja      | N/A      |
+| Stoppen                   | N/A     | Ja      | Ja*      |
+| Analyse ansehen           | Nein    | Nein    | Ja       |
 
-\*Stopping a sent campaign only prevents future steps (e.g. in a drip). Past emails are not affected.
+\*Das Stoppen einer gesendeten Kampagne verhindert nur zukünftige Schritte (z. B. in einem Drip). Vergangene E-Mails sind nicht betroffen.
 
-## What happens next
+## Nächste Schritte
 
-- After sending, check [campaign analytics](/en/campaigns/analytics) for delivery rates, opens, and clicks.
-- Create a new campaign if you need to send a different message.
+- Prüfen Sie nach dem Senden die [Kampagnen-Analyse](/de/campaigns/analytics) auf Zustellraten, Öffnungen und Klicks.
+- Erstellen Sie eine neue Kampagne, wenn Sie eine andere Nachricht senden möchten.
 
-## Related docs
+## Verwandte Dokumente
 
 <CardGroup cols={2}>
-  <Card title="Create campaigns" icon="paper-plane" href="/en/campaigns/create">
-    Campaign wizard and test send.
+  <Card title="Kampagnen erstellen" icon="paper-plane" href="/de/campaigns/create">
+    Kampagnen-Assistent und Testversand.
   </Card>
-  <Card title="Campaign analytics" icon="chart-line" href="/en/campaigns/analytics">
-    Metrics and recipient activity.
+  <Card title="Kampagnen-Analyse" icon="chart-line" href="/de/campaigns/analytics">
+    Metriken und Empfängeraktivität.
   </Card>
 </CardGroup>

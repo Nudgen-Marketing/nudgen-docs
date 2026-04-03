@@ -1,76 +1,76 @@
 ---
-title: "Team settings"
-description: "Invite members, manage roles, and handle invitations"
+title: "Настройки команды"
+description: "Приглашение участников, управление ролями и работа с приглашениями"
 ---
 
-## What this page helps you do
+## Что вы узнаете на этой странице
 
-Add team members to your Nudgen workspace, assign roles, and manage pending or expired invitations. You'll understand roles and permissions so you can collaborate safely.
+Вы научитесь добавлять участников в свое рабочее пространство Nudgen, назначать роли и управлять ожидающими или истекшими приглашениями. Вы поймете разницу в ролях и полномочиях для безопасной совместной работы.
 
-## Before you start
+## Перед началом работы
 
-- Owner or admin access
-- Email addresses of people you want to invite
+- Доступ с правами Владельца или Администратора.
+- Адреса электронной почты людей, которых вы хотите пригласить.
 
-## Roles and permissions
+## Роли и разрешения
 
-| Role   | Can do                                                                 |
-| ------ | ---------------------------------------------------------------------- |
-| **Owner** | Full access. Manage billing, team, and workspace. Cannot be removed. |
-| **Admin** | Invite and manage members. Edit campaigns, contacts, brand. No billing. |
-| **Member** | Create and edit campaigns, upload contacts, use brand configs. Limited team access. |
+| Роль   | Что может делать                                                                 |
+| ------ | ---------------------------------------------------------------------------------- |
+| **Owner (Владелец)** | Полный доступ. Управление биллингом, командой и пространством. Не может быть удален. |
+| **Admin (Админ)** | Приглашение и управление участниками. Редактирование кампаний, контактов, бренда. Нет доступа к биллингу. |
+| **Member (Участник)** | Создание и редактирование кампаний, загрузка контактов, использование настроек бренда. Ограниченный доступ к разделу команды. |
 
 <Note>
-Only owners and admins can invite new members or change roles. Members can view the team list but cannot modify it.
+Только владельцы и админы могут приглашать новых участников или изменять роли. Участники могут видеть список команды, но не могут его изменять.
 </Note>
 
-## Invite a team member
+## Приглашение участника команды
 
-1. Go to **Settings** → **Team**.
-2. Click **Invite member**.
-3. Enter email and select role (**Admin** or **Member**).
-4. Send. The invitee receives an email with a link to accept.
+1. Перейдите в **Настройки (Settings)** → **Команда (Team)**.
+2. Нажмите **Invite member (Пригласить участника)**.
+3. Введите email и выберите роль (**Admin** или **Member**).
+4. Отправьте. Приглашенный получит письмо со ссылкой для принятия приглашения.
 
-## Invitation statuses
+## Статусы приглашений
 
-| Status     | Meaning                                                         |
-| ---------- | --------------------------------------------------------------- |
-| **Pending**  | Invitation sent. Recipient can accept via the link in the email. |
-| **Accepted** | Recipient joined. They appear in the team list with their role. |
-| **Expired**  | Invitation link timed out. Resend if needed.                   |
-| **Cancelled** | Invitation was cancelled before acceptance.                    |
+| Статус     | Значение                                                                     |
+| ---------- | ---------------------------------------------------------------------------- |
+| **Ожидание (Pending)**  | Приглашение отправлено. Получатель может принять его по ссылке в письме. |
+| **Принято (Accepted)** | Получатель присоединился. Он отображается в списке команды со своей ролью. |
+| **Истекло (Expired)**  | Срок действия ссылки истек. При необходимости отправьте приглашение повторно. |
+| **Отменено (Cancelled)** | Приглашение было отменено до момента его принятия. |
 
-## Change or remove a member
+## Изменение или удаление участника
 
-- **Change role:** Open the member, select a new role, save. Only owners and admins can change roles.
-- **Remove member:** Use **Remove** and confirm. They lose access immediately. Their past actions remain in logs.
+- **Изменить роль:** Откройте профиль участника, выберите новую роль и сохраните. Только владельцы и администраторы могут менять роли.
+- **Удалить участника:** Нажмите **Remove (Удалить)** и подтвердите выбор. Доступ будет закрыт немедленно. Информация об прошлых действиях участника сохранится в логах.
 
-## What happens next
+## Что дальше
 
-- New members can [upload contacts](/en/contacts/upload), [create campaigns](/en/campaigns/create), and use shared brand configs.
-- Owners retain control over billing and critical settings.
+- Новые участники могут [загружать контакты](/ru/contacts/upload), [создавать кампании](/ru/campaigns/create) и использовать общие настройки бренда.
+- Владельцы сохраняют контроль над биллингом и критически важными настройками.
 
-## Troubleshooting
+## Устранение неполадок
 
 <AccordionGroup>
-  <Accordion title="Invitee didn't receive the email">
-    Ask them to check spam. Resend the invitation from the team page. Ensure the email address is correct.
+  <Accordion title="Приглашенный не получил письмо">
+    Попросите его проверить папку «Спам». Отправьте приглашение повторно со страницы команды. Убедитесь, что адрес email указан верно.
   </Accordion>
-  <Accordion title="Invitation expired">
-    Invitations expire after a set period. Create a new invitation with the same email.
+  <Accordion title="Срок приглашения истек">
+    Приглашения имеют ограниченный срок действия. Создайте новое приглашение для того же адреса email.
   </Accordion>
-  <Accordion title="Can a member see all contacts?">
-    Yes. Team members with access share the same workspace and contact list. Use tags and campaigns to organize work.
+  <Accordion title="Видит ли участник все контакты?">
+    Да. Все участники команды, имеющие доступ, работают в одном пространстве и с одним списком контактов. Используйте теги и кампании для организации работы.
   </Accordion>
 </AccordionGroup>
 
-## Related docs
+## Связанные документы
 
 <CardGroup cols={2}>
-  <Card title="Account settings" icon="gear" href="/en/settings/account">
-    Overview of all settings.
+  <Card title="Настройки аккаунта" icon="gear" href="/ru/settings/account">
+    Обзор всех настроек.
   </Card>
-  <Card title="Signatures" icon="pen-fancy" href="/en/settings/signatures">
-    Email signatures for campaigns.
+  <Card title="Подписи" icon="pen-fancy" href="/ru/settings/signatures">
+    Подписи к письмам для ваших кампаний.
   </Card>
 </CardGroup>

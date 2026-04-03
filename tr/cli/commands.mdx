@@ -1,0 +1,66 @@
+---
+title: "CLI Komutları"
+description: "Tüm Nudgen CLI komutları için referans."
+---
+
+## Genel Bakış
+
+Nudgen CLI'da bulunan temel komutları tanıyın. Çoğu komut, kaynak türüne (kampanyalar, kişiler, ekipler vb.) göre gruplandırılmıştır.
+
+### Kimlik Doğrulama ve Kimlik
+
+| Komut | Açıklama |
+| :--- | :--- |
+| `nudgen login` | Kişisel Erişim Anahtarınız (PAT) ile kimlik doğrulaması yapın. |
+| `nudgen whoami` | Mevcut anahtar sahibini ve kullanıcı bilgilerini görüntüleyin. |
+| `nudgen logout` | Yerel kimlik bilgilerini temizleyin. |
+
+### Ekip Yönetimi
+
+| Komut | Açıklama |
+| :--- | :--- |
+| `nudgen teams list` | Ait olduğunuz tüm ekipleri listeleyin. |
+| `nudgen teams current` | Mevcut aktif ekip bağlamını görüntüleyin. |
+| `nudgen teams switch <id>` | Belirli bir ekibe geçiş yapın. |
+
+### Kampanyalar
+
+Aktif ekip içindeki pazarlama çalışmalarınızı yönetin.
+
+| Komut | Açıklama |
+| :--- | :--- |
+| `nudgen campaigns list` | Mevcut ekipteki aktif kampanyaları listeleyin. |
+| `nudgen campaigns create` | İnteraktif oluşturma sihirbazı. |
+| `nudgen campaigns update <id>` | Mevcut kampanya ayarlarını değiştirin. |
+| `nudgen campaigns delete <id>` | Bir kampanya kaydını silin. |
+
+### Kişiler (Lead Yönetimi)
+
+| Komut | Açıklama |
+| :--- | :--- |
+| `nudgen contacts list` | Mevcut ekipteki tüm adayları listeleyin. |
+| `nudgen contacts create` | Manuel olarak yeni bir aday kaydı ekleyin. |
+| `nudgen contacts import` | Toplu alım için interaktif CSV eşleştirici. |
+| `nudgen contacts update <id>` | Aday detaylarını düzenleyin. |
+| `nudgen contacts delete <id>` | Bir kişi kaydını silin. |
+
+### Marka Kimlikleri (Brand)
+
+| Komut | Açıklama |
+| :--- | :--- |
+| `nudgen brand list` | Ekibin tüm marka seslerini (tonlarını) listeleyin. |
+| `nudgen brand create` | Yeni bir marka sesi başlatma sihirbazı. |
+| `nudgen brand update <id>` | Marka yapılandırmalarını düzenleyin. |
+| `nudgen brand delete <id>` | Bir marka kimliğini silin. |
+
+### Satış Ortaklığı ve Kazançlar
+
+| Komut | Açıklama |
+| :--- | :--- |
+| `nudgen referral stats` | Satış ortaklığı performans özetini görün. |
+| `nudgen referral link` | Benzersiz referans bağlantınızı alın. |
+| `nudgen referral activity` | Son tıklama geçmişini ve kayıtları görün. |
+| `nudgen referral referrals` | Yönlendirdiğiniz ekipleri ve durumlarını listeleyin. |
+| `nudgen referral payouts` | Ödeme taleplerinin geçmişini ve durumunu görün. |
+
+Sıradaki adımda, bu komutların [Yapay Zeka Ajanları](/tr/cli/agentic-usage) için kullanımını görün.

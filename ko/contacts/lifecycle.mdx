@@ -1,48 +1,46 @@
 ---
-title: "Contact lifecycle"
-description: "Import, updates, unsubscribes, and suppression"
+title: "연락처 생애주기"
+description: "가져오기, 업데이트, 수신 거부 및 전송 차단 안내"
 ---
 
-## What this page helps you do
+## 이 페이지의 도움말
+연락처가 처음 등록된 시점부터 참여 및 발송 차단에 이르기까지 어떻게 관리되는지 설명합니다. 이를 통해 연락처 리스트를 건강하게 유지하고, 잘못된 주소나 수신을 거부한 주소로 메일이 발송되는 것을 방지할 수 있습니다.
 
-Understand how contacts move from import through engagement and suppression. This helps you keep your list healthy and avoid sending to bad or opted-out addresses.
+## 생애주기 단계
 
-## Lifecycle stages
+### 가져오기 및 저장
 
-### Import and storage
+- 연락처는 **CSV 업로드** 또는 **연락처 추가**를 통해 등록됩니다. 이메일과 이름은 유효성 검사를 거쳐 암호화된 상태로 저장됩니다.
+- 동일한 워크스페이스 내의 중복 이메일은 업로드 시 자동으로 통합되며, 기존 연락처 정보가 업데이트될 수 있습니다.
+- 새로운 연락처는 **활성(Active)** 상태로 시작하며, 상태가 변경되기 전까지 캠페인을 수신할 수 있습니다.
 
-- You add contacts via **Upload CSV** or **Add contact**. Emails and names are validated and encrypted at rest.
-- Duplicates (same email in the same workspace) are merged on upload; existing contacts may be updated.
-- New contacts start as **active** and can receive campaigns until something changes their status.
+### 활성 및 수신 중
 
-### Active and receiving
+- **활성** 상태의 연락처는 요금제 한도에 포함되며, 캠페인 오디언스(전체, 태그별, 수동 선택)에 포함될 수 있습니다.
+- 단발성 발송이나 드립 캠페인이 실행될 때 이메일을 수신합니다. 오픈, 클릭, 바운스 등의 활동은 분석 데이터 및 차단 목록에 반영됩니다.
 
-- **Active** contacts count toward your plan limit and can be included in campaign audiences (all, by tags, or manual).
-- They receive emails when you send or run a drip. Opens, clicks, and bounces are recorded and reflected in analytics and suppression.
+### 수신 거부 (Unsubscribe)
 
-### Unsubscribe
+- 수신자가 이메일 내의 **수신 거부** 링크를 클릭하면 즉시 **수신 거부** 상태로 표시되며, 이후의 모든 캠페인 발송 대상에서 제외됩니다.
+- 수신 거부된 연락처는 여전히 목록에서 확인할 수 있습니다. 드문 경우지만 관리자가 수동으로 다시 구독시킬 수 있으나, 앱은 상태가 변경되지 않는 한 수신 거부 상태를 철저히 존중합니다.
 
-- When a recipient clicks the **unsubscribe** link in an email, they are marked **unsubscribed** and are excluded from future campaign sends.
-- You can still see them in the contact list. Some teams manually re-subscribe in rare cases; the app respects the unsubscribed status unless you change it.
+### 바운스 및 전송 차단 (Bounces & Suppression)
 
-### Bounces and suppression
+- **Soft bounces (일시적 실패)** (예: 편지함 가득 참, 일시적 서버 오류)의 경우 발송 대행사가 재시도할 수 있습니다. 반복적으로 실패하면 차단 목록에 오를 수 있습니다.
+- **Hard bounces (영구적 실패)** (예: 잘못된 주소, 존재하지 않는 도메인)의 경우 즉시 전송 차단 목록에 등록됩니다. 저희는 발송 대행사의 차단 목록과 동기화하여 해당 주소로 다시 발송되지 않도록 관리합니다.
+- 차단되거나 바운스된 연락처로 계속 발송을 시도하면 발신자 평판과 도달률이 떨어질 수 있으므로, 향후 발송 대상에서 영구적으로 제외됩니다.
 
-- **Soft bounces** (e.g. mailbox full, temporary failure) may be retried by the delivery provider. Repeated failures can lead to suppression.
-- **Hard bounces** (invalid address, domain doesn’t exist) are suppressed immediately. We sync with the delivery provider’s suppression list so those addresses are not used again.
-- Suppressed or bounced contacts are excluded from future sends to protect your sender reputation and deliverability.
+### 업데이트 및 삭제
 
-### Updates and deletion
+- 연락처 목록에서 상세 정보(이름, 태그 등)를 수정할 수 있습니다. 동일한 이메일이 포함된 CSV를 다시 업로드하면 해당 연락처 정보가 업데이트됩니다.
+- 연락처를 삭제하면 해당 워크스페이스에서 완전히 제거됩니다. 더 이상 요금제 한도에 포함되지 않으며 캠페인을 수신할 수 없습니다.
 
-- You can edit contact details (e.g. name, tags) in the contact list. Re-uploading a CSV with the same email updates that contact.
-- Deleting a contact removes them from the workspace. They no longer count toward limits and cannot receive campaigns.
+## 캠페인에 미치는 영향
 
-## How this affects campaigns
+- 오디언스(전체, 태그, 수동)를 선택할 때, **활성** 상태이면서 전송 차단 리스트에 없는 연락처만 포함됩니다. 캠페인 마법사의 예상 도달 범위는 이를 반영한 수치입니다.
+- 드립 캠페인 중간에 수신을 거부하거나 차단 리스트에 등록된 연락처는 이후 단계의 이메일을 받지 않고 건너뛰게 됩니다.
 
-- When you pick an audience (all, tags, or manual), only **active** contacts that are not suppressed are included. The wizard’s reach estimate reflects that.
-- Drip campaigns skip later steps for contacts who unsubscribed or were suppressed after an earlier step.
-
-## What happens next
-
-- [Contacts overview](/en/contacts/overview) — Encryption, masking, and tags.
-- [Upload contacts](/en/contacts/upload) — CSV format and validation.
-- [Deliverability basics](/en/concepts/deliverability-basics) — Bounces and sender reputation.
+## 다음 단계
+- [연락처 개요](/ko/contacts/overview) — 암호화, 마스킹 및 태그 사용법.
+- [연락처 업로드](/ko/contacts/upload) — CSV 형식 및 유효성 검사 안내.
+- [이메일 도달률 기초](/ko/concepts/deliverability-basics) — 바운스 관리와 발신자 평판.

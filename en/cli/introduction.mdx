@@ -1,0 +1,44 @@
+---
+title: "CLI Introduction"
+description: "Master the Nudgen marketing automation platform via its interactive Command Line Interface."
+---
+
+## Overview
+
+The Nudgen CLI is a powerful tool designed for both humans and AI agents. It provides a seamless way to manage campaigns, contacts, brand identities, and referral stats directly from your terminal.
+
+Whether you're a developer looking to automate your marketing workflows or an AI agent needing high-quality interaction with the Nudgen platform, the CLI is your primary interface.
+
+### Key Features
+
+<CardGroup cols={2}>
+  <Card title="Interactive TUI" icon="terminal">
+    Beautiful terminal user interface with interactive forms and live stats for human operators.
+  </Card>
+  <Card title="AI-First Design" icon="robot">
+    Every command supports `--json` output, making it easy for AI agents to parse and automate tasks.
+  </Card>
+  <Card title="Team Context" icon="users-gear">
+    Switch between different teams effortlessly and manage resources within specific team contexts.
+  </Card>
+  <Card title="Secure" icon="lock">
+    Credentials are stored securely in your system's keychain, ensuring your data remains protected.
+  </Card>
+</CardGroup>
+
+## Purpose
+
+The CLI serves multiple roles:
+
+1. **For Humans**: Provides a quick way to list campaigns, import contacts, and check referral earnings without opening the web browser.
+2. **For AI Agents**: Offers a machine-interpretable interface to automate complex marketing outreach and brand management.
+3. **For Developers**: Helpers for local development and repository management within the Nudgen ecosystem.
+
+## Interaction Patterns
+
+The CLI follows the "Interaction over API" principle. It uses standard RESTful API calls to communicate with the Nudgen backend while securely managing session state locally.
+
+- **JSON Standard**: All commands support `--json`. This is critical for agent-to-agent communication.
+- **Context-Aware**: Operations like listing campaigns are automatically scoped to your active team.
+
+Next, learn how to [install the CLI](/en/cli/installation).

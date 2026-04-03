@@ -1,0 +1,66 @@
+---
+title: "Comandos de la CLI"
+description: "Referencia para todos los comandos de la CLI de Nudgen."
+---
+
+## Resumen
+
+Explore los comandos principales disponibles en la CLI de Nudgen. La mayoría se agruphan por tipo de recurso (campañas, contactos, equipos, etc.).
+
+### Autenticación e Identidad
+
+| Comando | Descripción |
+| :--- | :--- |
+| `nudgen login` | Autenticarse con su Token de Acceso Personal (PAT). |
+| `nudgen whoami` | Mostrar el propietario del token actual y la información del usuario. |
+| `nudgen logout` | Limpiar las credenciales locales. |
+
+### Gestión de Equipos
+
+| Comando | Descripción |
+| :--- | :--- |
+| `nudgen teams list` | Listar todos los equipos a los que pertenece. |
+| `nudgen teams current` | Mostrar el contexto del equipo activo actualmente. |
+| `nudgen teams switch <id>` | Cambiar a un equipo específico. |
+
+### Campañas
+
+Gestione sus esfuerzos de marketing dentro del equipo activo.
+
+| Comando | Descripción |
+| :--- | :--- |
+| `nudgen campaigns list` | Listar campañas activas en el equipo actual. |
+| `nudgen campaigns create` | Asistente interactivo de creación. |
+| `nudgen campaigns update <id>` | Modificar la configuración de una campaña existente. |
+| `nudgen campaigns delete <id>` | Eliminar una campaña. |
+
+### Contactos (Gestión de Leads)
+
+| Comando | Descripción |
+| :--- | :--- |
+| `nudgen contacts list` | Listar todos los leads del equipo actual. |
+| `nudgen contacts create` | Añadir manualmente un nuevo lead. |
+| `nudgen contacts import` | Mapeador CSV interactivo para ingesta masiva. |
+| `nudgen contacts update <id>` | Editar detalles de un lead. |
+| `nudgen contacts delete <id>` | Eliminar un contacto. |
+
+### Identidades de Marca
+
+| Comando | Descripción |
+| :--- | :--- |
+| `nudgen brand list` | Listar todas las voces de marca del equipo. |
+| `nudgen brand create` | Asistente para inicializar una nueva voz de marca. |
+| `nudgen brand update <id>` | Editar configuraciones de marca. |
+| `nudgen brand delete <id>` | Eliminar una identidad de marca. |
+
+### Referidos y Ganancias
+
+| Comando | Descripción |
+| :--- | :--- |
+| `nudgen referral stats` | Ver resumen de rendimiento de referidos. |
+| `nudgen referral link` | Obtener su enlace de referencia único. |
+| `nudgen referral activity` | Ver historial de clics y registros recientes. |
+| `nudgen referral referrals` | Listar equipos referidos por usted y su estado. |
+| `nudgen referral payouts` | Ver historial de solicitudes de pago y su estado. |
+
+A continuación, vea cómo usar estos comandos para [Agentes de IA](/es/cli/agentic-usage).
