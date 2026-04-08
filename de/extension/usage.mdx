@@ -1,0 +1,48 @@
+---
+title: "Nutzung"
+description: "Erfahre, wie du mit der Erweiterung Leads findest, validierst und exportierst."
+---
+
+Nach der Installation erscheint der Lead Email Finder als schwebende Seitenleiste oder Pop-up, wenn du unterstützte professionelle Netzwerke wie LinkedIn besuchst.
+
+## Standardmäßiger Prozess
+
+1. **Navigation**: Gehe zu einer Profilseite in einem unterstützten Netzwerk (**LinkedIn, Facebook, X/Twitter**) oder einer Unternehmenswebsite.
+2. **Seite scannen**: Klicke auf das Erweiterungssymbol und wähle **Scan Page**, um die Interessenten auf der aktuellen Seite zu erkennen.
+3. **Alle validieren**: Drücke auf **Validate All**, um Echtzeit-Prüfungen gegen SMTP- und MX-Records für alle gefundenen E-Mails durchzuführen.
+4. **Exportieren**: Drücke auf **Export CSV**, um deine Ergebnisse für die Verwendung in einem beliebigen CRM herunterzuladen.
+
+## Leads exportieren
+
+Sobald E-Mails gefunden und validiert wurden, kannst du sie exportieren:
+
+- **Export CSV**: Lädt eine saubere Datei mit Namen, Titeln, Unternehmen und validierten E-Mail-Adressen herunter.
+
+### Validierungsstatus
+
+- <Icon icon="circle-check" color="green" /> **Verified**: Hohes Vertrauen, sicher für den Versand.
+- <Icon icon="circle-info" color="orange" /> **Inconclusive**: Wir haben ein Muster gefunden, aber der Server bestätigt dies nicht (Catch-all).
+- <Icon icon="circle-xmark" color="red" /> **Invalid**: Keine gültige E-Mail gefunden oder Postfach ist voll.
+
+<Tip>
+Um die beste Zustellbarkeit zu gewährleisten, priorisiere Leads mit dem Status **Verified**.
+</Tip>
+
+## Häufig gestellte Fragen
+
+<AccordionGroup>
+  <Accordion title="Ist die Nutzung auf LinkedIn und anderen Plattformen sicher?">
+    Absolut sicher. Unser Tool verwendet menschenähnliche Scroll-Mechanismen und intelligente Verzögerungen, um natürliches Browsing-Verhalten zu imitieren und dein Konto vor Automatisierungserkennung zu schützen.
+  </Accordion>  <Accordion title="Wie funktioniert die Deep Email Verification?">
+    Wir führen mehrschichtige Prüfungen durch, um sicherzustellen, dass jeder Lead kontaktierbar ist. Dazu gehören Syntax-Prüfungen, Tippfehler-Korrektur, Filterung von Einweg-Domains, MX-Record-Validierung und Echtzeit-SMTP-Handshakes zur Bestätigung, dass das Postfach existiert.
+  </Accordion>
+  <Accordion title="Kann ich E-Mails von Seiten mit Lazy Loading extrahieren?">
+    Ja. Unsere Smart Extract-Funktion scrollt automatisch durch endlose Feeds und dynamische Fußzeilen, um jeden versteckten Lead auf jeder Website zu erfassen.
+  </Accordion>
+  <Accordion title="Kann ich Leads direkt in mein CRM exportieren?">
+    Ja. Du kannst deine Liste verifizierter Leads in ein universell kompatibles CSV-Format exportieren, das in HubSpot, Salesforce oder jedes andere Outreach-Tool importiert werden kann.
+  </Accordion>
+  <Accordion title="Gibt es ein Limit dafür, wie viele Leads ich suchen kann?">
+    Kostenlose Nutzer können E-Mails unbegrenzt scannen und extrahieren, sind jedoch auf 25 Lead-Validierungen und 10 Listenexporte pro Tag begrenzt. Pro-Nutzer genießen unbegrenzte Extraktionen, Validierungen und Massenexportfunktionen.
+  </Accordion>
+</AccordionGroup>

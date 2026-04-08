@@ -1,0 +1,49 @@
+---
+title: "Kullanım"
+description: "Uzantıyı kullanarak potansiyel müşterileri nasıl bulacağınızı, doğrulayacağınızı ve dışa aktaracağınızı öğrenin."
+---
+
+Yüklendikten sonra Lead Email Finder, LinkedIn gibi desteklenen profesyonel ağları ziyaret ettiğinizde kayan bir kenar çubuğu veya açılır pencere olarak görünecektir.
+
+## Standart İş Akışı
+
+1. **Gezinme**: Desteklenen bir ağdaki (**LinkedIn, Facebook, X/Twitter**) bir profil sayfasına veya bir şirket web sitesine gidin.
+2. **Sayfayı Tara**: Uzantı simgesine tıklayın ve mevcut sayfadaki adayları algılamak için **Scan Page** (Sayfayı Tara) öğesini seçin.
+3. **Tümünü Doğrula**: Bulunan tüm e-postalar için SMTP ve MX kayıtlarına karşı gerçek zamanlı kontroller gerçekleştirmek üzere **Validate All** (Tümünü Doğrula) düğmesine basın.
+4. **Dışa Aktar**: Sonuçlarınızı herhangi bir CRM'de kullanmak üzere indirmek için **Export CSV** (CSV Dışa Aktar) düğmesine basın.
+
+## Potansiyel Müşterileri Dışa Aktarma
+
+E-postalar bulunup doğrulandıktan sonra bunları dışa aktarabilirsiniz:
+
+- **Export CSV**: İsimler, Ünvanlar, Şirketler ve doğrulanmış e-posta adreslerini içeren temiz bir dosya indirir.
+
+### Doğrulama Durumları
+
+- <Icon icon="circle-check" color="green" /> **Verified (Doğrulandı)**: Yüksek güven, gönderim için güvenli.
+- <Icon icon="circle-info" color="orange" /> **Inconclusive (Belirsiz)**: Bir kalıp bulduk ancak sunucu onaylamıyor (catch-all).
+- <Icon icon="circle-xmark" color="red" /> **Invalid (Geçersiz)**: Geçerli bir e-posta bulunamadı veya posta kutusu dolu.
+
+<Tip>
+En iyi teslimat oranını sağlamak için **Verified** durumundaki potansiyel müşterilere öncelik verin.
+</Tip>
+
+## Sıkça Sorulan Sorular
+
+<AccordionGroup>
+  <Accordion title="LinkedIn ve diğer platformlarda kullanmak güvenli mi?">
+    Tamamen güvenli. Aracımız, doğal gezinme davranışını taklit etmek için insan benzeri kaydırma mekanizmaları ve akıllı gecikmeler kullanarak hesabınızı otomasyon algılamasından korur.
+  </Accordion>
+  <Accordion title="Derin E-posta Doğrulaması (Deep Email Verification) nasıl çalışır?">
+    Her aday müşteriye ulaşılabilir olduğundan emin olmak için çok katmanlı kontroller yapıyoruz. Buna sözdizimi kontrolleri, yazım hatası düzeltme, tek kullanımlık alan adı filtreleme, MX kaydı doğrulaması ve posta kutusunun var olduğunu onaylamak için gerçek zamanlı SMTP el sıkışmaları dahildir.
+  </Accordion>
+  <Accordion title="Geç yüklenen (lazy loading) sayfalardan e-posta ayıklayabilir miyim?">
+    Evet. Akıllı Ayıklama özelliğimiz, herhangi bir web sitesindeki her gizli adayı yakalamak için sonsuz akışlar ve dinamik alt bilgiler arasında otomatik olarak gezinir.
+  </Accordion>
+  <Accordion title="Potansiyel müşterileri doğrudan CRM'ime aktarabilir miyim?">
+    Evet. Doğrulanmış aday listenizi; HubSpot, Salesforce veya diğer herhangi bir erişim aracına aktarılabilen, evrensel olarak uyumlu bir CSV formatında dışa aktarabilirsiniz.
+  </Accordion>
+  <Accordion title="Kaç potansiyel müşteri arayabileceğim konusunda bir sınır var mı?">
+    Ücretsiz kullanıcılar e-postaları sınırsız olarak tarayabilir ve ayıklayabilir, ancak günlük 25 aday doğrulaması ve 10 liste dışa aktarımı ile sınırlıdır. Pro kullanıcılar sınırsız ayıklama, doğrulama ve toplu dışa aktarma özelliklerinden yararlanır.
+  </Accordion>
+</AccordionGroup>

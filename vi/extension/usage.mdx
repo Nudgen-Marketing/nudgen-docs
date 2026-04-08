@@ -1,0 +1,49 @@
+---
+title: "Cách sử dụng"
+description: "Tìm hiểu cách tìm, xác thực và xuất khách hàng tiềm năng bằng tiện ích mở rộng."
+---
+
+Sau khi cài đặt, Lead Email Finder sẽ xuất hiện dưới dạng một thanh bên nổi hoặc cửa sổ bật lên khi bạn truy cập các mạng lưới chuyên nghiệp được hỗ trợ như LinkedIn.
+
+## Quy trình chuẩn
+
+1. **Điều hướng**: Truy cập một hồ sơ mạng xã hội được hỗ trợ (**LinkedIn, Facebook, X/Twitter**) hoặc trang web công ty.
+2. **Quét trang**: Nhấp vào biểu tượng tiện ích mở rộng và chọn **Scan Page** để nhận diện các khách hàng tiềm năng trên trang hiện tại.
+3. **Xác thực tất cả**: Nhấn **Validate All** để thực hiện kiểm tra thời gian thực so với bản ghi SMTP và MX cho tất cả các email tìm thấy.
+4. **Xuất**: Nhấn **Export CSV** để tải xuống kết quả sử dụng cho bất kỳ CRM nào.
+
+## Xuất khách hàng tiềm năng
+
+Sau khi tìm thấy email, bạn có thể xuất chúng để sử dụng trong các chiến dịch marketing hoặc các công cụ khác:
+
+- **Export CSV**: Tải xuống một tệp sạch chứa Tên, Chức danh, Công ty và địa chỉ Email đã được xác thực.
+
+### Trạng thái xác thực
+
+- <Icon icon="circle-check" color="green" /> **Verified**: Độ tin cậy cao, an toàn để gửi.
+- <Icon icon="circle-info" color="orange" /> **Inconclusive**: Chúng tôi tìm thấy một mẫu, nhưng máy chủ không xác nhận (catch-all).
+- <Icon icon="circle-xmark" color="red" /> **Invalid**: Không tìm thấy email hợp lệ hoặc hộp thư đã đầy.
+
+<Tip>
+Để đảm bảo khả năng phân phối tốt nhất, hãy ưu tiên các khách hàng tiềm năng có trạng thái **Verified**.
+</Tip>
+
+## Câu hỏi thường gặp
+
+<AccordionGroup>
+  <Accordion title="Sử dụng trên LinkedIn và các nền tảng khác có an toàn không?">
+    Hoàn toàn an toàn. Công cụ của chúng tôi sử dụng cơ chế cuộn trang giống con người và các khoảng hoãn thông minh để mô phỏng hành vi duyệt web tự nhiên, giữ cho tài khoản của bạn an toàn khỏi sự phát hiện tự động.
+  </Accordion>
+  <Accordion title="Xác thực Email Chuyên sâu (Deep Email Verification) hoạt động như thế nào?">
+    Chúng tôi thực hiện kiểm tra đa lớp để đảm bảo mọi lead đều có thể liên lạc được. Điều này bao gồm kiểm tra cú pháp regex nâng cao, sửa lỗi chính tả, lọc tên miền dùng một lần, xác thực bản ghi MX và bắt tay SMTP thời gian thực để xác nhận hộp thư thực sự tồn tại trên máy chủ.
+  </Accordion>
+  <Accordion title="Tôi có thể trích xuất email từ các trang sử dụng tải chậm (lazy loading) không?">
+    Có. Tính năng Smart Extract của chúng tôi tự động cuộn qua các bảng tin vô tận và chân trang động để nắm bắt mọi lead bị ẩn trên bất kỳ trang web nào.
+  </Accordion>
+  <Accordion title="Tôi có thể xuất leads trực tiếp vào CRM của mình không?">
+    Có. Bạn có thể xuất danh sách lead đã xác thực sang định dạng CSV tương thích toàn cầu, có thể nhập vào HubSpot, Salesforce hoặc bất kỳ công cụ tiếp cận nào khác.
+  </Accordion>
+  <Accordion title="Có giới hạn về số lượng leads tôi có thể tìm kiếm không?">
+    Người dùng miễn phí có thể quét và trích xuất email không giới hạn từ bất kỳ trang web nào, nhưng bị giới hạn 25 lần xác thực lead và 10 lần xuất danh sách mỗi ngày. Người dùng Pro được hưởng tính năng trích xuất, xác thực không giới hạn và các tính năng xuất hàng loạt nâng cao.
+  </Accordion>
+</AccordionGroup>

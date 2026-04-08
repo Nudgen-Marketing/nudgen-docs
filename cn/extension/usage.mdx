@@ -1,0 +1,49 @@
+---
+title: "使用指南"
+description: "了解如何使用扩展程序查找、验证和导出潜在客户。"
+---
+
+安装后，当您访问支持的专业网络（如 LinkedIn）时，Lead Email Finder 将显示为浮动侧边栏或弹出窗口。
+
+## 标准流程
+
+1. **导航**：转到支持的网络（**LinkedIn、Facebook、X/Twitter**）上的个人资料页面或公司网站。
+2. **扫描页面**：点击扩展程序图标，然后选择 **Scan Page**（扫描页面）以检测当前页面上的潜在候选人。
+3. **全部验证**：点击 **Validate All**（全部验证），对找到的所有电子邮件实时执行 SMTP 和 MX 记录检查。
+4. **导出**：点击 **Export CSV**（导出 CSV）以下载结果，以便在任何 CRM 中使用。
+
+## 导出潜在客户
+
+在找到并验证电子邮件后，您可以将其导出：
+
+- **导出 CSV**：下载一个包含姓名、职位、公司和验证过的电子邮件地址的纯净文件。
+
+### 验证状态
+
+- <Icon icon="circle-check" color="green" /> **Verified（已验证）**：高度可靠，可安全发送。
+- <Icon icon="circle-info" color="orange" /> **Inconclusive（不确定）**：我们找到了一个模式，但服务器未给出确认（catch-all）。
+- <Icon icon="circle-xmark" color="red" /> **Invalid（无效）**：未找到有效的电子邮件或邮箱已满。
+
+<Tip>
+为了确保最佳的送达率，请优先选择状态为 **Verified** 的潜在客户。
+</Tip>
+
+## 常见问题
+
+<AccordionGroup>
+  <Accordion title="在 LinkedIn 和其他平台上使用安全吗？">
+    完全安全。我们的工具使用类似人类的滚动机制和智能延迟来模拟自然的浏览行为，保护您的账户免受自动化检测。
+  </Accordion>
+  <Accordion title="深度电子邮件验证 (Deep Email Verification) 是如何工作的？">
+    我们执行多层检查以确保每个潜在客户都是可联系的。这包括语法检查、拼写错误纠正、一次性域名过滤、MX 记录验证以及实时 SMTP 握手以确认邮箱真实存在。
+  </Accordion>
+  <Accordion title="我可以从使用延迟加载 (lazy loading) 的页面提取电子邮件吗？">
+    可以。我们的智能提取 (Smart Extract) 功能会自动滚动无尽的信息流和动态页脚，以捕获任何网站上的每个隐藏潜在客户。
+  </Accordion>
+  <Accordion title="我可以将潜在客户直接导出到我的 CRM 吗？">
+    可以。您可以将验证过的潜在客户列表导出为全球兼容的 CSV 格式，该格式可以导入到 HubSpot、Salesforce 或任何其他外联工具中。
+  </Accordion>
+  <Accordion title="我可以搜索的潜在客户数量有限制吗？">
+    免费用户可以无限制地扫描和提取电子邮件，但每天只能验证 25 个潜在客户并导出 10 个列表。Pro 用户可以享受无限制的提取、验证和批量导出功能。
+  </Accordion>
+</AccordionGroup>

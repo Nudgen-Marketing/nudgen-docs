@@ -1,0 +1,45 @@
+---
+title: "How to use"
+description: "Learn how to find, verify, and export leads using the extension."
+---
+
+## Workflow
+
+1. **Navigate**: Visit a supported social profile (**LinkedIn, Facebook, X/Twitter**) or corporate website.
+2. **Scan Page**: Click the extension icon and select **Scan Page** to identify potential leads on the current page.
+3. **Validate All**: Click **Validate All** to perform real-time check against SMTP and MX records for all found emails.
+4. **Export**: Click **Export CSV** to download your results for use in any CRM.
+
+## Exporting Leads
+
+After finding emails, you can export them for use in your marketing campaigns or other tools.
+
+### Verification States
+
+- <Icon icon="circle-check" color="green" /> **Verified**: High confidence, safe to send.
+- <Icon icon="circle-info" color="orange" /> **Inconclusive**: We found a pattern, but the server didn't confirm (catch-all).
+- <Icon icon="circle-xmark" color="red" /> **Invalid**: No valid email found or mailbox is full.
+
+<Tip>
+To ensure the best deliverability, prioritize leads with the **Verified** status.
+</Tip>
+
+## Frequently Asked Questions
+
+<AccordionGroup>
+  <Accordion title="Is it safe to use on LinkedIn and other platforms?">
+    Absolutely. Our engine uses human-like scrolling and intelligent delays to mimic natural browsing behavior, keeping your accounts safe from automated detection.
+  </Accordion>
+  <Accordion title="How does the Deep Email Verification work?">
+    We perform a multi-layer audit to ensure every lead is reachable. This includes advanced regex syntax checks, typo correction, disposable domain filtering, MX record verification, and real-time SMTP handshakes to confirm the mailbox actually exists on the server.
+  </Accordion>
+  <Accordion title="Can I extract emails from pages that use lazy loading?">
+    Yes. Our Smart Extract feature automatically scrolls through infinite feeds and dynamic footers to capture every hidden lead on any webpage.
+  </Accordion>
+  <Accordion title="Can I export leads directly to my CRM?">
+    Yes. You can export your verified lead lists to a universally compatible CSV format, which can be imported into HubSpot, Salesforce, or any other outreach tool.
+  </Accordion>
+  <Accordion title="Is there a limit on how many leads I can find?">
+    Free users can scan and extract unlimited emails from any website, but are limited to 25 lead verifications and 10 list exports per day. Pro users enjoy unlimited extraction, verification, and advanced batch export features.
+  </Accordion>
+</AccordionGroup>

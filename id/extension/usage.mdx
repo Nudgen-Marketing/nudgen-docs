@@ -1,0 +1,49 @@
+---
+title: "Penggunaan"
+description: "Pelajari cara menemukan, memvalidasi, dan mengekspor prospek menggunakan ekstensi."
+---
+
+Setelah terinstal, Lead Email Finder akan muncul sebagai bilah sisi mengambang atau pop-up saat Anda mengunjungi jaringan profesional yang didukung seperti LinkedIn.
+
+## Alur Kerja Standar
+
+1. **Navigasi**: Buka halaman profil di jaringan yang didukung (**LinkedIn, Facebook, X/Twitter**) atau situs web perusahaan.
+2. **Pindai Halaman**: Klik ikon ekstensi dan pilih **Scan Page** untuk mendeteksi prospek di halaman saat ini.
+3. **Validasi Semua**: Tekan **Validate All** untuk melakukan pemeriksaan waktu nyata terhadap catatan SMTP dan MX untuk semua email yang ditemukan.
+4. **Ekspor**: Tekan **Export CSV** untuk mengunduh hasil Anda untuk digunakan di CRM mana pun.
+
+## Mengekspor Prospek
+
+Setelah email ditemukan dan divalidasi, Anda dapat mengekspornya:
+
+- **Export CSV**: Mengunduh berkas bersih berisi Nama, Jabatan, Perusahaan, dan alamat email yang divalidasi.
+
+### Status Validasi
+
+- <Icon icon="circle-check" color="green" /> **Verified (Terverifikasi)**: Kepercayaan tinggi, aman untuk dikirim.
+- <Icon icon="circle-info" color="orange" /> **Inconclusive (Tidak meyakinkan)**: Kami menemukan pola, tetapi server tidak memberikan konfirmasi (catch-all).
+- <Icon icon="circle-xmark" color="red" /> **Invalid (Tidak valid)**: Tidak ada email valid yang ditemukan atau kotak surat penuh.
+
+<Tip>
+Untuk memastikan pengiriman yang terbaik, prioritaskan prospek dengan status **Verified**.
+</Tip>
+
+## Pertanyaan yang Sering Diajukan
+
+<AccordionGroup>
+  <Accordion title="Apakah aman digunakan di LinkedIn dan platform lainnya?">
+    Sangat aman. Alat kami menggunakan mekanisme gulir layaknya manusia dan penundaan cerdas untuk meniru perilaku penjelajahan alami, menjaga akun Anda aman dari deteksi otomatisasi.
+  </Accordion>
+  <Accordion title="Bagaimana cara kerja Verifikasi Email Mendalam (Deep Email Verification)?">
+    Kami melakukan pemeriksaan berlapis untuk memastikan setiap prospek dapat dihubungi. Ini termasuk pemeriksaan sintaksis, koreksi salah ketik, penyaringan domain sekali pakai, validasi catatan MX, dan jabat tangan SMTP waktu nyata untuk mengonfirmasi kotak surat benar-benar ada.
+  </Accordion>
+  <Accordion title="Dapatkah saya mengekstrak email dari halaman yang menggunakan pemuatan lambat (lazy loading)?">
+    Ya. Fitur Smart Extract kami secara otomatis menggulir feed tanpa henti dan footer dinamis untuk menangkap setiap prospek yang tersembunyi di situs web mana pun.
+  </Accordion>
+  <Accordion title="Dapatkah saya mengekspor prospek secara langsung ke CRM saya?">
+    Ya. Anda dapat mengekspor daftar prospek terverifikasi Anda ke format CSV yang kompatibel secara universal, yang dapat diimpor ke HubSpot, Salesforce, atau alat penjangkauan lainnya.
+  </Accordion>
+  <Accordion title="Apakah ada batasan jumlah prospek yang dapat saya cari?">
+    Pengguna gratis dapat memindai dan mengekstrak email tanpa batas, tetapi dibatasi hingga 25 validasi prospek dan 10 ekspor daftar per hari. Pengguna Pro menikmati ekstraksi, validasi, dan fitur ekspor massal tanpa batas.
+  </Accordion>
+</AccordionGroup>

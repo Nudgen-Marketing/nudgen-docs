@@ -87,6 +87,14 @@
                 ]
               },
               {
+                "group": "Lead Email Finder",
+                "pages": [
+                  "en/extension/overview",
+                  "en/extension/installation",
+                  "en/extension/usage"
+                ]
+              },
+              {
                 "group": "Concepts",
                 "pages": [
                   "en/concepts/contact-lifecycle",
@@ -124,6 +132,11 @@
               "anchor": "Pricing",
               "href": "https://nudgen.net/pricing",
               "icon": "tag"
+            },
+            {
+              "anchor": "Blog",
+              "href": "https://nudgen.net/blog",
+              "icon": "newspaper"
             },
             {
               "anchor": "Affiliate",
@@ -228,6 +241,14 @@
                 ]
               },
               {
+                "group": "مكتشف البريد الإلكتروني (Extension)",
+                "pages": [
+                  "ar/extension/overview",
+                  "ar/extension/installation",
+                  "ar/extension/usage"
+                ]
+              },
+              {
                 "group": "المفاهيم",
                 "pages": [
                   "ar/concepts/contact-lifecycle",
@@ -265,6 +286,11 @@
               "anchor": "الأسعار",
               "href": "https://nudgen.net/pricing",
               "icon": "tag"
+            },
+            {
+              "anchor": "المدونة",
+              "href": "https://nudgen.net/blog",
+              "icon": "newspaper"
             },
             {
               "anchor": "التسويق بالعمولة",
@@ -369,6 +395,14 @@
                 ]
               },
               {
+                "group": "潜在客户邮箱查找器 (扩展)",
+                "pages": [
+                  "cn/extension/overview",
+                  "cn/extension/installation",
+                  "cn/extension/usage"
+                ]
+              },
+              {
                 "group": "概念",
                 "pages": [
                   "cn/concepts/contact-lifecycle",
@@ -406,6 +440,11 @@
               "anchor": "定价",
               "href": "https://nudgen.net/pricing",
               "icon": "tag"
+            },
+            {
+              "anchor": "博客",
+              "href": "https://nudgen.net/blog",
+              "icon": "newspaper"
             },
             {
               "anchor": "联盟计划",
@@ -510,6 +549,14 @@
                 ]
               },
               {
+                "group": "E-Mail-Finder (Erweiterung)",
+                "pages": [
+                  "de/extension/overview",
+                  "de/extension/installation",
+                  "de/extension/usage"
+                ]
+              },
+              {
                 "group": "Konzepte",
                 "pages": [
                   "de/concepts/contact-lifecycle",
@@ -547,6 +594,11 @@
               "anchor": "Preise",
               "href": "https://nudgen.net/pricing",
               "icon": "tag"
+            },
+            {
+              "anchor": "Blog",
+              "href": "https://nudgen.net/blog",
+              "icon": "newspaper"
             },
             {
               "anchor": "Partnerprogramm",
@@ -651,6 +703,14 @@
                 ]
               },
               {
+                "group": "Buscador de Emails (Extensión)",
+                "pages": [
+                  "es/extension/overview",
+                  "es/extension/installation",
+                  "es/extension/usage"
+                ]
+              },
+              {
                 "group": "Conceptos",
                 "pages": [
                   "es/concepts/contact-lifecycle",
@@ -688,6 +748,11 @@
               "anchor": "Precios",
               "href": "https://nudgen.net/pricing",
               "icon": "tag"
+            },
+            {
+              "anchor": "Blog",
+              "href": "https://nudgen.net/blog",
+              "icon": "newspaper"
             },
             {
               "anchor": "Afiliados",
@@ -792,6 +857,14 @@
                 ]
               },
               {
+                "group": "Recherche d'e-mails (Extension)",
+                "pages": [
+                  "fr/extension/overview",
+                  "fr/extension/installation",
+                  "fr/extension/usage"
+                ]
+              },
+              {
                 "group": "Concepts",
                 "pages": [
                   "fr/concepts/contact-lifecycle",
@@ -829,6 +902,11 @@
               "anchor": "Tarifs",
               "href": "https://nudgen.net/pricing",
               "icon": "tag"
+            },
+            {
+              "anchor": "Blog",
+              "href": "https://nudgen.net/blog",
+              "icon": "newspaper"
             },
             {
               "anchor": "Affiliation",
@@ -933,6 +1011,14 @@
                 ]
               },
               {
+                "group": "Pencari Email Prospek (Ekstensi)",
+                "pages": [
+                  "id/extension/overview",
+                  "id/extension/installation",
+                  "id/extension/usage"
+                ]
+              },
+              {
                 "group": "Konsep",
                 "pages": [
                   "id/concepts/contact-lifecycle",
@@ -970,6 +1056,11 @@
               "anchor": "Harga",
               "href": "https://nudgen.net/pricing",
               "icon": "tag"
+            },
+            {
+              "anchor": "Blog",
+              "href": "https://nudgen.net/blog",
+              "icon": "newspaper"
             },
             {
               "anchor": "Afiliasi",
@@ -1074,6 +1165,14 @@
                 ]
               },
               {
+                "group": "リードメールファインダー (拡張機能)",
+                "pages": [
+                  "jp/extension/overview",
+                  "jp/extension/installation",
+                  "jp/extension/usage"
+                ]
+              },
+              {
                 "group": "コンセプト",
                 "pages": [
                   "jp/concepts/contact-lifecycle",
@@ -1111,6 +1210,11 @@
               "anchor": "料金",
               "href": "https://nudgen.net/pricing",
               "icon": "tag"
+            },
+            {
+              "anchor": "ブログ",
+              "href": "https://nudgen.net/blog",
+              "icon": "newspaper"
             },
             {
               "anchor": "アフィリエイト",
@@ -1215,6 +1319,14 @@
                 ]
               },
               {
+                "group": "리드 이메일 파인더 (확장 프로그램)",
+                "pages": [
+                  "ko/extension/overview",
+                  "ko/extension/installation",
+                  "ko/extension/usage"
+                ]
+              },
+              {
                 "group": "개념",
                 "pages": [
                   "ko/concepts/contact-lifecycle",
@@ -1252,6 +1364,11 @@
               "anchor": "요금제",
               "href": "https://nudgen.net/pricing",
               "icon": "tag"
+            },
+            {
+              "anchor": "블로그",
+              "href": "https://nudgen.net/blog",
+              "icon": "newspaper"
             },
             {
               "anchor": "제휴",
@@ -1356,6 +1473,14 @@
                 ]
               },
               {
+                "group": "Поиск Email (Расширение)",
+                "pages": [
+                  "ru/extension/overview",
+                  "ru/extension/installation",
+                  "ru/extension/usage"
+                ]
+              },
+              {
                 "group": "Концепции",
                 "pages": [
                   "ru/concepts/contact-lifecycle",
@@ -1393,6 +1518,11 @@
               "anchor": "Цены",
               "href": "https://nudgen.net/pricing",
               "icon": "tag"
+            },
+            {
+              "anchor": "Блог",
+              "href": "https://nudgen.net/blog",
+              "icon": "newspaper"
             },
             {
               "anchor": "Партнерская программа",
@@ -1497,6 +1627,14 @@
                 ]
               },
               {
+                "group": "E-posta Bulucu (Uzantı)",
+                "pages": [
+                  "tr/extension/overview",
+                  "tr/extension/installation",
+                  "tr/extension/usage"
+                ]
+              },
+              {
                 "group": "Kavramlar",
                 "pages": [
                   "tr/concepts/contact-lifecycle",
@@ -1534,6 +1672,11 @@
               "anchor": "Fiyatlandırma",
               "href": "https://nudgen.net/pricing",
               "icon": "tag"
+            },
+            {
+              "anchor": "Blog",
+              "href": "https://nudgen.net/blog",
+              "icon": "newspaper"
             },
             {
               "anchor": "Satış ortaklığı",
@@ -1638,6 +1781,14 @@
                 ]
               },
               {
+                "group": "Tìm kiếm Email (Extension)",
+                "pages": [
+                  "vi/extension/overview",
+                  "vi/extension/installation",
+                  "vi/extension/usage"
+                ]
+              },
+              {
                 "group": "Khái niệm",
                 "pages": [
                   "vi/concepts/contact-lifecycle",
@@ -1675,6 +1826,11 @@
               "anchor": "Bảng giá",
               "href": "https://nudgen.net/pricing",
               "icon": "tag"
+            },
+            {
+              "anchor": "Blog",
+              "href": "https://nudgen.net/blog",
+              "icon": "newspaper"
             },
             {
               "anchor": "Tiếp thị liên kết",
