@@ -78,7 +78,7 @@
                 ]
               },
               {
-                "group": "CLI",
+                "group": "CLI (AI Agent)",
                 "pages": [
                   "en/cli/introduction",
                   "en/cli/installation",
@@ -87,11 +87,19 @@
                 ]
               },
               {
-                "group": "Lead Email Finder",
+                "group": "Lead Email Finder (Extension)",
                 "pages": [
                   "en/extension/overview",
                   "en/extension/installation",
                   "en/extension/usage"
+                ]
+              },
+              {
+                "group": "Signature Generator",
+                "pages": [
+                  "en/extension/signature-overview",
+                  "en/extension/signature-usage",
+                  "en/extension/signature-installation"
                 ]
               },
               {
@@ -232,7 +240,7 @@
                 ]
               },
               {
-                "group": "CLI",
+                "group": "CLI (AI Agent)",
                 "pages": [
                   "ar/cli/introduction",
                   "ar/cli/installation",
@@ -246,6 +254,14 @@
                   "ar/extension/overview",
                   "ar/extension/installation",
                   "ar/extension/usage"
+                ]
+              },
+              {
+                "group": "منشئ التوقيع",
+                "pages": [
+                  "ar/extension/signature-overview",
+                  "ar/extension/signature-usage",
+                  "ar/extension/signature-installation"
                 ]
               },
               {
@@ -386,7 +402,7 @@
                 ]
               },
               {
-                "group": "CLI",
+                "group": "CLI (AI Agent)",
                 "pages": [
                   "cn/cli/introduction",
                   "cn/cli/installation",
@@ -400,6 +416,14 @@
                   "cn/extension/overview",
                   "cn/extension/installation",
                   "cn/extension/usage"
+                ]
+              },
+              {
+                "group": "签名生成器",
+                "pages": [
+                  "cn/extension/signature-overview",
+                  "cn/extension/signature-usage",
+                  "cn/extension/signature-installation"
                 ]
               },
               {
@@ -540,7 +564,7 @@
                 ]
               },
               {
-                "group": "CLI",
+                "group": "CLI (AI Agent)",
                 "pages": [
                   "de/cli/introduction",
                   "de/cli/installation",
@@ -554,6 +578,14 @@
                   "de/extension/overview",
                   "de/extension/installation",
                   "de/extension/usage"
+                ]
+              },
+              {
+                "group": "Signatur-Generator",
+                "pages": [
+                  "de/extension/signature-overview",
+                  "de/extension/signature-usage",
+                  "de/extension/signature-installation"
                 ]
               },
               {
@@ -694,7 +726,7 @@
                 ]
               },
               {
-                "group": "CLI",
+                "group": "CLI (AI Agent)",
                 "pages": [
                   "es/cli/introduction",
                   "es/cli/installation",
@@ -708,6 +740,14 @@
                   "es/extension/overview",
                   "es/extension/installation",
                   "es/extension/usage"
+                ]
+              },
+              {
+                "group": "Generador de Firmas",
+                "pages": [
+                  "es/extension/signature-overview",
+                  "es/extension/signature-usage",
+                  "es/extension/signature-installation"
                 ]
               },
               {
@@ -848,7 +888,7 @@
                 ]
               },
               {
-                "group": "CLI",
+                "group": "CLI (AI Agent)",
                 "pages": [
                   "fr/cli/introduction",
                   "fr/cli/installation",
@@ -862,6 +902,14 @@
                   "fr/extension/overview",
                   "fr/extension/installation",
                   "fr/extension/usage"
+                ]
+              },
+              {
+                "group": "Générateur de Signature",
+                "pages": [
+                  "fr/extension/signature-overview",
+                  "fr/extension/signature-usage",
+                  "fr/extension/signature-installation"
                 ]
               },
               {
@@ -1002,7 +1050,7 @@
                 ]
               },
               {
-                "group": "CLI",
+                "group": "CLI (AI Agent)",
                 "pages": [
                   "id/cli/introduction",
                   "id/cli/installation",
@@ -1016,6 +1064,14 @@
                   "id/extension/overview",
                   "id/extension/installation",
                   "id/extension/usage"
+                ]
+              },
+              {
+                "group": "Pembuat Tanda Tangan",
+                "pages": [
+                  "id/extension/signature-overview",
+                  "id/extension/signature-usage",
+                  "id/extension/signature-installation"
                 ]
               },
               {
@@ -1156,7 +1212,7 @@
                 ]
               },
               {
-                "group": "CLI",
+                "group": "CLI (AI Agent)",
                 "pages": [
                   "jp/cli/introduction",
                   "jp/cli/installation",
@@ -1170,6 +1226,14 @@
                   "jp/extension/overview",
                   "jp/extension/installation",
                   "jp/extension/usage"
+                ]
+              },
+              {
+                "group": "署名ジェネレーター",
+                "pages": [
+                  "jp/extension/signature-overview",
+                  "jp/extension/signature-usage",
+                  "jp/extension/signature-installation"
                 ]
               },
               {
@@ -1310,7 +1374,7 @@
                 ]
               },
               {
-                "group": "CLI",
+                "group": "CLI (AI Agent)",
                 "pages": [
                   "ko/cli/introduction",
                   "ko/cli/installation",
@@ -1324,6 +1388,14 @@
                   "ko/extension/overview",
                   "ko/extension/installation",
                   "ko/extension/usage"
+                ]
+              },
+              {
+                "group": "서명 생성기",
+                "pages": [
+                  "ko/extension/signature-overview",
+                  "ko/extension/signature-usage",
+                  "ko/extension/signature-installation"
                 ]
               },
               {
@@ -1464,7 +1536,7 @@
                 ]
               },
               {
-                "group": "CLI",
+                "group": "CLI (AI Agent)",
                 "pages": [
                   "ru/cli/introduction",
                   "ru/cli/installation",
@@ -1478,6 +1550,14 @@
                   "ru/extension/overview",
                   "ru/extension/installation",
                   "ru/extension/usage"
+                ]
+              },
+              {
+                "group": "Генератор подписей",
+                "pages": [
+                  "ru/extension/signature-overview",
+                  "ru/extension/signature-usage",
+                  "ru/extension/signature-installation"
                 ]
               },
               {
@@ -1618,7 +1698,7 @@
                 ]
               },
               {
-                "group": "CLI",
+                "group": "CLI (AI Agent)",
                 "pages": [
                   "tr/cli/introduction",
                   "tr/cli/installation",
@@ -1632,6 +1712,14 @@
                   "tr/extension/overview",
                   "tr/extension/installation",
                   "tr/extension/usage"
+                ]
+              },
+              {
+                "group": "İmza Oluşturucu",
+                "pages": [
+                  "tr/extension/signature-overview",
+                  "tr/extension/signature-usage",
+                  "tr/extension/signature-installation"
                 ]
               },
               {
@@ -1772,7 +1860,7 @@
                 ]
               },
               {
-                "group": "CLI",
+                "group": "CLI (AI Agent)",
                 "pages": [
                   "vi/cli/introduction",
                   "vi/cli/installation",
@@ -1786,6 +1874,14 @@
                   "vi/extension/overview",
                   "vi/extension/installation",
                   "vi/extension/usage"
+                ]
+              },
+              {
+                "group": "Trình tạo chữ ký",
+                "pages": [
+                  "vi/extension/signature-overview",
+                  "vi/extension/signature-usage",
+                  "vi/extension/signature-installation"
                 ]
               },
               {
