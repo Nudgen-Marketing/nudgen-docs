@@ -103,6 +103,12 @@
                 ]
               },
               {
+                "group": "Spam Checker",
+                "pages": [
+                  "en/spam-checker/overview"
+                ]
+              },
+              {
                 "group": "Concepts",
                 "pages": [
                   "en/concepts/contact-lifecycle",
@@ -262,6 +268,12 @@
                   "ar/extension/signature-overview",
                   "ar/extension/signature-usage",
                   "ar/extension/signature-installation"
+                ]
+              },
+              {
+                "group": "مدقق البريد العشوائي",
+                "pages": [
+                  "ar/spam-checker/overview"
                 ]
               },
               {
@@ -427,6 +439,12 @@
                 ]
               },
               {
+                "group": "垃圾邮件检查器",
+                "pages": [
+                  "cn/spam-checker/overview"
+                ]
+              },
+              {
                 "group": "概念",
                 "pages": [
                   "cn/concepts/contact-lifecycle",
@@ -586,6 +604,12 @@
                   "de/extension/signature-overview",
                   "de/extension/signature-usage",
                   "de/extension/signature-installation"
+                ]
+              },
+              {
+                "group": "Spam-Checker",
+                "pages": [
+                  "de/spam-checker/overview"
                 ]
               },
               {
@@ -751,6 +775,12 @@
                 ]
               },
               {
+                "group": "Comprobador de Spam",
+                "pages": [
+                  "es/spam-checker/overview"
+                ]
+              },
+              {
                 "group": "Conceptos",
                 "pages": [
                   "es/concepts/contact-lifecycle",
@@ -910,6 +940,12 @@
                   "fr/extension/signature-overview",
                   "fr/extension/signature-usage",
                   "fr/extension/signature-installation"
+                ]
+              },
+              {
+                "group": "Vérificateur de Spam",
+                "pages": [
+                  "fr/spam-checker/overview"
                 ]
               },
               {
@@ -1075,6 +1111,12 @@
                 ]
               },
               {
+                "group": "Pemeriksa Spam",
+                "pages": [
+                  "id/spam-checker/overview"
+                ]
+              },
+              {
                 "group": "Konsep",
                 "pages": [
                   "id/concepts/contact-lifecycle",
@@ -1234,6 +1276,12 @@
                   "jp/extension/signature-overview",
                   "jp/extension/signature-usage",
                   "jp/extension/signature-installation"
+                ]
+              },
+              {
+                "group": "スパムチェッカー",
+                "pages": [
+                  "jp/spam-checker/overview"
                 ]
               },
               {
@@ -1399,6 +1447,12 @@
                 ]
               },
               {
+                "group": "스팸 검사기",
+                "pages": [
+                  "ko/spam-checker/overview"
+                ]
+              },
+              {
                 "group": "개념",
                 "pages": [
                   "ko/concepts/contact-lifecycle",
@@ -1558,6 +1612,12 @@
                   "ru/extension/signature-overview",
                   "ru/extension/signature-usage",
                   "ru/extension/signature-installation"
+                ]
+              },
+              {
+                "group": "Проверка на спам",
+                "pages": [
+                  "ru/spam-checker/overview"
                 ]
               },
               {
@@ -1723,6 +1783,12 @@
                 ]
               },
               {
+                "group": "Spam Kontrolü",
+                "pages": [
+                  "tr/spam-checker/overview"
+                ]
+              },
+              {
                 "group": "Kavramlar",
                 "pages": [
                   "tr/concepts/contact-lifecycle",
@@ -1882,6 +1948,12 @@
                   "vi/extension/signature-overview",
                   "vi/extension/signature-usage",
                   "vi/extension/signature-installation"
+                ]
+              },
+              {
+                "group": "Kiểm tra Spam",
+                "pages": [
+                  "vi/spam-checker/overview"
                 ]
               },
               {
