@@ -1,0 +1,85 @@
+---
+title: "이메일 도달성 진단"
+description: "도메인의 SPF, DKIM, DMARC 레코드를 진단하여 최적의 수신함 도달을 보장하세요."
+---
+
+## 개요
+
+**이메일 도달성 진단** 도구는 도메인의 인증 설정을 확인하기 위해 설계된 포괄적인 기술 체커입니다. SPF, DKIM, DMARC 레코드를 한 번에 진단함으로써, Nudgen은 이메일이 스팸으로 분류되거나 Gmail 및 Outlook과 같은 주요 이메일 서비스 제공업체에 의해 거부될 수 있는 구성 오류를 식별합니다.
+
+이 도구를 사용하면 다음 마케팅 또는 고객 유지 캠페인을 시작하기 전에 기술적 기반이 견고한지 확인할 수 있습니다.
+
+<Info>
+  도구는 다음 주소에서 직접 액세스할 수 있습니다: [nudgen.net/email-deliverability-audit](https://nudgen.net/email-deliverability-audit)
+</Info>
+
+## 핵심 인증 체크
+
+진단은 도메인에 대해 세 가지 필수 체크를 수행합니다.
+
+### SPF (Sender Policy Framework)
+SPF는 도메인을 대신하여 이메일을 보낼 수 있는 권한이 있는 메일 서버를 지정하는 DNS 레코드로, 사칭을 방지하는 데 도움이 됩니다.
+- **통과**: 유효한 SPF 레코드가 감지되었으며 형식이 올바릅니다.
+- **실패**: SPF 레코드를 찾을 수 없거나 여러 개의 충돌하는 레코드가 감지되었습니다.
+- **권장 사항**: Nudgen은 일반적인 "다중 SPF 레코드" 오류를 수정하기 위한 통합 SPF 레코드 템플릿을 제공합니다.
+
+### DKIM (DomainKeys Identified Mail)
+DKIM은 이메일에 디지털 서명을 추가하여 수신자가 해당 메시지가 실제로 도메인 소유자에 의해 승인되었는지 확인할 수 있도록 합니다.
+- **자동 감지**: 도구는 일반적인 셀렉터(\`google\`, \`selector1\`, \`k1\` 등)를 감지하려고 시도합니다.
+- **맞춤 셀렉터**: 서비스 제공업체에서 맞춤 셀렉터를 사용하는 경우, 정확한 체크를 위해 수동으로 입력할 수 있습니다.
+
+### DMARC (Domain-based Message Authentication, Reporting, and Conformance)
+DMARC는 인증에 실패한 이메일을 수신 서버에서 어떻게 처리할지 지시하는 정책으로 SPF와 DKIM을 연결합니다.
+- **정책 강도**: Nudgen은 정책이 \`none\`(모니터링), \`quarantine\`(격리), 또는 \`reject\`(거부)로 설정되어 있는지 확인합니다.
+- **정렬**: DMARC 레코드가 도메인과 올바르게 정렬되었는지 확인합니다.
+
+## 결과 이해하기
+
+각 체크는 다음 세 가지 상태 중 하나를 반환합니다.
+
+- **통과 (에메랄드)**: 레코드가 올바르게 구성되었으며 모범 사례를 따르고 있습니다.
+- **경고 (황색)**: 레코드가 발견되었으나 최적화 기회가 있을 수 있습니다 (예: DMARC 정책이 \`none\`으로 설정됨).
+- **실패 (로즈)**: 레코드가 누락되었거나 유효하지 않거나 형식이 잘못되어 도달성에 영향을 미칠 가능성이 높습니다.
+
+## 기술 권장 사항
+
+실패하거나 누락된 체크에 대해 Nudgen은 **즉시 복사하여 사용할 수 있는 DNS 레코드 템플릿**을 제공합니다.
+
+1. **차이 식별**: "다음에 게시할 권장 레코드" 섹션을 검토합니다.
+2. **값 복사**: **복사** 버튼을 사용하여 유형, 이름 및 콘텐츠를 가져옵니다.
+3. **DNS 업데이트**: 이러한 레코드를 DNS 제공업체(예: Cloudflare, GoDaddy, Namecheap)에 붙여넣습니다.
+4. **자리 표시자 교체**: \`YOUR_VALUE\`와 같은 자리 표시자를 이메일 서비스 제공업체에서 제공한 실제 데이터로 교체해야 합니다.
+
+## 자주 묻는 질문 (FAQ)
+
+<AccordionGroup>
+  <Accordion title="SPF란 무엇인가요?">
+    SPF (Sender Policy Framework)는 도메인을 대신하여 이메일을 보낼 수 있는 메일 서버를 나열하는 DNS 레코드로, 사칭을 방지하는 데 도움이 됩니다.
+  </Accordion>
+  <Accordion title="DKIM이란 무엇인가요?">
+    DKIM (DomainKeys Identified Mail)은 제공업체가 메시지가 도메인에 의해 승인되었는지 확인할 수 있도록 이메일에 디지털 서명을 추가합니다.
+  </Accordion>
+  <Accordion title="DMARC란 무엇인가요?">
+    DMARC는 공급업체에 SPF 또는 DKIM 체크를 통과하지 못한 이메일을 처리하는 방법을 지시하고 남용 시도에 대한 보고서를 보낼 수 있습니다.
+  </Accordion>
+  <Accordion title="이것이 이메일의 기본 수신함 도착을 보장하나요?">
+    이것만으로는 충분하지 않습니다. 이 도구는 기술적 기반(DNS)을 체크하지만, 도달성은 평판, 콘텐츠 및 전송 동작에도 달려 있습니다.
+  </Accordion>
+  <Accordion title="DKIM이 실패 대신 경고를 표시하는 이유는 무엇인가요?">
+    많은 제공업체가 맞춤 셀렉터를 사용합니다. 표준 셀렉터를 찾을 수 없는 경우, 더 정확한 체크를 위해 올바른 셀렉터를 입력하도록 제안합니다.
+  </Accordion>
+  <Accordion title="이 레코드들은 즉시 복사하여 붙여넣을 수 있나요?">
+    이것들은 올바른 유형과 호스트에 대한 표준 템플릿이지만, 자리 표시자를 실제 제공업체의 값으로 교체해야 합니다.
+  </Accordion>
+</AccordionGroup>
+
+## 다음 단계
+
+<CardGroup cols={2}>
+  <Card title="진단 실행" icon="shield-check" href="https://nudgen.net/email-deliverability-audit">
+    지금 도메인 인증을 확인하세요.
+  </Card>
+  <Card title="스팸 체커" icon="magnifying-glass" href="/ko/spam-checker/overview">
+    이메일 콘텐츠에서 스팸 유발 요인을 분석하세요.
+  </Card>
+</CardGroup>

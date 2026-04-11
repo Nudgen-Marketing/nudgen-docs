@@ -1,0 +1,85 @@
+---
+title: "Audit de délivrabilité des e-mails"
+description: "Auditez les enregistrements SPF, DKIM et DMARC de votre domaine pour garantir un placement optimal en boîte de réception."
+---
+
+## Aperçu
+
+L'outil **Audit de délivrabilité des e-mails** est un vérificateur technique complet conçu pour vous aider à vérifier la configuration de l'authentification de votre domaine. En auditant vos enregistrements **SPF**, **DKIM** et **DMARC** en un seul passage, Nudgen identifie les lacunes de configuration qui pourraient entraîner le signalement de vos e-mails comme spam ou leur rejet par les principaux fournisseurs de messagerie comme Gmail et Outlook.
+
+L'utilisation de cet outil garantit que votre base technique est solide avant de lancer votre prochaine campagne de marketing ou de rétention.
+
+<Info>
+  Vous pouvez accéder à l'outil directement sur [nudgen.net/email-deliverability-audit](https://nudgen.net/email-deliverability-audit).
+</Info>
+
+## Vérifications d’authentification de base
+
+L'audit effectue trois vérifications essentielles sur votre domaine :
+
+### SPF (Sender Policy Framework)
+Le SPF est un enregistrement DNS qui liste les serveurs autorisés à envoyer des e-mails pour votre domaine, aidant à prévenir l'usurpation.
+- **Réussite** : Un enregistrement SPF valide est détecté et correctement formaté.
+- **Échec** : Aucun enregistrement SPF trouvé ou plusieurs enregistrements contradictoires détectés.
+- **Recommandation** : Nudgen fournit un modèle d'enregistrement SPF unifié pour corriger les erreurs courantes de "plusieurs enregistrements SPF".
+
+### DKIM (DomainKeys Identified Mail)
+Le DKIM ajoute une signature cryptographique à vos e-mails pour que les fournisseurs vérifient que le message a été autorisé par votre domaine et n'a pas été modifié.
+- **Auto-détection** : L'outil tente de détecter les sélecteurs courants (comme `google`, `selector1`, `k1`).
+- **Sélecteur personnalisé** : Si votre fournisseur utilise un sélecteur spécifique, vous pouvez le saisir manuellement pour une vérification précise.
+
+### DMARC (Domain-based Message Authentication, Reporting, and Conformance)
+Le DMARC indique aux fournisseurs comment traiter les e-mails qui échouent aux tests SPF ou DKIM, et peut vous envoyer des rapports sur les tentatives d'abus.
+- **Force de la politique** : Nudgen vérifie si votre politique est définie sur `none` (surveillance), `quarantine` (mise en quarantaine) ou `reject` (rejet).
+- **Alignement** : Garantit que votre enregistrement DMARC est correctement aligné avec votre domaine.
+
+## Comprendre les résultats
+
+Chaque vérification renvoie l’un des trois statuts suivants :
+
+- **Réussite (Émeraude)** : Votre enregistrement est correctement configuré et suit les meilleures pratiques.
+- **Avertissement (Ambre)** : Un enregistrement a été trouvé mais peut présenter des opportunités d’optimisation (par exemple, politique DMARC définie sur `none`).
+- **Échec (Rose)** : L’enregistrement est manquant, invalide ou mal formaté, ce qui aura probablement un impact sur la délivrabilité.
+
+## Recommandations techniques
+
+Pour chaque vérification échouée ou manquante, Nudgen fournit des **modèles d’enregistrements DNS prêts à copier**.
+
+1. **Identifier la lacune** : Consultez la section "Enregistrements recommandés à publier ensuite".
+2. **Copier les valeurs** : Utilisez les boutons **Copier** pour récupérer le Type, le Nom et le Contenu.
+3. **Mettre à jour le DNS** : Collez ces enregistrements chez votre fournisseur DNS (par exemple, Cloudflare, GoDaddy, Namecheap).
+4. **Remplacer les espaces réservés** : Assurez-vous de remplacer tous les espaces réservés `YOUR_VALUE` par les données spécifiques fournies par votre fournisseur de services de messagerie.
+
+## FAQ
+
+<AccordionGroup>
+  <Accordion title="Qu'est-ce que le SPF ?">
+    Le SPF (Sender Policy Framework) est un enregistrement DNS qui liste les serveurs autorisés à envoyer des e-mails pour votre domaine, aidant à prévenir l'usurpation.
+  </Accordion>
+  <Accordion title="Qu'est-ce que le DKIM ?">
+    Le DKIM (DomainKeys Identified Mail) ajoute une signature cryptographique à vos e-mails pour que les fournisseurs vérifient que le message a été autorisé par votre domaine.
+  </Accordion>
+  <Accordion title="Qu'est-ce que le DMARC ?">
+    Le DMARC indique aux fournisseurs comment traiter les e-mails qui échouent aux tests SPF ou DKIM, et peut vous envoyer des rapports sur les tentatives d'abus.
+  </Accordion>
+  <Accordion title="Cela garantit-il que mes e-mails arriveront en boîte de réception ?">
+    Pas à lui seul. Cet outil vérifie la base technique DNS, mais la délivrabilité dépend aussi de la réputation, du contenu et du comportement d'envoi.
+  </Accordion>
+  <Accordion title="Pourquoi le DKIM affiche-t-il un avertissement plutôt qu'un échec ?">
+    Beaucoup de fournisseurs utilisent des sélecteurs personnalisés. Si nous ne détectons pas de sélecteur courant, nous vous demandons de l'entrer manuellement.
+  </Accordion>
+  <Accordion title="Ces enregistrements DNS sont-ils prêts à être collés ?">
+    Ce sont des modèles avec l'hôte et le type corrects, mais vous devez remplacer les placeholders par les valeurs de votre fournisseur e-mail.
+  </Accordion>
+</AccordionGroup>
+
+## Étapes suivantes
+
+<CardGroup cols={2}>
+  <Card title="Lancer un audit" icon="shield-check" href="https://nudgen.net/email-deliverability-audit">
+    Vérifiez l’authentification de votre domaine maintenant.
+  </Card>
+  <Card title="Vérificateur Spam" icon="magnifying-glass" href="/fr/spam-checker/overview">
+    Analysez le contenu de vos e-mails pour détecter les déclencheurs de spam.
+  </Card>
+</CardGroup>

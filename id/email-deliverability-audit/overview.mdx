@@ -1,0 +1,85 @@
+---
+title: "Audit Pengiriman Email"
+description: "Audit catatan SPF, DKIM, dan DMARC domain Anda untuk memastikan penempatan kotak masuk yang optimal."
+---
+
+## Ringkasan
+
+Alat **Audit Pengiriman Email** adalah pemeriksa teknis komprehensif yang dirancang untuk membantu Anda memverifikasi pengaturan autentikasi domain Anda. Dengan mengaudit catatan **SPF**, **DKIM**, dan **DMARC** Anda dalam satu langkah, Nudgen mengidentifikasi celah konfigurasi yang dapat menyebabkan email Anda ditandai sebagai spam atau ditolak oleh penyedia kotak surat utama seperti Gmail dan Outlook.
+
+Menggunakan alat ini memastikan bahwa fondasi teknis Anda solid sebelum Anda meluncurkan kampanye pemasaran atau retensi berikutnya.
+
+<Info>
+  Anda dapat mengakses alat ini secara langsung di [nudgen.net/email-deliverability-audit](https://nudgen.net/email-deliverability-audit).
+</Info>
+
+## Pemeriksaan Autentikasi Inti
+
+Audit melakukan tiga pemeriksaan penting pada domain Anda:
+
+### SPF (Sender Policy Framework)
+SPF adalah catatan DNS yang menentukan server email mana yang diizinkan untuk mengirim email atas nama domain Anda, membantu mencegah pemalsuan.
+- **Lulus**: Catatan SPF yang valid terdeteksi dan diformat dengan benar.
+- **Gagal**: Tidak ada catatan SPF yang ditemukan atau terdeteksi beberapa catatan yang saling bertentangan.
+- **Rekomendasi**: Nudgen menyediakan templat catatan SPF terpadu untuk memperbaiki kesalahan umum "beberapa catatan SPF".
+
+### DKIM (DomainKeys Identified Mail)
+DKIM menambahkan tanda tangan kriptografi ke email Anda, memungkinkan penerima memverifikasi bahwa pesan tersebut memang diizinkan oleh pemilik domain.
+- **Deteksi Otomatis**: Alat ini mencoba mendeteksi selector umum (seperti \`google\`, \`selector1\`, \`k1\`).
+- **Selector kustom**: Jika penyedia Anda menggunakan selector khusus, Anda dapat memasukkannya secara manual untuk pemeriksaan yang presisi.
+
+### DMARC (Domain-based Message Authentication, Reporting, and Conformance)
+DMARC menghubungkan SPF dan DKIM dengan kebijakan yang memberi tahu server penerima cara menangani email yang gagal autentikasi.
+- **Kekuatan Kebijakan**: Nudgen memeriksa apakah kebijakan Anda disetel ke \`none\` (pemantauan), \`quarantine\` (karantina), atau \`reject\` (tolak).
+- **Penyelarasan**: Memastikan catatan DMARC Anda selaras dengan benar dengan domain Anda.
+
+## Memahami Hasil
+
+Setiap pemeriksaan mengembalikan salah satu dari tiga status:
+
+- **Lulus (Zamrud)**: Catatan Anda dikonfigurasi dengan benar dan mengikuti praktik terbaik.
+- **Peringatan (Ambar)**: Catatan ditemukan tetapi mungkin memiliki peluang optimalisasi (misalnya, kebijakan DMARC disetel ke \`none\`).
+- **Gagal (Mawar)**: Catatan hilang, tidak valid, atau formatnya salah, yang kemungkinan besar akan berdampak pada pengiriman.
+
+## Rekomendasi Teknis
+
+Untuk setiap pemeriksaan yang gagal atau hilang, Nudgen menyediakan **templat catatan DNS siap salin**.
+
+1. **Identifikasi Kesenjangan**: Tinjau bagian "Catatan yang disarankan untuk diterbitkan selanjutnya".
+2. **Salin Nilai**: Gunakan tombol **Salin** untuk mengambil Tipe, Nama, dan Konten.
+3. **Perbarui DNS**: Tempel catatan ini ke penyedia DNS Anda (misalnya, Cloudflare, GoDaddy, Namecheap).
+4. **Ganti Placeholder**: Pastikan Anda mengganti placeholder \`YOUR_VALUE\` dengan data spesifik yang disediakan oleh penyedia layanan email Anda.
+
+## FAQ
+
+<AccordionGroup>
+  <Accordion title="Apa itu SPF?">
+    SPF (Sender Policy Framework) adalah catatan DNS yang mencantumkan server email yang diizinkan untuk mengirim email atas nama domain Anda, membantu mencegah spoofing.
+  </Accordion>
+  <Accordion title="Apa itu DKIM?">
+    DKIM (DomainKeys Identified Mail) menambahkan tanda tangan digital ke email Anda agar penyedia dapat memverifikasi bahwa pesan tersebut diizinkan oleh domain Anda.
+  </Accordion>
+  <Accordion title="Apa itu DMARC?">
+    DMARC menginstruksikan penyedia cara menangani email yang gagal pemeriksaan SPF atau DKIM, dan dapat mengirimkan laporan tentang upaya penyalahgunaan.
+  </Accordion>
+  <Accordion title="Apakah ini menjamin email masuk ke kotak masuk utama?">
+    Tidak dengan sendirinya. Alat ini memeriksa dasar teknis (DNS), tetapi pengiriman juga bergantung pada reputasi, konten, dan perilaku pengiriman.
+  </Accordion>
+  <Accordion title="Mengapa DKIM menunjukkan peringatan bukannya gagal?">
+    Banyak penyedia menggunakan selector khusus. Jika kami tidak menemukan selector standar, kami akan menyarankan Anda memasukkan selector yang tepat.
+  </Accordion>
+  <Accordion title="Apakah catatan DNS ini siap untuk langsung disalin dan ditempel?">
+    Ini adalah templat dengan host dan tipe yang benar, tetapi Anda perlu mengganti placeholder dengan nilai sebenarnya dari penyedia pengiriman Anda.
+  </Accordion>
+</AccordionGroup>
+
+## Langkah Selanjutnya
+
+<CardGroup cols={2}>
+  <Card title="Jalankan Audit" icon="shield-check" href="https://nudgen.net/email-deliverability-audit">
+    Periksa autentikasi domain Anda sekarang.
+  </Card>
+  <Card title="Pemeriksa Spam" icon="magnifying-glass" href="/id/spam-checker/overview">
+    Analisis konten email Anda untuk menemukan pemicu spam.
+  </Card>
+</CardGroup>

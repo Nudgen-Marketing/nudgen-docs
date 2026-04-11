@@ -109,6 +109,12 @@
                 ]
               },
               {
+                "group": "Email Deliverability Audit",
+                "pages": [
+                  "en/email-deliverability-audit/overview"
+                ]
+              },
+              {
                 "group": "Concepts",
                 "pages": [
                   "en/concepts/contact-lifecycle",
@@ -274,6 +280,12 @@
                 "group": "مدقق البريد العشوائي",
                 "pages": [
                   "ar/spam-checker/overview"
+                ]
+              },
+              {
+                "group": "تدقيق قابلية تسليم البريد",
+                "pages": [
+                  "ar/email-deliverability-audit/overview"
                 ]
               },
               {
@@ -445,6 +457,12 @@
                 ]
               },
               {
+                "group": "邮件送达率审计",
+                "pages": [
+                  "cn/email-deliverability-audit/overview"
+                ]
+              },
+              {
                 "group": "概念",
                 "pages": [
                   "cn/concepts/contact-lifecycle",
@@ -610,6 +628,12 @@
                 "group": "Spam-Checker",
                 "pages": [
                   "de/spam-checker/overview"
+                ]
+              },
+              {
+                "group": "E-Mail-Zustellbarkeits-Audit",
+                "pages": [
+                  "de/email-deliverability-audit/overview"
                 ]
               },
               {
@@ -781,6 +805,12 @@
                 ]
               },
               {
+                "group": "Auditoría de Entregabilidad",
+                "pages": [
+                  "es/email-deliverability-audit/overview"
+                ]
+              },
+              {
                 "group": "Conceptos",
                 "pages": [
                   "es/concepts/contact-lifecycle",
@@ -946,6 +976,12 @@
                 "group": "Vérificateur de Spam",
                 "pages": [
                   "fr/spam-checker/overview"
+                ]
+              },
+              {
+                "group": "Audit de Délivrabilité",
+                "pages": [
+                  "fr/email-deliverability-audit/overview"
                 ]
               },
               {
@@ -1117,6 +1153,12 @@
                 ]
               },
               {
+                "group": "Audit Pengiriman Email",
+                "pages": [
+                  "id/email-deliverability-audit/overview"
+                ]
+              },
+              {
                 "group": "Konsep",
                 "pages": [
                   "id/concepts/contact-lifecycle",
@@ -1282,6 +1324,12 @@
                 "group": "スパムチェッカー",
                 "pages": [
                   "jp/spam-checker/overview"
+                ]
+              },
+              {
+                "group": "メール到達性診断",
+                "pages": [
+                  "jp/email-deliverability-audit/overview"
                 ]
               },
               {
@@ -1453,6 +1501,12 @@
                 ]
               },
               {
+                "group": "이메일 도달성 진단",
+                "pages": [
+                  "ko/email-deliverability-audit/overview"
+                ]
+              },
+              {
                 "group": "개념",
                 "pages": [
                   "ko/concepts/contact-lifecycle",
@@ -1618,6 +1672,12 @@
                 "group": "Проверка на спам",
                 "pages": [
                   "ru/spam-checker/overview"
+                ]
+              },
+              {
+                "group": "Аудит доставляемости",
+                "pages": [
+                  "ru/email-deliverability-audit/overview"
                 ]
               },
               {
@@ -1789,6 +1849,12 @@
                 ]
               },
               {
+                "group": "E-posta Teslimat Denetimi",
+                "pages": [
+                  "tr/email-deliverability-audit/overview"
+                ]
+              },
+              {
                 "group": "Kavramlar",
                 "pages": [
                   "tr/concepts/contact-lifecycle",
@@ -1954,6 +2020,12 @@
                 "group": "Kiểm tra Spam",
                 "pages": [
                   "vi/spam-checker/overview"
+                ]
+              },
+              {
+                "group": "Kiểm tra Xác thực Email",
+                "pages": [
+                  "vi/email-deliverability-audit/overview"
                 ]
               },
               {

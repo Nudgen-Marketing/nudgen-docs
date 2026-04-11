@@ -1,0 +1,85 @@
+---
+title: "E-posta Teslimat Denetimi"
+description: "Optimal gelen kutusu yerleşimi sağlamak için alan adınızın SPF, DKIM ve DMARC kayıtlarını denetleyin."
+---
+
+## Genel Bakış
+
+**E-posta Teslimat Denetimi** aracı, alan adınızın kimlik doğrulama kurulumunu doğrulamanıza yardımcı olmak için tasarlanmış kapsamlı bir teknik denetleyicidir. SPF, DKIM ve DMARC kayıtlarınızı tek seferde denetleyerek Nudgen, e-postalarınızın spam olarak işaretlenmesine veya Gmail ve Outlook gibi ana posta kutusu sağlayıcıları tarafından reddedilmesine neden olabilecek yapılandırma boşluklarını belirler.
+
+Bu aracı kullanmak, bir sonraki pazarlama veya elde tutma kampanyanızı başlatmadan önce teknik temelinizin sağlam olmasını sağlar.
+
+<Info>
+  Araca doğrudan şu adresten erişebilirsiniz: [nudgen.net/email-deliverability-audit](https://nudgen.net/email-deliverability-audit).
+</Info>
+
+## Temel Kimlik Doğrulama Kontrolleri
+
+Denetim, alan adınız üzerinde üç temel kontrol gerçekleştirir:
+
+### SPF (Sender Policy Framework)
+SPF, alan adınız adına e-posta göndermeye hangi posta sunucularının yetkili olduğunu belirten bir DNS kaydıdır ve sahteciliği önlemeye yardımcı olur.
+- **Geçti**: Geçerli bir SPF kaydı algılandı ve doğru şekilde biçimlendirildi.
+- **Başarısız**: SPF kaydı bulunamadı veya birden fazla çakışan kayıt algılandı.
+- **Öneri**: Nudgen, yaygın "birden fazla SPF kaydı" hatalarını düzeltmek için birleşik bir SPF kaydı şablonu sağlar.
+
+### DKIM (DomainKeys Identified Mail)
+DKIM, e-postalarınıza dijital bir imza ekleyerek alıcıların mesajın gerçekten alan adı sahibi tarafından yetkilendirildiğini doğrulamasını sağlar.
+- **Otomatik Algılama**: Araç, yaygın selector'ları (\`google\`, \`selector1\`, \`k1\` gibi) algılamaya çalışır.
+- **Özel selector**: Sağlayıcınız özel bir selector kullanıyorsa, kesin bir kontrol için bunu manuel olarak girebilirsiniz.
+
+### DMARC (Domain-based Message Authentication, Reporting, and Conformance)
+DMARC, SPF ve DKIM'i, kimlik doğrulaması başarısız olan e-postaların nasıl işleneceğini alıcı sunuculara bildiren bir politika ile birbirine bağlar.
+- **Politika Gücü**: Nudgen, politikanızın \`none\` (izleme), \`quarantine\` (karantina) veya \`reject\` (reddetme) olarak ayarlanıp ayarlanmadığını kontrol eder.
+- **Hizalama**: DMARC kaydınızın alan adınızla doğru şekilde hizalandığından emin olur.
+
+## Sonuçları Anlamak
+
+Her kontrol üç durumdan birini döndürür:
+
+- **Geçti (Zümrüt)**: Kaydınız doğru şekilde yapılandırılmıştır ve en iyi uygulamaları takip eder.
+- **Uyarı (Kehribar)**: Bir kayıt bulundu ancak optimizasyon fırsatları olabilir (örneğin, DMARC politikası \`none\` olarak ayarlanmış).
+- **Başarısız (Gül)**: Kayıt eksik, geçersiz veya yanlış biçimlendirilmiş; bu durum muhtemelen teslimatı etkileyecektir.
+
+## Teknik Öneriler
+
+Başarısız olan veya eksik olan her kontrol için Nudgen, **kopyalamaya hazır DNS kaydı şablonları** sunar.
+
+1. **Boşluğu Belirleyin**: "Bundan sonra yayınlanması önerilen kayıtlar" bölümünü inceleyin.
+2. **Değerleri Kopyalayın**: Tür, Ad ve İçeriği almak için **Kopyala** düğmelerini kullanın.
+3. **DNS'i Güncelleyin**: Bu kayıtları DNS sağlayıcınıza (örneğin, Cloudflare, GoDaddy, Namecheap) yapıştırın.
+4. **Yer Tutucuları Değiştirin**: \`YOUR_VALUE\` yer tutucularını e-posta servis sağlayıcınız tarafından sağlanan spesifik verilerle değiştirdiğinizden emin olun.
+
+## SSS
+
+<AccordionGroup>
+  <Accordion title="SPF nedir?">
+    SPF (Sender Policy Framework), alan adınız adına e-posta göndermesine izin verilen posta sunucularını listeleyen ve sahteciliği önlemeye yardımcı olan bir DNS kaydıdır.
+  </Accordion>
+  <Accordion title="DKIM nedir?">
+    DKIM (DomainKeys Identified Mail), sağlayıcıların mesajın alan adınız tarafından yetkilendirildiğini doğrulaması için e-postalarınıza dijital bir imza ekler.
+  </Accordion>
+  <Accordion title="DMARC nedir?">
+    DMARC, sağlayıcılara SPF veya DKIM kontrollerinden geçemeyen e-postalarla nasıl başa çıkacaklarını bildirir ve kötüye kullanım girişimleri hakkında raporlar gönderebilir.
+  </Accordion>
+  <Accordion title="Bu, e-postaların birincil gelen kutusuna düşmesini garanti eder mi?">
+    Tek başına yeterli değildir. Bu araç teknik temeli (DNS) kontrol eder, ancak teslimat aynı zamanda itibara, içeriğe ve gönderim davranışına da bağlıdır.
+  </Accordion>
+  <Accordion title="DKIM neden hata yerine uyarı gösteriyor?">
+    Birçok sağlayıcı özel selector'lar kullanır. Standart bir selector bulamazsak, daha kesin bir kontrol için doğru olanı girmenizi öneririz.
+  </Accordion>
+  <Accordion title="Bu kayıtlar hemen kopyalanıp yapıştırılmaya hazır mı?">
+    Bunlar doğru tür ve ana bilgisayar için standart şablonlardır, ancak yer tutucuları servis sağlayıcınızdan gelen gerçek değerlerle değiştirmeniz gerekir.
+  </Accordion>
+</AccordionGroup>
+
+## Sonraki Adımlar
+
+<CardGroup cols={2}>
+  <Card title="Denetimi Çalıştır" icon="shield-check" href="https://nudgen.net/email-deliverability-audit">
+    Alan adı kimlik doğrulamanızı şimdi kontrol edin.
+  </Card>
+  <Card title="Spam Denetleyici" icon="magnifying-glass" href="/tr/spam-checker/overview">
+    E-posta içeriğinizi spam tetikleyicileri için analiz edin.
+  </Card>
+</CardGroup>

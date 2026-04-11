@@ -1,0 +1,85 @@
+---
+title: "Auditoría de Entregabilidad de Email"
+description: "Audita los registros SPF, DKIM y DMARC de tu dominio para garantizar un placement óptimo en la bandeja de entrada."
+---
+
+## Descripción general
+
+La herramienta **Auditoría de Entregabilidad de Email** es un verificador técnico completo diseñado para ayudarte a verificar la configuración de autenticación de tu dominio. Al auditar tus registros **SPF**, **DKIM** y **DMARC** en un solo paso, Nudgen identifica brechas de configuración que podrían causar que tus correos sean marcados como spam o rechazados por los principales proveedores como Gmail y Outlook.
+
+El uso de esta herramienta asegura que tu base técnica sea sólida antes de lanzar tu próxima campaña de marketing o retención.
+
+<Info>
+  Puedes acceder a la herramienta directamente en [nudgen.net/email-deliverability-audit](https://nudgen.net/email-deliverability-audit).
+</Info>
+
+## Verificaciones de autenticación principales
+
+La auditoría realiza tres comprobaciones esenciales en tu dominio:
+
+### SPF (Sender Policy Framework)
+El SPF es un registro DNS que indica qué servidores de correo pueden enviar correos en nombre de su dominio, evitando la suplantación.
+- **Correcto**: Se detecta un registro SPF válido y correctamente formateado.
+- **Error**: No se encontró registro SPF o se detectaron múltiples registros en conflicto.
+- **Recomendación**: Nudgen proporciona una plantilla de registro SPF unificada para corregir errores comunes de "múltiples registros SPF".
+
+### DKIM (DomainKeys Identified Mail)
+El DKIM añade una firma criptográfica a tus correos para que los proveedores verifiquen que el mensaje fue autorizado por tu dominio y no fue alterado.
+- **Auto-detección**: La herramienta intenta detectar selectores comunes (como \`google\`, \`selector1\`, \`k1\`).
+- **Selector personalizado**: Si tu proveedor usa un selector específico, puedes ingresarlo manualmente para una revisión precisa.
+
+### DMARC (Domain-based Message Authentication, Reporting, and Conformance)
+DMARC indica a los proveedores cómo manejar correos que fallan la autenticación SPF o DKIM, y envía reportes sobre intentos de abuso.
+- **Fuerza de la política**: Nudgen verifica si tu política está establecida en \`none\` (monitoreo), \`quarantine\` (cuarentena) o \`reject\` (rechazo).
+- **Alineación**: Asegura que tu registro DMARC esté correctamente alineado con tu dominio.
+
+## Entendiendo los resultados
+
+Cada verificación devuelve uno de tres estados:
+
+- **Correcto (Esmeralda)**: Tu registro está configurado correctamente và sigue las mejores prácticas.
+- **Advertencia (Ámbar)**: Se encontró un registro pero puede tener oportunidades de optimización (por ejemplo, política DMARC establecida en \`none\`).
+- **Error (Rosa)**: El registro falta, es inválido o tiene un formato incorrecto, lo que probablemente afectará la entregabilidad.
+
+## Recomendaciones técnicas
+
+Para cada verificación fallida o faltante, Nudgen proporciona **plantillas de registros DNS listas para copiar**.
+
+1. **Identificar la brecha**: Revisa la sección "Registros recomendados para publicar".
+2. **Copiar los valores**: Usa los botones **Copiar** para obtener el Tipo, Nombre y Contenido.
+3. **Actualizar DNS**: Pega estos registros en tu proveedor de DNS (por ejemplo, Cloudflare, GoDaddy, Namecheap).
+4. **Reemplazar marcadores**: Asegúrate de reemplazar cualquier marcador \`YOUR_VALUE\` con los datos específicos proporcionados por tu proveedor de servicios de email.
+
+## FAQ
+
+<AccordionGroup>
+  <Accordion title="¿Qué es SPF?">
+    SPF (Sender Policy Framework) es un registro DNS que indica qué servidores de correo pueden enviar correos en nombre de su dominio, evitando la suplantación.
+  </Accordion>
+  <Accordion title="¿Qué es DKIM?">
+    DKIM (DomainKeys Identified Mail) añade una firma criptográfica a tus correos para que los proveedores verifiquen que el mensaje fue autorizado por tu dominio.
+  </Accordion>
+  <Accordion title="¿Qué es DMARC?">
+    DMARC indica a los proveedores cómo manejar correos que fallan la alineación SPF o DKIM, y envía reportes sobre intentos de abuso.
+  </Accordion>
+  <Accordion title="¿Esto garantiza que mis correos lleguen a la bandeja de entrada?">
+    No por sí solo. Esta herramienta revisa la base técnica DNS, pero la entregabilidad también depende de la reputación, el contenido y el comportamiento de envío.
+  </Accordion>
+  <Accordion title="¿Por qué DKIM podría mostrar advertencia en lugar de error?">
+    Muchos proveedores usan selectores personalizados. Si no detectamos uno común, te pediremos que ingreses el de tu proveedor para una revisión precisa.
+  </Accordion>
+  <Accordion title="¿Estos registros están listos para copiar y pegar?">
+    Son plantillas con el host y tipo correctos, pero debes reemplazar los marcadores por los valores exactos de tu proveedor de envío.
+  </Accordion>
+</AccordionGroup>
+
+## Pasos siguientes
+
+<CardGroup cols={2}>
+  <Card title="Ejecutar Auditoría" icon="shield-check" href="https://nudgen.net/email-deliverability-audit">
+    Revisa tu autenticación de dominio ahora.
+  </Card>
+  <Card title="Verificador de Spam" icon="magnifying-glass" href="/es/spam-checker/overview">
+    Analiza el contenido de tu email para encontrar disparadores de spam.
+  </Card>
+</CardGroup>

@@ -1,0 +1,85 @@
+---
+title: "Email Deliverability Audit"
+description: "Audit your domain’s SPF, DKIM, and DMARC records to ensure optimal inbox placement."
+---
+
+## Overview
+
+The **Email Deliverability Audit** tool is a comprehensive technical checker designed to help you verify your domain's authentication setup. By auditing your **SPF**, **DKIM**, and **DMARC** records in one pass, Nudgen identifies configuration gaps that could cause your emails to be flagged as spam or rejected by major mailbox providers like Gmail and Outlook.
+
+Using this tool ensures that your technical foundation is solid before you launch your next marketing or retention campaign.
+
+<Info>
+  You can access the tool directly at [nudgen.net/email-deliverability-audit](https://nudgen.net/email-deliverability-audit).
+</Info>
+
+## Core Authentication Checks
+
+The audit performs three essential checks on your domain:
+
+### SPF (Sender Policy Framework)
+SPF is a DNS record that specifies which mail servers are authorized to send email on behalf of your domain.
+- **Pass**: A valid SPF record is detected and correctly formatted.
+- **Fail**: No SPF record found or multiple conflicting records detected.
+- **Recommendation**: Nudgen provides a unified SPF record template to fix common "multiple SPF record" errors.
+
+### DKIM (DomainKeys Identified Mail)
+DKIM adds a cryptographic signature to your emails, allowing receivers to verify that the message was indeed authorized by the domain owner.
+- **Auto-Detection**: The tool attempts to detect common selectors (like `google`, `selector1`, `k1`).
+- **Manual selector**: If your provider uses a custom selector, you can enter it manually for a precise check.
+
+### DMARC (Domain-based Message Authentication, Reporting, and Conformance)
+DMARC ties SPF and DKIM together with a policy that tells receiving servers how to handle emails that fail authentication.
+- **Policy Strength**: Nudgen checks if your policy is set to `none` (monitoring), `quarantine`, or `reject` (enforcement).
+- **Alignment**: Ensures your DMARC record is correctly aligned with your domain.
+
+## Understanding Results
+
+Each check returns one of three statuses:
+
+- **Pass (Emerald)**: Your record is correctly configured and follows best practices.
+- **Warning (Amber)**: A record is found but may have optimization opportunities (e.g., DMARC policy set to `none`).
+- **Fail (Rose)**: The record is missing, invalid, or incorrectly formatted, which will likely impact deliverability.
+
+## Technical Recommendations
+
+For every failed or missing check, Nudgen provides **copy-ready DNS record templates**. 
+
+1. **Identify the Gap**: Review the "Recommended records to publish next" section.
+2. **Copy the Values**: Use the **Copy** buttons to grab the Type, Name, and Content.
+3. **Update DNS**: Paste these records into your DNS provider (e.g., Cloudflare, GoDaddy, Namecheap).
+4. **Replace Placeholders**: Ensure you replace any `YOUR_VALUE` placeholders with the specific data provided by your email service provider.
+
+## FAQ
+
+<AccordionGroup>
+  <Accordion title="What is SPF?">
+    SPF stands for Sender Policy Framework. It is a DNS record that lists which mail servers are allowed to send email for your domain, helping receiving providers spot spoofed messages.
+  </Accordion>
+  <Accordion title="What is DKIM?">
+    DKIM stands for DomainKeys Identified Mail. It adds a cryptographic signature to your emails so mailbox providers can verify that the message was authorized by your domain and was not changed in transit.
+  </Accordion>
+  <Accordion title="What is DMARC?">
+    DMARC stands for Domain-based Message Authentication, Reporting, and Conformance. It tells receiving providers how to handle messages that fail SPF or DKIM alignment and can also send you reports about attempted abuse.
+  </Accordion>
+  <Accordion title="Does this tell me if my emails will land in the inbox?">
+    Not by itself. This tool checks your authentication DNS records, which are a required technical foundation, but inbox placement also depends on sender reputation, content, engagement, and sending behavior.
+  </Accordion>
+  <Accordion title="Why might DKIM show a warning instead of a fail?">
+    Many providers use custom selectors. If we can’t detect a common selector automatically, we prompt you to enter the selector from your email provider so we can run a more precise DKIM check.
+  </Accordion>
+  <Accordion title="Are these DNS records ready to paste directly?">
+    They are copy-ready templates for the correct host and record type, but placeholders may still need to be replaced with the exact values from your sending provider.
+  </Accordion>
+</AccordionGroup>
+
+## Next Steps
+
+<CardGroup cols={2}>
+  <Card title="Run an Audit" icon="shield-check" href="https://nudgen.net/email-deliverability-audit">
+    Check your domain authentication now.
+  </Card>
+  <Card title="Spam Checker" icon="magnifying-glass" href="/en/spam-checker/overview">
+    Analyze your email content for spam triggers.
+  </Card>
+</CardGroup>

@@ -1,0 +1,85 @@
+---
+title: "Kiểm tra khả năng gửi email"
+description: "Kiểm tra các bản ghi SPF, DKIM và DMARC của tên miền để đảm bảo khả năng vào hộp thư tối ưu."
+---
+
+## Tổng quan
+
+Công cụ **Kiểm tra khả năng gửi email** là một trình kiểm tra kỹ thuật toàn diện được thiết kế để giúp bạn xác minh thiết lập xác thực tên miền của mình. Bằng cách kiểm tra các bản ghi **SPF**, **DKIM** và **DMARC** chỉ trong một lần, Nudgen sẽ xác định các lỗ hổng cấu hình có thể khiến email của bạn bị đánh dấu là thư rác hoặc bị các nhà cung cấp hộp thư lớn như Gmail và Outlook từ chối.
+
+Sử dụng công cụ này đảm bảo rằng nền tảng kỹ thuật của bạn vững chắc trước khi khởi chạy chiến dịch marketing hoặc giữ chân khách hàng tiếp theo.
+
+<Info>
+  Bạn có thể truy cập công cụ trực tiếp tại [nudgen.net/email-deliverability-audit](https://nudgen.net/email-deliverability-audit).
+</Info>
+
+## Kiểm tra xác thực cốt lõi
+
+Cuộc kiểm tra thực hiện ba bước kiểm tra thiết yếu trên tên miền của bạn:
+
+### SPF (Sender Policy Framework)
+SPF là một bản ghi DNS liệt kê các máy chủ thư được phép gửi email thay mặt cho tên miền của bạn, giúp ngăn chặn giả mạo.
+- **Đạt**: Bản ghi SPF hợp lệ được phát hiện và định dạng chính xác.
+- **Lỗi**: Không tìm thấy bản ghi SPF hoặc phát hiện nhiều bản ghi xung đột.
+- **Khuyến nghị**: Nudgen cung cấp một mẫu bản ghi SPF chuẩn để khắc phục lỗi "nhiều bản ghi SPF" phổ biến.
+
+### DKIM (DomainKeys Identified Mail)
+DKIM thêm chữ ký số vào email để nhà cung cấp xác minh rằng thư được ủy quyền bởi tên miền của bạn và không bị thay đổi khi truyền đi.
+- **Tự động phát hiện**: Công cụ cố gắng phát hiện các selector phổ biến (như `google`, `selector1`, `k1`).
+- **Selector tùy chỉnh**: Nếu nhà cung cấp của bạn sử dụng selector riêng, bạn có thể nhập thủ công để kiểm tra chính xác.
+
+### DMARC (Domain-based Message Authentication, Reporting, and Conformance)
+DMARC chỉ dẫn nhà cung cấp cách xử lý thư không vượt qua kiểm tra SPF hoặc DKIM, đồng thời gửi báo cáo về các nỗ lực lạm dụng tên miền.
+- **Độ mạnh chính sách**: Nudgen kiểm tra xem chính sách của bạn được đặt thành `none` (theo dõi), `quarantine` (cách ly) hay `reject` (từ chối).
+- **Căn chỉnh**: Đảm bảo bản ghi DMARC của bạn được căn chỉnh chính xác với tên miền.
+
+## Hiểu kết quả
+
+Mỗi lần kiểm tra sẽ trả về một trong ba trạng thái:
+
+- **Đạt (Xanh lục)**: Bản ghi của bạn được cấu hình chính xác và tuân theo các thực hành tốt nhất.
+- **Cảnh báo (Vàng)**: Một bản ghi được tìm thấy nhưng có thể có cơ hội tối ưu hóa (ví dụ: chính sách DMARC được đặt thành `none`).
+- **Lỗi (Đỏ)**: Bản ghi bị thiếu, không hợp lệ hoặc định dạng sai, điều này có khả năng ảnh hưởng đến khả năng gửi.
+
+## Khuyến nghị kỹ thuật
+
+Đối với mọi lần kiểm tra thất bại hoặc bị thiếu, Nudgen cung cấp **các mẫu bản ghi DNS sẵn sàng để sao chép**.
+
+1. **Xác định khoảng trống**: Xem phần "Các bản ghi được đề xuất để xuất bản tiếp theo".
+2. **Sao chép các giá trị**: Sử dụng các nút **Sao chép** để lấy Loại, Tên và Nội dung.
+3. **Cập nhật DNS**: Dán các bản ghi này vào nhà cung cấp DNS của bạn (ví dụ: Cloudflare, GoDaddy, Namecheap).
+4. **Thay thế các phần giữ chỗ**: Đảm bảo bạn thay thế bất kỳ phần giữ chỗ `YOUR_VALUE` nào bằng dữ liệu cụ thể do nhà cung cấp dịch vụ email của bạn cung cấp.
+
+## Câu hỏi thường gặp
+
+<AccordionGroup>
+  <Accordion title="SPF là gì?">
+    SPF (Sender Policy Framework) là một bản ghi DNS liệt kê các máy chủ thư được phép gửi email thay mặt cho tên miền của bạn, giúp ngăn chặn giả mạo.
+  </Accordion>
+  <Accordion title="DKIM là gì?">
+    DKIM (DomainKeys Identified Mail) thêm chữ ký số vào email để nhà cung cấp xác minh rằng thư được ủy quyền bởi tên miền của bạn và không bị thay đổi khi truyền đi.
+  </Accordion>
+  <Accordion title="DMARC là gì?">
+    DMARC chỉ dẫn nhà cung cấp cách xử lý thư không vượt qua kiểm tra SPF hoặc DKIM, đồng thời gửi báo cáo về các nỗ lực lạm dụng tên miền.
+  </Accordion>
+  <Accordion title="Công cụ này có đảm bảo email vào hộp thư chính không?">
+    Chỉ riêng công cụ này là không đủ. Nó kiểm tra nền tảng kỹ thuật (DNS), nhưng khả năng vào inbox còn phụ thuộc vào danh tiếng, nội dung và hành vi gửi.
+  </Accordion>
+  <Accordion title="Tại sao DKIM hiển thị cảnh báo thay vì lỗi?">
+    Nhiều nhà cung cấp sử dụng selector riêng. Nếu không tìm thấy selector chuẩn, chúng tôi sẽ gợi ý bạn nhập selector chính xác để kiểm tra kỹ hơn.
+  </Accordion>
+  <Accordion title="Các bản ghi này có thể sao chép và sử dụng ngay không?">
+    Đây là các mẫu chuẩn cho đúng loại bản ghi và host, nhưng bạn cần thay thế các phần giữ chỗ bằng giá trị thực từ nhà cung cấp dịch vụ của mình.
+  </Accordion>
+</AccordionGroup>
+
+## Bước tiếp theo
+
+<CardGroup cols={2}>
+  <Card title="Chạy kiểm tra" icon="shield-check" href="https://nudgen.net/email-deliverability-audit">
+    Kiểm tra xác thực tên miền của bạn ngay bây giờ.
+  </Card>
+  <Card title="Phân tích Spam" icon="magnifying-glass" href="/vi/spam-checker/overview">
+    Phân tích nội dung email của bạn để tìm các tác nhân spam.
+  </Card>
+</CardGroup>
