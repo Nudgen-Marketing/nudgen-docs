@@ -1,0 +1,81 @@
+---
+title: "E-Mail für Agenten"
+description: "Geben Sie Claude Code, Codex, Cursor, OpenClaw und Ihren eigenen Agenten strukturierte Möglichkeiten, Nudgen zu installieren, Ihren Stack zu migrieren, Events zu senden und mit Nudgen zu arbeiten."
+---
+
+## Einführung
+
+Nudgen wurde für die Ära der Agenten (Agentic Era) entwickelt. Wir bieten strukturierte Möglichkeiten für KI-Agenten wie **Claude Code**, **Codex**, **Cursor** und **OpenClaw**, um mit Ihrem Marketing-Stack zu interagieren.
+
+Ob Sie Nudgen in einer neuen App installieren, von einem alten Anbieter migrieren oder komplexe Kampagnen-Workflows automatisieren müssen – unsere Agent-First-Schnittstellen gewährleisten hohe Zuverlässigkeit und Entwicklereffizienz.
+
+<CardGroup cols={3}>
+  <Card title="Skills" icon="book-open" href="/de/agents/skills">
+    Kombinierbare Module, die Ihrem Agenten beibringen, wie er mit Nudgen arbeitet. Installation mit einem einzigen Befehl.
+  </Card>
+  <Card title="CLI" icon="terminal" href="/de/agents/cli/introduction">
+    Go-basiertes Command Center für die Orchestrierung und Nachverfolgung direkt im Terminal.
+  </Card>
+  <Card title="API" icon="code" href="/de/agents/api">
+    REST-API mit Personal Access Token (PAT) Authentifizierung für die programmatische Verwaltung.
+  </Card>
+</CardGroup>
+
+## Kompatibel mit
+
+- **Codex**
+- **Claude Code**
+- **Cursor**
+- **OpenClaw**
+
+## Anwendungsfälle
+
+Wie sieht agentenbasiertes Marketing in der Realität aus? Hier sind einige gängige Workflows:
+
+### „Teste diese transaktionale E-Mail über das Terminal“
+**Was der Agent tut:** Nutzt das CLI, um eine Test-E-Mail mit Ihrer Template-ID und Beispieldaten-Variablen zu senden. Zeigt den Antwortstatus und die Zustellbestätigung an.
+
+**Was Sie abschließen:** Überprüfen Sie Ihren Posteingang, begutachten Sie die gerenderte E-Mail und veröffentlichen Sie das Template, wenn es bereit ist.
+
+---
+
+### „Auditiere mein E-Mail-Setup und übertrage es auf Nudgen“
+**Was der Agent tut:** Scannt Ihre Codebase nach Aufrufen von E-Mail-Providern, identifiziert jeden Versand, jedes Template und jeden Webhook. Ordnet jedes Element einem Nudgen-Äquivalent zu und erstellt einen dateibasierten Migrationsplan.
+
+**Was Sie abschließen:** Erstellen Sie die Templates im Nudgen-Editor neu, konfigurieren Sie die Abmelde- und Webhook-Einstellungen im Dashboard.
+
+---
+
+### „Sende ein Stornierungs-Event an Nudgen“
+**Was der Agent tut:** Verbindet Ihren Stripe-Webhook-Handler, um die Nudgen Events API aufzurufen, wenn ein Abonnement gekündigt wird. Legt den Event-Namen fest und ordnet relevante Eigenschaften zu (Plan, Grund, Datum).
+
+**Was Sie abschließen:** Erstellen Sie den Stornierungs-Nudgen im Dashboard und definieren Sie bei Bedarf benutzerdefinierte Kontakteigenschaften.
+
+---
+
+### „Installiere Nudgen in meiner Next.js-App“
+**Was der Agent tut:** Erkennt Next.js, installiert das JavaScript SDK, verknüpft den NUDGEN_API_KEY aus der .env-Datei, erstellt eine Route zur Kontaktsynchronisierung sowie ein Beispiel für den transaktionalen Versand und gibt eine Test-Checkliste aus.
+
+**Was Sie abschließen:** Fügen Sie Ihren API-Schlüssel im Nudgen-Dashboard hinzu, veröffentlichen Sie Ihr transaktionales E-Mail-Template und verifizieren Sie den Testversand.
+
+## Ressourcen
+
+<CardGroup cols={2}>
+  <Card title="CLI-Repository" icon="github" href="https://github.com/Nudgen-Marketing/nudgen-cli">
+    Quellcode des Go-basierten Command Centers.
+  </Card>
+  <Card title="Skills-Repository" icon="github" href="https://github.com/Nudgen-Marketing/skills">
+    Bibliothek für agentenbasierte Marketing-Skills.
+  </Card>
+</CardGroup>
+
+## Roadmap
+
+Wir erweitern ständig die Fähigkeiten unserer Agenten:
+
+- **Setup-Skill**: (Demnächst) Erkennt Ihren Stack, verknüpft die Authentifizierung und erstellt funktionierende Beispiele.
+- **Migrate-Skill**: (Demnächst) Auditiert Ihren Stack und erstellt einen Migrationsplan.
+- **Programmierbare E-Mail-Erstellung**: (Demnächst) Schreiben Sie E-Mail-Templates direkt als Code.
+- **MCP-Server**: (Demnächst) Native Unterstützung für das Model Context Protocol.
+
+Als Nächstes: Erkunden Sie die [Agent-Skills](/de/agents/skills).

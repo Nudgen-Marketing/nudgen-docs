@@ -1,0 +1,81 @@
+---
+title: "Email for Agents"
+description: "Give Claude Code, Codex, Cursor, OpenClaw and your own agents structured ways to install Nudgen, migrate your stack, send events, and work with Nudgen."
+---
+
+## Introduction
+
+Nudgen is built for the agentic era. We provide structured ways for AI agents like **Claude Code**, **Codex**, **Cursor**, and **OpenClaw** to interact with your marketing stack.
+
+Whether you need to install Nudgen in a new app, migrate from a legacy provider, or automate complex campaign workflows, our agent-first interfaces ensure high reliability and developer efficiency.
+
+<CardGroup cols={3}>
+  <Card title="Skills" icon="book-open" href="/en/agents/skills">
+    Composable modules that teach your agent how to work with Nudgen. Install with a single command.
+  </Card>
+  <Card title="CLI" icon="terminal" href="/en/agents/cli/introduction">
+    Go-powered command center for orchestration and tracking from the terminal.
+  </Card>
+  <Card title="API" icon="code" href="/en/agents/api">
+    REST API with Personal Access Token auth for programmatic management.
+  </Card>
+</CardGroup>
+
+## Works With
+
+- **Codex**
+- **Claude Code**
+- **Cursor**
+- **OpenClaw**
+
+## Use Cases
+
+What does agentic marketing look like in reality? Here are a few common workflows:
+
+### "Test this transactional email from the terminal"
+**What the agent does:** Uses the CLI to send a test transactional email with your template ID and sample data variables. Shows the response status and delivery confirmation.
+
+**What you finish:** Check your inbox, review the rendered email, publish the template when ready.
+
+---
+
+### "Audit my email setup and map it to Nudgen"
+**What the agent does:** Scans your codebase for email provider calls, identifies every send, template, and webhook. Maps each to a Nudgen equivalent and produces a file-by-file migration plan.
+
+**What you finish:** Recreate templates in the Nudgen editor, configure unsubscribe and webhook settings in the dashboard.
+
+---
+
+### "Send a cancellation event into Nudgen"
+**What the agent does:** Wires your Stripe webhook handler to call the Nudgen events API when a subscription is canceled. Sets event name, maps relevant properties (plan, reason, date).
+
+**What you finish:** Create the cancellation Nudgen in the dashboard, define custom contact properties if needed.
+
+---
+
+### "Install Nudgen in my Next.js app"
+**What the agent does:** Detects Next.js, installs the JavaScript SDK, wires NUDGEN_API_KEY from .env, creates a contact sync route and transactional send example, outputs a testing checklist.
+
+**What you finish:** Add your API key in the Nudgen dashboard, publish your transactional email template, verify the test send.
+
+## Resources
+
+<CardGroup cols={2}>
+  <Card title="CLI Repository" icon="github" href="https://github.com/Nudgen-Marketing/nudgen-cli">
+    Go-powered command center source code.
+  </Card>
+  <Card title="Skills Repository" icon="github" href="https://github.com/Nudgen-Marketing/skills">
+    Agentic marketing skills library.
+  </Card>
+</CardGroup>
+
+## Roadmap
+
+We are constantly expanding our agent capabilities:
+
+- **Setup skill**: (Soon) Detects your stack, wires auth, and creates working examples.
+- **Migrate skill**: (Soon) Audits your stack and builds a migration plan.
+- **Programmable email authoring**: (Next) Write email templates using code.
+- **MCP server**: (Next) Native Model Context Protocol support.
+
+Next, explore the [Agent Skills](/en/agents/skills).

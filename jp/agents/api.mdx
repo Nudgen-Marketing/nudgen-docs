@@ -1,0 +1,67 @@
+---
+title: "開発者向けAPI"
+description: "個人アクセスアクセストークン認証を備えたREST API。連絡先、キャンペーン、テンプレート、設定をプログラムで管理できます。"
+---
+
+## 概要
+
+Nudgen開発者向けAPIは、マーケティングインフラを管理するための、クリーンでリソース指向のRESTインターフェースを提供します。すべてのリクエストは標準のHTTPメソッドを使用し、予測可能なJSONレスポンスを返します。
+
+<CardGroup cols={3}>
+  <Card title="PAT認証" icon="shield-check">
+    標準のBearerヘッダーを介して、個人アクセスアクセストークン（PAT）で認証します。
+  </Card>
+  <Card title="クリーンなREST" icon="globe">
+    標準のHTTPメソッドを使用した、予測可能でリソース指向のURL。
+  </Card>
+  <Card title="レート制限" icon="gauge">
+    ワークフローを保護するため、チームおよびエンドポイントごとに組み込みのレート制限が適用されます。
+  </Card>
+</CardGroup>
+
+## 認証
+
+すべてのAPIリクエストには、 `Authorization` ヘッダーを介して渡される個人アクセスアクセストークン（PAT）が必要です。トークンは、Nudgenダッシュボードの **設定 → APIキー** から生成できます。
+
+```bash
+curl -X GET https://app.nudgen.com/api/v1/user/me \
+  -H "Authorization: Bearer <your-pat>"
+```
+
+## ベースURL
+
+すべてのAPIリクエストのベースURLは以下の通りです：
+`https://app.nudgen.com`
+
+## エンドポイント
+
+### 認証とアイデンティティ
+- `GET /api/v1/user/me`: 現在認証されているユーザーを取得します。
+- `GET /api/v1/teams`: 現在のユーザーのすべてのチームを一覧表示します。
+- `POST /api/v1/teams/switch`: アクティブなチームコンテキストを切り替えます。
+
+### 連絡先
+- `GET /api/v1/contacts`: ページネーション、検索、タグフィルターを使用して連絡先を一覧表示します。
+- `POST /api/v1/contacts/add`: 新しい連絡先を作成します。
+- `GET /api/v1/contacts/:id`: 特定の連絡先を取得します。
+- `PATCH /api/v1/contacts/:id`: 既存の連絡先を更新します。
+- `DELETE /api/v1/contacts/:id`: 連絡先を削除します。
+
+### キャンペーン
+- `GET /api/v1/campaigns`: 現在のチームのキャンペーンを一覧表示します。
+- `POST /api/v1/campaigns`: 新しいキャンペーンを作成します。
+- `GET /api/v1/campaigns/:id`: キャンペーンの詳細を取得します。
+- `GET /api/v1/campaigns/:id/stats`: キャンペーンの配信統計を取得します。
+
+### テンプレート
+- `GET /api/v1/templates`: メールテンプレートを一覧表示します。
+- `POST /api/v1/templates`: 新しいメールテンプレートを作成します。
+
+### 設定
+- `GET /api/v1/settings/brand`: ブランド設定を取得します。
+- `PATCH /api/v1/settings/brand`: ブランド設定を更新します。
+
+## OpenAPI仕様
+
+完全なOpenAPI仕様はこちらからダウンロードできます：
+[openapi.json](https://app.nudgen.com/api/openapi.json)

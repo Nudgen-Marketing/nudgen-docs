@@ -1,0 +1,81 @@
+---
+title: "Email pour les Agents"
+description: "Donnez à Claude Code, Codex, Cursor, OpenClaw et vos propres agents des moyens structurés pour installer Nudgen, migrer votre stack, envoyer des événements et travailler avec Nudgen."
+---
+
+## Introduction
+
+Nudgen est conçu pour l'ère des agents (Agentic Era). Nous fournissons des moyens structurés pour que les agents d'IA comme **Claude Code**, **Codex**, **Cursor** et **OpenClaw** interagissent avec votre stack marketing.
+
+Que vous ayez besoin d'installer Nudgen dans une nouvelle application, de migrer depuis un ancien fournisseur ou d'automatiser des flux de travail de campagne complexes, nos interfaces axées sur les agents garantissent une grande fiabilité et une efficacité accrue pour les développeurs.
+
+<CardGroup cols={3}>
+  <Card title="Skills" icon="book-open" href="/fr/agents/skills">
+    Des modules composables qui apprennent à votre agent comment travailler avec Nudgen. Installation en une seule commande.
+  </Card>
+  <Card title="CLI" icon="terminal" href="/fr/agents/cli/introduction">
+    Centre de commande propulsé par Go pour l'orchestration et le suivi depuis le terminal.
+  </Card>
+  <Card title="API" icon="code" href="/fr/agents/api">
+    API REST avec authentification par jeton d'accès personnel (PAT) pour une gestion programmatique.
+  </Card>
+</CardGroup>
+
+## Fonctionne avec
+
+- **Codex**
+- **Claude Code**
+- **Cursor**
+- **OpenClaw**
+
+## Cas d'utilisation
+
+À quoi ressemble le marketing par agents en réalité ? Voici quelques flux de travail courants :
+
+### "Teste cet email transactionnel depuis le terminal"
+**Ce que fait l'agent :** Utilise la CLI pour envoyer un email transactionnel de test avec votre ID de modèle et des variables de données d'exemple. Affiche l'état de la réponse et la confirmation de livraison.
+
+**Ce que vous terminez :** Vérifiez votre boîte de réception, examinez l'email rendu, publiez le modèle quand il est prêt.
+
+---
+
+### "Audit ma configuration email et mappe-la vers Nudgen"
+**Ce que fait l'agent :** Scanne votre codebase à la recherche d'appels de fournisseurs d'emails, identifie chaque envoi, modèle et webhook. Mappe chacun vers un équivalent Nudgen et produit un plan de migration fichier par fichier.
+
+**Ce que vous terminez :** Recréez les modèles dans l'éditeur Nudgen, configurez les paramètres de désabonnement et de webhook dans le tableau de bord.
+
+---
+
+### "Envoie un événement d'annulation à Nudgen"
+**Ce que fait l'agent :** Configure votre gestionnaire de webhook Stripe pour appeler l'API d'événements Nudgen lors d'une annulation d'abonnement. Définit le nom de l'événement, mappe les propriétés pertinentes (plan, raison, date).
+
+**Ce que vous terminez :** Créez le Nudgen d'annulation dans le tableau de bord, définissez des propriétés de contact personnalisées si nécessaire.
+
+---
+
+### "Installe Nudgen dans mon application Next.js"
+**Ce que fait l'agent :** Détecte Next.js, installe le SDK JavaScript, connecte NUDGEN_API_KEY depuis .env, crée une route de synchronisation des contacts et un exemple d'envoi transactionnel, puis génère une checklist de test.
+
+**Ce que vous terminez :** Ajoutez votre clé API dans le tableau de bord Nudgen, publiez votre modèle d'email transactionnel, vérifiez l'envoi test.
+
+## Ressources
+
+<CardGroup cols={2}>
+  <Card title="Dépôt CLI" icon="github" href="https://github.com/Nudgen-Marketing/nudgen-cli">
+    Code source du centre de commande propulsé par Go.
+  </Card>
+  <Card title="Dépôt Skills" icon="github" href="https://github.com/Nudgen-Marketing/skills">
+    Bibliothèque de compétences marketing pour agents.
+  </Card>
+</CardGroup>
+
+## Feuille de route
+
+Nous élargissons constamment les capacités de nos agents :
+
+- **Setup skill** : (Bientôt) Détecte votre stack, connecte l'authentification et crée des exemples fonctionnels.
+- **Migrate skill** : (Bientôt) Audite votre stack et élabore un plan de migration.
+- **Rédaction d'emails programmable** : (À venir) Écrivez des modèles d'emails en utilisant du code.
+- **Serveur MCP** : (À venir) Support natif du Model Context Protocol.
+
+Ensuite, explorez les [Compétences d'Agent (Agent Skills)](/fr/agents/skills).

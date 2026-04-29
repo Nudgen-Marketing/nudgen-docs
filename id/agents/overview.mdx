@@ -1,0 +1,81 @@
+---
+title: "Email untuk Agen"
+description: "Berikan Claude Code, Codex, Cursor, OpenClaw, dan agen Anda sendiri cara terstruktur untuk menginstal Nudgen, memigrasikan stack Anda, mengirim event, dan bekerja dengan Nudgen."
+---
+
+## Pendahuluan
+
+Nudgen dibangun untuk era agen (Agentic Era). Kami menyediakan cara terstruktur bagi agen AI seperti **Claude Code**, **Codex**, **Cursor**, dan **OpenClaw** untuk berinteraksi dengan stack pemasaran Anda.
+
+Baik Anda perlu menginstal Nudgen di aplikasi baru, bermigrasi dari penyedia lama, atau mengotomatiskan alur kerja kampanye yang kompleks, antarmuka prioritas agen kami memastikan keandalan tinggi dan efisiensi pengembang.
+
+<CardGroup cols={3}>
+  <Card title="Skills" icon="book-open" href="/id/agents/skills">
+    Modul yang dapat disusun yang mengajarkan agen Anda cara bekerja dengan Nudgen. Instal dengan satu perintah.
+  </Card>
+  <Card title="CLI" icon="terminal" href="/id/agents/cli/introduction">
+    Pusat komando berbasis Go untuk orkestrasi dan pelacakan dari terminal.
+  </Card>
+  <Card title="API" icon="code" href="/id/agents/api">
+    REST API dengan autentikasi Personal Access Token (PAT) untuk manajemen terprogram.
+  </Card>
+</CardGroup>
+
+## Bekerja Dengan
+
+- **Codex**
+- **Claude Code**
+- **Cursor**
+- **OpenClaw**
+
+## Kasus Penggunaan
+
+Seperti apa pemasaran berbasis agen dalam kenyataan? Berikut adalah beberapa alur kerja umum:
+
+### "Uji email transaksional ini dari terminal"
+**Apa yang dilakukan agen:** Menggunakan CLI untuk mengirim email transaksional uji dengan ID templat dan variabel data sampel Anda. Menampilkan status respons dan konfirmasi pengiriman.
+
+**Apa yang Anda selesaikan:** Periksa kotak masuk Anda, tinjau email yang dirender, publikasikan templat saat sudah siap.
+
+---
+
+### "Audit pengaturan email saya dan petakan ke Nudgen"
+**Apa yang dilakukan agen:** Memindai basis kode Anda untuk panggilan penyedia email, mengidentifikasi setiap pengiriman, templat, dan webhook. Memetakan masing-masing ke padanan Nudgen dan menghasilkan rencana migrasi file-demi-file.
+
+**Apa yang Anda selesaikan:** Buat ulang templat di editor Nudgen, konfigurasikan pengaturan berhenti berlangganan dan webhook di dasbor.
+
+---
+
+### "Kirim event pembatalan ke Nudgen"
+**Apa yang dilakukan agen:** Menghubungkan handler webhook Stripe Anda untuk memanggil API event Nudgen saat langganan dibatalkan. Menetapkan nama event, memetakan properti yang relevan (plan, alasan, tanggal).
+
+**Apa yang Anda selesaikan:** Buat Nudgen (alur) pembatalan di dasbor, tentukan properti kontak kustom jika diperlukan.
+
+---
+
+### "Instal Nudgen di aplikasi Next.js saya"
+**Apa yang dilakukan agen:** Mendeteksi Next.js, menginstal SDK JavaScript, menghubungkan NUDGEN_API_KEY dari .env, membuat rute sinkronisasi kontak dan contoh pengiriman transaksional, serta mengeluarkan daftar periksa pengujian.
+
+**Apa yang Anda selesaikan:** Tambahkan kunci API Anda di dasbor Nudgen, publikasikan templat email transaksional Anda, verifikasi pengiriman uji.
+
+## Sumber Daya
+
+<CardGroup cols={2}>
+  <Card title="Repositori CLI" icon="github" href="https://github.com/Nudgen-Marketing/nudgen-cli">
+    Kode sumber pusat komando berbasis Go.
+  </Card>
+  <Card title="Repositori Skills" icon="github" href="https://github.com/Nudgen-Marketing/skills">
+    Perpustakaan keterampilan pemasaran berbasis agen.
+  </Card>
+</CardGroup>
+
+## Peta Jalan
+
+Kami terus memperluas kemampuan agen kami:
+
+- **Setup skill**: (Segera) Mendeteksi stack Anda, menghubungkan autentikasi, dan membuat contoh yang berfungsi.
+- **Migrate skill**: (Segera) Mengaudit stack Anda dan membangun rencana migrasi.
+- **Penulisan email terprogram**: (Berikutnya) Tulis templat email menggunakan kode.
+- **Server MCP**: (Berikutnya) Dukungan Model Context Protocol asli.
+
+Berikutnya, jelajahi [Keterampilan Agen (Agent Skills)](/id/agents/skills).

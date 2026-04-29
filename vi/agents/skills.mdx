@@ -1,0 +1,54 @@
+---
+title: "Kỹ năng dành cho Agent (Skills)"
+description: "Skills là các mô-đun có thể kết hợp giúp dạy cho agent lập trình của bạn cách làm việc với Nudgen. Cài đặt chúng chỉ với một lệnh duy nhất."
+---
+
+## Thêm khả năng cho agent của bạn
+
+Nudgen Skills là các hướng dẫn và tập lệnh mô-đun được thiết kế cho các agent lập trình như Claude Code, Codex và Cursor. Chúng mở rộng sự hiểu biết của agent về các quy trình marketing và các mẫu tích hợp của Nudgen.
+
+<CardGroup cols={2}>
+  <Card title="GitHub Repository" icon="github" href="https://github.com/Nudgen-Marketing/skills">
+    Xem tất cả các kỹ năng chính thức trên GitHub.
+  </Card>
+  <Card title="Tài liệu API" icon="book-open" href="/vi/agents/api">
+    Tìm hiểu về API nền tảng.
+  </Card>
+</CardGroup>
+
+## Các kỹ năng hiện có
+
+### Kỹ năng CLI (CLI Skill)
+Cài đặt và xác thực Nudgen CLI, quản lý nhóm, danh bạ, chiến dịch, nhận diện thương hiệu và theo dõi lượt giới thiệu (referral).
+
+```bash
+npx skills add https://github.com/Nudgen-Marketing/skills --global --skill cli
+```
+
+**Chi tiết**: Cài đặt, xác thực qua PAT và quản lý danh bạ, chiến dịch, nhận diện thương hiệu và dữ liệu giới thiệu từ terminal. Hỗ trợ chuyển đổi ngữ cảnh giữa nhiều nhóm và xuất dữ liệu `--json` cho việc viết tập lệnh.
+
+---
+
+### Kỹ năng API (API Skill)
+Các thao tác CRUD danh bạ, chiến dịch, nhóm, cấu hình thương hiệu, số liệu thống kê, dữ liệu liên kết (affiliate), mẫu SDK, giới hạn tốc độ (rate limits) và mã định danh duy nhất (idempotency keys).
+
+```bash
+npx skills add https://github.com/Nudgen-Marketing/skills --global --skill api
+```
+
+**Chi tiết**: Bao gồm danh bạ, chiến dịch, mẫu email, cài đặt thương hiệu, quản lý nhóm, mẫu SDK so với REST API, giới hạn tốc độ, mã định danh duy nhất và xử lý lỗi. Sử dụng `Authorization: Bearer <PAT>` để xác thực.
+
+---
+
+### Kỹ năng Thực hành Email Tốt nhất
+Kỹ năng email đa dụng. Kiểm tra khả năng gửi (deliverability), cấu trúc và các mẫu vòng đời (lifecycle). Hoạt động dù có hay không có Nudgen.
+
+```bash
+npx skills add https://github.com/Nudgen-Marketing/skills --global --skill email-sending-best-practices
+```
+
+**Chi tiết**: Xác thực người gửi (SPF, DKIM, DMARC), kiểm tra sự tách biệt giữa email giao dịch và email marketing, xem xét việc xử lý hủy đăng ký, gắn cờ các giai đoạn vòng đời còn thiếu và chấm điểm nội dung theo các bộ lọc thư rác (spam triggers).
+
+## Đóng góp
+
+Chúng tôi hoan nghênh các đóng góp từ cộng đồng cho thư viện kỹ năng. Nếu bạn đã xây dựng một kỹ năng hữu ích cho Nudgen hoặc tự động hóa marketing nói chung, vui lòng mở một PR trên [GitHub repository](https://github.com/Nudgen-Marketing/skills) của chúng tôi.

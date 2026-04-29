@@ -1,0 +1,67 @@
+---
+title: "API dành cho nhà phát triển"
+description: "REST API với xác thực bằng Personal Access Token. Quản lý danh bạ, chiến dịch, mẫu và cài đặt bằng lập trình."
+---
+
+## Tổng quan
+
+Nudgen Developer API cung cấp giao diện REST sạch sẽ, hướng tài nguyên để quản lý cơ sở hạ tầng marketing của bạn. Tất cả các yêu cầu đều sử dụng các phương thức HTTP tiêu chuẩn và trả về các phản hồi JSON có thể dự đoán được.
+
+<CardGroup cols={3}>
+  <Card title="Xác thực PAT" icon="shield-check">
+    Xác thực bằng Personal Access Tokens thông qua tiêu đề Bearer tiêu chuẩn.
+  </Card>
+  <Card title="REST sạch sẽ" icon="globe">
+    Các URL hướng tài nguyên, có thể dự đoán được với các phương thức HTTP tiêu chuẩn.
+  </Card>
+  <Card title="Giới hạn tốc độ" icon="gauge">
+    Tích hợp sẵn tính năng giới hạn tốc độ (rate limiting) cho mỗi nhóm và điểm cuối để bảo vệ quy trình làm việc của bạn.
+  </Card>
+</CardGroup>
+
+## Xác thực
+
+Tất cả các yêu cầu API đều yêu cầu Personal Access Token (PAT) được truyền qua tiêu đề `Authorization`. Bạn có thể tạo token từ bảng điều khiển Nudgen trong phần **Cài đặt → API Keys**.
+
+```bash
+curl -X GET https://app.nudgen.com/api/v1/user/me \
+  -H "Authorization: Bearer <your-pat>"
+```
+
+## URL cơ sở
+
+URL cơ sở cho tất cả các yêu cầu API là:
+`https://app.nudgen.com`
+
+## Các điểm cuối (Endpoints)
+
+### Xác thực & Danh tính
+- `GET /api/v1/user/me`: Lấy thông tin người dùng hiện tại đã xác thực.
+- `GET /api/v1/teams`: Liệt kê tất cả các nhóm của người dùng hiện tại.
+- `POST /api/v1/teams/switch`: Chuyển đổi ngữ cảnh nhóm đang hoạt động.
+
+### Danh bạ
+- `GET /api/v1/contacts`: Liệt kê danh bạ với phân trang, tìm kiếm và bộ lọc thẻ (tag).
+- `POST /api/v1/contacts/add`: Tạo danh bạ mới.
+- `GET /api/v1/contacts/:id`: Lấy thông tin một danh bạ cụ thể.
+- `PATCH /api/v1/contacts/:id`: Cập nhật danh bạ hiện có.
+- `DELETE /api/v1/contacts/:id`: Xóa một danh bạ.
+
+### Chiến dịch
+- `GET /api/v1/campaigns`: Liệt kê các chiến dịch trong nhóm hiện tại.
+- `POST /api/v1/campaigns`: Tạo một chiến dịch mới.
+- `GET /api/v1/campaigns/:id`: Lấy chi tiết chiến dịch.
+- `GET /api/v1/campaigns/:id/stats`: Lấy số liệu thống kê gửi chiến dịch.
+
+### Mẫu (Templates)
+- `GET /api/v1/templates`: Liệt kê các mẫu email.
+- `POST /api/v1/templates`: Tạo một mẫu email mới.
+
+### Cài đặt
+- `GET /api/v1/settings/brand`: Lấy cấu hình thương hiệu.
+- `PATCH /api/v1/settings/brand`: Cập nhật cài đặt thương hiệu.
+
+## Đặc tả OpenAPI
+
+Bạn có thể tải xuống đặc tả OpenAPI đầy đủ của chúng tôi tại đây:
+[openapi.json](https://app.nudgen.com/api/openapi.json)

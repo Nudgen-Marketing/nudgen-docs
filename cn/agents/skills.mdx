@@ -1,0 +1,54 @@
+---
+title: "智能体技能"
+description: "技能是可组合的模块，教您的编程智能体如何使用 Nudgen。一键安装。"
+---
+
+## 为您的智能体增加能力
+
+Nudgen 技能是专为 Claude Code、Codex 和 Cursor 等编程智能体设计的模块化指令和脚本。它们扩展了智能体对营销工作流和 Nudgen 集成模式的理解。
+
+<CardGroup cols={2}>
+  <Card title="GitHub 仓库" icon="github" href="https://github.com/Nudgen-Marketing/skills">
+    在 GitHub 上查看所有官方技能。
+  </Card>
+  <Card title="API 参考" icon="book-open" href="/cn/agents/api">
+    了解底层 API。
+  </Card>
+</CardGroup>
+
+## 可用技能
+
+### CLI 技能
+安装并认证 Nudgen CLI，管理团队、联系人、营销活动、品牌身份和推荐追踪。
+
+```bash
+npx skills add https://github.com/Nudgen-Marketing/skills --global --skill cli
+```
+
+**详情**：安装、通过 PAT 认证，并在终端管理联系人、营销活动、品牌身份和推荐数据。支持多团队上下文切换和用于脚本编写的 `--json` 输出。
+
+---
+
+### API 技能
+联系人增删改查 (CRUD)、营销活动、团队、品牌配置、统计数据、联盟计划数据、SDK 模式、速率限制和幂等性密钥 (Idempotency keys)。
+
+```bash
+npx skills add https://github.com/Nudgen-Marketing/skills --global --skill api
+```
+
+**详情**：涵盖联系人、营销活动、模板、品牌设置、团队管理、SDK 与 REST API 模式、速率限制、幂等性密钥和错误处理。使用 `Authorization: Bearer <PAT>` 进行认证。
+
+---
+
+### 邮件最佳实践技能
+通用邮件技能。审计送达率、结构和生命周期模式。无论是否使用 Nudgen 均可工作。
+
+```bash
+npx skills add https://github.com/Nudgen-Marketing/skills --global --skill email-sending-best-practices
+```
+
+**详情**：验证发件人身份验证 (SPF、DKIM、DMARC)，检查事务性与营销邮件分离，审查退订处理，标记缺失的生命周期阶段，并针对垃圾邮件触发因素对内容进行评分。
+
+## 贡献
+
+我们欢迎社区为我们的技能库做出贡献。如果您为 Nudgen 或通用营销自动化构建了实用的技能，请在我们的 [GitHub 仓库](https://github.com/Nudgen-Marketing/skills) 中提交 PR。

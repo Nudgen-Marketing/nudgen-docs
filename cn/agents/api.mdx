@@ -1,0 +1,67 @@
+---
+title: "开发者 API"
+description: "使用个人访问令牌认证的 REST API。以编程方式管理联系人、营销活动、模板和设置。"
+---
+
+## 概述
+
+Nudgen 开发者 API 提供了一个干净、面向资源的 REST 接口，用于管理您的营销基础设施。所有请求都使用标准的 HTTP 方法，并返回可预测的 JSON 响应。
+
+<CardGroup cols={3}>
+  <Card title="PAT 认证" icon="shield-check">
+    通过标准的 Bearer 请求头使用个人访问令牌进行身份认证。
+  </Card>
+  <Card title="标准 REST" icon="globe">
+    采用标准 HTTP 方法、可预测且面向资源的 URL。
+  </Card>
+  <Card title="速率限制" icon="gauge">
+    每个团队和端点内置速率限制，以保护您的工作流。
+  </Card>
+</CardGroup>
+
+## 身份认证
+
+所有 API 请求都需要通过 `Authorization` 请求头传递个人访问令牌 (PAT)。您可以从 Nudgen 控制面板的 **设置 → API 密钥** 中生成令牌。
+
+```bash
+curl -X GET https://app.nudgen.com/api/v1/user/me \
+  -H "Authorization: Bearer <your-pat>"
+```
+
+## 基准 URL
+
+所有 API 请求的基准 URL 为：
+`https://app.nudgen.com`
+
+## 端点
+
+### 认证与身份
+- `GET /api/v1/user/me`：获取当前认证的用户。
+- `GET /api/v1/teams`：列出当前用户的所有团队。
+- `POST /api/v1/teams/switch`：切换活跃团队上下文。
+
+### 联系人
+- `GET /api/v1/contacts`：列出联系人，支持分页、搜索和标签过滤。
+- `POST /api/v1/contacts/add`：创建新联系人。
+- `GET /api/v1/contacts/:id`：检索特定联系人。
+- `PATCH /api/v1/contacts/:id`：更新现有联系人。
+- `DELETE /api/v1/contacts/:id`：删除联系人。
+
+### 营销活动
+- `GET /api/v1/campaigns`：列出当前团队中的营销活动。
+- `POST /api/v1/campaigns`：创建新营销活动。
+- `GET /api/v1/campaigns/:id`：获取营销活动详情。
+- `GET /api/v1/campaigns/:id/stats`：获取营销活动发送统计。
+
+### 模板
+- `GET /api/v1/templates`：列出邮件模板。
+- `POST /api/v1/templates`：创建新邮件模板。
+
+### 设置
+- `GET /api/v1/settings/brand`：获取品牌配置。
+- `PATCH /api/v1/settings/brand`：更新品牌设置。
+
+## OpenAPI 规范
+
+您可以在此处下载我们完整的 OpenAPI 规范：
+[openapi.json](https://app.nudgen.com/api/openapi.json)

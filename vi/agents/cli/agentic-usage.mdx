@@ -1,0 +1,52 @@
+---
+title: "Sử dụng cho AI Agent"
+description: "Cách sử dụng Nudgen CLI như một giao diện cho các AI Agent."
+---
+
+## Tổng quan
+
+Nudgen CLI được thiết kế với phương pháp tiếp cận **Ưu tiên AI (AI-First)**. Mặc dù nó cung cấp giao diện TUI đẹp mắt cho con người, nhưng mọi lệnh cũng được tối ưu hóa cho giao tiếp giữa máy với máy.
+
+### Mẫu thiết kế Agent (The Agentic Pattern)
+
+Khi một AI Agent (như Claude, GPT hoặc một agent tự động hóa chuyên dụng) sử dụng CLI, nó nên tuân theo các mẫu sau:
+
+1. **Xuất JSON**: Thêm `--json` vào mọi lệnh để nhận dữ liệu mà máy tính có thể phân tích được.
+2. **Nhận biết ngữ cảnh**: Luôn xác minh ngữ cảnh nhóm trước khi thực hiện các thao tác.
+3. **Không tương tác**: Sử dụng các cờ (flags) để bỏ qua các lời nhắc TUI tương tác.
+
+## Tự động hóa JSON
+
+Mọi lệnh liệt kê và trạng thái đều hỗ trợ cờ `--json`. Lệnh này trả về một cấu trúc JSON sạch thay vì một bảng được định dạng.
+
+```bash
+# Lấy tất cả các chiến dịch dưới dạng JSON
+nudgen campaigns list --json
+
+# Lấy danh bạ trong nhóm hiện tại
+nudgen contacts list --json
+```
+
+## Quy trình làm việc đa khách hàng (Multi-tenant) cho Agent
+
+Vì Nudgen hỗ trợ nhiều nhóm, một agent phải đảm bảo nó đang hoạt động trên đúng nhóm trước khi tạo hoặc cập nhật tài nguyên.
+
+**Quy trình làm việc được khuyến nghị:**
+
+1. **Kiểm tra nhóm hiện tại**:
+   ```bash
+   nudgen teams current --json
+   ```
+2. **Chuyển đổi nhóm (nếu cần)**:
+   Nếu `id` từ bước trước không khớp với nhóm mục tiêu, hãy chuyển đổi:
+   ```bash
+   nudgen teams switch <target-team-id>
+   ```
+3. **Thực thi lệnh dữ liệu**:
+   Tiếp tục với các lệnh `campaigns`, `contacts` hoặc `brand`.
+
+## Thực hành tốt nhất cho nhà phát triển Agent
+
+- **Xử lý lỗi**: Theo dõi mã thoát (exit code) của các lệnh CLI. Mã thoát khác không cho thấy lỗi (xác thực, mạng hoặc ủy quyền).
+- **Giới hạn tốc độ (Rate Limiting)**: CLI giao tiếp với Nudgen API. Đảm bảo các tập lệnh agent của bạn xử lý các giới hạn tốc độ tiềm ẩn một cách khéo léo.
+- **Chế độ im lặng**: Nếu một lệnh không hỗ trợ cờ cụ thể cho mọi lời nhắc, hãy đảm bảo agent của bạn có thể xử lý các luồng stdout/stderr mà không bị kẹt trong vòng lặp TUI.

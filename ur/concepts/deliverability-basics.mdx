@@ -1,31 +1,31 @@
 ---
-title: "Deliverability basics"
-description: "How we keep your emails out of spam"
+title: "ڈیلیوریبلٹی کی بنیادی باتیں"
+description: "ہم آپ کی ای میلز کو اسپیم سے کیسے دور رکھتے ہیں"
 ---
 
-## What is deliverability?
+## ڈیلیوریبلٹی (Deliverability) کیا ہے؟
 
-**Deliverability** means your emails reach the inbox instead of spam or being blocked. It depends on sender reputation, content, and recipient engagement. Nudgen and the delivery provider work to keep your campaigns deliverable.
+**ڈیلیوریبلٹی** کا مطلب یہ ہے کہ آپ کی ای میلز اسپیم میں جانے یا بلاک ہونے کے بجائے ان باکس (inbox) تک پہنچیں۔ اس کا انحصار بھیجنے والے کی ساکھ، مواد اور وصول کنندہ کی دلچسپی پر ہوتا ہے۔ Nudgen اور ڈیلیوری فراہم کنندہ آپ کی مہمات کو قابل ترسیل رکھنے کے لیے کام کرتے ہیں۔
 
-## What we do
+## ہم کیا کرتے ہیں
 
-- **Sending via our email provider** — Emails are sent through a trusted delivery provider with good infrastructure and reputation.
-- **Validation and suppression** — We validate addresses and sync with the provider’s suppression list (bounces, complaints). We don’t resend to addresses that have hard bounced or been marked as spam.
-- **Content checks** — Before send, we can run basic checks (e.g. spam-prone wording) so you can fix issues. Signatures and HTML are sanitized to avoid injection and risky content.
-- **Tracking and unsubscribe** — Opens and clicks use tracking pixels and signed links. Every campaign includes an unsubscribe link so recipients can opt out; we honor that and stop sending to them.
+- **ہمارے ای میل فراہم کنندہ کے ذریعے بھیجنا** — ای میلز ایک قابل اعتماد ڈیلیوری فراہم کنندہ کے ذریعے بھیجی جاتی ہیں جس کا انفراسٹرکچر اور ساکھ اچھی ہے۔
+- **تصدیق اور سپریشن (Suppression)** — ہم پتوں (addresses) کی تصدیق کرتے ہیں اور فراہم کنندہ کی سپریشن لسٹ (باؤنسز، شکایات) کے ساتھ ہم آہنگ کرتے ہیں۔ ہم ان پتوں پر دوبارہ ای میل نہیں بھیجتے جو ہارڈ باؤنس (hard bounced) ہو چکے ہوں یا اسپیم کے طور پر نشان زد کیے گئے ہوں۔
+- **مواد کی جانچ** — بھیجنے سے پہلے، ہم بنیادی جانچ (مثلاً اسپیم کا شکار الفاظ) کر سکتے ہیں تاکہ آپ مسائل کو حل کر سکیں۔ انجکشن اور پرخطر مواد سے بچنے کے لیے دستخطوں اور HTML کو صاف کیا جاتا ہے۔
+- **ٹریکنگ اور ان سبسکرائب** — ای میل اوپنز اور کلکس ٹریکنگ پکسلز اور سائن شدہ لنکس استعمال کرتے ہیں۔ ہر مہم میں ایک ان سبسکرائب لنک شامل ہوتا ہے تاکہ وصول کنندگان آپ کی ای میلز وصول کرنا بند کر سکیں؛ ہم اس کا احترام کرتے ہیں اور انہیں ای میل بھیجنا بند کر دیتے ہیں۔
 
-## What you can do
+## آپ کیا کر سکتے ہیں
 
-- **Keep your list clean** — Remove or fix bounced and invalid addresses. Don’t buy lists or add contacts who didn’t opt in.
-- **Respect unsubscribes** — Don’t manually re-add unsubscribed users to campaigns without consent.
-- **Use a clear From name and reply-to** — Set brand identity (Settings → Brand) so recipients recognize you.
-- **Avoid spammy content** — Write clear, relevant copy and avoid aggressive sales language or misleading subject lines.
-- **Watch your metrics** — High bounce or complaint rates hurt reputation. Use the [Dashboard](/en/dashboard/overview) and [Campaign analytics](/en/campaigns/analytics) to spot problems.
+- **اپنی فہرست کو صاف رکھیں** — باؤنس شدہ اور غلط پتوں کو ہٹائیں یا درست کریں۔ ایسی فہرستیں نہ خریدیں یا ایسے رابطے شامل نہ کریں جنہوں نے رضامندی نہ دی ہو۔
+- **ان سبسکرائب کا احترام کریں** — ان سبسکرائب کرنے والے صارفین کو رضامندی کے بغیر دستی طور پر دوبارہ مہمات میں شامل نہ کریں۔
+- **واضح نام اور جواب دہ ای میل استعمال کریں** — برانڈ کی شناخت (Settings ← Brand) ترتیب دیں تاکہ وصول کنندگان آپ کو پہچان سکیں۔
+- **اسپیم والے مواد سے پرہیز کریں** — واضح اور متعلقہ کاپی لکھیں اور جارحانہ سیلز زبان یا گمراہ کن سبجیکٹ لائنز سے بچیں۔
+- **اپنے میٹرکس پر نظر رکھیں** — باؤنس یا شکایت کی زیادہ شرح ساکھ کو نقصان پہنچاتی ہے۔ مسائل کی نشاندہی کے لیے [Dashboard](/ur/dashboard/overview) اور [Campaign analytics](/ur/campaigns/analytics) استعمال کریں۔
 
-## Bounces and complaints
+## باؤنسز اور شکایات
 
-- **Soft bounce** — Temporary failure (mailbox full, server down). The provider may retry; repeated soft bounces can lead to suppression.
-- **Hard bounce** — Permanent failure (invalid address, domain doesn’t exist). We suppress these immediately.
-- **Spam complaint** — Recipient marked the email as spam. Too many complaints damage reputation; we suppress complainers and you should review content and targeting.
+- **سافٹ باؤنس (Soft bounce)** — عارضی ناکامی (میل باکس بھرا ہوا، سرور ڈاؤن)۔ فراہم کنندہ دوبارہ کوشش کر سکتا ہے؛ بار بار سافٹ باؤنس ہونے کی صورت میں سپریشن ہو سکتی ہے۔
+- **ہارڈ باؤنس (Hard bounce)** — مستقل ناکامی (غلط پتہ، ڈومین کا وجود نہیں ہے)۔ ہم انہیں فوری طور پر روک دیتے ہیں۔
+- **اسپیم شکایت** — وصول کنندہ نے ای میل کو اسپیم کے طور پر نشان زد کیا۔ بہت زیادہ شکایات ساکھ کو نقصان پہنچاتی ہیں؛ ہم شکایت کرنے والوں کو فہرست سے نکال دیتے ہیں اور آپ کو مواد اور ٹارگٹنگ کا جائزہ لینا چاہیے۔
 
-For more on contact status and suppression, see [Contact lifecycle](/en/contacts/lifecycle) and [Contacts overview](/en/contacts/overview). For sending issues, see [Troubleshooting: deliverability](/en/troubleshooting/deliverability).
+رابطے کی حیثیت اور سپریشن کے بارے میں مزید جاننے کے لیے [Contact lifecycle](/ur/contacts/lifecycle) اور [Contacts overview](/ur/contacts/overview) دیکھیں۔ بھیجنے کے مسائل کے لیے [Troubleshooting: deliverability](/ur/troubleshooting/deliverability) دیکھیں۔

@@ -1,0 +1,67 @@
+---
+title: "Developer API"
+description: "REST API with Personal Access Token authentication. Manage contacts, campaigns, templates, and settings programmatically."
+---
+
+## Overview
+
+The Nudgen Developer API provides a clean, resource-oriented REST interface for managing your marketing infrastructure. All requests use standard HTTP methods and return predictable JSON responses.
+
+<CardGroup cols={3}>
+  <Card title="PAT Auth" icon="shield-check">
+    Authenticate with Personal Access Tokens via standard Bearer header.
+  </Card>
+  <Card title="Clean REST" icon="globe">
+    Predictable, resource-oriented URLs with standard HTTP methods.
+  </Card>
+  <Card title="Rate Limited" icon="gauge">
+    Built-in rate limiting per team and endpoint to protect your workflows.
+  </Card>
+</CardGroup>
+
+## Authentication
+
+All API requests require a Personal Access Token (PAT) passed via the `Authorization` header. You can generate tokens from your Nudgen dashboard under **Settings → API Keys**.
+
+```bash
+curl -X GET https://app.nudgen.com/api/v1/user/me \
+  -H "Authorization: Bearer <your-pat>"
+```
+
+## Base URL
+
+The base URL for all API requests is:
+`https://app.nudgen.com`
+
+## Endpoints
+
+### Auth & Identity
+- `GET /api/v1/user/me`: Get current authenticated user.
+- `GET /api/v1/teams`: List all teams for the current user.
+- `POST /api/v1/teams/switch`: Switch active team context.
+
+### Contacts
+- `GET /api/v1/contacts`: List contacts with pagination, search, and tag filters.
+- `POST /api/v1/contacts/add`: Create a new contact.
+- `GET /api/v1/contacts/:id`: Retrieve a specific contact.
+- `PATCH /api/v1/contacts/:id`: Update an existing contact.
+- `DELETE /api/v1/contacts/:id`: Delete a contact.
+
+### Campaigns
+- `GET /api/v1/campaigns`: List campaigns in current team.
+- `POST /api/v1/campaigns`: Create a new campaign.
+- `GET /api/v1/campaigns/:id`: Get campaign details.
+- `GET /api/v1/campaigns/:id/stats`: Get campaign delivery statistics.
+
+### Templates
+- `GET /api/v1/templates`: List email templates.
+- `POST /api/v1/templates`: Create a new email template.
+
+### Settings
+- `GET /api/v1/settings/brand`: Get brand configuration.
+- `PATCH /api/v1/settings/brand`: Update brand settings.
+
+## OpenAPI Specification
+
+You can download our full OpenAPI specification here:
+[openapi.json](https://app.nudgen.com/api/openapi.json)

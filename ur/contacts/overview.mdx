@@ -1,64 +1,64 @@
 ---
-title: "Contacts overview"
-description: "How Nudgen stores, encrypts, and displays your contact data"
+title: "رابطوں کا جائزہ"
+description: "Nudgen آپ کے رابطے کے ڈیٹا کو کیسے اسٹور، انکرپٹ اور ڈسپلے کرتا ہے"
 ---
 
-## What this page helps you do
+## یہ صفحہ آپ کی کیا مدد کرتا ہے
 
-Understand how contacts are stored, why they appear masked, and how to use tags for segmentation. This sets you up to upload contacts and build campaigns confidently.
+سمجھیں کہ رابطے کیسے اسٹور کیے جاتے ہیں، وہ ماسک شدہ (masked) کیوں ظاہر ہوتے ہیں، اور سیگمنٹیشن کے لیے ٹیگز کا استعمال کیسے کیا جاتا ہے۔ یہ آپ کو اعتماد کے ساتھ رابطے اپ لوڈ کرنے اور مہمات بنانے کے لیے تیار کرتا ہے۔
 
-## Before you start
+## شروع کرنے سے پہلے
 
-- A Nudgen account
-- A CSV file with at least one email address (see [upload guide](/en/contacts/upload) for format)
+- ایک Nudgen اکاؤنٹ
+- کم از کم ایک ای میل ایڈریس والی CSV فائل (فارمیٹ کے لیے [upload guide](/ur/contacts/upload) دیکھیں)
 
-## How contact data is stored
+## رابطے کا ڈیٹا کیسے اسٹور کیا جاتا ہے
 
-Nudgen encrypts every piece of personally identifiable information (PII) before it is saved:
+Nudgen ذاتی طور پر قابل شناخت معلومات (PII) کے ہر ٹکڑے کو محفوظ کرنے سے پہلے انکرپٹ (encrypt) کرتا ہے:
 
-- **Emails** — AES-256 encrypted. We cannot read them.
-- **Names** — Encrypted if provided. Optional in your CSV.
-- **Custom metadata** — Any extra columns you upload are encrypted as well.
+- **ای میلز** — AES-256 انکرپٹڈ۔ ہم انہیں پڑھ نہیں سکتے۔
+- **نام** — اگر فراہم کیے جائیں تو انکرپٹڈ۔ آپ کی CSV میں نام اختیاری ہیں۔
+- **کسٹم میٹا ڈیٹا** — آپ کے اپ لوڈ کردہ تمام اضافی کالم بھی انکرپٹ کیے جاتے ہیں۔
 
-We also store a one-way hash of each email for deduplication. Duplicate emails in the same list are merged automatically.
+ہم ڈپلیکیٹس کو ہٹانے کے لیے ہر ای میل کا ون وے ہیش (one-way hash) بھی اسٹور کرتے ہیں۔ ایک ہی فہرست میں موجود ڈپلیکیٹ ای میلز کو خود بخود ضم کر دیا جاتا ہے۔
 
-## Masked view
+## ماسک شدہ منظر (Masked view)
 
-By default, the contact list shows masked values like `j***@g***.com` instead of real addresses. PII is encrypted at rest; we never see or store plaintext emails or names. Masking protects your data from shoulder-surfing and limits exposure if someone else has access to your screen.
+پہلے سے طے شدہ طور پر، رابطوں کی فہرست حقیقی پتوں کے بجائے `j***@g***.com` جیسی ماسک شدہ اقدار دکھاتی ہے۔ PII اسٹوریج میں انکرپٹڈ ہوتی ہے؛ ہم کبھی بھی سادہ ٹیکسٹ ای میلز یا نام نہیں دیکھتے یا اسٹور نہیں کرتے۔ ماسکنگ آپ کے ڈیٹا کی حفاظت کرتی ہے اور اگر کوئی اور آپ کی اسکرین دیکھ رہا ہو تو اسے ڈیٹا نظر نہیں آتا۔
 
-**Revealing a contact:** You (and other workspace members with access) can click **Reveal** to show the real email and name in the UI. Decryption happens only in your browser when you reveal; after you navigate away or refresh, values mask again. We never display decrypted PII in analytics, logs, or exports.
+**رابطہ ظاہر کرنا:** آپ (اور ورک اسپیس کے دیگر ممبرز جنہیں رسائی حاصل ہے) UI میں اصلی ای میل اور نام دیکھنے کے لیے **Reveal** پر کلک کر سکتے ہیں۔ ڈیکرپشن صرف آپ کے براؤزر میں اس وقت ہوتی ہے جب آپ ریویل کرتے ہیں؛ صفحہ تبدیل کرنے یا ریفریش کرنے کے بعد، اقدار دوبارہ ماسک ہو جاتی ہیں۔ ہم تجزیات، لاگز یا ایکسپورٹ میں کبھی بھی ڈیکرپٹڈ PII نہیں دکھاتے۔
 
-## Tags and segmentation
+## ٹیگز اور سیگمنٹیشن (Tags and segmentation)
 
-Assign tags when you upload contacts or edit them later. Use tags to target specific segments in campaigns:
+رابطے اپ لوڈ کرتے وقت یا بعد میں ان میں ترمیم کرتے وقت ٹیگز تفویض کریں۔ مہمات میں مخصوص حصوں (segments) کو نشانہ بنانے کے لیے ٹیگز استعمال کریں:
 
-- `inactive` — Users who haven't logged in for 30+ days
-- `vip` — High-value or premium customers
-- `trial` — People on a free trial
+- `inactive` — وہ صارفین جنہوں نے 30+ دنوں سے لاگ ان نہیں کیا
+- `vip` — اعلیٰ قدر والے یا پریمیم صارفین
+- `trial` — وہ لوگ جو فری ٹرائل پر ہیں
 
-When creating a campaign, you choose an audience: all contacts, or only those with certain tags. Tags make it easy to run different sequences for different segments.
+مہم بناتے وقت، آپ سامعین کا انتخاب کرتے ہیں: تمام رابطے، یا صرف وہ جن کے پاس مخصوص ٹیگز ہوں۔ ٹیگز مختلف حصوں کے لیے مختلف سلسلے چلانا آسان بنا دیتے ہیں۔
 
-## Contact statuses
+## رابطے کے اسٹیٹس (Contact statuses)
 
-Contacts can have one of these statuses:
+رابطوں کی درج ذیل میں سے کوئی ایک حالت ہو سکتی ہے:
 
-- **Active** — Can receive campaigns. Default for newly imported contacts.
-- **Unsubscribed** — Opted out via the unsubscribe link or manually. They will not receive future campaign emails unless you change their status.
-- **Suppressed / Bounced** — Delivery failed (invalid address, mailbox full, or provider suppression list). These contacts are automatically excluded from future sends to protect deliverability. Our system syncs with the delivery provider's suppression list.
+- **فعال (Active)** — مہمات وصول کر سکتے ہیں۔ نئے درآمد شدہ رابطوں کے لیے پہلے سے طے شدہ۔
+- **ان سبسکرائب شدہ (Unsubscribed)** — ان سبسکرائب لنک کے ذریعے یا دستی طور پر ای میلز وصول کرنا بند کر دیا۔ جب تک آپ ان کا اسٹیٹس تبدیل نہیں کریں گے، وہ مستقبل کی مہم کی ای میلز وصول نہیں کریں گے۔
+- **سپریس شدہ / باؤنس شدہ (Suppressed / Bounced)** — ترسیل ناکام ہوگئی (غلط پتہ، میل باکس بھرا ہوا، یا فراہم کنندہ کی سپریشن لسٹ)۔ ڈیلیوریبلٹی کی حفاظت کے لیے ان رابطوں کو خود بخود مستقبل کی ترسیل سے خارج کر دیا جاتا ہے۔ ہمارا سسٹم ڈیلیوری فراہم کنندہ کی سپریشن لسٹ کے ساتھ ہم آہنگ رہتا ہے۔
 
-## What happens next
+## آگے کیا ہوگا
 
-- [Upload a CSV](/en/contacts/upload) to add contacts.
-- [Create a campaign](/en/campaigns/create) and select your audience by tags or all contacts.
-- Check [plan limits](/en/billing/overview) for max contacts per plan.
+- رابطے شامل کرنے کے لیے [CSV اپ لوڈ کریں](/ur/contacts/upload)۔
+- ایک [مہم بنائیں](/ur/campaigns/create) اور ٹیگز یا تمام رابطوں کے ذریعے اپنے سامعین کا انتخاب کریں۔
+- زیادہ سے زیادہ رابطوں کے لیے [plan limits](/ur/billing/overview) چیک کریں۔
 
-## Related docs
+## متعلقہ دستاویزات
 
 <CardGroup cols={2}>
-  <Card title="Upload contacts" icon="file-upload" href="/en/contacts/upload">
-    CSV format, validation, and tag assignment.
+  <Card title="رابطے اپ لوڈ کریں" icon="file-upload" href="/ur/contacts/upload">
+    CSV فارمیٹ، تصدیق اور ٹیگ تفویض۔
   </Card>
-  <Card title="Create campaigns" icon="paper-plane" href="/en/campaigns/create">
-    Choose audience and launch your first campaign.
+  <Card title="مہمات بنانا" icon="paper-plane" href="/ur/campaigns/create">
+    سامعین کا انتخاب کریں اور اپنی پہلی مہم شروع کریں۔
   </Card>
 </CardGroup>

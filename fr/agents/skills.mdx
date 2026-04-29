@@ -1,0 +1,54 @@
+---
+title: "Compétences d'Agent (Skills)"
+description: "Les Skills sont des modules composables qui apprennent à votre agent de codage comment travailler avec Nudgen. Installez-les avec une seule commande."
+---
+
+## Ajoutez des capacités à votre agent
+
+Les Nudgen Skills sont des instructions et des scripts modulaires conçus pour les agents de codage comme Claude Code, Codex et Cursor. Ils étendent la compréhension de votre agent sur les flux de travail marketing et les schémas d'intégration de Nudgen.
+
+<CardGroup cols={2}>
+  <Card title="Dépôt GitHub" icon="github" href="https://github.com/Nudgen-Marketing/skills">
+    Voir toutes les compétences officielles sur GitHub.
+  </Card>
+  <Card title="Référence API" icon="book-open" href="/fr/agents/api">
+    En savoir plus sur l'API sous-jacente.
+  </Card>
+</CardGroup>
+
+## Compétences disponibles
+
+### Skill CLI
+Installer et authentifier la CLI Nudgen, gérer les équipes, les contacts, les campagnes, les identités de marque et le suivi des parrainages.
+
+```bash
+npx skills add https://github.com/Nudgen-Marketing/skills --global --skill cli
+```
+
+**Détails** : Installation, authentification via PAT, et gestion des contacts, campagnes, identités de marque et données de parrainage depuis le terminal. Prend en charge le changement de contexte multi-équipes et la sortie `--json` pour le scripting.
+
+---
+
+### Skill API
+CRUD des contacts, campagnes, équipes, configurations de marque, statistiques, données d'affiliation, schémas SDK, limites de débit et clés d'idempotence.
+
+```bash
+npx skills add https://github.com/Nudgen-Marketing/skills --global --skill api
+```
+
+**Détails** : Couvre les contacts, les campagnes, les modèles, les paramètres de marque, la gestion d'équipe, les schémas SDK vs REST API, les limites de débit, les clés d'idempotence et la gestion des erreurs. Utilise `Authorization: Bearer <PAT>` pour l'authentification.
+
+---
+
+### Skill Bonnes Pratiques Email
+Compétence email à usage général. Audite la délivrabilité, la structure et les schémas de cycle de vie. Fonctionne avec ou sans Nudgen.
+
+```bash
+npx skills add https://github.com/Nudgen-Marketing/skills --global --skill email-sending-best-practices
+```
+
+**Détails** : Valide l'authentification de l'expéditeur (SPF, DKIM, DMARC), vérifie la séparation entre emails transactionnels et marketing, examine la gestion des désabonnements, signale les étapes de cycle de vie manquantes et évalue le contenu pour les déclencheurs de spam.
+
+## Contribution
+
+Nous accueillons les contributions de la communauté à notre bibliothèque de compétences. Si vous avez créé une compétence utile pour Nudgen ou l'automatisation du marketing en général, veuillez ouvrir une PR sur notre [dépôt GitHub](https://github.com/Nudgen-Marketing/skills).

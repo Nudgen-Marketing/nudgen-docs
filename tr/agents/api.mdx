@@ -1,0 +1,67 @@
+---
+title: "Geliştirici API'sı"
+description: "Kişisel Erişim Jetonu (PAT) kimlik doğrulamalı REST API. Kişileri, kampanyaları, şablonları ve ayarları programlı olarak yönetin."
+---
+
+## Genel Bakış
+
+Nudgen Geliştirici API'sı, pazarlama altyapınızı yönetmek için temiz ve kaynak yönelimli bir REST arayüzü sunar. Tüm istekler standart HTTP yöntemlerini kullanır ve öngörülebilir JSON yanıtları döndürür.
+
+<CardGroup cols={3}>
+  <Card title="PAT Kimlik Doğrulama" icon="shield-check">
+    Standart Bearer başlığı aracılığıyla Kişisel Erişim Jetonları ile kimlik doğrulaması yapın.
+  </Card>
+  <Card title="Temiz REST" icon="globe">
+    Standart HTTP yöntemlerine sahip öngörülebilir, kaynak yönelimli URL'ler.
+  </Card>
+  <Card title="Hız Sınırlamalı" icon="gauge">
+    İş akışlarınızı korumak için ekip ve uç nokta (endpoint) başına yerleşik hız sınırlaması.
+  </Card>
+</CardGroup>
+
+## Kimlik Doğrulama
+
+Tüm API istekleri, `Authorization` başlığı aracılığıyla iletilen bir Kişisel Erişim Jetonu (PAT) gerektirir. Jetonları Nudgen panelinizde **Ayarlar → API Anahtarları** altından oluşturabilirsiniz.
+
+```bash
+curl -X GET https://app.nudgen.com/api/v1/user/me \
+  -H "Authorization: Bearer <your-pat>"
+```
+
+## Temel URL
+
+Tüm API istekleri için temel URL şöyledir:
+`https://app.nudgen.com`
+
+## Uç Noktalar (Endpoints)
+
+### Kimlik Doğrulama ve Kimlik
+- `GET /api/v1/user/me`: Mevcut kimliği doğrulanmış kullanıcıyı getirir.
+- `GET /api/v1/teams`: Mevcut kullanıcı için tüm ekipleri listeler.
+- `POST /api/v1/teams/switch`: Aktif ekip bağlamını değiştirir.
+
+### Kişiler
+- `GET /api/v1/contacts`: Sayfalandırma, arama ve etiket filtreleri ile kişileri listeler.
+- `POST /api/v1/contacts/add`: Yeni bir kişi oluşturur.
+- `GET /api/v1/contacts/:id`: Belirli bir kişiyi getirir.
+- `PATCH /api/v1/contacts/:id`: Mevcut bir kişiyi günceller.
+- `DELETE /api/v1/contacts/:id`: Bir kişiyi siler.
+
+### Kampanyalar
+- `GET /api/v1/campaigns`: Mevcut ekipteki kampanyaları listeler.
+- `POST /api/v1/campaigns`: Yeni bir kampanya oluşturur.
+- `GET /api/v1/campaigns/:id`: Kampanya detaylarını getirir.
+- `GET /api/v1/campaigns/:id/stats`: Kampanya gönderim istatistiklerini getirir.
+
+### Şablonlar
+- `GET /api/v1/templates`: E-posta şablonlarını listeler.
+- `POST /api/v1/templates`: Yeni bir e-posta şablonu oluşturur.
+
+### Ayarlar
+- `GET /api/v1/settings/brand`: Marka yapılandırmasını getirir.
+- `PATCH /api/v1/settings/brand`: Marka ayarlarını günceller.
+
+## OpenAPI Spesifikasyonu
+
+Tam OpenAPI spesifikasyonumuzu buradan indirebilirsiniz:
+[openapi.json](https://app.nudgen.com/api/openapi.json)

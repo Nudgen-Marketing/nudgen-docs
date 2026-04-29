@@ -1,0 +1,52 @@
+---
+title: "Nutzung durch KI-Agenten"
+description: "Wie Sie das Nudgen CLI als Schnittstelle für KI-Agenten nutzen."
+---
+
+## Übersicht
+
+Das Nudgen CLI wurde mit einem **AI-First**-Ansatz entwickelt. Während es für Menschen eine ansprechende TUI bietet, ist jeder Befehl auch für die Maschine-zu-Maschine-Kommunikation optimiert.
+
+### Das Agenten-Muster
+
+Wenn ein KI-Agent (wie Claude, GPT oder ein spezialisierter Automatisierungsagent) das CLI nutzt, sollte er diesen Mustern folgen:
+
+1. **JSON-Ausgabe**: Hängen Sie an jeden Befehl `--json` an, um maschinenlesbare Daten zu erhalten.
+2. **Kontextbewusstsein**: Überprüfen Sie vor der Ausführung von Operationen immer den Team-Kontext.
+3. **Nicht-interaktiv**: Nutzen Sie Flags, um interaktive TUI-Abfragen zu umgehen.
+
+## JSON-Automatisierung
+
+Jeder Listen- und Statusbefehl unterstützt ein `--json`-Flag. Dies gibt eine saubere JSON-Struktur anstelle einer formatierten Tabelle zurück.
+
+```bash
+# Alle Kampagnen als JSON abrufen
+nudgen campaigns list --json
+
+# Kontakte im aktuellen Team abrufen
+nudgen contacts list --json
+```
+
+## Multi-Tenant-Workflow für Agenten
+
+Da Nudgen mehrere Teams unterstützt, muss ein Agent sicherstellen, dass er im richtigen Team agiert, bevor er Ressourcen erstellt oder aktualisiert.
+
+**Empfohlener Workflow:**
+
+1. **Aktuelles Team prüfen**:
+   ```bash
+   nudgen teams current --json
+   ```
+2. **Team wechseln (falls erforderlich)**:
+   Wenn die `id` aus dem vorherigen Schritt nicht mit dem Ziel-Team übereinstimmt, wechseln Sie das Team:
+   ```bash
+   nudgen teams switch <target-team-id>
+   ```
+3. **Datenbefehl ausführen**:
+   Fahren Sie mit `campaigns`-, `contacts`- oder `brand`-Befehlen fort.
+
+## Best Practices für Agenten-Entwickler
+
+- **Fehlerbehandlung**: Überwachen Sie den Exit-Code von CLI-Befehlen. Ein Exit-Code ungleich Null weist auf einen Fehler hin (Validierung, Netzwerk oder Authentifizierung).
+- **Rate Limiting**: Das CLI kommuniziert mit der Nudgen API. Stellen Sie sicher, dass Ihre Agenten-Skripte potenzielle Ratenbegrenzungen (Rate Limits) grazil behandeln.
+- **Silent-Modus**: Wenn ein Befehl kein spezifisches Flag für jede Abfrage unterstützt, stellen Sie sicher, dass Ihr Agent stdout/stderr-Streams verarbeiten kann, ohne in einer TUI-Schleife hängenzubleiben.

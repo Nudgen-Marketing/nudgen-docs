@@ -1,0 +1,72 @@
+---
+title: "تثبيت واجهة السطر البرمجي (CLI)"
+description: "ابدأ مع واجهة السطر البرمجي لـ Nudgen على أنظمة macOS أو Linux أو Windows."
+---
+
+## التثبيت السريع
+
+أسهل طريقة لتثبيت Nudgen CLI هي استخدام نص التثبيت المكون من سطر واحد.
+
+### macOS و Linux
+
+قم بتشغيل الأمر التالي في جهازك الطرفي (Terminal):
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/Nudgen-Marketing/nudgen-cli/main/scripts/install.sh | bash
+```
+
+### عبر لغة Go
+
+إذا كان لديك Go 1.22+ مثبتاً، يمكنك تثبيت CLI مباشرة:
+
+```bash
+go install github.com/Nudgen-Marketing/nudgen-cli@latest
+```
+
+### من الكود المصدري
+
+إذا كان لديك Go 1.22+ مثبتاً، يمكنك البناء من الكود المصدري:
+
+```bash
+git clone https://github.com/Nudgen-Marketing/nudgen-cli.git
+cd nudgen-cli
+make build
+```
+
+سيكون الملف الثنائي متاحاً في `./bin/nudgen`.
+
+## الإعداد الأولي
+
+بمجرد التثبيت، تحقق من التثبيت عن طريق التحقق من الإصدار:
+
+```bash
+nudgen version
+```
+
+### المصادقة
+
+لبدء استخدام CLI، تحتاج إلى المصادقة باستخدام رمز وصول شخصي (PAT).
+
+1. قم بتشغيل أمر تسجيل الدخول:
+   ```bash
+   nudgen login
+   ```
+2. اتبع المطالبات التفاعلية لإدخال الرمز الخاص بك.
+3. تحقق من هويتك:
+   ```bash
+   nudgen whoami
+   ```
+
+### التحديث
+
+للتحديث إلى أحدث إصدار، ما عليك سوى تشغيل نص التثبيت مرة أخرى أو استخدام أمر التحديث المدمج (إذا كان متاحاً):
+
+```bash
+nudgen update
+```
+
+## الأمان
+
+تستخدم Nudgen CLI سلسلة مفاتيح النظام (System Keychain) لتخزين PAT الخاص بك بشكل آمن. نحن لا نقوم أبداً بتسجيل أو إظهار الرموز الخام في أي مخرجات للأوامر.
+
+بعد ذلك، استكشف [الأوامر الأساسية](/ar/agents/cli/commands).

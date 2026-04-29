@@ -1,0 +1,52 @@
+---
+title: "Penggunaan Agen AI"
+description: "Cara menggunakan Nudgen CLI sebagai antarmuka untuk Agen AI."
+---
+
+## Ikhtisar
+
+Nudgen CLI dirancang dengan pendekatan **AI-First**. Meskipun menyediakan TUI yang indah untuk manusia, setiap perintah juga dioptimalkan untuk komunikasi antar mesin.
+
+### Pola Agentic
+
+Saat agen AI (seperti Claude, GPT, atau agen otomatisasi khusus) menggunakan CLI, ia harus mengikuti pola-pola berikut:
+
+1. **Output JSON**: Tambahkan `--json` ke setiap perintah untuk mendapatkan data yang dapat diurai mesin.
+2. **Sadar Konteks**: Selalu verifikasi konteks tim sebelum melakukan operasi.
+3. **Non-Interaktif**: Gunakan flag untuk melewati perintah TUI interaktif.
+
+## Otomatisasi JSON
+
+Setiap perintah daftar dan status mendukung flag `--json`. Ini mengembalikan struktur JSON yang bersih, bukan tabel yang diformat.
+
+```bash
+# Dapatkan semua kampanye sebagai JSON
+nudgen campaigns list --json
+
+# Dapatkan kontak di tim saat ini
+nudgen contacts list --json
+```
+
+## Alur Kerja Multi-tenant untuk Agen
+
+Karena Nudgen mendukung banyak tim, agen harus memastikan bahwa ia beroperasi pada tim yang benar sebelum membuat atau memperbarui sumber daya.
+
+**Alur Kerja yang Direkomendasikan:**
+
+1. **Periksa Tim Saat Ini**:
+   ```bash
+   nudgen teams current --json
+   ```
+2. **Ganti Tim (jika perlu)**:
+   Jika `id` dari langkah sebelumnya tidak cocok dengan tim target, ganti:
+   ```bash
+   nudgen teams switch <target-team-id>
+   ```
+3. **Jalankan Perintah Data**:
+   Lanjutkan dengan perintah `campaigns`, `contacts`, atau `brand`.
+
+## Praktik Terbaik untuk Pengembang Agen
+
+- **Penanganan Kesalahan**: Pantau kode keluar (exit code) perintah CLI. Kode keluar non-nol menunjukkan adanya kesalahan (validasi, jaringan, atau autentikasi).
+- **Pembatasan Laju (Rate Limiting)**: CLI berkomunikasi dengan API Nudgen. Pastikan skrip agen Anda menangani potensi pembatasan laju dengan anggun.
+- **Mode Senyap**: Jika perintah tidak mendukung flag tertentu untuk setiap prompt, pastikan agen Anda dapat menangani stream stdout/stderr tanpa terjebak dalam loop TUI.

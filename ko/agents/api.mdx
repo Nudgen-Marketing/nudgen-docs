@@ -1,0 +1,67 @@
+---
+title: "개발자 API"
+description: "개인 액세스 토큰 인증을 사용하는 REST API입니다. 연락처, 캠페인, 템플릿 및 설정을 프로그래밍 방식으로 관리하세요."
+---
+
+## 개요
+
+Nudgen 개발자 API는 마케팅 인프라 관리를 위해 리소스 중심의 깔끔한 REST 인터페이스를 제공합니다. 모든 요청은 표준 HTTP 메서드를 사용하며 예측 가능한 JSON 응답을 반환합니다.
+
+<CardGroup cols={3}>
+  <Card title="PAT 인증" icon="shield-check">
+    표준 Bearer 헤더를 통해 개인 액세스 토큰(PAT)으로 인증합니다.
+  </Card>
+  <Card title="깔끔한 REST" icon="globe">
+    표준 HTTP 메서드를 사용하는 예측 가능한 리소스 중심 URL입니다.
+  </Card>
+  <Card title="요율 제한" icon="gauge">
+    워크플로우 보호를 위해 팀 및 엔드포인트별로 내장된 요율 제한(Rate Limiting)이 적용됩니다.
+  </Card>
+</CardGroup>
+
+## 인증
+
+모든 API 요청에는 `Authorization` 헤더를 통해 전달되는 개인 액세스 토큰(PAT)이 필요합니다. 토큰은 Nudgen 대시보드의 **설정 → API 키** 메뉴에서 생성할 수 있습니다.
+
+```bash
+curl -X GET https://app.nudgen.com/api/v1/user/me \
+  -H "Authorization: Bearer <your-pat>"
+```
+
+## 베이스 URL
+
+모든 API 요청의 베이스 URL은 다음과 같습니다:
+`https://app.nudgen.com`
+
+## 엔드포인트
+
+### 인증 및 ID
+- `GET /api/v1/user/me`: 현재 인증된 사용자 정보를 가져옵니다.
+- `GET /api/v1/teams`: 현재 사용자의 모든 팀 목록을 가져옵니다.
+- `POST /api/v1/teams/switch`: 활성 팀 컨텍스트를 전환합니다.
+
+### 연락처
+- `GET /api/v1/contacts`: 페이지네이션, 검색 및 태그 필터를 사용하여 연락처 목록을 가져옵니다.
+- `POST /api/v1/contacts/add`: 새 연락처를 생성합니다.
+- `GET /api/v1/contacts/:id`: 특정 연락처 정보를 조회합니다.
+- `PATCH /api/v1/contacts/:id`: 기존 연락처 정보를 업데이트합니다.
+- `DELETE /api/v1/contacts/:id`: 연락처를 삭제합니다.
+
+### 캠페인
+- `GET /api/v1/campaigns`: 현재 팀의 캠페인 목록을 가져옵니다.
+- `POST /api/v1/campaigns`: 새 캠페인을 생성합니다.
+- `GET /api/v1/campaigns/:id`: 캠페인 상세 정보를 가져옵니다.
+- `GET /api/v1/campaigns/:id/stats`: 캠페인 도달 통계 정보를 가져옵니다.
+
+### 템플릿
+- `GET /api/v1/templates`: 이메일 템플릿 목록을 가져옵니다.
+- `POST /api/v1/templates`: 새 이메일 템플릿을 생성합니다.
+
+### 설정
+- `GET /api/v1/settings/brand`: 브랜드 설정 정보를 가져옵니다.
+- `PATCH /api/v1/settings/brand`: 브랜드 설정을 업데이트합니다.
+
+## OpenAPI 명세
+
+전체 OpenAPI 명세서는 여기서 다운로드할 수 있습니다:
+[openapi.json](https://app.nudgen.com/api/openapi.json)

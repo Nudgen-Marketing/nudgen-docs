@@ -1,0 +1,67 @@
+---
+title: "ڈویلپر API"
+description: "پرسنل ایکسیس ٹوکن (PAT) توثیق کے ساتھ REST API۔ رابطوں، مہمات، ٹیمپلیٹس اور ترتیبات کو پروگرام کے ذریعے منظم کریں۔"
+---
+
+## جائزہ
+
+Nudgen ڈویلپر API آپ کے مارکیٹنگ انفراسٹرکچر کے انتظام کے لیے ایک صاف ستھرا اور ریسورس پر مبنی REST انٹرفیس فراہم کرتا ہے۔ تمام درخواستیں معیاری HTTP طریقے استعمال کرتی ہیں اور متوقع JSON جوابات واپس کرتی ہیں۔
+
+<CardGroup cols={3}>
+  <Card title="PAT توثیق" icon="shield-check">
+    معیاری Bearer ہیڈر کے ذریعے پرسنل ایکسیس ٹوکنز کے ساتھ توثیق کریں۔
+  </Card>
+  <Card title="صاف REST" icon="globe">
+    معیاری HTTP طریقوں کے ساتھ متوقع اور ریسورس پر مبنی URLs۔
+  </Card>
+  <Card title="ریٹ لمٹڈ" icon="gauge">
+    آپ کے ورک فلوز کی حفاظت کے لیے فی ٹیم اور اینڈ پوائنٹ بلٹ ان ریٹ لمٹنگ۔
+  </Card>
+</CardGroup>
+
+## توثیق (Authentication)
+
+تمام API درخواستوں کے لیے ایک پرسنل ایکسیس ٹوکن (PAT) درکار ہوتا ہے جو `Authorization` ہیڈر کے ذریعے بھیجا جاتا ہے۔ آپ اپنے Nudgen ڈیش بورڈ میں **Settings ← API Keys** کے تحت ٹوکن تیار کر سکتے ہیں۔
+
+```bash
+curl -X GET https://app.nudgen.com/api/v1/user/me \
+  -H "Authorization: Bearer <your-pat>"
+```
+
+## بیس URL
+
+تمام API درخواستوں کے لیے بیس URL یہ ہے:
+`https://app.nudgen.com`
+
+## اینڈ پوائنٹس (Endpoints)
+
+### توثیق اور شناخت
+- `GET /api/v1/user/me`: موجودہ توثیق شدہ صارف کی معلومات حاصل کریں۔
+- `GET /api/v1/teams`: موجودہ صارف کی تمام ٹیموں کی فہرست دیکھیں۔
+- `POST /api/v1/teams/switch`: فعال ٹیم کا سیاق و سباق تبدیل کریں۔
+
+### رابطے (Contacts)
+- `GET /api/v1/contacts`: صفحات، تلاش اور ٹیگ فلٹرز کے ساتھ رابطوں کی فہرست دیکھیں۔
+- `POST /api/v1/contacts/add`: نیا رابطہ بنائیں۔
+- `GET /api/v1/contacts/:id`: کسی مخصوص رابطے کی معلومات حاصل کریں۔
+- `PATCH /api/v1/contacts/:id`: موجودہ رابطے کو اپ ڈیٹ کریں۔
+- `DELETE /api/v1/contacts/:id`: رابطہ حذف کریں۔
+
+### مہمات (Campaigns)
+- `GET /api/v1/campaigns`: موجودہ ٹیم میں مہمات کی فہرست دیکھیں۔
+- `POST /api/v1/campaigns`: نئی مہم بنائیں۔
+- `GET /api/v1/campaigns/:id`: مہم کی تفصیلات حاصل کریں۔
+- `GET /api/v1/campaigns/:id/stats`: مہم کی ترسیل کے اعداد و شمار حاصل کریں۔
+
+### ٹیمپلیٹس
+- `GET /api/v1/templates`: ای میل ٹیمپلیٹس کی فہرست دیکھیں۔
+- `POST /api/v1/templates`: نیا ای میل ٹیمپلیٹ بنائیں۔
+
+### ترتیبات (Settings)
+- `GET /api/v1/settings/brand`: برانڈ کنفیگریشن حاصل کریں۔
+- `PATCH /api/v1/settings/brand`: برانڈ کی ترتیبات اپ ڈیٹ کریں۔
+
+## OpenAPI تفصیلات
+
+آپ ہماری مکمل OpenAPI تفصیلات یہاں سے ڈاؤن لوڈ کر سکتے ہیں:
+[openapi.json](https://app.nudgen.com/api/openapi.json)

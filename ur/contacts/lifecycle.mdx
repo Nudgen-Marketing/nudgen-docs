@@ -1,48 +1,48 @@
 ---
-title: "Contact lifecycle"
-description: "Import, updates, unsubscribes, and suppression"
+title: "رابطے کا لائف سائیکل"
+description: "درآمد (import)، اپ ڈیٹس، ان سبسکرائب اور سپریشن"
 ---
 
-## What this page helps you do
+## یہ صفحہ آپ کی کیا مدد کرتا ہے
 
-Understand how contacts move from import through engagement and suppression. This helps you keep your list healthy and avoid sending to bad or opted-out addresses.
+سمجھیں کہ رابطے درآمد سے لے کر انگیجمنٹ اور سپریشن تک کیسے منتقل ہوتے ہیں۔ اس سے آپ کو اپنی فہرست کو صحت مند رکھنے اور خراب یا آپٹ آؤٹ کیے گئے پتوں پر ای میل بھیجنے سے بچنے میں مدد ملتی ہے۔
 
-## Lifecycle stages
+## لائف سائیکل کے مراحل
 
-### Import and storage
+### درآمد اور اسٹوریج (Import and storage)
 
-- You add contacts via **Upload CSV** or **Add contact**. Emails and names are validated and encrypted at rest.
-- Duplicates (same email in the same workspace) are merged on upload; existing contacts may be updated.
-- New contacts start as **active** and can receive campaigns until something changes their status.
+- آپ **Upload CSV** یا **Add contact** کے ذریعے رابطے شامل کرتے ہیں۔ ای میلز اور ناموں کی تصدیق کی جاتی ہے اور انہیں اسٹوریج میں انکرپٹ کیا جاتا ہے۔
+- اپ لوڈ کے وقت ڈپلیکیٹس (ایک ہی ورک اسپیس میں ایک ہی ای میل) کو ضم کر دیا جاتا ہے؛ موجودہ رابطوں کو اپ ڈیٹ کیا جا سکتا ہے۔
+- نئے رابطے **فعال (active)** کے طور پر شروع ہوتے ہیں اور مہمات وصول کر سکتے ہیں جب تک کہ ان کا اسٹیٹس تبدیل نہ ہو جائے۔
 
-### Active and receiving
+### فعال اور وصول کنندہ
 
-- **Active** contacts count toward your plan limit and can be included in campaign audiences (all, by tags, or manual).
-- They receive emails when you send or run a drip. Opens, clicks, and bounces are recorded and reflected in analytics and suppression.
+- **فعال** رابطے آپ کے پلان کی حد میں شمار ہوتے ہیں اور مہم کے سامعین (تمام، ٹیگز کے ذریعے، یا دستی طور پر) میں شامل کیے جا سکتے ہیں۔
+- جب آپ مہم بھیجتے ہیں یا ڈرپ (drip) چلاتے ہیں تو وہ ای میلز وصول کرتے ہیں۔ ای میل کھولنا، کلک کرنا اور باؤنس ہونا ریکارڈ کیا جاتا ہے اور تجزیات اور سپریشن میں ظاہر ہوتا ہے۔
 
-### Unsubscribe
+### ان سبسکرائب (Unsubscribe)
 
-- When a recipient clicks the **unsubscribe** link in an email, they are marked **unsubscribed** and are excluded from future campaign sends.
-- You can still see them in the contact list. Some teams manually re-subscribe in rare cases; the app respects the unsubscribed status unless you change it.
+- جب کوئی وصول کنندہ ای میل میں موجود **unsubscribe** لنک پر کلک کرتا ہے، تو اسے **unsubscribed** کے طور پر نشان زد کیا جاتا ہے اور اسے مستقبل کی مہم کی ترسیل سے خارج کر دیا جاتا ہے۔
+- آپ اب بھی انہیں رابطوں کی فہرست میں دیکھ سکتے ہیں۔ کچھ ٹیمیں شاذ و نادر صورتوں میں دستی طور پر دوبارہ سبسکرائب کرتی ہیں؛ ایپ ان سبسکرائب شدہ اسٹیٹس کا احترام کرتی ہے جب تک کہ آپ اسے تبدیل نہ کریں۔
 
-### Bounces and suppression
+### باؤنسز اور سپریشن (Bounces and suppression)
 
-- **Soft bounces** (e.g. mailbox full, temporary failure) may be retried by the delivery provider. Repeated failures can lead to suppression.
-- **Hard bounces** (invalid address, domain doesn’t exist) are suppressed immediately. We sync with the delivery provider’s suppression list so those addresses are not used again.
-- Suppressed or bounced contacts are excluded from future sends to protect your sender reputation and deliverability.
+- **سافٹ باؤنسز** (مثلاً میل باکس بھرا ہوا، عارضی ناکامی) کی ڈیلیوری فراہم کنندہ دوبارہ کوشش کر سکتا ہے۔ بار بار ناکامی سپریشن کا باعث بن سکتی ہے۔
+- **ہارڈ باؤنسز** (غلط پتہ، ڈومین کا وجود نہیں ہے) کو فوری طور پر سپریس (suppress) کر دیا جاتا ہے۔ ہم ڈیلیوری فراہم کنندہ کی سپریشن لسٹ کے ساتھ ہم آہنگ رہتے ہیں تاکہ وہ پتے دوبارہ استعمال نہ ہوں۔
+- سپریس شدہ یا باؤنس شدہ رابطوں کو مستقبل کی ترسیل سے خارج کر دیا جاتا ہے تاکہ بھیجنے والے کے طور پر آپ کی ساکھ اور ڈیلیوریبلٹی کی حفاظت کی جا سکے۔
 
-### Updates and deletion
+### اپ ڈیٹس اور حذف کرنا (Deletion)
 
-- You can edit contact details (e.g. name, tags) in the contact list. Re-uploading a CSV with the same email updates that contact.
-- Deleting a contact removes them from the workspace. They no longer count toward limits and cannot receive campaigns.
+- آپ رابطوں کی فہرست میں رابطے کی تفصیلات (مثلاً نام، ٹیگز) میں ترمیم کر سکتے ہیں۔ اسی ای میل کے ساتھ CSV دوبارہ اپ لوڈ کرنے سے وہ رابطہ اپ ڈیٹ ہو جاتا ہے۔
+- رابطے کو حذف کرنے سے وہ ورک اسپیس سے ختم ہو جاتا ہے۔ وہ اب حدود میں شمار نہیں ہوتے اور مہمات وصول نہیں کر سکتے۔
 
-## How this affects campaigns
+## یہ مہمات پر کیسے اثر انداز ہوتا ہے
 
-- When you pick an audience (all, tags, or manual), only **active** contacts that are not suppressed are included. The wizard’s reach estimate reflects that.
-- Drip campaigns skip later steps for contacts who unsubscribed or were suppressed after an earlier step.
+- جب آپ سامعین (تمام، ٹیگز، یا دستی) کا انتخاب کرتے ہیں، تو صرف وہ **فعال** رابطے شامل کیے جاتے ہیں جو سپریس شدہ نہیں ہیں۔ وزرڈ کا رسائی کا اندازہ (reach estimate) اسی کی عکاسی کرتا ہے۔
+- ڈرپ مہمات ان رابطوں کے لیے اگلے مراحل کو چھوڑ دیتی ہیں جنہوں نے ان سبسکرائب کیا ہو یا جو پہلے مرحلے کے بعد سپریس ہو گئے ہوں۔
 
-## What happens next
+## آگے کیا ہوگا
 
-- [Contacts overview](/en/contacts/overview) — Encryption, masking, and tags.
-- [Upload contacts](/en/contacts/upload) — CSV format and validation.
-- [Deliverability basics](/en/concepts/deliverability-basics) — Bounces and sender reputation.
+- [Contacts overview](/ur/contacts/overview) — انکرپشن، ماسکنگ اور ٹیگز۔
+- [Upload contacts](/ur/contacts/upload) — CSV فارمیٹ اور تصدیق۔
+- [Deliverability basics](/ur/concepts/deliverability-basics) — باؤنسز اور بھیجنے والے کی ساکھ۔

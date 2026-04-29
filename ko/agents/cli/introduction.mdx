@@ -1,0 +1,55 @@
+---
+title: "CLI 소개"
+description: "대화형 명령줄 인터페이스(CLI)를 통해 Nudgen 마케팅 자동화 플랫폼을 마스터하세요."
+---
+
+## 개요
+
+Nudgen CLI는 사람과 AI 에이전트 모두를 위해 설계된 강력한 도구입니다. 터미널에서 직접 캠페인, 연락처, 브랜드 아이덴티티 및 추천 통계를 관리할 수 있는 원활한 방법을 제공합니다.
+
+마케팅 워크플로우를 자동화하려는 개발자이든, Nudgen 플랫폼과 고품질 상호 작용이 필요한 AI 에이전트이든 관계없이 CLI는 기본 인터페이스 역할을 합니다.
+
+### 리소스
+
+<CardGroup cols={2}>
+  <Card title="GitHub 리포지토리" icon="github" href="https://github.com/Nudgen-Marketing/nudgen-cli">
+    GitHub에서 Go 기반 소스 코드를 확인하세요.
+  </Card>
+  <Card title="릴리스" icon="download" href="https://github.com/Nudgen-Marketing/nudgen-cli/releases">
+    macOS, Linux 및 Windows용 최신 바이너리를 다운로드하세요.
+  </Card>
+</CardGroup>
+
+### 주요 특징
+
+<CardGroup cols={2}>
+  <Card title="대화형 TUI" icon="terminal">
+    사람 사용자를 위한 대화형 양식과 실시간 통계를 제공하는 아름다운 터미널 사용자 인터페이스입니다.
+  </Card>
+  <Card title="AI 우선 설계" icon="robot">
+    모든 명령이 `--json` 출력을 지원하여 AI 에이전트가 작업을 쉽게 파싱하고 자동화할 수 있습니다.
+  </Card>
+  <Card title="팀 컨텍스트" icon="users-gear">
+    여러 팀 간을 손쉽게 전환하고 특정 팀 컨텍스트 내에서 리소스를 관리합니다.
+  </Card>
+  <Card title="보안" icon="lock">
+    자격 증명이 시스템 키체인에 안전하게 저장되어 데이터가 안전하게 보호됩니다.
+  </Card>
+</CardGroup>
+
+## 목적
+
+CLI는 다음과 같은 여러 역할을 수행합니다:
+
+1. **사람 사용자용**: 웹 브라우저를 열지 않고도 캠페인 목록을 확인하고, 연락처를 가져오고, 추천 수익을 빠르게 확인할 수 있는 방법을 제공합니다.
+2. **AI 에이전트용**: 복잡한 마케팅 홍보 및 브랜드 관리를 자동화하기 위해 기계가 해석 가능한 인터페이스를 제공합니다.
+3. **개발자용**: Nudgen 생태계 내에서의 로컬 개발 및 리포지토리 관리를 위한 헬퍼 도구를 제공합니다.
+
+## 상호 작용 패턴
+
+CLI는 "API를 통한 상호 작용" 원칙을 따릅니다. 로컬에서 세션 상태를 안전하게 관리하면서 표준 RESTful API 호출을 사용하여 Nudgen 백엔드와 통신합니다.
+
+- **JSON 표준**: 모든 명령은 `--json`을 지원합니다. 이는 에이전트 간 통신에 매우 중요합니다.
+- **컨텍스트 인식**: 캠페인 목록 조회와 같은 작업은 활성 팀으로 자동 범위가 지정됩니다.
+
+다음으로 [CLI 설치 방법](/ko/agents/cli/installation)을 알아보세요.

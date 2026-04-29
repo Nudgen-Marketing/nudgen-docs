@@ -1,0 +1,66 @@
+---
+title: "CLI 命令"
+description: "Nudgen CLI 所有命令的参考指南。"
+---
+
+## 概述
+
+探索 Nudgen CLI 中可用的核心命令。大多数命令按资源类型（营销活动、联系人、团队等）分组。
+
+### 身份认证与标识
+
+| 命令 | 描述 |
+| :--- | :--- |
+| `nudgen login` | 使用您的个人访问令牌 (PAT) 进行身份认证。 |
+| `nudgen whoami` | 显示当前令牌所有者和用户信息。 |
+| `nudgen logout` | 清除本地凭据。 |
+
+### 团队管理
+
+| 命令 | 描述 |
+| :--- | :--- |
+| `nudgen teams list` | 列出您所属的所有团队。 |
+| `nudgen teams current` | 显示当前活跃的团队上下文。 |
+| `nudgen teams switch <id>` | 切换到特定团队。 |
+
+### 营销活动
+
+在活跃团队中管理营销推广工作。
+
+| 命令 | 描述 |
+| :--- | :--- |
+| `nudgen campaigns list` | 列出当前团队中的活跃营销活动。 |
+| `nudgen campaigns create` | 交互式创建向导。 |
+| `nudgen campaigns update <id>` | 修改现有的营销活动设置。 |
+| `nudgen campaigns delete <id>` | 删除营销活动记录。 |
+
+### 联系人 (潜在客户管理)
+
+| 命令 | 描述 |
+| :--- | :--- |
+| `nudgen contacts list` | 列出当前团队中的所有潜在客户。 |
+| `nudgen contacts create` | 手动添加新的潜在客户记录。 |
+| `nudgen contacts import` | 用于批量导入的交互式 CSV 映射工具。 |
+| `nudgen contacts update <id>` | 编辑潜在客户详情。 |
+| `nudgen contacts delete <id>` | 删除联系人记录。 |
+
+### 品牌身份
+
+| 命令 | 描述 |
+| :--- | :--- |
+| `nudgen brand list` | 列出团队的所有品牌语调。 |
+| `nudgen brand create` | 初始化新品牌语调的向导。 |
+| `nudgen brand update <id>` | 编辑品牌配置。 |
+| `nudgen brand delete <id>` | 删除品牌身份。 |
+
+### 推荐与收益
+
+| 命令 | 描述 |
+| :--- | :--- |
+| `nudgen referral stats` | 查看高层级的推荐表现摘要。 |
+| `nudgen referral link` | 获取您的唯一推荐链接。 |
+| `nudgen referral activity` | 查看最近的点击历史和注册情况。 |
+| `nudgen referral referrals` | 列出由您推荐的团队及其状态。 |
+| `nudgen referral payouts` | 查看提现请求的历史记录和状态。 |
+
+下一步，了解如何为 [AI 智能体](/cn/agents/cli/agentic-usage) 使用这些命令。

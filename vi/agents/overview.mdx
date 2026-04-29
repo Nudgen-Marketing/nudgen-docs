@@ -1,0 +1,81 @@
+---
+title: "Email dành cho AI Agent"
+description: "Cung cấp cho Claude Code, Codex, Cursor, OpenClaw và các agent của riêng bạn những cách thức có cấu trúc để cài đặt Nudgen, di chuyển bộ công cụ (stack), gửi sự kiện và làm việc với Nudgen."
+---
+
+## Giới thiệu
+
+Nudgen được xây dựng cho kỷ nguyên AI Agent (Agentic Era). Chúng tôi cung cấp các phương thức có cấu trúc để các AI Agent như **Claude Code**, **Codex**, **Cursor**, và **OpenClaw** tương tác với bộ công cụ marketing của bạn.
+
+Cho dù bạn cần cài đặt Nudgen trong một ứng dụng mới, di chuyển từ một nhà cung cấp cũ hay tự động hóa các quy trình chiến dịch phức tạp, các giao diện ưu tiên agent (agent-first) của chúng tôi đảm bảo độ tin cậy cao và hiệu quả cho nhà phát triển.
+
+<CardGroup cols={3}>
+  <Card title="Skills" icon="book-open" href="/vi/agents/skills">
+    Các mô-đun có thể kết hợp giúp dạy cho agent của bạn cách làm việc với Nudgen. Cài đặt chỉ với một lệnh duy nhất.
+  </Card>
+  <Card title="CLI" icon="terminal" href="/vi/agents/cli/introduction">
+    Trung tâm điều khiển chạy bằng Go để điều phối và theo dõi từ terminal.
+  </Card>
+  <Card title="API" icon="code" href="/vi/agents/api">
+    REST API với xác thực bằng Personal Access Token (PAT) để quản lý theo chương trình.
+  </Card>
+</CardGroup>
+
+## Hoạt động với
+
+- **Codex**
+- **Claude Code**
+- **Cursor**
+- **OpenClaw**
+
+## Trường hợp sử dụng
+
+Marketing theo hướng agent (agentic marketing) trông như thế nào trong thực tế? Dưới đây là một vài quy trình làm việc phổ biến:
+
+### "Kiểm tra email giao dịch này từ terminal"
+**Agent làm gì:** Sử dụng CLI để gửi một email giao dịch thử nghiệm với ID mẫu và các biến dữ liệu mẫu của bạn. Hiển thị trạng thái phản hồi và xác nhận gửi.
+
+**Bạn hoàn tất:** Kiểm tra hộp thư đến, xem lại email đã hiển thị, xuất bản mẫu khi đã sẵn sàng.
+
+---
+
+### "Kiểm tra thiết lập email của tôi và ánh xạ nó sang Nudgen"
+**Agent làm gì:** Quét mã nguồn của bạn để tìm các lệnh gọi nhà cung cấp email, xác định mọi lượt gửi, mẫu và webhook. Ánh xạ từng thành phần sang Nudgen tương ứng và tạo kế hoạch di chuyển theo từng tệp.
+
+**Bạn hoàn tất:** Tạo lại các mẫu trong trình chỉnh sửa Nudgen, cấu hình cài đặt hủy đăng ký và webhook trong bảng điều khiển.
+
+---
+
+### "Gửi một sự kiện hủy bỏ vào Nudgen"
+**Agent làm gì:** Kết nối trình xử lý Stripe webhook của bạn để gọi API sự kiện của Nudgen khi một gói đăng ký bị hủy. Đặt tên sự kiện, ánh xạ các thuộc tính liên quan (gói, lý do, ngày).
+
+**Bạn hoàn tất:** Tạo Nudgen (quy trình) hủy bỏ trong bảng điều khiển, xác định các thuộc tính liên hệ tùy chỉnh nếu cần.
+
+---
+
+### "Cài đặt Nudgen vào ứng dụng Next.js của tôi"
+**Agent làm gì:** Phát hiện Next.js, cài đặt SDK JavaScript, kết nối NUDGEN_API_KEY từ .env, tạo route đồng bộ hóa liên hệ và ví dụ gửi email giao dịch, xuất danh sách kiểm tra (checklist).
+
+**Bạn hoàn tất:** Thêm mã API của bạn trong bảng điều khiển Nudgen, xuất bản mẫu email giao dịch, xác nhận lượt gửi thử nghiệm.
+
+## Tài nguyên
+
+<CardGroup cols={2}>
+  <Card title="CLI Repository" icon="github" href="https://github.com/Nudgen-Marketing/nudgen-cli">
+    Mã nguồn trung tâm điều khiển chạy bằng Go.
+  </Card>
+  <Card title="Skills Repository" icon="github" href="https://github.com/Nudgen-Marketing/skills">
+    Thư viện các kỹ năng marketing dành cho agent.
+  </Card>
+</CardGroup>
+
+## Lộ trình phát triển
+
+Chúng tôi liên tục mở rộng khả năng cho agent:
+
+- **Kỹ năng thiết lập (Setup skill)**: (Sắp có) Phát hiện bộ công cụ của bạn, kết nối xác thực và tạo các ví dụ hoạt động.
+- **Kỹ năng di chuyển (Migrate skill)**: (Sắp có) Kiểm tra bộ công cụ và xây dựng kế hoạch di chuyển.
+- **Soạn thảo email theo chương trình**: (Tiếp theo) Viết mẫu email bằng mã nguồn.
+- **Máy chủ MCP**: (Tiếp theo) Hỗ trợ Model Context Protocol gốc.
+
+Tiếp theo, hãy khám phá [Kỹ năng Agent (Agent Skills)](/vi/agents/skills).

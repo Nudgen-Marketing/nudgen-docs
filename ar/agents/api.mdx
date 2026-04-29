@@ -1,0 +1,67 @@
+---
+title: "واجهة برمجة تطبيقات المطورين (API)"
+description: "واجهة REST API مع مصادقة رمز الوصول الشخصي. إدارة جهات الاتصال والحملات والقوالب والإعدادات برمجياً."
+---
+
+## نظرة عامة
+
+توفر واجهة برمجة تطبيقات المطورين لـ Nudgen واجهة REST نظيفة وموجهة نحو الموارد لإدارة البنية التحتية للتسويق الخاصة بك. تستخدم جميع الطلبات أساليب HTTP القياسية وترجع استجابات JSON يمكن التنبؤ بها.
+
+<CardGroup cols={3}>
+  <Card title="مصادقة PAT" icon="shield-check">
+    المصادقة باستخدام رموز الوصول الشخصية عبر ترويسة Bearer القياسية.
+  </Card>
+  <Card title="REST نظيف" icon="globe">
+    عناوين URL يمكن التنبؤ بها وموجهة نحو الموارد مع أساليب HTTP القياسية.
+  </Card>
+  <Card title="تحديد المعدل" icon="gauge">
+    تحديد معدل مدمج لكل فريق ونقطة نهاية لحماية تدفقات العمل الخاصة بك.
+  </Card>
+</CardGroup>
+
+## المصادقة
+
+تتطلب جميع طلبات API رمز وصول شخصي (PAT) يتم تمريره عبر ترويسة `Authorization`. يمكنك إنشاء الرموز من لوحة تحكم Nudgen ضمن **الإعدادات ← مفاتيح API**.
+
+```bash
+curl -X GET https://app.nudgen.com/api/v1/user/me \
+  -H "Authorization: Bearer <your-pat>"
+```
+
+## عنوان URL الأساسي
+
+عنوان URL الأساسي لجميع طلبات API هو:
+`https://app.nudgen.com`
+
+## نقاط النهاية (Endpoints)
+
+### المصادقة والهوية
+- `GET /api/v1/user/me`: الحصول على المستخدم الحالي المصادق عليه.
+- `GET /api/v1/teams`: سرد جميع الفرق للمستخدم الحالي.
+- `POST /api/v1/teams/switch`: تبديل سياق الفريق النشط.
+
+### جهات الاتصال
+- `GET /api/v1/contacts`: سرد جهات الاتصال مع تقسيم الصفحات والبحث وفلاتر العلامات (tags).
+- `POST /api/v1/contacts/add`: إنشاء جهة اتصال جديدة.
+- `GET /api/v1/contacts/:id`: استرداد جهة اتصال محددة.
+- `PATCH /api/v1/contacts/:id`: تحديث جهة اتصال موجودة.
+- `DELETE /api/v1/contacts/:id`: حذف جهة اتصال.
+
+### الحملات
+- `GET /api/v1/campaigns`: سرد الحملات في الفريق الحالي.
+- `POST /api/v1/campaigns`: إنشاء حملة جديدة.
+- `GET /api/v1/campaigns/:id`: الحصول على تفاصيل الحملة.
+- `GET /api/v1/campaigns/:id/stats`: الحصول على إحصائيات تسليم الحملة.
+
+### القوالب
+- `GET /api/v1/templates`: سرد قوالب البريد الإلكتروني.
+- `POST /api/v1/templates`: إنشاء قالب بريد إلكتروني جديد.
+
+### الإعدادات
+- `GET /api/v1/settings/brand`: الحصول على تكوين العلامة التجارية.
+- `PATCH /api/v1/settings/brand`: تحديث إعدادات العلامة التجارية.
+
+## مواصفات OpenAPI
+
+يمكنك تنزيل مواصفات OpenAPI الكاملة الخاصة بنا من هنا:
+[openapi.json](https://app.nudgen.com/api/openapi.json)

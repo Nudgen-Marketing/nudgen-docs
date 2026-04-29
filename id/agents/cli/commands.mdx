@@ -1,0 +1,66 @@
+---
+title: "Perintah CLI"
+description: "Referensi untuk semua perintah Nudgen CLI."
+---
+
+## Ikhtisar
+
+Jelajahi perintah inti yang tersedia di Nudgen CLI. Sebagian besar perintah dikelompokkan berdasarkan jenis sumber daya (kampanye, kontak, tim, dll.).
+
+### Autentikasi & Identitas
+
+| Perintah | Deskripsi |
+| :--- | :--- |
+| `nudgen login` | Autentikasi dengan Personal Access Token (PAT) Anda. |
+| `nudgen whoami` | Tampilkan pemilik token saat ini dan info pengguna. |
+| `nudgen logout` | Hapus kredensial lokal. |
+
+### Manajemen Tim
+
+| Perintah | Deskripsi |
+| :--- | :--- |
+| `nudgen teams list` | Daftar semua tim tempat Anda bergabung. |
+| `nudgen teams current` | Tampilkan konteks tim yang sedang aktif. |
+| `nudgen teams switch <id>` | Beralih ke tim tertentu. |
+
+### Kampanye
+
+Kelola upaya penjangkauan pemasaran dalam tim yang aktif.
+
+| Perintah | Deskripsi |
+| :--- | :--- |
+| `nudgen campaigns list` | Daftar kampanye aktif di tim saat ini. |
+| `nudgen campaigns create` | Wizard pembuatan interaktif. |
+| `nudgen campaigns update <id>` | Ubah pengaturan kampanye yang ada. |
+| `nudgen campaigns delete <id>` | Hapus catatan kampanye. |
+
+### Kontak (Manajemen Prospek)
+
+| Perintah | Deskripsi |
+| :--- | :--- |
+| `nudgen contacts list` | Daftar semua prospek di tim saat ini. |
+| `nudgen contacts create` | Tambahkan catatan prospek baru secara manual. |
+| `nudgen contacts import` | Pemetaan CSV interaktif untuk penyerapan massal. |
+| `nudgen contacts update <id>` | Edit detail prospek. |
+| `nudgen contacts delete <id>` | Hapus catatan kontak. |
+
+### Identitas Merek
+
+| Perintah | Deskripsi |
+| :--- | :--- |
+| `nudgen brand list` | Daftar semua suara merek untuk tim. |
+| `nudgen brand create` | Wizard untuk menginisialisasi suara merek baru. |
+| `nudgen brand update <id>` | Edit konfigurasi merek. |
+| `nudgen brand delete <id>` | Hapus identitas merek. |
+
+### Referensi & Penghasilan
+
+| Perintah | Deskripsi |
+| :--- | :--- |
+| `nudgen referral stats` | Lihat ringkasan performa referensi tingkat tinggi. |
+| `nudgen referral link` | Dapatkan tautan referensi unik Anda. |
+| `nudgen referral activity` | Lihat riwayat klik dan pendaftaran terbaru. |
+| `nudgen referral referrals` | Daftar tim yang Anda referensikan dan status mereka. |
+| `nudgen referral payouts` | Lihat riwayat permintaan penarikan dan statusnya. |
+
+Berikutnya, lihat cara menggunakan perintah ini untuk [Agen AI](/id/agents/cli/agentic-usage).

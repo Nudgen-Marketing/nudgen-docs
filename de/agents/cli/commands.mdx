@@ -1,0 +1,66 @@
+---
+title: "CLI Befehle"
+description: "Referenz für alle Nudgen CLI Befehle."
+---
+
+## Übersicht
+
+Entdecken Sie die Kernbefehle des Nudgen CLI. Die meisten Befehle sind nach Ressourcentyp gruppiert (Kampagnen, Kontakte, Teams usw.).
+
+### Authentifizierung & Identität
+
+| Befehl | Beschreibung |
+| :--- | :--- |
+| `nudgen login` | Authentifizierung mit Ihrem Personal Access Token (PAT). |
+| `nudgen whoami` | Zeigt den aktuellen Token-Inhaber und Benutzerinformationen an. |
+| `nudgen logout` | Löscht lokale Anmeldedaten. |
+
+### Team-Verwaltung
+
+| Befehl | Beschreibung |
+| :--- | :--- |
+| `nudgen teams list` | Listet alle Teams auf, denen Sie angehören. |
+| `nudgen teams current` | Zeigt den aktuell aktiven Team-Kontext an. |
+| `nudgen teams switch <id>` | Wechselt zu einem spezifischen Team. |
+
+### Kampagnen
+
+Verwalten Sie Marketingmaßnahmen innerhalb des aktiven Teams.
+
+| Befehl | Beschreibung |
+| :--- | :--- |
+| `nudgen campaigns list` | Listet aktive Kampagnen im aktuellen Team auf. |
+| `nudgen campaigns create` | Interaktiver Erstellungs-Assistent. |
+| `nudgen campaigns update <id>` | Ändert bestehende Kampagneneinstellungen. |
+| `nudgen campaigns delete <id>` | Entfernt einen Kampagneneintrag. |
+
+### Kontakte (Lead-Verwaltung)
+
+| Befehl | Beschreibung |
+| :--- | :--- |
+| `nudgen contacts list` | Listet alle Leads im aktuellen Team auf. |
+| `nudgen contacts create` | Fügt manuell einen neuen Lead-Eintrag hinzu. |
+| `nudgen contacts import` | Interaktiver CSV-Mapper für den Massenimport. |
+| `nudgen contacts update <id>` | Bearbeitet Lead-Details. |
+| `nudgen contacts delete <id>` | Entfernt einen Kontakteintrag. |
+
+### Markenidentitäten
+
+| Befehl | Beschreibung |
+| :--- | :--- |
+| `nudgen brand list` | Listet alle Brand-Voices des Teams auf. |
+| `nudgen brand create` | Assistent zum Initialisieren einer neuen Brand-Voice. |
+| `nudgen brand update <id>` | Bearbeitet Markenkonfigurationen. |
+| `nudgen brand delete <id>` | Entfernt eine Markenidentität. |
+
+### Empfehlungen & Einnahmen
+
+| Befehl | Beschreibung |
+| :--- | :--- |
+| `nudgen referral stats` | Zeigt eine Übersicht der Referral-Performance an. |
+| `nudgen referral link` | Erhalten Sie Ihren persönlichen Empfehlungslink. |
+| `nudgen referral activity` | Zeigt den aktuellen Klickverlauf und Registrierungen an. |
+| `nudgen referral referrals` | Listet von Ihnen empfohlene Teams und deren Status auf. |
+| `nudgen referral payouts` | Zeigt den Verlauf von Auszahlungsanfragen und deren Status an. |
+
+Erfahren Sie als Nächstes, wie Sie diese Befehle für [KI-Agenten](/de/agents/cli/agentic-usage) nutzen.

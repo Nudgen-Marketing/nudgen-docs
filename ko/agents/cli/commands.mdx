@@ -1,0 +1,66 @@
+---
+title: "CLI 명령"
+description: "Nudgen CLI의 모든 명령에 대한 레퍼런스입니다."
+---
+
+## 개요
+
+Nudgen CLI에서 사용 가능한 핵심 명령을 살펴보세요. 대부분의 명령은 리소스 유형(캠페인, 연락처, 팀 등)별로 그룹화되어 있습니다.
+
+### 인증 및 ID
+
+| 명령 | 설명 |
+| :--- | :--- |
+| `nudgen login` | 개인 액세스 토큰(PAT)으로 인증합니다. |
+| `nudgen whoami` | 현재 토큰 소유자 및 사용자 정보를 표시합니다. |
+| `nudgen logout` | 로컬 자격 증명을 삭제합니다. |
+
+### 팀 관리
+
+| 명령 | 설명 |
+| :--- | :--- |
+| `nudgen teams list` | 소속된 모든 팀을 나열합니다. |
+| `nudgen teams current` | 현재 활성화된 팀 컨텍스트를 표시합니다. |
+| `nudgen teams switch <id>` | 특정 팀으로 전환합니다. |
+
+### 캠페인
+
+활성 팀 내에서 마케팅 홍보 활동을 관리합니다.
+
+| 명령 | 설명 |
+| :--- | :--- |
+| `nudgen campaigns list` | 현재 팀의 활성 캠페인을 나열합니다. |
+| `nudgen campaigns create` | 대화형 생성 위저드입니다. |
+| `nudgen campaigns update <id>` | 기존 캠페인 설정을 수정합니다. |
+| `nudgen campaigns delete <id>` | 캠페인 기록을 삭제합니다. |
+
+### 연락처 (리드 관리)
+
+| 명령 | 설명 |
+| :--- | :--- |
+| `nudgen contacts list` | 현재 팀의 모든 리드를 나열합니다. |
+| `nudgen contacts create` | 새 리드 기록을 수동으로 추가합니다. |
+| `nudgen contacts import` | 대량 수집을 위한 대화형 CSV 매퍼입니다. |
+| `nudgen contacts update <id>` | 리드 상세 정보를 편집합니다. |
+| `nudgen contacts delete <id>` | 연락처 기록을 삭제합니다. |
+
+### 브랜드 아이덴티티
+
+| 명령 | 설명 |
+| :--- | :--- |
+| `nudgen brand list` | 팀의 모든 브랜드 보이스를 나열합니다. |
+| `nudgen brand create` | 새 브랜드 보이스를 초기화하는 위저드입니다. |
+| `nudgen brand update <id>` | 브랜드 구성을 편집합니다. |
+| `nudgen brand delete <id>` | 브랜드 아이덴티티를 삭제합니다. |
+
+### 추천 및 수익
+
+| 명령 | 설명 |
+| :--- | :--- |
+| `nudgen referral stats` | 추천 성과 요약을 확인합니다. |
+| `nudgen referral link` | 고유한 추천 링크를 가져옵니다. |
+| `nudgen referral activity` | 최근 클릭 기록 및 가입 현황을 확인합니다. |
+| `nudgen referral referrals` | 본인이 추천한 팀과 해당 상태를 나열합니다. |
+| `nudgen referral payouts` | 출금 요청 기록 및 상태를 확인합니다. |
+
+다음으로 [AI 에이전트](/ko/agents/cli/agentic-usage)를 위해 이 명령들을 사용하는 방법을 알아보세요.

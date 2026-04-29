@@ -1,0 +1,81 @@
+---
+title: "Agentlar için E-posta"
+description: "Claude Code, Codex, Cursor, OpenClaw ve kendi agentlarınıza Nudgen'ı kurmaları, yığınınızı (stack) taşımaları, etkinlik göndermeleri ve Nudgen ile çalışmaları için yapılandırılmış yollar sunun."
+---
+
+## Giriş
+
+Nudgen, agent (aracı/temsilci) çağı için inşa edildi. **Claude Code**, **Codex**, **Cursor** ve **OpenClaw** gibi yapay zeka agentlarının pazarlama yığınınızla etkileşime girmesi için yapılandırılmış yollar sağlıyoruz.
+
+Yeni bir uygulamaya Nudgen kurmanız, eski bir sağlayıcıdan geçiş yapmanız veya karmaşık kampanya iş akışlarını otomatikleştirmeniz gerekip gerekmediğine bakılmaksızın, "agent-öncelikli" arayüzlerimiz yüksek güvenilirlik ve geliştirici verimliliği sağlar.
+
+<CardGroup cols={3}>
+  <Card title="Yetenekler (Skills)" icon="code" href="/tr/agents/skills">
+    Agentınıza Nudgen ile nasıl çalışacağını öğreten birleştirilebilir modüller. Tek bir komutla kurun.
+  </Card>
+  <Card title="CLI" icon="terminal" href="/tr/agents/cli/introduction">
+    Terminalden orkestrasyon ve izleme için Go tabanlı komut merkezi.
+  </Card>
+  <Card title="API" icon="code" href="/tr/agents/api">
+    Programatik yönetim için Kişisel Erişim Jetonu (PAT) kimlik doğrulamalı REST API.
+  </Card>
+</CardGroup>
+
+## Şunlarla Çalışır
+
+- **Codex**
+- **Claude Code**
+- **Cursor**
+- **OpenClaw**
+
+## Kullanım Durumları
+
+Agent tabanlı pazarlama gerçekte neye benzer? İşte birkaç yaygın iş akışı:
+
+### "Bu işlemsel (transactional) e-postayı terminalden test et"
+**Agent ne yapar:** Şablon kimliğiniz ve örnek veri değişkenlerinizle bir test e-postası göndermek için CLI'yı kullanır. Yanıt durumunu ve teslimat onayını gösterir.
+
+**Siz neyi tamamlarsınız:** Gelen kutunuzu kontrol edin, oluşturulan e-postayı inceleyin ve hazır olduğunda şablonu yayınlayın.
+
+---
+
+### "E-posta kurulumumu denetle ve Nudgen'a eşle"
+**Agent ne yapar:** Kod tabanınızı e-posta sağlayıcı çağrıları için tarar, her gönderimi, şablonu ve webhook'u tanımlar. Her birini bir Nudgen eşdeğeriyle eşleştirir ve dosya dosya bir geçiş planı oluşturur.
+
+**Siz neyi tamamlarsınız:** Şablonları Nudgen düzenleyicisinde yeniden oluşturun, abonelikten çıkma ve webhook ayarlarını panelden yapılandırın.
+
+---
+
+### "Nudgen'a bir iptal etkinliği gönder"
+**Agent ne yapar:** Bir abonelik iptal edildiğinde Nudgen etkinlik API'sini çağırmak için Stripe webhook işleyicinizi bağlar. Etkinlik adını ayarlar, ilgili özellikleri (plan, neden, tarih) eşleştirir.
+
+**Siz neyi tamamlarsınız:** Panelde iptal Nudgen'ını (akışını) oluşturun, gerekirse özel kişi özelliklerini tanımlayın.
+
+---
+
+### "Nudgen'ı Next.js uygulamama kur"
+**Agent ne yapar:** Next.js'i algılar, JavaScript SDK'sını kurar, .env dosyasından NUDGEN_API_KEY'i bağlar, bir kişi senkronizasyon rotası ve işlemsel gönderim örneği oluşturur, bir test kontrol listesi çıktısı verir.
+
+**Siz neyi tamamlarsınız:** API anahtarınızı Nudgen paneline ekleyin, işlemsel e-posta şablonunuzu yayınlayın, test gönderimini doğrulayın.
+
+## Kaynaklar
+
+<CardGroup cols={2}>
+  <Card title="CLI Deposu" icon="github" href="https://github.com/Nudgen-Marketing/nudgen-cli">
+    Go tabanlı komut merkezi kaynak kodu.
+  </Card>
+  <Card title="Yetenekler Deposu" icon="github" href="https://github.com/Nudgen-Marketing/skills">
+    Agent tabanlı pazarlama yetenekleri kütüphanesi.
+  </Card>
+</CardGroup>
+
+## Yol Haritası
+
+Agent yeteneklerimizi sürekli genişletiyoruz:
+
+- **Setup skill (Kurulum yeteneği)**: (Yakında) Yığınınızı algılar, kimlik doğrulamasını bağlar ve çalışan örnekler oluşturur.
+- **Migrate skill (Taşıma yeteneği)**: (Yakında) Yığınınızı denetler ve bir geçiş planı oluşturur.
+- **Programlanabilir e-posta yazımı**: (Sonraki) Kod kullanarak e-posta şablonları yazın.
+- **MCP sunucusu**: (Sonraki) Yerel Model Context Protocol desteği.
+
+Sırada, [Agent Yeteneklerini (Agent Skills)](/tr/agents/skills) keşfedin.

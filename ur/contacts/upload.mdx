@@ -1,80 +1,80 @@
 ---
-title: "Upload contacts"
-description: "CSV format, validation rules, and tag assignment for contact uploads"
+title: "رابطے اپ لوڈ کریں"
+description: "رابطے اپ لوڈ کرنے کے لیے CSV فارمیٹ، تصدیق کے اصول اور ٹیگ تفویض"
 ---
 
-## What this page helps you do
+## یہ صفحہ آپ کی کیا مدد کرتا ہے
 
-Upload a CSV of contacts so you can run campaigns. You'll learn the required columns, validation rules, size limits, and how to add tags during upload.
+رابطوں کی CSV فائل اپ لوڈ کریں تاکہ آپ مہمات چلا سکیں۔ آپ ضروری کالمز، تصدیق کے اصول، سائز کی حدود، اور اپ لوڈ کے دوران ٹیگز شامل کرنے کا طریقہ سیکھیں گے۔
 
-## Before you start
+## شروع کرنے سے پہلے
 
-- A Nudgen account
-- A CSV file with at least an `email` column
-- Contacts must be under your plan limit (see [billing](/en/billing/overview))
+- ایک Nudgen اکاؤنٹ
+- کم از کم ایک `email` کالم والی CSV فائل
+- رابطے آپ کے پلان کی حد کے اندر ہونے چاہئیں (دیکھیں [billing](/ur/billing/overview))
 
-## Step 1: Prepare your CSV
+## مرحلہ 1: اپنی CSV فائل تیار کریں
 
-Your CSV must include:
+آپ کی CSV میں درج ذیل شامل ہونا ضروری ہے:
 
-| Column   | Required | Description                          |
-| -------- | -------- | ------------------------------------ |
-| `email`  | Yes      | Valid email address. Must be unique. |
-| `name`   | No       | Display name for personalization.   |
+| کالم | ضروری ہے | تفصیل |
+| :--- | :--- | :--- |
+| `email` | جی ہاں | درست ای میل ایڈریس۔ منفرد ہونا ضروری ہے۔ |
+| `name` | جی نہیں | پرسنلائزیشن کے لیے دکھایا جانے والا نام۔ |
 
-You can add other columns (e.g. `company`, `segment`). They are stored encrypted and can be used in tags or segmentation logic.
+آپ دوسرے کالم بھی شامل کر سکتے ہیں (مثلاً `company` ، `segment`)۔ وہ انکرپٹڈ اسٹور کیے جاتے ہیں اور ٹیگز یا سیگمنٹیشن لاجک میں استعمال کیے جا سکتے ہیں۔
 
-## Step 2: Validate format
+## مرحلہ 2: فارمیٹ کی تصدیق کریں
 
-- **Encoding:** UTF-8 recommended.
-- **Delimiter:** Comma (`,`).
-- **Header row:** First row must contain column names. `email` and `name` are recognized case-insensitively.
-- **Duplicate emails:** Duplicates in the same file are merged. Existing contacts with the same email are updated.
+- **انکوڈنگ (Encoding):** UTF-8 تجویز کی جاتی ہے۔
+- **ڈیلیمیٹر (Delimiter):** کوما (`,`)۔
+- **ہیڈر رو (Header row):** پہلی قطار میں کالموں کے نام ہونے چاہئیں۔ `email` اور `name` کو کیس-انسینسیٹو (case-insensitively) پہچانا جاتا ہے۔
+- **ڈپلیکیٹ ای میلز:** ایک ہی فائل میں موجود ڈپلیکیٹس کو ضم کر دیا جاتا ہے۔ ایک ہی ای میل والے موجودہ رابطوں کو اپ ڈیٹ کر دیا جاتا ہے۔
 
 <Warning>
-Invalid emails (malformed, missing `@`, etc.) are skipped. Check the upload summary to see how many rows were imported vs skipped.
+غلط ای میلز (ناقص فارمیٹ، غائب `@` ، وغیرہ) کو چھوڑ دیا جاتا ہے۔ اپ لوڈ کا خلاصہ چیک کریں تاکہ معلوم ہو سکے کہ کتنی قطاریں درآمد کی گئیں اور کتنی چھوڑی گئیں۔
 </Warning>
 
-## Step 3: Upload in Nudgen
+## مرحلہ 3: Nudgen میں اپ لوڈ کریں
 
-1. Go to **Contacts** in the sidebar.
-2. Click **Upload CSV**.
-3. Select your file.
-4. Choose tags to apply to all uploaded contacts (e.g. `inactive`, `re-engage`).
-5. Review the preview and confirm.
+1. سائڈ بار میں **Contacts** پر جائیں۔
+2. **Upload CSV** پر کلک کریں۔
+3. اپنی فائل منتخب کریں۔
+4. اپ لوڈ کیے گئے تمام رابطوں پر لاگو کرنے کے لیے ٹیگز منتخب کریں (مثلاً `inactive` ، `re-engage`)۔
+5. پری ویو کا جائزہ لیں اور تصدیق کریں۔
 
-## Size limits
+## سائز کی حدود (Size limits)
 
-- **File size:** Follow the on-screen limit (typically a few MB). Large lists may take longer to process.
-- **Contacts per workspace:** Depends on your plan. The app enforces the limit at upload time; if you exceed it, the upload is rejected. See [Billing](/en/billing/overview) and the live [pricing page](https://nudgen.net/pricing) for current limits.
+- **فائل کا سائز:** اسکرین پر دی گئی حد پر عمل کریں (عام طور پر چند MB)۔ بڑی فہرستوں پر کارروائی کرنے میں زیادہ وقت لگ سکتا ہے۔
+- **فی ورک اسپیس رابطے:** آپ کے پلان پر منحصر ہے۔ ایپ اپ لوڈ کے وقت حد نافذ کرتی ہے؛ اگر آپ حد سے تجاوز کرتے ہیں، تو اپ لوڈ مسترد کر دیا جاتا ہے۔ موجودہ حدود کے لیے [Billing](/ur/billing/overview) اور لائیو [pricing page](https://nudgen.net/pricing) دیکھیں۔
 
-## What happens next
+## آگے کیا ہوگا
 
-- Contacts appear in the list with masked emails (`j***@g***.com`).
-- Use tags to segment audiences in [campaigns](/en/campaigns/create).
-- You can [reveal](/en/contacts/overview) individual contacts as the account owner.
+- رابطے فہرست میں ماسک شدہ ای میلز (`j***@g***.com`) کے ساتھ ظاہر ہوتے ہیں۔
+- [مہمات](/ur/campaigns/create) میں سامعین کو سیگمنٹ کرنے کے لیے ٹیگز کا استعمال کریں۔
+- آپ اکاؤنٹ کے مالک کے طور پر انفرادی رابطوں کو [ریویل (reveal)](/ur/contacts/overview) کر سکتے ہیں۔
 
-## Troubleshooting
+## خرابیوں کا سراغ لگانا (Troubleshooting)
 
 <AccordionGroup>
-  <Accordion title="Some rows were skipped">
-    Check that each row has a valid email in the `email` column. Empty rows or malformed addresses are skipped.
+  <Accordion title="کچھ قطاریں چھوڑ دی گئیں">
+    چیک کریں کہ ہر قطار کے `email` کالم میں درست ای میل موجود ہے۔ خالی قطاروں یا ناقص پتوں کو چھوڑ دیا جاتا ہے۔
   </Accordion>
-  <Accordion title="Upload failed: plan limit exceeded">
-    Your contact count would exceed your plan limit. Upgrade your plan or remove existing contacts.
+  <Accordion title="اپ لوڈ ناکام: پلان کی حد ختم ہو گئی">
+    آپ کے رابطوں کی تعداد آپ کے پلان کی حد سے تجاوز کر جائے گی۔ اپنا پلان اپ گریڈ کریں یا موجودہ رابطوں کو ہٹائیں۔
   </Accordion>
-  <Accordion title="Column not recognized">
-    Ensure the header row includes `email` (or `Email`). Other columns are optional.
+  <Accordion title="کالم کی شناخت نہیں ہو سکی">
+    یقینی بنائیں کہ ہیڈر رو میں `email` (یا `Email`) شامل ہے۔ دیگر کالم اختیاری ہیں۔
   </Accordion>
 </AccordionGroup>
 
-## Related docs
+## متعلقہ دستاویزات
 
 <CardGroup cols={2}>
-  <Card title="Contacts overview" icon="users" href="/en/contacts/overview">
-    Encryption, masking, and segmentation.
+  <Card title="رابطوں کا جائزہ" icon="users" href="/ur/contacts/overview">
+    انکرپشن، ماسکنگ اور سیگمنٹیشن۔
   </Card>
-  <Card title="Create campaigns" icon="paper-plane" href="/en/campaigns/create">
-    Select your audience and launch a campaign.
+  <Card title="مہمات بنانا" icon="paper-plane" href="/ur/campaigns/create">
+    اپنے سامعین کا انتخاب کریں اور مہم شروع کریں۔
   </Card>
 </CardGroup>

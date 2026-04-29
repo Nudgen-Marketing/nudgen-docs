@@ -1,0 +1,55 @@
+---
+title: "Introducción a la CLI"
+description: "Domine la plataforma de automatización de marketing Nudgen a través de su interfaz de línea de comandos interactiva."
+---
+
+## Resumen
+
+La CLI de Nudgen es una herramienta potente diseñada tanto para humanos como para agentes de IA. Proporciona una forma fluida de gestionar campañas, contactos, identidades de marca y estadísticas de referidos directamente desde su terminal.
+
+Ya sea un desarrollador que busca automatizar sus flujos de trabajo de marketing o un agente de IA que necesita una interacción de alta calidad con la plataforma Nudgen, la CLI es su interfaz principal.
+
+### Recursos
+
+<CardGroup cols={2}>
+  <Card title="Repositorio de GitHub" icon="github" href="https://github.com/Nudgen-Marketing/nudgen-cli">
+    Vea el código fuente impulsado por Go en GitHub.
+  </Card>
+  <Card title="Lanzamientos" icon="download" href="https://github.com/Nudgen-Marketing/nudgen-cli/releases">
+    Descargue los últimos binarios para macOS, Linux y Windows.
+  </Card>
+</CardGroup>
+
+### Características Clave
+
+<CardGroup cols={2}>
+  <Card title="TUI Interactiva" icon="terminal">
+    Hermosa interfaz de usuario de terminal con formularios interactivos y estadísticas en vivo para operadores humanos.
+  </Card>
+  <Card title="Diseño AI-First" icon="robot">
+    Cada comando admite salida `--json`, lo que facilita a los agentes de IA analizar y automatizar tareas.
+  </Card>
+  <Card title="Contexto de Equipo" icon="users-gear">
+    Cambie entre diferentes equipos sin esfuerzo y gestione recursos dentro de contextos de equipo específicos.
+  </Card>
+  <Card title="Seguro" icon="lock">
+    Las credenciales se almacenan de forma segura en el llavero de su sistema, lo que garantiza que sus datos permanezcan protegidos.
+  </Card>
+</CardGroup>
+
+## Propósito
+
+La CLI cumple múltiples funciones:
+
+1. **Para Humanos**: Proporciona una forma rápida de listar campañas, importar contactos y consultar las ganancias de referidos sin abrir el navegador web.
+2. **Para Agentes de IA**: Ofrece una interfaz interpretable por máquinas para automatizar la comunicación de marketing compleja y la gestión de marca.
+3. **Para Desarrolladores**: Ayudas para el desarrollo local y la gestión de repositorios dentro del ecosistema de Nudgen.
+
+## Patrones de Interacción
+
+La CLI sigue el principio de "Interacción sobre API". Utiliza llamadas API RESTful estándar para comunicarse con el backend de Nudgen mientras gestiona de forma segura el estado de la sesión localmente.
+
+- **Estándar JSON**: Todos los comandos admiten `--json`. Esto es fundamental para la comunicación entre agentes.
+- **Conciencia del Contexto**: Las operaciones como el listado de campañas se limitan automáticamente a su equipo activo.
+
+A continuación, aprenda cómo [instalar la CLI](/es/agents/cli/installation).

@@ -1,0 +1,66 @@
+---
+title: "Các lệnh CLI"
+description: "Tham khảo cho tất cả các lệnh của Nudgen CLI."
+---
+
+## Tổng quan
+
+Khám phá các lệnh cốt lõi có sẵn trong Nudgen CLI. Hầu hết các lệnh được nhóm theo loại tài nguyên (chiến dịch, danh bạ, nhóm, v.v.).
+
+### Xác thực & Danh tính
+
+| Lệnh | Mô tả |
+| :--- | :--- |
+| `nudgen login` | Xác thực bằng Personal Access Token (PAT) của bạn. |
+| `nudgen whoami` | Hiển thị chủ sở hữu token hiện tại và thông tin người dùng. |
+| `nudgen logout` | Xóa thông tin xác thực cục bộ. |
+
+### Quản lý nhóm
+
+| Lệnh | Mô tả |
+| :--- | :--- |
+| `nudgen teams list` | Liệt kê tất cả các nhóm mà bạn thuộc về. |
+| `nudgen teams current` | Hiển thị ngữ cảnh nhóm hiện đang hoạt động. |
+| `nudgen teams switch <id>` | Chuyển sang một nhóm cụ thể. |
+
+### Chiến dịch
+
+Quản lý các nỗ lực tiếp cận marketing trong nhóm đang hoạt động.
+
+| Lệnh | Mô tả |
+| :--- | :--- |
+| `nudgen campaigns list` | Liệt kê các chiến dịch đang hoạt động trong nhóm hiện tại. |
+| `nudgen campaigns create` | Trình hướng dẫn tạo tương tác. |
+| `nudgen campaigns update <id>` | Sửa đổi cài đặt chiến dịch hiện có. |
+| `nudgen campaigns delete <id>` | Xóa một bản ghi chiến dịch. |
+
+### Danh bạ (Quản lý khách hàng tiềm năng)
+
+| Lệnh | Mô tả |
+| :--- | :--- |
+| `nudgen contacts list` | Liệt kê tất cả khách hàng tiềm năng trong nhóm hiện tại. |
+| `nudgen contacts create` | Thêm bản ghi khách hàng tiềm năng mới một cách thủ công. |
+| `nudgen contacts import` | Trình ánh xạ CSV tương tác để nhập dữ liệu hàng loạt. |
+| `nudgen contacts update <id>` | Chỉnh sửa chi tiết khách hàng tiềm năng. |
+| `nudgen contacts delete <id>` | Xóa một bản ghi danh bạ. |
+
+### Nhận diện thương hiệu
+
+| Lệnh | Mô tả |
+| :--- | :--- |
+| `nudgen brand list` | Liệt kê tất cả tiếng nói thương hiệu (brand voices) của nhóm. |
+| `nudgen brand create` | Trình hướng dẫn để khởi tạo một tiếng nói thương hiệu mới. |
+| `nudgen brand update <id>` | Chỉnh sửa cấu hình thương hiệu. |
+| `nudgen brand delete <id>` | Xóa một nhận diện thương hiệu. |
+
+### Giới thiệu & Thu nhập
+
+| Lệnh | Mô tả |
+| :--- | :--- |
+| `nudgen referral stats` | Xem tóm tắt hiệu suất giới thiệu cấp cao. |
+| `nudgen referral link` | Lấy liên kết giới thiệu duy nhất của bạn. |
+| `nudgen referral activity` | Xem lịch sử nhấp chuột và đăng ký gần đây. |
+| `nudgen referral referrals` | Liệt kê các nhóm được bạn giới thiệu và trạng thái của họ. |
+| `nudgen referral payouts` | Xem lịch sử các yêu cầu thanh toán và trạng thái. |
+
+Tiếp theo, hãy xem cách sử dụng các lệnh này cho [AI Agent](/vi/agents/cli/agentic-usage).

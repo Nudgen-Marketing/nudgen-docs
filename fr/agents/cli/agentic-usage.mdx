@@ -1,0 +1,52 @@
+---
+title: "Utilisation par les agents d'IA"
+description: "Comment utiliser la CLI Nudgen comme interface pour les agents d'IA."
+---
+
+## Aperçu
+
+La CLI Nudgen est conçue avec une approche **AI-First**. Bien qu'elle fournisse une belle interface TUI pour les humains, chaque commande est également optimisée pour la communication de machine à machine.
+
+### Le modèle agentique (Agentic Pattern)
+
+Lorsqu'un agent d'IA (comme Claude, GPT ou un agent d'automatisation spécialisé) utilise la CLI, il doit suivre ces modèles :
+
+1. **Sortie JSON** : Ajoutez `--json` à chaque commande pour obtenir des données analysables par machine.
+2. **Conscience du contexte** : Vérifiez toujours le contexte de l'équipe avant d'effectuer des opérations.
+3. **Non interactif** : Utilisez des drapeaux (flags) pour contourner les invites interactives de la TUI.
+
+## Automatisation JSON
+
+Chaque commande de liste et de statut prend en charge un drapeau `--json`. Cela renvoie une structure JSON propre au lieu d'un tableau formaté.
+
+```bash
+# Obtenir toutes les campagnes en JSON
+nudgen campaigns list --json
+
+# Obtenir les contacts de l'équipe actuelle
+nudgen contacts list --json
+```
+
+## Flux de travail multi-locataire pour les agents
+
+Puisque Nudgen prend en charge plusieurs équipes, un agent doit s'assurer qu'il opère sur la bonne équipe avant de créer ou de mettre à jour des ressources.
+
+**Flux de travail recommandé :**
+
+1. **Vérifier l'équipe actuelle** :
+   ```bash
+   nudgen teams current --json
+   ```
+2. **Changer d'équipe (si nécessaire)** :
+   Si l' `id` de l'étape précédente ne correspond pas à l'équipe cible, changez :
+   ```bash
+   nudgen teams switch <target-team-id>
+   ```
+3. **Exécuter la commande de données** :
+   Procédez avec les commandes `campaigns`, `contacts` ou `brand`.
+
+## Bonnes pratiques pour les développeurs d'agents
+
+- **Gestion des erreurs** : Surveillez le code de sortie des commandes CLI. Un code de sortie non nul indique une erreur (validation, réseau ou authentification).
+- **Limitation de débit (Rate Limiting)** : La CLI communique avec l'API Nudgen. Assurez-vous que vos scripts d'agent gèrent les limites de débit potentielles avec élégance.
+- **Mode silencieux** : Si une commande ne prend pas en charge un drapeau spécifique pour chaque invite, assurez-vous que votre agent peut gérer les flux stdout/stderr sans rester bloqué dans une boucle TUI.

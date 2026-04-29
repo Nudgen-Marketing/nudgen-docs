@@ -1,0 +1,55 @@
+---
+title: "Pendahuluan CLI"
+description: "Kuasai platform otomatisasi pemasaran Nudgen melalui Antarmuka Baris Perintah (CLI) yang interaktif."
+---
+
+## Ikhtisar
+
+Nudgen CLI adalah alat canggih yang dirancang untuk manusia dan agen AI. Alat ini menyediakan cara yang mulus untuk mengelola kampanye, kontak, identitas merek, dan statistik referensi langsung dari terminal Anda.
+
+Baik Anda seorang pengembang yang ingin mengotomatiskan alur kerja pemasaran Anda atau agen AI yang membutuhkan interaksi berkualitas tinggi dengan platform Nudgen, CLI adalah antarmuka utama Anda.
+
+### Sumber Daya
+
+<CardGroup cols={2}>
+  <Card title="Repositori GitHub" icon="github" href="https://github.com/Nudgen-Marketing/nudgen-cli">
+    Lihat kode sumber berbasis Go di GitHub.
+  </Card>
+  <Card title="Rilis" icon="download" href="https://github.com/Nudgen-Marketing/nudgen-cli/releases">
+    Unduh biner terbaru untuk macOS, Linux, dan Windows.
+  </Card>
+</CardGroup>
+
+### Fitur Utama
+
+<CardGroup cols={2}>
+  <Card title="TUI Interaktif" icon="terminal">
+    Antarmuka pengguna terminal yang indah dengan formulir interaktif dan statistik langsung untuk operator manusia.
+  </Card>
+  <Card title="Desain AI-First" icon="robot">
+    Setiap perintah mendukung output `--json`, memudahkan agen AI untuk mengurai dan mengotomatiskan tugas.
+  </Card>
+  <Card title="Konteks Tim" icon="users-gear">
+    Beralih di antara tim yang berbeda dengan mudah dan kelola sumber daya dalam konteks tim tertentu.
+  </Card>
+  <Card title="Aman" icon="lock">
+    Kredensial disimpan dengan aman di keychain sistem Anda, memastikan data Anda tetap terlindungi.
+  </Card>
+</CardGroup>
+
+## Tujuan
+
+CLI melayani berbagai peran:
+
+1. **Untuk Manusia**: Menyediakan cara cepat untuk mencantumkan kampanye, mengimpor kontak, dan memeriksa penghasilan referensi tanpa membuka browser web.
+2. **Untuk Agen AI**: Menawarkan antarmuka yang dapat diinterpretasikan mesin untuk mengotomatiskan penjangkauan pemasaran dan manajemen merek yang kompleks.
+3. **Untuk Pengembang**: Pembantu untuk pengembangan lokal dan manajemen repositori dalam ekosistem Nudgen.
+
+## Pola Interaksi
+
+CLI mengikuti prinsip "Interaction over API". Ia menggunakan panggilan RESTful API standar untuk berkomunikasi dengan backend Nudgen sambil mengelola status sesi secara lokal dengan aman.
+
+- **Standar JSON**: Semua perintah mendukung `--json`. Ini sangat penting untuk komunikasi antar agen.
+- **Sadar Konteks**: Operasi seperti mencantumkan kampanye secara otomatis dicakupkan ke tim aktif Anda.
+
+Berikutnya, pelajari cara [menginstal CLI](/id/agents/cli/installation).

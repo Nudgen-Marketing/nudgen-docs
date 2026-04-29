@@ -1,60 +1,60 @@
 ---
-title: "Sending and deliverability"
-description: "Emails not sending, bounces, and spam"
+title: "بھیجنا اور ڈیلیوریبلٹی (Deliverability)"
+description: "ای میل نہ جانا، باؤنسز اور اسپیم"
 ---
 
-## Emails not sending
+## ای میلز نہیں جا رہی ہیں
 
-**Campaign stuck or “sending” for a long time**
+**مہم پھنس گئی ہے یا کافی دیر سے "sending" حالت میں ہے**
 
-- Sends are queued and processed in batches. Large campaigns can take time. Refresh the dashboard; if status stays “Sending” for hours, contact support.
-- Check that you haven’t hit your **daily or monthly email limit**. The app blocks new sends when you’re over cap. See [Billing](/en/billing/overview) and [Troubleshooting: billing](/en/troubleshooting/billing).
+- ای میلز قطار (queue) میں رکھی جاتی ہیں اور بیچز (batches) میں بھیجی جاتی ہیں۔ بڑی مہمات میں وقت لگ سکتا ہے۔ ڈیش بورڈ ریفریش کریں؛ اگر اسٹیٹس گھنٹوں تک "Sending" رہے تو سپورٹ سے رابطہ کریں۔
+- چیک کریں کہ آپ اپنی **روزانہ یا ماہانہ ای میل کی حد** سے تجاوز تو نہیں کر گئے۔ حد ختم ہونے پر ایپ نئی ای میلز بلاک کر دیتی ہے۔ [Billing](/ur/billing/overview) اور [Troubleshooting: billing](/ur/troubleshooting/billing) دیکھیں۔
 
-**Test email didn’t arrive**
+**ٹیسٹ ای میل موصول نہیں ہوئی**
 
-- Check spam/junk. Add the sender to your contacts or safe senders.
-- Confirm the **account email** (where tests are sent) is correct in your profile.
-- Wait a few minutes; delivery can be delayed. Try again or send to a different address.
+- اسپیم/جنک فولڈر چیک کریں۔ بھیجنے والے کو اپنے رابطوں یا محفوظ بھیجنے والوں کی فہرست میں شامل کریں۔
+- تصدیق کریں کہ آپ کے پروفائل میں **اکاؤنٹ ای میل** (جہاں ٹیسٹ بھیجے جاتے ہیں) درست ہے۔
+- چند منٹ انتظار کریں؛ ترسیل میں تاخیر ہو سکتی ہے۔ دوبارہ کوشش کریں یا کسی دوسرے پتے پر بھیجیں۔
 
-**“No active contacts” or reach is zero**
+**"No active contacts" یا رسائی صفر ہے**
 
-- Upload or add at least one contact and ensure they’re **active** (not unsubscribed or suppressed). See [Contacts overview](/en/contacts/overview) and [Contact lifecycle](/en/contacts/lifecycle).
-- If you chose “By tags,” ensure some contacts have the selected tags.
+- کم از کم ایک رابطہ اپ لوڈ یا شامل کریں اور یقینی بنائیں کہ وہ **فعال (active)** ہے (ان سبسکرائب شدہ یا سپریس شدہ نہیں)۔ [Contacts overview](/ur/contacts/overview) اور [Contact lifecycle](/ur/contacts/lifecycle) دیکھیں۔
+- اگر آپ نے "By tags" کا انتخاب کیا ہے، تو یقینی بنائیں کہ کچھ رابطوں کے پاس منتخب کردہ ٹیگز موجود ہیں۔
 
-## Bounces and complaints
+## باؤنسز اور شکایات
 
-**High bounce rate**
+**باؤنس ریٹ زیادہ ہونا**
 
-- **Hard bounces** (invalid address, domain doesn’t exist) are automatically suppressed. Remove or fix bad addresses in your list; avoid bought or scraped lists.
-- **Soft bounces** (mailbox full, server down) may be retried by the provider. Repeated soft bounces can lead to suppression. Clean your list and avoid role addresses (e.g. info@) unless they’re valid inboxes.
-- Keep bounce rate low (e.g. under 2%) to protect sender reputation. Use the [Dashboard](/en/dashboard/overview) and [Campaign analytics](/en/campaigns/analytics) to monitor.
+- **ہارڈ باؤنسز** (غلط پتہ، ڈومین کا وجود نہیں ہے) کو خود بخود روک دیا جاتا ہے۔ اپنی فہرست سے خراب پتوں کو ہٹائیں یا درست کریں؛ خریدی گئی فہرستوں سے پرہیز کریں۔
+- **سافٹ باؤنسز** (میل باکس بھرا ہوا، سرور ڈاؤن) کی فراہم کنندہ دوبارہ کوشش کر سکتا ہے۔ بار بار سافٹ باؤنس ہونا سپریشن کا باعث بن سکتا ہے۔ اپنی فہرست صاف رکھیں اور رول ایڈریسز (مثلاً info@) سے پرہیز کریں جب تک کہ وہ درست ان باکسز نہ ہوں۔
+- بھیجنے والے کے طور پر اپنی ساکھ بچانے کے لیے باؤنس ریٹ کم رکھیں (مثلاً 2% سے کم)۔ نگرانی کے لیے [Dashboard](/ur/dashboard/overview) اور [Campaign analytics](/ur/campaigns/analytics) استعمال کریں۔
 
-**Spam complaints**
+**اسپیم شکایات**
 
-- Recipients marked the email as spam. We suppress complainers and they won’t receive future campaigns. Too many complaints hurt reputation.
-- Improve content: clear subject lines, relevant copy, obvious unsubscribe link. Don’t send to people who didn’t opt in. See [Deliverability basics](/en/concepts/deliverability-basics).
+- وصول کنندگان نے ای میل کو اسپیم کے طور پر نشان زد کیا۔ ہم شکایت کرنے والوں کو روک دیتے ہیں اور انہیں مستقبل کی مہمات موصول نہیں ہوں گی۔ بہت زیادہ شکایات ساکھ کو نقصان پہنچاتی ہیں۔
+- مواد کو بہتر بنائیں: واضح سبجیکٹ لائنز، متعلقہ تحریر، اور واضح ان سبسکرائب لنک۔ ان لوگوں کو ای میل نہ بھیجیں جنہوں نے رضامندی نہ دی ہو۔ [Deliverability basics](/ur/concepts/deliverability-basics) دیکھیں۔
 
-**Unsubscribes**
+**ان سبسکرائب (Unsubscribes)**
 
-- Unsubscribe links are required and honored. Unsubscribed contacts are excluded from future sends. This is normal and keeps you compliant.
+- ان سبسکرائب لنکس ضروری ہیں اور ان کا احترام کیا جاتا ہے۔ ان سبسکرائب شدہ رابطوں کو مستقبل کی ترسیل سے خارج کر دیا جاتا ہے۔ یہ ایک عام عمل ہے اور آپ کو قوانین کی تعمیل کرنے میں مدد دیتا ہے۔
 
-## Tracking and metrics
+## ٹریکنگ اور میٹرکس
 
-**Opens or clicks not updating**
+**اوپنز یا کلکس اپ ڈیٹ نہیں ہو رہے ہیں**
 
-- Tracking uses a pixel (opens) and signed links (clicks). Some clients block images or strip tracking; metrics can be undercounted.
-- Data can take a short time to appear. Refresh the campaign detail page or dashboard.
-- If a campaign shows zero opens/clicks for a long time after sends, check that links and images in the email are intact and that the campaign actually sent (check “Emails Sent” and “Emails Delivered”).
+- ٹریکنگ کے لیے ایک پکسل (اوپنز) اور سائن شدہ لنکس (کلکس) استعمال کیے جاتے ہیں۔ کچھ کلائنٹس تصاویر کو بلاک کرتے ہیں یا ٹریکنگ کو ہٹا دیتے ہیں؛ اس وجہ سے میٹرکس اصل سے کم ہو سکتے ہیں۔
+- ڈیٹا ظاہر ہونے میں تھوڑا وقت لگ سکتا ہے۔ مہم کی تفصیل کا صفحہ یا ڈیش بورڈ ریفریش کریں۔
+- اگر کوئی مہم بھیجے جانے کے کافی دیر بعد بھی زیرو اوپنز/کلکس دکھا رہی ہے، تو چیک کریں کہ ای میل میں لنکس اور تصاویر درست ہیں اور کیا مہم واقعی بھیجی گئی ہے ("Emails Sent" اور "Emails Delivered" چیک کریں)۔
 
-**Analytics look wrong**
+**تجزیات (Analytics) غلط لگ رہے ہیں**
 
-- Ensure the **date range** includes the send date. Dashboard and campaign detail pages filter by selected range.
-- “Emails Sent” includes all attempts; “Emails Delivered” is successful delivery. CTR is (Total Clicks / Total Sent) × 100. See [Campaign analytics](/en/campaigns/analytics) and [Dashboard overview](/en/dashboard/overview).
+- یقینی بنائیں کہ **تاریخ کی حد** میں بھیجنے کی تاریخ شامل ہے۔ ڈیش بورڈ اور مہم کی تفصیل کے صفحات منتخب کردہ حد کے لحاظ سے ڈیٹا فلٹر کرتے ہیں۔
+- "Emails Sent" میں تمام کوششیں شامل ہیں؛ "Emails Delivered" کامیاب ترسیل ہے۔ CTR کا فارمولا ہے: (کل کلکس / کل بھیجی گئی) × 100۔ [Campaign analytics](/ur/campaigns/analytics) اور [Dashboard overview](/ur/dashboard/overview) دیکھیں۔
 
-## What we do to protect deliverability
+## ہم ڈیلیوریبلٹی کی حفاظت کے لیے کیا کرتے ہیں
 
-- We send via our email provider and sync with their suppression list so we don’t resend to bounced or complained addresses.
-- Contacts are validated and we avoid sending to unsubscribed or suppressed contacts.
-- Content and signatures are sanitized; we may flag spam-prone wording when possible.
+- ہم اپنے ای میل فراہم کنندہ کے ذریعے ای میل بھیجتے ہیں اور ان کی سپریشن لسٹ کے ساتھ ہم آہنگ رہتے ہیں تاکہ باؤنس شدہ یا شکایت شدہ پتوں پر دوبارہ ای میل نہ جائے۔
+- رابطوں کی تصدیق کی جاتی ہے اور ہم ان سبسکرائب شدہ یا سپریس شدہ رابطوں کو ای میل بھیجنے سے گریز کرتے ہیں۔
+- مواد اور دستخطوں کو صاف (sanitize) کیا جاتا ہے؛ جہاں ممکن ہو ہم اسپیم کا شکار الفاظ کی نشاندہی کر سکتے ہیں۔
 
-For more, see [Deliverability basics](/en/concepts/deliverability-basics) and [Contact lifecycle](/en/contacts/lifecycle).
+مزید معلومات کے لیے [Deliverability basics](/ur/concepts/deliverability-basics) اور [Contact lifecycle](/ur/contacts/lifecycle) دیکھیں۔

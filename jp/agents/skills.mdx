@@ -1,0 +1,54 @@
+---
+title: "エージェントスキル"
+description: "スキルは、コーディングエージェントにNudgenの使い方を教える構成可能なモジュールです。1つのコマンドでインストールできます。"
+---
+
+## エージェントに機能を追加する
+
+Nudgenスキルは、Claude Code、Codex、Cursorなどのコーディングエージェント向けに設計されたモジュール形式の指示とスクリプトです。これにより、マーケティングワークフローやNudgenの統合パターンに対するエージェントの理解が深まります。
+
+<CardGroup cols={2}>
+  <Card title="GitHubリポジトリ" icon="github" href="https://github.com/Nudgen-Marketing/skills">
+    GitHubで公式スキルをすべて表示。
+  </Card>
+  <Card title="APIリファレンス" icon="book-open" href="/jp/agents/api">
+    基盤となるAPIについて学ぶ。
+  </Card>
+</CardGroup>
+
+## 利用可能なスキル
+
+### CLIスキル
+Nudgen CLIのインストールと認証、チーム、連絡先、キャンペーン、ブランドアイデンティティ、および紹介トラッキングの管理。
+
+```bash
+npx skills add https://github.com/Nudgen-Marketing/skills --global --skill cli
+```
+
+**詳細**: ターミナルからインストール、PATによる認証、連絡先、キャンペーン、ブランドアイデンティティ、紹介データの管理が可能です。複数チームのコンテキスト切り替えや、スクリプト用の `--json` 出力をサポートしています。
+
+---
+
+### APIスキル
+連絡先のCRUD、キャンペーン、チーム、ブランド構成、統計、アフィリエイトデータ、SDKパターン、レート制限、およびべき等性キー（idempotency keys）。
+
+```bash
+npx skills add https://github.com/Nudgen-Marketing/skills --global --skill api
+```
+
+**詳細**: 連絡先、キャンペーン、テンプレート、ブランド設定、チーム管理、SDKとREST APIのパターン、レート制限、べき等性キー、およびエラー処理をカバーします。認証には `Authorization: Bearer <PAT>` を使用します。
+
+---
+
+### メールベストプラクティススキル
+汎用的なメールスキル。配信可能性、構造、およびライフサイクルパターンを監査します。Nudgenの使用有無にかかわらず動作します。
+
+```bash
+npx skills add https://github.com/Nudgen-Marketing/skills --global --skill email-sending-best-practices
+```
+
+**詳細**: 送信者認証（SPF、DKIM、DMARC）の検証、トランザクションメールとマーケティングメールの分離のチェック、購読解除処理のレビュー、欠落しているライフサイクルステージのフラグ立て、およびスパムトリガーのコンテンツスコアリングを行います。
+
+## 貢献
+
+スキルライブラリへのコミュニティからの貢献を歓迎します。Nudgenや一般的なマーケティング自動化に役立つスキルを構築した場合は、[GitHubリポジトリ](https://github.com/Nudgen-Marketing/skills) でプルリクエスト（PR）を作成してください。

@@ -1,0 +1,55 @@
+---
+title: "Giới thiệu về CLI"
+description: "Làm chủ nền tảng tự động hóa marketing Nudgen thông qua giao diện dòng lệnh (CLI) tương tác."
+---
+
+## Tổng quan
+
+Nudgen CLI là một công cụ mạnh mẽ được thiết kế cho cả con người và các AI Agent. Nó cung cấp một cách thức liền mạch để quản lý các chiến dịch, danh bạ, nhận diện thương hiệu và số liệu thống kê giới thiệu ngay từ terminal của bạn.
+
+Cho dù bạn là một nhà phát triển đang tìm cách tự động hóa các quy trình marketing hay một AI Agent cần tương tác chất lượng cao với nền tảng Nudgen, CLI chính là giao diện chính của bạn.
+
+### Tài nguyên
+
+<CardGroup cols={2}>
+  <Card title="GitHub Repository" icon="github" href="https://github.com/Nudgen-Marketing/nudgen-cli">
+    Xem mã nguồn chạy bằng Go trên GitHub.
+  </Card>
+  <Card title="Các bản phát hành" icon="download" href="https://github.com/Nudgen-Marketing/nudgen-cli/releases">
+    Tải xuống các tệp thực thi mới nhất cho macOS, Linux và Windows.
+  </Card>
+</CardGroup>
+
+### Các tính năng chính
+
+<CardGroup cols={2}>
+  <Card title="TUI tương tác" icon="terminal">
+    Giao diện người dùng terminal đẹp mắt với các biểu mẫu tương tác và số liệu thống kê trực tiếp cho người vận hành.
+  </Card>
+  <Card title="Thiết kế ưu tiên AI" icon="robot">
+    Mọi lệnh đều hỗ trợ xuất dữ liệu `--json`, giúp các AI Agent dễ dàng phân tích và tự động hóa các tác vụ.
+  </Card>
+  <Card title="Ngữ cảnh nhóm" icon="users-gear">
+    Chuyển đổi giữa các nhóm khác nhau một cách dễ dàng và quản lý tài nguyên trong các ngữ cảnh nhóm cụ thể.
+  </Card>
+  <Card title="Bảo mật" icon="lock">
+    Thông tin xác thực được lưu trữ an toàn trong keychain của hệ thống, đảm bảo dữ liệu của bạn luôn được bảo vệ.
+  </Card>
+</CardGroup>
+
+## Mục đích
+
+CLI phục vụ nhiều vai trò:
+
+1. **Dành cho con người**: Cung cấp cách nhanh chóng để liệt kê các chiến dịch, nhập danh bạ và kiểm tra thu nhập giới thiệu mà không cần mở trình duyệt web.
+2. **Dành cho AI Agent**: Cung cấp một giao diện mà máy tính có thể diễn giải được để tự động hóa việc tiếp cận marketing và quản lý thương hiệu phức tạp.
+3. **Dành cho nhà phát triển**: Các công cụ hỗ trợ phát triển cục bộ và quản lý repository trong hệ sinh thái Nudgen.
+
+## Các mẫu tương tác
+
+CLI tuân theo nguyên tắc "Tương tác qua API". Nó sử dụng các lệnh gọi RESTful API tiêu chuẩn để giao tiếp với backend của Nudgen trong khi quản lý trạng thái phiên làm việc cục bộ một cách an toàn.
+
+- **Tiêu chuẩn JSON**: Tất cả các lệnh đều hỗ trợ `--json`. Điều này cực kỳ quan trọng cho việc giao tiếp giữa các agent với nhau.
+- **Nhận biết ngữ cảnh**: Các thao tác như liệt kê chiến dịch sẽ tự động được giới hạn trong nhóm đang hoạt động của bạn.
+
+Tiếp theo, hãy tìm hiểu cách [cài đặt CLI](/vi/agents/cli/installation).

@@ -1,77 +1,77 @@
 ---
-title: "Campaign analytics"
-description: "Metrics, delivery rates, time-series charts, and recipient activity"
+title: "مہم کے تجزیات"
+description: "میٹرکس، ڈیلیوری ریٹ، ٹائم سیریز چارٹس اور وصول کنندہ کی سرگرمی"
 ---
 
-## What this page helps you do
+## یہ صفحہ آپ کی کیا مدد کرتا ہے
 
-Understand how your campaigns perform: how many emails were sent, delivered, opened, and clicked. You'll also see delivery success and failure rates, plus per-recipient activity.
+سمجھیں کہ آپ کی مہمات کیسی کارکردگی دکھا رہی ہیں: کتنی ای میلز بھیجی گئیں، ڈیلیور ہوئیں، کھولی گئیں اور کلک کی گئیں۔ آپ ڈیلیوری کی کامیابی اور ناکامی کی شرح، اور ہر وصول کنندہ کی سرگرمی بھی دیکھیں گے۔
 
-## Before you start
+## شروع کرنے سے پہلے
 
-- At least one campaign that has been sent (or is sending)
-- Access to the campaign detail page
+- کم از کم ایک مہم جو بھیجی جا چکی ہو (یا بھیجی جا رہی ہو)
+- مہم کی تفصیل کے صفحے تک رسائی
 
-## Metric cards
+## میٹرکس کارڈز
 
-On the campaign detail page, you'll see:
+مہم کی تفصیل کے صفحے پر، آپ دیکھیں گے:
 
-| Metric            | Meaning                                                                 |
-| ----------------- | ----------------------------------------------------------------------- |
-| **Emails Sent**   | Total send attempts (including API or network failures).                |
-| **Emails Delivered** | Emails successfully accepted by the recipient's mail server.        |
-| **Total Opens**   | Number of times the email was opened (tracking pixel).                  |
-| **Total Clicks**  | Number of times links were clicked.                                    |
-| **CTR**           | Click-through rate: (Total Clicks / Total Sent) × 100.                 |
-| **Spam Complaints** | Number of times recipients marked the email as spam.                 |
-| **Soft Bounce**   | Temporary delivery issues (mailbox full, throttling, transient errors).  |
-| **Hard Bounce**   | Permanent delivery failures (invalid address, blocked domain).          |
+| میٹرک | مطلب |
+| :--- | :--- |
+| **Emails Sent** | بھیجنے کی کل کوششیں (بشمول API یا نیٹ ورک کی ناکامیاں)۔ |
+| **Emails Delivered** | وصول کنندہ کے میل سرور کے ذریعہ کامیابی سے قبول کی گئی ای میلز۔ |
+| **Total Opens** | ای میل کتنی بار کھولی گئی (ٹریکنگ پکسل)۔ |
+| **Total Clicks** | لنکس پر کتنی بار کلک کیا گیا۔ |
+| **CTR** | کلک تھرو ریٹ: (کل کلکس / کل بھیجی گئی) × 100۔ |
+| **Spam Complaints** | کتنی بار وصول کنندگان نے ای میل کو اسپیم کے طور پر نشان زد کیا۔ |
+| **Soft Bounce** | عارضی ترسیل کے مسائل (میل باکس بھرا ہوا، تھروٹلنگ، عارضی غلطیاں)۔ |
+| **Hard Bounce** | مستقل ترسیل کی ناکامیاں (غلط پتہ، بلاک شدہ ڈومین)۔ |
 
-## Delivery success and failure
+## ترسیل (Delivery) کی کامیابی اور ناکامی
 
-- **Success rate** = (delivered / sent) × 100
-- **Failure rate** = (bounced + failed) / sent × 100
+- **کامیابی کی شرح (Success rate)** = (ڈیلیور شدہ / بھیجی گئی) × 100
+- **ناکامی کی شرح (Failure rate)** = (باؤنس شدہ + ناکام) / بھیجی گئی × 100
 
-A high failure rate can hurt your sender reputation. Remove or correct bounced addresses and avoid invalid contacts.
+ناکامی کی زیادہ شرح بھیجنے والے کے طور پر آپ کی ساکھ کو نقصان پہنچا سکتی ہے۔ باؤنس شدہ پتوں کو ہٹائیں یا درست کریں اور غلط رابطوں سے پرہیز کریں۔
 
-## Time-series chart
+## ٹائم سیریز چارٹ (Time-series chart)
 
-The performance chart shows metrics over time (by day, week, or month). Use the granularity toggle to switch views. Toggle individual metrics on/off to focus on opens, clicks, or delivery.
+کارکردگی کا چارٹ وقت کے ساتھ میٹرکس دکھاتا ہے (دن، ہفتے یا مہینے کے لحاظ سے)۔ ویوز کو تبدیل کرنے کے لیے ٹوگل کا استعمال کریں۔ مخصوص میٹرکس جیسے اوپنز، کلکس یا ڈیلیوری پر توجہ مرکوز کرنے کے لیے انہیں آن/آف کریں۔
 
-## Date range picker
+## تاریخ کی حد منتخب کرنے والا (Date range picker)
 
-Filter metrics and the chart by date range. Default is usually the full campaign period. Adjust to compare specific weeks or focus on recent activity.
+تاریخ کی حد کے لحاظ سے میٹرکس اور چارٹ کو فلٹر کریں۔ پہلے سے طے شدہ عام طور پر پوری مہم کی مدت ہوتی ہے۔ مخصوص ہفتوں کا موازنہ کرنے یا حالیہ سرگرمی پر توجہ دینے کے لیے اسے ایڈجسٹ کریں۔
 
-## Recipient activity table
+## وصول کنندہ کی سرگرمی کا ٹیبل (Recipient activity table)
 
-See per-contact status:
+فی رابطہ اسٹیٹس دیکھیں:
 
-- **Contact** — Email (masked unless revealed) and name
-- **Status** — Latest event: sent, delivered, opened, clicked, bounced
-- **Sent at** — When the email was sent
-- **Delivered at** — When delivery was confirmed (if available)
-- **Opened at** — First open timestamp
-- **Clicked at** — First click timestamp
+- **رابطہ (Contact)** — ای میل (ماسک شدہ جب تک ریویل نہ کیا جائے) اور نام
+- **Status** — تازہ ترین واقعہ: بھیجی گئی، ڈیلیور شدہ، کھولی گئی، کلک کی گئی، باؤنس شدہ
+- **Sent at** — ای میل کب بھیجی گئی
+- **Delivered at** — ترسیل کی تصدیق کب ہوئی (اگر دستیاب ہو)
+- **Opened at** — پہلی بار ای میل کھولنے کا وقت
+- **Clicked at** — پہلی بار کلک کرنے کا وقت
 
-Use this to:
+اسے استعمال کریں:
 
-- Find engaged users for follow-up
-- Identify bounces for list cleanup
-- Debug delivery issues for specific addresses
+- فالو اپ کے لیے دلچسپی رکھنے والے صارفین کو تلاش کرنے کے لیے
+- فہرست کی صفائی کے لیے باؤنسز کی شناخت کے لیے
+- مخصوص پتوں کے لیے ترسیل کے مسائل کو ڈی بگ کرنے کے لیے
 
-## What happens next
+## آگے کیا ہوگا
 
-- Use insights to refine future campaigns (subject lines, tone, timing).
-- Remove bounced contacts from your list to protect deliverability.
-- Check [billing](/en/billing/overview) for email send limits if you're approaching your plan cap.
+- مستقبل کی مہمات (سبجیکٹ لائنز، لہجہ، وقت) کو بہتر بنانے کے لیے بصیرت کا استعمال کریں۔
+- ڈیلیوریبلٹی کی حفاظت کے لیے اپنی فہرست سے باؤنس شدہ رابطوں کو ہٹائیں۔
+- اگر آپ اپنے پلان کی حد کے قریب پہنچ رہے ہیں تو ای میل بھیجنے کی حدود کے لیے [billing](/ur/billing/overview) چیک کریں۔
 
-## Related docs
+## متعلقہ دستاویزات
 
 <CardGroup cols={2}>
-  <Card title="Manage campaigns" icon="pen-to-square" href="/en/campaigns/manage">
-    Edit, send, schedule, stop.
+  <Card title="مہمات کا انتظام" icon="pen-to-square" href="/ur/campaigns/manage">
+    ترمیم، بھیجنا، شیڈول، روکنا۔
   </Card>
-  <Card title="Billing & usage" icon="credit-card" href="/en/billing/overview">
-    Plan limits and usage meters.
+  <Card title="بلنگ اور استعمال" icon="credit-card" href="/ur/billing/overview">
+    پلان کی حدود اور استعمال کے میٹرز۔
   </Card>
 </CardGroup>

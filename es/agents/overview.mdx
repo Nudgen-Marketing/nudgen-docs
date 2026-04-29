@@ -1,0 +1,81 @@
+---
+title: "Email para Agentes"
+description: "Ofrezca a Claude Code, Codex, Cursor, OpenClaw y sus propios agentes formas estructuradas de instalar Nudgen, migrar su stack, enviar eventos y trabajar con Nudgen."
+---
+
+## Introducción
+
+Nudgen está diseñado para la era de los agentes (Agentic Era). Proporcionamos formas estructuradas para que agentes de IA como **Claude Code**, **Codex**, **Cursor** y **OpenClaw** interactúen con su stack de marketing.
+
+Ya sea que necesite instalar Nudgen en una nueva aplicación, migrar desde un proveedor heredado o automatizar flujos de trabajo de campañas complejos, nuestras interfaces centradas en los agentes garantizan una alta confiabilidad y eficiencia para los desarrolladores.
+
+<CardGroup cols={3}>
+  <Card title="Skills" icon="book-open" href="/es/agents/skills">
+    Módulos combinables que enseñan a su agente cómo trabajar con Nudgen. Instalación con un solo comando.
+  </Card>
+  <Card title="CLI" icon="terminal" href="/es/agents/cli/introduction">
+    Centro de comando impulsado por Go para la orquestación y el seguimiento desde la terminal.
+  </Card>
+  <Card title="API" icon="code" href="/es/agents/api">
+    API REST con autenticación de Token de Acceso Personal (PAT) para una gestión programática.
+  </Card>
+</CardGroup>
+
+## Funciona con
+
+- **Codex**
+- **Claude Code**
+- **Cursor**
+- **OpenClaw**
+
+## Casos de Uso
+
+¿Cómo se ve el marketing por agentes en la realidad? Aquí tiene algunos flujos de trabajo comunes:
+
+### "Prueba este email transaccional desde la terminal"
+**Qué hace el agente:** Utiliza la CLI para enviar un email transaccional de prueba con su ID de plantilla y variables de datos de ejemplo. Muestra el estado de la respuesta y la confirmación de entrega.
+
+**Qué termina usted:** Revise su bandeja de entrada, examine el email renderizado, publique la plantilla cuando esté lista.
+
+---
+
+### "Audita mi configuración de email y mapeala a Nudgen"
+**Qué hace el agente:** Escanea su base de código en busca de llamadas a proveedores de email, identifica cada envío, plantilla y webhook. Mapea cada uno a un equivalente de Nudgen y produce un plan de migration archivo por archivo.
+
+**Qué termina usted:** Recree las plantillas en el editor de Nudgen, configure los ajustes de baja y webhook en el panel de control.
+
+---
+
+### "Envía un evento de cancelación a Nudgen"
+**Qué hace el agente:** Conecta su manejador de webhook de Stripe para llamar a la API de eventos de Nudgen cuando se cancela una suscripción. Establece el nombre del evento, mapea las propiedades relevantes (plan, motivo, fecha).
+
+**Qué termina usted:** Cree el Nudgen de cancelación en el panel de control, defina propiedades de contacto personalizadas si es necesario.
+
+---
+
+### "Instala Nudgen en mi aplicación Next.js"
+**Qué hace el agente:** Detecta Next.js, instala el SDK de JavaScript, conecta NUDGEN_API_KEY desde .env, crea una ruta de sincronización de contactos y un ejemplo de envío transaccional, y genera una lista de verificación de prueba.
+
+**Qué termina usted:** Agregue su clave API en el panel de Nudgen, publique su plantilla de email transaccional, verifique el envío de prueba.
+
+## Recursos
+
+<CardGroup cols={2}>
+  <Card title="Repositorio CLI" icon="github" href="https://github.com/Nudgen-Marketing/nudgen-cli">
+    Código fuente del centro de comando impulsado por Go.
+  </Card>
+  <Card title="Repositorio de Skills" icon="github" href="https://github.com/Nudgen-Marketing/skills">
+    Biblioteca de habilidades de marketing para agentes.
+  </Card>
+</CardGroup>
+
+## Hoja de Ruta
+
+Estamos ampliando constantemente las capacidades de nuestros agentes:
+
+- **Setup skill**: (Próximamente) Detecta su stack, conecta la autenticación y crea ejemplos funcionales.
+- **Migrate skill**: (Próximamente) Audita su stack y construye un plan de migración.
+- **Autoría de emails programable**: (Próximamente) Escriba plantillas de email usando código.
+- **Servidor MCP**: (Próximamente) Soporte nativo para Model Context Protocol.
+
+A continuación, explore las [Habilidades de Agente (Agent Skills)](/es/agents/skills).

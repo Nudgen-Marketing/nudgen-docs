@@ -1,0 +1,72 @@
+---
+title: "CLI کی انسٹالیشن"
+description: "macOS، Linux، یا Windows پر Nudgen CLI کے ساتھ شروعات کریں۔"
+---
+
+## فوری انسٹالیشن
+
+Nudgen CLI کو انسٹال کرنے کا سب سے آسان طریقہ ہمارا ون لائنر انسٹال اسکرپٹ استعمال کرنا ہے۔
+
+### macOS اور Linux
+
+اپنے ٹرمینل میں درج ذیل کمانڈ چلائیں:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/Nudgen-Marketing/nudgen-cli/main/scripts/install.sh | bash
+```
+
+### Go کے ذریعے
+
+اگر آپ کے پاس Go 1.22+ انسٹال ہے تو آپ براہ راست CLI انسٹال کر سکتے ہیں:
+
+```bash
+go install github.com/Nudgen-Marketing/nudgen-cli@latest
+```
+
+### سورس سے
+
+اگر آپ کے پاس Go 1.22+ انسٹال ہے تو آپ سورس سے بلڈ کر سکتے ہیں:
+
+```bash
+git clone https://github.com/Nudgen-Marketing/nudgen-cli.git
+cd nudgen-cli
+make build
+```
+
+بائنری `./bin/nudgen` پر دستیاب ہوگی۔
+
+## ابتدائی سیٹ اپ
+
+ایک بار انسٹال ہونے کے بعد، ورژن چیک کرکے انسٹالیشن کی تصدیق کریں:
+
+```bash
+nudgen version
+```
+
+### توثیق (Authentication)
+
+CLI کا استعمال شروع کرنے کے لیے آپ کو پرسنل ایکسیس ٹوکن (PAT) کے ساتھ توثیق کرنی ہوگی۔
+
+1. لاگ ان کمانڈ چلائیں:
+   ```bash
+   nudgen login
+   ```
+2. اپنا ٹوکن درج کرنے کے لیے انٹرایکٹو ہدایات پر عمل کریں۔
+3. اپنی شناخت کی تصدیق کریں:
+   ```bash
+   nudgen whoami
+   ```
+
+### اپ ڈیٹ کرنا
+
+تازہ ترین ورژن میں اپ ڈیٹ کرنے کے لیے صرف انسٹال اسکرپٹ دوبارہ چلائیں یا بلٹ ان اپ ڈیٹ کمانڈ استعمال کریں (اگر دستیاب ہو):
+
+```bash
+nudgen update
+```
+
+## سیکیورٹی
+
+Nudgen CLI آپ کے PAT کو محفوظ طریقے سے اسٹور کرنے کے لیے سسٹم کی چین (keychain) کا استعمال کرتی ہے۔ ہم کبھی بھی کسی کمانڈ آؤٹ پٹ میں خام ٹوکن لاگ یا آؤٹ پٹ نہیں کرتے ہیں۔
+
+اگلا، [بنیادی کمانڈز](/ur/agents/cli/commands) دیکھیں۔

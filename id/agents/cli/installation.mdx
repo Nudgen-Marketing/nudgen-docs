@@ -1,0 +1,72 @@
+---
+title: "Instalasi CLI"
+description: "Mulai gunakan Nudgen CLI di macOS, Linux, atau Windows."
+---
+
+## Instalasi Cepat
+
+Cara termudah untuk menginstal Nudgen CLI adalah dengan menggunakan skrip instalasi satu baris kami.
+
+### macOS & Linux
+
+Jalankan perintah berikut di terminal Anda:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/Nudgen-Marketing/nudgen-cli/main/scripts/install.sh | bash
+```
+
+### Melalui Go
+
+Jika Anda sudah menginstal Go 1.22+, Anda dapat menginstal CLI secara langsung:
+
+```bash
+go install github.com/Nudgen-Marketing/nudgen-cli@latest
+```
+
+### Dari Sumber (Source)
+
+Jika Anda sudah menginstal Go 1.22+, Anda dapat membuild dari sumber:
+
+```bash
+git clone https://github.com/Nudgen-Marketing/nudgen-cli.git
+cd nudgen-cli
+make build
+```
+
+Biner akan tersedia di `./bin/nudgen`.
+
+## Pengaturan Awal
+
+Setelah diinstal, verifikasi instalasi dengan memeriksa versi:
+
+```bash
+nudgen version
+```
+
+### Autentikasi
+
+Untuk mulai menggunakan CLI, Anda perlu melakukan autentikasi dengan Personal Access Token (PAT).
+
+1. Jalankan perintah login:
+   ```bash
+   nudgen login
+   ```
+2. Ikuti perintah interaktif untuk memasukkan token Anda.
+3. Verifikasi identitas Anda:
+   ```bash
+   nudgen whoami
+   ```
+
+### Memperbarui
+
+Untuk memperbarui ke versi terbaru, cukup jalankan kembali skrip instalasi atau gunakan perintah pembaruan bawaan (jika tersedia):
+
+```bash
+nudgen update
+```
+
+## Keamanan
+
+Nudgen CLI menggunakan keychain sistem untuk menyimpan PAT Anda dengan aman. Kami tidak pernah mencatat atau mengeluarkan token mentah dalam output perintah apa pun.
+
+Berikutnya, jelajahi [perintah inti](/id/agents/cli/commands).

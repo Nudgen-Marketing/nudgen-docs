@@ -1,0 +1,54 @@
+---
+title: "Keterampilan Agen (Skills)"
+description: "Skills adalah modul yang dapat disusun yang mengajarkan agen coding Anda cara bekerja dengan Nudgen. Instal dengan satu perintah."
+---
+
+## Tambahkan kemampuan ke agen Anda
+
+Nudgen Skills adalah instruksi dan skrip modular yang dirancang untuk agen coding seperti Claude Code, Codex, dan Cursor. Mereka memperluas pemahaman agen Anda tentang alur kerja pemasaran dan pola integrasi Nudgen.
+
+<CardGroup cols={2}>
+  <Card title="Repositori GitHub" icon="github" href="https://github.com/Nudgen-Marketing/skills">
+    Lihat semua keterampilan resmi di GitHub.
+  </Card>
+  <Card title="Referensi API" icon="book-open" href="/id/agents/api">
+    Pelajari tentang API yang mendasarinya.
+  </Card>
+</CardGroup>
+
+## Keterampilan yang Tersedia
+
+### CLI Skill
+Instal dan autentikasi Nudgen CLI, kelola tim, kontak, kampanye, identitas merek, dan pelacakan referensi.
+
+```bash
+npx skills add https://github.com/Nudgen-Marketing/skills --global --skill cli
+```
+
+**Detail**: Instal, autentikasi melalui PAT, dan kelola kontak, kampanye, identitas merek, dan data referensi dari terminal. Mendukung perpindahan konteks multi-tim dan output `--json` untuk pembuatan skrip.
+
+---
+
+### API Skill
+CRUD Kontak, kampanye, tim, konfigurasi merek, statistik, data afiliasi, pola SDK, batas rate limit, dan kunci idempotensi.
+
+```bash
+npx skills add https://github.com/Nudgen-Marketing/skills --global --skill api
+```
+
+**Detail**: Mencakup kontak, kampanye, templat, pengaturan merek, manajemen tim, pola SDK vs REST API, batas rate limit, kunci idempotensi, dan penanganan kesalahan. Menggunakan `Authorization: Bearer <PAT>` untuk autentikasi.
+
+---
+
+### Email Best Practices Skill
+Keterampilan email serbaguna. Mengaudit deliverability, struktur, dan pola siklus hidup. Bekerja dengan atau tanpa Nudgen.
+
+```bash
+npx skills add https://github.com/Nudgen-Marketing/skills --global --skill email-sending-best-practices
+```
+
+**Detail**: Memvalidasi autentikasi pengirim (SPF, DKIM, DMARC), memeriksa pemisahan antara email transaksional vs pemasaran, meninjau penanganan berhenti berlangganan, menandai tahap siklus hidup yang hilang, dan memberi skor konten untuk pemicu spam.
+
+## Berkontribusi
+
+Kami menyambut kontribusi komunitas ke perpustakaan keterampilan kami. Jika Anda telah membangun keterampilan yang berguna untuk Nudgen atau otomatisasi pemasaran umum, silakan buka PR di [repositori GitHub](https://github.com/Nudgen-Marketing/skills) kami.

@@ -1,0 +1,67 @@
+---
+title: "API para Desarrolladores"
+description: "API REST con autenticación mediante Token de Acceso Personal. Gestione contactos, campañas, plantillas y ajustes mediante programación."
+---
+
+## Resumen
+
+La API para desarrolladores de Nudgen proporciona una interfaz REST limpia y orientada a recursos para gestionar su infraestructura de marketing. Todas las solicitudes utilizan métodos HTTP estándar y devuelven respuestas JSON predecibles.
+
+<CardGroup cols={3}>
+  <Card title="Autenticación PAT" icon="shield-check">
+    Autentíquese con Tokens de Acceso Personal mediante la cabecera Bearer estándar.
+  </Card>
+  <Card title="REST Limpio" icon="globe">
+    URLs predecibles y orientadas a recursos con métodos HTTP estándar.
+  </Card>
+  <Card title="Limitación de Velocidad" icon="gauge">
+    Limitación de velocidad integrada por equipo y endpoint para proteger sus flujos de trabajo.
+  </Card>
+</CardGroup>
+
+## Autenticación
+
+Todas las solicitudes de la API requieren un Token de Acceso Personal (PAT) enviado a través de la cabecera `Authorization`. Puede generar tokens desde su panel de control de Nudgen en **Ajustes → Claves API**.
+
+```bash
+curl -X GET https://app.nudgen.com/api/v1/user/me \
+  -H "Authorization: Bearer <your-pat>"
+```
+
+## URL Base
+
+La URL base para todas las solicitudes de la API es:
+`https://app.nudgen.com`
+
+## Endpoints
+
+### Autenticación e Identidad
+- `GET /api/v1/user/me`: Obtiene el usuario autenticado actualmente.
+- `GET /api/v1/teams`: Lista todos los equipos del usuario actual.
+- `POST /api/v1/teams/switch`: Cambia el contexto del equipo activo.
+
+### Contactos
+- `GET /api/v1/contacts`: Lista los contactos con paginación, búsqueda y filtros de etiquetas.
+- `POST /api/v1/contacts/add`: Crea un nuevo contacto.
+- `GET /api/v1/contacts/:id`: Recupera un contacto específico.
+- `PATCH /api/v1/contacts/:id`: Actualiza un contacto existente.
+- `DELETE /api/v1/contacts/:id`: Elimina un contacto.
+
+### Campañas
+- `GET /api/v1/campaigns`: Lista las campañas del equipo actual.
+- `POST /api/v1/campaigns`: Crea una nueva campaña.
+- `GET /api/v1/campaigns/:id`: Obtiene los detalles de la campaña.
+- `GET /api/v1/campaigns/:id/stats`: Obtiene las estadísticas de entrega de la campaña.
+
+### Plantillas
+- `GET /api/v1/templates`: Lista las plantillas de correo electrónico.
+- `POST /api/v1/templates`: Crea una nueva plantilla de correo electrónico.
+
+### Ajustes
+- `GET /api/v1/settings/brand`: Obtiene la configuración de la marca.
+- `PATCH /api/v1/settings/brand`: Actualiza los ajustes de la marca.
+
+## Especificación OpenAPI
+
+Puede descargar nuestra especificación OpenAPI completa aquí:
+[openapi.json](https://app.nudgen.com/api/openapi.json)

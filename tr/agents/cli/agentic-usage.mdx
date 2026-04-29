@@ -1,0 +1,52 @@
+---
+title: "Yapay Zeka Agent Kullanımı"
+description: "Nudgen CLI'nın Yapay Zeka Agentları için bir arayüz olarak nasıl kullanılacağı."
+---
+
+## Genel Bakış
+
+Nudgen CLI, **Yapay Zeka Öncelikli (AI-First)** bir yaklaşımla tasarlanmıştır. İnsanlar için şık bir TUI sunarken, her komut aynı zamanda makineden makineye iletişim için optimize edilmiştir.
+
+### Agentic Modeli
+
+Bir yapay zeka agentı (Claude, GPT veya özel bir otomasyon agentı gibi) CLI'yı kullandığında şu modelleri izlemelidir:
+
+1. **JSON Çıktısı**: Makine tarafından ayrıştırılabilir veriler almak için her komuta `--json` ekleyin.
+2. **Bağlam Farkındalığı**: İşlemleri gerçekleştirmeden önce her zaman ekip bağlamını doğrulayın.
+3. **Etkileşimsiz Kullanım**: Etkileşimli TUI istemlerini atlamak için flag'leri (bayrakları) kullanın.
+
+## JSON Otomasyonu
+
+Her liste ve durum komutu bir `--json` flag'ini destekler. Bu, biçimlendirilmiş bir tablo yerine temiz bir JSON yapısı döndürür.
+
+```bash
+# Tüm kampanyaları JSON olarak al
+nudgen campaigns list --json
+
+# Mevcut ekipteki kişileri al
+nudgen contacts list --json
+```
+
+## Agentlar İçin Çoklu Kiracılı (Multi-tenant) İş Akışı
+
+Nudgen birden fazla ekibi desteklediğinden, bir agent kaynak oluşturmadan veya güncellemeden önce doğru ekipte çalıştığından emin olmalıdır.
+
+**Önerilen İş Akışı:**
+
+1. **Mevcut Ekibi Kontrol Et**:
+   ```bash
+   nudgen teams current --json
+   ```
+2. **Ekip Değiştir (Gerekirse)**:
+   Önceki adımdaki `id` hedef ekiple eşleşmiyorsa, geçiş yapın:
+   ```bash
+   nudgen teams switch <target-team-id>
+   ```
+3. **Veri Komutunu Çalıştır**:
+   `campaigns`, `contacts` veya `brand` komutlarıyla devam edin.
+
+## Agent Geliştiricileri İçin En İyi Pratikler
+
+- **Hata Yönetimi**: CLI komutlarının çıkış kodunu (exit code) izleyin. Sıfır olmayan bir çıkış kodu bir hatayı (doğrulama, ağ veya yetkilendirme) gösterir.
+- **Hız Sınırlaması (Rate Limiting)**: CLI, Nudgen API ile iletişim kurar. Agent scriptlerinizin potansiyel hız sınırlarını sorunsuzca yönettiğinden emin olun.
+- **Sessiz Mod**: Bir komut her istem için belirli bir flag'i desteklemiyorsa, agent'ınızın TUI döngüsünde takılmadan stdout/stderr akışlarını yönetebildiğinden emin olun.

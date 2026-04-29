@@ -1,0 +1,54 @@
+---
+title: "Agent-Skills"
+description: "Skills sind kombinierbare Module, die Ihrem Coding-Agenten beibringen, wie er mit Nudgen arbeitet. Installieren Sie sie mit einem einzigen Befehl."
+---
+
+## Erweitern Sie die Fähigkeiten Ihres Agenten
+
+Nudgen Skills sind modulare Anweisungen und Skripte, die für Coding-Agenten wie Claude Code, Codex und Cursor entwickelt wurden. Sie erweitern das Verständnis Ihres Agenten für Marketing-Workflows und Nudgen-Integrationsmuster.
+
+<CardGroup cols={2}>
+  <Card title="GitHub-Repository" icon="github" href="https://github.com/Nudgen-Marketing/skills">
+    Alle offiziellen Skills auf GitHub anzeigen.
+  </Card>
+  <Card title="API-Referenz" icon="book-open" href="/de/agents/api">
+    Erfahren Sie mehr über die zugrunde liegende API.
+  </Card>
+</CardGroup>
+
+## Verfügbare Skills
+
+### CLI-Skill
+Nudgen CLI installieren und authentifizieren, Teams, Kontakte, Kampagnen, Markenidentitäten und Referral-Tracking verwalten.
+
+```bash
+npx skills add https://github.com/Nudgen-Marketing/skills --global --skill cli
+```
+
+**Details**: Installation, Authentifizierung via PAT sowie Verwaltung von Kontakten, Kampagnen, Markenidentitäten und Empfehlungsdaten über das Terminal. Unterstützt Kontextwechsel zwischen mehreren Teams und `--json`-Ausgabe für Skripte.
+
+---
+
+### API-Skill
+Kontakte (CRUD), Kampagnen, Teams, Markenkonfigurationen, Statistiken, Affiliate-Daten, SDK-Muster, Ratenbegrenzungen (Rate Limits) und Idempotenz-Keys.
+
+```bash
+npx skills add https://github.com/Nudgen-Marketing/skills --global --skill api
+```
+
+**Details**: Deckt Kontakte, Kampagnen, Templates, Markeneinstellungen, Teamverwaltung, SDK- vs. REST-API-Muster, Ratenbegrenzungen, Idempotenz-Keys und Fehlerbehandlung ab. Nutzt `Authorization: Bearer <PAT>` zur Authentifizierung.
+
+---
+
+### Email Best Practices Skill
+Universeller E-Mail-Skill. Auditiert Zustellbarkeit, Struktur und Lifecycle-Muster. Funktioniert mit oder ohne Nudgen.
+
+```bash
+npx skills add https://github.com/Nudgen-Marketing/skills --global --skill email-sending-best-practices
+```
+
+**Details**: Validiert die Absender-Authentifizierung (SPF, DKIM, DMARC), prüft die Trennung von transaktionalen und Marketing-E-Mails, überprüft das Abmelde-Handling, markiert fehlende Lifecycle-Phasen und bewertet Inhalte auf Spam-Trigger.
+
+## Beitragen
+
+Wir freuen uns über Beiträge der Community zu unserer Skills-Bibliothek. Wenn Sie einen nützlichen Skill für Nudgen oder die allgemeine Marketing-Automatisierung entwickelt haben, öffnen Sie bitte einen PR in unserem [GitHub-Repository](https://github.com/Nudgen-Marketing/skills).

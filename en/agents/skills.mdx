@@ -1,0 +1,54 @@
+---
+title: "Agent Skills"
+description: "Skills are composable modules that teach your coding agent how to work with Nudgen. Install them with a single command."
+---
+
+## Add capabilities to your agent
+
+Nudgen Skills are modular instructions and scripts designed for coding agents like Claude Code, Codex, and Cursor. They extend your agent's understanding of marketing workflows and Nudgen integration patterns.
+
+<CardGroup cols={2}>
+  <Card title="GitHub Repository" icon="github" href="https://github.com/Nudgen-Marketing/skills">
+    View all official skills on GitHub.
+  </Card>
+  <Card title="API Reference" icon="book-open" href="/en/agents/api">
+    Learn about the underlying API.
+  </Card>
+</CardGroup>
+
+## Available Skills
+
+### CLI Skill
+Install and authenticate the Nudgen CLI, manage teams, contacts, campaigns, brand identities, and referral tracking.
+
+```bash
+npx skills add https://github.com/Nudgen-Marketing/skills --global --skill cli
+```
+
+**Details**: Install, authenticate via PAT, and manage contacts, campaigns, brand identities, and referral data from the terminal. Supports multi-team context switching and `--json` output for scripting.
+
+---
+
+### API Skill
+Contacts CRUD, campaigns, teams, brand configs, stats, affiliate data, SDK patterns, rate limits, and idempotency keys.
+
+```bash
+npx skills add https://github.com/Nudgen-Marketing/skills --global --skill api
+```
+
+**Details**: Covers contacts, campaigns, templates, brand settings, team management, SDK vs REST API patterns, rate limits, idempotency keys, and error handling. Uses `Authorization: Bearer <PAT>` for authentication.
+
+---
+
+### Email Best Practices Skill
+General-purpose email skill. Audits deliverability, structure, and lifecycle patterns. Works with or without Nudgen.
+
+```bash
+npx skills add https://github.com/Nudgen-Marketing/skills --global --skill email-sending-best-practices
+```
+
+**Details**: Validates sender authentication (SPF, DKIM, DMARC), checks transactional vs. marketing separation, reviews unsubscribe handling, flags missing lifecycle stages, and scores content for spam triggers.
+
+## Contributing
+
+We welcome community contributions to our skills library. If you've built a useful skill for Nudgen or general marketing automation, please open a PR on our [GitHub repository](https://github.com/Nudgen-Marketing/skills).

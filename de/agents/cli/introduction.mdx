@@ -1,0 +1,55 @@
+---
+title: "CLI Einführung"
+description: "Meistern Sie die Nudgen Marketing-Automatisierungsplattform über das interaktive Command Line Interface (CLI)."
+---
+
+## Übersicht
+
+Das Nudgen CLI ist ein leistungsstarkes Tool, das sowohl für Menschen als auch für KI-Agenten entwickelt wurde. Es bietet eine nahtlose Möglichkeit, Kampagnen, Kontakte, Markenidentitäten und Referral-Statistiken direkt von Ihrem Terminal aus zu verwalten.
+
+Egal, ob Sie ein Entwickler sind, der seine Marketing-Workflows automatisieren möchte, oder ein KI-Agent, der eine hochwertige Interaktion mit der Nudgen-Plattform benötigt – das CLI ist Ihre primäre Schnittstelle.
+
+### Ressourcen
+
+<CardGroup cols={2}>
+  <Card title="GitHub-Repository" icon="github" href="https://github.com/Nudgen-Marketing/nudgen-cli">
+    Quellcode des Go-basierten CLI auf GitHub anzeigen.
+  </Card>
+  <Card title="Releases" icon="download" href="https://github.com/Nudgen-Marketing/nudgen-cli/releases">
+    Laden Sie die neuesten Binärdateien für macOS, Linux und Windows herunter.
+  </Card>
+</CardGroup>
+
+### Hauptmerkmale
+
+<CardGroup cols={2}>
+  <Card title="Interaktive TUI" icon="terminal">
+    Ansprechende Terminal-Benutzeroberfläche mit interaktiven Formularen und Live-Statistiken für menschliche Anwender.
+  </Card>
+  <Card title="AI-First Design" icon="robot">
+    Jeder Befehl unterstützt die `--json`-Ausgabe, was es KI-Agenten erleichtert, Aufgaben zu analysieren und zu automatisieren.
+  </Card>
+  <Card title="Team-Kontext" icon="users-gear">
+    Wechseln Sie mühelos zwischen verschiedenen Teams und verwalten Sie Ressourcen innerhalb spezifischer Team-Kontexte.
+  </Card>
+  <Card title="Sicher" icon="lock">
+    Anmeldedaten werden sicher im Schlüsselbund (Keychain) Ihres Systems gespeichert, damit Ihre Daten geschützt bleiben.
+  </Card>
+</CardGroup>
+
+## Zweck
+
+Das CLI erfüllt mehrere Rollen:
+
+1. **Für Menschen**: Bietet einen schnellen Weg, um Kampagnen aufzulisten, Kontakte zu importieren und Empfehlungseinnahmen zu prüfen, ohne den Webbrowser öffnen zu müssen.
+2. **Für KI-Agenten**: Bietet eine maschinenlesbare Schnittstelle zur Automatisierung komplexer Marketing-Outreach-Maßnahmen und Markenmanagement.
+3. **Für Entwickler**: Hilfsmittel für die lokale Entwicklung und das Repository-Management innerhalb des Nudgen-Ökosystems.
+
+## Interaktionsmuster
+
+Das CLI folgt dem Prinzip „Interaktion über API“. Es nutzt Standard-REST-API-Aufrufe zur Kommunikation mit dem Nudgen-Backend, während der Sitzungsstatus lokal sicher verwaltet wird.
+
+- **JSON-Standard**: Alle Befehle unterstützen `--json`. Dies ist entscheidend für die Kommunikation von Agent zu Agent.
+- **Kontextsensitiv**: Operationen wie das Auflisten von Kampagnen werden automatisch auf Ihr aktives Team beschränkt.
+
+Erfahren Sie als Nächstes, wie Sie [das CLI installieren](/de/agents/cli/installation).

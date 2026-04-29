@@ -1,0 +1,67 @@
+---
+title: "API Pengembang"
+description: "REST API dengan autentikasi Personal Access Token. Kelola kontak, kampanye, templat, dan pengaturan secara terprogram."
+---
+
+## Ikhtisar
+
+Nudgen Developer API menyediakan antarmuka REST yang bersih dan berorientasi sumber daya untuk mengelola infrastruktur pemasaran Anda. Semua permintaan menggunakan metode HTTP standar dan mengembalikan respons JSON yang dapat diprediksi.
+
+<CardGroup cols={3}>
+  <Card title="Autentikasi PAT" icon="shield-check">
+    Autentikasi dengan Personal Access Token melalui header Bearer standar.
+  </Card>
+  <Card title="REST Bersih" icon="globe">
+    URL yang dapat diprediksi dan berorientasi sumber daya dengan metode HTTP standar.
+  </Card>
+  <Card title="Batas Laju" icon="gauge">
+    Pembatasan laju (rate limiting) bawaan per tim dan titik akhir untuk melindungi alur kerja Anda.
+  </Card>
+</CardGroup>
+
+## Autentikasi
+
+Semua permintaan API memerlukan Personal Access Token (PAT) yang diteruskan melalui header `Authorization`. Anda dapat membuat token dari dasbor Nudgen di bawah **Pengaturan → API Keys**.
+
+```bash
+curl -X GET https://app.nudgen.com/api/v1/user/me \
+  -H "Authorization: Bearer <your-pat>"
+```
+
+## URL Dasar
+
+URL dasar untuk semua permintaan API adalah:
+`https://app.nudgen.com`
+
+## Titik Akhir (Endpoints)
+
+### Autentikasi & Identitas
+- `GET /api/v1/user/me`: Dapatkan pengguna terautentikasi saat ini.
+- `GET /api/v1/teams`: Daftar semua tim untuk pengguna saat ini.
+- `POST /api/v1/teams/switch`: Ganti konteks tim yang aktif.
+
+### Kontak
+- `GET /api/v1/contacts`: Daftar kontak dengan paginasi, pencarian, dan filter tag.
+- `POST /api/v1/contacts/add`: Buat kontak baru.
+- `GET /api/v1/contacts/:id`: Ambil kontak tertentu.
+- `PATCH /api/v1/contacts/:id`: Perbarui kontak yang ada.
+- `DELETE /api/v1/contacts/:id`: Hapus kontak.
+
+### Kampanye
+- `GET /api/v1/campaigns`: Daftar kampanye di tim saat ini.
+- `POST /api/v1/campaigns`: Buat kampanye baru.
+- `GET /api/v1/campaigns/:id`: Dapatkan detail kampanye.
+- `GET /api/v1/campaigns/:id/stats`: Dapatkan statistik pengiriman kampanye.
+
+### Templat
+- `GET /api/v1/templates`: Daftar templat email.
+- `POST /api/v1/templates`: Buat templat email baru.
+
+### Pengaturan
+- `GET /api/v1/settings/brand`: Dapatkan konfigurasi merek.
+- `PATCH /api/v1/settings/brand`: Perbarui pengaturan merek.
+
+## Spesifikasi OpenAPI
+
+Anda dapat mengunduh spesifikasi OpenAPI lengkap kami di sini:
+[openapi.json](https://app.nudgen.com/api/openapi.json)

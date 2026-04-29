@@ -1,0 +1,72 @@
+---
+title: "CLI Kurulumu"
+description: "macOS, Linux veya Windows üzerinde Nudgen CLI ile çalışmaya başlayın."
+---
+
+## Hızlı Kurulum
+
+Nudgen CLI'yı kurmanın en kolay yolu, tek satırlık kurulum scriptimizi kullanmaktır.
+
+### macOS ve Linux
+
+Terminalinizde aşağıdaki komutu çalıştırın:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/Nudgen-Marketing/nudgen-cli/main/scripts/install.sh | bash
+```
+
+### Go ile
+
+Eğer sisteminizde Go 1.22+ kuruluysa, CLI'yı doğrudan kurabilirsiniz:
+
+```bash
+go install github.com/Nudgen-Marketing/nudgen-cli@latest
+```
+
+### Kaynak Koddan
+
+Sisteminizde Go 1.22+ kuruluysa, kaynak koddan derleme yapabilirsiniz:
+
+```bash
+git clone https://github.com/Nudgen-Marketing/nudgen-cli.git
+cd nudgen-cli
+make build
+```
+
+İkili dosya (binary) `./bin/nudgen` konumunda hazır olacaktır.
+
+## İlk Kurulum
+
+Kurulum tamamlandıktan sonra, sürümü kontrol ederek kurulumu doğrulayın:
+
+```bash
+nudgen version
+```
+
+### Kimlik Doğrulama
+
+CLI'yı kullanmaya başlamak için bir Kişisel Erişim Jetonu (PAT) ile kimlik doğrulaması yapmanız gerekir.
+
+1. Login komutunu çalıştırın:
+   ```bash
+   nudgen login
+   ```
+2. Jetonunuzu girmek için etkileşimli yönergeleri izleyin.
+3. Kimliğinizi doğrulayın:
+   ```bash
+   nudgen whoami
+   ```
+
+### Güncelleme
+
+En son sürüme güncellemek için kurulum scriptini tekrar çalıştırmanız veya (varsa) yerleşik güncelleme komutunu kullanmanız yeterlidir:
+
+```bash
+nudgen update
+```
+
+## Güvenlik
+
+Nudgen CLI, PAT'ınızı güvenli bir şekilde saklamak için sistem anahtar zincirini (system keychain) kullanır. Herhangi bir komut çıktısında asla ham jetonları günlüğe kaydetmeyiz veya göstermeyiz.
+
+Sırada, [temel komutları](/tr/agents/cli/commands) keşfedin.

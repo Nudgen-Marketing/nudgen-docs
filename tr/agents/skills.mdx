@@ -1,0 +1,54 @@
+---
+title: "Agent Yetenekleri (Skills)"
+description: "Yetenekler (Skills), kodlama agentınıza Nudgen ile nasıl çalışacağını öğreten birleştirilebilir modüllerdir. Bunları tek bir komutla kurun."
+---
+
+## Agentınıza yeni yetenekler ekleyin
+
+Nudgen Yetenekleri, Claude Code, Codex ve Cursor gibi kodlama agentları için tasarlanmış modüler talimatlar ve scriptlerdir. Agentınızın pazarlama iş akışlarını ve Nudgen entegrasyon modellerini anlamasını geliştirirler.
+
+<CardGroup cols={2}>
+  <Card title="GitHub Deposu" icon="github" href="https://github.com/Nudgen-Marketing/skills">
+    GitHub'daki tüm resmi yetenekleri görüntüleyin.
+  </Card>
+  <Card title="API Referansı" icon="book-open" href="/tr/agents/api">
+    Temel API hakkında bilgi edinin.
+  </Card>
+</CardGroup>
+
+## Mevcut Yetenekler
+
+### CLI Yeteneği
+Nudgen CLI'yı kurun ve kimlik doğrulamasını yapın; ekipleri, kişileri, kampanyaları, marka kimliklerini ve referans takibini yönetin.
+
+```bash
+npx skills add https://github.com/Nudgen-Marketing/skills --global --skill cli
+```
+
+**Detaylar**: Kurulum, PAT üzerinden kimlik doğrulama ve kişileri, kampanyaları, marka kimliklerini ve referans verilerini terminalden yönetme. Çoklu ekip bağlam değiştirme ve script yazımı için `--json` çıktısını destekler.
+
+---
+
+### API Yeteneği
+Kişi CRUD işlemleri, kampanyalar, ekipler, marka yapılandırmaları, istatistikler, satış ortağı verileri, SDK modelleri, hız limitleri ve idempotentlik anahtarları.
+
+```bash
+npx skills add https://github.com/Nudgen-Marketing/skills --global --skill api
+```
+
+**Detaylar**: Kişiler, kampanyalar, şablonlar, marka ayarları, ekip yönetimi, SDK vs REST API modelleri, hız limitleri, idempotentlik anahtarları ve hata yönetimini kapsar. Kimlik doğrulama için `Authorization: Bearer <PAT>` kullanır.
+
+---
+
+### E-posta En İyi Uygulamaları Yeteneği
+Genel amaçlı e-posta yeteneği. Teslimat oranını, yapıyı ve yaşam döngüsü modellerini denetler. Nudgen ile veya Nudgen olmadan çalışır.
+
+```bash
+npx skills add https://github.com/Nudgen-Marketing/skills --global --skill email-sending-best-practices
+```
+
+**Detaylar**: Gönderici kimlik doğrulamasını (SPF, DKIM, DMARC) doğrular, işlemsel ve pazarlama e-postası ayrımını kontrol eder, abonelikten çıkma işlemlerini inceler, eksik yaşam döngüsü aşamalarını işaretler ve içeriği spam tetikleyicileri açısından puanlar.
+
+## Katkıda Bulunma
+
+Topluluğun yetenek kütüphanemize katkılarını memnuniyetle karşılıyoruz. Nudgen veya genel pazarlama otomasyonu için yararlı bir yetenek geliştirdiyseniz, lütfen [GitHub depomuzda](https://github.com/Nudgen-Marketing/skills) bir PR açın.

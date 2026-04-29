@@ -78,12 +78,15 @@
                 ]
               },
               {
-                "group": "CLI (AI Agent)",
+                "group": "Agents",
                 "pages": [
-                  "en/cli/introduction",
-                  "en/cli/installation",
-                  "en/cli/commands",
-                  "en/cli/agentic-usage"
+                  "en/agents/overview",
+                  "en/agents/skills",
+                  "en/agents/cli/introduction",
+                  "en/agents/cli/installation",
+                  "en/agents/cli/commands",
+                  "en/agents/cli/agentic-usage",
+                  "en/agents/api"
                 ]
               },
               {
@@ -252,12 +255,15 @@
                 ]
               },
               {
-                "group": "CLI (AI Agent)",
+                "group": "Agents",
                 "pages": [
-                  "ar/cli/introduction",
-                  "ar/cli/installation",
-                  "ar/cli/commands",
-                  "ar/cli/agentic-usage"
+                  "ar/agents/overview",
+                  "ar/agents/skills",
+                  "ar/agents/cli/introduction",
+                  "ar/agents/cli/installation",
+                  "ar/agents/cli/commands",
+                  "ar/agents/cli/agentic-usage",
+                  "ar/agents/api"
                 ]
               },
               {
@@ -426,12 +432,15 @@
                 ]
               },
               {
-                "group": "CLI (AI Agent)",
+                "group": "Agents",
                 "pages": [
-                  "cn/cli/introduction",
-                  "cn/cli/installation",
-                  "cn/cli/commands",
-                  "cn/cli/agentic-usage"
+                  "cn/agents/overview",
+                  "cn/agents/skills",
+                  "cn/agents/cli/introduction",
+                  "cn/agents/cli/installation",
+                  "cn/agents/cli/commands",
+                  "cn/agents/cli/agentic-usage",
+                  "cn/agents/api"
                 ]
               },
               {
@@ -600,12 +609,15 @@
                 ]
               },
               {
-                "group": "CLI (AI Agent)",
+                "group": "Agents",
                 "pages": [
-                  "de/cli/introduction",
-                  "de/cli/installation",
-                  "de/cli/commands",
-                  "de/cli/agentic-usage"
+                  "de/agents/overview",
+                  "de/agents/skills",
+                  "de/agents/cli/introduction",
+                  "de/agents/cli/installation",
+                  "de/agents/cli/commands",
+                  "de/agents/cli/agentic-usage",
+                  "de/agents/api"
                 ]
               },
               {
@@ -774,12 +786,15 @@
                 ]
               },
               {
-                "group": "CLI (AI Agent)",
+                "group": "Agents",
                 "pages": [
-                  "es/cli/introduction",
-                  "es/cli/installation",
-                  "es/cli/commands",
-                  "es/cli/agentic-usage"
+                  "es/agents/overview",
+                  "es/agents/skills",
+                  "es/agents/cli/introduction",
+                  "es/agents/cli/installation",
+                  "es/agents/cli/commands",
+                  "es/agents/cli/agentic-usage",
+                  "es/agents/api"
                 ]
               },
               {
@@ -948,12 +963,15 @@
                 ]
               },
               {
-                "group": "CLI (AI Agent)",
+                "group": "Agents",
                 "pages": [
-                  "fr/cli/introduction",
-                  "fr/cli/installation",
-                  "fr/cli/commands",
-                  "fr/cli/agentic-usage"
+                  "fr/agents/overview",
+                  "fr/agents/skills",
+                  "fr/agents/cli/introduction",
+                  "fr/agents/cli/installation",
+                  "fr/agents/cli/commands",
+                  "fr/agents/cli/agentic-usage",
+                  "fr/agents/api"
                 ]
               },
               {
@@ -1122,12 +1140,15 @@
                 ]
               },
               {
-                "group": "CLI (AI Agent)",
+                "group": "Agents",
                 "pages": [
-                  "id/cli/introduction",
-                  "id/cli/installation",
-                  "id/cli/commands",
-                  "id/cli/agentic-usage"
+                  "id/agents/overview",
+                  "id/agents/skills",
+                  "id/agents/cli/introduction",
+                  "id/agents/cli/installation",
+                  "id/agents/cli/commands",
+                  "id/agents/cli/agentic-usage",
+                  "id/agents/api"
                 ]
               },
               {
@@ -1296,12 +1317,15 @@
                 ]
               },
               {
-                "group": "CLI (AI Agent)",
+                "group": "Agents",
                 "pages": [
-                  "jp/cli/introduction",
-                  "jp/cli/installation",
-                  "jp/cli/commands",
-                  "jp/cli/agentic-usage"
+                  "jp/agents/overview",
+                  "jp/agents/skills",
+                  "jp/agents/cli/introduction",
+                  "jp/agents/cli/installation",
+                  "jp/agents/cli/commands",
+                  "jp/agents/cli/agentic-usage",
+                  "jp/agents/api"
                 ]
               },
               {
@@ -1470,12 +1494,15 @@
                 ]
               },
               {
-                "group": "CLI (AI Agent)",
+                "group": "Agents",
                 "pages": [
-                  "ko/cli/introduction",
-                  "ko/cli/installation",
-                  "ko/cli/commands",
-                  "ko/cli/agentic-usage"
+                  "ko/agents/overview",
+                  "ko/agents/skills",
+                  "ko/agents/cli/introduction",
+                  "ko/agents/cli/installation",
+                  "ko/agents/cli/commands",
+                  "ko/agents/cli/agentic-usage",
+                  "ko/agents/api"
                 ]
               },
               {
@@ -1644,12 +1671,15 @@
                 ]
               },
               {
-                "group": "CLI (AI Agent)",
+                "group": "Agents",
                 "pages": [
-                  "ru/cli/introduction",
-                  "ru/cli/installation",
-                  "ru/cli/commands",
-                  "ru/cli/agentic-usage"
+                  "ru/agents/overview",
+                  "ru/agents/skills",
+                  "ru/agents/cli/introduction",
+                  "ru/agents/cli/installation",
+                  "ru/agents/cli/commands",
+                  "ru/agents/cli/agentic-usage",
+                  "ru/agents/api"
                 ]
               },
               {
@@ -1818,12 +1848,15 @@
                 ]
               },
               {
-                "group": "CLI (AI Agent)",
+                "group": "Agents",
                 "pages": [
-                  "tr/cli/introduction",
-                  "tr/cli/installation",
-                  "tr/cli/commands",
-                  "tr/cli/agentic-usage"
+                  "tr/agents/overview",
+                  "tr/agents/skills",
+                  "tr/agents/cli/introduction",
+                  "tr/agents/cli/installation",
+                  "tr/agents/cli/commands",
+                  "tr/agents/cli/agentic-usage",
+                  "tr/agents/api"
                 ]
               },
               {
@@ -1992,12 +2025,15 @@
                 ]
               },
               {
-                "group": "CLI (AI Agent)",
+                "group": "Agents",
                 "pages": [
-                  "vi/cli/introduction",
-                  "vi/cli/installation",
-                  "vi/cli/commands",
-                  "vi/cli/agentic-usage"
+                  "vi/agents/overview",
+                  "vi/agents/skills",
+                  "vi/agents/cli/introduction",
+                  "vi/agents/cli/installation",
+                  "vi/agents/cli/commands",
+                  "vi/agents/cli/agentic-usage",
+                  "vi/agents/api"
                 ]
               },
               {

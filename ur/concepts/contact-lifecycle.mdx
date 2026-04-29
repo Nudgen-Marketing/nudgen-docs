@@ -1,35 +1,35 @@
 ---
-title: "Contact lifecycle"
-description: "How contacts move through import, engagement, and suppression"
+title: "رابطے کا لائف سائیکل"
+description: "رابطے درآمد (import)، انگیجمنٹ اور سپریشن کے مراحل سے کیسے گزرتے ہیں"
 ---
 
-Contacts in Nudgen move through a simple lifecycle from import to active sending, and sometimes to unsubscribed or suppressed. Understanding this helps you keep lists clean and stay within limits.
+Nudgen میں رابطے درآمد (import) سے لے کر فعال ترسیل، اور بعض اوقات ان سبسکرائب یا سپریس (suppressed) ہونے تک ایک سادہ لائف سائیکل سے گزرتے ہیں۔ اسے سمجھنے سے آپ کو فہرستوں کو صاف رکھنے اور حدود کے اندر رہنے میں مدد ملتی ہے۔
 
-## From import to active
+## درآمد (import) سے فعال تک
 
-When you **import** contacts (CSV or add one-by-one), they are validated, encrypted, and stored. Duplicates in the same workspace are merged. New contacts are **active** and can be selected as campaign recipients.
+جب آپ رابطے **درآمد** کرتے ہیں (CSV یا ایک ایک کر کے شامل کرنا)، تو ان کی تصدیق کی جاتی ہے، انہیں انکرپٹ کیا جاتا ہے اور اسٹور کیا جاتا ہے۔ ایک ہی ورک اسپیس میں ڈپلیکیٹ رابطوں کو ضم کر دیا جاتا ہے۔ نئے رابطے **فعال (active)** ہوتے ہیں اور انہیں مہم کے وصول کنندگان کے طور پر منتخب کیا جا سکتا ہے۔
 
-## Receiving campaigns
+## مہمات وصول کرنا
 
-**Active** contacts are eligible for campaigns. When you choose an audience (all contacts, by tags, or manual), the app counts only active, non-suppressed contacts and shows a reach estimate. Sends, opens, clicks, bounces, and unsubscribes are recorded and drive both analytics and status changes.
+**فعال** رابطے مہمات کے اہل ہوتے ہیں۔ جب آپ سامعین (تمام رابطے، ٹیگز کے ذریعے، یا دستی طور پر) کا انتخاب کرتے ہیں، تو ایپ صرف فعال اور غیر سپریس شدہ رابطوں کو گنتی ہے اور ممکنہ رسائی کا اندازہ دکھاتی ہے۔ ای میل بھیجنا، کھولنا، کلک کرنا، باؤنس اور ان سبسکرائب ہونا سب ریکارڈ کیا جاتا ہے اور یہ تجزیات اور اسٹیٹس کی تبدیلیوں کا سبب بنتا ہے۔
 
-## Status changes
+## اسٹیٹس کی تبدیلیاں
 
-- **Unsubscribed** — Recipient used the unsubscribe link (or was marked unsubscribed manually). They are excluded from future campaign sends.
-- **Suppressed / Bounced** — The delivery provider reported a bounce or added the address to a suppression list. We sync with that list and exclude these contacts from future sends to protect deliverability.
+- **ان سبسکرائب شدہ (Unsubscribed)** — وصول کنندہ نے ان سبسکرائب لنک کا استعمال کیا (یا اسے دستی طور پر ان سبسکرائب شدہ کے طور پر نشان زد کیا گیا)۔ انہیں مستقبل کی مہمات سے خارج کر دیا جاتا ہے۔
+- **سپریس شدہ / باؤنس شدہ (Suppressed / Bounced)** — ڈیلیوری فراہم کنندہ نے باؤنس کی اطلاع دی یا پتہ کو سپریشن لسٹ میں شامل کیا۔ ہم ڈیلیوریبلٹی کی حفاظت کے لیے اس فہرست کے ساتھ ہم آہنگ ہوتے ہیں اور مستقبل میں ان رابطوں کو ای میل نہیں بھیجتے۔
 
-## Updates and removal
+## اپ ڈیٹس اور خاتمہ
 
-You can **update** contacts (name, tags) in the UI or by re-uploading a CSV with the same email. **Deleting** a contact removes them from the workspace; they no longer count toward your contact limit and cannot receive campaigns.
+آپ UI میں یا اسی ای میل کے ساتھ CSV دوبارہ اپ لوڈ کر کے رابطوں (نام، ٹیگز) کو **اپ ڈیٹ** کر سکتے ہیں۔ رابطے کو **حذف (delete)** کرنے سے وہ ورک اسپیس سے ختم ہو جاتا ہے؛ وہ اب آپ کے رابطے کی حد میں شمار نہیں ہوتا اور مہمات وصول نہیں کر سکتا۔
 
-## Summary
+## خلاصہ
 
-| State | Can receive campaigns? | Counts toward limit? |
-| ----- | ----------------------- | --------------------- |
-| Active | Yes | Yes |
-| Unsubscribed | No | Yes* |
-| Suppressed / Bounced | No | Yes* |
+| حالت (State) | کیا مہمات وصول کر سکتا ہے؟ | کیا حد میں شمار ہوتا ہے؟ |
+| :--- | :--- | :--- |
+| فعال (Active) | جی ہاں | جی ہاں |
+| ان سبسکرائب شدہ | جی نہیں | جی ہاں* |
+| سپریس شدہ / باؤنس شدہ | جی نہیں | جی ہاں* |
 
-\*Unsubscribed and suppressed contacts still count toward your plan’s contact limit; you can delete them to free space.
+\*ان سبسکرائب شدہ اور سپریس شدہ رابطے اب بھی آپ کے پلان کی رابطے کی حد میں شمار ہوتے ہیں؛ آپ جگہ خالی کرنے کے لیے انہیں حذف کر سکتے ہیں۔
 
-For step-by-step lifecycle details, see [Contact lifecycle (Contacts)](/en/contacts/lifecycle). For encryption and masking, see [Contacts overview](/en/contacts/overview).
+لائف سائیکل کی مرحلہ وار تفصیلات کے لیے [Contact lifecycle (Contacts)](/ur/contacts/lifecycle) دیکھیں۔ انکرپشن اور ماسکنگ کے لیے [Contacts overview](/ur/contacts/overview) دیکھیں۔

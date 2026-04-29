@@ -1,0 +1,72 @@
+---
+title: "CLI インストール"
+description: "macOS、Linux、WindowsでNudgen CLIを使い始めましょう。"
+---
+
+## クイックインストール
+
+Nudgen CLIをインストールする最も簡単な方法は、ワンライナーのインストールスクリプトを使用することです。
+
+### macOS & Linux
+
+ターミナルで以下のコマンドを実行してください：
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/Nudgen-Marketing/nudgen-cli/main/scripts/install.sh | bash
+```
+
+### Goを使用する場合
+
+Go 1.22以上がインストールされている場合は、CLIを直接インストールできます：
+
+```bash
+go install github.com/Nudgen-Marketing/nudgen-cli@latest
+```
+
+### ソースからビルドする場合
+
+Go 1.22以上がインストールされている場合は、ソースからビルドできます：
+
+```bash
+git clone https://github.com/Nudgen-Marketing/nudgen-cli.git
+cd nudgen-cli
+make build
+```
+
+バイナリは `./bin/nudgen` で利用可能になります。
+
+## 初期設定
+
+インストール後、バージョンを確認してインストールを検証します：
+
+```bash
+nudgen version
+```
+
+### 認証
+
+CLIの使用を開始するには、個人アクセスアクセストークン（PAT）で認証する必要があります。
+
+1. ログインコマンドを実行します：
+   ```bash
+   nudgen login
+   ```
+2. インタラクティブなプロンプトに従ってトークンを入力します。
+3. IDを検証します：
+   ```bash
+   nudgen whoami
+   ```
+
+### アップデート
+
+最新バージョンにアップデートするには、インストールスクリプトを再実行するか、組み込みのアップデートコマンドを使用します（利用可能な場合）：
+
+```bash
+nudgen update
+```
+
+## セキュリティ
+
+Nudgen CLIは、システムのキーチェーンを使用してPATを安全に保存します。コマンド出力に生のトークンをログに記録したり出力したりすることはありません。
+
+次に、[コアコマンド](/jp/agents/cli/commands) を確認しましょう。

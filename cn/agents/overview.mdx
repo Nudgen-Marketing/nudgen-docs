@@ -1,0 +1,81 @@
+---
+title: "面向智能体的邮件服务"
+description: "为 Claude Code、Codex、Cursor、OpenClaw 以及您自己的智能体提供结构化方式，用于安装 Nudgen、迁移技术栈、发送事件以及与 Nudgen 协作。"
+---
+
+## 简介
+
+Nudgen 是为智能体时代 (Agentic Era) 而构建的。我们为 **Claude Code**、**Codex**、**Cursor** 和 **OpenClaw** 等 AI 智能体提供与您的营销栈交互的结构化方式。
+
+无论您是需要在新应用中安装 Nudgen、从旧供应商迁移，还是自动化复杂的营销活动工作流，我们的智能体优先 (Agent-first) 接口都能确保高可靠性和开发效率。
+
+<CardGroup cols={3}>
+  <Card title="技能 (Skills)" icon="code" href="/cn/agents/skills">
+    可组合的模块，教您的智能体如何使用 Nudgen。一键安装。
+  </Card>
+  <Card title="CLI" icon="terminal" href="/cn/agents/cli/introduction">
+    基于 Go 的命令行中心，用于终端的编排和追踪。
+  </Card>
+  <Card title="API" icon="code" href="/cn/agents/api">
+    带有个人访问令牌 (PAT) 认证的 REST API，用于编程化管理。
+  </Card>
+</CardGroup>
+
+## 兼容智能体
+
+- **Codex**
+- **Claude Code**
+- **Cursor**
+- **OpenClaw**
+
+## 使用案例
+
+智能体营销在现实中是什么样的？以下是一些常见的工作流：
+
+### “从终端测试此事务性邮件”
+**智能体执行的操作：** 使用 CLI 结合您的模板 ID 和示例数据变量发送测试事务性邮件。显示响应状态和送达确认。
+
+**您完成的操作：** 检查您的收件箱，查看渲染后的邮件，准备就绪后发布模板。
+
+---
+
+### “审计我的邮件设置并映射到 Nudgen”
+**智能体执行的操作：** 扫描您的代码库以查找邮件提供商调用，识别每次发送、模板和 Webhook。将每一个映射到 Nudgen 的对应项，并生成逐文件的迁移计划。
+
+**您完成的操作：** 在 Nudgen 编辑器中重新创建模板，在仪表盘中配置取消订阅和 Webhook 设置。
+
+---
+
+### “向 Nudgen 发送取消事件”
+**智能体执行的操作：** 配置您的 Stripe Webhook 处理程序，在订阅取消时调用 Nudgen 事件 API。设置事件名称，映射相关属性（计划、原因、日期）。
+
+**您完成的操作：** 在仪表盘中创建取消 Nudgen (Nudgen 流程)，根据需要定义自定义联系人属性。
+
+---
+
+### “在我的 Next.js 应用中安装 Nudgen”
+**智能体执行的操作：** 检测 Next.js，安装 JavaScript SDK，从 .env 关联 NUDGEN_API_KEY，创建联系人同步路由和事务性发送示例，并输出测试清单。
+
+**您完成的操作：** 在 Nudgen 仪表盘中添加您的 API 密钥，发布您的事务性邮件模板，验证测试发送。
+
+## 资源
+
+<CardGroup cols={2}>
+  <Card title="CLI 仓库" icon="github" href="https://github.com/Nudgen-Marketing/nudgen-cli">
+    基于 Go 的命令行中心源代码。
+  </Card>
+  <Card title="技能仓库" icon="github" href="https://github.com/Nudgen-Marketing/skills">
+    智能体营销技能库。
+  </Card>
+</CardGroup>
+
+## 路线图
+
+我们正在不断扩展智能体能力：
+
+- **安装技能 (Setup skill)**：(即将推出) 检测您的技术栈，配置认证，并创建工作示例。
+- **迁移技能 (Migrate skill)**：(即将推出) 审计您的技术栈并构建迁移计划。
+- **可编程邮件创作**：(后续) 使用代码编写邮件模板。
+- **MCP 服务**：(后续) 原生 Model Context Protocol (模型上下文协议) 支持。
+
+下一步，探索 [智能体技能 (Agent Skills)](/cn/agents/skills)。
