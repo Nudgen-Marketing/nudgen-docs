@@ -1,29 +1,21 @@
 ---
 title: "Yol Haritası"
-description: "Gelecek özellikler ve ürün yönü"
+description: "Yaklaşan özellikler ve ürün yönü"
 ---
 
-Öncelik sırasına göre planlanan özellikler. Tarihler ve kapsam geliştirme sürecinde değişebilir.
+Öncelik sırasına göre planlanan özellikler. Tarihler ve kapsam, biz geliştirme yaptıkça değişebilir.
 
-## 1. E-posta şablonları
+## 1. Kampanya A/B Testi
 
-Düzenleri kaydedebileceğiniz ve kampanyalar arasında yeniden kullanabileceğiniz e-posta şablonları. Şablonu bir kez oluşturun, ardından bir kampanya oluştururken seçin ve gerektiğinde özelleştirin. Ayrıca her gönderimin kişiselleştirilebilmesi için Jinja şablonlarını kullanan **dinamik değişkenleri** (örneğin kişi adı, ürün adı ve diğer kişi veya kampanya başına veriler) destekliyoruz. Tekrarları azaltır ve marka bilincini tutarlı tutar.
+E-posta konu satırları veya içeriği üzerinde A/B testleri yapın. Kitlenizin segmentlerine farklı varyantlar gönderin ve performansı (açılmalar, tıklamalar, dönüşümler) karşılaştırın. Sonuçları bir kazanan seçmek veya en iyi varyantı listenizin geri kalanına sunmak için kullanın.
 
-## 2. Kampanya A/B testleri
+## 2. Daha fazla birleşik durdurma kuralı desteği
 
-Konu satırları veya e-posta içeriği üzerinde A/B testleri yapın. Varyantları hedef kitlenizin segmentlerine gönderin ve performansı (açılma, tıklama, dönüşüm) karşılaştırın. Sonuçları bir kazanan seçmek veya en iyi varyantı listenizin geri kalanına sunmak için kullanın.
+Durdurma kuralları için daha fazla koşul ekleyeceğiz ve bunları birleştirmenize olanak tanıyacağız. Birleşik koşullar karşılandığında, kampanya otomatik olarak duraklar veya durur; bu da size daha hassas kontrol ve teslim edilebilirlik ile liste sağlığı için daha iyi koruma sağlar.
 
-## 3. CRM API entegrasyonu
+## 3. Davranış takip SDK'sı ve erken kayıp önleme
 
-Nudgen'i API aracılığıyla CRM'inizle entegre edin: kişileri senkronize edin, CRM etkinliklerinden kampanyaları tetikleyin veya kampanya sonuçlarını geri gönderin. Programatik iş akışlarını mümkün kılar ve kişi verilerini sistemler arasında senkronize tutar.
-
-## 4. Daha fazla birleşik durdurma kuralı desteği
-
-Durdurma kuralları için daha fazla koşul ekleyeceğiz ve bunları birleştirmenize olanak tanıyacağız. Birleşik koşullar karşılandığında kampanya otomatik olarak duraklar veya durur; bu da size daha ince kontrol ve teslim edilebilirlik ile liste sağlığı için daha iyi koruma sağlar.
-
-## 5. Veri içgörülerine dayalı kampanya için yapay zeka önerisi
-
-Kampanya ve iletişim verilerinizden güç alan öneriler: geçmiş performansa ve etkileşime dayalı olarak önerilen gönderim süreleri, konu satırları veya segmentler. Tahmin yürütmeden açılmaları, tıklamaları ve dönüşümleri iyileştirmek için veriye dayalı önerileri kullanın.
+Münferit müşteri davranışlarını (sayfa ziyaretleri, özellik kullanımı, hareketsizlik modelleri ve etkileşim sinyalleri) kişi düzeyinde izlemek için ürününüze yerleştirdiğiniz hafif bir SDK. Olaydan sonra toplu trendleri gösteren geleneksel analitiklerin aksine, Nudgen'ın SDK'sı eylem için oluşturulmuştur: Kişi başına erken kayıp (churn) sinyallerini algılar, kayıp riskini gerçek zamanlı olarak puanlar ve müşteriler ayrılmadan önce onları yeniden canlandırmak için otomatik olarak yeniden etkileşim kampanyaları önerir. Müşterilerin gidişini sadece izlemeyin; henüz vaktiniz varken müdahale edin.
 
 ---
 

@@ -1,30 +1,22 @@
 ---
 title: "Feuille de route"
-description: "Fonctionnalités à venir et direction produit"
+description: "Fonctionnalités à venir et direction du produit"
 ---
 
-Les fonctionnalités prévues sont listées ici par ordre de priorité. Les dates et le périmètre peuvent évoluer au fil du développement.
+Fonctionnalités prévues, par ordre de priorité. Les dates et la portée peuvent changer au fur et à mesure de la construction.
 
-## 1. Modèles d’email
+## 1. Tests A/B de campagne
 
-Des modèles réutilisables pour enregistrer une mise en page et un contenu, puis les réemployer dans plusieurs campagnes. Vous pourrez créer un modèle une seule fois, le sélectionner au moment de créer une campagne, puis le personnaliser si nécessaire. Nous prévoyons aussi de prendre en charge des **variables dynamiques** avec des templates Jinja, par exemple le nom du contact, le nom du produit ou d’autres données par destinataire ou par campagne, afin que chaque envoi soit plus personnalisé. Cela réduira les tâches répétitives et renforcera la cohérence de marque.
+Réalisez des tests A/B sur les objets d'e-mail ou le contenu. Envoyez des variantes à des segments de votre audience et comparez les performances (ouvertures, clics, conversions). Utilisez les résultats pour choisir un gagnant ou déployer la meilleure variante sur le reste de votre liste.
 
-## 2. Tests A/B de campagne
+## 2. Prise en charge de plus de règles d'arrêt combinées
 
-Lancez des tests A/B sur les objets ou le contenu des emails. Envoyez plusieurs variantes à différents segments de votre audience puis comparez les performances, comme les ouvertures, clics et conversions. Vous pourrez ensuite choisir une version gagnante ou déployer la meilleure au reste de votre audience.
+Nous ajouterons plus de conditions pour les règles d'arrêt et vous permettrons de les combiner. Lorsque les conditions combinées sont remplies, la campagne s'arrête ou se met en pause automatiquement, vous offrant un contrôle plus précis et une meilleure protection de la délivrabilité et de la santé de la liste.
 
-## 3. Intégration API CRM
+## 3. SDK de suivi comportemental et prévention précoce du désabonnement
 
-Connectez Nudgen à votre CRM via API : synchronisez les contacts, déclenchez des campagnes depuis des événements CRM ou renvoyez les résultats de campagne vers votre système. Cela ouvrira la voie à des workflows programmatiques et à une meilleure cohérence des données.
-
-## 4. Davantage de règles d’arrêt combinées
-
-Nous ajouterons plus de conditions aux règles d’arrêt et il sera possible de les combiner. Quand les conditions définies sont remplies, la campagne pourra se mettre en pause ou s’arrêter automatiquement, avec un contrôle plus fin et une meilleure protection de la délivrabilité et de la santé de votre liste.
-
-## 5. Recommandations de campagne basées sur les données
-
-Des recommandations issues des données de vos campagnes et de vos contacts : meilleurs horaires d’envoi, objets suggérés ou segments recommandés selon les performances passées et l’engagement observé. Vous pourrez améliorer les ouvertures, clics et conversions avec des suggestions fondées sur les données.
+Un SDK léger que vous intégrez dans votre produit pour suivre le comportement individuel des clients — visites de pages, utilisation des fonctionnalités, schémas d'inactivité et signaux d'engagement — au niveau du contact. Contrairement aux analyses traditionnelles qui affichent des tendances globales après coup, le SDK de Nudgen est conçu pour l'action : il détecte les signaux précoces de désabonnement par contact, évalue le risque de départ en temps réel et suggère automatiquement des campagnes de réengagement pour "réchauffer" les contacts avant qu'ils ne partent. Ne vous contentez pas de regarder les clients s'en aller — intervenez tant que vous le pouvez encore.
 
 ---
 
-Vous voulez influencer la feuille de route ? Écrivez-nous à [contact@nudgen.net](mailto:contact@nudgen.net).
+Vous souhaitez influencer la feuille de route ? Contactez-nous à [contact@nudgen.net](mailto:contact@nudgen.net).

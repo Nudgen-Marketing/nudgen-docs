@@ -1,30 +1,22 @@
 ---
 title: "Lộ trình phát triển"
-description: "Các tính năng sắp ra mắt và định hướng sản phẩm"
+description: "Các tính năng sắp tới và định hướng sản phẩm"
 ---
 
-Các tính năng đang được lên kế hoạch theo thứ tự ưu tiên. Mốc thời gian và phạm vi có thể thay đổi trong quá trình phát triển.
+Các tính năng đã được lên kế hoạch, sắp xếp theo thứ tự ưu tiên. Mốc thời gian và phạm vi có thể thay đổi trong quá trình phát triển.
 
-## 1. Mẫu email
+## 1. Kiểm thử A/B cho chiến dịch
 
-Các mẫu email có thể tái sử dụng để bạn lưu bố cục và nội dung rồi dùng lại cho nhiều chiến dịch. Bạn có thể tạo mẫu một lần, chọn nó khi tạo chiến dịch và chỉnh lại khi cần. Chúng tôi cũng dự kiến hỗ trợ **biến động** bằng template Jinja, ví dụ tên liên hệ, tên sản phẩm và các dữ liệu theo từng người nhận hoặc từng chiến dịch, để mỗi email gửi đi đều có thể được cá nhân hóa. Tính năng này sẽ giúp giảm việc lặp lại và giữ thương hiệu nhất quán.
+Chạy kiểm thử A/B cho tiêu đề email hoặc nội dung email. Gửi các biến thể cho các phân khúc đối tượng của bạn và so sánh hiệu suất (lượt mở, lượt nhấp, lượt chuyển đổi). Sử dụng kết quả để chọn ra biến thể chiến thắng hoặc áp dụng biến thể tốt nhất cho phần còn lại của danh sách.
 
-## 2. A/B testing cho chiến dịch
+## 2. Hỗ trợ thêm các quy tắc dừng kết hợp
 
-Chạy thử nghiệm A/B cho tiêu đề email hoặc nội dung email. Gửi các phiên bản khác nhau cho từng nhóm người nhận rồi so sánh hiệu quả như lượt mở, lượt nhấp và chuyển đổi. Từ đó bạn có thể chọn phiên bản tốt nhất hoặc triển khai cho toàn bộ danh sách.
+Chúng tôi sẽ thêm nhiều điều kiện hơn cho các quy tắc dừng và cho phép bạn kết hợp chúng. Khi các điều kiện kết hợp được đáp ứng, chiến dịch sẽ tự động tạm dừng hoặc dừng lại, giúp bạn kiểm soát chặt chẽ hơn và bảo vệ tốt hơn khả năng gửi thư cũng như sức khỏe danh sách của mình.
 
-## 3. Tích hợp API với CRM
+## 3. SDK theo dõi hành vi và ngăn ngừa rời bỏ sớm
 
-Kết nối Nudgen với CRM của bạn qua API: đồng bộ liên hệ, kích hoạt chiến dịch từ các sự kiện trong CRM hoặc đẩy kết quả chiến dịch ngược lại hệ thống. Điều này giúp xây dựng luồng làm việc tự động và giữ dữ liệu đồng bộ giữa các nền tảng.
-
-## 4. Nhiều quy tắc dừng kết hợp hơn
-
-Chúng tôi sẽ bổ sung thêm điều kiện cho quy tắc dừng và cho phép kết hợp nhiều điều kiện với nhau. Khi các điều kiện được đáp ứng, chiến dịch có thể tự động tạm dừng hoặc dừng hẳn, giúp bạn kiểm soát tốt hơn và bảo vệ khả năng gửi đến cũng như chất lượng danh sách.
-
-## 5. Gợi ý chiến dịch dựa trên dữ liệu
-
-Đưa ra khuyến nghị dựa trên dữ liệu chiến dịch và liên hệ: thời điểm gửi phù hợp hơn, tiêu đề nên dùng hoặc phân khúc nên nhắm tới dựa trên hiệu quả trước đó và mức độ tương tác. Nhờ vậy bạn có thể cải thiện lượt mở, lượt nhấp và chuyển đổi mà không cần phỏng đoán.
+Một SDK nhẹ mà bạn nhúng vào sản phẩm của mình để theo dõi hành vi của từng người liên hệ — lượt xem trang, cách sử dụng tính năng, mô hình không hoạt động và các tín hiệu tương tác — ở cấp độ người liên hệ. Khác với các công cụ phân tích truyền thống chỉ cho bạn thấy các xu hướng tổng hợp sau khi sự việc đã xảy ra, SDK của Nudgen được xây dựng để hành động: nó phát hiện các tín hiệu rời bỏ sớm của từng người liên hệ, tính điểm rủi ro rời bỏ trong thời gian thực và tự động gợi ý các chiến dịch tương tác lại để "làm ấm" người liên hệ trước khi họ rời đi. Đừng chỉ đứng nhìn khách hàng bỏ đi — hãy can thiệp khi bạn vẫn còn có thể.
 
 ---
 
-Muốn góp ý cho lộ trình sản phẩm? Hãy liên hệ [contact@nudgen.net](mailto:contact@nudgen.net).
+Bạn muốn đóng góp ý kiến cho lộ trình? Hãy liên hệ tại [contact@nudgen.net](mailto:contact@nudgen.net).

@@ -1,55 +1,48 @@
-# Mintlify Starter Kit
+# Nudgen Documentation
 
-Use the starter kit to get your docs deployed and ready to customize.
+This repository contains the documentation for [Nudgen](https://nudgen.net), a retention email automation platform for shop owners and growing SMEs to boost customer lifetime value.
 
-Click the green **Use this template** button at the top of this repo to copy the Mintlify starter kit. The starter kit contains examples with
+The documentation is built with [Mintlify](https://mintlify.com).
 
-- Guide pages
-- Navigation
-- Customizations
-- API reference pages
-- Use of popular components
+## Local Development
 
-**[Follow the full quickstart guide](https://starter.mintlify.com/quickstart)**
+To preview your documentation changes locally, you need to install the [Mintlify CLI](https://www.npmjs.com/package/mint).
 
-## AI-assisted writing
+1. **Install the CLI:**
+   ```bash
+   npm i -g mint
+   ```
 
-Set up your AI coding tool to work with Mintlify:
+2. **Run the development server:**
+   At the root of the repository, run:
+   ```bash
+   mint dev
+   ```
+
+3. **View the preview:**
+   Open [http://localhost:3000](http://localhost:3000) in your browser.
+
+## Writing and Structure
+
+- **Content:** Documentation is written in MDX files (Markdown with JSX components).
+- **Structure:** The navigation and global settings are defined in `docs.json`.
+- **Guidelines:** See [AGENTS.md](./AGENTS.md) for writing standards, terminology, and project-specific instructions.
+
+### AI-Assisted Writing
+
+If you are using an AI-enabled coding tool (like Claude Code, Cursor, or Windsurf), you can install the Mintlify skill to help with component usage and writing standards:
 
 ```bash
 npx skills add https://mintlify.com/docs
 ```
 
-This command installs Mintlify's documentation skill for your configured AI tools like Claude Code, Cursor, Windsurf, and others. The skill includes component reference, writing standards, and workflow guidance.
+## Publishing
 
-See the [AI tools guides](/ai-tools) for tool-specific setup.
+Changes pushed to the main branch are automatically deployed via the Mintlify GitHub App. You can monitor the status and configuration in the [Mintlify Dashboard](https://dashboard.mintlify.com).
 
-## Development
+## Resources
 
-Install the [Mintlify CLI](https://www.npmjs.com/package/mint) to preview your documentation changes locally. To install, use the following command:
+- [Live Documentation](https://docs.nudgen.net)
+- [Mintlify Documentation](https://mintlify.com/docs)
+- [Nudgen Website](https://nudgen.net)
 
-```
-npm i -g mint
-```
-
-Run the following command at the root of your documentation, where your `docs.json` is located:
-
-```
-mint dev
-```
-
-View your local preview at `http://localhost:3000`.
-
-## Publishing changes
-
-Install our GitHub app from your [dashboard](https://dashboard.mintlify.com/settings/organization/github-app) to propagate changes from your repo to your deployment. Changes are deployed to production automatically after pushing to the default branch.
-
-## Need help?
-
-### Troubleshooting
-
-- If your dev environment isn't running: Run `mint update` to ensure you have the most recent version of the CLI.
-- If a page loads as a 404: Make sure you are running in a folder with a valid `docs.json`.
-
-### Resources
-- [Mintlify documentation](https://mintlify.com/docs)
