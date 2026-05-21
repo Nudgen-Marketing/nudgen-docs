@@ -8,6 +8,20 @@
     "dark": "#15803D"
   },
   "favicon": "/favicons/favicon.ico",
+  "api": {
+    "playground": {
+      "display": "interactive"
+    },
+    "examples": {
+      "languages": [
+        "curl",
+        "javascript",
+        "python"
+      ],
+      "defaults": "required",
+      "prefill": true
+    }
+  },
   "navigation": {
     "languages": [
       {
@@ -140,6 +154,33 @@
                 "group": "Security & privacy",
                 "pages": [
                   "en/security/privacy-and-data"
+                ]
+              }
+            ]
+          },
+          {
+            "tab": "API Playground",
+            "groups": [
+              {
+                "group": "API reference",
+                "openapi": "openapi.json",
+                "pages": [
+                  "GET /api/v1/user/me",
+                  "GET /api/v1/teams",
+                  "GET /api/v1/contacts",
+                  "POST /api/v1/contacts/add",
+                  "GET /api/v1/contacts/{id}",
+                  "PATCH /api/v1/contacts/{id}",
+                  "DELETE /api/v1/contacts/{id}",
+                  "GET /api/v1/campaigns",
+                  "POST /api/v1/campaigns",
+                  "GET /api/v1/campaigns/{id}",
+                  "PUT /api/v1/campaigns/{id}",
+                  "POST /api/v1/campaigns/{id}/launch",
+                  "GET /api/v1/campaigns/{id}/stats",
+                  "GET /api/v1/settings/brand",
+                  "PATCH /api/v1/settings/brand",
+                  "POST /api/v1/ai/generate"
                 ]
               }
             ]
