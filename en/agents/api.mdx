@@ -1,67 +1,193 @@
 ---
 title: "Developer API"
-description: "REST API with Personal Access Token authentication. Manage contacts, campaigns, templates, and settings programmatically."
+description: "REST API and MCP access with Personal Access Token authentication. Manage contacts, campaigns, brand settings, and AI drafts programmatically."
 ---
 
 ## Overview
 
-The Nudgen Developer API provides a clean, resource-oriented REST interface for managing your marketing infrastructure. All requests use standard HTTP methods and return predictable JSON responses.
+The Nudgen Developer API gives scripts, internal tools, and AI agents a predictable way to work with your Nudgen workspace. Use REST endpoints for normal HTTP integrations, or use MCP when an agent can call Nudgen tools directly.
 
 <CardGroup cols={3}>
-  <Card title="PAT Auth" icon="shield-check">
-    Authenticate with Personal Access Tokens via standard Bearer header.
+  <Card title="PAT auth" icon="shield-check">
+    Authenticate REST and MCP requests with the same Personal Access Token.
   </Card>
-  <Card title="Clean REST" icon="globe">
-    Predictable, resource-oriented URLs with standard HTTP methods.
+  <Card title="Campaign operations" icon="send">
+    Create campaigns, schedule launches, and read delivery stats.
   </Card>
-  <Card title="Rate Limited" icon="gauge">
-    Built-in rate limiting per team and endpoint to protect your workflows.
+  <Card title="Agent-ready" icon="bot">
+    Give Codex, Claude Code, Cursor, and custom agents structured access.
   </Card>
 </CardGroup>
 
+## Why this matters
+
+A PAT lets you automate real marketing workflows without sharing your dashboard session. You can create contacts, draft campaign copy, create campaigns, and schedule sends from trusted developer tools while keeping token access revocable.
+
 ## Authentication
 
-All API requests require a Personal Access Token (PAT) passed via the `Authorization` header. You can generate tokens from your Nudgen dashboard under **Settings → API Keys**.
+Create a Personal Access Token from **Settings -> API Keys** in the Nudgen dashboard. Store it securely and pass it with every request:
 
 ```bash
-curl -X GET https://app.nudgen.com/api/v1/user/me \
+Authorization: Bearer <your-pat>
+```
+
+Example:
+
+```bash
+curl https://nudgen.net/api/v1/user/me \
   -H "Authorization: Bearer <your-pat>"
 ```
 
+<Warning>
+  PATs are shown only once. Revoke old or exposed tokens from **Settings -> API Keys**.
+</Warning>
+
 ## Base URL
 
-The base URL for all API requests is:
-`https://app.nudgen.com`
+```text
+https://nudgen.net
+```
 
-## Endpoints
+## REST endpoints
 
-### Auth & Identity
-- `GET /api/v1/user/me`: Get current authenticated user.
-- `GET /api/v1/teams`: List all teams for the current user.
-- `POST /api/v1/teams/switch`: Switch active team context.
+### Identity and workspace
+
+| Method | Endpoint | Description |
+| --- | --- | --- |
+| `GET` | `/api/v1/user/me` | Get the authenticated user. |
+| `GET` | `/api/v1/teams` | List workspaces available to the token owner. |
 
 ### Contacts
-- `GET /api/v1/contacts`: List contacts with pagination, search, and tag filters.
-- `POST /api/v1/contacts/add`: Create a new contact.
-- `GET /api/v1/contacts/:id`: Retrieve a specific contact.
-- `PATCH /api/v1/contacts/:id`: Update an existing contact.
-- `DELETE /api/v1/contacts/:id`: Delete a contact.
+
+| Method | Endpoint | Description |
+| --- | --- | --- |
+| `GET` | `/api/v1/contacts` | List contacts with `page`, `limit`, `search`, `tags`, and `status` filters. |
+| `POST` | `/api/v1/contacts/add` | Create a contact. |
+| `GET` | `/api/v1/contacts/:id` | Get a contact. |
+| `PATCH` | `/api/v1/contacts/:id` | Update a contact. |
+| `DELETE` | `/api/v1/contacts/:id` | Delete a contact. |
+
+Create a contact:
+
+```bash
+curl -X POST https://nudgen.net/api/v1/contacts/add \
+  -H "Authorization: Bearer <your-pat>" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "email": "nathan@example.com",
+    "name": "Nathan Nguyen",
+    "tags": ["api-test"]
+  }'
+```
 
 ### Campaigns
-- `GET /api/v1/campaigns`: List campaigns in current team.
-- `POST /api/v1/campaigns`: Create a new campaign.
-- `GET /api/v1/campaigns/:id`: Get campaign details.
-- `GET /api/v1/campaigns/:id/stats`: Get campaign delivery statistics.
 
-### Templates
-- `GET /api/v1/templates`: List email templates.
-- `POST /api/v1/templates`: Create a new email template.
+| Method | Endpoint | Description |
+| --- | --- | --- |
+| `GET` | `/api/v1/campaigns` | List campaigns in the active workspace. |
+| `POST` | `/api/v1/campaigns` | Create a campaign draft or scheduled campaign. |
+| `GET` | `/api/v1/campaigns/:id` | Get campaign details. |
+| `PUT` | `/api/v1/campaigns/:id` | Update an existing campaign. |
+| `POST` | `/api/v1/campaigns/:id/launch` | Launch now or schedule a campaign. |
+| `GET` | `/api/v1/campaigns/:id/stats` | Get delivery, open, click, bounce, and complaint stats. |
+| `GET` | `/api/v1/campaigns/:id/progress` | Get campaign sending progress. |
+| `GET` | `/api/v1/campaigns/:id/recipients` | List campaign recipients. |
+| `POST` | `/api/v1/campaigns/test-send` | Send a test email without creating dashboard send stats. |
 
-### Settings
-- `GET /api/v1/settings/brand`: Get brand configuration.
-- `PATCH /api/v1/settings/brand`: Update brand settings.
+Create a draft campaign:
 
-## OpenAPI Specification
+```bash
+curl -X POST https://nudgen.net/api/v1/campaigns \
+  -H "Authorization: Bearer <your-pat>" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "API launch test",
+    "goal": "Invite contacts to try Nudgen.",
+    "subject": "Try Nudgen",
+    "html": "<p>Ready to launch smarter email?</p>",
+    "link": "https://nudgen.net",
+    "audienceType": "manual",
+    "audienceContactIds": ["contact_id"]
+  }'
+```
 
-You can download our full OpenAPI specification here:
-[openapi.json](https://app.nudgen.com/api/openapi.json)
+Schedule an existing campaign:
+
+```bash
+curl -X POST https://nudgen.net/api/v1/campaigns/campaign_id/launch \
+  -H "Authorization: Bearer <your-pat>" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "sendNow": false,
+    "scheduledAt": "2026-05-21T06:46:52.128Z"
+  }'
+```
+
+Send immediately by setting `sendNow` to `true`, or by creating a campaign with `sendNow: true`.
+
+<Warning>
+  Launching a campaign schedules real email. Use `/api/v1/campaigns/test-send` for inbox previews that should not appear as launched campaigns in dashboard stats.
+</Warning>
+
+### Brand settings
+
+| Method | Endpoint | Description |
+| --- | --- | --- |
+| `GET` | `/api/v1/settings/brand` | Read brand name, website, sender email, logo, and design settings. |
+| `PATCH` | `/api/v1/settings/brand` | Update brand settings. |
+
+### AI draft generation
+
+| Method | Endpoint | Description |
+| --- | --- | --- |
+| `POST` | `/api/v1/ai/generate` | Generate an email subject and HTML draft from campaign context. |
+
+```bash
+curl -X POST https://nudgen.net/api/v1/ai/generate \
+  -H "Authorization: Bearer <your-pat>" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "campaignGoal": "Write a short retention email inviting users to try Nudgen.",
+    "link": "https://nudgen.net",
+    "personalizationMode": "off"
+  }'
+```
+
+## MCP endpoint
+
+Use MCP when your agent supports Model Context Protocol tools.
+
+```text
+POST https://nudgen.net/api/mcp
+GET  https://nudgen.net/.well-known/mcp/server-card.json
+```
+
+Authenticate MCP requests with the same bearer PAT:
+
+```bash
+curl -X POST https://nudgen.net/api/mcp \
+  -H "Authorization: Bearer <your-pat>" \
+  -H "Content-Type: application/json" \
+  -d '{"jsonrpc":"2.0","id":1,"method":"tools/list"}'
+```
+
+Available MCP tools mirror the core REST workflows:
+
+| Tool | REST equivalent |
+| --- | --- |
+| `get_current_user` | `GET /api/v1/user/me` |
+| `list_contacts` | `GET /api/v1/contacts` |
+| `create_contact` | `POST /api/v1/contacts/add` |
+| `list_campaigns` | `GET /api/v1/campaigns` |
+| `create_campaign` | `POST /api/v1/campaigns` |
+| `launch_campaign` | `POST /api/v1/campaigns/:id/launch` |
+| `get_campaign_stats` | `GET /api/v1/campaigns/:id/stats` |
+| `get_brand_settings` | `GET /api/v1/settings/brand` |
+| `update_brand_settings` | `PATCH /api/v1/settings/brand` |
+| `generate_email_draft` | `POST /api/v1/ai/generate` |
+
+## Responses and errors
+
+Successful responses return JSON. Validation errors return `400`, expired or missing tokens return `401`, insufficient plan access returns `403`, missing resources return `404`, and rate limits return `429`.
+
+All data is scoped to the token owner's active workspace.

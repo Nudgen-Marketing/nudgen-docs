@@ -7,62 +7,67 @@ description: "Give Claude Code, Codex, Cursor, OpenClaw and your own agents stru
 
 Nudgen is built for the agentic era. We provide structured ways for AI agents like **Claude Code**, **Codex**, **Cursor**, and **OpenClaw** to interact with your marketing stack.
 
-Whether you need to install Nudgen in a new app, migrate from a legacy provider, or automate complex campaign workflows, our agent-first interfaces ensure high reliability and developer efficiency.
+Whether you need to install Nudgen in a new app, migrate from a legacy provider, or automate campaign workflows, our agent-first interfaces give your tools reliable access to contacts, campaigns, brand settings, and email draft generation.
 
 <CardGroup cols={3}>
   <Card title="Skills" icon="book-open" href="/en/agents/skills">
-    Composable modules that teach your agent how to work with Nudgen. Install with a single command.
+    Composable modules that teach your agent how to work with Nudgen.
   </Card>
   <Card title="CLI" icon="terminal" href="/en/agents/cli/introduction">
     Go-powered command center for orchestration and tracking from the terminal.
   </Card>
-  <Card title="API" icon="code" href="/en/agents/api">
-    REST API with Personal Access Token auth for programmatic management.
+  <Card title="API and MCP" icon="code" href="/en/agents/api">
+    REST and MCP access with Personal Access Token auth for programmatic management.
   </Card>
 </CardGroup>
 
-## Works With
+## Works with
 
 - **Codex**
 - **Claude Code**
 - **Cursor**
 - **OpenClaw**
+- Any MCP-capable or HTTP-capable agent
 
-## Use Cases
+## Use cases
 
 What does agentic marketing look like in reality? Here are a few common workflows:
 
+### "Create a contact and launch a campaign"
+
+**What the agent does:** Uses the REST API or MCP tools to create a contact, draft campaign copy, create a campaign, and schedule launch through Nudgen.
+
+**What you finish:** Review dashboard stats and stop or iterate campaigns from the web app.
+
+---
+
 ### "Test this transactional email from the terminal"
-**What the agent does:** Uses the CLI to send a test transactional email with your template ID and sample data variables. Shows the response status and delivery confirmation.
+
+**What the agent does:** Uses the CLI or API to send a test email with your template and sample data. Shows response status and delivery confirmation.
 
 **What you finish:** Check your inbox, review the rendered email, publish the template when ready.
 
 ---
 
 ### "Audit my email setup and map it to Nudgen"
-**What the agent does:** Scans your codebase for email provider calls, identifies every send, template, and webhook. Maps each to a Nudgen equivalent and produces a file-by-file migration plan.
 
-**What you finish:** Recreate templates in the Nudgen editor, configure unsubscribe and webhook settings in the dashboard.
+**What the agent does:** Scans your codebase for email provider calls, identifies sends, templates, and webhook paths. Maps each to a Nudgen equivalent and produces a file-by-file migration plan.
 
----
-
-### "Send a cancellation event into Nudgen"
-**What the agent does:** Wires your Stripe webhook handler to call the Nudgen events API when a subscription is canceled. Sets event name, maps relevant properties (plan, reason, date).
-
-**What you finish:** Create the cancellation Nudgen in the dashboard, define custom contact properties if needed.
+**What you finish:** Recreate templates in the Nudgen editor, configure unsubscribe settings, and verify test sends.
 
 ---
 
 ### "Install Nudgen in my Next.js app"
-**What the agent does:** Detects Next.js, installs the JavaScript SDK, wires NUDGEN_API_KEY from .env, creates a contact sync route and transactional send example, outputs a testing checklist.
 
-**What you finish:** Add your API key in the Nudgen dashboard, publish your transactional email template, verify the test send.
+**What the agent does:** Detects Next.js, stores your PAT securely, creates a contact sync route, and adds a campaign or draft-generation example.
+
+**What you finish:** Create your API key in the Nudgen dashboard, verify the test request, and publish the workflow.
 
 ## Resources
 
 <CardGroup cols={2}>
-  <Card title="CLI Repository" icon="github" href="https://github.com/Nudgen-Marketing/nudgen-cli">
-    Go-powered command center source code.
+  <Card title="Developer API" icon="code" href="/en/agents/api">
+    REST endpoints and MCP tool mapping.
   </Card>
   <Card title="Skills Repository" icon="github" href="https://github.com/Nudgen-Marketing/skills">
     Agentic marketing skills library.
@@ -73,9 +78,9 @@ What does agentic marketing look like in reality? Here are a few common workflow
 
 We are constantly expanding our agent capabilities:
 
-- **Setup skill**: (Soon) Detects your stack, wires auth, and creates working examples.
-- **Migrate skill**: (Soon) Audits your stack and builds a migration plan.
-- **Programmable email authoring**: (Next) Write email templates using code.
-- **MCP server**: (Next) Native Model Context Protocol support.
+- **Setup skill**: Detects your stack, wires auth, and creates working examples.
+- **Migrate skill**: Audits your stack and builds a migration plan.
+- **Programmable email authoring**: Write email templates using code.
+- **MCP server**: Available for PAT-authenticated agent workflows.
 
-Next, explore the [Agent Skills](/en/agents/skills).
+Next, explore the [Developer API](/en/agents/api).

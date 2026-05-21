@@ -1,6 +1,70 @@
 ---
 title: "Developers and APIs"
-description: "Integration and API availability"
+description: "Use Nudgen with Personal Access Tokens, the REST API, and MCP"
 ---
 
-Nudgen does not offer a public API, webhooks, or an embeddable SDK yet. All usage is through the web app at [nudgen.net](https://nudgen.net). If you need programmatic access or integrations, contact us—we may add APIs in a future release.
+Nudgen now supports developer access through **Personal Access Tokens (PATs)**. Use the same token for the REST API, the MCP server, and agent workflows.
+
+## Why this matters
+
+You can connect Nudgen to scripts, internal tools, and AI agents without sharing your dashboard login. Tokens are scoped to your account and active workspace, and every request is still protected by Nudgen rate limits and workspace permissions.
+
+## Create an API key
+
+1. Open [nudgen.net](https://nudgen.net).
+2. Go to **Settings -> API Keys**.
+3. Create a Personal Access Token.
+4. Copy the token once and store it securely.
+
+Use the token in the standard bearer header:
+
+```bash
+Authorization: Bearer pat_...
+```
+
+## REST API
+
+Use the REST API when you want conventional HTTP endpoints for contacts, campaigns, brand settings, and AI draft generation.
+
+```bash
+curl https://nudgen.net/api/v1/user/me \
+  -H "Authorization: Bearer <your-pat>"
+```
+
+Common endpoints include:
+
+| Method | Endpoint | Purpose |
+| --- | --- | --- |
+| `GET` | `/api/v1/user/me` | Get the authenticated user. |
+| `GET` | `/api/v1/contacts` | List contacts in the active workspace. |
+| `POST` | `/api/v1/contacts/add` | Create a contact. |
+| `GET` | `/api/v1/campaigns` | List campaigns. |
+| `POST` | `/api/v1/campaigns` | Create a campaign. |
+| `POST` | `/api/v1/campaigns/:id/launch` | Launch or schedule a campaign. |
+| `GET` | `/api/v1/campaigns/:id/stats` | Read campaign stats. |
+| `GET` | `/api/v1/settings/brand` | Read brand settings. |
+| `PATCH` | `/api/v1/settings/brand` | Update brand settings. |
+| `POST` | `/api/v1/ai/generate` | Generate an email draft. |
+
+## MCP server
+
+Use MCP when an AI agent can call tools directly instead of hand-coding REST requests. The MCP endpoint is:
+
+```text
+https://nudgen.net/api/mcp
+```
+
+The server card is available at:
+
+```text
+https://nudgen.net/.well-known/mcp/server-card.json
+```
+
+MCP uses the same bearer PAT as the REST API.
+
+## Safety notes
+
+- Treat PATs like passwords.
+- Revoke tokens from **Settings -> API Keys** when they are no longer needed.
+- Campaign launch endpoints can send real email when the worker processes the queue.
+- Use future `scheduledAt` values for tests when you do not want to send immediately.
