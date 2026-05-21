@@ -86,7 +86,8 @@
                   "en/agents/cli/installation",
                   "en/agents/cli/commands",
                   "en/agents/cli/agentic-usage",
-                  "en/agents/api"
+                  "en/agents/api",
+                  "en/agents/mcp"
                 ]
               },
               {

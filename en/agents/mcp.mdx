@@ -1,0 +1,206 @@
+---
+title: "MCP server"
+description: "Install the hosted Nudgen MCP server in Claude Code, Cursor, Windsurf, Codex CLI, or another MCP client."
+---
+
+## Overview
+
+Nudgen MCP gives AI agents tool-based access to your Nudgen workspace. Use it when your agent supports Model Context Protocol and you want it to call Nudgen tools directly instead of writing REST requests.
+
+<CardGroup cols={3}>
+  <Card title="Hosted server" icon="cloud">
+    Connect to Nudgen over HTTPS. No local MCP server process is required.
+  </Card>
+  <Card title="PAT auth" icon="shield-check">
+    Use the same Personal Access Token as the Developer API.
+  </Card>
+  <Card title="Campaign tools" icon="send">
+    Create contacts, draft emails, create campaigns, and schedule launches.
+  </Card>
+</CardGroup>
+
+## Why this matters
+
+MCP lets an AI assistant operate through structured Nudgen tools. That makes workflows like "create this contact, draft a campaign, schedule it for tomorrow, and report stats" easier for the agent to perform reliably.
+
+Use MCP when your agent supports Model Context Protocol tools. The Nudgen MCP server is hosted, so you do not need to run a local server process.
+
+```text
+Server URL:  https://nudgen.net/api/mcp
+Server card: https://nudgen.net/.well-known/mcp/server-card.json
+```
+
+### Before you connect
+
+1. Create a Personal Access Token from **Settings -> API Keys**.
+2. Store the token as an environment variable, for example `NUDGEN_PAT`.
+3. Confirm your active workspace in Nudgen. MCP tools operate on the token owner's active workspace.
+
+```bash
+export NUDGEN_PAT="pat_..."
+```
+
+<Warning>
+  The MCP server can create contacts, update brand settings, create campaigns, and launch real email. Keep manual approval enabled for tool calls when your MCP client supports it.
+</Warning>
+
+### Claude Code
+
+Add Nudgen as an HTTP MCP server:
+
+```bash
+claude mcp add --scope project --transport http nudgen "https://nudgen.net/api/mcp" \
+  --header "Authorization: Bearer ${NUDGEN_PAT}"
+```
+
+If you prefer project config, add this to `.mcp.json`:
+
+```json
+{
+  "mcpServers": {
+    "nudgen": {
+      "type": "http",
+      "url": "https://nudgen.net/api/mcp",
+      "headers": {
+        "Authorization": "Bearer ${NUDGEN_PAT}"
+      }
+    }
+  }
+}
+```
+
+Restart Claude Code or run its MCP refresh command, then ask:
+
+```text
+List my Nudgen campaigns using MCP tools.
+```
+
+### Cursor
+
+Open **Cursor Settings -> Tools & MCP -> New MCP Server** and add:
+
+```json
+{
+  "mcpServers": {
+    "nudgen": {
+      "type": "http",
+      "url": "https://nudgen.net/api/mcp",
+      "headers": {
+        "Authorization": "Bearer ${NUDGEN_PAT}"
+      }
+    }
+  }
+}
+```
+
+Restart Cursor if the tools do not appear immediately. Then ask Cursor to use MCP tools, for example:
+
+```text
+Use Nudgen MCP to show my active team and recent campaigns.
+```
+
+### Windsurf
+
+Open the Windsurf MCP configuration and add the hosted HTTP server:
+
+```json
+{
+  "mcpServers": {
+    "nudgen": {
+      "type": "http",
+      "url": "https://nudgen.net/api/mcp",
+      "headers": {
+        "Authorization": "Bearer ${NUDGEN_PAT}"
+      }
+    }
+  }
+}
+```
+
+Reload Windsurf after saving. If your Windsurf version does not support HTTP MCP headers, use the REST API directly until header support is available.
+
+### Codex CLI
+
+Add the server to your Codex MCP configuration:
+
+```toml
+[mcp_servers.nudgen]
+type = "http"
+url = "https://nudgen.net/api/mcp"
+
+[mcp_servers.nudgen.headers]
+Authorization = "Bearer ${NUDGEN_PAT}"
+```
+
+Then verify the server is available:
+
+```bash
+codex mcp list
+```
+
+### Generic MCP clients
+
+Any MCP client that supports hosted HTTP MCP servers and custom headers can connect with this configuration:
+
+```json
+{
+  "name": "nudgen",
+  "type": "http",
+  "url": "https://nudgen.net/api/mcp",
+  "headers": {
+    "Authorization": "Bearer ${NUDGEN_PAT}"
+  }
+}
+```
+
+If your client only supports local command-based MCP servers, use the REST API for now or run a small local proxy that forwards requests to `https://nudgen.net/api/mcp` with the `Authorization` header.
+
+### Verify with JSON-RPC
+
+You can verify the server without an MCP client:
+
+```bash
+curl -X POST https://nudgen.net/api/mcp \
+  -H "Authorization: Bearer ${NUDGEN_PAT}" \
+  -H "Content-Type: application/json" \
+  -d '{"jsonrpc":"2.0","id":1,"method":"tools/list"}'
+```
+
+### Available MCP tools
+
+Available MCP tools mirror the core REST workflows:
+
+| Tool | REST equivalent |
+| --- | --- |
+| `get_current_user` | `GET /api/v1/user/me` |
+| `list_contacts` | `GET /api/v1/contacts` |
+| `create_contact` | `POST /api/v1/contacts/add` |
+| `list_campaigns` | `GET /api/v1/campaigns` |
+| `create_campaign` | `POST /api/v1/campaigns` |
+| `launch_campaign` | `POST /api/v1/campaigns/:id/launch` |
+| `get_campaign_stats` | `GET /api/v1/campaigns/:id/stats` |
+| `get_brand_settings` | `GET /api/v1/settings/brand` |
+| `update_brand_settings` | `PATCH /api/v1/settings/brand` |
+| `generate_email_draft` | `POST /api/v1/ai/generate` |
+
+### Troubleshooting
+
+| Symptom | What to check |
+| --- | --- |
+| `Unauthorized` | Confirm the PAT is copied correctly, not revoked, and sent as `Authorization: Bearer <token>`. |
+| Tools do not appear | Restart the MCP client and confirm it supports hosted HTTP MCP servers. |
+| Writes fail with `403` | Confirm the workspace plan and role can perform write actions. |
+| Campaign does not send | Confirm the campaign worker is running and the campaign has eligible contacts. |
+| Dashboard stats stay at zero | Test sends are excluded from launched campaign stats. Launch a real campaign or schedule one through `launch_campaign`. |
+
+### Security recommendations
+
+- Create a separate PAT for each agent or environment.
+- Revoke tokens when an agent, laptop, CI job, or workspace is no longer trusted.
+- Keep manual approval enabled for write tools such as `create_campaign`, `launch_campaign`, and `update_brand_settings`.
+- Use future `scheduledAt` values when testing campaign launch workflows.
+- Avoid pasting raw PATs into chat logs, issue comments, or source files.
+
+## REST alternative
+
+If your client does not support hosted HTTP MCP servers or custom headers, use the [Developer API](/en/agents/api). The REST API uses the same PAT and exposes equivalent campaign, contact, brand, and AI draft operations.

@@ -20,7 +20,7 @@ Go to **Settings** in the dashboard to access:
 | --- | --- | --- |
 | **Team** | Invite members, assign roles, manage permissions | [Team settings](/en/settings/team) |
 | **Brand** | Set brand identity: name, description, reply-to email, logo | [Brand identity](/en/settings/brand) |
-| **API Keys** | Create and revoke Personal Access Tokens for REST, MCP, and CLI workflows | [Developer API](/en/agents/api) |
+| **API Keys** | Create and revoke Personal Access Tokens for REST, MCP, and CLI workflows | [Developer API](/en/agents/api), [MCP server](/en/agents/mcp) |
 | **Signatures** | Create and edit email signatures for campaigns | [Signatures](/en/settings/signatures) |
 
 ## Workspace and account
@@ -37,7 +37,8 @@ Use **Settings -> API Keys** to create Personal Access Tokens. PATs authenticate
 
 ## What happens next
 
-- [Developer API](/en/agents/api) - use PATs with REST and MCP.
+- [Developer API](/en/agents/api) - use PATs with REST endpoints.
+- [MCP server](/en/agents/mcp) - connect Nudgen to MCP-capable agents.
 - [Manage your team](/en/settings/team) - invite collaborators and set roles.
 - [Set up signatures](/en/settings/signatures) - add signatures to campaign emails.
 - [Configure brand tone](/en/brand/overview) - control how AI generates content.
@@ -46,7 +47,10 @@ Use **Settings -> API Keys** to create Personal Access Tokens. PATs authenticate
 
 <CardGroup cols={2}>
   <Card title="Developer API" icon="code" href="/en/agents/api">
-    REST and MCP access with API keys.
+    REST access with API keys.
+  </Card>
+  <Card title="MCP server" icon="bot" href="/en/agents/mcp">
+    Tool-based agent access with API keys.
   </Card>
   <Card title="Team settings" icon="users" href="/en/settings/team">
     Invites, roles, and permissions.

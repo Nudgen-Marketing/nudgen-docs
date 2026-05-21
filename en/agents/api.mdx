@@ -1,15 +1,15 @@
 ---
 title: "Developer API"
-description: "REST API and MCP access with Personal Access Token authentication. Manage contacts, campaigns, brand settings, and AI drafts programmatically."
+description: "REST API with Personal Access Token authentication. Manage contacts, campaigns, brand settings, and AI drafts programmatically."
 ---
 
 ## Overview
 
-The Nudgen Developer API gives scripts, internal tools, and AI agents a predictable way to work with your Nudgen workspace. Use REST endpoints for normal HTTP integrations, or use MCP when an agent can call Nudgen tools directly.
+The Nudgen Developer API gives scripts, internal tools, and AI agents a predictable REST interface for working with your Nudgen workspace.
 
 <CardGroup cols={3}>
   <Card title="PAT auth" icon="shield-check">
-    Authenticate REST and MCP requests with the same Personal Access Token.
+    Authenticate REST requests with a Personal Access Token.
   </Card>
   <Card title="Campaign operations" icon="send">
     Create campaigns, schedule launches, and read delivery stats.
@@ -153,38 +153,13 @@ curl -X POST https://nudgen.net/api/v1/ai/generate \
   }'
 ```
 
-## MCP endpoint
+## MCP server
 
-Use MCP when your agent supports Model Context Protocol tools.
+Use [Nudgen MCP](/en/agents/mcp) when your agent supports Model Context Protocol tools. MCP uses the same Personal Access Token as the REST API, but exposes Nudgen as agent-callable tools instead of conventional HTTP endpoints.
 
-```text
-POST https://nudgen.net/api/mcp
-GET  https://nudgen.net/.well-known/mcp/server-card.json
-```
-
-Authenticate MCP requests with the same bearer PAT:
-
-```bash
-curl -X POST https://nudgen.net/api/mcp \
-  -H "Authorization: Bearer <your-pat>" \
-  -H "Content-Type: application/json" \
-  -d '{"jsonrpc":"2.0","id":1,"method":"tools/list"}'
-```
-
-Available MCP tools mirror the core REST workflows:
-
-| Tool | REST equivalent |
-| --- | --- |
-| `get_current_user` | `GET /api/v1/user/me` |
-| `list_contacts` | `GET /api/v1/contacts` |
-| `create_contact` | `POST /api/v1/contacts/add` |
-| `list_campaigns` | `GET /api/v1/campaigns` |
-| `create_campaign` | `POST /api/v1/campaigns` |
-| `launch_campaign` | `POST /api/v1/campaigns/:id/launch` |
-| `get_campaign_stats` | `GET /api/v1/campaigns/:id/stats` |
-| `get_brand_settings` | `GET /api/v1/settings/brand` |
-| `update_brand_settings` | `PATCH /api/v1/settings/brand` |
-| `generate_email_draft` | `POST /api/v1/ai/generate` |
+<Card title="MCP server setup" icon="bot" href="/en/agents/mcp">
+  Install Nudgen MCP in Claude Code, Cursor, Windsurf, Codex CLI, or a generic MCP client.
+</Card>
 
 ## Responses and errors
 
