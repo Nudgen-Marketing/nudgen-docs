@@ -1,71 +1,89 @@
 ---
-title: "Ikhtisar Kampanye"
-description: "Kampanye sekali kirim vs drip dan status kampanye"
+title: "Ikhtisar kampanye"
+description: "Kampanye sekali pakai, tetes, dan Seumur Hidup"
 ---
 
-## Apa yang dapat Anda lakukan di halaman ini
+## Apa yang halaman ini bantu Anda lakukan
 
-Memahami dua jenis kampanye dan arti dari setiap status. Ini membantu Anda memilih jenis kampanye yang tepat dan menafsirkan daftar kampanye Anda.
+Pahami tiga jenis kampanye dan siklus hidupnya. Ini membantu Anda memilih jenis kampanye yang tepat dan menafsirkan daftar kampanye Anda.
 
 ## Sebelum memulai
 
-- Kontak telah diunggah ke Nudgen
-- Konfigurasi merek (preset nada atau perintah kustom) telah disiapkan
+- Kontak yang diunggah di Nudgen
+- Konfigurasi merek (nada preset atau perintah khusus)
 
-## Jenis Kampanye
+## Jenis kampanye
 
-### Kampanye Sekali Kirim (One-shot)
+### Kampanye sekali pakai
 
-Satu email yang dikirim satu kali ke audiens yang Anda pilih. Gunakan ini saat Anda ingin:
+Satu email dikirim satu kali ke audiens yang Anda pilih. Gunakan ini saat Anda ingin:
 
 - Mengumumkan fitur atau acara
-- Mengirim pesan penjangkauan ulang satu kali
-- Menguji pesan sebelum membangun urutan yang lebih panjang
+- Mengirim ledakan keterlibatan ulang satu kali
+- Menguji pesan sebelum membuat urutan yang lebih panjang
 
-Anda memilih audiens, AI menghasilkan konten, Anda meninjau dan mengirim (atau menjadwalkan).
+Anda memilih audiens, AI menghasilkan konten, Anda mempratinjau dan mengirim (atau menjadwalkan).
 
-### Urutan Drip (Drip Sequences)
+### Urutan tetes
 
-Kampanye multi-langkah dengan penundaan di antara email (misalnya Hari ke-1, Hari ke-3, Hari ke-7). Gunakan ini saat Anda ingin:
+Kampanye multi-langkah dengan penundaan antar email (misalnya Hari 1, Hari 3, Hari 7). Gunakan ini saat Anda ingin:
 
-- Mengajak pengguna yang tidak aktif selama beberapa hari
-- Menindaklanjuti mereka yang tidak membuka atau mengklik pesan
+- Mendorong pengguna yang tidak aktif selama beberapa hari
+- Menindaklanjuti dengan non-pembuka atau non-klik
 - Membangun alur retensi gaya Duolingo
 
-Setiap langkah memiliki tujuannya sendiri, subjek, dan isi yang dibuat oleh AI. Kontak berpindah ke langkah berikutnya hanya setelah penundaan yang ditentukan. Anda dapat mengatur **aturan penghentian otomatis** (misalnya berhenti saat penerima mengklik, atau saat mereka membuka email) sehingga pengguna yang sudah berinteraksi berhenti menerima langkah-langkah selanjutnya.
+Setiap langkah memiliki sasaran, subjek, dan isi yang dihasilkan AI sendiri. Kontak berpindah ke langkah berikutnya hanya setelah penundaan. Anda dapat menetapkan **aturan berhenti otomatis** (misalnya, berhenti saat penerima mengeklik, atau saat mereka membuka email) sehingga pengguna yang terlibat berhenti menerima langkah selanjutnya.
 
-**Jenis Audiens:** Saat membuat kampanye, Anda memilih siapa yang menerimanya: **Semua kontak**, **Berdasarkan tag** (hanya kontak dengan tag yang dipilih), atau **Manual** (memilih penerima secara langsung). Wizard akan menunjukkan perkiraan jangkauan sebelum Anda meluncurkan kampanye.
+### Kampanye seumur hidup
 
-## Status Kampanye
+Kampanye seumur hidup tetap siap untuk acara dari sistem Anda. Setiap pemicu yang diautentikasi membuat paling banyak satu eksekusi dan mengirimkan satu dorongan ke kontak dalam pemicu tersebut.
 
-| Status     | Arti                                                                 |
+Gunakan kampanye Seumur Hidup untuk konfirmasi pesanan, pengingat pembayaran, orientasi berbasis peristiwa, atau email transaksional dan retensi lainnya yang dimulai oleh backend Anda. Audiensnya selalu **Pemicu**—tidak langsung dikirim ke segmen kontak yang disimpan.
+
+Lihat [Menggunakan kampanye Seumur Hidup](/id/campaigns/lifetime) untuk alur kerja dasbor dan panduan integrasi.
+
+**Jenis audiens:** Saat membuat kampanye, Anda memilih siapa yang menerimanya: **Semua kontak**, **Berdasarkan tag** (hanya kontak dengan tag yang dipilih), atau **Manual** (pilih penerima). Wizard menampilkan perkiraan jangkauan sebelum Anda meluncurkannya.
+
+## Status kampanye
+
+| Status | Artinya |
 | ---------- | ----------------------------------------------------------------------- |
-| **Draft**  | Belum terkirim. Anda dapat mengedit tujuan, audiens, konten, dan jadwal. |
-| **Scheduled** | Waktu pengiriman telah diatur. Email akan dikirim pada waktu yang dijadwalkan. |
-| **Active** / **Sending** | Email sedang dikirim. Progres akan muncul di dasbor. |
-| **Sent**   | Semua email telah terkirim. Konten dikunci; Anda dapat melihat analitik. |
-| **Stopped**| Kampanye dihentikan secara manual. Beberapa kontak mungkin sudah menerima email; langkah drip di masa depan dibatalkan. |
+| **Draf** | Tidak terkirim. Anda dapat mengedit sasaran, audiens, konten, dan jadwal.         |
+| **Dijadwalkan** | Waktu pengiriman sudah diatur. Email akan keluar pada waktu yang dijadwalkan.        |
+| **Aktif** / **Mengirim** | Email sedang dikirim. Kemajuan muncul di dasbor.     |
+| **Terkirim** | Semua email telah terkirim. Konten terkunci; Anda dapat melihat analitik.  |
+| **Berhenti**| Kampanye dihentikan secara manual. Beberapa kontak mungkin sudah menerima email; langkah tetesan di masa depan dibatalkan. |
 
 <Note>
-Setelah kampanye terkirim, Anda tidak dapat mengedit konten atau mengirimnya kembali. Buat kampanye baru jika ingin mengirim pesan yang berbeda.
+Setelah kampanye dikirim, Anda tidak dapat mengedit kontennya atau mengirim ulang. Buat kampanye baru untuk mengirim pesan yang berbeda.
 </Note>
 
-## Langkah selanjutnya
+### Siklus hidup seumur hidup
 
-- [Buat kampanye](/id/campaigns/create) — ikuti panduan wizard dan kirim email pertama Anda.
+Kampanye seumur hidup menggunakan siklus hidup terpisah: **Draf** → **Aktif** → **Dijeda** → **Aktif**, atau **Aktif/Dijeda** → **Diarsipkan**. Anda tidak dapat mengaktifkan kembali kampanye yang diarsipkan.
+
+Saat Anda menjeda atau mengarsipkan kampanye Seumur Hidup, Nudgen membatalkan eksekusi yang masih menunggu keputusan atau antrean. Eksekusi yang sedang diproses mungkin masih terkirim. Perubahan pada kampanye aktif hanya berlaku untuk pemicu di masa mendatang karena setiap eksekusi menyimpan cuplikan konten dan konfigurasi pengiriman.
+
+## Apa yang terjadi selanjutnya
+
+- [Buat kampanye](/id/campaigns/create) — telusuri wizard dan kirim email pertama Anda.
 - [Kelola kampanye](/id/campaigns/manage) — edit draf, kirim, jadwalkan, atau hentikan.
-- [Lihat analitik](/id/campaigns/analytics) — buka, klik, tingkat pengiriman, dan aktivitas penerima.
+- [Gunakan kampanye Seumur Hidup](/id/campaigns/lifetime) — konfigurasikan kampanye yang dipicu peristiwa dan integrasi API-nya.
+- [Lihat analitik](/id/campaigns/analytics) — pembukaan, klik, rasio pengiriman, dan aktivitas penerima.
 
 ## Dokumen terkait
 
 <CardGroup cols={2}>
-  <Card title="Buat kampanye" icon="paper-plane" href="/id/campaigns/create">
-    Panduan wizard kampanye langkah demi langkah.
-  </Card>
-  <Card title="Kelola kampanye" icon="pen-to-square" href="/id/campaigns/manage">
-    Edit, kirim, jadwalkan, dan hentikan.
-  </Card>
-  <Card title="Analitik kampanye" icon="chart-line" href="/id/campaigns/analytics">
-    Metrik dan aktivitas penerima.
-  </Card>
+ <Card title="Create campaigns" icon="paper-plane" href="/id/campaigns/create">
+ Panduan kampanye langkah demi langkah.
+ </Card>
+ <Card title="Manage campaigns" icon="pen-to-square" href="/id/campaigns/manage">
+ Edit, kirim, jadwalkan, dan hentikan.
+ </Card>
+ <Card title="Use Lifetime campaigns" icon="bolt" href="/id/campaigns/lifetime">
+ Kirim satu dorongan untuk setiap acara dari sistem Anda.
+ </Card>
+ <Card title="Campaign analytics" icon="chart-line" href="/id/campaigns/analytics">
+ Metrik dan aktivitas penerima.
+ </Card>
 </CardGroup>

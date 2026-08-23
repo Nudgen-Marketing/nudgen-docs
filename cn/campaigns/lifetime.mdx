@@ -1,22 +1,133 @@
 ---
-title: "使用 Lifetime 营销活动"
-description: "每次经过验证的事件触发都会向联系人发送一封邮件"
+title: 标题：“使用终身营销活动”
+description: 描述：“通过每个经过身份验证的触发器，向联系人发送一个事件触发的轻推”
 ---
 
-## Lifetime 营销活动
+## 此页面可帮助您做什么
 
-Lifetime 营销活动会持续等待您系统中的事件。每个有效 trigger 最多创建一次 execution，并向 payload 中的 contact 发送一封 nudge。它适用于订单确认、付款提醒和事件驱动的 onboarding；受众始终是 **Trigger**。
+创建一个终身营销活动，为系统中的事件做好准备。每个有效触发器最多创建一次执行，并向其有效负载中的联系人发送一次推送。
 
-## 设置与安全
+## 为什么这很重要
 
-在 **Campaigns** → **New campaign** → **Lifetime** 中创建活动。`order_id` 等运行时参数会成为 `{{data.order_id}}`。创建、预览和测试邮件后点击 **Activate**。在 **Settings** → **API Keys** 创建 Team trigger API key，并且只能在后端保存 `ndg_team_*`。
+您可以发送及时、相关的电子邮件，而无需重复构建和启动营销活动。您的后端控制事件何时发生，而 Nudgen 将电子邮件内容、递送、跟踪和联系首选项保留在一个位置。
 
-`variableManifest` 是与 `data` 之间的契约，最多支持 100 个 `data.*` 变量，类型为 `string`、`number`、`boolean`、`date` 或 `url`。HTML 值会转义；在 `href` 中的变量必须是 `url`。
+## 何时使用终身营销活动
 
-## 生命周期和重试
+对事件驱动的电子邮件使用终身营销活动，例如：
 
-有效转换为 `draft → active → paused → active` 与 `active|paused → archived`。归档不可恢复。暂停或归档会取消 `pending`/`queued` execution；正在处理的邮件仍可能发送。每个 execution 都会保存内容快照。
+- 订单确认
+- 付款提醒
+- 基于事件的入门
+- 帐户或订阅更新
 
-只从可信后端触发，并在重试时复用 `eventId`：`201` 为新 execution，`200` 为重复。对 `429`、`503` 和网络错误使用指数退避，且不要记录密钥。
+与一次性和点滴营销活动不同，终身营销活动不会立即发送给已保存的受众。其受众始终是 **触发器**。
 
-参阅 [Developer API](/cn/agents/api)。
+## 创建并激活营销活动
+
+<Steps>
+ <Step title="Create a Lifetime campaign">
+ 转至 **营销活动**，单击 **新营销活动**，然后选择 **终身**。添加广告活动名称、目标、品牌配置和可选的 CTA 链接。
+ </Step>
+ <Step title="Define runtime parameters">
+ 添加系统在发送时提供的每个值。参数创建 `data.*` 变量：例如，`order_id` 在电子邮件中变为 `{{data.order_id}}`。
+ </Step>
+ <Step title="Create the email">
+ 生成或编写主题和 HTML，然后将运行时变量添加到它们所属的位置。在激活之前预览电子邮件并发送测试。
+ </Step>
+ <Step title="Activate the campaign">
+将其保存为草稿，然后单击“**激活**”。 Nudgen 检查电子邮件中是否包含所需的参数，以及参数契约自生成以来未发生更改。
+ </Step>
+ <Step title="Create a trigger key">
+ 转到 **设置** → **API 密钥** 并创建 **团队触发器 API 密钥**。将 `ndg_team_*` 密钥存储在您的后端或密钥管理器中；切勿将其放置在浏览器或移动应用程序代码中。
+ </Step>
+</Steps>
+
+## 运行时参数和模板变量
+
+您的 `variableManifest` 是电子邮件模板与每个触发器的 `data` 对象之间的契约。一个营销活动最多可以定义 100 个变量。
+
+|领域|类型 |必填 |描述 |
+| --- | --- | --- | --- |
+| `path` | `data.<name>` |是的 |可变路径。支持嵌套路径，例如 `data.order.total`。 |
+| `type` | `string`、`number`、`boolean`、`date` 或 `url` |是的 |触发器必须提供的类型。 `date` 必须是有效的日期字符串，`url` 必须是 HTTP(S)。 |
+| `required` |布尔 |是的 |除非设置了默认值，否则缺失值将返回 `422`。 |
+| `defaultValue` |字符串、数字或布尔值 |没有 |后备值必须与变量类型匹配。 |
+| `description` |字符串|没有 |解释该值，以便您和 Nudgen AI 可以正确使用它。 |
+
+例如，在模板中使用 `{{data.order_id}}`、`{{data.total}}` 和 `{{data.order_url}}`。您还可以使用 `contact.*`、`event.*`、`brand.*` 以及旧变量，例如 `{{firstName}}` 和 `{{brandName}}`。
+
+Nudgen 对插入到 HTML 中的变量值进行转义。模板不支持 JavaScript、表达式或循环。 `href` 中使用的任何变量都必须是使用 `url` 类型声明的 `data.*` 变量。
+
+## 管理生命周期
+
+|状态 |这意味着什么 |
+| --- | --- |
+| **草稿** |配置活动并测试其电子邮件。 |
+| **活跃** | Nudgen 接受经过身份验证的触发器。 |
+| **暂停** | Nudgen 不接受新的触发器。你可以恢复它。 |
+| **已存档** |该活动已永久关闭，无法再次激活。 |
+
+有效转换为 `draft → active → paused → active` 和 `active|paused → archived`。
+
+<Note>
+暂停或存档会取消仍待处理或排队的执行。已处理的执行仍可能发送。
+</Note>
+
+每次执行都会在 Nudgen 收到触发器时拍摄营销活动内容的快照并发送设置。编辑活动活动仅影响后续触发器，而不会影响已存在的执行。
+
+## 从后端触发
+
+验证源事件后，从受信任的服务器调用触发器端点。使用团队触发器 API 密钥，而不是个人访问令牌 (PAT)。
+
+```bash
+curl -X POST "$NUDGEN_APP_URL/api/v1/campaigns/$CAMPAIGN_ID/triggers" \
+  -H "Authorization: Bearer $NUDGEN_TEAM_API_KEY" \
+  -H "Content-Type: application/json" \
+  --data @- <<'JSON'
+{
+  "eventId": "order_123",
+  "eventName": "order.created",
+  "occurredAt": "2026-08-23T10:00:00Z",
+  "contact": {
+    "email": "an@example.com",
+    "externalId": "customer_456",
+    "name": "An Nguyen",
+    "metadata": { "company": "Nudgen" }
+  },
+  "data": {
+    "order_id": "order_123",
+    "total": 490000,
+    "order_url": "https://example.com/orders/order_123"
+  }
+}
+JSON
+```
+
+重试事件时保留相同的 `eventId`。 Nudgen 使用 `200` 和 `duplicate: true` 返回现有执行，而不是发送另一个微移。新执行返回 `201`。
+
+## 安全集成
+
+- 从 Webhook 使用者或后端触发，并在调用 Nudgen 之前验证传入的 Webhook。
+- 重试网络错误、`429` 和 `503`，具有指数退避和相同功能`eventId`。
+- 请勿记录包含敏感联系人数据的 `Authorization` 标头或有效负载。
+- 定期轮换触发密钥，如果您怀疑密钥已暴露，请立即撤销密钥。
+- 为每个事件类型和可变合同创建一个活动，以便模板和执行审核保持清晰。
+
+## 监控执行情况
+
+在仪表板中打开活动以查看最近的执行及其状态。执行可以是 `pending`、`queued`、`processing`、`sent`、`skipped`、`cancelled`、`failed` 或`delivery_unknown`。
+
+`skipped` 表示联系人已取消订阅或退回，因此 Nudgen 会记录该事件，但不会发送或消耗配额。 `delivery_unknown` 表示提供商可能已接受邮件，但最终投递结果不确定； Nudgen 不会自动重试以避免重复发送。
+
+有关编程设置、触发和执行查询的信息，请参阅[开发人员 API](/cn/agents/api)。
+
+## 相关文档
+
+<CardGroup cols={2}>
+ <Card title="Campaigns overview" icon="list" href="/cn/campaigns/overview">
+ 比较一次性、滴注和终身营销活动。
+ </Card>
+ <Card title="Developer API" icon="code" href="/cn/agents/api">
+ 通过 API 管理终身营销活动和触发器。
+ </Card>
+</CardGroup>

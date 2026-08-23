@@ -1,22 +1,133 @@
 ---
-title: "Lifetime キャンペーンを使用する"
-description: "認証済みイベントごとにコンタクトへ1通のメールを送信します"
+title: "ライフタイム キャンペーンを使用する"
+description: "認証されたトリガーごとに、イベント トリガーのナッジを 1 つ連絡先に送信します"
 ---
 
-## Lifetime キャンペーン
+## このページで役立つこと
 
-Lifetime キャンペーンはシステムのイベントを待ち続けます。有効な trigger は最大1つの execution を作成し、payload の contact に1通の nudge を送ります。注文確認、支払いリマインダー、イベント型 onboarding に使用し、audience は常に **Trigger** です。
+システムからのイベントに備えたライフタイム キャンペーンを作成します。有効なトリガーごとに最大 1 つの実行が作成され、ペイロード内の連絡先に 1 つのナッジが送信されます。
 
-## 設定と安全な連携
+## これが重要な理由
 
-**Campaigns** → **New campaign** → **Lifetime** で作成します。`order_id` などの runtime parameter は `{{data.order_id}}` になります。メールを作成、プレビュー、テストしてから **Activate** を選択します。**Settings** → **API Keys** で Team trigger API key を作り、`ndg_team_*` はバックエンドだけに保存してください。
+キャンペーンの構築と開始を繰り返し行わなくても、タイムリーで関連性の高いメールを送信できます。バックエンドはイベントの発生時期を制御しますが、Nudgen はメールの内容、配信、追跡、連絡先設定を 1 か所で管理します。
 
-`variableManifest` は `data` との契約です。`string`、`number`、`boolean`、`date`、`url` 型の `data.*` 変数を最大100個使えます。HTML 値はエスケープされ、`href` の変数は `url` 型でなければなりません。
+## ライフタイム キャンペーンを使用する場合
 
-## ライフサイクルと再試行
+次のようなイベント ドリブンのメールにはライフタイム キャンペーンを使用します。
 
-有効な遷移は `draft → active → paused → active` と `active|paused → archived` です。archive は元に戻せません。pause/archive は `pending`/`queued` execution を取り消しますが、処理中の送信は完了することがあります。各 execution は内容の snapshot を保持します。
+- 注文確認
+- 支払いリマインダー
+- イベントベースのオンボーディング
+- アカウントまたはサブスクリプションの更新
 
-信頼できる backend からのみ trigger し、retry では同じ `eventId` を使います。`201` は新規、`200` は duplicate です。`429`、`503`、ネットワークエラーは exponential backoff で再試行し、secret をログに残さないでください。
+ワンショット キャンペーンやドリップ キャンペーンとは異なり、ライフタイム キャンペーンは、保存されたオーディエンスにすぐには送信されません。対象ユーザーは常に **トリガー** です。
 
-[Developer API](/jp/agents/api) を参照してください。
+## キャンペーンを作成してアクティブ化します
+
+<Steps>
+ <Step title="Create a Lifetime campaign">
+ **キャンペーン**に移動し、**新しいキャンペーン**をクリックして、**ライフタイム**を選択します。キャンペーン名、目標、ブランド構成、およびオプションの CTA リンクを追加します。
+ </Step>
+ <Step title="Define runtime parameters">
+ 送信時にシステムが提供する各値を追加します。パラメータにより `data.*` 変数が作成されます。たとえば、電子メールでは `order_id` は `{{data.order_id}}` になります。
+ </Step>
+ <Step title="Create the email">
+ 件名と HTML を生成または書き込み、それらが属する場所にランタイム変数を追加します。メールをプレビューして、アクティブ化する前にテストを送信します。
+ </Step>
+ <Step title="Activate the campaign">
+下書きとして保存し、**アクティブ化** をクリックします。 Nudgen は、必要なパラメータがメールに記載されていること、およびパラメータ コントラクトが生成以降に変更されていないことを確認します。
+ </Step>
+ <Step title="Create a trigger key">
+ [**設定**] → [**API キー**] に移動し、**チーム トリガー API キー**を作成します。 `ndg_team_*` シークレットをバックエンドまたはシークレット マネージャーに保存します。ブラウザやモバイルアプリのコードには決して配置しないでください。
+ </Step>
+</Steps>
+
+## ランタイム パラメーターとテンプレート変数
+
+`variableManifest` は、電子メール テンプレートと各トリガーの `data` オブジェクトの間のコントラクトです。キャンペーンでは最大 100 個の変数を定義できます。
+
+|フィールド |タイプ |必須 |説明 |
+| --- | --- | --- | --- |
+| `path` | `data.<name>` |はい |変数パス。 `data.order.total` などのネストされたパスがサポートされています。 |
+| `type` | `string`、`number`、`boolean`、`date`、または `url` |はい |トリガーが提供する必要があるタイプ。 `date` は有効な日付文字列である必要があり、`url` は HTTP(S) である必要があります。 |
+| `required` |ブール値 |はい |デフォルトが設定されていない限り、欠損値は `422` を返します。 |
+| `defaultValue` |文字列、数値、またはブール値 |いいえ |変数の型と一致する必要があるフォールバック値。 |
+| `description` |文字列 |いいえ |あなたと Nudgen AI が正しく使用できるように、値を説明します。 |
+
+たとえば、テンプレートで `{{data.order_id}}`、`{{data.total}}`、および `{{data.order_url}}` を使用します。 `contact.*`、`event.*`、`brand.*`、および `{{firstName}}` や `{{brandName}}` などの従来の変数も使用できます。
+
+Nudgen は、HTML に挿入された変数値をエスケープします。テンプレートは JavaScript、式、またはループをサポートしていません。 `href` で使用される変数は、`url` 型で宣言された `data.*` 変数である必要があります。
+
+## ライフサイクルを管理する
+
+|ステータス |意味 |
+| --- | --- |
+| **草案** |キャンペーンを設定し、その電子メールをテストします。 |
+| **アクティブ** | Nudgen は認証されたトリガーを受け入れます。 |
+| **一時停止中** | Nudgen は新しいトリガーを受け入れません。再開できます。 |
+| **アーカイブ済み** |キャンペーンは完全に終了しており、再度有効にすることはできません。 |
+
+有効な遷移は、`draft → active → paused → active` と `active|paused → archived` です。
+
+<Note>
+一時停止またはアーカイブすると、まだ保留中またはキューにある実行がキャンセルされます。すでに処理されている実行は引き続き送信される可能性があります。
+</Note>
+
+Nudgen がトリガーを受信すると、すべての実行でキャンペーン コンテンツのスナップショットが作成され、設定が送信されます。アクティブなキャンペーンの編集は、後のトリガーにのみ影響し、既存の実行には影響しません。
+
+## バックエンドからのトリガー
+
+ソース イベントを検証した後、信頼できるサーバーからトリガー エンドポイントを呼び出します。パーソナル アクセス トークン (PAT) ではなく、チーム トリガー API キーを使用してください。
+
+```bash
+curl -X POST "$NUDGEN_APP_URL/api/v1/campaigns/$CAMPAIGN_ID/triggers" \
+  -H "Authorization: Bearer $NUDGEN_TEAM_API_KEY" \
+  -H "Content-Type: application/json" \
+  --data @- <<'JSON'
+{
+  "eventId": "order_123",
+  "eventName": "order.created",
+  "occurredAt": "2026-08-23T10:00:00Z",
+  "contact": {
+    "email": "an@example.com",
+    "externalId": "customer_456",
+    "name": "An Nguyen",
+    "metadata": { "company": "Nudgen" }
+  },
+  "data": {
+    "order_id": "order_123",
+    "total": 490000,
+    "order_url": "https://example.com/orders/order_123"
+  }
+}
+JSON
+```
+
+イベントを再試行するときは、同じ `eventId` を維持してください。 Nudgen は、別のナッジを送信する代わりに、`200` および `duplicate: true` を使用して既存の実行を返します。新しい実行では、`201` が返されます。
+
+## 安全に統合します。
+
+- Webhook コンシューマーまたはバックエンドからトリガーし、Nudgen を呼び出す前に受信 Webhook を確認します。
+- 指数バックオフを使用してネットワーク エラー、`429`、および `503` を再試行します。 `eventId`.
+- 機密の連絡先データを含む `Authorization` ヘッダーまたはペイロードをログに記録しないでください。
+- トリガー キーを定期的にローテーションし、公開されている疑いがある場合はキーをすぐに取り消します。
+- テンプレートと実行監査が明確になるように、イベント タイプと変数コントラクトごとに 1 つのキャンペーンを作成します。
+
+## 実行を監視する
+
+ダッシュボードでキャンペーンを開いて、最近の実行とそのステータスを確認します。実行は、`pending`、`queued`、`processing`、`sent`、`skipped`、`cancelled`、`failed`、または`delivery_unknown`.
+
+`skipped` は、コンタクトが登録解除または返送されたことを意味するため、Nudgen はイベントを記録しますが、クォータの送信や消費は行いません。 `delivery_unknown` は、プロバイダーが電子メールを受け入れた可能性があるが、最終的な配信結果が不確実であることを意味します。 Nudgen は、重複送信を避けるために自動的に再試行しません。
+
+プログラムによるセットアップ、トリガー、実行クエリについては、[開発者 API](/jp/agents/api) をご覧ください。
+
+## 関連ドキュメント
+
+<CardGroup cols={2}>
+ <Card title="Campaigns overview" icon="list" href="/jp/campaigns/overview">
+ ワンショット、ドリップ、ライフタイム キャンペーンを比較します。
+ </Card>
+ <Card title="Developer API" icon="code" href="/jp/agents/api">
+ API を通じてライフタイム キャンペーンとトリガーを管理します。
+ </Card>
+</CardGroup>

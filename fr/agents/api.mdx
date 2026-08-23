@@ -1,71 +1,254 @@
 ---
-title: "API Développeur"
-description: "API REST avec authentification par jeton d'accès personnel. Gérez les contacts, les campagnes, les modèles et les paramètres par programmation."
+title: "API de développeur"
+description: "API REST pour votre espace de travail Nudgen, y compris les campagnes à vie déclenchées par des événements"
 ---
 
-## Aperçu
+## Présentation
 
-L'API Développeur Nudgen fournit une interface REST propre et orientée ressources pour gérer votre infrastructure marketing. Toutes les requêtes utilisent des méthodes HTTP standard et renvoient des réponses JSON prévisibles.
+L'API de développeur Nudgen offre aux scripts, aux outils internes et aux agents d'IA une interface REST prévisible pour votre espace de travail. Utilisez un jeton d'accès personnel (PAT) pour gérer les ressources de l'espace de travail. Utilisez une clé API de déclenchement d'équipe uniquement pour déclencher une campagne à vie à partir de votre backend.
 
-<CardGroup cols={3}>
-  <Card title="Auth PAT" icon="shield-check">
-    Authentification avec des jetons d'accès personnels via l'en-tête Bearer standard.
-  </Card>
-  <Card title="REST Propre" icon="globe">
-    URLs prévisibles et orientées ressources avec des méthodes HTTP standard.
-  </Card>
-  <Card title="Limitation de débit" icon="gauge">
-    Limitation de débit intégrée par équipe et par endpoint pour protéger vos flux de travail.
-  </Card>
-</CardGroup>
+## Pourquoi c'est important
 
-## Authentification
-
-Toutes les requêtes API nécessitent un jeton d'accès personnel (PAT) transmis via l'en-tête `Authorization`. Vous pouvez générer des jetons depuis votre tableau de bord Nudgen sous **Paramètres → Clés API**.
-
-```bash
-curl -X GET https://app.nudgen.com/api/v1/user/me \
-  -H "Authorization: Bearer <your-pat>"
-```
+Vous pouvez automatiser les workflows de marketing et de fidélisation basés sur les événements sans partager une session de tableau de bord. Les PAT maintiennent la gestion de l'espace de travail révocable, tandis qu'une touche de déclenchement d'équipe étroite permet à un service de production d'envoyer un coup de pouce déclenché par un événement sans accès étendu à l'espace de travail.
 
 ## URL de base
 
-L'URL de base pour toutes les requêtes API est :
-`https://app.nudgen.com`
+Définissez une fois l'URL de l'application pour votre environnement et utilisez-la dans chaque exemple. La production utilise généralement `https://app.nudgen.net` ; le développement local utilise couramment `http://localhost:3000`.
 
-## Endpoints
+```bash
+export NUDGEN_APP_URL="https://app.nudgen.net"
+```
 
-### Auth & Identité
-- `GET /api/v1/user/me` : Obtenir l'utilisateur actuel authentifié.
-- `GET /api/v1/teams` : Lister toutes les équipes de l'utilisateur actuel.
-- `POST /api/v1/teams/switch` : Basculer le contexte de l'équipe active.
+## Authentification
+
+### Jeton d'accès personnel
+
+Créez un PAT dans **Paramètres** → **Clés API**. Utilisez-le pour les contacts, la gestion des campagnes, les paramètres de marque et la génération d'IA.
+
+```bash
+Authorization: Bearer $NUDGEN_PAT
+```
+
+Les PAT ne sont affichés qu'une seule fois. Stockez-les en toute sécurité et révoquez tout jeton ancien ou exposé dans **Paramètres** → **Clés API**.
+
+### Clé API de déclenchement d'équipe
+
+Une clé API de déclenchement d'équipe commence par `ndg_team_` et a la portée étroite `campaigns:trigger`. Il ne peut déclencher que des campagnes à vie ; un PAT ne peut pas les déclencher.
+
+Seuls les propriétaires et les administrateurs d'espace de travail peuvent créer, alterner ou révoquer ces clés. Par défaut, une clé expire après 90 jours. Définissez `expiresInDays` sur `null` pour créer une clé qui n'expire pas.
+
+```bash
+curl -X POST "$NUDGEN_APP_URL/api/v1/settings/team-api-keys" \
+  -H "Authorization: Bearer $NUDGEN_PAT" \
+  -H "Content-Type: application/json" \
+  --data '{"name":"Order service production","expiresInDays":90}'
+```
+
+La réponse `201` contient le texte en clair `key` exactement une fois. Enregistrez-le dans un gestionnaire de secrets côté serveur. Les réponses ultérieures exposent uniquement `keyPrefix`.
+
+| Méthode | Point de terminaison | Description |
+| --- | --- | --- |
+| `POST` | `/api/v1/settings/team-api-keys` | Créez une clé API de déclencheur d'équipe. |
+| `GET` | `/api/v1/settings/team-api-keys` | Répertoriez les clés API des déclencheurs d’équipe. |
+| `POST` | `/api/v1/settings/team-api-keys/:id` | Faites pivoter une clé active et non expirée. |
+| `DELETE` | `/api/v1/settings/team-api-keys/:id` | Révoquer une clé. |
+
+## Points de terminaison REST
+
+### Identité et espace de travail
+
+| Méthode | Point de terminaison | Description |
+| --- | --- | --- |
+| `GET` | `/api/v1/user/me` | Obtenez l'utilisateur authentifié. |
+| `GET` | `/api/v1/teams` | Répertoriez les espaces de travail disponibles pour le propriétaire du jeton. |
 
 ### Contacts
-- `GET /api/v1/contacts` : Lister les contacts avec pagination, recherche et filtres de tags.
-- `POST /api/v1/contacts/add` : Créer un nouveau contact.
-- `GET /api/v1/contacts/:id` : Récupérer un contact spécifique.
-- `PATCH /api/v1/contacts/:id` : Mettre à jour un contact existant.
-- `DELETE /api/v1/contacts/:id` : Supprimer un contact.
 
-### Campagnes
-- `GET /api/v1/campaigns` : Lister les campagnes de l'équipe actuelle.
-- `POST /api/v1/campaigns` : Créer une nouvelle campagne.
-- `GET /api/v1/campaigns/:id` : Obtenir les détails d'une campagne.
-- `GET /api/v1/campaigns/:id/stats` : Obtenir les statistiques de diffusion d'une campagne.
+| Méthode | Point de terminaison | Description |
+| --- | --- | --- |
+| `GET` | `/api/v1/contacts` | Répertoriez les contacts avec les filtres `page`, `limit`, `search`, `tags` et `status`. |
+| `POST` | `/api/v1/contacts/add` | Créez un contact. |
+| `GET` | `/api/v1/contacts/:id` | Obtenez un contact. |
+| `PATCH` | `/api/v1/contacts/:id` | Mettre à jour un contact. |
+| `DELETE` | `/api/v1/contacts/:id` | Supprimer un contact. |
 
-### Modèles
-- `GET /api/v1/templates` : Lister les modèles d'e-mail.
-- `POST /api/v1/templates` : Créer un nouveau modèle d'e-mail.
+```bash
+curl -X POST "$NUDGEN_APP_URL/api/v1/contacts/add" \
+  -H "Authorization: Bearer $NUDGEN_PAT" \
+  -H "Content-Type: application/json" \
+  --data '{"email":"nathan@example.com","name":"Nathan Nguyen","tags":["api-test"]}'
+```
 
-### Paramètres
-- `GET /api/v1/settings/brand` : Obtenir la configuration de marque.
-- `PATCH /api/v1/settings/brand` : Mettre à jour les paramètres de marque.
+### Campagnes one-shot et goutte à goutte
 
-## Spécification OpenAPI
+| Méthode | Point de terminaison | Description |
+| --- | --- | --- |
+| `GET` | `/api/v1/campaigns` | Répertoriez les campagnes dans l'espace de travail actif. |
+| `POST` | `/api/v1/campaigns` | Créez un brouillon de campagne ou une campagne planifiée. |
+| `GET` | `/api/v1/campaigns/:id` | Obtenez les détails de la campagne. |
+| `PUT` | `/api/v1/campaigns/:id` | Mettez à jour une campagne existante. |
+| `POST` | `/api/v1/campaigns/:id/launch` | Lancez-vous maintenant ou planifiez une campagne ponctuelle ou goutte à goutte. |
+| `GET` | `/api/v1/campaigns/:id/stats` | Obtenez des statistiques de livraison, d'ouverture, de clic, de rebond et de réclamation. |
+| `GET` | `/api/v1/campaigns/:id/progress` | Obtenez la progression de l'envoi de la campagne. |
+| `GET` | `/api/v1/campaigns/:id/recipients` | Répertoriez les destinataires de la campagne. |
+| `POST` | `/api/v1/campaigns/test-send` | Envoyez un e-mail de test sans envoyer de statistiques au tableau de bord. |
 
-Vous pouvez télécharger notre spécification OpenAPI complète ici :
-[openapi.json](https://app.nudgen.com/api/openapi.json)
+<Warning>
+Le lancement d'une campagne programme de véritables e-mails. Utilisez `/api/v1/campaigns/test-send` pour les aperçus de la boîte de réception.
+</Warning>
 
-## Campagnes Lifetime
+## Campagnes à vie
 
-Utilisez un PAT pour créer le brouillon et modifier le cycle de vie (`PATCH /api/v1/campaigns/:id/lifecycle`). Seul un Team trigger API key `ndg_team_*` peut appeler `POST /api/v1/campaigns/:id/triggers`. Utilisez `eventId` pour l’idempotence et consultez les exécutions avec `GET /api/v1/campaigns/:id/executions`. Voir le [guide Lifetime](/fr/campaigns/lifetime).
+Les campagnes à vie sont déclenchées par des événements : chaque déclencheur accepté crée au plus une exécution et envoie un coup de pouce au contact fourni. Consultez la section [Utiliser les campagnes à vie](/fr/campaigns/lifetime) pour connaître le flux de travail du tableau de bord et les conseils relatifs aux contrats variables.
+
+### Créer une campagne à vie
+
+Créer des campagnes à vie en tant que `draft`. N'envoyez pas `sendNow: true`, `status: "active"` ou `status: "scheduled"` ; activez plutôt la campagne avec son point de terminaison de cycle de vie.
+
+```bash
+curl -X POST "$NUDGEN_APP_URL/api/v1/campaigns" \
+  -H "Authorization: Bearer $NUDGEN_PAT" \
+  -H "Content-Type: application/json" \
+  --data @- <<'JSON'
+{
+  "name": "Order confirmation",
+  "type": "lifetime",
+  "status": "draft",
+  "goal": "Confirm an order and direct the customer to its details.",
+  "subject": "Your order {{data.order_id}} was received",
+  "html": "<p>Hello {{contact.firstName}},</p><p>Order {{data.order_id}} totals {{data.total}} VND.</p><p><a href=\"{{data.order_url}}\">View your order</a></p>",
+  "link": "https://example.com/orders",
+  "variableManifest": [
+    { "path": "data.order_id", "type": "string", "required": true, "description": "Order ID" },
+    { "path": "data.total", "type": "number", "required": true, "description": "Order total in VND" },
+    { "path": "data.order_url", "type": "url", "required": true, "description": "Order details URL" }
+  ],
+  "generatedVariableManifest": [
+    { "path": "data.order_id", "type": "string", "required": true, "description": "Order ID" },
+    { "path": "data.total", "type": "number", "required": true, "description": "Order total in VND" },
+    { "path": "data.order_url", "type": "url", "required": true, "description": "Order details URL" }
+  ]
+}
+JSON
+```
+
+`variableManifest` définit jusqu'à 100 variables `data.*`. Il doit inclure chaque jeton `data.*` utilisé dans le sujet ou le code HTML. Les valeurs par défaut doivent correspondre au type déclaré et une variable utilisée dans un code HTML `href` doit avoir le type `url`.
+
+Lorsque vous générez le contenu d'un e-mail, enregistrez le `generatedVariableManifest` correspondant. Nudgen bloque l'activation si elle diffère du manifeste actuel ou si les paramètres déclarés requis sont absents de l'e-mail.
+
+### Modifier le cycle de vie
+
+| Méthode | Point de terminaison | Authentification | Description |
+| --- | --- | --- | --- |
+| `PATCH` | `/api/v1/campaigns/:campaignId/lifecycle` | PAT | Remplacez une campagne à vie par `active`, `paused` ou `archived`. |
+
+```bash
+curl -X PATCH "$NUDGEN_APP_URL/api/v1/campaigns/$CAMPAIGN_ID/lifecycle" \
+  -H "Authorization: Bearer $NUDGEN_PAT" \
+  -H "Content-Type: application/json" \
+  --data '{"status":"active"}'
+```
+
+Les transitions valides sont `draft → active → paused → active` et `active|paused → archived`. La suspension ou l'archivage annule les exécutions qui sont toujours `pending` ou `queued` et libère leurs réservations de quota. Une exécution déjà en cours de traitement peut encore envoyer.
+
+### Déclencher un nudge
+
+| Méthode | Point de terminaison | Authentification | Description |
+| --- | --- | --- | --- |
+| `POST` | `/api/v1/campaigns/:campaignId/triggers` | Clé API de déclenchement d'équipe | Créez une exécution d’événement et mettez un coup de pouce en file d’attente. |
+
+```bash
+curl -X POST "$NUDGEN_APP_URL/api/v1/campaigns/$CAMPAIGN_ID/triggers" \
+  -H "Authorization: Bearer $NUDGEN_TEAM_API_KEY" \
+  -H "Content-Type: application/json" \
+  --data @- <<'JSON'
+{
+  "eventId": "order_123",
+  "eventName": "order.created",
+  "occurredAt": "2026-08-23T10:00:00Z",
+  "contact": {
+    "email": "an@example.com",
+    "externalId": "customer_456",
+    "name": "An Nguyen",
+    "phone": "+84901234567",
+    "metadata": { "company": "Nudgen" }
+  },
+  "data": {
+    "order_id": "order_123",
+    "total": 490000,
+    "order_url": "https://example.com/orders/order_123"
+  }
+}
+JSON
+```
+
+| Champ | Tapez | Obligatoire | Limites et comportement |
+| --- | --- | --- | --- |
+| `eventId` | chaîne | Oui | 1 à 128 caractères. Clé d'idempotence unique au sein de la campagne ; réutilisez-le pour les tentatives. |
+| `eventName` | chaîne | Non | 1 à 100 caractères, par exemple `order.created`. |
+| `occurredAt` | Dateheure ISO 8601 | Non | Heure de l’événement source. |
+| `contact.email` | courrier électronique | Oui | Minuscule. Nudgen crée ou met à jour le contact par email. |
+| `contact.externalId` | chaîne | Non | 1 à 200 caractères et ne peut pas appartenir à une autre adresse e-mail de contact dans l'espace de travail. |
+| `contact.name` | chaîne | Non | Jusqu'à 200 caractères. |
+| `contact.phone` | chaîne | Non | Jusqu'à 50 caractères. |
+| `contact.metadata` | objet | Non | Données de profil de contact supplémentaires. |
+| `data` | objet | Oui | Doit correspondre à `variableManifest` ; maximum 32 Ko. |
+
+Le corps entier de la requête est limité à 64 Ko, l'imbrication JSON à huit niveaux et les clés non sécurisées telles que `__proto__`, `constructor` et `prototype` sont rejetées.
+
+Un nouveau déclencheur renvoie `201` avec `{ "execution": { "id": "...", "status": "queued" }, "duplicate": false }`. La réutilisation d'un `eventId` renvoie l'exécution existante avec `200` et `duplicate: true`.
+
+### Répertorier les exécutions
+
+| Méthode | Point de terminaison | Authentification | Description |
+| --- | --- | --- | --- |
+| `GET` | `/api/v1/campaigns/:campaignId/executions` | PAT | Répertoriez les exécutions de campagnes à vie. |
+
+```bash
+curl "$NUDGEN_APP_URL/api/v1/campaigns/$CAMPAIGN_ID/executions?limit=25&status=sent&search=an@example.com" \
+  -H "Authorization: Bearer $NUDGEN_PAT"
+```
+
+Utilisez `limit` de 1 à 100 (`25` par défaut), `cursor` pour la page suivante, `status` pour filtrer par état d'exécution et `search` pour faire correspondre un e-mail ou un identifiant externe. La réponse inclut `executions` et `nextCursor`.
+
+## Erreurs, tentatives et limites de débit
+
+Les déclencheurs à vie autorisent 600 requêtes par minute pour chaque clé API de déclencheur d'équipe. Les réponses incluent `x-ratelimit-limit`, `x-ratelimit-remaining` et `x-ratelimit-reset`. Une réponse `429` inclut également `Retry-After`.
+
+| Statut | Signification | Que faire |
+| --- | --- | --- |
+| `200` | Dupliquer `eventId` | Utilisez l'exécution renvoyée ; ne pas envoyer à nouveau. |
+| `201` | Nouvelle exécution en file d'attente | Attendez que le travailleur le traite. |
+| `400` | JSON, corps ou champ de base non valide | Corrigez la charge utile ; ne réessayez pas inchangé. |
+| `401` | Clé manquante, invalide, révoquée, expirée ou dont la portée est incorrecte | Faites pivoter ou corrigez la configuration des touches. |
+| `402` / `403` | Le quota ou l'abonnement empêche les écritures | Résolvez le problème de quota ou d’abonnement. Les erreurs de quota incluent `code`, `required`, `available` et `checkoutUrl`. |
+| `404` | La campagne est manquante ou en dehors de l'espace de travail de la clé | Vérifiez l'ID et la clé de la campagne. |
+| `409` | La campagne n'est pas active/pas à vie, ou conflits d'identité de contact | Activez la campagne ou corrigez l'identité du contact. |
+| `413` | La requête dépasse 64 Ko | Réduisez la taille de la charge utile. |
+| `415` | `Content-Type: application/json` manquant | Ajoutez l'en-tête requis. |
+| `422` | `data` ne correspond pas au manifeste de variable | Corrigez les données ; inspectez `details` pour les chemins et les codes d’erreur. |
+| `429` | Limite de débit dépassée | Attendez `Retry-After`, puis réessayez avec le même `eventId`. |
+| `503` | L'exécution n'a pas pu être mise en file d'attente | Réessayez avec une interruption et le même `eventId`. |
+
+Pour `429`, `503` et les erreurs réseau, réessayez avec un intervalle exponentiel et le même `eventId`. La tâche de file d'attente est déterministe pour une exécution. Les nouvelles tentatives ne créent donc pas d'e-mails en double.
+
+### Paramètres de marque
+
+| Méthode | Point de terminaison | Description |
+| --- | --- | --- |
+| `GET` | `/api/v1/settings/brand` | Lisez le nom de la marque, le site Web, l'e-mail de l'expéditeur, le logo et les paramètres de conception. |
+| `PATCH` | `/api/v1/settings/brand` | Mettez à jour les paramètres de la marque. |
+
+### Génération de brouillons d'IA
+
+| Méthode | Point de terminaison | Description |
+| --- | --- | --- |
+| `POST` | `/api/v1/ai/generate` | Générez un objet d'e-mail et un brouillon HTML à partir du contexte de la campagne. |
+
+## Serveur MCP
+
+Utilisez [Nudgen MCP](/en/agents/mcp) lorsque votre agent prend en charge les outils Model Context Protocol. MCP utilise le même PAT que les API de gestion de l'espace de travail, mais expose Nudgen en tant qu'outils appelables par agent au lieu de points de terminaison HTTP conventionnels.
+
+<Card title="MCP server setup" icon="bot" href="/en/agents/mcp">
+ Installez Nudgen MCP dans Claude Code, Cursor, Windsurf, Codex CLI ou un client MCP générique.
+</Card>

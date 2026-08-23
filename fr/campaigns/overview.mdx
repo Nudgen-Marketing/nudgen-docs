@@ -1,59 +1,89 @@
 ---
-title: "Vue d’ensemble des campagnes"
-description: "Campagnes ponctuelles, séquences drip et états de campagne"
+title: "Présentation des campagnes"
+description: "Campagnes ponctuelles, goutte à goutte et à vie"
 ---
 
 ## Ce que cette page vous aide à faire
-Comprendre les deux grands types de campagnes et la signification de chaque statut. Cela vous aide à choisir le bon format et à mieux lire votre liste de campagnes.
+
+Comprendre les trois types de campagnes et leurs cycles de vie. Cela vous aide à choisir le bon type de campagne et à interpréter votre liste de campagnes.
 
 ## Avant de commencer
-- Des contacts déjà importés dans Nudgen
-- Une configuration de marque, avec ton prédéfini ou prompt personnalisé
+
+- Contacts téléchargés dans Nudgen
+- Une configuration de marque (ton prédéfini ou invite personnalisée)
 
 ## Types de campagnes
-### Campagne ponctuelle
-Un seul e-mail envoyé une seule fois à l’audience sélectionnée. Utilisez ce format si vous voulez :
-- annoncer une fonctionnalité ou un événement
-- lancer une campagne de réengagement unique
-- tester un message avant de construire une séquence plus longue
 
-### Séquence drip
-Une campagne en plusieurs étapes avec un délai entre les e-mails, par exemple Jour 1, Jour 3 et Jour 7. Utilisez-la si vous voulez :
-- relancer des utilisateurs inactifs sur plusieurs jours
-- suivre les contacts qui n’ont pas ouvert ou cliqué
-- construire un flux de rétention plus progressif
+### Campagnes ponctuelles
 
-Chaque étape a son propre objectif, son objet et son contenu généré par l’IA. Les contacts passent à l’étape suivante uniquement après le délai défini. Vous pouvez aussi définir des **règles d’arrêt automatique**, par exemple arrêter lorsqu’un destinataire clique ou ouvre l’e-mail.
+Un seul e-mail envoyé une fois à votre audience sélectionnée. Utilisez-le lorsque vous souhaitez :
 
-**Types d’audience :** lors de la création d’une campagne, vous choisissez qui la reçoit : **Tous les contacts**, **Par tags** ou **Manuel**. L’assistant affiche une estimation de portée avant le lancement.
+- Annoncer une fonctionnalité ou un événement
+- Envoyer une explosion de réengagement unique
+- Tester un message avant de créer une séquence plus longue
 
-## Statuts de la campagne
+Vous choisissez l'audience, l'IA génère le contenu, vous prévisualisez et envoyez (ou planifiez).
+
+### Séquences goutte à goutte
+
+Une campagne en plusieurs étapes avec des délais entre les e-mails (par exemple, jour 1, jour 3, jour 7). Utilisez-le lorsque vous souhaitez :
+
+- Encourager les utilisateurs inactifs sur plusieurs jours
+- Effectuer un suivi auprès des utilisateurs qui n'ouvrent pas ou ne cliquent pas
+- Créer un flux de rétention de style Duolingo
+
+Chaque étape a son propre objectif, son sujet et son corps généré par l'IA. Les contacts passent à l'étape suivante seulement après le délai. Vous pouvez définir des **règles d'arrêt automatique** (par exemple, s'arrêter lorsqu'un destinataire clique ou lorsqu'il ouvre l'e-mail) afin que les utilisateurs qui s'engagent ne reçoivent plus les étapes ultérieures.
+
+### Campagnes à vie
+
+Une campagne à vie reste prête pour les événements de votre système. Chaque déclencheur authentifié crée au plus une exécution et envoie un coup de pouce au contact dans ce déclencheur.
+
+Utilisez une campagne à vie pour les confirmations de commande, les rappels de paiement, l'intégration basée sur des événements ou d'autres e-mails transactionnels et de rétention lancés par votre backend. Son audience est toujours **Trigger** : il n'envoie pas immédiatement à un segment de contact enregistré.
+
+Consultez la section [Utiliser les campagnes à vie](/fr/campaigns/lifetime) pour connaître le flux de travail du tableau de bord et les conseils d'intégration.
+
+**Types d'audience :** lors de la création d'une campagne, vous choisissez qui la reçoit : **Tous les contacts**, **Par balises** (uniquement les contacts avec les balises sélectionnées) ou **Manuel** (sélectionnez manuellement les destinataires). L'assistant affiche une estimation de la portée avant le lancement.
+
+## États de la campagne
+
 | Statut | Signification |
-| --- | --- |
-| **Brouillon** | La campagne n’a pas encore été envoyée. Vous pouvez modifier l’objectif, l’audience, le contenu et la programmation. |
-| **Programmée** | Une date et une heure d’envoi sont définies. Les e-mails partiront automatiquement. |
-| **Envoi en cours** | Les e-mails sont en train d’être envoyés. La progression apparaît dans le tableau de bord. |
-| **Envoyée** | Tous les e-mails ont été envoyés. Le contenu est verrouillé, mais vous pouvez consulter les analyses. |
-| **Arrêtée** | La campagne a été arrêtée manuellement. Certains contacts ont peut-être déjà reçu un e-mail, mais les étapes futures sont annulées. |
+| ---------- | ----------------------------------------------------------------------- |
+| **Brouillon** | Non envoyé. Vous pouvez modifier les objectifs, l'audience, le contenu et le calendrier.         |
+| **Planifié** | L’heure d’envoi est définie. Les e-mails seront envoyés à l'heure prévue.        |
+| **Actif** / **Envoi** | Des emails sont envoyés. La progression apparaît dans le tableau de bord.     |
+| **Envoyé** | Tous les e-mails ont été envoyés. Le contenu est verrouillé ; vous pouvez afficher des analyses.  |
+| **Arrêté**| La campagne a été arrêtée manuellement. Certains contacts ont peut-être déjà reçu des e-mails ; les futures étapes d'égouttement sont annulées. |
 
 <Note>
-Une fois une campagne envoyée, vous ne pouvez plus modifier son contenu ni la renvoyer telle quelle. Créez une nouvelle campagne pour envoyer un autre message.
+Une fois qu'une campagne est envoyée, vous ne pouvez pas modifier son contenu ni la renvoyer. Créez une campagne pour envoyer un message différent.
 </Note>
 
+### Cycle de vie à vie
+
+Les campagnes à vie utilisent un cycle de vie distinct : **Brouillon** → **Actif** → **En pause** → **Actif** ou **Actif/En pause** → **Archivé**. Vous ne pouvez pas réactiver une campagne archivée.
+
+Lorsque vous suspendez ou archivez une campagne à vie, Nudgen annule les exécutions toujours en attente ou en file d'attente. Une exécution déjà en cours de traitement peut encore être envoyée. Les modifications apportées à une campagne active s'appliquent uniquement aux déclencheurs futurs, car chaque exécution stocke un instantané du contenu et de la configuration d'envoi.
+
 ## Que se passe-t-il ensuite
-- [Créer une campagne](/fr/campaigns/create) : suivez l’assistant et envoyez votre premier e-mail.
-- [Gérer les campagnes](/fr/campaigns/manage) : modifiez les brouillons, envoyez, programmez ou arrêtez.
-- [Analyse de campagne](/fr/campaigns/analytics) : ouvertures, clics, délivrabilité et activité des destinataires.
+
+- [Créer une campagne](/fr/campaigns/create) : parcourez l'assistant et envoyez votre premier e-mail.
+- [Gérer les campagnes](/fr/campaigns/manage) : modifiez les brouillons, envoyez, planifiez ou arrêtez.
+- [Utilisez des campagnes à vie](/fr/campaigns/lifetime) : configurez une campagne déclenchée par un événement et son intégration API.
+- [Afficher Analytics](/fr/campaigns/analytics) : ouvertures, clics, taux de livraison et activité des destinataires.
 
 ## Documents associés
+
 <CardGroup cols={2}>
-  <Card title="Créer des campagnes" icon="paper-plane" href="/fr/campaigns/create">
-    Assistant de campagne étape par étape.
-  </Card>
-  <Card title="Gérer les campagnes" icon="pen-to-square" href="/fr/campaigns/manage">
-    Modifier, envoyer, programmer et arrêter.
-  </Card>
-  <Card title="Analyse de campagne" icon="chart-line" href="/fr/campaigns/analytics">
-    Métriques et activité des destinataires.
-  </Card>
+ <Card title="Create campaigns" icon="paper-plane" href="/fr/campaigns/create">
+ Assistant de campagne étape par étape.
+ </Card>
+ <Card title="Manage campaigns" icon="pen-to-square" href="/fr/campaigns/manage">
+ Modifier, envoyer, planifier et arrêter.
+ </Card>
+ <Card title="Use Lifetime campaigns" icon="bolt" href="/fr/campaigns/lifetime">
+ Envoyez un coup de pouce pour chaque événement depuis votre système.
+ </Card>
+ <Card title="Campaign analytics" icon="chart-line" href="/fr/campaigns/analytics">
+ Métriques et activité des destinataires.
+ </Card>
 </CardGroup>

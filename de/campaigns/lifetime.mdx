@@ -1,22 +1,133 @@
 ---
-title: "Lifetime-Kampagnen verwenden"
-description: "Senden Sie pro authentifiziertem Ereignis eine E-Mail an einen Kontakt"
+title: „Lebenslange Kampagnen verwenden“
+description: „Mit jedem authentifizierten Auslöser einen ereignisgesteuerten Anstoß an einen Kontakt senden“
 ---
 
-## Lifetime-Kampagnen
+## Was Ihnen diese Seite dabei hilft
 
-Eine Lifetime-Kampagne wartet auf Ereignisse aus Ihrem System. Jeder gültige Trigger erstellt höchstens eine Ausführung und sendet einen Nudge an den Kontakt im Payload. Nutzen Sie sie für Bestellbestätigungen, Zahlungserinnerungen und ereignisbasiertes Onboarding. Die Zielgruppe ist immer **Trigger**.
+Erstellen Sie eine lebenslange Kampagne, die für Ereignisse aus Ihrem System bereit bleibt. Jeder gültige Auslöser erstellt höchstens eine Ausführung und sendet einen Anstoß an den Kontakt in seiner Nutzlast.
 
-## Einrichtung und Sicherheit
+## Warum das wichtig ist
 
-Erstellen Sie unter **Campaigns** → **New campaign** → **Lifetime** die Kampagne. Runtime-Parameter wie `order_id` werden zu `{{data.order_id}}`. Erstellen, prüfen und testen Sie die E-Mail, aktivieren Sie die Kampagne und erzeugen Sie unter **Settings** → **API Keys** einen Team-Trigger-Key. Bewahren Sie `ndg_team_*` ausschließlich serverseitig auf.
+Sie können zeitnah relevante E-Mails senden, ohne wiederholt Kampagnen erstellen und starten zu müssen. Ihr Backend steuert, wann ein Ereignis eintritt, während Nudgen den E-Mail-Inhalt, die Zustellung, die Nachverfolgung und die Kontaktpräferenzen an einem Ort speichert.
 
-`variableManifest` ist der Vertrag mit `data`: bis zu 100 `data.*`-Variablen mit `string`, `number`, `boolean`, `date` oder `url`. HTML-Werte werden escaped; Variablen in `href` müssen `url` sein.
+## Wann Sie eine Lifetime-Kampagne verwenden sollten
 
-## Lifecycle und Wiederholungen
+Verwenden Sie eine Lifetime-Kampagne für ereignisgesteuerte E-Mails, wie zum Beispiel:
 
-Gültig sind `draft → active → paused → active` und `active|paused → archived`. Archivieren ist endgültig. Pause oder Archivierung bricht `pending`/`queued` Ausführungen ab; bereits laufende können noch senden. Jede Ausführung speichert einen Inhalts-Snapshot.
+- Bestellbestätigungen
+- Zahlungserinnerungen
+- Ereignisbasiertes Onboarding
+- Konto- oder Abonnementaktualisierungen
 
-Triggern Sie nur vom Backend. Verwenden Sie bei Retry dieselbe `eventId`: `201` ist neu, `200` ein Duplikat. Wiederholen Sie `429`, `503` und Netzwerkfehler mit Exponential Backoff und protokollieren Sie keine Secrets.
+Im Gegensatz zu One-Shot- und Drip-Kampagnen a Die lebenslange Kampagne wird nicht sofort an eine gespeicherte Zielgruppe gesendet. Seine Zielgruppe ist immer **Trigger**.
 
-Siehe [Developer API](/de/agents/api).
+## Erstellen und aktivieren Sie eine Kampagne
+
+<Steps>
+ <Step title="Create a Lifetime campaign">
+ Gehen Sie zu **Kampagnen**, klicken Sie auf **Neue Kampagne** und wählen Sie dann **Lebensdauer**. Fügen Sie den Kampagnennamen, das Ziel, die Markenkonfiguration und den optionalen CTA-Link hinzu.
+ </Step>
+ <Step title="Define runtime parameters">
+ Fügen Sie jeden Wert hinzu, den Ihr System zum Zeitpunkt des Versands bereitstellt. Ein Parameter erstellt eine `data.*`-Variable: Beispielsweise wird `order_id` in der E-Mail zu `{{data.order_id}}`.
+ </Step>
+ <Step title="Create the email">
+ Generieren oder schreiben Sie den Betreff und den HTML-Code und fügen Sie dann Ihre Laufzeitvariablen dort hinzu, wo sie hingehören. Sehen Sie sich die E-Mail in der Vorschau an und senden Sie einen Test, bevor Sie sie aktivieren.
+ </Step>
+ <Step title="Activate the campaign">
+Speichern Sie es als Entwurf und klicken Sie dann auf **Aktivieren**. Nudgen prüft, ob erforderliche Parameter in der E-Mail dargestellt sind und dass sich der Parametervertrag seit der Generierung nicht geändert hat.
+ </Step>
+ <Step title="Create a trigger key">
+ Gehen Sie zu **Einstellungen** → **API-Schlüssel** und erstellen Sie einen **Team-Trigger-API-Schlüssel**. Speichern Sie das `ndg_team_*`-Geheimnis in Ihrem Backend oder Geheimmanager. Platzieren Sie es niemals im Browser- oder Mobile-App-Code.
+ </Step>
+</Steps>
+
+## Laufzeitparameter und Vorlagenvariablen
+
+Ihr `variableManifest` ist der Vertrag zwischen der E-Mail-Vorlage und dem `data`-Objekt jedes Triggers. Eine Kampagne kann bis zu 100 Variablen definieren.
+
+| Feld | Geben Sie | ein Erforderlich | Beschreibung |
+| --- | --- | --- | --- |
+| `path` | `data.<name>` | Ja | Variabler Pfad. Verschachtelte Pfade wie `data.order.total` werden unterstützt. |
+| `type` | `string`, `number`, `boolean`, `date` oder `url` | Ja | Geben Sie den Trigger ein, den er bereitstellen muss. Ein `date` muss eine gültige Datumszeichenfolge sein und ein `url` muss HTTP(S) sein. |
+| `required` | boolescher Wert | Ja | Fehlende Werte geben `422` zurück, sofern kein Standardwert festgelegt ist. |
+| `defaultValue` | Zeichenfolge, Zahl oder boolescher Wert | Nein | Fallback-Wert, der mit dem Variablentyp übereinstimmen muss. |
+| `description` | Zeichenfolge | Nein | Erklären Sie den Wert, damit Sie und Nudgen AI ihn richtig nutzen können. |
+
+Verwenden Sie beispielsweise `{{data.order_id}}`, `{{data.total}}` und `{{data.order_url}}` in einer Vorlage. Sie können auch `contact.*`, `event.*`, `brand.*` und Legacy-Variablen wie `{{firstName}}` und `{{brandName}}` verwenden.
+
+Nudgen maskiert in HTML eingefügte Variablenwerte. Vorlagen unterstützen kein JavaScript, keine Ausdrücke oder Schleifen. Jede in einem `href` verwendete Variable muss eine `data.*`-Variable sein, die mit dem Typ `url` deklariert wurde.
+
+## Verwalten Sie den Lebenszyklus
+
+| Status | Was es bedeutet |
+| --- | --- |
+| **Entwurf** | Konfigurieren Sie die Kampagne und testen Sie ihre E-Mail. |
+| **Aktiv** | Nudgen akzeptiert authentifizierte Auslöser. |
+| **Pausiert** | Nudgen akzeptiert keine neuen Auslöser. Sie können es fortsetzen. |
+| **Archiviert** | Die Kampagne ist dauerhaft geschlossen und kann nicht erneut aktiviert werden. |
+
+Die gültigen Übergänge sind `draft → active → paused → active` und `active|paused → archived`.
+
+<Note>
+Durch das Anhalten oder Archivieren werden Ausführungen abgebrochen, die noch ausstehen oder in der Warteschlange stehen. Eine Ausführung, die bereits verarbeitet wird, sendet möglicherweise noch.
+</Note>
+
+Bei jeder Ausführung werden Snapshots des Kampagneninhalts und der Sendeeinstellungen erstellt, wenn Nudgen den Auslöser empfängt. Das Bearbeiten einer aktiven Kampagne wirkt sich nur auf spätere Trigger aus, nicht auf bereits vorhandene Ausführungen.
+
+## Trigger von Ihrem Backend
+
+Rufen Sie den Trigger-Endpunkt von einem vertrauenswürdigen Server aus auf, nachdem Sie das Quellereignis validiert haben. Verwenden Sie den Team-Trigger-API-Schlüssel und kein persönliches Zugriffstoken (PAT).
+
+```bash
+curl -X POST "$NUDGEN_APP_URL/api/v1/campaigns/$CAMPAIGN_ID/triggers" \
+  -H "Authorization: Bearer $NUDGEN_TEAM_API_KEY" \
+  -H "Content-Type: application/json" \
+  --data @- <<'JSON'
+{
+  "eventId": "order_123",
+  "eventName": "order.created",
+  "occurredAt": "2026-08-23T10:00:00Z",
+  "contact": {
+    "email": "an@example.com",
+    "externalId": "customer_456",
+    "name": "An Nguyen",
+    "metadata": { "company": "Nudgen" }
+  },
+  "data": {
+    "order_id": "order_123",
+    "total": 490000,
+    "order_url": "https://example.com/orders/order_123"
+  }
+}
+JSON
+```
+
+Behalten Sie den gleichen `eventId` bei, wenn Sie ein Ereignis erneut versuchen. Nudgen gibt die vorhandene Ausführung mit `200` und `duplicate: true` zurück, anstatt einen weiteren Nudge zu senden. Eine neue Ausführung gibt `201` zurück.
+
+## Sicher integrieren
+
+- Von einem Webhook-Consumer oder Backend auslösen und den eingehenden Webhook überprüfen, bevor Nudgen aufgerufen wird.
+- Netzwerkfehler, `429` und `503` mit exponentiellem Backoff und demselben `eventId` erneut versuchen.
+- Protokollieren Sie keine `Authorization`-Header oder Payloads, die vertrauliche Kontaktdaten enthalten.
+- Wechseln Sie Triggerschlüssel regelmäßig und widerrufen Sie einen Schlüssel sofort, wenn Sie den Verdacht haben, dass er offengelegt wird.
+- Erstellen Sie eine Kampagne pro Ereignistyp und Variablenvertrag, damit Vorlagen und Ausführungsprüfungen übersichtlich bleiben.
+
+## Überwachen Sie Ausführungen
+
+Öffnen Sie die Kampagne im Dashboard, um aktuelle Ausführungen und deren Status anzuzeigen. Eine Ausführung kann `pending`, `queued`, `processing`, `sent`, `skipped`, `cancelled`, `failed` oder sein `delivery_unknown`.
+
+`skipped` bedeutet, dass der Kontakt abgemeldet oder zurückgesendet wurde, sodass Nudgen das Ereignis aufzeichnet, aber kein Kontingent sendet oder verbraucht. `delivery_unknown` bedeutet, dass der Anbieter die E-Mail möglicherweise akzeptiert hat, das endgültige Zustellungsergebnis jedoch ungewiss war; Nudgen versucht es nicht automatisch erneut, um einen doppelten Versand zu vermeiden.
+
+Informationen zu programmatischen Setup-, Trigger- und Ausführungsabfragen finden Sie in der [Entwickler-API](/de/agents/api).
+
+## Verwandte Dokumente
+
+<CardGroup cols={2}>
+ <Card title="Campaigns overview" icon="list" href="/de/campaigns/overview">
+ Vergleichen Sie One-Shot-, Drip- und Lifetime-Kampagnen.
+ </Card>
+ <Card title="Developer API" icon="code" href="/de/agents/api">
+ Verwalten Sie Lifetime-Kampagnen und Trigger über die API.
+ </Card>
+</CardGroup>

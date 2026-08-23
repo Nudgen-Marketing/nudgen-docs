@@ -1,71 +1,89 @@
 ---
-title: "Kampagnen-Übersicht"
-description: "Einmalige vs. Drip-Kampagnen und Kampagnen-Status"
+title: „Kampagnenübersicht“
+description: „One-Shot-, Drip- und Lifetime-Kampagnen“
 ---
 
-## Was diese Seite Ihnen bietet
+## Was diese Seite Ihnen hilft
 
-Verstehen Sie die zwei Kampagnentypen und was jeder Status bedeutet. Dies hilft Ihnen, den richtigen Kampagnentyp zu wählen und Ihre Kampagnenliste zu interpretieren.
+Verstehen Sie die drei Kampagnentypen und ihre Lebenszyklen. Dies hilft Ihnen, den richtigen Kampagnentyp auszuwählen und Ihre Kampagnenliste zu interpretieren.
 
 ## Bevor Sie beginnen
 
-- Kontakte müssen in Nudgen hochgeladen sein
-- Eine Markenkonfiguration (vordefinierte Tonalität oder benutzerdefinierter Prompt)
+- In Nudgen hochgeladene Kontakte
+- Eine Markenkonfiguration (voreingestellter Ton oder benutzerdefinierte Aufforderung)
 
 ## Kampagnentypen
 
-### Einmalige Kampagnen (One-shot)
+### One-Shot-Kampagnen
 
-Eine einzelne E-Mail, die einmal an Ihre ausgewählte Zielgruppe gesendet wird. Nutzen Sie diese, um:
+Eine einzelne E-Mail, die einmal an Ihre ausgewählte Zielgruppe gesendet wird. Verwenden Sie dies, wenn Sie:
 
-- Eine Funktion oder ein Event anzukündigen
-- Eine einmalige Reaktivierungs-Kampagne zu senden
-- Eine Nachricht zu testen, bevor Sie eine längere Sequenz erstellen
+- eine Funktion oder Veranstaltung ankündigen möchten
+- einen einmaligen Re-Engagement-Blast senden
+- eine Nachricht testen, bevor Sie eine längere Sequenz erstellen
 
-Sie wählen die Zielgruppe, die KI generiert den Inhalt, Sie prüfen die Vorschau und senden (oder planen) die Nachricht.
+Sie wählen die Zielgruppe aus, die KI generiert den Inhalt, Sie zeigen eine Vorschau an und senden ihn (oder planen).
 
 ### Drip-Sequenzen
 
-Eine mehrstufige Kampagne mit zeitlichen Verzögerungen zwischen den E-Mails (z. B. Tag 1, Tag 3, Tag 7). Nutzen Sie diese, um:
+Eine mehrstufige Kampagne mit Verzögerungen zwischen E-Mails (z. B. Tag 1, Tag 3, Tag 7). Verwenden Sie dies, wenn Sie Folgendes erreichen möchten:
 
-- Inaktive Benutzer über mehrere Tage hinweg anzustupsen (Nudge)
-- Follow-ups an Personen zu senden, die nicht geöffnet oder geklickt haben
-- Einen Retention-Flow im "Duolingo-Stil" aufzubauen
+- Inaktive Benutzer über mehrere Tage hinweg fördern
+- Nicht-Öffner oder Nicht-Klicker weiterverfolgen
+- Einen Aufbewahrungsfluss im Duolingo-Stil erstellen
 
-Jeder Schritt hat sein eigenes Ziel, seinen eigenen Betreff und einen KI-generierten Text. Kontakte bewegen sich erst nach der Verzögerung zum nächsten Schritt. Sie können **Auto-Stop-Regeln** festlegen (z. B. Stopp bei Klick oder bei Öffnen der E-Mail), damit Benutzer, die bereits interagieren, keine weiteren Schritte erhalten.
+Jeder Schritt hat sein eigenes Ziel, Thema und einen KI-generierten Text. Kontakte wechseln erst nach der Verzögerung zum nächsten Schritt. Sie können **Auto-Stop-Regeln** festlegen (z. B. stoppen, wenn ein Empfänger klickt oder die E-Mail öffnet), sodass Benutzer, die sich engagieren, keine weiteren Schritte mehr erhalten.
 
-**Zielgruppen-Typen:** Beim Erstellen einer Kampagne wählen Sie, wer sie erhalten soll: **Alle Kontakte**, **Nach Tags** (nur Kontakte mit ausgewählten Tags) oder **Manuell** (einzelne Empfänger auswählen). Der Assistent zeigt eine Reichweitenschätzung an, bevor Sie starten.
+### Lifetime-Kampagnen
 
-## Kampagnen-Status
+Eine Lifetime-Kampagne bleibt für Ereignisse aus Ihrem System bereit. Jeder authentifizierte Auslöser erstellt höchstens eine Ausführung und sendet einen Anstoß an den Kontakt in diesem Auslöser.
 
-| Status     | Bedeutung                                                              |
-| ---------- | ---------------------------------------------------------------------- |
-| **Entwurf (Draft)** | Nicht gesendet. Sie können Ziele, Zielgruppe, Inhalt und Zeitplan bearbeiten. |
-| **Geplant (Scheduled)** | Sendezeitpunkt ist festgelegt. E-Mails werden zur geplanten Zeit versendet. |
-| **Aktiv / Senden (Active)** | E-Mails werden aktuell versendet. Der Fortschritt erscheint im Dashboard. |
-| **Gesendet (Sent)** | Alle E-Mails wurden versendet. Der Inhalt ist gesperrt; Sie können Analysen einsehen. |
-| **Gestoppt (Stopped)** | Die Kampagne wurde manuell gestoppt. Einige Kontakte haben evtl. bereits E-Mails erhalten; zukünftige Drip-Schritte sind abgebrochen. |
+Verwenden Sie eine Lifetime-Kampagne für Bestellbestätigungen, Zahlungserinnerungen, ereignisbasiertes Onboarding oder andere Transaktions- und Aufbewahrungs-E-Mails, die Ihr Backend initiiert. Seine Zielgruppe ist immer **Trigger** – es wird nicht sofort an ein gespeichertes Kontaktsegment gesendet.
+
+Den Dashboard-Workflow und die Integrationsanleitung finden Sie unter [Lifetime-Kampagnen verwenden] (/de/campaigns/lifetime).
+
+**Zielgruppentypen:** Beim Erstellen einer Kampagne wählen Sie aus, wer sie erhält: **Alle Kontakte**, **Nach Tags** (nur Kontakte mit ausgewählten Tags) oder **Manuell** (Empfänger manuell auswählen). Der Assistent zeigt vor dem Start eine Reichweitenschätzung an.
+
+## Kampagnenstatus
+
+| Status | Bedeutung |
+| ---------- | ----------------------------------------------------------------------- |
+| **Entwurf** | Nicht gesendet. Sie können Ziele, Zielgruppe, Inhalte und Zeitplan bearbeiten.         |
+| **Geplant** | Der Sendezeitpunkt ist eingestellt. E-Mails werden zur geplanten Zeit verschickt.        |
+| **Aktiv** / **Senden** | E-Mails werden versendet. Der Fortschritt wird im Dashboard angezeigt.     |
+| **Gesendet** | Alle E-Mails wurden gesendet. Der Inhalt ist gesperrt; Sie können Analysen anzeigen.  |
+| **Gestoppt**| Die Kampagne wurde manuell gestoppt. Einige Kontakte haben möglicherweise bereits E-Mails erhalten. Zukünftige Tropfschritte werden abgebrochen. |
 
 <Note>
-Sobald eine Kampagne gesendet wurde, können Sie deren Inhalt nicht mehr bearbeiten oder sie erneut senden. Erstellen Sie eine neue Kampagne, um eine andere Nachricht zu senden.
+Sobald eine Kampagne gesendet wurde, können Sie ihren Inhalt nicht mehr bearbeiten oder erneut senden. Erstellen Sie eine neue Kampagne, um eine andere Nachricht zu senden.
 </Note>
 
-## Nächste Schritte
+### Lebenslanger Lebenszyklus
 
-- [Kampagne erstellen](/de/campaigns/create) — Gehen Sie durch den Assistenten und senden Sie Ihre erste E-Mail.
-- [Kampagnen verwalten](/de/campaigns/manage) — Entwürfe bearbeiten, senden, planen oder stoppen.
-- [Analysen ansehen](/de/campaigns/analytics) — Öffnungen, Klicks, Zustellraten und Empfängeraktivität.
+Lebenslange Kampagnen verwenden einen separaten Lebenszyklus: **Entwurf** → **Aktiv** → **Pausiert** → **Aktiv** oder **Aktiv/Pausiert** → **Archiviert**. Sie können eine archivierte Kampagne nicht reaktivieren.
+
+Wenn Sie eine Lifetime-Kampagne pausieren oder archivieren, bricht Nudgen Ausführungen ab, die noch ausstehen oder in der Warteschlange stehen. Eine bereits verarbeitete Ausführung sendet möglicherweise noch. Änderungen an einer aktiven Kampagne gelten nur für zukünftige Auslöser, da bei jeder Ausführung ein Snapshot des Inhalts und der Sendekonfiguration gespeichert wird.
+
+## Was passiert als nächstes
+
+- [Eine Kampagne erstellen](/de/campaigns/create) – Gehen Sie durch den Assistenten und senden Sie Ihre erste E-Mail.
+- [Kampagnen verwalten](/de/campaigns/manage) – Entwürfe bearbeiten, senden, planen oder stoppen.
+- [Lebenslange Kampagnen verwenden](/de/campaigns/lifetime) – Konfigurieren Sie eine ereignisgesteuerte Kampagne und ihre API-Integration.
+- [Anzeigen Analytics](/de/campaigns/analytics) – Öffnungen, Klicks, Zustellraten und Empfängeraktivität.
 
 ## Verwandte Dokumente
 
 <CardGroup cols={2}>
-  <Card title="Kampagnen erstellen" icon="paper-plane" href="/de/campaigns/create">
-    Schritt-für-Schritt-Assistent für Kampagnen.
-  </Card>
-  <Card title="Kampagnen verwalten" icon="pen-to-square" href="/de/campaigns/manage">
-    Bearbeiten, Senden, Planen und Stoppen.
-  </Card>
-  <Card title="Kampagnen-Analyse" icon="chart-line" href="/de/campaigns/analytics">
-    Metriken und Empfängeraktivität.
-  </Card>
+ <Card title="Create campaigns" icon="paper-plane" href="/de/campaigns/create">
+ Schritt-für-Schritt-Kampagnenassistent.
+ </Card>
+ <Card title="Manage campaigns" icon="pen-to-square" href="/de/campaigns/manage">
+ Bearbeiten, senden, planen und stoppen.
+ </Card>
+ <Card title="Use Lifetime campaigns" icon="bolt" href="/de/campaigns/lifetime">
+ Senden Sie einen Anstoß für jedes Ereignis aus Ihrem System.
+ </Card>
+ <Card title="Campaign analytics" icon="chart-line" href="/de/campaigns/analytics">
+ Metriken und Empfängeraktivität.
+ </Card>
 </CardGroup>

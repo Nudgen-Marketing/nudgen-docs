@@ -1,71 +1,254 @@
 ---
-title: "開発者向けAPI"
-description: "個人アクセスアクセストークン認証を備えたREST API。連絡先、キャンペーン、テンプレート、設定をプログラムで管理できます。"
+title: "開発者 API"
+description: "イベントトリガーのライフタイム キャンペーンを含む、Nudgen ワークスペース用の REST API"
 ---
 
 ## 概要
 
-Nudgen開発者向けAPIは、マーケティングインフラを管理するための、クリーンでリソース指向のRESTインターフェースを提供します。すべてのリクエストは標準のHTTPメソッドを使用し、予測可能なJSONレスポンスを返します。
+Nudgen 開発者 API は、ワークスペース用の予測可能な REST インターフェイスをスクリプト、内部ツール、AI エージェントに提供します。パーソナル アクセス トークン (PAT) を使用して、ワークスペース リソースを管理します。チーム トリガー API キーは、バックエンドからライフタイム キャンペーンをトリガーする場合にのみ使用してください。
 
-<CardGroup cols={3}>
-  <Card title="PAT認証" icon="shield-check">
-    標準のBearerヘッダーを介して、個人アクセスアクセストークン（PAT）で認証します。
-  </Card>
-  <Card title="クリーンなREST" icon="globe">
-    標準のHTTPメソッドを使用した、予測可能でリソース指向のURL。
-  </Card>
-  <Card title="レート制限" icon="gauge">
-    ワークフローを保護するため、チームおよびエンドポイントごとに組み込みのレート制限が適用されます。
-  </Card>
-</CardGroup>
+## これが重要な理由
+
+ダッシュボード セッションを共有せずに、マーケティングおよびイベント主導型の保持ワークフローを自動化できます。 PAT によりワークスペース管理は取り消し可能に保たれますが、狭いチーム トリガー キーを使用すると、実稼働サービスはワークスペースに広範囲にアクセスしなくてもイベント トリガーのナッジを送信できます。
+
+## ベース URL
+
+環境のアプリ URL を 1 回設定すると、それをすべての例で使用できます。本番環境では通常、`https://app.nudgen.net` を使用します。ローカル開発では通常、`http://localhost:3000` を使用します。
+
+```bash
+export NUDGEN_APP_URL="https://app.nudgen.net"
+```
 
 ## 認証
 
-すべてのAPIリクエストには、 `Authorization` ヘッダーを介して渡される個人アクセスアクセストークン（PAT）が必要です。トークンは、Nudgenダッシュボードの **設定 → APIキー** から生成できます。
+### パーソナル アクセス トークン
+
+[**設定**] → [**API キー**] で PAT を作成します。連絡先、キャンペーン管理、ブランド設定、AI 生成に使用します。
 
 ```bash
-curl -X GET https://app.nudgen.com/api/v1/user/me \
-  -H "Authorization: Bearer <your-pat>"
+Authorization: Bearer $NUDGEN_PAT
 ```
 
-## ベースURL
+PAT は 1 回だけ表示されます。これらを安全に保存し、**設定** → **API キー** から古いトークンまたは公開されたトークンを取り消します。
 
-すべてのAPIリクエストのベースURLは以下の通りです：
-`https://app.nudgen.com`
+### チーム トリガー API キー
 
-## エンドポイント
+チーム トリガー API キーは、`ndg_team_` で始まり、`campaigns:trigger` という狭いスコープを持ちます。ライフタイム キャンペーンのみをトリガーできます。 PAT はキーをトリガーできません。
 
-### 認証とアイデンティティ
-- `GET /api/v1/user/me`: 現在認証されているユーザーを取得します。
-- `GET /api/v1/teams`: 現在のユーザーのすべてのチームを一覧表示します。
-- `POST /api/v1/teams/switch`: アクティブなチームコンテキストを切り替えます。
+これらのキーを作成、ローテーション、または取り消すことができるのは、ワークスペースの所有者と管理者だけです。デフォルトでは、キーは 90 日後に期限切れになります。無期限のキーを作成するには、`expiresInDays` を `null` に設定します。
+
+```bash
+curl -X POST "$NUDGEN_APP_URL/api/v1/settings/team-api-keys" \
+  -H "Authorization: Bearer $NUDGEN_PAT" \
+  -H "Content-Type: application/json" \
+  --data '{"name":"Order service production","expiresInDays":90}'
+```
+
+`201` 応答には、プレーンテキスト `key` が 1 回だけ含まれています。サーバー側のシークレット マネージャーに保存します。その後の応答では、`keyPrefix` のみが公開されます。
+
+|方法 |エンドポイント |説明 |
+| --- | --- | --- |
+| `POST` | `/api/v1/settings/team-api-keys` |チームトリガーAPIキーを作成します。 |
+| `GET` | `/api/v1/settings/team-api-keys` |チームトリガー API キーをリストします。 |
+| `POST` | `/api/v1/settings/team-api-keys/:id` |有効期限が切れていないアクティブなキーをローテーションします。 |
+| `DELETE` | `/api/v1/settings/team-api-keys/:id` |キーを取り消します。 |
+
+## REST エンドポイント
+
+### ID とワークスペース
+
+|方法 |エンドポイント |説明 |
+| --- | --- | --- |
+| `GET` | `/api/v1/user/me` |認証されたユーザーを取得します。 |
+| `GET` | `/api/v1/teams` |トークン所有者が利用できるワークスペースをリストします。 |
 
 ### 連絡先
-- `GET /api/v1/contacts`: ページネーション、検索、タグフィルターを使用して連絡先を一覧表示します。
-- `POST /api/v1/contacts/add`: 新しい連絡先を作成します。
-- `GET /api/v1/contacts/:id`: 特定の連絡先を取得します。
-- `PATCH /api/v1/contacts/:id`: 既存の連絡先を更新します。
-- `DELETE /api/v1/contacts/:id`: 連絡先を削除します。
 
-### キャンペーン
-- `GET /api/v1/campaigns`: 現在のチームのキャンペーンを一覧表示します。
-- `POST /api/v1/campaigns`: 新しいキャンペーンを作成します。
-- `GET /api/v1/campaigns/:id`: キャンペーンの詳細を取得します。
-- `GET /api/v1/campaigns/:id/stats`: キャンペーンの配信統計を取得します。
+|方法 |エンドポイント |説明 |
+| --- | --- | --- |
+| `GET` | `/api/v1/contacts` | `page`、`limit`、`search`、`tags`、および `status` フィルターを使用して連絡先を一覧表示します。 |
+| `POST` | `/api/v1/contacts/add` |連絡先を作成します。 |
+| `GET` | `/api/v1/contacts/:id` |連絡先を取得します。 |
+| `PATCH` | `/api/v1/contacts/:id` |連絡先を更新します。 |
+| `DELETE` | `/api/v1/contacts/:id` |連絡先を削除します。 |
 
-### テンプレート
-- `GET /api/v1/templates`: メールテンプレートを一覧表示します。
-- `POST /api/v1/templates`: 新しいメールテンプレートを作成します。
+```bash
+curl -X POST "$NUDGEN_APP_URL/api/v1/contacts/add" \
+  -H "Authorization: Bearer $NUDGEN_PAT" \
+  -H "Content-Type: application/json" \
+  --data '{"email":"nathan@example.com","name":"Nathan Nguyen","tags":["api-test"]}'
+```
 
-### 設定
-- `GET /api/v1/settings/brand`: ブランド設定を取得します。
-- `PATCH /api/v1/settings/brand`: ブランド設定を更新します。
+### ワンショット キャンペーンとドリップ キャンペーン
 
-## OpenAPI仕様
+|方法 |エンドポイント |説明 |
+| --- | --- | --- |
+| `GET` | `/api/v1/campaigns` |アクティブなワークスペース内のキャンペーンをリストします。 |
+| `POST` | `/api/v1/campaigns` |キャンペーンの下書きまたはスケジュールされたキャンペーンを作成します。 |
+| `GET` | `/api/v1/campaigns/:id` |キャンペーンの詳細を取得します。 |
+| `PUT` | `/api/v1/campaigns/:id` |既存のキャンペーンを更新します。 |
+| `POST` | `/api/v1/campaigns/:id/launch` |今すぐ開始するか、ワンショットまたはドリップキャンペーンをスケジュールしてください。 |
+| `GET` | `/api/v1/campaigns/:id/stats` |配信、開封、クリック、バウンス、苦情の統計を取得します。 |
+| `GET` | `/api/v1/campaigns/:id/progress` |キャンペーン送信の進行状況を取得します。 |
+| `GET` | `/api/v1/campaigns/:id/recipients` |キャンペーンの受信者をリストします。 |
+| `POST` | `/api/v1/campaigns/test-send` |ダッシュボード送信統計を使用せずにテストメールを送信します。 |
 
-完全なOpenAPI仕様はこちらからダウンロードできます：
-[openapi.json](https://app.nudgen.com/api/openapi.json)
+<Warning>
+キャンペーンを開始すると、実際のメールがスケジュールされます。受信トレイのプレビューには、`/api/v1/campaigns/test-send` を使用してください。
+</Warning>
 
-## Lifetime キャンペーン
+## ライフタイム キャンペーン
 
-draft の作成と lifecycle の変更には PAT を使用します（`PATCH /api/v1/campaigns/:id/lifecycle`）。`POST /api/v1/campaigns/:id/triggers` は `ndg_team_*` Team trigger API key 専用です。idempotency には `eventId` を使い、execution は `GET /api/v1/campaigns/:id/executions` で確認します。[Lifetime ガイド](/jp/campaigns/lifetime)を参照してください。
+ライフタイム キャンペーンはイベントによってトリガーされます。受け入れられたトリガーごとに最大 1 つの実行が作成され、指定された連絡先に 1 つのナッジが送信されます。ダッシュボードのワークフローと変動契約のガイダンスについては、[ライフタイム キャンペーンを使用する](/jp/campaigns/lifetime) を参照してください。
+
+### ライフタイム キャンペーンを作成する
+
+ライフタイム キャンペーンを `draft` として作成します。 `sendNow: true`、`status: "active"`、または `status: "scheduled"` は送信しないでください。代わりに、ライフサイクル エンドポイントを使用してキャンペーンをアクティブ化します。
+
+```bash
+curl -X POST "$NUDGEN_APP_URL/api/v1/campaigns" \
+  -H "Authorization: Bearer $NUDGEN_PAT" \
+  -H "Content-Type: application/json" \
+  --data @- <<'JSON'
+{
+  "name": "Order confirmation",
+  "type": "lifetime",
+  "status": "draft",
+  "goal": "Confirm an order and direct the customer to its details.",
+  "subject": "Your order {{data.order_id}} was received",
+  "html": "<p>Hello {{contact.firstName}},</p><p>Order {{data.order_id}} totals {{data.total}} VND.</p><p><a href=\"{{data.order_url}}\">View your order</a></p>",
+  "link": "https://example.com/orders",
+  "variableManifest": [
+    { "path": "data.order_id", "type": "string", "required": true, "description": "Order ID" },
+    { "path": "data.total", "type": "number", "required": true, "description": "Order total in VND" },
+    { "path": "data.order_url", "type": "url", "required": true, "description": "Order details URL" }
+  ],
+  "generatedVariableManifest": [
+    { "path": "data.order_id", "type": "string", "required": true, "description": "Order ID" },
+    { "path": "data.total", "type": "number", "required": true, "description": "Order total in VND" },
+    { "path": "data.order_url", "type": "url", "required": true, "description": "Order details URL" }
+  ]
+}
+JSON
+```
+
+`variableManifest` は、最大 100 個の `data.*` 変数を定義します。件名または HTML で使用されるすべての `data.*` トークンを含める必要があります。デフォルトは宣言された型と一致する必要があり、HTML `href` で使用される変数の型は `url` である必要があります。
+
+電子メール コンテンツを生成するときは、一致する `generatedVariableManifest` を保存します。 Nudgen は、現在のマニフェストと異なる場合、または必要な宣言されたパラメータがメールにない場合、アクティベーションをブロックします。
+
+### ライフサイクルを変更する
+
+|方法 |エンドポイント |認証 |説明 |
+| --- | --- | --- | --- |
+| `PATCH` | `/api/v1/campaigns/:campaignId/lifecycle` |パット |ライフタイム キャンペーンを `active`、`paused`、または `archived` に変更します。 |
+
+```bash
+curl -X PATCH "$NUDGEN_APP_URL/api/v1/campaigns/$CAMPAIGN_ID/lifecycle" \
+  -H "Authorization: Bearer $NUDGEN_PAT" \
+  -H "Content-Type: application/json" \
+  --data '{"status":"active"}'
+```
+
+有効なトランジションは、`draft → active → paused → active` と `active|paused → archived` です。一時停止またはアーカイブすると、`pending` または `queued` のままの実行がキャンセルされ、クォータ予約が解放されます。すでに処理中の実行でも送信される可能性があります。
+
+### ナッジをトリガーする
+
+|方法 |エンドポイント |認証 |説明 |
+| --- | --- | --- | --- |
+| `POST` | `/api/v1/campaigns/:campaignId/triggers` |チームトリガー API キー | 1 つのイベント実行を作成し、ナッジをキューに入れます。 |
+
+```bash
+curl -X POST "$NUDGEN_APP_URL/api/v1/campaigns/$CAMPAIGN_ID/triggers" \
+  -H "Authorization: Bearer $NUDGEN_TEAM_API_KEY" \
+  -H "Content-Type: application/json" \
+  --data @- <<'JSON'
+{
+  "eventId": "order_123",
+  "eventName": "order.created",
+  "occurredAt": "2026-08-23T10:00:00Z",
+  "contact": {
+    "email": "an@example.com",
+    "externalId": "customer_456",
+    "name": "An Nguyen",
+    "phone": "+84901234567",
+    "metadata": { "company": "Nudgen" }
+  },
+  "data": {
+    "order_id": "order_123",
+    "total": 490000,
+    "order_url": "https://example.com/orders/order_123"
+  }
+}
+JSON
+```
+
+|フィールド |タイプ |必須 |制限と動作 |
+| --- | --- | --- | --- |
+| `eventId` |文字列 |はい | 1 ～ 128 文字。キャンペーン内の一意のべき等性キー。再試行時に再利用します。 |
+| `eventName` |文字列 |いいえ | 1 ～ 100 文字 (例: `order.created`)。 |
+| `occurredAt` | ISO 8601 日付時刻 |いいえ |ソースイベントの時刻。 |
+| `contact.email` |メール |はい |小文字。 Nudgen は電子メールで連絡先を作成または更新します。 |
+| `contact.externalId` |文字列 |いいえ | 1 ～ 200 文字で、ワークスペース内の別の連絡先メールアドレスに属することはできません。 |
+| `contact.name` |文字列 |いいえ |最大 200 文字。 |
+| `contact.phone` |文字列 |いいえ |最大 50 文字。 |
+| `contact.metadata` |オブジェクト |いいえ |追加の連絡先プロファイル データ。 |
+| `data` |オブジェクト |はい | `variableManifest` と一致する必要があります。最大 32 KiB。 |
+
+リクエスト本文全体は 64 KiB に制限され、JSON ネストは 8 レベルに制限され、`__proto__`、`constructor`、`prototype` などの安全でないキーは拒否されます。
+
+新しいトリガーは、`{ "execution": { "id": "...", "status": "queued" }, "duplicate": false }` とともに `201` を返します。 `eventId` を再利用すると、`200` および `duplicate: true` の既存の実行が返されます。
+
+### 実行のリストを表示します
+
+|方法 |エンドポイント |認証 |説明 |
+| --- | --- | --- | --- |
+| `GET` | `/api/v1/campaigns/:campaignId/executions` |パット |生涯キャンペーンの実行をリストします。 |
+
+```bash
+curl "$NUDGEN_APP_URL/api/v1/campaigns/$CAMPAIGN_ID/executions?limit=25&status=sent&search=an@example.com" \
+  -H "Authorization: Bearer $NUDGEN_PAT"
+```
+
+1 ～ 100 の `limit` (デフォルトは `25`)、次のページには `cursor`、実行ステータスでフィルターするには `status` を使用します。 `search` は電子メールまたは外部 ID と一致します。応答には、`executions` と `nextCursor` が含まれます。
+
+## エラー、再試行、レート制限
+
+ライフタイム トリガーでは、チーム トリガー API キーごとに 1 分あたり 600 件のリクエストが許可されます。応答には、`x-ratelimit-limit`、`x-ratelimit-remaining`、および `x-ratelimit-reset` が含まれます。 `429` 応答には、`Retry-After` も含まれます。
+
+|ステータス |意味 |どうすればいいですか |
+| --- | --- | --- |
+| `200` | `eventId` を複製する |返された実行を使用します。再度送信しないでください。 |
+| `201` |新しい実行がキューに入れられました |ワーカーが処理するまで待ちます。 |
+| `400` |無効な JSON、本文、または基本フィールド |ペイロードを修正してください。変更せずに再試行しないでください。 |
+| `401` |キーが見つからない、無効である、取り消されている、有効期限が切れている、またはスコープが間違っている |キー構成を変更または修正します。 |
+| `402` / `403` |クォータまたはサブスクリプションにより書き込みが禁止される |クォータまたはサブスクリプションの問題を解決します。クォータ エラーには、`code`、`required`、`available`、および `checkoutUrl` が含まれます。 |
+| `404` |キャンペーンが見つからないか、キーのワークスペースの外にあります。キャンペーンIDとキーを確認してください。 |
+| `409` |キャンペーンがアクティブではない/有効期間ではない、または連絡先 ID の競合 |キャンペーンをアクティブ化するか、連絡先の ID を修正します。 |
+| `413` |リクエストが 64 KiB を超えています |ペイロードサイズを減らします。 |
+| `415` | `Content-Type: application/json` が見つかりません |必要なヘッダーを追加します。 |
+| `422` | `data` は変数マニフェストと一致しません。データを修正します。 `details` のパスとエラー コードを調べてください。 |
+| `429` |レート制限を超えました | `Retry-After` を待ってから、同じ `eventId` で再試行します。 |
+| `503` |実行をキューに入れることができませんでした。バックオフと同じ `eventId` を使用して再試行します。 |
+
+`429`、`503`、およびネットワーク エラーの場合は、指数バックオフと同じ `eventId` を使用して再試行してください。キュー ジョブの実行は決定的であるため、再試行によって重複した電子メールが作成されることはありません。
+
+### ブランド設定
+
+|方法 |エンドポイント |説明 |
+| --- | --- | --- |
+| `GET` | `/api/v1/settings/brand` |ブランド名、Web サイト、送信者の電子メール、ロゴ、デザイン設定を読み取ります。 |
+| `PATCH` | `/api/v1/settings/brand` |ブランド設定を更新します。 |
+
+### AI ドラフト生成
+
+|方法 |エンドポイント |説明 |
+| --- | --- | --- |
+| `POST` | `/api/v1/ai/generate` |キャンペーンコンテキストから電子メールの件名と HTML ドラフトを生成します。 |
+
+## MCP サーバー
+
+エージェントがモデル コンテキスト プロトコル ツールをサポートしている場合は、[Nudgen MCP](/en/agents/mcp) を使用します。 MCP はワークスペース管理 API と同じ PAT を使用しますが、Nudgen を従来の HTTP エンドポイントではなくエージェント呼び出し可能なツールとして公開します。
+
+<Card title="MCP server setup" icon="bot" href="/en/agents/mcp">
+ Nudgen MCP を Claude Code、Cursor、Windsurf、Codex CLI、または汎用 MCP クライアントにインストールします。
+</Card>

@@ -1,22 +1,133 @@
 ---
-title: "Lifetime kampanyalarını kullanın"
-description: "Her doğrulanmış tetikleyiciyle bir kişiye olay tabanlı e-posta gönderin"
+title: "Ömür Boyu kampanyaları kullanın"
+description: "Kimliği doğrulanmış her tetikleyiciyle bir kişiye etkinlikle tetiklenen bir uyarı gönderin"
 ---
 
-## Lifetime kampanyası
+## Bu sayfa size ne yardımcı olur
 
-Lifetime kampanyası sisteminizdeki olayları bekler. Her geçerli trigger en fazla bir execution oluşturur ve payload içindeki contact’a bir nudge gönderir. Sipariş onayı, ödeme hatırlatması ve olay tabanlı onboarding için kullanın; audience her zaman **Trigger** olur.
+Sisteminizdeki etkinliklere hazır kalan bir Ömür Boyu kampanya oluşturun. Her geçerli tetikleyici en fazla bir yürütme oluşturur ve yükündeki kişiye bir uyarı gönderir.
 
-## Kurulum
+## Bu neden önemlidir
 
-**Campaigns** → **New campaign** → **Lifetime** seçin. `order_id` gibi runtime parametreleri `{{data.order_id}}` olur. E-postayı oluşturun, önizleyin ve test edin; sonra **Activate** seçin. **Settings** → **API Keys** altında Team trigger API key oluşturun ve `ndg_team_*` anahtarını yalnızca backend’de saklayın.
+Kampanyaları sürekli olarak oluşturup başlatmadan zamanında, alakalı e-posta gönderebilirsiniz. Bir etkinliğin ne zaman gerçekleşeceğini arka ucunuz kontrol ederken, Nudgen e-posta içeriğini, teslimatı, takibi ve iletişim tercihlerini tek bir yerde tutar.
 
-`variableManifest`, `data` sözleşmesidir: en fazla 100 `data.*` değişkeni; türler `string`, `number`, `boolean`, `date`, `url`. HTML değerleri escape edilir; `href` içindeki değişken `url` olmalıdır.
+## Ömür Boyu bir kampanya ne zaman kullanılmalı
 
-## Yaşam döngüsü ve yeniden deneme
+Olay odaklı e-posta için Ömür Boyu bir kampanya kullanın, örneğin:
 
-Geçişler `draft → active → paused → active` ve `active|paused → archived` şeklindedir. Archive geri alınamaz. Pause/archive, `pending`/`queued` execution’ları iptal eder; işlenen e-posta yine de gönderilebilir. Her execution içerik snapshot’ı alır.
+- Sipariş onayları
+- Ödeme hatırlatıcıları
+- Etkinliğe dayalı katılım
+- Hesap veya abonelik güncellemeleri
 
-Yalnızca güvenilir backend’den trigger edin ve retry’de aynı `eventId` kullanın: `201` yeni, `200` duplicate’tir. `429`, `503` ve ağ hatalarını exponential backoff ile tekrar deneyin; secret’ları loglamayın.
+Tek seferlik ve damla kampanyalardan farklı olarak Ömür Boyu kampanya şunları yapar: kayıtlı bir hedef kitleye hemen göndermeyin. Hedef kitlesi her zaman **Tetikleyici**'dir.
 
-[Developer API](/tr/agents/api) sayfasına bakın.
+## Bir kampanya oluşturun ve etkinleştirin
+
+<Steps>
+ <Step title="Create a Lifetime campaign">
+ **Kampanyalar**'a gidin, **Yeni kampanya**'yı tıklayın ve ardından **Ömür Boyu**'nu seçin. Kampanya adını, hedefi, marka yapılandırmasını ve isteğe bağlı CTA bağlantısını ekleyin.
+ </Step>
+ <Step title="Define runtime parameters">
+ Sisteminizin gönderme sırasında sağlayacağı her değeri ekleyin. Bir parametre bir `data.*` değişkeni oluşturur: örneğin, `order_id`, e-postada `{{data.order_id}}` olur.
+ </Step>
+ <Step title="Create the email">
+ Konuyu ve HTML'yi oluşturun veya yazın, ardından çalışma zamanı değişkenlerinizi ait oldukları yere ekleyin. E-postayı önizleyin ve etkinleştirmeden önce bir test gönderin.
+ </Step>
+ <Step title="Activate the campaign">
+Taslak olarak kaydedin ve **Etkinleştir**'i tıklayın. Nudgen, gerekli parametrelerin e-postada sunulduğunu ve parametre sözleşmesinin oluşturulduğundan bu yana değişmediğini kontrol eder.
+ </Step>
+ <Step title="Create a trigger key">
+ **Ayarlar** → **API Anahtarları**'na gidin ve bir **Takım tetikleyici API anahtarı** oluşturun. `ndg_team_*` sırrını arka uçta veya gizli yöneticinizde saklayın; asla tarayıcıya veya mobil uygulama koduna yerleştirmeyin.
+ </Step>
+</Steps>
+
+## Çalışma zamanı parametreleri ve şablon değişkenleri
+
+`variableManifest`'niz, e-posta şablonu ile her tetikleyicinin `data` nesnesi arasındaki sözleşmedir. Bir kampanya en fazla 100 değişken tanımlayabilir.
+
+| Alan | Tür | Gerekli | Açıklama |
+| --- | --- | --- | --- |
+| `path` | `data.<name>` | Evet | Değişken yol. `data.order.total` gibi iç içe geçmiş yollar desteklenir. |
+| `type` | `string`, `number`, `boolean`, `date` veya `url` | Evet | Tetikleyicinin sağlaması gereken türü yazın. `date` geçerli bir tarih dizesi olmalı ve `url`, HTTP(S) olmalıdır. |
+| `required` | boole | Evet | Eksik değerler, bir varsayılan ayarlanmadıkça `422` değerini döndürür. |
+| `defaultValue` | dize, sayı veya boole | Hayır | Değişken türüyle eşleşmesi gereken geri dönüş değeri. |
+| `description` | dize | Hayır | Değeri açıklayın ki siz ve Nudgen AI bunu doğru şekilde kullanabilsin. |
+
+Örneğin, bir şablonda `{{data.order_id}}`, `{{data.total}}` ve `{{data.order_url}}` kullanın. Ayrıca `contact.*`, `event.*`, `brand.*`'nin yanı sıra `{{firstName}}` ve `{{brandName}}` gibi eski değişkenleri de kullanabilirsiniz.
+
+Ndgen, HTML'ye eklenen değişken değerlerden kaçar. Şablonlar JavaScript'i, ifadeleri veya döngüleri desteklemez. `href`'de kullanılan herhangi bir değişken, `url` türüyle bildirilen bir `data.*` değişkeni olmalıdır.
+
+## Yaşam döngüsünü yönetin
+
+| Durum | Ne anlama geliyor |
+| --- | --- |
+| **Taslak** | Kampanyayı yapılandırın ve e-postasını test edin. |
+| **Aktif** | Nudgen, kimliği doğrulanmış tetikleyicileri kabul eder. |
+| **Duraklatıldı** | Nudgen yeni tetikleyicileri kabul etmiyor. Devam ettirebilirsiniz. |
+| **Arşivlendi** | Kampanya kalıcı olarak kapatılmıştır ve tekrar etkinleştirilemez. |
+
+Geçerli geçişler `draft → active → paused → active` ve `active|paused → archived`'dir.
+
+<Note>
+Duraklatma veya arşivleme, hâlâ beklemede veya sıraya alınmış olan yürütmeleri iptal eder. Halihazırda işlenmekte olan bir yürütme hâlâ gönderilebilir.
+</Note>
+
+Nudgen tetikleyiciyi aldığında her yürütme, kampanya içeriğinin anlık görüntüsünü alır ve ayarları gönderir. Etkin bir kampanyayı düzenlemek, halihazırda mevcut olan yürütmeleri değil, yalnızca sonraki tetikleyicileri etkiler.
+
+## Arka ucunuzdan tetikleyin
+
+Kaynak etkinliğini doğruladıktan sonra güvenilir bir sunucudan tetikleyici uç noktasını arayın. Kişisel Erişim Simgesini (PAT) değil, Ekip tetikleyici API anahtarını kullanın.
+
+```bash
+curl -X POST "$NUDGEN_APP_URL/api/v1/campaigns/$CAMPAIGN_ID/triggers" \
+  -H "Authorization: Bearer $NUDGEN_TEAM_API_KEY" \
+  -H "Content-Type: application/json" \
+  --data @- <<'JSON'
+{
+  "eventId": "order_123",
+  "eventName": "order.created",
+  "occurredAt": "2026-08-23T10:00:00Z",
+  "contact": {
+    "email": "an@example.com",
+    "externalId": "customer_456",
+    "name": "An Nguyen",
+    "metadata": { "company": "Nudgen" }
+  },
+  "data": {
+    "order_id": "order_123",
+    "total": 490000,
+    "order_url": "https://example.com/orders/order_123"
+  }
+}
+JSON
+```
+
+Bir etkinliği yeniden denediğinizde aynı `eventId`'yi koruyun. Ndgen, başka bir dürtme göndermek yerine `200` ve `duplicate: true` ile mevcut yürütmeyi döndürür. Yeni bir yürütme, `201` değerini döndürür.
+
+## Güvenli bir şekilde entegre edin
+
+- Bir web kancası tüketicisinden veya arka uçtan tetikleyin ve Nudgen'i çağırmadan önce gelen web kancasını doğrulayın.
+- Üstel geri çekilme ile ağ hatalarını, `429` ve `503`'yi yeniden deneyin ve aynısı `eventId`.
+- `Authorization` başlıklarını veya hassas iletişim verileri içeren yükleri günlüğe kaydetmeyin.
+- Tetikleyici anahtarları düzenli olarak döndürün ve açığa çıktığından şüpheleniyorsanız bir anahtarı hemen iptal edin.
+- Şablonların ve yürütme denetimlerinin net kalması için etkinlik türü ve değişken sözleşme başına bir kampanya oluşturun.
+
+## Yürütmeleri izleyin
+
+En son yürütmeleri ve durumlarını görmek için kontrol panelinde kampanyayı açın. Bir yürütme `pending`, `queued`, `processing`, `sent`, `skipped`, `cancelled`, `failed` veya `failed` olabilir veya `delivery_unknown`.
+
+`skipped`, kişinin aboneliğinin iptal edildiği veya geri döndüğü anlamına gelir; dolayısıyla Nudgen olayı kaydeder ancak göndermez veya kotayı tüketmez. `delivery_unknown`, sağlayıcının e-postayı kabul etmiş olabileceği ancak nihai teslimat sonucunun belirsiz olduğu anlamına gelir; Ndgen, yinelenen gönderimi önlemek için otomatik olarak yeniden denemez.
+
+Programatik kurulum, tetikleme ve yürütme sorguları için [Geliştirici API'sine](/tr/agents/api) bakın.
+
+## İlgili belgeler
+
+<CardGroup cols={2}>
+ <Card title="Campaigns overview" icon="list" href="/tr/campaigns/overview">
+ Tek seferlik, damlama ve Ömür Boyu kampanyaları karşılaştırın.
+ </Card>
+ <Card title="Developer API" icon="code" href="/tr/agents/api">
+ API aracılığıyla Ömür Boyu kampanyaları ve tetikleyicileri yönetin.
+ </Card>
+</CardGroup>

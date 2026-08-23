@@ -1,29 +1,133 @@
 ---
-title: "Utiliser les campagnes Lifetime"
-description: "Envoyez un e-mail déclenché par événement à chaque contact"
+title: "Utiliser les campagnes à vie"
+description: "Envoyer un coup de pouce déclenché par un événement à un contact avec chaque déclencheur authentifié"
 ---
 
-## Qu’est-ce qu’une campagne Lifetime ?
+## Ce que cette page vous aide à faire
 
-Une campagne Lifetime reste prête à recevoir les événements de votre système. Chaque déclencheur valide crée au plus une exécution et envoie un nudge au contact du payload. Utilisez-la pour les confirmations de commande, rappels de paiement et parcours déclenchés par événement ; son audience est toujours **Trigger**.
+Créer une campagne à vie qui reste prête pour les événements de votre système. Chaque déclencheur valide crée au plus une exécution et envoie un coup de pouce au contact dans sa charge utile.
 
-## Pourquoi c’est important
+## Pourquoi c'est important
 
-Votre backend décide quand l’événement se produit, tandis que Nudgen centralise le contenu, l’envoi, le suivi et les préférences des contacts.
+Vous pouvez envoyer des e-mails pertinents en temps opportun sans créer et lancer de campagnes à plusieurs reprises. Votre backend contrôle le moment où un événement se produit, tandis que Nudgen conserve le contenu des e-mails, la livraison, le suivi et les préférences de contact en un seul endroit.
 
-## Configuration dans le tableau de bord
+## Quand utiliser une campagne à vie
 
-1. Ouvrez **Campaigns** → **New campaign** → **Lifetime**.
-2. Ajoutez des paramètres d’exécution. `order_id` devient `{{data.order_id}}` dans l’e-mail.
-3. Créez, prévisualisez et testez l’e-mail, puis cliquez sur **Activate**.
-4. Dans **Settings** → **API Keys**, créez une **Team trigger API key** et conservez le secret `ndg_team_*` uniquement côté serveur.
+Utilisez une campagne à vie pour les e-mails basés sur des événements, tels que :
 
-`variableManifest` est le contrat entre le modèle et `data`. Il accepte jusqu’à 100 variables `data.*` de type `string`, `number`, `boolean`, `date` ou `url`. Les valeurs HTML sont échappées et une variable utilisée dans `href` doit être de type `url`.
+- Confirmations de commande
+- Rappels de paiement
+- Intégration basée sur des événements
+- Mises à jour de compte ou d'abonnement
 
-## Cycle de vie et déclenchement
+Contrairement aux campagnes ponctuelles et goutte à goutte, une campagne à vie ne ne pas envoyer immédiatement à une audience enregistrée. Son audience est toujours **Trigger**.
 
-Les transitions valides sont `draft → active → paused → active` et `active|paused → archived`. Une campagne archivée ne peut pas être réactivée. La pause ou l’archivage annule les exécutions `pending`/`queued`; une exécution déjà traitée peut partir. Chaque exécution capture le contenu au moment du trigger.
+## Créer et activer une campagne
 
-Déclenchez depuis un serveur fiable et réutilisez `eventId` pour les nouvelles tentatives : `201` crée une exécution, `200` renvoie un doublon. Réessayez `429`, `503` et les erreurs réseau avec backoff exponentiel, sans journaliser les secrets.
+<Steps>
+ <Step title="Create a Lifetime campaign">
+ Accédez à **Campagnes**, cliquez sur **Nouvelle campagne**, puis choisissez **Durée de vie**. Ajoutez le nom de la campagne, l'objectif, la configuration de la marque et un lien CTA facultatif.
+ </Step>
+ <Step title="Define runtime parameters">
+ Ajoutez chaque valeur que votre système fournira au moment de l'envoi. Un paramètre crée une variable `data.*` : par exemple, `order_id` devient `{{data.order_id}}` dans l'e-mail.
+ </Step>
+ <Step title="Create the email">
+ Générez ou écrivez le sujet et le code HTML, puis ajoutez vos variables d'exécution à leur place. Prévisualisez l'e-mail et envoyez un test avant de l'activer.
+ </Step>
+ <Step title="Activate the campaign">
+Enregistrez-le en tant que brouillon, puis cliquez sur **Activer**. Nudgen vérifie que les paramètres requis sont représentés dans l'e-mail et que le contrat de paramètres n'a pas changé depuis la génération.
+ </Step>
+ <Step title="Create a trigger key">
+ Accédez à **Paramètres** → **Clés API** et créez une **Clé API de déclenchement d'équipe**. Stockez le secret `ndg_team_*` dans votre backend ou votre gestionnaire de secrets ; ne le placez jamais dans le code d'un navigateur ou d'une application mobile.
+ </Step>
+</Steps>
 
-Consultez l’[API développeur](/fr/agents/api) pour l’intégration.
+## Paramètres d'exécution et variables de modèle
+
+Votre `variableManifest` est le contrat entre le modèle d'e-mail et l'objet `data` de chaque déclencheur. Une campagne peut définir jusqu'à 100 variables.
+
+| Champ | Tapez | Obligatoire | Description |
+| --- | --- | --- | --- |
+| `path` | `data.<name>` | Oui | Chemin variable. Les chemins imbriqués tels que `data.order.total` sont pris en charge. |
+| `type` | `string`, `number`, `boolean`, `date` ou `url` | Oui | Tapez le déclencheur que vous devez fournir. Un `date` doit être une chaîne de date valide et un `url` doit être HTTP(S). |
+| `required` | booléen | Oui | Les valeurs manquantes renvoient `422` sauf si une valeur par défaut est définie. |
+| `defaultValue` | chaîne, nombre ou booléen | Non | Valeur de secours qui doit correspondre au type de variable. |
+| `description` | chaîne | Non | Expliquez la valeur afin que vous et Nudgen AI puissiez l'utiliser correctement. |
+
+Par exemple, utilisez `{{data.order_id}}`, `{{data.total}}` et `{{data.order_url}}` dans un modèle. Vous pouvez également utiliser `contact.*`, `event.*`, `brand.*` et des variables héritées telles que `{{firstName}}` et `{{brandName}}`.
+
+Nudgen échappe aux valeurs de variables insérées dans HTML. Les modèles ne prennent pas en charge JavaScript, les expressions ou les boucles. Toute variable utilisée dans un `href` doit être une variable `data.*` déclarée avec le type `url`.
+
+## Gérer le cycle de vie
+
+| Statut | Ce que cela signifie |
+| --- | --- |
+| **Brouillon** | Configurez la campagne et testez son email. |
+| **Actif** | Nudgen accepte les déclencheurs authentifiés. |
+| **En pause** | Nudgen n'accepte pas de nouveaux déclencheurs. Vous pouvez le reprendre. |
+| **Archivé** | La campagne est définitivement fermée et ne peut plus être activée. |
+
+Les transitions valides sont `draft → active → paused → active` et `active|paused → archived`.
+
+<Note>
+La pause ou l'archivage annule les exécutions qui sont toujours en attente ou en file d'attente. Une exécution en cours de traitement peut encore envoyer.
+</Note>
+
+Chaque exécution capture le contenu de la campagne et envoie les paramètres lorsque Nudgen reçoit le déclencheur. La modification d'une campagne active n'affecte que les déclencheurs ultérieurs, pas les exécutions qui existent déjà.
+
+## Déclencheur depuis votre backend
+
+Appelez le point de terminaison du déclencheur à partir d'un serveur de confiance après avoir validé l'événement source. Utilisez la clé API du déclencheur d'équipe, et non un jeton d'accès personnel (PAT).
+
+```bash
+curl -X POST "$NUDGEN_APP_URL/api/v1/campaigns/$CAMPAIGN_ID/triggers" \
+  -H "Authorization: Bearer $NUDGEN_TEAM_API_KEY" \
+  -H "Content-Type: application/json" \
+  --data @- <<'JSON'
+{
+  "eventId": "order_123",
+  "eventName": "order.created",
+  "occurredAt": "2026-08-23T10:00:00Z",
+  "contact": {
+    "email": "an@example.com",
+    "externalId": "customer_456",
+    "name": "An Nguyen",
+    "metadata": { "company": "Nudgen" }
+  },
+  "data": {
+    "order_id": "order_123",
+    "total": 490000,
+    "order_url": "https://example.com/orders/order_123"
+  }
+}
+JSON
+```
+
+Conservez le même `eventId` lorsque vous réessayez un événement. Nudgen renvoie l'exécution existante avec `200` et `duplicate: true` au lieu d'envoyer un autre nudge. Une nouvelle exécution renvoie `201`.
+
+## Intégrez en toute sécurité
+
+- Déclenchez à partir d'un consommateur ou d'un backend de webhook et vérifiez le webhook entrant avant d'appeler Nudgen.
+- Réessayez les erreurs réseau, `429` et `503` avec un intervalle exponentiel et le même `eventId`.
+- N'enregistrez pas les en-têtes ou les charges utiles `Authorization` contenant des données de contact sensibles.
+- Faites régulièrement pivoter les clés de déclenchement et révoquez immédiatement une clé si vous pensez qu'elle est exposée.
+- Créez une campagne par type d'événement et contrat variable afin que les modèles et les audits d'exécution restent clairs.
+
+## Surveillez les exécutions
+
+Ouvrez la campagne dans le tableau de bord pour voir les exécutions récentes et leurs statuts. Une exécution peut être `pending`, `queued`, `processing`, `sent`, `skipped`, `cancelled`, `failed` ou `delivery_unknown`.
+
+`skipped` signifie que le contact a été désabonné ou rebondi, donc Nudgen enregistre l'événement mais n'envoie ni ne consomme de quota. `delivery_unknown` signifie que le fournisseur a peut-être accepté l'e-mail mais que le résultat final de la livraison était incertain ; Nudgen ne réessaye pas automatiquement pour éviter un envoi en double.
+
+Pour les requêtes de configuration, de déclenchement et d'exécution par programmation, consultez l'[API du développeur](/fr/agents/api).
+
+## Documents associés
+
+<CardGroup cols={2}>
+ <Card title="Campaigns overview" icon="list" href="/fr/campaigns/overview">
+ Comparez les campagnes one-shot, goutte à goutte et à vie.
+ </Card>
+ <Card title="Developer API" icon="code" href="/fr/agents/api">
+ Gérez les campagnes et les déclencheurs à vie via l'API.
+ </Card>
+</CardGroup>

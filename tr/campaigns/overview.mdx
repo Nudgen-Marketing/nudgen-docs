@@ -1,71 +1,89 @@
 ---
 title: "Kampanyalara genel bakış"
-description: "Tek seferlik ve drip kampanyaları ile kampanya durumları"
+description: "Tek seferlik, damlama ve Ömür Boyu kampanyalar"
 ---
 
-## Bu sayfa size ne konuda yardımcı olur?
+## Bu sayfa size neler yardımcı olur
 
-İki kampanya türünü ve her durumun ne anlama geldiğini anlayın. Bu, doğru kampanya türünü seçmenize ve kampanya listenizi yorumlamanıza yardımcı olur.
+Üç kampanya türünü ve bunların yaşam döngülerini anlayın. Bu, doğru kampanya türünü seçmenize ve kampanya listenizi yorumlamanıza yardımcı olur.
 
 ## Başlamadan önce
 
-- Nudgen'a yüklenmiş kişiler
+- Nudgen'e yüklenen kişiler
 - Bir marka yapılandırması (önceden ayarlanmış ton veya özel istem)
 
 ## Kampanya türleri
 
-### Tek seferlik (One-shot) kampanyalar
+### Tek seferlik kampanyalar
 
-Seçtiğiniz hedef kitleye bir kez gönderilen tek bir e-postadır. Şunları yapmak istediğinizde kullanın:
+Seçtiğiniz kitleye bir kez gönderilen tek bir e-posta. Aşağıdakileri yapmak istediğinizde bunu kullanın:
 
 - Bir özelliği veya etkinliği duyurmak
-- Tek seferlik bir yeniden etkileşim gönderimi yapmak
-- Daha uzun bir sekans oluşturmadan önce bir mesajı test etmek
+- Tek seferlik yeniden etkileşime geçme patlaması göndermek
+- Daha uzun bir dizi oluşturmadan önce bir mesajı test etmek
 
-Hedef kitleyi seçersiniz, AI içeriği oluşturur, önizler ve gönderirsiniz (veya planlarsınız).
+Siz hedef kitleyi seçersiniz, yapay zeka içeriği oluşturur, önizlemesini yaparsınız ve gönderirsiniz (veya planlarsınız).
 
-### Drip (Damlama) sekansları
+### Damlama dizileri
 
-E-postalar arasında gecikmeler olan (örneğin 1. Gün, 3. Gün, 7. Gün) çok adımlı bir kampanyadır. Şunları yapmak istediğinizde kullanın:
+E-postalar arasında gecikmeler olan çok adımlı bir kampanya (ör. 1. Gün, 3. Gün, 7. Gün). Aşağıdakileri yapmak istediğinizde bunu kullanın:
 
-- Pasif kullanıcıları birkaç gün boyunca dürtmek
-- Açmayan veya tıklamayanlarla takibi sürdürmek
-- Duolingo tarzı bir elde tutma akışı oluşturmak
+- Birkaç gün boyunca etkin olmayan kullanıcıları uyarın
+- Açılmayan veya tıklamayanları takip edin
+- Duolingo tarzı bir elde tutma akışı oluşturun
 
-Her adımın kendi hedefi, konusu ve AI tarafından oluşturulmuş gövde metni vardır. Kişiler bir sonraki adıma yalnızca belirtilen gecikmeden sonra geçer. **Otomatik durdurma kuralları** (örneğin, bir alıcı tıkladığında veya e-postayı açtığında durdur) ayarlayabilirsiniz; böylece etkileşime geçen kullanıcılar sonraki adımları almayı bırakır.
+Her adımın kendi hedefi, konusu ve yapay zeka tarafından oluşturulan gövdesi vardır. Kişiler ancak gecikme sonrasında bir sonraki adıma geçer. **Otomatik durdurma kuralları** (ör. bir alıcı tıkladığında veya e-postayı açtığında dur) ayarlayabilirsiniz, böylece etkileşime giren kullanıcılar daha sonraki adımları almayı durdurur.
 
-**Hedef kitle türleri:** Bir kampanya oluştururken kimlerin alacağını seçersiniz: **Tüm kişiler**, **Etiketlere göre** (yalnızca seçilen etiketlere sahip kişiler) veya **Manuel** (alıcıları tek tek seçin). Sihirbaz, yayına girmeden önce bir erişim tahmini gösterir.
+### Ömür boyu kampanyalar
+
+Ömür boyu bir kampanya, sisteminizdeki etkinliklere hazır kalır. Kimliği doğrulanmış her tetikleyici, en fazla bir yürütme oluşturur ve o tetikleyicideki kişiye bir uyarı gönderir.
+
+Sipariş onayları, ödeme hatırlatıcıları, etkinliğe dayalı katılım veya arka ucunuzun başlattığı diğer işlem ve saklama e-postaları için Ömür Boyu bir kampanya kullanın. Hedef kitlesi her zaman **Tetikleyici**'dir; kayıtlı bir kişi segmentine hemen gönderim yapmaz.
+
+Kontrol paneli iş akışı ve entegrasyon kılavuzu için [Ömür boyu kampanyaları kullanma](/tr/campaigns/lifetime) konusuna bakın.
+
+**Hedef kitle türleri:** Bir kampanya oluştururken, kampanyayı kimin alacağını seçersiniz: **Tüm kişiler**, **Etiketlere göre** (yalnızca seçilen etiketlere sahip kişiler) veya **Manuel** (alıcıları elle seçin). Sihirbaz, lansmandan önce bir erişim tahmini gösterir.
 
 ## Kampanya durumları
 
-| Durum      | Anlamı                                                                 |
-| ---------- | ---------------------------------------------------------------------- |
-| **Taslak (Draft)** | Gönderilmedi. Hedefleri, hedef kitleyi, içeriği ve zamanlamayı düzenleyebilirsiniz. |
-| **Planlandı (Scheduled)** | Gönderim zamanı ayarlandı. E-postalar planlanan zamanda gönderilecek. |
-| **Aktif / Gönderiliyor (Active / Sending)** | E-postalar gönderiliyor. İlerleme panelde görünür. |
-| **Gönderildi (Sent)** | Tüm e-postalar gönderildi. İçerik kilitlendi; analizleri görüntüleyebilirsiniz. |
-| **Durduruldu (Stopped)** | Kampanya manuel olarak durduruldu. Bazı kişiler e-postaları almış olabilir; gelecekteki drip adımları iptal edildi. |
+| Durum | Anlamı |
+| ---------- | ------------------------------------------------------------ |
+| **Taslak** | Gönderilmedi. Hedefleri, hedef kitleyi, içeriği ve programı düzenleyebilirsiniz.         |
+| **Planlanmış** | Gönderme zamanı ayarlandı. E-postalar planlanan zamanda gönderilecektir.        |
+| **Aktif** / **Gönderiliyor** | E-postalar gönderiliyor. İlerleme durumu kontrol panelinde görünür.     |
+| **Gönderildi** | Tüm e-postalar gönderildi. İçerik kilitli; analizleri görüntüleyebilirsiniz.  |
+| **Durduruldu**| Kampanya manuel olarak durduruldu. Bazı kişiler zaten e-posta almış olabilir; gelecekteki damlama adımları iptal edilir. |
 
 <Note>
 Bir kampanya gönderildikten sonra içeriğini düzenleyemez veya yeniden gönderemezsiniz. Farklı bir mesaj göndermek için yeni bir kampanya oluşturun.
 </Note>
 
-## Sırada ne var?
+### Yaşam boyu yaşam döngüsü
 
-- [Kampanya oluştur](/tr/campaigns/create) — sihirbazı takip edin ve ilk e-postanızı gönderin.
-- [Kampanyaları yönet](/tr/campaigns/manage) — taslakları düzenleyin, gönderin, planlayın veya durdurun.
-- [Analizleri görüntüle](/tr/campaigns/analytics) — açılmalar, tıklamalar, teslimat oranları ve alıcı aktivitesi.
+Ömür boyu kampanyalar ayrı bir yaşam döngüsü kullanır: **Taslak** → **Etkin** → **Duraklatıldı** → **Etkin** veya **Etkin/Duraklatıldı** → **Arşivlendi**. Arşivlenmiş bir kampanyayı yeniden etkinleştiremezsiniz.
+
+Bir Ömür Boyu kampanyayı duraklattığınızda veya arşivlediğinizde, Nudgen hâlâ beklemede veya sıraya alınmış yürütmeleri iptal eder. Zaten işlenmekte olan bir yürütme yine de gönderilebilir. Etkin bir kampanyada yapılan değişiklikler yalnızca gelecekteki tetikleyiciler için geçerli olur çünkü her yürütme, içeriğin ve gönderme yapılandırmasının anlık görüntüsünü saklar.
+
+## Bundan sonra ne olacak
+
+- [Bir kampanya oluşturun](/tr/campaigns/create) — Sihirbazda ilerleyin ve ilk e-postanızı gönderin.
+- [Kampanyaları yönetin](/tr/campaigns/manage) — Taslakları düzenleyin, gönderin, planlayın veya durdurun.
+- [Ömür Boyu kampanyaları kullanın](/tr/campaigns/lifetime) — etkinlikle tetiklenen bir kampanyayı ve bunun API entegrasyonunu yapılandırın.
+- [Görüntüle analitik](/tr/campaigns/analytics) — açılışlar, tıklamalar, dağıtım oranları ve alıcı etkinliği.
 
 ## İlgili dokümanlar
 
 <CardGroup cols={2}>
-  <Card title="Kampanya oluştur" icon="paper-plane" href="/tr/campaigns/create">
-    Adım adım kampanya sihirbazı.
-  </Card>
-  <Card title="Kampanyaları yönet" icon="pen-to-square" href="/tr/campaigns/manage">
-    Düzenle, gönder, planla ve durdur.
-  </Card>
-  <Card title="Kampanya analizleri" icon="chart-line" href="/tr/campaigns/analytics">
-    Metrikler ve alıcı aktivitesi.
-  </Card>
+ <Card title="Create campaigns" icon="paper-plane" href="/tr/campaigns/create">
+ Adım adım kampanya sihirbazı.
+ </Card>
+ <Card title="Manage campaigns" icon="pen-to-square" href="/tr/campaigns/manage">
+ Düzenle, gönderin, planlayın ve durdurun.
+ </Card>
+ <Card title="Use Lifetime campaigns" icon="bolt" href="/tr/campaigns/lifetime">
+ Sisteminizden her etkinlik için bir uyarı gönderin.
+ </Card>
+ <Card title="Campaign analytics" icon="chart-line" href="/tr/campaigns/analytics">
+ Metrikler ve alıcı etkinliği.
+ </Card>
 </CardGroup>

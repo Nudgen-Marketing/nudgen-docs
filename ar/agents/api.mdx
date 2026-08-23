@@ -1,71 +1,254 @@
 ---
-title: "واجهة برمجة تطبيقات المطورين (API)"
-description: "واجهة REST API مع مصادقة رمز الوصول الشخصي. إدارة جهات الاتصال والحملات والقوالب والإعدادات برمجياً."
+title: "واجهة برمجة تطبيقات المطور"
+description: "واجهة برمجة تطبيقات REST لمساحة عمل Nudgen الخاصة بك، بما في ذلك الحملات مدى الحياة التي يتم تشغيلها بالحدث"
 ---
 
 ## نظرة عامة
 
-توفر واجهة برمجة تطبيقات المطورين لـ Nudgen واجهة REST نظيفة وموجهة نحو الموارد لإدارة البنية التحتية للتسويق الخاصة بك. تستخدم جميع الطلبات أساليب HTTP القياسية وترجع استجابات JSON يمكن التنبؤ بها.
+تمنح واجهة برمجة تطبيقات Nudgen Developer البرامج النصية والأدوات الداخلية ووكلاء الذكاء الاصطناعي واجهة REST يمكن التنبؤ بها لمساحة العمل الخاصة بك. استخدم رمز الوصول الشخصي (PAT) لإدارة موارد مساحة العمل. استخدم مفتاح واجهة برمجة تطبيقات تشغيل الفريق فقط لتشغيل حملة مدى الحياة من الواجهة الخلفية لديك.
 
-<CardGroup cols={3}>
-  <Card title="مصادقة PAT" icon="shield-check">
-    المصادقة باستخدام رموز الوصول الشخصية عبر ترويسة Bearer القياسية.
-  </Card>
-  <Card title="REST نظيف" icon="globe">
-    عناوين URL يمكن التنبؤ بها وموجهة نحو الموارد مع أساليب HTTP القياسية.
-  </Card>
-  <Card title="تحديد المعدل" icon="gauge">
-    تحديد معدل مدمج لكل فريق ونقطة نهاية لحماية تدفقات العمل الخاصة بك.
-  </Card>
-</CardGroup>
+## سبب أهمية ذلك
 
-## المصادقة
-
-تتطلب جميع طلبات API رمز وصول شخصي (PAT) يتم تمريره عبر ترويسة `Authorization`. يمكنك إنشاء الرموز من لوحة تحكم Nudgen ضمن **الإعدادات ← مفاتيح API**.
-
-```bash
-curl -X GET https://app.nudgen.com/api/v1/user/me \
-  -H "Authorization: Bearer <your-pat>"
-```
+يمكنك أتمتة عمليات سير عمل التسويق والاحتفاظ المستندة إلى الأحداث دون مشاركة جلسة لوحة المعلومات. تحافظ PAT على إدارة مساحة العمل قابلة للإلغاء، بينما يتيح مفتاح تشغيل الفريق الضيق لخدمة الإنتاج إرسال دفعة يتم تشغيلها بالحدث دون الوصول إلى مساحة العمل على نطاق واسع.
 
 ## عنوان URL الأساسي
 
-عنوان URL الأساسي لجميع طلبات API هو:
-`https://app.nudgen.com`
+قم بتعيين عنوان URL للتطبيق لبيئتك مرة واحدة واستخدمه في كل مثال. يستخدم الإنتاج عادة `https://app.nudgen.net`؛ يستخدم التطوير المحلي عادةً `http://localhost:3000`.
 
-## نقاط النهاية (Endpoints)
+```bash
+export NUDGEN_APP_URL="https://app.nudgen.net"
+```
 
-### المصادقة والهوية
-- `GET /api/v1/user/me`: الحصول على المستخدم الحالي المصادق عليه.
-- `GET /api/v1/teams`: سرد جميع الفرق للمستخدم الحالي.
-- `POST /api/v1/teams/switch`: تبديل سياق الفريق النشط.
+## المصادقة
+
+### رمز الوصول الشخصي
+
+قم بإنشاء PAT في **الإعدادات** → **مفاتيح API**. استخدمه لجهات الاتصال وإدارة الحملات وإعدادات العلامة التجارية وإنشاء الذكاء الاصطناعي.
+
+```bash
+Authorization: Bearer $NUDGEN_PAT
+```
+
+يتم عرض PAT مرة واحدة فقط. قم بتخزينها بشكل آمن وقم بإلغاء أي رمز مميز قديم أو مكشوف من **الإعدادات** → **مفاتيح واجهة برمجة التطبيقات**.
+
+### مفتاح واجهة برمجة تطبيقات تشغيل الفريق
+
+يبدأ مفتاح واجهة برمجة تطبيقات تشغيل الفريق بـ `ndg_team_` وله نطاق `campaigns:trigger` الضيق. يمكنه تشغيل حملات مدى الحياة فقط؛ لا يمكن لـ PAT تشغيلها.
+
+يمكن لمالكي ومسؤولي مساحة العمل فقط إنشاء هذه المفاتيح أو تدويرها أو إبطالها. بشكل افتراضي، تنتهي صلاحية المفتاح بعد 90 يومًا. قم بتعيين `expiresInDays` على `null` لإنشاء مفتاح غير منتهي الصلاحية.
+
+```bash
+curl -X POST "$NUDGEN_APP_URL/api/v1/settings/team-api-keys" \
+  -H "Authorization: Bearer $NUDGEN_PAT" \
+  -H "Content-Type: application/json" \
+  --data '{"name":"Order service production","expiresInDays":90}'
+```
+
+تحتوي استجابة `201` على النص العادي `key` مرة واحدة بالضبط. احفظه في مدير سري من جانب الخادم. الردود اللاحقة تكشف فقط `keyPrefix`.
+
+| الطريقة | نقطة النهاية | الوصف |
+| --- | --- | --- |
+| `POST` | `/api/v1/settings/team-api-keys` | قم بإنشاء مفتاح API لتشغيل الفريق. |
+| `GET` | `/api/v1/settings/team-api-keys` | قائمة فريق تشغيل مفاتيح API. |
+| `POST` | `/api/v1/settings/team-api-keys/:id` | قم بتدوير مفتاح نشط غير منتهي الصلاحية. |
+| `DELETE` | `/api/v1/settings/team-api-keys/:id` | إبطال مفتاح. |
+
+## نقاط نهاية REST
+
+### الهوية ومساحة العمل
+
+| الطريقة | نقطة النهاية | الوصف |
+| --- | --- | --- |
+| `GET` | `/api/v1/user/me` | احصل على المستخدم المصادق عليه. |
+| `GET` | `/api/v1/teams` | قم بإدراج مساحات العمل المتاحة لمالك الرمز المميز. |
 
 ### جهات الاتصال
-- `GET /api/v1/contacts`: سرد جهات الاتصال مع تقسيم الصفحات والبحث وفلاتر العلامات (tags).
-- `POST /api/v1/contacts/add`: إنشاء جهة اتصال جديدة.
-- `GET /api/v1/contacts/:id`: استرداد جهة اتصال محددة.
-- `PATCH /api/v1/contacts/:id`: تحديث جهة اتصال موجودة.
-- `DELETE /api/v1/contacts/:id`: حذف جهة اتصال.
 
-### الحملات
-- `GET /api/v1/campaigns`: سرد الحملات في الفريق الحالي.
-- `POST /api/v1/campaigns`: إنشاء حملة جديدة.
-- `GET /api/v1/campaigns/:id`: الحصول على تفاصيل الحملة.
-- `GET /api/v1/campaigns/:id/stats`: الحصول على إحصائيات تسليم الحملة.
+| الطريقة | نقطة النهاية | الوصف |
+| --- | --- | --- |
+| `GET` | `/api/v1/contacts` | قم بإدراج جهات الاتصال باستخدام مرشحات `page` و`limit` و`search` و`tags` و`status`. |
+| `POST` | `/api/v1/contacts/add` | قم بإنشاء جهة اتصال. |
+| `GET` | `/api/v1/contacts/:id` | احصل على جهة اتصال. |
+| `PATCH` | `/api/v1/contacts/:id` | تحديث جهة اتصال. |
+| `DELETE` | `/api/v1/contacts/:id` | حذف جهة اتصال. |
 
-### القوالب
-- `GET /api/v1/templates`: سرد قوالب البريد الإلكتروني.
-- `POST /api/v1/templates`: إنشاء قالب بريد إلكتروني جديد.
+```bash
+curl -X POST "$NUDGEN_APP_URL/api/v1/contacts/add" \
+  -H "Authorization: Bearer $NUDGEN_PAT" \
+  -H "Content-Type: application/json" \
+  --data '{"email":"nathan@example.com","name":"Nathan Nguyen","tags":["api-test"]}'
+```
 
-### الإعدادات
-- `GET /api/v1/settings/brand`: الحصول على تكوين العلامة التجارية.
-- `PATCH /api/v1/settings/brand`: تحديث إعدادات العلامة التجارية.
+### حملات اللقطة الواحدة والتنقيط
 
-## مواصفات OpenAPI
+| الطريقة | نقطة النهاية | الوصف |
+| --- | --- | --- |
+| `GET` | `/api/v1/campaigns` | قم بإدراج الحملات في مساحة العمل النشطة. |
+| `POST` | `/api/v1/campaigns` | قم بإنشاء مسودة حملة أو حملة مجدولة. |
+| `GET` | `/api/v1/campaigns/:id` | احصل على تفاصيل الحملة. |
+| `PUT` | `/api/v1/campaigns/:id` | تحديث حملة موجودة. |
+| `POST` | `/api/v1/campaigns/:id/launch` | ابدأ الآن أو قم بجدولة حملة طلقة واحدة أو حملة تنقيط. |
+| `GET` | `/api/v1/campaigns/:id/stats` | احصل على إحصائيات التسليم والفتح والنقر والارتداد والشكوى. |
+| `GET` | `/api/v1/campaigns/:id/progress` | احصل على تقدم إرسال الحملة. |
+| `GET` | `/api/v1/campaigns/:id/recipients` | قم بإدراج مستلمي الحملة. |
+| `POST` | `/api/v1/campaigns/test-send` | أرسل بريدًا إلكترونيًا تجريبيًا دون إرسال إحصائيات لوحة التحكم. |
 
-يمكنك تنزيل مواصفات OpenAPI الكاملة الخاصة بنا من هنا:
-[openapi.json](https://app.nudgen.com/api/openapi.json)
+<Warning>
+يؤدي إطلاق الحملة إلى جدولة البريد الإلكتروني الحقيقي. استخدم `/api/v1/campaigns/test-send` لمعاينات البريد الوارد.
+</Warning>
 
-## حملات Lifetime
+## الحملات مدى الحياة
 
-استخدم PAT لإنشاء draft وتغيير lifecycle عبر `PATCH /api/v1/campaigns/:id/lifecycle`. لا يمكن استدعاء `POST /api/v1/campaigns/:id/triggers` إلا باستخدام Team trigger API key يبدأ بـ `ndg_team_*`. استخدم `eventId` لضمان idempotency واستعلم عن execution عبر `GET /api/v1/campaigns/:id/executions`. راجع [دليل Lifetime](/ar/campaigns/lifetime).
+يتم تشغيل الحملات مدى الحياة بواسطة حدث: ينشئ كل مشغل مقبول تنفيذًا واحدًا على الأكثر ويرسل دفعة واحدة إلى جهة الاتصال المقدمة. راجع [استخدام الحملات الدائمة](/ar/campaigns/lifetime) للاطلاع على سير عمل لوحة التحكم وإرشادات العقود المتغيرة.
+
+### إنشاء حملة مدى الحياة
+
+إنشاء حملات مدى الحياة باسم `draft`. لا ترسل `sendNow: true` أو `status: "active"` أو `status: "scheduled"`؛ قم بتنشيط الحملة باستخدام نقطة نهاية دورة الحياة الخاصة بها بدلاً من ذلك.
+
+```bash
+curl -X POST "$NUDGEN_APP_URL/api/v1/campaigns" \
+  -H "Authorization: Bearer $NUDGEN_PAT" \
+  -H "Content-Type: application/json" \
+  --data @- <<'JSON'
+{
+  "name": "Order confirmation",
+  "type": "lifetime",
+  "status": "draft",
+  "goal": "Confirm an order and direct the customer to its details.",
+  "subject": "Your order {{data.order_id}} was received",
+  "html": "<p>Hello {{contact.firstName}},</p><p>Order {{data.order_id}} totals {{data.total}} VND.</p><p><a href=\"{{data.order_url}}\">View your order</a></p>",
+  "link": "https://example.com/orders",
+  "variableManifest": [
+    { "path": "data.order_id", "type": "string", "required": true, "description": "Order ID" },
+    { "path": "data.total", "type": "number", "required": true, "description": "Order total in VND" },
+    { "path": "data.order_url", "type": "url", "required": true, "description": "Order details URL" }
+  ],
+  "generatedVariableManifest": [
+    { "path": "data.order_id", "type": "string", "required": true, "description": "Order ID" },
+    { "path": "data.total", "type": "number", "required": true, "description": "Order total in VND" },
+    { "path": "data.order_url", "type": "url", "required": true, "description": "Order details URL" }
+  ]
+}
+JSON
+```
+
+يحدد `variableManifest` ما يصل إلى 100 متغير `data.*`. يجب أن يتضمن كل رمز `data.*` المميز المستخدم في الموضوع أو HTML. يجب أن تتطابق الإعدادات الافتراضية مع النوع المعلن، ويجب أن يكون للمتغير المستخدم في HTML `href` النوع `url`.
+
+عندما تقوم بإنشاء محتوى بريد إلكتروني، احفظ `generatedVariableManifest` المطابق. يقوم Nudgen بحظر التنشيط إذا كان يختلف عن البيان الحالي أو إذا كانت المعلمات المعلنة المطلوبة غائبة عن البريد الإلكتروني.
+
+### تغيير دورة الحياة
+
+| الطريقة | نقطة النهاية | المصادقة | الوصف |
+| --- | --- | --- | --- |
+| `PATCH` | `/api/v1/campaigns/:campaignId/lifecycle` | بات | قم بتغيير حملة مدى الحياة إلى `active` أو `paused` أو `archived`. |
+
+```bash
+curl -X PATCH "$NUDGEN_APP_URL/api/v1/campaigns/$CAMPAIGN_ID/lifecycle" \
+  -H "Authorization: Bearer $NUDGEN_PAT" \
+  -H "Content-Type: application/json" \
+  --data '{"status":"active"}'
+```
+
+الانتقالات الصالحة هي `draft → active → paused → active` و`active|paused → archived`. يؤدي الإيقاف المؤقت أو الأرشفة إلى إلغاء عمليات التنفيذ التي لا تزال `pending` أو `queued` وتحرير حجوزات الحصص الخاصة بها. قد يستمر إرسال عملية التنفيذ التي تتم معالجتها بالفعل.
+
+### إطلاق دفعة
+
+| الطريقة | نقطة النهاية | المصادقة | الوصف |
+| --- | --- | --- | --- |
+| `POST` | `/api/v1/campaigns/:campaignId/triggers` | فريق تشغيل مفتاح API | قم بإنشاء تنفيذ حدث واحد ووضع دفعة في قائمة الانتظار. |
+
+```bash
+curl -X POST "$NUDGEN_APP_URL/api/v1/campaigns/$CAMPAIGN_ID/triggers" \
+  -H "Authorization: Bearer $NUDGEN_TEAM_API_KEY" \
+  -H "Content-Type: application/json" \
+  --data @- <<'JSON'
+{
+  "eventId": "order_123",
+  "eventName": "order.created",
+  "occurredAt": "2026-08-23T10:00:00Z",
+  "contact": {
+    "email": "an@example.com",
+    "externalId": "customer_456",
+    "name": "An Nguyen",
+    "phone": "+84901234567",
+    "metadata": { "company": "Nudgen" }
+  },
+  "data": {
+    "order_id": "order_123",
+    "total": 490000,
+    "order_url": "https://example.com/orders/order_123"
+  }
+}
+JSON
+```
+
+| المجال | اكتب | مطلوب | الحدود والسلوك |
+| --- | --- | --- | --- |
+| `eventId` | سلسلة | نعم | 1-128 حرفًا. مفتاح العجز الفريد داخل الحملة؛ إعادة استخدامه لإعادة المحاولة. |
+| `eventName` | سلسلة | لا | من 1 إلى 100 حرف، على سبيل المثال `order.created`. |
+| `occurredAt` | التاريخ والوقت ISO 8601 | لا | وقت الحدث المصدر. |
+| `contact.email` | البريد الإلكتروني | نعم | بأحرف صغيرة. يقوم Nudgen بإنشاء أو تحديث جهة الاتصال عبر البريد الإلكتروني. |
+| `contact.externalId` | سلسلة | لا | من 1 إلى 200 حرف ولا يمكن أن ينتمي إلى بريد إلكتروني آخر لجهة الاتصال في مساحة العمل. |
+| `contact.name` | سلسلة | لا | ما يصل إلى 200 حرفا. |
+| `contact.phone` | سلسلة | لا | ما يصل إلى 50 حرفا. |
+| `contact.metadata` | كائن | لا | بيانات ملف تعريف جهة الاتصال الإضافية. |
+| `data` | كائن | نعم | يجب أن يتطابق مع `variableManifest`؛ الحد الأقصى 32 كيلو بايت. |
+
+يقتصر نص الطلب بالكامل على 64 كيلو بايت، ويتم رفض تداخل JSON على ثمانية مستويات، ويتم رفض المفاتيح غير الآمنة مثل `__proto__` و`constructor` و`prototype`.
+
+يقوم المشغل الجديد بإرجاع `201` مع `{ "execution": { "id": "...", "status": "queued" }, "duplicate": false }`. تؤدي إعادة استخدام `eventId` إلى إرجاع التنفيذ الحالي باستخدام `200` و`duplicate: true`.
+
+### قائمة عمليات التنفيذ
+
+| الطريقة | نقطة النهاية | المصادقة | الوصف |
+| --- | --- | --- | --- |
+| `GET` | `/api/v1/campaigns/:campaignId/executions` | بات | قائمة عمليات تنفيذ الحملة مدى الحياة. |
+
+```bash
+curl "$NUDGEN_APP_URL/api/v1/campaigns/$CAMPAIGN_ID/executions?limit=25&status=sent&search=an@example.com" \
+  -H "Authorization: Bearer $NUDGEN_PAT"
+```
+
+استخدم `limit` من 1–100 (الافتراضي `25`)، `cursor` للصفحة التالية، `status` للتصفية حسب حالة التنفيذ، و `search` لمطابقة البريد الإلكتروني أو المعرف الخارجي. تتضمن الاستجابة `executions` و`nextCursor`.
+
+## الأخطاء وإعادة المحاولة وحدود المعدل
+
+تسمح المشغلات مدى الحياة بـ 600 طلب في الدقيقة لكل مفتاح API الخاص بتشغيل الفريق. تتضمن الإجابات `x-ratelimit-limit`، و`x-ratelimit-remaining`، و`x-ratelimit-reset`. تتضمن استجابة `429` أيضًا `Retry-After`.
+
+| الحالة | معنى | ما يجب فعله |
+| --- | --- | --- |
+| `200` | مكررة `eventId` | استخدم التنفيذ الذي تم إرجاعه؛ لا ترسل مرة أخرى. |
+| `201` | تنفيذ جديد في قائمة الانتظار | انتظر حتى يقوم العامل بمعالجتها. |
+| `400` | JSON أو النص الأساسي أو الحقل الأساسي | تصحيح الحمولة؛ لا تقم بإعادة المحاولة دون تغيير. |
+| `401` | مفتاح مفقود أو غير صالح أو تم إبطاله أو منتهي الصلاحية أو تم تحديد نطاقه بشكل خاطئ | قم بتدوير أو تصحيح تكوين المفتاح. |
+| `402` / `403` | الحصة أو الاشتراك يمنع الكتابة | حل مشكلة الحصة أو الاشتراك. تتضمن أخطاء الحصة النسبية `code`، و`required`، و`available`، و`checkoutUrl`. |
+| `404` | الحملة مفقودة أو خارج مساحة عمل المفتاح | تحقق من معرف الحملة والمفتاح. |
+| `409` | الحملة غير نشطة/ليست مدى الحياة، أو تعارض في هوية جهة الاتصال | تفعيل الحملة أو تصحيح هوية جهة الاتصال. |
+| `413` | الطلب يتجاوز 64 كيلو بايت | تقليل حجم الحمولة. |
+| `415` | مفقود `Content-Type: application/json` | أضف الرأس المطلوب. |
+| `422` | `data` لا يتطابق مع بيان المتغير | تصحيح البيانات؛ افحص `details` بحثًا عن المسارات ورموز الأخطاء. |
+| `429` | تم تجاوز حد المعدل | انتظر `Retry-After`، ثم أعد المحاولة بنفس `eventId`. |
+| `503` | لا يمكن وضع التنفيذ في قائمة الانتظار | أعد المحاولة مع التراجع ونفس `eventId`. |
+
+بالنسبة إلى `429` و`503` وأخطاء الشبكة، أعد المحاولة مع التراجع الأسي ونفس `eventId`. تعد مهمة قائمة الانتظار أمرًا محددًا للتنفيذ، لذا فإن إعادة المحاولة لا تؤدي إلى إنشاء بريد إلكتروني مكرر.
+
+### إعدادات العلامة التجارية
+
+| الطريقة | نقطة النهاية | الوصف |
+| --- | --- | --- |
+| `GET` | `/api/v1/settings/brand` | اقرأ اسم العلامة التجارية وموقع الويب والبريد الإلكتروني للمرسل والشعار وإعدادات التصميم. |
+| `PATCH` | `/api/v1/settings/brand` | تحديث إعدادات العلامة التجارية. |
+
+### إنشاء مسودة الذكاء الاصطناعي
+
+| الطريقة | نقطة النهاية | الوصف |
+| --- | --- | --- |
+| `POST` | `/api/v1/ai/generate` | قم بإنشاء موضوع بريد إلكتروني ومسودة HTML من سياق الحملة. |
+
+## خادم MCP
+
+استخدم [Nudgen MCP](/en/agents/mcp) عندما يدعم وكيلك أدوات بروتوكول السياق النموذجي. يستخدم MCP نفس PAT مثل واجهات برمجة تطبيقات إدارة مساحة العمل، ولكنه يعرض Nudgen كأدوات يمكن استدعاء الوكيل بدلاً من نقاط نهاية HTTP التقليدية.
+
+<Card title="MCP server setup" icon="bot" href="/en/agents/mcp">
+ قم بتثبيت Nudgen MCP في Claude Code، أو Cursor، أو Windsurf، أو Codex CLI، أو عميل MCP عام.
+</Card>

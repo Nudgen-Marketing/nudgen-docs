@@ -1,29 +1,133 @@
 ---
-title: "Usar campañas Lifetime"
-description: "Envía un correo activado por eventos a cada contacto"
+title: "Usar campañas de por vida"
+description: "Enviar un empujón activado por evento a un contacto con cada activador autenticado"
 ---
 
-## Qué es una campaña Lifetime
+## Qué le ayuda a hacer esta página
 
-Una campaña Lifetime queda lista para los eventos de tu sistema. Cada trigger válido crea como máximo una ejecución y envía un nudge al contacto del payload. Úsala para confirmaciones de pedidos, recordatorios de pago y onboarding por eventos; su audiencia siempre es **Trigger**.
+Cree una campaña de por vida que esté lista para los eventos de su sistema. Cada activador válido crea como máximo una ejecución y envía un empujón al contacto en su carga útil.
 
-## Por qué importa
+## Por qué esto es importante
 
-Tu backend determina cuándo ocurre el evento y Nudgen centraliza el contenido, la entrega, el seguimiento y las preferencias de los contactos.
+Puede enviar correos electrónicos relevantes y oportunos sin crear ni lanzar campañas repetidamente. Su backend controla cuándo ocurre un evento, mientras que Nudgen mantiene el contenido del correo electrónico, la entrega, el seguimiento y las preferencias de contacto en un solo lugar.
 
-## Configúrala
+## Cuándo usar una campaña de por vida
 
-1. Ve a **Campaigns** → **New campaign** → **Lifetime**.
-2. Añade parámetros de ejecución; `order_id` crea `{{data.order_id}}`.
-3. Genera, previsualiza y prueba el correo; después selecciona **Activate**.
-4. Crea una **Team trigger API key** en **Settings** → **API Keys** y guarda `ndg_team_*` solo en el servidor.
+Utilice una campaña de por vida para correo electrónico basado en eventos, como:
 
-`variableManifest` define el contrato con `data`: hasta 100 variables `data.*` de tipo `string`, `number`, `boolean`, `date` o `url`. Nudgen escapa valores HTML; una variable en `href` debe ser `url`.
+- Confirmaciones de pedidos
+- Recordatorios de pago
+- Incorporación basada en eventos
+- Actualizaciones de cuenta o suscripción
 
-## Ciclo de vida y reintentos
+A diferencia de las campañas de una sola vez y de goteo, una campaña de por vida no envía a una audiencia guardada inmediatamente. Su audiencia es siempre **Activador**.
 
-Las transiciones son `draft → active → paused → active` y `active|paused → archived`. Archivar es irreversible. Pausar o archivar cancela ejecuciones `pending`/`queued`; las que ya se procesan pueden enviarse. Cada ejecución guarda una instantánea del contenido.
+## Crear y activar una campaña
 
-Activa desde un servidor fiable y reutiliza `eventId` al reintentar: `201` es nuevo y `200` es duplicado. Reintenta `429`, `503` y errores de red con backoff exponencial y nunca registres secretos.
+<Steps>
+ <Step title="Create a Lifetime campaign">
+ Vaya a **Campañas**, haga clic en **Nueva campaña** y luego elija **Duración**. Agregue el nombre de la campaña, el objetivo, la configuración de marca y el enlace CTA opcional.
+ </Step>
+ <Step title="Define runtime parameters">
+ Agregue cada valor que su sistema proporcionará en el momento del envío. Un parámetro crea una variable `data.*`: por ejemplo, `order_id` se convierte en `{{data.order_id}}` en el correo electrónico.
+ </Step>
+ <Step title="Create the email">
+ Genere o escriba el asunto y el HTML, luego agregue las variables de tiempo de ejecución donde pertenecen. Obtenga una vista previa del correo electrónico y envíe una prueba antes de activarlo.
+ </Step>
+ <Step title="Activate the campaign">
+Guárdelo como borrador y luego haga clic en **Activar**. Nudgen verifica que los parámetros requeridos estén representados en el correo electrónico y que el contrato de parámetros no haya cambiado desde su generación.
+ </Step>
+ <Step title="Create a trigger key">
+ Vaya a **Configuración** → **Claves API** y cree una **Clave API de activación de equipo**. Guarde el secreto `ndg_team_*` en su backend o administrador de secretos; nunca lo coloque en el código del navegador o de la aplicación móvil.
+ </Step>
+</Steps>
 
-Consulta la [API para desarrolladores](/es/agents/api).
+## Parámetros de tiempo de ejecución y variables de plantilla
+
+Su `variableManifest` es el contrato entre la plantilla de correo electrónico y el objeto `data` de cada activador. Una campaña puede definir hasta 100 variables.
+
+| Campo | Tipo | Requerido | Descripción |
+| --- | --- | --- | --- |
+| `path` | `data.<name>` | Sí | Camino variable. Se admiten rutas anidadas como `data.order.total`. |
+| `type` | `string`, `number`, `boolean`, `date` o `url` | Sí | Escriba el disparador que debe proporcionar. Un `date` debe ser una cadena de fecha válida y un `url` debe ser HTTP(S). |
+| `required` | booleano | Sí | Los valores faltantes devuelven `422` a menos que se establezca un valor predeterminado. |
+| `defaultValue` | cadena, número o booleano | No | Valor de reserva que debe coincidir con el tipo de variable. |
+| `description` | cadena | No | Explique el valor para que usted y Nudgen AI puedan usarlo correctamente. |
+
+Por ejemplo, use `{{data.order_id}}`, `{{data.total}}` y `{{data.order_url}}` en una plantilla. También puede utilizar `contact.*`, `event.*`, `brand.*` y variables heredadas como `{{firstName}}` y `{{brandName}}`.
+
+Nudgen escapa de los valores de las variables insertadas en HTML. Las plantillas no admiten JavaScript, expresiones ni bucles. Cualquier variable utilizada en un `href` debe ser una variable `data.*` declarada con el tipo `url`.
+
+## Administrar el ciclo de vida
+
+| Estado | Qué significa |
+| --- | --- |
+| **Borrador** | Configura la campaña y prueba su correo electrónico. |
+| **Activo** | Nudgen acepta activadores autenticados. |
+| **Pausado** | Nudgen no acepta nuevos desencadenantes. Puedes retomarlo. |
+| **Archivado** | La campaña está cerrada permanentemente y no se puede volver a activar. |
+
+Las transiciones válidas son `draft → active → paused → active` y `active|paused → archived`.
+
+<Note>
+Pausar o archivar cancela ejecuciones que aún están pendientes o en cola. Es posible que aún se envíe una ejecución que ya se está procesando.
+</Note>
+
+Cada ejecución toma una instantánea del contenido de la campaña y envía la configuración cuando Nudgen recibe el activador. La edición de una campaña activa afecta solo a los activadores posteriores, no a las ejecuciones que ya existen.
+
+## Activador desde su servidor
+
+Llame al punto final del activador desde un servidor confiable después de validar el evento de origen. Utilice la clave API de activación del equipo, no un token de acceso personal (PAT).
+
+```bash
+curl -X POST "$NUDGEN_APP_URL/api/v1/campaigns/$CAMPAIGN_ID/triggers" \
+  -H "Authorization: Bearer $NUDGEN_TEAM_API_KEY" \
+  -H "Content-Type: application/json" \
+  --data @- <<'JSON'
+{
+  "eventId": "order_123",
+  "eventName": "order.created",
+  "occurredAt": "2026-08-23T10:00:00Z",
+  "contact": {
+    "email": "an@example.com",
+    "externalId": "customer_456",
+    "name": "An Nguyen",
+    "metadata": { "company": "Nudgen" }
+  },
+  "data": {
+    "order_id": "order_123",
+    "total": 490000,
+    "order_url": "https://example.com/orders/order_123"
+  }
+}
+JSON
+```
+
+Mantenga el mismo `eventId` cuando vuelva a intentar un evento. Nudgen devuelve la ejecución existente con `200` y `duplicate: true` en lugar de enviar otro empujón. Una nueva ejecución devuelve `201`.
+
+## Integrar de forma segura
+
+- Activar desde un consumidor de webhook o backend y verificar el webhook entrante antes de llamar a Nudgen.
+- Reintentar errores de red, `429` y `503` con retroceso exponencial y lo mismo `eventId`.
+- No registre encabezados `Authorization` ni cargas útiles que contengan datos de contacto confidenciales.
+- Gire las claves de activación con regularidad y revoque una clave inmediatamente si sospecha que está expuesta.
+- Cree una campaña por tipo de evento y contrato variable para que las plantillas y las auditorías de ejecución permanezcan claras.
+
+## Monitorear ejecuciones
+
+Abra la campaña en el panel para ver las ejecuciones recientes y sus estados. Una ejecución puede ser `pending`, `queued`, `processing`, `sent`, `skipped`, `cancelled`, `failed` o `delivery_unknown`.
+
+`skipped` significa que la suscripción del contacto fue cancelada o rebotada, por lo que Nudgen registra el evento pero no envía ni consume cuota. `delivery_unknown` significa que el proveedor pudo haber aceptado el correo electrónico pero el resultado final de la entrega fue incierto; Nudgen no lo vuelve a intentar automáticamente para evitar un envío duplicado.
+
+Para consultas de configuración, activación y ejecución programática, consulte la [API para desarrolladores](/es/agents/api).
+
+## Documentos relacionados
+
+<CardGroup cols={2}>
+ <Card title="Campaigns overview" icon="list" href="/es/campaigns/overview">
+ Compare campañas únicas, por goteo y de por vida.
+ </Card>
+ <Card title="Developer API" icon="code" href="/es/agents/api">
+ Administre campañas de por vida y activadores a través de la API.
+ </Card>
+</CardGroup>

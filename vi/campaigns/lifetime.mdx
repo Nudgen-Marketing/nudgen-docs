@@ -1,29 +1,133 @@
 ---
-title: "Sử dụng chiến dịch Lifetime"
-description: "Gửi một email theo sự kiện cho contact qua mỗi trigger đã xác thực"
+title: "Sử dụng chiến dịch trọn đời"
+description: "Gửi một cú hích do sự kiện kích hoạt tới một liên hệ với mọi trình kích hoạt được xác thực"
 ---
 
-## Lifetime campaign là gì?
+## Trang này giúp bạn làm gì
 
-Lifetime campaign luôn sẵn sàng nhận event từ hệ thống của bạn. Mỗi trigger hợp lệ tạo tối đa một execution và gửi một nudge cho contact trong payload. Dùng cho xác nhận đơn hàng, nhắc thanh toán và onboarding theo sự kiện; audience luôn là **Trigger**.
+Tạo chiến dịch trọn đời luôn sẵn sàng cho các sự kiện từ bạn hệ thống. Mỗi trình kích hoạt hợp lệ tạo ra tối đa một lần thực thi và gửi một lần nhắc nhở đến người liên hệ trong tải trọng của nó.
 
-## Vì sao điều này quan trọng
+## Tại sao điều này lại quan trọng
 
-Backend quyết định thời điểm event, còn Nudgen quản lý nội dung, delivery, tracking và contact preferences trong một nơi.
+Bạn có thể gửi email kịp thời, phù hợp mà không cần phải xây dựng và khởi chạy nhiều lần các chiến dịch. Phần phụ trợ của bạn kiểm soát thời điểm một sự kiện xảy ra, trong khi Nudgen giữ nội dung email, gửi, theo dõi và tùy chọn liên hệ ở một nơi.
 
-## Thiết lập trong dashboard
+## Khi nào nên sử dụng chiến dịch Trọn đời
 
-1. Vào **Campaigns** → **New campaign** → **Lifetime**.
-2. Thêm parameter runtime. `order_id` tạo biến `{{data.order_id}}` trong email.
-3. Tạo nội dung, preview và test send, rồi **Activate** campaign.
-4. Vào **Settings** → **API Keys** để tạo **Team trigger API key**. Chỉ lưu secret `ndg_team_*` ở backend hoặc secret manager.
+Sử dụng chiến dịch Trọn đời cho email theo hướng sự kiện, chẳng hạn như:
 
-`variableManifest` là contract của template và `data`. Nó hỗ trợ tối đa 100 biến `data.*`; các kiểu là `string`, `number`, `boolean`, `date`, và `url`. Giá trị HTML được escape; biến trong `href` phải có kiểu `url`.
+- Đặt hàng xác nhận
+- Lời nhắc thanh toán
+- Tham gia dựa trên sự kiện
+- Cập nhật tài khoản hoặc đăng ký
 
-## Lifecycle và trigger
+Không giống như các chiến dịch một lần và nhỏ giọt, chiến dịch Trọn đời không gửi ngay đến đối tượng đã lưu. Đối tượng của nó luôn là **Kích hoạt**.
 
-Lifecycle hợp lệ là `draft → active → paused → active` và `active|paused → archived`. Archive không thể kích hoạt lại. Pause hoặc archive hủy execution `pending`/`queued`; execution đang xử lý vẫn có thể gửi. Mỗi execution snapshot nội dung lúc nhận trigger, nên sửa campaign chỉ áp dụng cho trigger về sau.
+## Tạo và kích hoạt chiến dịch
 
-Gọi trigger từ server đã xác thực event nguồn. Dùng lại `eventId` khi retry: response mới là `201`, còn duplicate là `200` với `duplicate: true`. Retry `429`, `503` và lỗi mạng bằng exponential backoff; không log header `Authorization` hoặc dữ liệu nhạy cảm.
+<Steps>
+ <Step title="Tạo chiến dịch trọn đời">
+ Đi tới **Chiến dịch**, nhấp vào **Chiến dịch mới**, sau đó chọn **Trọn đời**. Thêm tên chiến dịch, mục tiêu, cấu hình thương hiệu và liên kết CTA tùy chọn.
+ </Step>
+ <Step title="Xác định tham số thời gian chạy">
+ Thêm từng giá trị mà hệ thống của bạn sẽ cung cấp tại thời điểm gửi. Một tham số tạo biến `data.*`: ví dụ: `order_id` trở thành `{{data.order_id}}` trong email.
+ </Step>
+ <Step title="Tạo email">
+ Tạo hoặc ghi chủ đề và HTML, sau đó thêm các biến thời gian chạy của bạn vào nơi chúng thuộc về. Xem trước email và gửi bản kiểm tra trước khi kích hoạt nó.
+ </Step>
+ <Step title="Kích hoạt chiến dịch">
+ Lưu nó dưới dạng bản nháp, sau đó nhấp vào **Kích hoạt**. Nudgen kiểm tra xem các tham số bắt buộc có được trình bày trong email hay không và hợp đồng tham số không thay đổi kể từ khi tạo.
+ </Step>
+ <Step title="Tạo khóa kích hoạt">
+ Đi tới **Cài đặt** → **Khóa API** và tạo **Khóa API trình kích hoạt nhóm**. Lưu trữ bí mật `ndg_team_*` trong phần phụ trợ hoặc trình quản lý bí mật của bạn; không bao giờ đặt nó trong trình duyệt hoặc mã ứng dụng dành cho thiết bị di động.
+ </Step>
+</Steps>
 
-Xem [Developer API](/vi/agents/api) để tích hợp API chi tiết.
+## Tham số thời gian chạy và biến mẫu
+
+`variableManifest` của bạn là hợp đồng giữa mẫu email và từng trình kích hoạt Đối tượng `data`. Một chiến dịch có thể xác định tối đa 100 biến.
+
+| Lĩnh vực | Loại | Bắt buộc | Mô tả |
+| --- | --- | --- | --- |
+| `path` | `data.<name>` | Có | Đường dẫn biến đổi. Các đường dẫn lồng nhau như `data.order.total` được hỗ trợ. |
+| `type` | `string`, `number`, `boolean`, `date` hoặc `url` | Có | Loại trình kích hoạt phải cung cấp. `date` phải là chuỗi ngày hợp lệ và `url` phải là HTTP(S). |
+| `required` | boolean | Có | Các giá trị bị thiếu trả về `422` trừ khi đặt mặc định. |
+| `defaultValue` | chuỗi, số hoặc boolean | Không | Giá trị dự phòng phải khớp với loại biến. |
+| `description` | chuỗi | Không | Giải thích giá trị để bạn và Ndgen AI có thể sử dụng giá trị đó một cách chính xác. |
+
+Ví dụ: sử dụng `{{data.order_id}}`, `{{data.total}}` và `{{data.order_url}}` trong một mẫu. Bạn cũng có thể sử dụng `contact.*`, `event.*`, `brand.*` và các biến cũ như `{{firstName}}` và `{{brandName}}`.
+
+Nudgen thoát khỏi các giá trị biến được chèn vào HTML. Mẫu không hỗ trợ JavaScript, biểu thức hoặc vòng lặp. Bất kỳ biến nào được sử dụng trong `href` đều phải là biến `data.*` được khai báo với loại `url`.
+
+## Quản lý vòng đời
+
+| Trạng thái | Ý nghĩa của nó |
+| --- | --- |
+| **Bản nháp** | Định cấu hình chiến dịch và kiểm tra email của chiến dịch. |
+| **Đang hoạt động** | Nudgen chấp nhận các kích hoạt đã được xác thực. |
+| **Đã tạm dừng** | Nudgen không chấp nhận những kích hoạt mới. Bạn có thể tiếp tục nó. |
+| **Đã lưu trữ** | Chiến dịch bị đóng vĩnh viễn và không thể kích hoạt lại. |
+
+Các chuyển đổi hợp lệ là `draft → active → paused → active` và `active|paused → archived`.
+
+<Note>
+Tạm dừng hoặc lưu trữ sẽ hủy các lệnh thực thi vẫn đang chờ xử lý hoặc xếp hàng đợi. Một lần thực thi đã được xử lý vẫn có thể gửi.
+</Note>
+
+Mỗi lần thực thi sẽ chụp nhanh nội dung chiến dịch và gửi cài đặt khi Nudgen nhận được kích hoạt. Việc chỉnh sửa chiến dịch đang hoạt động chỉ ảnh hưởng đến các lần kích hoạt sau này chứ không ảnh hưởng đến các lần thực thi đã tồn tại.
+
+## Trình kích hoạt từ chương trình phụ trợ của bạn
+
+Gọi điểm cuối trình kích hoạt từ một máy chủ đáng tin cậy sau khi bạn xác thực sự kiện nguồn. Sử dụng khóa API trình kích hoạt nhóm chứ không phải Mã thông báo truy cập cá nhân (PAT).
+
+```bash
+curl -X POST "$NUDGEN_APP_URL/api/v1/campaigns/$CAMPAIGN_ID/triggers" \
+  -H "Authorization: Bearer $NUDGEN_TEAM_API_KEY" \
+  -H "Content-Type: application/json" \
+  --data @- <<'JSON'
+{
+  "eventId": "order_123",
+  "eventName": "order.created",
+  "occurredAt": "2026-08-23T10:00:00Z",
+  "contact": {
+    "email": "an@example.com",
+    "externalId": "customer_456",
+    "name": "An Nguyen",
+    "metadata": { "company": "Nudgen" }
+  },
+  "data": {
+    "order_id": "order_123",
+    "total": 490000,
+    "order_url": "https://example.com/orders/order_123"
+  }
+}
+JSON
+```
+
+Giữ nguyên `eventId` khi bạn thử lại một sự kiện. Nudgen trả về việc thực thi hiện có với `200` và `duplicate: true` thay vì gửi một cú hích khác. Một lần thực thi mới trả về `201`.
+
+## Tích hợp an toàn
+
+- Kích hoạt từ người dùng webhook hoặc chương trình phụ trợ và xác minh webhook đến trước khi gọi Nudgen.
+- Thử lại lỗi mạng, `429` và `503` với dự phòng theo cấp số nhân và giống `eventId`.
+- Không ghi lại các tiêu đề hoặc tải trọng `Authorization` chứa dữ liệu liên hệ nhạy cảm.
+- Xoay khóa kích hoạt thường xuyên và thu hồi khóa ngay lập tức nếu bạn nghi ngờ nó bị lộ.
+- Tạo một chiến dịch cho mỗi loại sự kiện và hợp đồng biến đổi để các mẫu và quá trình kiểm tra thực thi luôn rõ ràng.
+
+## Giám sát các lần thực thi
+
+Mở chiến dịch trong trang tổng quan để xem các lần thực thi gần đây và trạng thái của chúng. Việc thực thi có thể là `pending`, `queued`, `processing`, `sent`, `skipped`, `cancelled`, `failed` hoặc `delivery_unknown`.
+
+`skipped` có nghĩa là liên hệ đã bị hủy đăng ký hoặc bị trả lại, do đó Nudgen ghi lại sự kiện nhưng không gửi hoặc sử dụng hạn mức. `delivery_unknown` có nghĩa là nhà cung cấp có thể đã chấp nhận email nhưng kết quả gửi cuối cùng không chắc chắn; Nudgen không tự động thử lại để tránh gửi trùng lặp.
+
+Để thiết lập, kích hoạt và thực thi các truy vấn có lập trình, hãy xem [API nhà phát triển](/vi/agents/api).
+
+## Tài liệu liên quan
+
+<CardGroup cols={2}>
+ <Card title="Tổng quan về chiến dịch" icon="list" href="/vi/campaigns/overview">
+ So sánh các chiến dịch một lần, nhỏ giọt và trọn đời.
+ </Card>
+ <Card title="Developer API" icon="code" href="/vi/agents/api">
+ Quản lý Các chiến dịch và lần kích hoạt trọn đời thông qua API.
+ </Card>
+</CardGroup>

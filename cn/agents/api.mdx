@@ -1,71 +1,254 @@
 ---
-title: "开发者 API"
-description: "使用个人访问令牌认证的 REST API。以编程方式管理联系人、营销活动、模板和设置。"
+title: 标题：“开发人员 API”
+description: 描述：“适用于您的 Nudgen 工作区的 REST API，包括事件触发的终身活动”
 ---
 
 ## 概述
 
-Nudgen 开发者 API 提供了一个干净、面向资源的 REST 接口，用于管理您的营销基础设施。所有请求都使用标准的 HTTP 方法，并返回可预测的 JSON 响应。
+Nudgen 开发人员 API 为您的工作区提供脚本、内部工具和 AI 代理可预测的 REST 接口。使用个人访问令牌 (PAT) 来管理工作区资源。仅使用团队触发器 API 密钥从后端触发终身营销活动。
 
-<CardGroup cols={3}>
-  <Card title="PAT 认证" icon="shield-check">
-    通过标准的 Bearer 请求头使用个人访问令牌进行身份认证。
-  </Card>
-  <Card title="标准 REST" icon="globe">
-    采用标准 HTTP 方法、可预测且面向资源的 URL。
-  </Card>
-  <Card title="速率限制" icon="gauge">
-    每个团队和端点内置速率限制，以保护您的工作流。
-  </Card>
-</CardGroup>
+## 为什么这很重要
 
-## 身份认证
+您可以自动化营销和事件驱动的保留工作流程，而无需共享仪表板会话。 PAT 保持工作区管理可撤销，而狭窄的团队触发键允许生产服务发送事件触发的微移，而无需广泛的工作区访问。
 
-所有 API 请求都需要通过 `Authorization` 请求头传递个人访问令牌 (PAT)。您可以从 Nudgen 控制面板的 **设置 → API 密钥** 中生成令牌。
+## 基本 URL
+
+为您的环境设置一次应用程序 URL，并在每个示例中使用它。生产常用`https://app.nudgen.net`；本地开发通常使用`http://localhost:3000`。
 
 ```bash
-curl -X GET https://app.nudgen.com/api/v1/user/me \
-  -H "Authorization: Bearer <your-pat>"
+export NUDGEN_APP_URL="https://app.nudgen.net"
 ```
 
-## 基准 URL
+##身份验证
 
-所有 API 请求的基准 URL 为：
-`https://app.nudgen.com`
+###个人访问令牌
 
-## 端点
+在**设置** → **API密钥**中创建PAT。将其用于联系人、营销活动管理、品牌设置和 AI 生成。
 
-### 认证与身份
-- `GET /api/v1/user/me`：获取当前认证的用户。
-- `GET /api/v1/teams`：列出当前用户的所有团队。
-- `POST /api/v1/teams/switch`：切换活跃团队上下文。
+```bash
+Authorization: Bearer $NUDGEN_PAT
+```
+
+PAT 仅显示一次。安全地存储它们，并从 **设置** → **API 密钥** 撤销任何旧的或公开的令牌。
+
+### 团队触发器 API 密钥
+
+团队触发器 API 密钥以 `ndg_team_` 开头，并具有狭窄的 `campaigns:trigger` 范围。只能触发终身活动； PAT 无法触发它们。
+
+只有工作区所有者和管理员才能创建、轮换或撤销这些密钥。默认情况下，密钥会在 90 天后过期。将 `expiresInDays` 设置为 `null` 以创建永不过期的密钥。
+
+```bash
+curl -X POST "$NUDGEN_APP_URL/api/v1/settings/team-api-keys" \
+  -H "Authorization: Bearer $NUDGEN_PAT" \
+  -H "Content-Type: application/json" \
+  --data '{"name":"Order service production","expiresInDays":90}'
+```
+
+`201` 响应仅包含一次明文 `key`。将其保存在服务器端秘密管理器中。后来的回复仅公开 `keyPrefix`。
+
+|方法|端点 |描述 |
+| --- | --- | --- |
+| `POST` | `/api/v1/settings/team-api-keys` |创建团队触发器 API 密钥。 |
+| `GET` | `/api/v1/settings/team-api-keys` |列出团队触发器 API 密钥。 |
+| `POST` | `/api/v1/settings/team-api-keys/:id` |轮换活动的、未过期的密钥。 |
+| `DELETE` | `/api/v1/settings/team-api-keys/:id` |撤销密钥。 |
+
+## REST 端点
+
+### 身份和工作区
+
+|方法|端点 |描述 |
+| --- | --- | --- |
+| `GET` | `/api/v1/user/me` |获取经过身份验证的用户。 |
+| `GET` | `/api/v1/teams` |列出令牌所有者可用的工作区。 |
 
 ### 联系人
-- `GET /api/v1/contacts`：列出联系人，支持分页、搜索和标签过滤。
-- `POST /api/v1/contacts/add`：创建新联系人。
-- `GET /api/v1/contacts/:id`：检索特定联系人。
-- `PATCH /api/v1/contacts/:id`：更新现有联系人。
-- `DELETE /api/v1/contacts/:id`：删除联系人。
 
-### 营销活动
-- `GET /api/v1/campaigns`：列出当前团队中的营销活动。
-- `POST /api/v1/campaigns`：创建新营销活动。
-- `GET /api/v1/campaigns/:id`：获取营销活动详情。
-- `GET /api/v1/campaigns/:id/stats`：获取营销活动发送统计。
+|方法|端点 |描述 |
+| --- | --- | --- |
+| `GET` | `/api/v1/contacts` |使用 `page`、`limit`、`search`、`tags` 和 `status` 筛选器列出联系人。 |
+| `POST` | `/api/v1/contacts/add` |创建联系人。 |
+| `GET` | `/api/v1/contacts/:id` |获取联系方式。 |
+| `PATCH` | `/api/v1/contacts/:id` |更新联系人。 |
+| `DELETE` | `/api/v1/contacts/:id` |删除联系人。 |
 
-### 模板
-- `GET /api/v1/templates`：列出邮件模板。
-- `POST /api/v1/templates`：创建新邮件模板。
+```bash
+curl -X POST "$NUDGEN_APP_URL/api/v1/contacts/add" \
+  -H "Authorization: Bearer $NUDGEN_PAT" \
+  -H "Content-Type: application/json" \
+  --data '{"email":"nathan@example.com","name":"Nathan Nguyen","tags":["api-test"]}'
+```
 
-### 设置
-- `GET /api/v1/settings/brand`：获取品牌配置。
-- `PATCH /api/v1/settings/brand`：更新品牌设置。
+### 一次性和滴水活动
 
-## OpenAPI 规范
+|方法|端点 |描述 |
+| --- | --- | --- |
+| `GET` | `/api/v1/campaigns` |列出活动工作区中的营销活动。 |
+| `POST` | `/api/v1/campaigns` |创建活动草稿或计划的活动。 |
+| `GET` | `/api/v1/campaigns/:id` |获取活动详细信息。 |
+| `PUT` | `/api/v1/campaigns/:id` |更新现有的营销活动。 |
+| `POST` | `/api/v1/campaigns/:id/launch` |立即启动或安排一次性或点滴活动。 |
+| `GET` | `/api/v1/campaigns/:id/stats` |获取送达、打开、点击、退回和投诉统计信息。 |
+| `GET` | `/api/v1/campaigns/:id/progress` |获取营销活动发送进度。 |
+| `GET` | `/api/v1/campaigns/:id/recipients` |列出活动收件人。 |
+| `POST` | `/api/v1/campaigns/test-send` |发送测试电子邮件而不使用仪表板发送统计信息。 |
 
-您可以在此处下载我们完整的 OpenAPI 规范：
-[openapi.json](https://app.nudgen.com/api/openapi.json)
+<Warning>
+发起活动会安排真实的电子邮件。使用 `/api/v1/campaigns/test-send` 进行收件箱预览。
+</Warning>
 
-## Lifetime 营销活动
+## 终身营销活动
 
-使用 PAT 创建 draft 和修改 lifecycle（`PATCH /api/v1/campaigns/:id/lifecycle`）。只有 `ndg_team_*` Team trigger API key 可以调用 `POST /api/v1/campaigns/:id/triggers`。使用 `eventId` 实现幂等，并通过 `GET /api/v1/campaigns/:id/executions` 查询 execution。参阅 [Lifetime 指南](/cn/campaigns/lifetime)。
+终身营销活动是事件触发的：每个接受的触发器最多创建一次执行并向提供的联系人发送一次推送。请参阅[使用终身营销活动](/cn/campaigns/lifetime)，了解仪表板工作流程和可变合同指南。
+
+### 创建终身营销活动
+
+以 `draft` 创建终身营销活动。请勿发送`sendNow: true`、`status: "active"`或`status: "scheduled"`；使用其生命周期端点激活营销活动。
+
+```bash
+curl -X POST "$NUDGEN_APP_URL/api/v1/campaigns" \
+  -H "Authorization: Bearer $NUDGEN_PAT" \
+  -H "Content-Type: application/json" \
+  --data @- <<'JSON'
+{
+  "name": "Order confirmation",
+  "type": "lifetime",
+  "status": "draft",
+  "goal": "Confirm an order and direct the customer to its details.",
+  "subject": "Your order {{data.order_id}} was received",
+  "html": "<p>Hello {{contact.firstName}},</p><p>Order {{data.order_id}} totals {{data.total}} VND.</p><p><a href=\"{{data.order_url}}\">View your order</a></p>",
+  "link": "https://example.com/orders",
+  "variableManifest": [
+    { "path": "data.order_id", "type": "string", "required": true, "description": "Order ID" },
+    { "path": "data.total", "type": "number", "required": true, "description": "Order total in VND" },
+    { "path": "data.order_url", "type": "url", "required": true, "description": "Order details URL" }
+  ],
+  "generatedVariableManifest": [
+    { "path": "data.order_id", "type": "string", "required": true, "description": "Order ID" },
+    { "path": "data.total", "type": "number", "required": true, "description": "Order total in VND" },
+    { "path": "data.order_url", "type": "url", "required": true, "description": "Order details URL" }
+  ]
+}
+JSON
+```
+
+`variableManifest` 定义最多 100 个 `data.*` 变量。它必须包含主题或 HTML 中使用的每个 `data.*` 令牌。默认值必须与声明的类型匹配，并且 HTML `href` 中使用的变量必须具有类型 `url`。
+
+生成电子邮件内容时，保存匹配的 `generatedVariableManifest`。如果 Nudgen 与当前清单不同或电子邮件中缺少必需的声明参数，则会阻止激活。
+
+### 更改生命周期
+
+|方法|端点 |认证|描述 |
+| --- | --- | --- | --- |
+| `PATCH` | `/api/v1/campaigns/:campaignId/lifecycle` |帕特 |将终身营销活动更改为 `active`、`paused` 或 `archived`。 |
+
+```bash
+curl -X PATCH "$NUDGEN_APP_URL/api/v1/campaigns/$CAMPAIGN_ID/lifecycle" \
+  -H "Authorization: Bearer $NUDGEN_PAT" \
+  -H "Content-Type: application/json" \
+  --data '{"status":"active"}'
+```
+
+有效转换为 `draft → active → paused → active` 和 `active|paused → archived`。暂停或归档会取消仍为 `pending` 或 `queued` 的执行，并释放其配额保留。已处理的执行仍可能发送。
+
+### 触发微移
+
+|方法|端点 |认证|描述 |
+| --- | --- | --- | --- |
+| `POST` | `/api/v1/campaigns/:campaignId/triggers` |团队触发 API 密钥 |创建一个事件执行并对微移进行排队。 |
+
+```bash
+curl -X POST "$NUDGEN_APP_URL/api/v1/campaigns/$CAMPAIGN_ID/triggers" \
+  -H "Authorization: Bearer $NUDGEN_TEAM_API_KEY" \
+  -H "Content-Type: application/json" \
+  --data @- <<'JSON'
+{
+  "eventId": "order_123",
+  "eventName": "order.created",
+  "occurredAt": "2026-08-23T10:00:00Z",
+  "contact": {
+    "email": "an@example.com",
+    "externalId": "customer_456",
+    "name": "An Nguyen",
+    "phone": "+84901234567",
+    "metadata": { "company": "Nudgen" }
+  },
+  "data": {
+    "order_id": "order_123",
+    "total": 490000,
+    "order_url": "https://example.com/orders/order_123"
+  }
+}
+JSON
+```
+
+|领域|类型 |必填 |限制和行为 |
+| --- | --- | --- | --- |
+| `eventId` |字符串|是的 | 1–128 个字符。活动中唯一的幂等性密钥；重试时重复使用它。 |
+| `eventName` |字符串|没有 | 1–100 个字符，例如 `order.created`。 |
+| `occurredAt` | ISO 8601 日期时间 |没有 |源事件的时间。 |
+| `contact.email` |电子邮件 |是的 |小写。 Nudgen 通过电子邮件创建或更新联系人。 |
+| `contact.externalId` |字符串|没有 | 1–200 个字符，并且不能属于工作区中的其他联系人电子邮件。 |
+| `contact.name` |字符串|没有 |最多 200 个字符。 |
+| `contact.phone` |字符串|没有 |最多 50 个字符。 |
+| `contact.metadata` |对象|没有 |附加联系人资料数据。 |
+| `data` |对象|是的 |必须匹配`variableManifest`；最大 32 KiB。 |
+
+整个请求正文限制为 64 KiB，JSON 嵌套为八层，`__proto__`、`constructor` 和 `prototype` 等不安全密钥将被拒绝。
+
+新触发器返回 `201` 和 `{ "execution": { "id": "...", "status": "queued" }, "duplicate": false }`。重用 `eventId` 将返回 `200` 和 `duplicate: true` 的现有执行。
+
+### 列出执行
+
+|方法|端点 |认证|描述 |
+| --- | --- | --- | --- |
+| `GET` | `/api/v1/campaigns/:campaignId/executions` |帕特 |列出终身营销活动执行情况。 |
+
+```bash
+curl "$NUDGEN_APP_URL/api/v1/campaigns/$CAMPAIGN_ID/executions?limit=25&status=sent&search=an@example.com" \
+  -H "Authorization: Bearer $NUDGEN_PAT"
+```
+
+使用`limit`从1到100（默认`25`），`cursor`用于下一页，`status`按执行状态过滤，以及`search` 匹配电子邮件或外部 ID。响应包括 `executions` 和 `nextCursor`。
+
+## 错误、重试和速率限制
+
+生命周期触发器允许每个团队触发器 API 密钥每分钟 600 个请求。响应包括 `x-ratelimit-limit`、`x-ratelimit-remaining` 和 `x-ratelimit-reset`。 `429` 响应还包括 `Retry-After`。
+
+|状态 |意义|该怎么办 |
+| --- | --- | --- |
+| `200` |重复 `eventId` |使用返回的执行；不要再发送。 |
+| `201` |新的执行已排队 |等待工人处理。 |
+| `400` |无效的 JSON、正文或基本字段 |修正有效载荷；不要重试不变。 |
+| `401` |密钥丢失、无效、撤销、过期或范围错误 |轮换或更正密钥配置。 |
+| `402` / `403` |配额或订阅阻止写入 |解决配额或订阅问题。配额错误包括 `code`、`required`、`available` 和 `checkoutUrl`。 |
+| `404` |营销活动丢失或位于密钥工作区之外 |检查活动 ID 和密钥。 |
+| `409` |活动未激活/不是终身的，或联系人身份冲突 |激活活动或更正联系人身份。 |
+| `413` |请求超过 64 KiB |减少有效负载大小。 |
+| `415` |缺少 `Content-Type: application/json` |添加所需的标头。 |
+| `422` | `data` 与变量清单不匹配|修正数据；检查 `details` 的路径和错误代码。 |
+| `429` |超出速率限制 |等待 `Retry-After`，然后使用相同的 `eventId` 重试。 |
+| `503` |执行无法排队 |使用退避和相同的 `eventId` 重试。 |
+
+对于 `429`、`503` 和网络错误，请使用指数退避和相同的 `eventId` 重试。队列作业的执行是确定性的，因此重试不会创建重复的电子邮件。
+
+### 品牌设置
+
+|方法|端点 |描述 |
+| --- | --- | --- |
+| `GET` | `/api/v1/settings/brand` |阅读品牌名称、网站、发件人电子邮件、徽标和设计设置。 |
+| `PATCH` | `/api/v1/settings/brand` |更新品牌设置。 |
+
+### AI 草稿生成
+
+|方法|端点 |描述 |
+| --- | --- | --- |
+| `POST` | `/api/v1/ai/generate` |根据营销活动上下文生成电子邮件主题和 HTML 草稿。 |
+
+## MCP 服务器
+
+当您的代理支持模型上下文协议工具时，请使用 [Nudgen MCP](/en/agents/mcp)。 MCP 使用与工作区管理 API 相同的 PAT，但将 Nudgen 公开为代理可调用工具，而不是传统的 HTTP 端点。
+
+<Card title="MCP server setup" icon="bot" href="/en/agents/mcp">
+ 在 Claude Code、Cursor、Windsurf、Codex CLI 或通用 MCP 客户端中安装 Nudgen MCP。
+</Card>

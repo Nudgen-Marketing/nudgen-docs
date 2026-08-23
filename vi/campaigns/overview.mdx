@@ -1,43 +1,89 @@
 ---
-title: "Tổng quan chiến dịch"
-description: "Chiến dịch gửi một lần, chiến dịch nhỏ giọt và các trạng thái chiến dịch"
+title: "Tổng quan về chiến dịch"
+description: "Chiến dịch một lần, nhỏ giọt và trọn đời"
 ---
 
 ## Trang này giúp bạn làm gì
 
-Hiểu hai loại chiến dịch và ý nghĩa của từng trạng thái. Điều này giúp bạn chọn đúng loại chiến dịch và đọc danh sách chiến dịch dễ hơn.
+Hiểu ba loại chiến dịch và vòng đời của chúng. Điều này giúp bạn chọn loại chiến dịch phù hợp và diễn giải danh sách chiến dịch của bạn.
 
-## Trước khi bắt đầu
+## Trước khi bạn bắt đầu
 
-- Đã tải danh bạ lên Nudgen
-- Đã có cấu hình thương hiệu
+- Địa chỉ liên hệ được tải lên trong Nudgen
+- Cấu hình thương hiệu (âm thanh cài sẵn hoặc lời nhắc tùy chỉnh)
 
-## Các loại chiến dịch
+## Chiến dịch loại
 
-### Chiến dịch gửi một lần
+### Chiến dịch một lần
 
-Một email được gửi một lần đến nhóm người nhận bạn chọn. Dùng khi bạn muốn:
+A một email được gửi một lần tới đối tượng đã chọn của bạn. Sử dụng tính năng này khi bạn muốn:
 
-- Thông báo tính năng hoặc sự kiện
-- Gửi một đợt tái kích hoạt duy nhất
-- Thử nghiệm thông điệp trước khi xây chuỗi dài hơn
+- Thông báo một tính năng hoặc sự kiện
+- Gửi thông báo thu hút lại một lần
+- Kiểm tra tin nhắn trước khi tạo chuỗi dài hơn
 
-### Chuỗi drip
+Bạn chọn đối tượng, AI tạo nội dung, bạn xem trước và gửi (hoặc lịch trình).
 
-Chuỗi nhiều bước với khoảng cách giữa các email, ví dụ Day 1, Day 3, Day 7. Dùng khi bạn muốn:
+### Trình tự nhỏ giọt
 
-- Nhắc lại người dùng không hoạt động trong vài ngày
-- Theo dõi những người không mở hoặc không nhấp
-- Xây một luồng giữ chân kiểu Duolingo
+A Chiến dịch nhiều bước có độ trễ giữa các email (ví dụ: Ngày 1, Ngày 3, Ngày 7). Sử dụng tính năng này khi bạn muốn:
 
-Mỗi bước có mục tiêu, tiêu đề và nội dung riêng do AI tạo. Bạn có thể đặt quy tắc tự dừng để người đã tương tác không nhận các bước sau.
+- Thúc đẩy người dùng không hoạt động trong vài ngày
+- Theo dõi những người dùng không mở hoặc không nhấp chuột
+- Xây dựng quy trình lưu giữ theo phong cách Duolingo
+
+EMỗi bước đều có mục tiêu, chủ đề và nội dung do AI tạo riêng. Danh bạ chỉ chuyển sang bước tiếp theo sau khi trì hoãn. Bạn có thể đặt **quy tắc tự động dừng** (ví dụ: dừng khi người nhận nhấp vào hoặc khi họ mở email) để những người dùng tương tác ngừng nhận các bước sau.
+
+### Chiến dịch trọn đời
+
+A Chiến dịch trọn đời luôn sẵn sàng cho các sự kiện từ hệ thống của bạn. Mỗi trình kích hoạt được xác thực sẽ tạo tối đa một lần thực thi và gửi một lần nhắc nhở đến người liên hệ trong trình kích hoạt đó.
+
+Sử dụng chiến dịch Trọn đời để xác nhận đơn hàng, lời nhắc thanh toán, giới thiệu dựa trên sự kiện hoặc các email giao dịch và lưu giữ khác mà chương trình phụ trợ của bạn khởi tạo. Đối tượng của nó luôn là **Kích hoạt**—nó không gửi ngay đến phân khúc liên hệ đã lưu.
+
+Xem [Sử dụng chiến dịch trọn đời](/vi/campaigns/lifetime) để biết quy trình làm việc trên trang tổng quan và hướng dẫn tích hợp.
+
+**Loại đối tượng:** Khi tạo chiến dịch, bạn chọn ai sẽ nhận chiến dịch đó: **Tất cả địa chỉ liên hệ**, **Theo thẻ** (chỉ những địa chỉ liên hệ có thẻ đã chọn) hoặc **Thủ công** (chọn tay người nhận). Trình hướng dẫn hiển thị ước tính phạm vi tiếp cận trước khi bạn khởi chạy.
 
 ## Trạng thái chiến dịch
 
 | Trạng thái | Ý nghĩa |
-| ---------- | ------- |
-| **Draft** | Chưa gửi. Có thể chỉnh mục tiêu, đối tượng, nội dung và lịch gửi. |
-| **Scheduled** | Đã lên lịch. Email sẽ được gửi vào thời điểm đã đặt. |
-| **Active / Sending** | Email đang được gửi. Tiến trình hiển thị trong dashboard. |
-| **Sent** | Đã gửi xong toàn bộ. Nội dung bị khóa nhưng vẫn xem được phân tích. |
-| **Stopped** | Đã dừng thủ công. Một số liên hệ có thể đã nhận email; các bước sau bị hủy. |
+| ---------- | ----------------------------------------------------------------------- |
+| **Bản nháp** | Không được gửi. Bạn có thể chỉnh sửa mục tiêu, đối tượng, nội dung và lịch trình.         |
+| **Đã lên lịch** | Thời gian gửi đã được thiết lập. Email sẽ đi ra ngoài vào thời gian dự kiến.        |
+| **Đang hoạt động** / **Đang gửi** | Email đang được gửi đi. Tiến trình xuất hiện trong bảng điều khiển.     |
+| **Đã gửi** | Tất cả các email đã được gửi. Nội dung bị khóa; bạn có thể xem phân tích.  |
+| **Đã dừng**| Chiến dịch đã bị dừng theo cách thủ công. Một số địa chỉ liên hệ có thể đã nhận được email; các bước nhỏ giọt trong tương lai sẽ bị hủy bỏ. |
+
+<Note>
+Sau khi chiến dịch được gửi, bạn không thể chỉnh sửa nội dung hoặc gửi lại. Tạo một chiến dịch mới để gửi một tin nhắn khác.
+</Note>
+
+### Vòng đời trọn đời
+
+Chiến dịch trọn đời sử dụng một vòng đời riêng biệt: **Dự thảo** → **Đang hoạt động** → **Tạm dừng** → **Hoạt động** hoặc **Hoạt động/Tạm dừng** → **Đã lưu trữ**. Bạn không thể kích hoạt lại chiến dịch đã lưu trữ.
+
+Khi bạn tạm dừng hoặc lưu trữ một chiến dịch Trọn đời, Nudgen sẽ hủy các lần thực thi vẫn đang chờ xử lý hoặc đang xếp hàng đợi. Việc thực thi đã được xử lý vẫn có thể gửi. Các thay đổi đối với chiến dịch đang hoạt động chỉ áp dụng cho các trình kích hoạt trong tương lai vì mỗi lần thực thi sẽ lưu trữ ảnh chụp nhanh nội dung và cấu hình gửi.
+
+## Điều gì xảy ra tiếp theo
+
+- [Tạo chiến dịch](/vi/campaigns/create) — xem qua trình hướng dẫn và gửi email đầu tiên của bạn.
+- [Quản lý chiến dịch](/vi/campaigns/manage) — chỉnh sửa bản nháp, gửi, lên lịch hoặc dừng.
+- [Sử dụng chiến dịch trọn đời](/vi/campaigns/lifetime) — định cấu hình chiến dịch kích hoạt sự kiện và tích hợp API của chiến dịch đó.
+- [Xem phân tích](/vi/campaigns/analytics) — mở, nhấp chuột, tỷ lệ phân phối và người nhận hoạt động.
+
+## Tài liệu liên quan
+
+<CardGroup cols={2}>
+ <Card title="Tạo chiến dịch" icon="paper-plane" href="/vi/campaigns/create">
+ Trình hướng dẫn chiến dịch từng bước.
+ </Card>
+ <Card title="Quản lý chiến dịch" icon="pen-to-square" href="/vi/campaigns/manage">
+ Chỉnh sửa, gửi, lên lịch và dừng.
+ </Card>
+ <Card title="Sử dụng chiến dịch trọn đời" icon="bolt" href="/vi/campaigns/lifetime">
+ Gửi một cú huých cho mỗi sự kiện từ hệ thống của bạn.
+ </Card>
+ <Card title="Campaign Analytics" icon="chart-line" href="/vi/campaigns/analytics">
+ Chỉ số và hoạt động của người nhận.
+ </Card>
+</CardGroup>

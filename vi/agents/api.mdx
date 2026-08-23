@@ -1,71 +1,254 @@
 ---
-title: "API dành cho nhà phát triển"
-description: "REST API với xác thực bằng Personal Access Token. Quản lý danh bạ, chiến dịch, mẫu và cài đặt bằng lập trình."
+title: "API nhà phát triển"
+description: "API REST cho không gian làm việc Nudgen của bạn, bao gồm các chiến dịch trọn đời do sự kiện kích hoạt"
 ---
 
 ## Tổng quan
 
-Nudgen Developer API cung cấp giao diện REST sạch sẽ, hướng tài nguyên để quản lý cơ sở hạ tầng marketing của bạn. Tất cả các yêu cầu đều sử dụng các phương thức HTTP tiêu chuẩn và trả về các phản hồi JSON có thể dự đoán được.
+API nhà phát triển Nudgen cung cấp cho các tập lệnh, công cụ nội bộ và tác nhân AI một khả năng có thể dự đoán được Giao diện REST cho không gian làm việc của bạn. Sử dụng Mã thông báo truy cập cá nhân (PAT) để quản lý tài nguyên không gian làm việc. Chỉ sử dụng khóa API kích hoạt nhóm để kích hoạt chiến dịch Trọn đời từ chương trình phụ trợ của bạn.
 
-<CardGroup cols={3}>
-  <Card title="Xác thực PAT" icon="shield-check">
-    Xác thực bằng Personal Access Tokens thông qua tiêu đề Bearer tiêu chuẩn.
-  </Card>
-  <Card title="REST sạch sẽ" icon="globe">
-    Các URL hướng tài nguyên, có thể dự đoán được với các phương thức HTTP tiêu chuẩn.
-  </Card>
-  <Card title="Giới hạn tốc độ" icon="gauge">
-    Tích hợp sẵn tính năng giới hạn tốc độ (rate limiting) cho mỗi nhóm và điểm cuối để bảo vệ quy trình làm việc của bạn.
-  </Card>
-</CardGroup>
+## Tại sao điều này lại quan trọng
 
-## Xác thực
-
-Tất cả các yêu cầu API đều yêu cầu Personal Access Token (PAT) được truyền qua tiêu đề `Authorization`. Bạn có thể tạo token từ bảng điều khiển Nudgen trong phần **Cài đặt → API Keys**.
-
-```bash
-curl -X GET https://app.nudgen.com/api/v1/user/me \
-  -H "Authorization: Bearer <your-pat>"
-```
+Bạn có thể tự động hóa quy trình tiếp thị và quy trình lưu giữ theo sự kiện mà không cần chia sẻ phiên trang tổng quan. PAT giữ cho việc quản lý không gian làm việc có thể thu hồi được, trong khi khóa kích hoạt Nhóm hẹp cho phép dịch vụ sản xuất gửi một cú huých do sự kiện kích hoạt mà không có quyền truy cập không gian làm việc rộng.
 
 ## URL cơ sở
 
-URL cơ sở cho tất cả các yêu cầu API là:
-`https://app.nudgen.com`
+Đặt URL ứng dụng cho môi trường của bạn một lần và sử dụng URL đó trong mọi ví dụ. Sản xuất thường sử dụng `https://app.nudgen.net`; phát triển cục bộ thường sử dụng `http://localhost:3000`.
 
-## Các điểm cuối (Endpoints)
+```bash
+export NUDGEN_APP_URL="https://app.nudgen.net"
+```
 
-### Xác thực & Danh tính
-- `GET /api/v1/user/me`: Lấy thông tin người dùng hiện tại đã xác thực.
-- `GET /api/v1/teams`: Liệt kê tất cả các nhóm của người dùng hiện tại.
-- `POST /api/v1/teams/switch`: Chuyển đổi ngữ cảnh nhóm đang hoạt động.
+## Authentication
 
-### Danh bạ
-- `GET /api/v1/contacts`: Liệt kê danh bạ với phân trang, tìm kiếm và bộ lọc thẻ (tag).
-- `POST /api/v1/contacts/add`: Tạo danh bạ mới.
-- `GET /api/v1/contacts/:id`: Lấy thông tin một danh bạ cụ thể.
-- `PATCH /api/v1/contacts/:id`: Cập nhật danh bạ hiện có.
-- `DELETE /api/v1/contacts/:id`: Xóa một danh bạ.
+### Mã thông báo truy cập cá nhân
 
-### Chiến dịch
-- `GET /api/v1/campaigns`: Liệt kê các chiến dịch trong nhóm hiện tại.
-- `POST /api/v1/campaigns`: Tạo một chiến dịch mới.
-- `GET /api/v1/campaigns/:id`: Lấy chi tiết chiến dịch.
-- `GET /api/v1/campaigns/:id/stats`: Lấy số liệu thống kê gửi chiến dịch.
+Tạo PAT trong **Cài đặt** → **Khóa API**. Sử dụng nó để liên hệ, quản lý chiến dịch, cài đặt thương hiệu và tạo AI.
 
-### Mẫu (Templates)
-- `GET /api/v1/templates`: Liệt kê các mẫu email.
-- `POST /api/v1/templates`: Tạo một mẫu email mới.
+```bash
+Authorization: Bearer $NUDGEN_PAT
+```
 
-### Cài đặt
-- `GET /api/v1/settings/brand`: Lấy cấu hình thương hiệu.
-- `PATCH /api/v1/settings/brand`: Cập nhật cài đặt thương hiệu.
+PAT chỉ được hiển thị một lần. Lưu trữ chúng một cách an toàn và thu hồi mọi mã thông báo cũ hoặc bị lộ khỏi **Cài đặt** → **Khóa API**.
 
-## Đặc tả OpenAPI
+### Khóa API kích hoạt nhóm
 
-Bạn có thể tải xuống đặc tả OpenAPI đầy đủ của chúng tôi tại đây:
-[openapi.json](https://app.nudgen.com/api/openapi.json)
+A Khóa API kích hoạt nhóm bắt đầu bằng `ndg_team_` và có phạm vi `campaigns:trigger` hẹp. Nó chỉ có thể kích hoạt các chiến dịch Trọn đời; PAT không thể kích hoạt chúng.
 
-## Lifetime campaigns
+Chỉ chủ sở hữu và quản trị viên không gian làm việc mới có thể tạo, xoay hoặc thu hồi các khóa này. Theo mặc định, khóa sẽ hết hạn sau 90 ngày. Đặt `expiresInDays` thành `null` để tạo khóa không hết hạn.
 
-Lifetime campaign dùng PAT để tạo draft và cập nhật lifecycle (`PATCH /api/v1/campaigns/:id/lifecycle`), còn `POST /api/v1/campaigns/:id/triggers` chỉ dùng Team trigger API key `ndg_team_*`. Dùng `eventId` cho idempotency; query execution bằng `GET /api/v1/campaigns/:id/executions`. Xem [hướng dẫn Lifetime](/vi/campaigns/lifetime).
+```bash
+curl -X POST "$NUDGEN_APP_URL/api/v1/settings/team-api-keys" \
+  -H "Authorization: Bearer $NUDGEN_PAT" \
+  -H "Content-Type: application/json" \
+  --data '{"name":"Order service production","expiresInDays":90}'
+```
+
+Phản hồi `201` chứa chính xác văn bản gốc `key` một lần. Lưu nó trong trình quản lý bí mật phía máy chủ. Các phản hồi sau chỉ hiển thị `keyPrefix`.
+
+| Phương pháp | Điểm cuối | Mô tả |
+| --- | --- | --- |
+| `POST` | `/api/v1/settings/team-api-keys` | Tạo khóa API kích hoạt nhóm. |
+| `GET` | `/api/v1/settings/team-api-keys` | Liệt kê các khóa API kích hoạt nhóm. |
+| `POST` | `/api/v1/settings/team-api-keys/:id` | Xoay một phím đang hoạt động, chưa hết hạn. |
+| `DELETE` | `/api/v1/settings/team-api-keys/:id` | Thu hồi một chìa khóa. |
+
+## Điểm cuối REST
+
+### Danh tính và không gian làm việc
+
+| Phương pháp | Điểm cuối | Mô tả |
+| --- | --- | --- |
+| `GET` | `/api/v1/user/me` | Nhận người dùng được xác thực. |
+| `GET` | `/api/v1/teams` | Liệt kê các không gian làm việc có sẵn cho chủ sở hữu mã thông báo. |
+
+### Liên hệ
+
+| Phương pháp | Điểm cuối | Mô tả |
+| --- | --- | --- |
+| `GET` | `/api/v1/contacts` | Liệt kê các liên hệ với các bộ lọc `page`, `limit`, `search`, `tags` và `status`. |
+| `POST` | `/api/v1/contacts/add` | Tạo một liên hệ. |
+| `GET` | `/api/v1/contacts/:id` | Nhận một liên lạc. |
+| `PATCH` | `/api/v1/contacts/:id` | Cập nhật một liên hệ. |
+| `DELETE` | `/api/v1/contacts/:id` | Xóa một liên hệ. |
+
+```bash
+curl -X POST "$NUDGEN_APP_URL/api/v1/contacts/add" \
+  -H "Authorization: Bearer $NUDGEN_PAT" \
+  -H "Content-Type: application/json" \
+  --data '{"email":"nathan@example.com","name":"Nathan Nguyen","tags":["api-test"]}'
+```
+
+### Chiến dịch một lần và nhỏ giọt
+
+| Phương pháp | Điểm cuối | Mô tả |
+| --- | --- | --- |
+| `GET` | `/api/v1/campaigns` | Liệt kê các chiến dịch trong không gian làm việc đang hoạt động. |
+| `POST` | `/api/v1/campaigns` | Tạo bản dự thảo chiến dịch hoặc chiến dịch đã lên lịch. |
+| `GET` | `/api/v1/campaigns/:id` | Nhận chi tiết chiến dịch. |
+| `PUT` | `/api/v1/campaigns/:id` | Cập nhật chiến dịch hiện có. |
+| `POST` | `/api/v1/campaigns/:id/launch` | Khởi động ngay bây giờ hoặc lên lịch chiến dịch một lần hoặc nhỏ giọt. |
+| `GET` | `/api/v1/campaigns/:id/stats` | Nhận số liệu thống kê về giao hàng, mở, nhấp chuột, trả lại và khiếu nại. |
+| `GET` | `/api/v1/campaigns/:id/progress` | Nhận tiến trình gửi chiến dịch. |
+| `GET` | `/api/v1/campaigns/:id/recipients` | Liệt kê người nhận chiến dịch. |
+| `POST` | `/api/v1/campaigns/test-send` | Gửi email kiểm tra mà không có số liệu thống kê gửi bảng điều khiển. |
+
+<Warning>
+Khởi động chiến dịch lên lịch gửi email thực. Sử dụng `/api/v1/campaigns/test-send` để xem trước hộp thư đến.
+</Warning>
+
+## Chiến dịch trọn đời
+
+Chiến dịch trọn đời được kích hoạt theo sự kiện: mỗi trình kích hoạt được chấp nhận tạo ra tối đa một lần thực thi và gửi một lần thúc đẩy đến người liên hệ được cung cấp. Xem [Sử dụng chiến dịch trọn đời](/vi/campaigns/lifetime) để biết quy trình làm việc trên trang tổng quan và hướng dẫn về hợp đồng thay đổi.
+
+### Tạo chiến dịch trọn đời
+
+Tạo chiến dịch trọn đời dưới dạng `draft`. Không gửi `sendNow: true`, `status: "active"` hoặc `status: "scheduled"`; thay vào đó hãy kích hoạt chiến dịch với điểm cuối vòng đời của nó.
+
+```bash
+curl -X POST "$NUDGEN_APP_URL/api/v1/campaigns" \
+  -H "Authorization: Bearer $NUDGEN_PAT" \
+  -H "Content-Type: application/json" \
+  --data @- <<'JSON'
+{
+  "name": "Order confirmation",
+  "type": "lifetime",
+  "status": "draft",
+  "goal": "Confirm an order and direct the customer to its details.",
+  "subject": "Your order {{data.order_id}} was received",
+  "html": "<p>Hello {{contact.firstName}},</p><p>Order {{data.order_id}} totals {{data.total}} VND.</p><p><a href=\"{{data.order_url}}\">View your order</a></p>",
+  "link": "https://example.com/orders",
+  "variableManifest": [
+    { "path": "data.order_id", "type": "string", "required": true, "description": "Order ID" },
+    { "path": "data.total", "type": "number", "required": true, "description": "Order total in VND" },
+    { "path": "data.order_url", "type": "url", "required": true, "description": "Order details URL" }
+  ],
+  "generatedVariableManifest": [
+    { "path": "data.order_id", "type": "string", "required": true, "description": "Order ID" },
+    { "path": "data.total", "type": "number", "required": true, "description": "Order total in VND" },
+    { "path": "data.order_url", "type": "url", "required": true, "description": "Order details URL" }
+  ]
+}
+JSON
+```
+
+`variableManifest` xác định tối đa 100 biến `data.*`. Nó phải bao gồm mọi mã thông báo `data.*` được sử dụng trong chủ đề hoặc HTML. Giá trị mặc định phải khớp với loại đã khai báo và biến được sử dụng trong HTML `href` phải có loại `url`.
+
+Khi bạn tạo nội dung email, hãy lưu `generatedVariableManifest` phù hợp. Nudgen chặn kích hoạt nếu nó khác với tệp kê khai hiện tại hoặc nếu các tham số được khai báo bắt buộc không có trong email.
+
+### Thay đổi vòng đời
+
+| Phương pháp | Điểm cuối | Xác thực | Mô tả |
+| --- | --- | --- | --- |
+| `PATCH` | `/api/v1/campaigns/:campaignId/lifecycle` | PAT | Thay đổi chiến dịch Trọn đời thành `active`, `paused` hoặc `archived`. |
+
+```bash
+curl -X PATCH "$NUDGEN_APP_URL/api/v1/campaigns/$CAMPAIGN_ID/lifecycle" \
+  -H "Authorization: Bearer $NUDGEN_PAT" \
+  -H "Content-Type: application/json" \
+  --data '{"status":"active"}'
+```
+
+Các chuyển tiếp hợp lệ là `draft → active → paused → active` và `active|paused → archived`. Việc tạm dừng hoặc lưu trữ sẽ hủy các lệnh thực thi vẫn là `pending` hoặc `queued` và giải phóng hạn ngạch đặt trước của chúng. Một quá trình thực thi đang được xử lý vẫn có thể gửi.
+
+### Kích hoạt một cú huých
+
+| Phương pháp | Điểm cuối | Xác thực | Mô tả |
+| --- | --- | --- | --- |
+| `POST` | `/api/v1/campaigns/:campaignId/triggers` | Khóa API kích hoạt nhóm | Tạo một lần thực hiện sự kiện và xếp hàng một cú huých. |
+
+```bash
+curl -X POST "$NUDGEN_APP_URL/api/v1/campaigns/$CAMPAIGN_ID/triggers" \
+  -H "Authorization: Bearer $NUDGEN_TEAM_API_KEY" \
+  -H "Content-Type: application/json" \
+  --data @- <<'JSON'
+{
+  "eventId": "order_123",
+  "eventName": "order.created",
+  "occurredAt": "2026-08-23T10:00:00Z",
+  "contact": {
+    "email": "an@example.com",
+    "externalId": "customer_456",
+    "name": "An Nguyen",
+    "phone": "+84901234567",
+    "metadata": { "company": "Nudgen" }
+  },
+  "data": {
+    "order_id": "order_123",
+    "total": 490000,
+    "order_url": "https://example.com/orders/order_123"
+  }
+}
+JSON
+```
+
+| Lĩnh vực | Loại | Bắt buộc | Giới hạn và hành vi |
+| --- | --- | --- | --- |
+| `eventId` | chuỗi | Có | 1–128 ký tự. Khóa bình thường duy nhất trong chiến dịch; tái sử dụng nó để thử lại. |
+| `eventName` | chuỗi | Không | 1–100 ký tự, ví dụ `order.created`. |
+| `occurredAt` | Ngày giờ ISO 8601 | Không | Thời gian xảy ra sự kiện nguồn. |
+| `contact.email` | email | Có | Viết thường. Nudgen tạo hoặc cập nhật liên hệ qua email. |
+| `contact.externalId` | chuỗi | Không | 1–200 ký tự và không được thuộc về một email liên hệ khác trong không gian làm việc. |
+| `contact.name` | chuỗi | Không | Lên đến 200 ký tự. |
+| `contact.phone` | chuỗi | Không | Tối đa 50 ký tự. |
+| `contact.metadata` | đối tượng | Không | Dữ liệu hồ sơ liên hệ bổ sung. |
+| `data` | đối tượng | Có | Phải khớp với `variableManifest`; tối đa 32 KiB. |
+
+Toàn bộ nội dung yêu cầu được giới hạn ở 64 KiB, JSON lồng nhau ở tám cấp và các khóa không an toàn như `__proto__`, `constructor` và `prototype` bị từ chối.
+
+A trình kích hoạt mới sẽ trả về `201` với `{ "execution": { "id": "...", "status": "queued" }, "duplicate": false }`. Việc sử dụng lại `eventId` sẽ trả về kết quả thực thi hiện có với `200` và `duplicate: true`.
+
+### Thực thi danh sách
+
+| Phương pháp | Điểm cuối | Xác thực | Mô tả |
+| --- | --- | --- | --- |
+| `GET` | `/api/v1/campaigns/:campaignId/executions` | PAT | Liệt kê các lần thực thi chiến dịch trọn đời. |
+
+```bash
+curl "$NUDGEN_APP_URL/api/v1/campaigns/$CAMPAIGN_ID/executions?limit=25&status=sent&search=an@example.com" \
+  -H "Authorization: Bearer $NUDGEN_PAT"
+```
+
+Sử dụng `limit` từ 1–100 (`25` mặc định), `cursor` cho trang tiếp theo, `status` để lọc theo trạng thái thực thi và `search` để khớp với email hoặc ID bên ngoài. Phản hồi bao gồm `executions` và `nextCursor`.
+
+## Lỗi, số lần thử lại và giới hạn tốc độ
+
+Trình kích hoạt trọn đời cho phép 600 yêu cầu mỗi phút đối với mỗi khóa API kích hoạt Nhóm. Các phản hồi bao gồm `x-ratelimit-limit`, `x-ratelimit-remaining` và `x-ratelimit-reset`. Phản hồi `429` cũng bao gồm `Retry-After`.
+
+| Trạng thái | Ý nghĩa | Phải làm gì |
+| --- | --- | --- |
+| `200` | Bản sao `eventId` | Sử dụng việc thực thi được trả về; đừng gửi nữa. |
+| `201` | Đã xếp hàng thực thi mới | Chờ nhân viên xử lý. |
+| `400` | JSON, nội dung hoặc trường cơ bản không hợp lệ | Sửa tải trọng; không thử lại không thay đổi. |
+| `401` | Khóa bị thiếu, không hợp lệ, bị thu hồi, hết hạn hoặc sai phạm vi | Xoay hoặc sửa cấu hình phím. |
+| `402` / `403` | Hạn ngạch hoặc đăng ký ngăn cản việc ghi | Giải quyết vấn đề hạn ngạch hoặc đăng ký. Lỗi hạn ngạch bao gồm `code`, `required`, `available` và `checkoutUrl`. |
+| `404` | Chiến dịch bị thiếu hoặc nằm ngoài không gian làm việc của khóa | Kiểm tra ID chiến dịch và khóa. |
+| `409` | Chiến dịch không hoạt động/không trọn đời hoặc xung đột danh tính liên hệ | Kích hoạt chiến dịch hoặc sửa danh tính liên hệ. |
+| `413` | Yêu cầu vượt quá 64 KiB | Giảm kích thước tải trọng. |
+| `415` | Thiếu `Content-Type: application/json` | Thêm tiêu đề cần thiết. |
+| `422` | `data` không khớp với bảng kê khai biến | Sửa dữ liệu; kiểm tra `details` để tìm đường dẫn và mã lỗi. |
+| `429` | Đã vượt quá giới hạn tỷ lệ | Đợi `Retry-After`, sau đó thử lại với `eventId` tương tự. |
+| `503` | Việc thực thi không thể được xếp hàng đợi | Thử lại với thời gian chờ và `eventId` tương tự. |
+
+Đối với `429`, `503` và các lỗi mạng, hãy thử lại với thời gian chờ lũy thừa và `eventId` tương tự. Công việc xếp hàng mang tính quyết định cho việc thực thi, do đó, việc thử lại sẽ không tạo ra email trùng lặp.
+
+### Brand settings
+
+| Phương pháp | Điểm cuối | Mô tả |
+| --- | --- | --- |
+| `GET` | `/api/v1/settings/brand` | Đọc tên thương hiệu, trang web, email người gửi, logo và cài đặt thiết kế. |
+| `PATCH` | `/api/v1/settings/brand` | Cập nhật cài đặt thương hiệu. |
+
+### Thế hệ dự thảo AI
+
+| Phương pháp | Điểm cuối | Mô tả |
+| --- | --- | --- |
+| `POST` | `/api/v1/ai/generate` | Tạo chủ đề email và bản nháp HTML từ ngữ cảnh chiến dịch. |
+
+## Máy chủ MCP
+
+Sử dụng [Nudgen MCP](/en/agents/mcp) khi tác nhân của bạn hỗ trợ các công cụ Giao thức bối cảnh mô hình. MCP sử dụng PAT giống như các API quản lý không gian làm việc, nhưng hiển thị Nudgen dưới dạng các công cụ có thể gọi tác nhân thay vì các điểm cuối HTTP thông thường.
+
+<Card title="MCP server setup" icon="bot" href="/en/agents/mcp">
+ Cài đặt Nudgen MCP trong Claude Code, Cursor, Windsurf, Codex CLI hoặc MCP chung client.
+</Card>

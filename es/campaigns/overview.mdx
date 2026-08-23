@@ -1,71 +1,89 @@
 ---
-title: "Resumen de campañas"
-description: "Campañas únicas frente a campañas por goteo y estados de campaña"
+title: "Descripción general de las campañas"
+description: "Campañas únicas, por goteo y de por vida"
 ---
 
-## Qué te ayuda a hacer esta página
+## Qué le ayuda a hacer esta página
 
-Entender los dos tipos de campaña y el significado de cada estado. Esto te ayuda a elegir el formato correcto e interpretar mejor tu lista de campañas.
+Comprenda los tres tipos de campañas y sus ciclos de vida. Esto le ayuda a elegir el tipo de campaña correcto e interpretar su lista de campañas.
 
-## Antes de empezar
+## Antes de comenzar
 
-- Contactos subidos en Nudgen
-- Una configuración de marca, con tono predefinido o prompt personalizado
+- Contactos cargados en Nudgen
+- Una configuración de marca (tono preestablecido o mensaje personalizado)
 
 ## Tipos de campaña
 
-### Campañas de envío único
+### Campañas únicas
 
-Un solo correo enviado una vez a la audiencia que elijas. Úsalo cuando quieras:
+Un solo correo electrónico enviado una vez a su audiencia seleccionada. Utilízalo cuando quieras:
 
-- Anunciar una funcionalidad o un evento
-- Lanzar una campaña puntual de reactivación
-- Probar un mensaje antes de montar una secuencia más larga
+- Anunciar una función o evento
+- Enviar un mensaje único para volver a interactuar
+- Probar un mensaje antes de crear una secuencia más larga
 
-Tú eliges la audiencia, la IA genera el contenido y luego lo previsualizas y lo envías, o lo programas.
+Tú eliges la audiencia, la IA genera el contenido, obtienes una vista previa y lo envías (o lo programas).
 
-### Secuencias drip
+### Secuencias de goteo
 
-Una campaña de varios pasos con retrasos entre correos, por ejemplo Día 1, Día 3 y Día 7. Úsala cuando quieras:
+Una campaña de varios pasos con retrasos entre correos electrónicos (por ejemplo, día 1, día 3, día 7). Utilízalo cuando quieras:
 
-- Reactivar usuarios inactivos durante varios días
-- Hacer seguimiento a quienes no abren o no hacen clic
-- Construir un flujo de retención al estilo Duolingo
+- Empujar a los usuarios inactivos durante varios días
+- Hacer un seguimiento de los que no abren ni hacen clic
+- Construir un flujo de retención estilo Duolingo
 
-Cada paso tiene su propio objetivo, asunto y cuerpo generado por IA. Los contactos avanzan al siguiente paso solo cuando se cumple el retraso. Puedes configurar **auto-stop rules**, por ejemplo detener cuando un destinatario hace clic o abre el correo, para que los usuarios que ya interactuaron no sigan recibiendo pasos posteriores.
+Cada paso tiene su propio objetivo, tema y cuerpo generado por IA. Los contactos pasan al siguiente paso solo después del retraso. Puede establecer **reglas de detención automática** (por ejemplo, detenerse cuando un destinatario hace clic o cuando abre el correo electrónico) para que los usuarios que participan dejen de recibir pasos posteriores.
 
-**Tipos de audiencia:** al crear una campaña eliges quién la recibirá: **All contacts**, **By tags** o **Manual**. El asistente te muestra una estimación de alcance antes del lanzamiento.
+### Campañas de por vida
 
-## Estados de campaña
+Una campaña de por vida permanece lista para los eventos de su sistema. Cada activador autenticado crea como máximo una ejecución y envía un empujón al contacto en ese activador.
+
+Utilice una campaña de por vida para confirmaciones de pedidos, recordatorios de pago, incorporación basada en eventos u otros correos electrónicos transaccionales y de retención que inicie su backend. Su audiencia siempre es **Disparador**: no envía inmediatamente a un segmento de contacto guardado.
+
+Consulte [Usar campañas de por vida](/es/campaigns/lifetime) para obtener orientación sobre el flujo de trabajo y la integración del panel.
+
+**Tipos de audiencia:** Al crear una campaña, usted elige quién la recibe: **Todos los contactos**, **Por etiquetas** (solo contactos con etiquetas seleccionadas) o **Manual** (seleccione personalmente los destinatarios). El asistente muestra una estimación de cobertura antes del lanzamiento.
+
+## Estados de la campaña
 
 | Estado | Significado |
-| ------ | ----------- |
-| **Draft** | No se ha enviado. Puedes editar objetivo, audiencia, contenido y programación. |
-| **Programada** | Ya tiene hora programada. Los correos se enviarán en ese momento. |
-| **Active** / **Sending** | Los correos se están enviando. El progreso aparece en el panel. |
-| **Sent** | Todos los correos ya se enviaron. El contenido queda bloqueado, pero puedes ver la analítica. |
-| **Stopped** | La campaña se detuvo manualmente. Algunos contactos pueden haber recibido correos; los pasos futuros del drip se cancelan. |
+| ---------- | ----------------------------------------------------------------------- |
+| **Borrador** | No enviado. Puede editar objetivos, audiencia, contenido y programación.         |
+| **Programado** | La hora de envío está configurada. Los correos electrónicos se enviarán a la hora programada.        |
+| **Activo** / **Enviando** | Se están enviando correos electrónicos. El progreso aparece en el tablero.     |
+| **Enviado** | Todos los correos electrónicos han sido enviados. El contenido está bloqueado; puedes ver análisis.  |
+| **Detenido**| La campaña se detuvo manualmente. Es posible que algunos contactos ya hayan recibido correos electrónicos; Se cancelan los pasos de goteo futuros. |
 
 <Note>
-Una vez enviada una campaña, no puedes editar su contenido ni reenviarla. Si necesitas mandar un mensaje distinto, crea una campaña nueva.
+Una vez enviada una campaña, no se puede editar su contenido ni reenviarla. Cree una nueva campaña para enviar un mensaje diferente.
 </Note>
 
-## Qué ocurre después
+### Ciclo de vida útil
 
-- [Crear una campaña](/es/campaigns/create) — Recorre el asistente y envía tu primer correo.
-- [Gestionar campañas](/es/campaigns/manage) — Edita borradores, envía, programa o detén campañas.
-- [Ver analítica](/es/campaigns/analytics) — Consulta aperturas, clics, tasas de entrega y actividad por destinatario.
+Las campañas vitalicias utilizan un ciclo de vida independiente: **Borrador** → **Activo** → **Pausado** → **Activo** o **Activo/Pausado** → **Archivado**. No puede reactivar una campaña archivada.
 
-## Documentación relacionada
+Cuando pausa o archiva una campaña de por vida, Nudgen cancela las ejecuciones que aún están pendientes o en cola. Es posible que aún se envíe una ejecución que ya se está procesando. Los cambios en una campaña activa se aplican solo a activadores futuros porque cada ejecución almacena una instantánea del contenido y la configuración de envío.
+
+## ¿Qué sucede a continuación?
+
+- [Crear una campaña](/es/campaigns/create): recorra el asistente y envíe su primer correo electrónico.
+- [Administrar campañas](/es/campaigns/manage): edite borradores, envíe, programe o detenga.
+- [Usar campañas de por vida](/es/campaigns/lifetime): configure una campaña activada por eventos y su integración API.
+- [Ver Analytics](/es/campaigns/analytics): aperturas, clics, tasas de entrega y actividad de los destinatarios.
+
+## Documentos relacionados
 
 <CardGroup cols={2}>
-  <Card title="Crear campañas" icon="paper-plane" href="/es/campaigns/create">
-    Asistente paso a paso para campañas.
-  </Card>
-  <Card title="Gestionar campañas" icon="pen-to-square" href="/es/campaigns/manage">
-    Edita, envía, programa y detén campañas.
-  </Card>
-  <Card title="Analítica de campañas" icon="chart-line" href="/es/campaigns/analytics">
-    Métricas y actividad por destinatario.
-  </Card>
+ <Card title="Create campaigns" icon="paper-plane" href="/es/campaigns/create">
+ Asistente de campañas paso a paso.
+ </Card>
+ <Card title="Manage campaigns" icon="pen-to-square" href="/es/campaigns/manage">
+ Editar, enviar, programar, y detener.
+ </Card>
+ <Card title="Use Lifetime campaigns" icon="bolt" href="/es/campaigns/lifetime">
+ Envíe un empujón por cada evento de su sistema.
+ </Card>
+ <Card title="Campaign analytics" icon="chart-line" href="/es/campaigns/analytics">
+ Métricas y actividad del destinatario.
+ </Card>
 </CardGroup>

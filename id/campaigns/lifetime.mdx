@@ -1,22 +1,133 @@
 ---
-title: "Menggunakan kampanye Lifetime"
-description: "Kirim satu email berbasis peristiwa untuk setiap kontak"
+title: "Gunakan kampanye Seumur Hidup"
+description: "Kirim satu dorongan yang dipicu peristiwa ke kontak dengan setiap pemicu yang diautentikasi"
 ---
 
-## Kampanye Lifetime
+## Apa yang halaman ini bantu lakukan
 
-Kampanye Lifetime selalu siap menerima event dari sistem Anda. Setiap trigger yang valid membuat paling banyak satu execution dan mengirim satu nudge kepada contact di payload. Gunakan untuk konfirmasi pesanan, pengingat pembayaran, dan onboarding berbasis event. Audience-nya selalu **Trigger**.
+Buat kampanye Seumur Hidup yang tetap siap untuk peristiwa dari sistem Anda. Setiap pemicu yang valid membuat paling banyak satu eksekusi dan mengirimkan satu dorongan ke kontak dalam payloadnya.
 
-## Menyiapkan kampanye
+## Mengapa hal ini penting
 
-Pilih **Campaigns** → **New campaign** → **Lifetime**. Parameter runtime seperti `order_id` menjadi `{{data.order_id}}`. Buat, pratinjau, dan test email, lalu **Activate**. Buat **Team trigger API key** di **Settings** → **API Keys** dan simpan `ndg_team_*` hanya di backend.
+Anda dapat mengirim email yang relevan dan tepat waktu tanpa membuat dan meluncurkan kampanye berulang kali. Backend Anda mengontrol kapan suatu peristiwa terjadi, sementara Nudgen menyimpan konten email, pengiriman, pelacakan, dan preferensi kontak di satu tempat.
 
-`variableManifest` adalah kontrak dengan `data`: maksimal 100 variabel `data.*` bertipe `string`, `number`, `boolean`, `date`, atau `url`. Nilai HTML di-escape; variabel di `href` harus bertipe `url`.
+## Kapan menggunakan kampanye Seumur Hidup
 
-## Lifecycle dan retry
+Gunakan kampanye Seumur Hidup untuk email berdasarkan peristiwa, seperti:
 
-Transisi yang valid adalah `draft → active → paused → active` dan `active|paused → archived`. Archive bersifat permanen. Pause/archive membatalkan execution `pending`/`queued`; execution yang sedang diproses masih mungkin terkirim. Setiap execution menyimpan snapshot konten.
+- Konfirmasi pesanan
+- Pengingat pembayaran
+- Orientasi berbasis peristiwa
+- Pembaruan akun atau langganan
 
-Trigger dari backend tepercaya dan pakai ulang `eventId` saat retry: `201` baru, `200` duplikat. Retry `429`, `503`, dan error jaringan dengan exponential backoff dan jangan log secret.
+Tidak seperti kampanye sekali pakai dan tetes, kampanye Seumur Hidup tidak kirim ke audiens yang disimpan segera. Audiensnya selalu **Pemicu**.
 
-Lihat [Developer API](/id/agents/api).
+## Buat dan aktifkan kampanye
+
+<Steps>
+ <Step title="Create a Lifetime campaign">
+ Buka **Kampanye**, klik **Kampanye baru**, lalu pilih **Seumur Hidup**. Tambahkan nama kampanye, sasaran, konfigurasi merek, dan tautan CTA opsional.
+ </Step>
+ <Step title="Define runtime parameters">
+ Tambahkan setiap nilai yang akan diberikan sistem Anda pada waktu pengiriman. Parameter membuat variabel `data.*`: misalnya, `order_id` menjadi `{{data.order_id}}` di email.
+ </Step>
+ <Step title="Create the email">
+ Buat atau tulis subjek dan HTML, lalu tambahkan variabel runtime di tempatnya. Pratinjau email dan kirim tes sebelum mengaktifkannya.
+ </Step>
+ <Step title="Activate the campaign">
+Simpan sebagai draf, lalu klik **Aktifkan**. Nudgen memeriksa apakah parameter yang diperlukan terwakili dalam email dan kontrak parameter tidak berubah sejak pembuatan.
+ </Step>
+ <Step title="Create a trigger key">
+ Buka **Pengaturan** → **Kunci API** dan buat **Kunci API pemicu tim**. Simpan rahasia `ndg_team_*` di backend atau manajer rahasia Anda; jangan pernah menempatkannya di browser atau kode aplikasi seluler.
+ </Step>
+</Steps>
+
+## Parameter runtime dan variabel template
+
+`variableManifest` Anda adalah kontrak antara template email dan objek `data` masing-masing pemicu. Sebuah kampanye dapat menentukan hingga 100 variabel.
+
+| Bidang | Ketik | Diperlukan | Deskripsi |
+| --- | --- | --- | --- |
+| `path` | `data.<name>` | Ya | Jalur variabel. Jalur bersarang seperti `data.order.total` didukung. |
+| `type` | `string`, `number`, `boolean`, `date`, atau `url` | Ya | Ketik yang harus disediakan oleh pemicu. `date` harus berupa string tanggal yang valid dan `url` harus berupa HTTP(S). |
+| `required` | boolean | Ya | Nilai yang hilang akan mengembalikan `422` kecuali nilai default disetel. |
+| `defaultValue` | string, angka, atau boolean | Tidak | Nilai cadangan yang harus sesuai dengan jenis variabel. |
+| `description` | tali | Tidak | Jelaskan nilainya agar Anda dan Nudgen AI dapat menggunakannya dengan benar. |
+
+Misalnya, gunakan `{{data.order_id}}`, `{{data.total}}`, dan `{{data.order_url}}` dalam sebuah template. Anda juga dapat menggunakan `contact.*`, `event.*`, `brand.*`, dan variabel lama seperti `{{firstName}}` dan `{{brandName}}`.
+
+Nudgen lolos dari nilai variabel yang dimasukkan ke dalam HTML. Templat tidak mendukung JavaScript, ekspresi, atau loop. Variabel apa pun yang digunakan dalam `href` harus berupa variabel `data.*` yang dideklarasikan dengan tipe `url`.
+
+## Kelola siklus hidup
+
+| Status | Apa artinya |
+| --- | --- |
+| **Draf** | Konfigurasikan kampanye dan uji emailnya. |
+| **Aktif** | Nudgen menerima pemicu yang diautentikasi. |
+| **Dijeda** | Nudgen tidak menerima pemicu baru. Anda dapat melanjutkannya. |
+| **Diarsipkan** | Kampanye ditutup secara permanen dan tidak dapat diaktifkan kembali. |
+
+Transisi yang valid adalah `draft → active → paused → active` dan `active|paused → archived`.
+
+<Note>
+Menjeda atau mengarsipkan akan membatalkan eksekusi yang masih tertunda atau dalam antrean. Eksekusi yang sudah diproses mungkin masih terkirim.
+</Note>
+
+Setiap eksekusi mengambil cuplikan konten kampanye dan setelan pengiriman saat Nudgen menerima pemicu. Mengedit kampanye aktif hanya memengaruhi pemicu berikutnya, bukan eksekusi yang sudah ada.
+
+## Pemicu dari backend Anda
+
+Panggil titik akhir pemicu dari server tepercaya setelah Anda memvalidasi peristiwa sumber. Gunakan kunci API pemicu tim, bukan Token Akses Pribadi (PAT).
+
+```bash
+curl -X POST "$NUDGEN_APP_URL/api/v1/campaigns/$CAMPAIGN_ID/triggers" \
+  -H "Authorization: Bearer $NUDGEN_TEAM_API_KEY" \
+  -H "Content-Type: application/json" \
+  --data @- <<'JSON'
+{
+  "eventId": "order_123",
+  "eventName": "order.created",
+  "occurredAt": "2026-08-23T10:00:00Z",
+  "contact": {
+    "email": "an@example.com",
+    "externalId": "customer_456",
+    "name": "An Nguyen",
+    "metadata": { "company": "Nudgen" }
+  },
+  "data": {
+    "order_id": "order_123",
+    "total": 490000,
+    "order_url": "https://example.com/orders/order_123"
+  }
+}
+JSON
+```
+
+Pertahankan `eventId` yang sama saat Anda mencoba kembali suatu acara. Nudgen mengembalikan eksekusi yang ada dengan `200` dan `duplicate: true` alih-alih mengirimkan dorongan lainnya. Eksekusi baru mengembalikan `201`.
+
+## Integrasikan dengan aman
+
+- Pemicu dari konsumen webhook atau backend, dan verifikasi webhook yang masuk sebelum memanggil Nudgen.
+- Coba lagi kesalahan jaringan, `429`, dan `503` dengan backoff eksponensial dan hal yang sama `eventId`.
+- Jangan mencatat header atau payload `Authorization` yang berisi data kontak sensitif.
+- Putar kunci pemicu secara teratur dan segera cabut kunci jika Anda curiga kunci tersebut terekspos.
+- Buat satu kampanye per jenis acara dan kontrak variabel sehingga template dan audit eksekusi tetap jelas.
+
+## Pantau eksekusi
+
+Buka kampanye di dasbor untuk melihat eksekusi terkini dan statusnya. Eksekusi dapat berupa `pending`, `queued`, `processing`, `sent`, `skipped`, `cancelled`, `failed`, atau `delivery_unknown`.
+
+`skipped` berarti kontak berhenti berlangganan atau terpental, sehingga Nudgen mencatat peristiwa tersebut tetapi tidak mengirim atau menggunakan kuota. `delivery_unknown` berarti penyedia mungkin telah menerima email tetapi hasil akhir pengiriman tidak pasti; Nudgen tidak mencobanya lagi secara otomatis untuk menghindari pengiriman duplikat.
+
+Untuk penyiapan terprogram, pemicuan, dan kueri eksekusi, lihat [API Pengembang](/id/agents/api).
+
+## Dokumen terkait
+
+<CardGroup cols={2}>
+ <Card title="Campaigns overview" icon="list" href="/id/campaigns/overview">
+ Bandingkan kampanye sekali pakai, tetes, dan Seumur Hidup.
+ </Card>
+ <Card title="Developer API" icon="code" href="/id/agents/api">
+ Kelola kampanye dan pemicu Seumur Hidup melalui API.
+ </Card>
+</CardGroup>

@@ -1,71 +1,254 @@
 ---
 title: "API Pengembang"
-description: "REST API dengan autentikasi Personal Access Token. Kelola kontak, kampanye, templat, dan pengaturan secara terprogram."
+description: "REST API untuk ruang kerja Nudgen Anda, termasuk kampanye Seumur Hidup yang dipicu oleh peristiwa"
 ---
 
 ## Ikhtisar
 
-Nudgen Developer API menyediakan antarmuka REST yang bersih dan berorientasi sumber daya untuk mengelola infrastruktur pemasaran Anda. Semua permintaan menggunakan metode HTTP standar dan mengembalikan respons JSON yang dapat diprediksi.
+Nudgen Developer API memberi skrip, alat internal, dan agen AI antarmuka REST yang dapat diprediksi untuk ruang kerja Anda. Gunakan Personal Access Token (PAT) untuk mengelola sumber daya ruang kerja. Gunakan kunci API pemicu tim hanya untuk memicu kampanye Seumur Hidup dari backend Anda.
 
-<CardGroup cols={3}>
-  <Card title="Autentikasi PAT" icon="shield-check">
-    Autentikasi dengan Personal Access Token melalui header Bearer standar.
-  </Card>
-  <Card title="REST Bersih" icon="globe">
-    URL yang dapat diprediksi dan berorientasi sumber daya dengan metode HTTP standar.
-  </Card>
-  <Card title="Batas Laju" icon="gauge">
-    Pembatasan laju (rate limiting) bawaan per tim dan titik akhir untuk melindungi alur kerja Anda.
-  </Card>
-</CardGroup>
+## Mengapa hal ini penting
 
-## Autentikasi
-
-Semua permintaan API memerlukan Personal Access Token (PAT) yang diteruskan melalui header `Authorization`. Anda dapat membuat token dari dasbor Nudgen di bawah **Pengaturan → API Keys**.
-
-```bash
-curl -X GET https://app.nudgen.com/api/v1/user/me \
-  -H "Authorization: Bearer <your-pat>"
-```
+Anda dapat mengotomatiskan alur kerja pemasaran dan retensi berbasis peristiwa tanpa berbagi sesi dasbor. PAT membuat pengelolaan ruang kerja tetap dapat dibatalkan, sementara kunci pemicu Tim yang sempit memungkinkan layanan produksi mengirimkan dorongan yang dipicu peristiwa tanpa akses ruang kerja yang luas.
 
 ## URL Dasar
 
-URL dasar untuk semua permintaan API adalah:
-`https://app.nudgen.com`
+Tetapkan URL aplikasi untuk lingkungan Anda satu kali dan gunakan dalam setiap contoh. Produksi biasanya menggunakan `https://app.nudgen.net`; pengembangan lokal biasanya menggunakan `http://localhost:3000`.
 
-## Titik Akhir (Endpoints)
+```bash
+export NUDGEN_APP_URL="https://app.nudgen.net"
+```
 
-### Autentikasi & Identitas
-- `GET /api/v1/user/me`: Dapatkan pengguna terautentikasi saat ini.
-- `GET /api/v1/teams`: Daftar semua tim untuk pengguna saat ini.
-- `POST /api/v1/teams/switch`: Ganti konteks tim yang aktif.
+## Otentikasi
+
+### Token Akses Pribadi
+
+Buat PAT di **Pengaturan** → **Kunci API**. Gunakan untuk kontak, manajemen kampanye, pengaturan merek, dan pembuatan AI.
+
+```bash
+Authorization: Bearer $NUDGEN_PAT
+```
+
+PAT hanya ditampilkan sekali. Simpan dengan aman dan cabut token lama atau yang terekspos dari **Setelan** → **Kunci API**.
+
+### Kunci API pemicu tim
+
+Kunci API pemicu tim dimulai dengan `ndg_team_` dan memiliki cakupan `campaigns:trigger` yang sempit. Ini hanya dapat memicu kampanye Seumur Hidup; PAT tidak dapat memicunya.
+
+Hanya pemilik dan admin ruang kerja yang dapat membuat, memutar, atau mencabut kunci ini. Secara default, masa berlaku kunci akan habis setelah 90 hari. Tetapkan `expiresInDays` ke `null` untuk membuat kunci yang tidak kedaluwarsa.
+
+```bash
+curl -X POST "$NUDGEN_APP_URL/api/v1/settings/team-api-keys" \
+  -H "Authorization: Bearer $NUDGEN_PAT" \
+  -H "Content-Type: application/json" \
+  --data '{"name":"Order service production","expiresInDays":90}'
+```
+
+Respons `201` berisi teks biasa `key` tepat satu kali. Simpan di manajer rahasia sisi server. Respons berikutnya hanya menampilkan `keyPrefix`.
+
+| Metode | Titik akhir | Deskripsi |
+| --- | --- | --- |
+| `POST` | `/api/v1/settings/team-api-keys` | Buat kunci API pemicu tim. |
+| `GET` | `/api/v1/settings/team-api-keys` | Cantumkan kunci API pemicu tim. |
+| `POST` | `/api/v1/settings/team-api-keys/:id` | Memutar kunci yang aktif dan belum kedaluwarsa. |
+| `DELETE` | `/api/v1/settings/team-api-keys/:id` | Cabut kunci. |
+
+## REST endpoints
+
+### Identitas dan ruang kerja
+
+| Metode | Titik akhir | Deskripsi |
+| --- | --- | --- |
+| `GET` | `/api/v1/user/me` | Dapatkan pengguna yang diautentikasi. |
+| `GET` | `/api/v1/teams` | Cantumkan ruang kerja yang tersedia untuk pemilik token. |
 
 ### Kontak
-- `GET /api/v1/contacts`: Daftar kontak dengan paginasi, pencarian, dan filter tag.
-- `POST /api/v1/contacts/add`: Buat kontak baru.
-- `GET /api/v1/contacts/:id`: Ambil kontak tertentu.
-- `PATCH /api/v1/contacts/:id`: Perbarui kontak yang ada.
-- `DELETE /api/v1/contacts/:id`: Hapus kontak.
 
-### Kampanye
-- `GET /api/v1/campaigns`: Daftar kampanye di tim saat ini.
-- `POST /api/v1/campaigns`: Buat kampanye baru.
-- `GET /api/v1/campaigns/:id`: Dapatkan detail kampanye.
-- `GET /api/v1/campaigns/:id/stats`: Dapatkan statistik pengiriman kampanye.
+| Metode | Titik akhir | Deskripsi |
+| --- | --- | --- |
+| `GET` | `/api/v1/contacts` | Buat daftar kontak dengan filter `page`, `limit`, `search`, `tags`, dan `status`. |
+| `POST` | `/api/v1/contacts/add` | Buat kontak. |
+| `GET` | `/api/v1/contacts/:id` | Dapatkan kontak. |
+| `PATCH` | `/api/v1/contacts/:id` | Perbarui kontak. |
+| `DELETE` | `/api/v1/contacts/:id` | Hapus kontak. |
 
-### Templat
-- `GET /api/v1/templates`: Daftar templat email.
-- `POST /api/v1/templates`: Buat templat email baru.
+```bash
+curl -X POST "$NUDGEN_APP_URL/api/v1/contacts/add" \
+  -H "Authorization: Bearer $NUDGEN_PAT" \
+  -H "Content-Type: application/json" \
+  --data '{"email":"nathan@example.com","name":"Nathan Nguyen","tags":["api-test"]}'
+```
 
-### Pengaturan
-- `GET /api/v1/settings/brand`: Dapatkan konfigurasi merek.
-- `PATCH /api/v1/settings/brand`: Perbarui pengaturan merek.
+### Kampanye sekali pakai
 
-## Spesifikasi OpenAPI
+| Metode | Titik akhir | Deskripsi |
+| --- | --- | --- |
+| `GET` | `/api/v1/campaigns` | Buat daftar kampanye di ruang kerja aktif. |
+| `POST` | `/api/v1/campaigns` | Buat draf kampanye atau kampanye terjadwal. |
+| `GET` | `/api/v1/campaigns/:id` | Dapatkan detail kampanye. |
+| `PUT` | `/api/v1/campaigns/:id` | Perbarui kampanye yang ada. |
+| `POST` | `/api/v1/campaigns/:id/launch` | Luncurkan sekarang atau jadwalkan kampanye sekali pakai atau tetes. |
+| `GET` | `/api/v1/campaigns/:id/stats` | Dapatkan statistik pengiriman, buka, klik, pentalan, dan aduan. |
+| `GET` | `/api/v1/campaigns/:id/progress` | Dapatkan kemajuan pengiriman kampanye. |
+| `GET` | `/api/v1/campaigns/:id/recipients` | Daftar penerima kampanye. |
+| `POST` | `/api/v1/campaigns/test-send` | Kirim email percobaan tanpa dasbor kirim statistik. |
 
-Anda dapat mengunduh spesifikasi OpenAPI lengkap kami di sini:
-[openapi.json](https://app.nudgen.com/api/openapi.json)
+<Warning>
+Peluncuran kampanye menjadwalkan email asli. Gunakan `/api/v1/campaigns/test-send` untuk pratinjau kotak masuk.
+</Warning>
 
-## Kampanye Lifetime
+## Kampanye seumur hidup
 
-Gunakan PAT untuk membuat draft dan mengubah lifecycle (`PATCH /api/v1/campaigns/:id/lifecycle`). Hanya Team trigger API key `ndg_team_*` yang dapat memanggil `POST /api/v1/campaigns/:id/triggers`. Gunakan `eventId` untuk idempotensi dan lihat execution melalui `GET /api/v1/campaigns/:id/executions`. Lihat [panduan Lifetime](/id/campaigns/lifetime).
+Kampanye seumur hidup dipicu oleh peristiwa: setiap pemicu yang diterima menciptakan maksimal satu eksekusi dan mengirimkan satu dorongan ke kontak yang diberikan. Lihat [Menggunakan kampanye Seumur Hidup](/id/campaigns/lifetime) untuk alur kerja dasbor dan panduan kontrak variabel.
+
+### Membuat kampanye Seumur Hidup
+
+Membuat kampanye Seumur Hidup sebagai `draft`. Jangan kirim `sendNow: true`, `status: "active"`, atau `status: "scheduled"`; aktifkan kampanye dengan titik akhir siklus hidupnya.
+
+```bash
+curl -X POST "$NUDGEN_APP_URL/api/v1/campaigns" \
+  -H "Authorization: Bearer $NUDGEN_PAT" \
+  -H "Content-Type: application/json" \
+  --data @- <<'JSON'
+{
+  "name": "Order confirmation",
+  "type": "lifetime",
+  "status": "draft",
+  "goal": "Confirm an order and direct the customer to its details.",
+  "subject": "Your order {{data.order_id}} was received",
+  "html": "<p>Hello {{contact.firstName}},</p><p>Order {{data.order_id}} totals {{data.total}} VND.</p><p><a href=\"{{data.order_url}}\">View your order</a></p>",
+  "link": "https://example.com/orders",
+  "variableManifest": [
+    { "path": "data.order_id", "type": "string", "required": true, "description": "Order ID" },
+    { "path": "data.total", "type": "number", "required": true, "description": "Order total in VND" },
+    { "path": "data.order_url", "type": "url", "required": true, "description": "Order details URL" }
+  ],
+  "generatedVariableManifest": [
+    { "path": "data.order_id", "type": "string", "required": true, "description": "Order ID" },
+    { "path": "data.total", "type": "number", "required": true, "description": "Order total in VND" },
+    { "path": "data.order_url", "type": "url", "required": true, "description": "Order details URL" }
+  ]
+}
+JSON
+```
+
+`variableManifest` mendefinisikan hingga 100 variabel `data.*`. Itu harus menyertakan setiap token `data.*` yang digunakan dalam subjek atau HTML. Default harus cocok dengan tipe yang dideklarasikan, dan variabel yang digunakan dalam HTML `href` harus memiliki tipe `url`.
+
+Saat Anda membuat konten email, simpan `generatedVariableManifest` yang cocok. Nudgen memblokir aktivasi jika berbeda dari manifes saat ini atau jika parameter yang dinyatakan diperlukan tidak ada dalam email.
+
+### Ubah siklus hidup
+
+| Metode | Titik akhir | Otentikasi | Deskripsi |
+| --- | --- | --- | --- |
+| `PATCH` | `/api/v1/campaigns/:campaignId/lifecycle` | tepuk | Ubah kampanye Seumur Hidup menjadi `active`, `paused`, atau `archived`. |
+
+```bash
+curl -X PATCH "$NUDGEN_APP_URL/api/v1/campaigns/$CAMPAIGN_ID/lifecycle" \
+  -H "Authorization: Bearer $NUDGEN_PAT" \
+  -H "Content-Type: application/json" \
+  --data '{"status":"active"}'
+```
+
+Transisi yang valid adalah `draft → active → paused → active` dan `active|paused → archived`. Menjeda atau mengarsipkan akan membatalkan eksekusi yang masih `pending` atau `queued` dan melepaskan reservasi kuotanya. Eksekusi yang sedang diproses mungkin masih terkirim.
+
+### Memicu dorongan
+
+| Metode | Titik akhir | Otentikasi | Deskripsi |
+| --- | --- | --- | --- |
+| `POST` | `/api/v1/campaigns/:campaignId/triggers` | Kunci API pemicu tim | Buat satu eksekusi acara dan antri dorongan. |
+
+```bash
+curl -X POST "$NUDGEN_APP_URL/api/v1/campaigns/$CAMPAIGN_ID/triggers" \
+  -H "Authorization: Bearer $NUDGEN_TEAM_API_KEY" \
+  -H "Content-Type: application/json" \
+  --data @- <<'JSON'
+{
+  "eventId": "order_123",
+  "eventName": "order.created",
+  "occurredAt": "2026-08-23T10:00:00Z",
+  "contact": {
+    "email": "an@example.com",
+    "externalId": "customer_456",
+    "name": "An Nguyen",
+    "phone": "+84901234567",
+    "metadata": { "company": "Nudgen" }
+  },
+  "data": {
+    "order_id": "order_123",
+    "total": 490000,
+    "order_url": "https://example.com/orders/order_123"
+  }
+}
+JSON
+```
+
+| Bidang | Ketik | Diperlukan | Batasan dan perilaku |
+| --- | --- | --- | --- |
+| `eventId` | tali | Ya | 1–128 karakter. Kunci idempotensi unik dalam kampanye; menggunakannya kembali untuk percobaan ulang. |
+| `eventName` | tali | Tidak | 1–100 karakter, misalnya `order.created`. |
+| `occurredAt` | Tanggal waktu ISO 8601 | Tidak | Waktu kejadian sumber. |
+| `contact.email` | email | Ya | Huruf kecil. Nudgen membuat atau memperbarui kontak melalui email. |
+| `contact.externalId` | tali | Tidak | 1–200 karakter dan tidak boleh dimiliki oleh email kontak lain di ruang kerja. |
+| `contact.name` | tali | Tidak | Hingga 200 karakter. |
+| `contact.phone` | tali | Tidak | Hingga 50 karakter. |
+| `contact.metadata` | objek | Tidak | Data profil kontak tambahan. |
+| `data` | objek | Ya | Harus cocok dengan `variableManifest`; maksimum 32 KiB. |
+
+Seluruh isi permintaan dibatasi hingga 64 KiB, JSON bertumpu pada delapan tingkat, dan kunci tidak aman seperti `__proto__`, `constructor`, dan `prototype` ditolak.
+
+Pemicu baru mengembalikan `201` dengan `{ "execution": { "id": "...", "status": "queued" }, "duplicate": false }`. Menggunakan kembali `eventId` akan mengembalikan eksekusi yang ada dengan `200` dan `duplicate: true`.
+
+### Daftar eksekusi
+
+| Metode | Titik akhir | Otentikasi | Deskripsi |
+| --- | --- | --- | --- |
+| `GET` | `/api/v1/campaigns/:campaignId/executions` | tepuk | Daftar eksekusi kampanye Seumur Hidup. |
+
+```bash
+curl "$NUDGEN_APP_URL/api/v1/campaigns/$CAMPAIGN_ID/executions?limit=25&status=sent&search=an@example.com" \
+  -H "Authorization: Bearer $NUDGEN_PAT"
+```
+
+Gunakan `limit` dari 1–100 (`25` default), `cursor` untuk halaman berikutnya, `status` untuk memfilter berdasarkan status eksekusi, dan `search` untuk mencocokkan email atau ID eksternal. Responsnya mencakup `executions` dan `nextCursor`.
+
+## Kesalahan, percobaan ulang, dan batas kapasitas
+
+Pemicu seumur hidup memungkinkan 600 permintaan per menit untuk setiap kunci API pemicu tim. Responsnya meliputi `x-ratelimit-limit`, `x-ratelimit-remaining`, dan `x-ratelimit-reset`. Respons `429` juga mencakup `Retry-After`.
+
+| Status | Arti | Apa yang harus dilakukan |
+| --- | --- | --- |
+| `200` | Duplikat `eventId` | Gunakan eksekusi yang dikembalikan; jangan kirim lagi. |
+| `201` | Eksekusi baru antri | Tunggu hingga pekerja memprosesnya. |
+| `400` | JSON, isi, atau bidang dasar | Perbaiki muatannya; jangan coba lagi tanpa perubahan. |
+| `401` | Kunci hilang, tidak valid, dicabut, kedaluwarsa, atau cakupannya salah | Putar atau perbaiki konfigurasi kunci. |
+| `402` / `403` | Kuota atau langganan mencegah penulisan | Mengatasi masalah kuota atau langganan. Kesalahan kuota meliputi `code`, `required`, `available`, dan `checkoutUrl`. |
+| `404` | Kampanye tidak ada atau berada di luar ruang kerja kunci | Periksa ID dan kunci kampanye. |
+| `409` | Kampanye tidak aktif/tidak Seumur Hidup, atau konflik identitas kontak | Aktifkan kampanye atau perbaiki identitas kontak. |
+| `413` | Permintaan melebihi 64 KiB | Kurangi ukuran muatan. |
+| `415` | `Content-Type: application/json` | Tambahkan tajuk yang diperlukan. |
+| `422` | `data` tidak cocok dengan manifes variabel | Perbaiki datanya; periksa `details` untuk jalur dan kode kesalahan. |
+| `429` | Batas tarif terlampaui | Tunggu `Retry-After`, lalu coba lagi dengan `eventId` yang sama. |
+| `503` | Eksekusi tidak dapat diantrekan | Coba lagi dengan backoff dan `eventId` yang sama. |
+
+Untuk `429`, `503`, dan kesalahan jaringan, coba lagi dengan backoff eksponensial dan `eventId` yang sama. Tugas antrean bersifat deterministik untuk suatu eksekusi, sehingga percobaan ulang tidak membuat email duplikat.
+
+### Setelan merek
+
+| Metode | Titik akhir | Deskripsi |
+| --- | --- | --- |
+| `GET` | `/api/v1/settings/brand` | Baca nama merek, situs web, email pengirim, logo, dan pengaturan desain. |
+| `PATCH` | `/api/v1/settings/brand` | Perbarui pengaturan merek. |
+
+### Pembuatan draf AI
+
+| Metode | Titik akhir | Deskripsi |
+| --- | --- | --- |
+| `POST` | `/api/v1/ai/generate` | Hasilkan subjek email dan draf HTML dari konteks kampanye. |
+
+## Server MCP
+
+Gunakan [Nudgen MCP](/en/agents/mcp) ketika agen Anda mendukung alat Model Context Protocol. MCP menggunakan PAT yang sama dengan API pengelolaan ruang kerja, namun menampilkan Nudgen sebagai alat yang dapat dipanggil oleh agen, bukan titik akhir HTTP konvensional.
+
+<Card title="MCP server setup" icon="bot" href="/en/agents/mcp">
+ Instal Nudgen MCP di Claude Code, Cursor, Windsurf, Codex CLI, atau klien MCP generik.
+</Card>

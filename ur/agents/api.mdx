@@ -1,67 +1,253 @@
 ---
-title: "ڈویلپر API"
-description: "پرسنل ایکسیس ٹوکن (PAT) توثیق کے ساتھ REST API۔ رابطوں، مہمات، ٹیمپلیٹس اور ترتیبات کو پروگرام کے ذریعے منظم کریں۔"
+title: "ڈیولپر API"
+description: "آپ کے Nudgen ورک اسپیس کے لیے REST API، بشمول ایونٹ سے چلنے والی لائف ٹائم مہمات"
 ---
 
 ## جائزہ
 
-Nudgen ڈویلپر API آپ کے مارکیٹنگ انفراسٹرکچر کے انتظام کے لیے ایک صاف ستھرا اور ریسورس پر مبنی REST انٹرفیس فراہم کرتا ہے۔ تمام درخواستیں معیاری HTTP طریقے استعمال کرتی ہیں اور متوقع JSON جوابات واپس کرتی ہیں۔
+Nudgen Developer API اسکرپٹس، اندرونی ٹولز، اور AI ایجنٹوں کو آپ کے کام کے لیے ایک متوقع REST انٹرفیس فراہم کرتا ہے۔ ورک اسپیس وسائل کو منظم کرنے کے لیے ذاتی رسائی ٹوکن (PAT) استعمال کریں۔ صرف اپنے بیک اینڈ سے لائف ٹائم مہم کو متحرک کرنے کے لیے ٹیم ٹرگر API کلید کا استعمال کریں۔
 
-<CardGroup cols={3}>
-  <Card title="PAT توثیق" icon="shield-check">
-    معیاری Bearer ہیڈر کے ذریعے پرسنل ایکسیس ٹوکنز کے ساتھ توثیق کریں۔
-  </Card>
-  <Card title="صاف REST" icon="globe">
-    معیاری HTTP طریقوں کے ساتھ متوقع اور ریسورس پر مبنی URLs۔
-  </Card>
-  <Card title="ریٹ لمٹڈ" icon="gauge">
-    آپ کے ورک فلوز کی حفاظت کے لیے فی ٹیم اور اینڈ پوائنٹ بلٹ ان ریٹ لمٹنگ۔
-  </Card>
-</CardGroup>
+## یہ کیوں اہم ہے
 
-## توثیق (Authentication)
-
-تمام API درخواستوں کے لیے ایک پرسنل ایکسیس ٹوکن (PAT) درکار ہوتا ہے جو `Authorization` ہیڈر کے ذریعے بھیجا جاتا ہے۔ آپ اپنے Nudgen ڈیش بورڈ میں **Settings ← API Keys** کے تحت ٹوکن تیار کر سکتے ہیں۔
-
-```bash
-curl -X GET https://app.nudgen.com/api/v1/user/me \
-  -H "Authorization: Bearer <your-pat>"
-```
+آپ ڈیش بورڈ سیشن کا اشتراک کیے بغیر مارکیٹنگ اور ایونٹ پر مبنی برقرار رکھنے والے ورک فلو کو خودکار کر سکتے ہیں۔ PATs ورک اسپیس کے انتظام کو منسوخ کرنے کے قابل رکھتا ہے، جب کہ ایک تنگ ٹیم ٹرگر کلید پروڈکشن سروس کو وسیع ورک اسپیس تک رسائی کے بغیر ایک ایونٹ سے چلنے والا جھٹکا بھیجنے دیتی ہے۔
 
 ## بیس URL
 
-تمام API درخواستوں کے لیے بیس URL یہ ہے:
-`https://app.nudgen.com`
+ایک بار اپنے ماحول کے لیے ایپ یو آر ایل سیٹ کریں اور اسے ہر مثال میں استعمال کریں۔ پیداوار عام طور پر `https://app.nudgen.net` استعمال کرتی ہے۔ مقامی ترقی عام طور پر `http://localhost:3000` استعمال کرتی ہے۔
 
-## اینڈ پوائنٹس (Endpoints)
+```bash
+export NUDGEN_APP_URL="https://app.nudgen.net"
+```
 
-### توثیق اور شناخت
-- `GET /api/v1/user/me`: موجودہ توثیق شدہ صارف کی معلومات حاصل کریں۔
-- `GET /api/v1/teams`: موجودہ صارف کی تمام ٹیموں کی فہرست دیکھیں۔
-- `POST /api/v1/teams/switch`: فعال ٹیم کا سیاق و سباق تبدیل کریں۔
+## توثیق
 
-### رابطے (Contacts)
-- `GET /api/v1/contacts`: صفحات، تلاش اور ٹیگ فلٹرز کے ساتھ رابطوں کی فہرست دیکھیں۔
-- `POST /api/v1/contacts/add`: نیا رابطہ بنائیں۔
-- `GET /api/v1/contacts/:id`: کسی مخصوص رابطے کی معلومات حاصل کریں۔
-- `PATCH /api/v1/contacts/:id`: موجودہ رابطے کو اپ ڈیٹ کریں۔
-- `DELETE /api/v1/contacts/:id`: رابطہ حذف کریں۔
+### ذاتی رسائی ٹوکن
 
-### مہمات (Campaigns)
-- `GET /api/v1/campaigns`: موجودہ ٹیم میں مہمات کی فہرست دیکھیں۔
-- `POST /api/v1/campaigns`: نئی مہم بنائیں۔
-- `GET /api/v1/campaigns/:id`: مہم کی تفصیلات حاصل کریں۔
-- `GET /api/v1/campaigns/:id/stats`: مہم کی ترسیل کے اعداد و شمار حاصل کریں۔
+**سیٹنگز** → **API کیز** میں ایک PAT بنائیں۔ اسے رابطوں، مہم کے انتظام، برانڈ کی ترتیبات، اور AI جنریشن کے لیے استعمال کریں۔
 
-### ٹیمپلیٹس
-- `GET /api/v1/templates`: ای میل ٹیمپلیٹس کی فہرست دیکھیں۔
-- `POST /api/v1/templates`: نیا ای میل ٹیمپلیٹ بنائیں۔
+```bash
+Authorization: Bearer $NUDGEN_PAT
+```
 
-### ترتیبات (Settings)
-- `GET /api/v1/settings/brand`: برانڈ کنفیگریشن حاصل کریں۔
-- `PATCH /api/v1/settings/brand`: برانڈ کی ترتیبات اپ ڈیٹ کریں۔
+PATs صرف ایک بار دکھائے جاتے ہیں۔ انہیں محفوظ طریقے سے اسٹور کریں اور **سیٹنگز** → **API کیز** سے کوئی پرانا یا ظاہر شدہ ٹوکن منسوخ کریں۔
 
-## OpenAPI تفصیلات
+### ٹیم ٹرگر API کلید
 
-آپ ہماری مکمل OpenAPI تفصیلات یہاں سے ڈاؤن لوڈ کر سکتے ہیں:
-[openapi.json](https://app.nudgen.com/api/openapi.json)
+ایک ٹیم ٹریگر API کلید `ndg_team_` سے شروع ہوتی ہے اور اس کا دائرہ محدود `campaigns:trigger` ہے۔ یہ صرف لائف ٹائم مہمات کو متحرک کر سکتا ہے۔ PAT انہیں متحرک نہیں کر سکتا۔
+
+صرف ورک اسپیس کے مالکان اور منتظمین ہی ان کیز کو بنا سکتے ہیں، گھما سکتے ہیں یا منسوخ کر سکتے ہیں۔ پہلے سے طے شدہ طور پر، ایک کلید 90 دنوں کے بعد ختم ہو جاتی ہے۔ ایک غیر ختم ہونے والی کلید بنانے کے لیے `expiresInDays` کو `null` پر سیٹ کریں۔
+
+```bash
+curl -X POST "$NUDGEN_APP_URL/api/v1/settings/team-api-keys" \
+  -H "Authorization: Bearer $NUDGEN_PAT" \
+  -H "Content-Type: application/json" \
+  --data '{"name":"Order service production","expiresInDays":90}'
+```
+
+`201` جواب میں بالکل ایک بار سادہ متن `key` شامل ہے۔ اسے سرور سائڈ سیکرٹ مینیجر میں محفوظ کریں۔ بعد کے جوابات صرف `keyPrefix` کو ظاہر کرتے ہیں۔
+
+| طریقہ | اختتامی نقطہ | تفصیل |
+| --- | --- | --- |
+| `POST` | `/api/v1/settings/team-api-keys` | ایک ٹیم ٹرگر API کلید بنائیں۔ |
+| `GET` | `/api/v1/settings/team-api-keys` | ٹیم ٹرگر API کیز کی فہرست بنائیں۔ |
+| `POST` | `/api/v1/settings/team-api-keys/:id` | ایک فعال، غیر ختم شدہ کلید کو گھمائیں۔ |
+| `DELETE` | `/api/v1/settings/team-api-keys/:id` | ایک کلید منسوخ کریں۔ |
+
+## REST اینڈ پوائنٹس
+
+### شناخت اور ورک اسپیس
+
+| طریقہ | اختتامی نقطہ | تفصیل |
+| --- | --- | --- |
+| `GET` | `/api/v1/user/me` | مستند صارف حاصل کریں۔ |
+| `GET` | `/api/v1/teams` | ٹوکن کے مالک کو دستیاب ورک اسپیس کی فہرست بنائیں۔ |
+
+### رابطے
+
+| طریقہ | اختتامی نقطہ | تفصیل |
+| --- | --- | --- |
+| `GET` | `/api/v1/contacts` | `page`، `limit`، `search`، `tags`، اور `status` فلٹرز کے ساتھ رابطوں کی فہرست بنائیں۔ |
+| `POST` | `/api/v1/contacts/add` | ایک رابطہ بنائیں۔ |
+| `GET` | `/api/v1/contacts/:id` | رابطہ حاصل کریں۔ |
+| `PATCH` | `/api/v1/contacts/:id` | ایک رابطہ اپ ڈیٹ کریں۔ |
+| `DELETE` | `/api/v1/contacts/:id` | ایک رابطہ حذف کریں۔ |
+
+```bash
+curl -X POST "$NUDGEN_APP_URL/api/v1/contacts/add" \
+  -H "Authorization: Bearer $NUDGEN_PAT" \
+  -H "Content-Type: application/json" \
+  --data '{"email":"nathan@example.com","name":"Nathan Nguyen","tags":["api-test"]}'
+```
+
+### ون شاٹ اور ڈرپ مہمات
+
+| طریقہ | اختتامی نقطہ | تفصیل |
+| --- | --- | --- |
+| `GET` | `/api/v1/campaigns` | فعال ورک اسپیس میں مہمات کی فہرست بنائیں۔ |
+| `POST` | `/api/v1/campaigns` | مہم کا ڈرافٹ یا شیڈول مہم بنائیں۔ |
+| `GET` | `/api/v1/campaigns/:id` | مہم کی تفصیلات حاصل کریں۔ |
+| `PUT` | `/api/v1/campaigns/:id` | موجودہ مہم کو اپ ڈیٹ کریں۔ |
+| `POST` | `/api/v1/campaigns/:id/launch` | ابھی شروع کریں یا ون شاٹ یا ڈرپ مہم کا شیڈول بنائیں۔ |
+| `GET` | `/api/v1/campaigns/:id/stats` | ڈیلیوری، اوپن، کلک، باؤنس، اور شکایت کے اعدادوشمار حاصل کریں۔ |
+| `GET` | `/api/v1/campaigns/:id/progress` | مہم بھیجنے کی پیشرفت حاصل کریں۔ |
+| `GET` | `/api/v1/campaigns/:id/recipients` | مہم کے وصول کنندگان کی فہرست بنائیں۔ |
+| `POST` | `/api/v1/campaigns/test-send` | ڈیش بورڈ کے بغیر ٹیسٹ ای میل بھیجیں اعدادوشمار بھیجیں۔ |
+
+<Warning>
+ایک مہم کا آغاز حقیقی ای میل کو شیڈول کرتا ہے۔ ان باکس کے پیش نظاروں کے لیے `/api/v1/campaigns/test-send` استعمال کریں۔
+</Warning>
+
+## لائف ٹائم مہمات
+
+لائف ٹائم مہمات ایونٹ سے محرک ہوتی ہیں: ہر قبول شدہ ٹرگر زیادہ سے زیادہ ایک ایگزیکیوشن بناتا ہے اور فراہم کردہ رابطہ کو ایک جھٹکا بھیجتا ہے۔ ڈیش بورڈ ورک فلو اور متغیر معاہدے کی رہنمائی کے لیے [لائف ٹائم مہمات کا استعمال کریں](/ur/campaigns/lifetime) دیکھیں۔
+
+### لائف ٹائم مہم بنائیں
+
+زندگی بھر کی مہمات کو `draft` کے بطور بنائیں۔ `sendNow: true`، `status: "active"`، یا `status: "scheduled"` نہ بھیجیں؛ اس کے بجائے مہم کو اس کے لائف سائیکل اینڈ پوائنٹ کے ساتھ فعال کریں۔
+
+```bash
+curl -X POST "$NUDGEN_APP_URL/api/v1/campaigns" \
+  -H "Authorization: Bearer $NUDGEN_PAT" \
+  -H "Content-Type: application/json" \
+  --data @- <<'JSON'
+{
+  "name": "Order confirmation",
+  "type": "lifetime",
+  "status": "draft",
+  "goal": "Confirm an order and direct the customer to its details.",
+  "subject": "Your order {{data.order_id}} was received",
+  "html": "<p>Hello {{contact.firstName}},</p><p>Order {{data.order_id}} totals {{data.total}} VND.</p><p><a href=\"{{data.order_url}}\">View your order</a></p>",
+  "link": "https://example.com/orders",
+  "variableManifest": [
+    { "path": "data.order_id", "type": "string", "required": true, "description": "Order ID" },
+    { "path": "data.total", "type": "number", "required": true, "description": "Order total in VND" },
+    { "path": "data.order_url", "type": "url", "required": true, "description": "Order details URL" }
+  ],
+  "generatedVariableManifest": [
+    { "path": "data.order_id", "type": "string", "required": true, "description": "Order ID" },
+    { "path": "data.total", "type": "number", "required": true, "description": "Order total in VND" },
+    { "path": "data.order_url", "type": "url", "required": true, "description": "Order details URL" }
+  ]
+}
+JSON
+```
+
+`variableManifest` 100 `data.*` متغیرات کی وضاحت کرتا ہے۔ اس میں موضوع یا HTML میں استعمال ہونے والا ہر `data.*` ٹوکن شامل ہونا چاہیے۔ ڈیفالٹس کا اعلان کردہ قسم سے مماثل ہونا چاہیے، اور HTML `href` میں استعمال ہونے والے متغیر کی قسم `url` ہونی چاہیے۔
+
+جب آپ ای میل مواد تیار کرتے ہیں تو مماثل `generatedVariableManifest` کو محفوظ کریں۔ Nudgen ایکٹیویشن کو روکتا ہے اگر یہ موجودہ مینی فیسٹ سے مختلف ہے یا اگر ضروری ہو تو اعلان کردہ پیرامیٹرز ای میل سے غائب ہیں۔
+
+### لائف سائیکل کو تبدیل کریں
+
+| طریقہ | اختتامی نقطہ | توثیق | تفصیل |
+| --- | --- | --- | --- |
+| `PATCH` | `/api/v1/campaigns/:campaignId/lifecycle` | PAT | زندگی بھر کی مہم کو `active`، `paused`، یا `archived` میں تبدیل کریں۔ |
+
+```bash
+curl -X PATCH "$NUDGEN_APP_URL/api/v1/campaigns/$CAMPAIGN_ID/lifecycle" \
+  -H "Authorization: Bearer $NUDGEN_PAT" \
+  -H "Content-Type: application/json" \
+  --data '{"status":"active"}'
+```
+
+درست ٹرانزیشنز `draft → active → paused → active` اور `active|paused → archived` ہیں۔ روکنا یا آرکائیو کرنا پھانسیوں کو منسوخ کر دیتا ہے جو ابھی بھی `pending` یا `queued` ہیں اور اپنے کوٹہ کے تحفظات جاری کر دیتے ہیں۔ پہلے سے عمل میں لایا جانے والا عمل اب بھی بھیج سکتا ہے۔
+
+### ایک جھٹکے کو متحرک کریں
+
+| طریقہ | اختتامی نقطہ | توثیق | تفصیل |
+| --- | --- | --- | --- |
+| `POST` | `/api/v1/campaigns/:campaignId/triggers` | ٹیم ٹرگر API کلید | ایک ایونٹ پر عمل درآمد بنائیں اور ایک جھٹکے کی قطار لگائیں۔ |
+
+```bash
+curl -X POST "$NUDGEN_APP_URL/api/v1/campaigns/$CAMPAIGN_ID/triggers" \
+  -H "Authorization: Bearer $NUDGEN_TEAM_API_KEY" \
+  -H "Content-Type: application/json" \
+  --data @- <<'JSON'
+{
+  "eventId": "order_123",
+  "eventName": "order.created",
+  "occurredAt": "2026-08-23T10:00:00Z",
+  "contact": {
+    "email": "an@example.com",
+    "externalId": "customer_456",
+    "name": "An Nguyen",
+    "phone": "+84901234567",
+    "metadata": { "company": "Nudgen" }
+  },
+  "data": {
+    "order_id": "order_123",
+    "total": 490000,
+    "order_url": "https://example.com/orders/order_123"
+  }
+}
+JSON
+```
+
+| فیلڈ | قسم | مطلوبہ | حدود اور برتاؤ |
+| --- | --- | --- | --- |
+| `eventId` | تار | جی ہاں | 1–128 حروف۔ مہم کے اندر منفرد شناخت کی کلید؛ دوبارہ کوششوں کے لیے اسے دوبارہ استعمال کریں۔ |
+| `eventName` | تار | نہیں | 1–100 حروف، مثال کے طور پر `order.created`۔ |
+| `occurredAt` | ISO 8601 ڈیٹ ٹائم | نہیں | سورس ایونٹ کا وقت۔ |
+| `contact.email` | ای میل | جی ہاں | لوئر کیس Nudgen ای میل کے ذریعے رابطہ تخلیق یا اپ ڈیٹ کرتا ہے۔ |
+| `contact.externalId` | تار | نہیں | 1-200 حروف اور ورک اسپیس میں کسی دوسرے رابطہ ای میل سے تعلق نہیں رکھ سکتے۔ |
+| `contact.name` | تار | نہیں | 200 حروف تک۔ |
+| `contact.phone` | تار | نہیں | 50 حروف تک۔ |
+| `contact.metadata` | اعتراض | نہیں | اضافی رابطہ پروفائل ڈیٹا۔ |
+| `data` | اعتراض | جی ہاں | `variableManifest` سے مماثل ہونا ضروری ہے۔ زیادہ سے زیادہ 32 KiB |
+
+درخواست کی پوری باڈی 64 KiB تک محدود ہے، JSON نے آٹھ لیول تک نیسٹنگ کی ہے، اور `__proto__`، `constructor`، اور `prototype` جیسی غیر محفوظ کلیدیں مسترد کر دی گئی ہیں۔
+
+ایک نیا ٹرگر `__proto__` کے ساتھ واپس آتا ہے۔ `{ "execution": { "id": "...", "status": "queued" }, "duplicate": false }`۔ `eventId` کو دوبارہ استعمال کرنے سے `200` اور `duplicate: true` کے ساتھ موجودہ ایگزیکیوشن واپس آجاتا ہے۔
+
+### پھانسیوں کی فہرست
+
+ طریقہ | اختتامی نقطہ | توثیق | تفصیل |
+| --- | --- | --- | --- |
+| `GET` | `/api/v1/campaigns/:campaignId/executions` | PAT | لائف ٹائم مہم کی سزاؤں کی فہرست بنائیں۔ |
+
+```bash
+curl "$NUDGEN_APP_URL/api/v1/campaigns/$CAMPAIGN_ID/executions?limit=25&status=sent&search=an@example.com" \
+  -H "Authorization: Bearer $NUDGEN_PAT"
+```
+ ای میل یا بیرونی ID سے ملنے کے لیے `search`۔ جواب میں `executions` اور `nextCursor` شامل ہیں۔
+
+## غلطیاں، دوبارہ کوششیں، اور شرح کی حدیں
+
+لائف ٹائم ٹرگرز ہر ٹیم ٹرگر API کلید کے لیے فی منٹ 600 درخواستوں کی اجازت دیتے ہیں۔ جوابات میں `x-ratelimit-limit`، `x-ratelimit-remaining`، اور `x-ratelimit-reset` شامل ہیں۔ `429` جواب میں `Retry-After` بھی شامل ہے۔
+
+| حیثیت | معنی | کیا کرنا ہے |
+| --- | --- | --- |
+| `200` | ڈپلیکیٹ `eventId` | واپسی پر عملدرآمد کا استعمال کریں؛ دوبارہ مت بھیجیں. |
+| `201` | نئی پھانسی کی قطار | کارکن کے اس پر کارروائی کرنے کا انتظار کریں۔ |
+| `400` | غلط JSON، باڈی، یا بنیادی فیلڈ | پے لوڈ کو درست کریں؛ بغیر تبدیلی کے دوبارہ کوشش نہ کریں۔ |
+| `401` | غائب، غلط، منسوخ، میعاد ختم، یا غلط دائرہ کار کی کلید | کلیدی ترتیب کو گھمائیں یا درست کریں۔ |
+| `402` / `403` | کوٹہ یا رکنیت لکھنے سے روکتی ہے | کوٹہ یا رکنیت کا مسئلہ حل کریں۔ کوٹہ کی خرابیوں میں `code`، `required`، `available`، اور `checkoutUrl` شامل ہیں۔ |
+| `404` | مہم غائب ہے یا کلید کے ورک اسپیس سے باہر ہے | مہم کی شناخت اور کلید چیک کریں۔ |
+| `409` | مہم فعال نہیں ہے/ تاحیات نہیں ہے، یا شناختی تنازعات سے رابطہ نہیں ہے۔ مہم کو چالو کریں یا رابطہ کی شناخت درست کریں۔ |
+| `413` | درخواست 64 KiB سے زیادہ ہے | پے لوڈ کا سائز کم کریں۔ |
+| `415` | غائب `Content-Type: application/json` | مطلوبہ ہیڈر شامل کریں۔ |
+| `422` | `data` متغیر مینی فیسٹ سے مماثل نہیں ہے۔ ڈیٹا کو درست کریں؛ راستوں اور ایرر کوڈز کے لیے `details` کا معائنہ کریں۔ |
+| `429` | شرح کی حد سے تجاوز کر گیا | `Retry-After` کا انتظار کریں، پھر اسی `eventId` کے ساتھ دوبارہ کوشش کریں۔ |
+| `503` | پھانسی کو قطار میں نہیں لگایا جا سکا | بیک آف اور اسی `eventId` کے ساتھ دوبارہ کوشش کریں۔ |
+
+`429`، `503`، اور نیٹ ورک کی خرابیوں کے لیے، ایکسپونینشل بیک آف اور اسی `eventId` کے ساتھ دوبارہ کوشش کریں۔ قطار کا کام عمل درآمد کے لیے طے شدہ ہے، اس لیے دوبارہ کوشش کرنے سے ڈپلیکیٹ ای میل نہیں بنتی ہے۔
+
+### برانڈ کی ترتیبات
+
+| طریقہ | اختتامی نقطہ | تفصیل |
+| --- | --- | --- |
+| `GET` | `/api/v1/settings/brand` | برانڈ کا نام، ویب سائٹ، بھیجنے والے کا ای میل، لوگو اور ڈیزائن کی ترتیبات پڑھیں۔ |
+| `PATCH` | `/api/v1/settings/brand` | برانڈ کی ترتیبات کو اپ ڈیٹ کریں۔ |
+
+### AI ڈرافٹ جنریشن
+
+| طریقہ | اختتامی نقطہ | تفصیل |
+| --- | --- | --- |
+| `POST` | `/api/v1/ai/generate` | مہم کے سیاق و سباق سے ای میل کا موضوع اور HTML ڈرافٹ بنائیں۔ |
+
+## MCP سرور
+
+جب آپ کا ایجنٹ ماڈل سیاق و سباق پروٹوکول ٹولز کو سپورٹ کرتا ہے تو [Nudgen MCP](/en/agents/mcp) استعمال کریں۔ MCP وہی PAT استعمال کرتا ہے جو ورک اسپیس مینجمنٹ APIs کے طور پر استعمال کرتا ہے، لیکن Nudgen کو روایتی HTTP اینڈ پوائنٹس کے بجائے ایجنٹ سے کال کرنے کے قابل ٹولز کے طور پر سامنے لاتا ہے۔
+
+<Card title="MCP server setup" icon="bot" href="/en/agents/mcp">
+ کلاڈ کوڈ، کرسر، ونڈ سرف، کوڈیکس CLI، یا ایک MCP میں Nudgen MCP انسٹال کریں۔ کلائنٹ۔
+</Card>
