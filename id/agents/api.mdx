@@ -65,3 +65,7 @@ URL dasar untuk semua permintaan API adalah:
 
 Anda dapat mengunduh spesifikasi OpenAPI lengkap kami di sini:
 [openapi.json](https://app.nudgen.com/api/openapi.json)
+
+## Kampanye Lifetime
+
+Gunakan PAT untuk membuat draft dan mengubah lifecycle (`PATCH /api/v1/campaigns/:id/lifecycle`). Hanya Team trigger API key `ndg_team_*` yang dapat memanggil `POST /api/v1/campaigns/:id/triggers`. Gunakan `eventId` untuk idempotensi dan lihat execution melalui `GET /api/v1/campaigns/:id/executions`. Lihat [panduan Lifetime](/id/campaigns/lifetime).

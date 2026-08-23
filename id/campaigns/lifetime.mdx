@@ -1,0 +1,22 @@
+---
+title: "Menggunakan kampanye Lifetime"
+description: "Kirim satu email berbasis peristiwa untuk setiap kontak"
+---
+
+## Kampanye Lifetime
+
+Kampanye Lifetime selalu siap menerima event dari sistem Anda. Setiap trigger yang valid membuat paling banyak satu execution dan mengirim satu nudge kepada contact di payload. Gunakan untuk konfirmasi pesanan, pengingat pembayaran, dan onboarding berbasis event. Audience-nya selalu **Trigger**.
+
+## Menyiapkan kampanye
+
+Pilih **Campaigns** → **New campaign** → **Lifetime**. Parameter runtime seperti `order_id` menjadi `{{data.order_id}}`. Buat, pratinjau, dan test email, lalu **Activate**. Buat **Team trigger API key** di **Settings** → **API Keys** dan simpan `ndg_team_*` hanya di backend.
+
+`variableManifest` adalah kontrak dengan `data`: maksimal 100 variabel `data.*` bertipe `string`, `number`, `boolean`, `date`, atau `url`. Nilai HTML di-escape; variabel di `href` harus bertipe `url`.
+
+## Lifecycle dan retry
+
+Transisi yang valid adalah `draft → active → paused → active` dan `active|paused → archived`. Archive bersifat permanen. Pause/archive membatalkan execution `pending`/`queued`; execution yang sedang diproses masih mungkin terkirim. Setiap execution menyimpan snapshot konten.
+
+Trigger dari backend tepercaya dan pakai ulang `eventId` saat retry: `201` baru, `200` duplikat. Retry `429`, `503`, dan error jaringan dengan exponential backoff dan jangan log secret.
+
+Lihat [Developer API](/id/agents/api).

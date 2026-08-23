@@ -1,0 +1,22 @@
+---
+title: "استخدام حملات Lifetime"
+description: "أرسل رسالة بريد مدفوعة بحدث لكل جهة اتصال"
+---
+
+## حملة Lifetime
+
+تبقى حملة Lifetime جاهزة لأحداث نظامك. ينشئ كل trigger صالح execution واحداً كحد أقصى ويرسل nudge إلى contact في payload. استخدمها لتأكيدات الطلبات وتذكيرات الدفع وonboarding المعتمد على الأحداث؛ الجمهور دائماً هو **Trigger**.
+
+## الإعداد والأمان
+
+أنشئ الحملة من **Campaigns** → **New campaign** → **Lifetime**. يتحول parameter مثل `order_id` إلى `{{data.order_id}}`. أنشئ الرسالة وعاينها واختبرها ثم اضغط **Activate**. أنشئ Team trigger API key من **Settings** → **API Keys** واحفظ `ndg_team_*` في backend فقط.
+
+`variableManifest` هو العقد مع `data`: حتى 100 متغير `data.*` من الأنواع `string` و`number` و`boolean` و`date` و`url`. يتم escape لقيم HTML، ويجب أن يكون المتغير في `href` من نوع `url`.
+
+## دورة الحياة وإعادة المحاولة
+
+الانتقالات الصحيحة هي `draft → active → paused → active` و`active|paused → archived`. لا يمكن استعادة archive. يؤدي pause أو archive إلى إلغاء execution بحالة `pending` أو `queued`، وقد تستمر الرسالة قيد المعالجة. يحفظ كل execution snapshot للمحتوى.
+
+شغّل trigger من backend موثوق وأعد استخدام `eventId` عند retry: ترجع العملية الجديدة `201` والمكررة `200`. أعد محاولة `429` و`503` وأخطاء الشبكة باستخدام exponential backoff ولا تسجل secrets.
+
+راجع [Developer API](/ar/agents/api).

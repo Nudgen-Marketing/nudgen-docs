@@ -1,0 +1,133 @@
+---
+title: "Use Lifetime campaigns"
+description: "Send one event-triggered nudge to a contact with every authenticated trigger"
+---
+
+## What this page helps you do
+
+Create a Lifetime campaign that stays ready for events from your system. Each valid trigger creates at most one execution and sends one nudge to the contact in its payload.
+
+## Why this matters
+
+You can send timely, relevant email without repeatedly building and launching campaigns. Your backend controls when an event happens, while Nudgen keeps the email content, delivery, tracking, and contact preferences in one place.
+
+## When to use a Lifetime campaign
+
+Use a Lifetime campaign for event-driven email, such as:
+
+- Order confirmations
+- Payment reminders
+- Event-based onboarding
+- Account or subscription updates
+
+Unlike one-shot and drip campaigns, a Lifetime campaign does not send to a saved audience immediately. Its audience is always **Trigger**.
+
+## Create and activate a campaign
+
+<Steps>
+  <Step title="Create a Lifetime campaign">
+    Go to **Campaigns**, click **New campaign**, then choose **Lifetime**. Add the campaign name, goal, brand configuration, and optional CTA link.
+  </Step>
+  <Step title="Define runtime parameters">
+    Add each value that your system will provide at send time. A parameter creates a `data.*` variable: for example, `order_id` becomes `{{data.order_id}}` in the email.
+  </Step>
+  <Step title="Create the email">
+    Generate or write the subject and HTML, then add your runtime variables where they belong. Preview the email and send a test before activating it.
+  </Step>
+  <Step title="Activate the campaign">
+    Save it as a draft, then click **Activate**. Nudgen checks that required parameters are represented in the email and that the parameter contract has not changed since generation.
+  </Step>
+  <Step title="Create a trigger key">
+    Go to **Settings** → **API Keys** and create a **Team trigger API key**. Store the `ndg_team_*` secret in your backend or secret manager; never place it in browser or mobile-app code.
+  </Step>
+</Steps>
+
+## Runtime parameters and template variables
+
+Your `variableManifest` is the contract between the email template and each trigger's `data` object. A campaign can define up to 100 variables.
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `path` | `data.<name>` | Yes | Variable path. Nested paths such as `data.order.total` are supported. |
+| `type` | `string`, `number`, `boolean`, `date`, or `url` | Yes | Type the trigger must provide. A `date` must be a valid date string and a `url` must be HTTP(S). |
+| `required` | boolean | Yes | Missing values return `422` unless a default is set. |
+| `defaultValue` | string, number, or boolean | No | Fallback value that must match the variable type. |
+| `description` | string | No | Explain the value so you and Nudgen AI can use it correctly. |
+
+For example, use `{{data.order_id}}`, `{{data.total}}`, and `{{data.order_url}}` in a template. You can also use `contact.*`, `event.*`, `brand.*`, and legacy variables such as `{{firstName}}` and `{{brandName}}`.
+
+Nudgen escapes variable values inserted into HTML. Templates do not support JavaScript, expressions, or loops. Any variable used in an `href` must be a `data.*` variable declared with type `url`.
+
+## Manage the lifecycle
+
+| Status | What it means |
+| --- | --- |
+| **Draft** | Configure the campaign and test its email. |
+| **Active** | Nudgen accepts authenticated triggers. |
+| **Paused** | Nudgen does not accept new triggers. You can resume it. |
+| **Archived** | The campaign is permanently closed and cannot be activated again. |
+
+The valid transitions are `draft → active → paused → active` and `active|paused → archived`.
+
+<Note>
+Pausing or archiving cancels executions that are still pending or queued. An execution already processing may still send.
+</Note>
+
+Every execution snapshots the campaign content and send settings when Nudgen receives the trigger. Editing an active campaign affects only later triggers, not executions that already exist.
+
+## Trigger from your backend
+
+Call the trigger endpoint from a trusted server after you validate the source event. Use the Team trigger API key, not a Personal Access Token (PAT).
+
+```bash
+curl -X POST "$NUDGEN_APP_URL/api/v1/campaigns/$CAMPAIGN_ID/triggers" \
+  -H "Authorization: Bearer $NUDGEN_TEAM_API_KEY" \
+  -H "Content-Type: application/json" \
+  --data @- <<'JSON'
+{
+  "eventId": "order_123",
+  "eventName": "order.created",
+  "occurredAt": "2026-08-23T10:00:00Z",
+  "contact": {
+    "email": "an@example.com",
+    "externalId": "customer_456",
+    "name": "An Nguyen",
+    "metadata": { "company": "Nudgen" }
+  },
+  "data": {
+    "order_id": "order_123",
+    "total": 490000,
+    "order_url": "https://example.com/orders/order_123"
+  }
+}
+JSON
+```
+
+Keep the same `eventId` when you retry an event. Nudgen returns the existing execution with `200` and `duplicate: true` instead of sending another nudge. A new execution returns `201`.
+
+## Integrate safely
+
+- Trigger from a webhook consumer or backend, and verify the incoming webhook before calling Nudgen.
+- Retry network errors, `429`, and `503` with exponential backoff and the same `eventId`.
+- Do not log `Authorization` headers or payloads containing sensitive contact data.
+- Rotate trigger keys regularly and revoke a key immediately if you suspect it is exposed.
+- Create one campaign per event type and variable contract so that templates and execution audits stay clear.
+
+## Monitor executions
+
+Open the campaign in the dashboard to see recent executions and their statuses. An execution can be `pending`, `queued`, `processing`, `sent`, `skipped`, `cancelled`, `failed`, or `delivery_unknown`.
+
+`skipped` means the contact was unsubscribed or bounced, so Nudgen records the event but does not send or consume quota. `delivery_unknown` means the provider may have accepted the email but the final delivery result was uncertain; Nudgen does not retry it automatically to avoid a duplicate send.
+
+For programmatic setup, triggering, and execution queries, see the [Developer API](/en/agents/api).
+
+## Related docs
+
+<CardGroup cols={2}>
+  <Card title="Campaigns overview" icon="list" href="/en/campaigns/overview">
+    Compare one-shot, drip, and Lifetime campaigns.
+  </Card>
+  <Card title="Developer API" icon="code" href="/en/agents/api">
+    Manage Lifetime campaigns and triggers through the API.
+  </Card>
+</CardGroup>

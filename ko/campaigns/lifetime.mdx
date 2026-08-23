@@ -1,0 +1,22 @@
+---
+title: "Lifetime 캠페인 사용"
+description: "인증된 이벤트마다 연락처에 이벤트 기반 이메일 한 통을 보냅니다"
+---
+
+## Lifetime 캠페인
+
+Lifetime 캠페인은 시스템 이벤트를 항상 기다립니다. 유효한 trigger 하나는 최대 하나의 execution을 만들고 payload의 contact에게 nudge 한 통을 보냅니다. 주문 확인, 결제 알림, 이벤트 기반 onboarding에 사용하며 audience는 항상 **Trigger**입니다.
+
+## 설정과 안전한 연동
+
+**Campaigns** → **New campaign** → **Lifetime**에서 만듭니다. `order_id` 같은 runtime parameter는 `{{data.order_id}}`가 됩니다. 이메일을 만들고 미리 보기 및 테스트한 뒤 **Activate**를 누릅니다. **Settings** → **API Keys**에서 Team trigger API key를 만들고 `ndg_team_*`는 backend에만 저장하세요.
+
+`variableManifest`는 `data` 계약입니다. `string`, `number`, `boolean`, `date`, `url` 형식의 `data.*` 변수를 최대 100개 지원합니다. HTML 값은 escape되며 `href` 변수는 `url` 형식이어야 합니다.
+
+## 수명 주기와 재시도
+
+유효한 전환은 `draft → active → paused → active` 및 `active|paused → archived`입니다. archive는 되돌릴 수 없습니다. pause/archive는 `pending`/`queued` execution을 취소하지만 처리 중인 메일은 전송될 수 있습니다. 각 execution은 콘텐츠 snapshot을 저장합니다.
+
+신뢰할 수 있는 backend에서만 trigger하고 재시도에는 같은 `eventId`를 사용하세요. `201`은 새 실행, `200`은 duplicate입니다. `429`, `503`, 네트워크 오류는 exponential backoff로 재시도하고 secret을 로그에 남기지 마세요.
+
+[Developer API](/ko/agents/api)를 참조하세요.

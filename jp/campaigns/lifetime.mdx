@@ -1,0 +1,22 @@
+---
+title: "Lifetime キャンペーンを使用する"
+description: "認証済みイベントごとにコンタクトへ1通のメールを送信します"
+---
+
+## Lifetime キャンペーン
+
+Lifetime キャンペーンはシステムのイベントを待ち続けます。有効な trigger は最大1つの execution を作成し、payload の contact に1通の nudge を送ります。注文確認、支払いリマインダー、イベント型 onboarding に使用し、audience は常に **Trigger** です。
+
+## 設定と安全な連携
+
+**Campaigns** → **New campaign** → **Lifetime** で作成します。`order_id` などの runtime parameter は `{{data.order_id}}` になります。メールを作成、プレビュー、テストしてから **Activate** を選択します。**Settings** → **API Keys** で Team trigger API key を作り、`ndg_team_*` はバックエンドだけに保存してください。
+
+`variableManifest` は `data` との契約です。`string`、`number`、`boolean`、`date`、`url` 型の `data.*` 変数を最大100個使えます。HTML 値はエスケープされ、`href` の変数は `url` 型でなければなりません。
+
+## ライフサイクルと再試行
+
+有効な遷移は `draft → active → paused → active` と `active|paused → archived` です。archive は元に戻せません。pause/archive は `pending`/`queued` execution を取り消しますが、処理中の送信は完了することがあります。各 execution は内容の snapshot を保持します。
+
+信頼できる backend からのみ trigger し、retry では同じ `eventId` を使います。`201` は新規、`200` は duplicate です。`429`、`503`、ネットワークエラーは exponential backoff で再試行し、secret をログに残さないでください。
+
+[Developer API](/jp/agents/api) を参照してください。

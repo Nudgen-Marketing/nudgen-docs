@@ -65,3 +65,7 @@ URL cơ sở cho tất cả các yêu cầu API là:
 
 Bạn có thể tải xuống đặc tả OpenAPI đầy đủ của chúng tôi tại đây:
 [openapi.json](https://app.nudgen.com/api/openapi.json)
+
+## Lifetime campaigns
+
+Lifetime campaign dùng PAT để tạo draft và cập nhật lifecycle (`PATCH /api/v1/campaigns/:id/lifecycle`), còn `POST /api/v1/campaigns/:id/triggers` chỉ dùng Team trigger API key `ndg_team_*`. Dùng `eventId` cho idempotency; query execution bằng `GET /api/v1/campaigns/:id/executions`. Xem [hướng dẫn Lifetime](/vi/campaigns/lifetime).

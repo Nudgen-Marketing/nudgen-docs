@@ -1,0 +1,29 @@
+---
+title: "Usar campañas Lifetime"
+description: "Envía un correo activado por eventos a cada contacto"
+---
+
+## Qué es una campaña Lifetime
+
+Una campaña Lifetime queda lista para los eventos de tu sistema. Cada trigger válido crea como máximo una ejecución y envía un nudge al contacto del payload. Úsala para confirmaciones de pedidos, recordatorios de pago y onboarding por eventos; su audiencia siempre es **Trigger**.
+
+## Por qué importa
+
+Tu backend determina cuándo ocurre el evento y Nudgen centraliza el contenido, la entrega, el seguimiento y las preferencias de los contactos.
+
+## Configúrala
+
+1. Ve a **Campaigns** → **New campaign** → **Lifetime**.
+2. Añade parámetros de ejecución; `order_id` crea `{{data.order_id}}`.
+3. Genera, previsualiza y prueba el correo; después selecciona **Activate**.
+4. Crea una **Team trigger API key** en **Settings** → **API Keys** y guarda `ndg_team_*` solo en el servidor.
+
+`variableManifest` define el contrato con `data`: hasta 100 variables `data.*` de tipo `string`, `number`, `boolean`, `date` o `url`. Nudgen escapa valores HTML; una variable en `href` debe ser `url`.
+
+## Ciclo de vida y reintentos
+
+Las transiciones son `draft → active → paused → active` y `active|paused → archived`. Archivar es irreversible. Pausar o archivar cancela ejecuciones `pending`/`queued`; las que ya se procesan pueden enviarse. Cada ejecución guarda una instantánea del contenido.
+
+Activa desde un servidor fiable y reutiliza `eventId` al reintentar: `201` es nuevo y `200` es duplicado. Reintenta `429`, `503` y errores de red con backoff exponencial y nunca registres secretos.
+
+Consulta la [API para desarrolladores](/es/agents/api).

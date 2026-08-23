@@ -1,0 +1,22 @@
+---
+title: "Lifetime kampanyalarını kullanın"
+description: "Her doğrulanmış tetikleyiciyle bir kişiye olay tabanlı e-posta gönderin"
+---
+
+## Lifetime kampanyası
+
+Lifetime kampanyası sisteminizdeki olayları bekler. Her geçerli trigger en fazla bir execution oluşturur ve payload içindeki contact’a bir nudge gönderir. Sipariş onayı, ödeme hatırlatması ve olay tabanlı onboarding için kullanın; audience her zaman **Trigger** olur.
+
+## Kurulum
+
+**Campaigns** → **New campaign** → **Lifetime** seçin. `order_id` gibi runtime parametreleri `{{data.order_id}}` olur. E-postayı oluşturun, önizleyin ve test edin; sonra **Activate** seçin. **Settings** → **API Keys** altında Team trigger API key oluşturun ve `ndg_team_*` anahtarını yalnızca backend’de saklayın.
+
+`variableManifest`, `data` sözleşmesidir: en fazla 100 `data.*` değişkeni; türler `string`, `number`, `boolean`, `date`, `url`. HTML değerleri escape edilir; `href` içindeki değişken `url` olmalıdır.
+
+## Yaşam döngüsü ve yeniden deneme
+
+Geçişler `draft → active → paused → active` ve `active|paused → archived` şeklindedir. Archive geri alınamaz. Pause/archive, `pending`/`queued` execution’ları iptal eder; işlenen e-posta yine de gönderilebilir. Her execution içerik snapshot’ı alır.
+
+Yalnızca güvenilir backend’den trigger edin ve retry’de aynı `eventId` kullanın: `201` yeni, `200` duplicate’tir. `429`, `503` ve ağ hatalarını exponential backoff ile tekrar deneyin; secret’ları loglamayın.
+
+[Developer API](/tr/agents/api) sayfasına bakın.

@@ -1,11 +1,11 @@
 ---
 title: "Campaigns overview"
-description: "One-shot vs drip campaigns and campaign statuses"
+description: "One-shot, drip, and Lifetime campaigns"
 ---
 
 ## What this page helps you do
 
-Understand the two campaign types and what each status means. This helps you choose the right campaign type and interpret your campaign list.
+Understand the three campaign types and their lifecycles. This helps you choose the right campaign type and interpret your campaign list.
 
 ## Before you start
 
@@ -34,6 +34,14 @@ A multi-step campaign with delays between emails (e.g. Day 1, Day 3, Day 7). Use
 
 Each step has its own goal, subject, and AI-generated body. Contacts move to the next step only after the delay. You can set **auto-stop rules** (e.g. stop when a recipient clicks, or when they open the email) so that users who engage stop receiving later steps.
 
+### Lifetime campaigns
+
+A Lifetime campaign stays ready for events from your system. Each authenticated trigger creates at most one execution and sends one nudge to the contact in that trigger.
+
+Use a Lifetime campaign for order confirmations, payment reminders, event-based onboarding, or other transactional and retention emails that your backend initiates. Its audience is always **Trigger**—it does not send immediately to a saved contact segment.
+
+See [Use Lifetime campaigns](/en/campaigns/lifetime) for the dashboard workflow and integration guidance.
+
 **Audience types:** When creating a campaign you choose who receives it: **All contacts**, **By tags** (only contacts with selected tags), or **Manual** (hand-pick recipients). The wizard shows a reach estimate before you launch.
 
 ## Campaign statuses
@@ -50,10 +58,17 @@ Each step has its own goal, subject, and AI-generated body. Contacts move to the
 Once a campaign is sent, you cannot edit its content or resend. Create a new campaign to send a different message.
 </Note>
 
+### Lifetime lifecycle
+
+Lifetime campaigns use a separate lifecycle: **Draft** → **Active** → **Paused** → **Active**, or **Active/Paused** → **Archived**. You cannot reactivate an archived campaign.
+
+When you pause or archive a Lifetime campaign, Nudgen cancels executions that are still pending or queued. An execution already being processed may still send. Changes to an active campaign apply only to future triggers because each execution stores a snapshot of the content and sending configuration.
+
 ## What happens next
 
 - [Create a campaign](/en/campaigns/create) — walk through the wizard and send your first email.
 - [Manage campaigns](/en/campaigns/manage) — edit drafts, send, schedule, or stop.
+- [Use Lifetime campaigns](/en/campaigns/lifetime) — configure an event-triggered campaign and its API integration.
 - [View analytics](/en/campaigns/analytics) — opens, clicks, delivery rates, and recipient activity.
 
 ## Related docs
@@ -64,6 +79,9 @@ Once a campaign is sent, you cannot edit its content or resend. Create a new cam
   </Card>
   <Card title="Manage campaigns" icon="pen-to-square" href="/en/campaigns/manage">
     Edit, send, schedule, and stop.
+  </Card>
+  <Card title="Use Lifetime campaigns" icon="bolt" href="/en/campaigns/lifetime">
+    Send one nudge for each event from your system.
   </Card>
   <Card title="Campaign analytics" icon="chart-line" href="/en/campaigns/analytics">
     Metrics and recipient activity.

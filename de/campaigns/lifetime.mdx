@@ -1,0 +1,22 @@
+---
+title: "Lifetime-Kampagnen verwenden"
+description: "Senden Sie pro authentifiziertem Ereignis eine E-Mail an einen Kontakt"
+---
+
+## Lifetime-Kampagnen
+
+Eine Lifetime-Kampagne wartet auf Ereignisse aus Ihrem System. Jeder gültige Trigger erstellt höchstens eine Ausführung und sendet einen Nudge an den Kontakt im Payload. Nutzen Sie sie für Bestellbestätigungen, Zahlungserinnerungen und ereignisbasiertes Onboarding. Die Zielgruppe ist immer **Trigger**.
+
+## Einrichtung und Sicherheit
+
+Erstellen Sie unter **Campaigns** → **New campaign** → **Lifetime** die Kampagne. Runtime-Parameter wie `order_id` werden zu `{{data.order_id}}`. Erstellen, prüfen und testen Sie die E-Mail, aktivieren Sie die Kampagne und erzeugen Sie unter **Settings** → **API Keys** einen Team-Trigger-Key. Bewahren Sie `ndg_team_*` ausschließlich serverseitig auf.
+
+`variableManifest` ist der Vertrag mit `data`: bis zu 100 `data.*`-Variablen mit `string`, `number`, `boolean`, `date` oder `url`. HTML-Werte werden escaped; Variablen in `href` müssen `url` sein.
+
+## Lifecycle und Wiederholungen
+
+Gültig sind `draft → active → paused → active` und `active|paused → archived`. Archivieren ist endgültig. Pause oder Archivierung bricht `pending`/`queued` Ausführungen ab; bereits laufende können noch senden. Jede Ausführung speichert einen Inhalts-Snapshot.
+
+Triggern Sie nur vom Backend. Verwenden Sie bei Retry dieselbe `eventId`: `201` ist neu, `200` ein Duplikat. Wiederholen Sie `429`, `503` und Netzwerkfehler mit Exponential Backoff und protokollieren Sie keine Secrets.
+
+Siehe [Developer API](/de/agents/api).

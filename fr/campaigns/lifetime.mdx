@@ -1,0 +1,29 @@
+---
+title: "Utiliser les campagnes Lifetime"
+description: "Envoyez un e-mail déclenché par événement à chaque contact"
+---
+
+## Qu’est-ce qu’une campagne Lifetime ?
+
+Une campagne Lifetime reste prête à recevoir les événements de votre système. Chaque déclencheur valide crée au plus une exécution et envoie un nudge au contact du payload. Utilisez-la pour les confirmations de commande, rappels de paiement et parcours déclenchés par événement ; son audience est toujours **Trigger**.
+
+## Pourquoi c’est important
+
+Votre backend décide quand l’événement se produit, tandis que Nudgen centralise le contenu, l’envoi, le suivi et les préférences des contacts.
+
+## Configuration dans le tableau de bord
+
+1. Ouvrez **Campaigns** → **New campaign** → **Lifetime**.
+2. Ajoutez des paramètres d’exécution. `order_id` devient `{{data.order_id}}` dans l’e-mail.
+3. Créez, prévisualisez et testez l’e-mail, puis cliquez sur **Activate**.
+4. Dans **Settings** → **API Keys**, créez une **Team trigger API key** et conservez le secret `ndg_team_*` uniquement côté serveur.
+
+`variableManifest` est le contrat entre le modèle et `data`. Il accepte jusqu’à 100 variables `data.*` de type `string`, `number`, `boolean`, `date` ou `url`. Les valeurs HTML sont échappées et une variable utilisée dans `href` doit être de type `url`.
+
+## Cycle de vie et déclenchement
+
+Les transitions valides sont `draft → active → paused → active` et `active|paused → archived`. Une campagne archivée ne peut pas être réactivée. La pause ou l’archivage annule les exécutions `pending`/`queued`; une exécution déjà traitée peut partir. Chaque exécution capture le contenu au moment du trigger.
+
+Déclenchez depuis un serveur fiable et réutilisez `eventId` pour les nouvelles tentatives : `201` crée une exécution, `200` renvoie un doublon. Réessayez `429`, `503` et les erreurs réseau avec backoff exponentiel, sans journaliser les secrets.
+
+Consultez l’[API développeur](/fr/agents/api) pour l’intégration.

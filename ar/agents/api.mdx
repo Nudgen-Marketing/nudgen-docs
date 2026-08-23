@@ -65,3 +65,7 @@ curl -X GET https://app.nudgen.com/api/v1/user/me \
 
 يمكنك تنزيل مواصفات OpenAPI الكاملة الخاصة بنا من هنا:
 [openapi.json](https://app.nudgen.com/api/openapi.json)
+
+## حملات Lifetime
+
+استخدم PAT لإنشاء draft وتغيير lifecycle عبر `PATCH /api/v1/campaigns/:id/lifecycle`. لا يمكن استدعاء `POST /api/v1/campaigns/:id/triggers` إلا باستخدام Team trigger API key يبدأ بـ `ndg_team_*`. استخدم `eventId` لضمان idempotency واستعلم عن execution عبر `GET /api/v1/campaigns/:id/executions`. راجع [دليل Lifetime](/ar/campaigns/lifetime).

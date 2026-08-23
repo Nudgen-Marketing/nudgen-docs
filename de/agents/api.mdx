@@ -65,3 +65,7 @@ Die Basis-URL für alle API-Anfragen lautet:
 
 Sie können unsere vollständige OpenAPI-Spezifikation hier herunterladen:
 [openapi.json](https://app.nudgen.com/api/openapi.json)
+
+## Lifetime-Kampagnen
+
+Erstellen Sie den Entwurf und ändern Sie den Lifecycle mit einem PAT (`PATCH /api/v1/campaigns/:id/lifecycle`). Nur ein Team Trigger API Key `ndg_team_*` darf `POST /api/v1/campaigns/:id/triggers` aufrufen. Verwenden Sie `eventId` für Idempotenz und lesen Sie Ausführungen mit `GET /api/v1/campaigns/:id/executions`. Siehe [Lifetime-Leitfaden](/de/campaigns/lifetime).

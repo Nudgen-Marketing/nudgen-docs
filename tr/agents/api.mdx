@@ -65,3 +65,7 @@ Tüm API istekleri için temel URL şöyledir:
 
 Tam OpenAPI spesifikasyonumuzu buradan indirebilirsiniz:
 [openapi.json](https://app.nudgen.com/api/openapi.json)
+
+## Lifetime kampanyaları
+
+Draft oluşturmak ve lifecycle güncellemek için PAT kullanın (`PATCH /api/v1/campaigns/:id/lifecycle`). `POST /api/v1/campaigns/:id/triggers` yalnızca `ndg_team_*` Team trigger API key ile çağrılır. Idempotency için `eventId` kullanın; execution listesini `GET /api/v1/campaigns/:id/executions` ile alın. [Lifetime rehberi](/tr/campaigns/lifetime).

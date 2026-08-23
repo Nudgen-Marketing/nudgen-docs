@@ -65,3 +65,7 @@ curl -X GET https://app.nudgen.com/api/v1/user/me \
 
 전체 OpenAPI 명세서는 여기서 다운로드할 수 있습니다:
 [openapi.json](https://app.nudgen.com/api/openapi.json)
+
+## Lifetime 캠페인
+
+PAT로 draft를 만들고 lifecycle을 변경합니다 (`PATCH /api/v1/campaigns/:id/lifecycle`). `POST /api/v1/campaigns/:id/triggers`는 `ndg_team_*` Team trigger API key만 사용할 수 있습니다. idempotency에는 `eventId`를 사용하고 execution은 `GET /api/v1/campaigns/:id/executions`로 조회합니다. [Lifetime 가이드](/ko/campaigns/lifetime)를 참조하세요.

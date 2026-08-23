@@ -1,0 +1,22 @@
+---
+title: "使用 Lifetime 营销活动"
+description: "每次经过验证的事件触发都会向联系人发送一封邮件"
+---
+
+## Lifetime 营销活动
+
+Lifetime 营销活动会持续等待您系统中的事件。每个有效 trigger 最多创建一次 execution，并向 payload 中的 contact 发送一封 nudge。它适用于订单确认、付款提醒和事件驱动的 onboarding；受众始终是 **Trigger**。
+
+## 设置与安全
+
+在 **Campaigns** → **New campaign** → **Lifetime** 中创建活动。`order_id` 等运行时参数会成为 `{{data.order_id}}`。创建、预览和测试邮件后点击 **Activate**。在 **Settings** → **API Keys** 创建 Team trigger API key，并且只能在后端保存 `ndg_team_*`。
+
+`variableManifest` 是与 `data` 之间的契约，最多支持 100 个 `data.*` 变量，类型为 `string`、`number`、`boolean`、`date` 或 `url`。HTML 值会转义；在 `href` 中的变量必须是 `url`。
+
+## 生命周期和重试
+
+有效转换为 `draft → active → paused → active` 与 `active|paused → archived`。归档不可恢复。暂停或归档会取消 `pending`/`queued` execution；正在处理的邮件仍可能发送。每个 execution 都会保存内容快照。
+
+只从可信后端触发，并在重试时复用 `eventId`：`201` 为新 execution，`200` 为重复。对 `429`、`503` 和网络错误使用指数退避，且不要记录密钥。
+
+参阅 [Developer API](/cn/agents/api)。

@@ -65,3 +65,7 @@ curl -X GET https://app.nudgen.com/api/v1/user/me \
 
 您可以在此处下载我们完整的 OpenAPI 规范：
 [openapi.json](https://app.nudgen.com/api/openapi.json)
+
+## Lifetime 营销活动
+
+使用 PAT 创建 draft 和修改 lifecycle（`PATCH /api/v1/campaigns/:id/lifecycle`）。只有 `ndg_team_*` Team trigger API key 可以调用 `POST /api/v1/campaigns/:id/triggers`。使用 `eventId` 实现幂等，并通过 `GET /api/v1/campaigns/:id/executions` 查询 execution。参阅 [Lifetime 指南](/cn/campaigns/lifetime)。

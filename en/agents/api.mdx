@@ -1,58 +1,57 @@
 ---
 title: "Developer API"
-description: "REST API with Personal Access Token authentication. Manage contacts, campaigns, brand settings, and AI drafts programmatically."
+description: "REST API for your Nudgen workspace, including event-triggered Lifetime campaigns"
 ---
 
 ## Overview
 
-The Nudgen Developer API gives scripts, internal tools, and AI agents a predictable REST interface for working with your Nudgen workspace.
-
-<CardGroup cols={3}>
-  <Card title="PAT auth" icon="shield-check">
-    Authenticate REST requests with a Personal Access Token.
-  </Card>
-  <Card title="Campaign operations" icon="send">
-    Create campaigns, schedule launches, and read delivery stats.
-  </Card>
-  <Card title="Agent-ready" icon="bot">
-    Give Codex, Claude Code, Cursor, and custom agents structured access.
-  </Card>
-</CardGroup>
+The Nudgen Developer API gives scripts, internal tools, and AI agents a predictable REST interface for your workspace. Use a Personal Access Token (PAT) to manage workspace resources. Use a Team trigger API key only to trigger a Lifetime campaign from your backend.
 
 ## Why this matters
 
-A PAT lets you automate real marketing workflows without sharing your dashboard session. You can create contacts, draft campaign copy, create campaigns, and schedule sends from trusted developer tools while keeping token access revocable.
-
-## Authentication
-
-Create a Personal Access Token from **Settings -> API Keys** in the Nudgen dashboard. Store it securely and pass it with every request:
-
-```bash
-Authorization: Bearer <your-pat>
-```
-
-Example:
-
-```bash
-curl https://nudgen.net/api/v1/user/me \
-  -H "Authorization: Bearer <your-pat>"
-```
-
-<Warning>
-  PATs are shown only once. Revoke old or exposed tokens from **Settings -> API Keys**.
-</Warning>
+You can automate marketing and event-driven retention workflows without sharing a dashboard session. PATs keep workspace management revocable, while a narrow Team trigger key lets a production service send an event-triggered nudge without broad workspace access.
 
 ## Base URL
 
-```text
-https://nudgen.net
+Set the app URL for your environment once and use it in every example. Production commonly uses `https://app.nudgen.net`; local development commonly uses `http://localhost:3000`.
+
+```bash
+export NUDGEN_APP_URL="https://app.nudgen.net"
 ```
 
-## Interactive API playground
+## Authentication
 
-Use the **API Playground** tab next to **Guides** for a Swagger-style playground. Each endpoint is generated from `openapi.json`, includes request and response schemas, and can prefill examples for cURL, JavaScript, and Python.
+### Personal Access Token
 
-Paste your PAT into the playground's bearer token field before sending requests. Playground calls hit the live Nudgen API, so use test contacts and drafts unless you intend to create or launch real campaigns.
+Create a PAT in **Settings** → **API Keys**. Use it for contacts, campaign management, brand settings, and AI generation.
+
+```bash
+Authorization: Bearer $NUDGEN_PAT
+```
+
+PATs are shown only once. Store them securely and revoke any old or exposed token from **Settings** → **API Keys**.
+
+### Team trigger API key
+
+A Team trigger API key starts with `ndg_team_` and has the narrow `campaigns:trigger` scope. It can trigger Lifetime campaigns only; a PAT cannot trigger them.
+
+Only workspace owners and admins can create, rotate, or revoke these keys. By default, a key expires after 90 days. Set `expiresInDays` to `null` to create a non-expiring key.
+
+```bash
+curl -X POST "$NUDGEN_APP_URL/api/v1/settings/team-api-keys" \
+  -H "Authorization: Bearer $NUDGEN_PAT" \
+  -H "Content-Type: application/json" \
+  --data '{"name":"Order service production","expiresInDays":90}'
+```
+
+The `201` response contains the plaintext `key` exactly once. Save it in a server-side secret manager. Later responses expose only `keyPrefix`.
+
+| Method | Endpoint | Description |
+| --- | --- | --- |
+| `POST` | `/api/v1/settings/team-api-keys` | Create a Team trigger API key. |
+| `GET` | `/api/v1/settings/team-api-keys` | List Team trigger API keys. |
+| `POST` | `/api/v1/settings/team-api-keys/:id` | Rotate an active, unexpired key. |
+| `DELETE` | `/api/v1/settings/team-api-keys/:id` | Revoke a key. |
 
 ## REST endpoints
 
@@ -73,20 +72,14 @@ Paste your PAT into the playground's bearer token field before sending requests.
 | `PATCH` | `/api/v1/contacts/:id` | Update a contact. |
 | `DELETE` | `/api/v1/contacts/:id` | Delete a contact. |
 
-Create a contact:
-
 ```bash
-curl -X POST https://nudgen.net/api/v1/contacts/add \
-  -H "Authorization: Bearer <your-pat>" \
+curl -X POST "$NUDGEN_APP_URL/api/v1/contacts/add" \
+  -H "Authorization: Bearer $NUDGEN_PAT" \
   -H "Content-Type: application/json" \
-  -d '{
-    "email": "nathan@example.com",
-    "name": "Nathan Nguyen",
-    "tags": ["api-test"]
-  }'
+  --data '{"email":"nathan@example.com","name":"Nathan Nguyen","tags":["api-test"]}'
 ```
 
-### Campaigns
+### One-shot and drip campaigns
 
 | Method | Endpoint | Description |
 | --- | --- | --- |
@@ -94,46 +87,150 @@ curl -X POST https://nudgen.net/api/v1/contacts/add \
 | `POST` | `/api/v1/campaigns` | Create a campaign draft or scheduled campaign. |
 | `GET` | `/api/v1/campaigns/:id` | Get campaign details. |
 | `PUT` | `/api/v1/campaigns/:id` | Update an existing campaign. |
-| `POST` | `/api/v1/campaigns/:id/launch` | Launch now or schedule a campaign. |
+| `POST` | `/api/v1/campaigns/:id/launch` | Launch now or schedule a one-shot or drip campaign. |
 | `GET` | `/api/v1/campaigns/:id/stats` | Get delivery, open, click, bounce, and complaint stats. |
 | `GET` | `/api/v1/campaigns/:id/progress` | Get campaign sending progress. |
 | `GET` | `/api/v1/campaigns/:id/recipients` | List campaign recipients. |
-| `POST` | `/api/v1/campaigns/test-send` | Send a test email without creating dashboard send stats. |
-
-Create a draft campaign:
-
-```bash
-curl -X POST https://nudgen.net/api/v1/campaigns \
-  -H "Authorization: Bearer <your-pat>" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "name": "API launch test",
-    "goal": "Invite contacts to try Nudgen.",
-    "subject": "Try Nudgen",
-    "html": "<p>Ready to launch smarter email?</p>",
-    "link": "https://nudgen.net",
-    "audienceType": "manual",
-    "audienceContactIds": ["contact_id"]
-  }'
-```
-
-Schedule an existing campaign:
-
-```bash
-curl -X POST https://nudgen.net/api/v1/campaigns/campaign_id/launch \
-  -H "Authorization: Bearer <your-pat>" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "sendNow": false,
-    "scheduledAt": "2026-05-21T06:46:52.128Z"
-  }'
-```
-
-Send immediately by setting `sendNow` to `true`, or by creating a campaign with `sendNow: true`.
+| `POST` | `/api/v1/campaigns/test-send` | Send a test email without dashboard send stats. |
 
 <Warning>
-  Launching a campaign schedules real email. Use `/api/v1/campaigns/test-send` for inbox previews that should not appear as launched campaigns in dashboard stats.
+Launching a campaign schedules real email. Use `/api/v1/campaigns/test-send` for inbox previews.
 </Warning>
+
+## Lifetime campaigns
+
+Lifetime campaigns are event-triggered: each accepted trigger creates at most one execution and sends one nudge to the supplied contact. See [Use Lifetime campaigns](/en/campaigns/lifetime) for the dashboard workflow and variable-contract guidance.
+
+### Create a Lifetime campaign
+
+Create Lifetime campaigns as `draft`. Do not send `sendNow: true`, `status: "active"`, or `status: "scheduled"`; activate the campaign with its lifecycle endpoint instead.
+
+```bash
+curl -X POST "$NUDGEN_APP_URL/api/v1/campaigns" \
+  -H "Authorization: Bearer $NUDGEN_PAT" \
+  -H "Content-Type: application/json" \
+  --data @- <<'JSON'
+{
+  "name": "Order confirmation",
+  "type": "lifetime",
+  "status": "draft",
+  "goal": "Confirm an order and direct the customer to its details.",
+  "subject": "Your order {{data.order_id}} was received",
+  "html": "<p>Hello {{contact.firstName}},</p><p>Order {{data.order_id}} totals {{data.total}} VND.</p><p><a href=\"{{data.order_url}}\">View your order</a></p>",
+  "link": "https://example.com/orders",
+  "variableManifest": [
+    { "path": "data.order_id", "type": "string", "required": true, "description": "Order ID" },
+    { "path": "data.total", "type": "number", "required": true, "description": "Order total in VND" },
+    { "path": "data.order_url", "type": "url", "required": true, "description": "Order details URL" }
+  ],
+  "generatedVariableManifest": [
+    { "path": "data.order_id", "type": "string", "required": true, "description": "Order ID" },
+    { "path": "data.total", "type": "number", "required": true, "description": "Order total in VND" },
+    { "path": "data.order_url", "type": "url", "required": true, "description": "Order details URL" }
+  ]
+}
+JSON
+```
+
+`variableManifest` defines up to 100 `data.*` variables. It must include every `data.*` token used in the subject or HTML. Defaults must match the declared type, and a variable used in an HTML `href` must have type `url`.
+
+When you generate email content, save the matching `generatedVariableManifest`. Nudgen blocks activation if it differs from the current manifest or if required declared parameters are absent from the email.
+
+### Change the lifecycle
+
+| Method | Endpoint | Authentication | Description |
+| --- | --- | --- | --- |
+| `PATCH` | `/api/v1/campaigns/:campaignId/lifecycle` | PAT | Change a Lifetime campaign to `active`, `paused`, or `archived`. |
+
+```bash
+curl -X PATCH "$NUDGEN_APP_URL/api/v1/campaigns/$CAMPAIGN_ID/lifecycle" \
+  -H "Authorization: Bearer $NUDGEN_PAT" \
+  -H "Content-Type: application/json" \
+  --data '{"status":"active"}'
+```
+
+Valid transitions are `draft → active → paused → active` and `active|paused → archived`. Pausing or archiving cancels executions that are still `pending` or `queued` and releases their quota reservations. An execution already being processed may still send.
+
+### Trigger a nudge
+
+| Method | Endpoint | Authentication | Description |
+| --- | --- | --- | --- |
+| `POST` | `/api/v1/campaigns/:campaignId/triggers` | Team trigger API key | Create one event execution and queue a nudge. |
+
+```bash
+curl -X POST "$NUDGEN_APP_URL/api/v1/campaigns/$CAMPAIGN_ID/triggers" \
+  -H "Authorization: Bearer $NUDGEN_TEAM_API_KEY" \
+  -H "Content-Type: application/json" \
+  --data @- <<'JSON'
+{
+  "eventId": "order_123",
+  "eventName": "order.created",
+  "occurredAt": "2026-08-23T10:00:00Z",
+  "contact": {
+    "email": "an@example.com",
+    "externalId": "customer_456",
+    "name": "An Nguyen",
+    "phone": "+84901234567",
+    "metadata": { "company": "Nudgen" }
+  },
+  "data": {
+    "order_id": "order_123",
+    "total": 490000,
+    "order_url": "https://example.com/orders/order_123"
+  }
+}
+JSON
+```
+
+| Field | Type | Required | Limits and behavior |
+| --- | --- | --- | --- |
+| `eventId` | string | Yes | 1–128 characters. Unique idempotency key within the campaign; reuse it for retries. |
+| `eventName` | string | No | 1–100 characters, for example `order.created`. |
+| `occurredAt` | ISO 8601 datetime | No | Time of the source event. |
+| `contact.email` | email | Yes | Lowercased. Nudgen creates or updates the contact by email. |
+| `contact.externalId` | string | No | 1–200 characters and cannot belong to another contact email in the workspace. |
+| `contact.name` | string | No | Up to 200 characters. |
+| `contact.phone` | string | No | Up to 50 characters. |
+| `contact.metadata` | object | No | Additional contact profile data. |
+| `data` | object | Yes | Must match `variableManifest`; maximum 32 KiB. |
+
+The whole request body is limited to 64 KiB, JSON nesting to eight levels, and unsafe keys such as `__proto__`, `constructor`, and `prototype` are rejected.
+
+A new trigger returns `201` with `{ "execution": { "id": "...", "status": "queued" }, "duplicate": false }`. Reusing an `eventId` returns the existing execution with `200` and `duplicate: true`.
+
+### List executions
+
+| Method | Endpoint | Authentication | Description |
+| --- | --- | --- | --- |
+| `GET` | `/api/v1/campaigns/:campaignId/executions` | PAT | List Lifetime campaign executions. |
+
+```bash
+curl "$NUDGEN_APP_URL/api/v1/campaigns/$CAMPAIGN_ID/executions?limit=25&status=sent&search=an@example.com" \
+  -H "Authorization: Bearer $NUDGEN_PAT"
+```
+
+Use `limit` from 1–100 (default `25`), `cursor` for the next page, `status` to filter by execution status, and `search` to match an email or external ID. The response includes `executions` and `nextCursor`.
+
+## Errors, retries, and rate limits
+
+Lifetime triggers allow 600 requests per minute for each Team trigger API key. Responses include `x-ratelimit-limit`, `x-ratelimit-remaining`, and `x-ratelimit-reset`. A `429` response also includes `Retry-After`.
+
+| Status | Meaning | What to do |
+| --- | --- | --- |
+| `200` | Duplicate `eventId` | Use the returned execution; do not send again. |
+| `201` | New execution queued | Wait for the worker to process it. |
+| `400` | Invalid JSON, body, or basic field | Correct the payload; do not retry unchanged. |
+| `401` | Missing, invalid, revoked, expired, or wrongly scoped key | Rotate or correct the key configuration. |
+| `402` / `403` | Quota or subscription prevents writes | Resolve the quota or subscription issue. Quota errors include `code`, `required`, `available`, and `checkoutUrl`. |
+| `404` | Campaign is missing or outside the key's workspace | Check the campaign ID and key. |
+| `409` | Campaign is not active/not Lifetime, or contact identity conflicts | Activate the campaign or correct the contact identity. |
+| `413` | Request exceeds 64 KiB | Reduce the payload size. |
+| `415` | Missing `Content-Type: application/json` | Add the required header. |
+| `422` | `data` does not match the variable manifest | Correct the data; inspect `details` for paths and error codes. |
+| `429` | Rate limit exceeded | Wait for `Retry-After`, then retry with the same `eventId`. |
+| `503` | Execution could not be enqueued | Retry with backoff and the same `eventId`. |
+
+For `429`, `503`, and network errors, retry with exponential backoff and the same `eventId`. The queue job is deterministic for an execution, so retries do not create duplicate email.
 
 ### Brand settings
 
@@ -148,27 +245,10 @@ Send immediately by setting `sendNow` to `true`, or by creating a campaign with 
 | --- | --- | --- |
 | `POST` | `/api/v1/ai/generate` | Generate an email subject and HTML draft from campaign context. |
 
-```bash
-curl -X POST https://nudgen.net/api/v1/ai/generate \
-  -H "Authorization: Bearer <your-pat>" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "campaignGoal": "Write a short retention email inviting users to try Nudgen.",
-    "link": "https://nudgen.net",
-    "personalizationMode": "off"
-  }'
-```
-
 ## MCP server
 
-Use [Nudgen MCP](/en/agents/mcp) when your agent supports Model Context Protocol tools. MCP uses the same Personal Access Token as the REST API, but exposes Nudgen as agent-callable tools instead of conventional HTTP endpoints.
+Use [Nudgen MCP](/en/agents/mcp) when your agent supports Model Context Protocol tools. MCP uses the same PAT as workspace management APIs, but exposes Nudgen as agent-callable tools instead of conventional HTTP endpoints.
 
 <Card title="MCP server setup" icon="bot" href="/en/agents/mcp">
   Install Nudgen MCP in Claude Code, Cursor, Windsurf, Codex CLI, or a generic MCP client.
 </Card>
-
-## Responses and errors
-
-Successful responses return JSON. Validation errors return `400`, expired or missing tokens return `401`, insufficient plan access returns `403`, missing resources return `404`, and rate limits return `429`.
-
-All data is scoped to the token owner's active workspace.

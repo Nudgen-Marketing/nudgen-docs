@@ -65,3 +65,7 @@ L'URL de base pour toutes les requêtes API est :
 
 Vous pouvez télécharger notre spécification OpenAPI complète ici :
 [openapi.json](https://app.nudgen.com/api/openapi.json)
+
+## Campagnes Lifetime
+
+Utilisez un PAT pour créer le brouillon et modifier le cycle de vie (`PATCH /api/v1/campaigns/:id/lifecycle`). Seul un Team trigger API key `ndg_team_*` peut appeler `POST /api/v1/campaigns/:id/triggers`. Utilisez `eventId` pour l’idempotence et consultez les exécutions avec `GET /api/v1/campaigns/:id/executions`. Voir le [guide Lifetime](/fr/campaigns/lifetime).

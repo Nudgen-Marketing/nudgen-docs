@@ -1,0 +1,22 @@
+---
+title: "Использование Lifetime-кампаний"
+description: "Отправляйте одно событийное письмо контакту для каждого триггера"
+---
+
+## Lifetime-кампания
+
+Lifetime-кампания постоянно ожидает события из вашей системы. Каждый корректный trigger создаёт не более одного execution и отправляет один nudge контакту из payload. Используйте её для подтверждений заказов, напоминаний об оплате и событийного onboarding; аудитория всегда **Trigger**.
+
+## Настройка и безопасность
+
+Создайте кампанию через **Campaigns** → **New campaign** → **Lifetime**. Параметр `order_id` становится `{{data.order_id}}`. Создайте, проверьте и протестируйте письмо, затем нажмите **Activate**. В **Settings** → **API Keys** создайте Team trigger API key; храните `ndg_team_*` только в backend.
+
+`variableManifest` — контракт с `data`: до 100 переменных `data.*` типов `string`, `number`, `boolean`, `date` или `url`. HTML-значения экранируются, а переменная в `href` должна иметь тип `url`.
+
+## Lifecycle и повторные попытки
+
+Допустимы `draft → active → paused → active` и `active|paused → archived`. Архивацию нельзя отменить. Pause/archive отменяет execution в `pending`/`queued`; уже обрабатываемое письмо может быть отправлено. Каждый execution сохраняет snapshot содержимого.
+
+Вызывайте trigger только из доверенного backend и используйте тот же `eventId` при retry: `201` — новая execution, `200` — duplicate. Повторяйте `429`, `503` и сетевые ошибки с exponential backoff и не логируйте secrets.
+
+Смотрите [Developer API](/ru/agents/api).

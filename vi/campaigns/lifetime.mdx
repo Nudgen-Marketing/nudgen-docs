@@ -1,0 +1,29 @@
+---
+title: "Sử dụng chiến dịch Lifetime"
+description: "Gửi một email theo sự kiện cho contact qua mỗi trigger đã xác thực"
+---
+
+## Lifetime campaign là gì?
+
+Lifetime campaign luôn sẵn sàng nhận event từ hệ thống của bạn. Mỗi trigger hợp lệ tạo tối đa một execution và gửi một nudge cho contact trong payload. Dùng cho xác nhận đơn hàng, nhắc thanh toán và onboarding theo sự kiện; audience luôn là **Trigger**.
+
+## Vì sao điều này quan trọng
+
+Backend quyết định thời điểm event, còn Nudgen quản lý nội dung, delivery, tracking và contact preferences trong một nơi.
+
+## Thiết lập trong dashboard
+
+1. Vào **Campaigns** → **New campaign** → **Lifetime**.
+2. Thêm parameter runtime. `order_id` tạo biến `{{data.order_id}}` trong email.
+3. Tạo nội dung, preview và test send, rồi **Activate** campaign.
+4. Vào **Settings** → **API Keys** để tạo **Team trigger API key**. Chỉ lưu secret `ndg_team_*` ở backend hoặc secret manager.
+
+`variableManifest` là contract của template và `data`. Nó hỗ trợ tối đa 100 biến `data.*`; các kiểu là `string`, `number`, `boolean`, `date`, và `url`. Giá trị HTML được escape; biến trong `href` phải có kiểu `url`.
+
+## Lifecycle và trigger
+
+Lifecycle hợp lệ là `draft → active → paused → active` và `active|paused → archived`. Archive không thể kích hoạt lại. Pause hoặc archive hủy execution `pending`/`queued`; execution đang xử lý vẫn có thể gửi. Mỗi execution snapshot nội dung lúc nhận trigger, nên sửa campaign chỉ áp dụng cho trigger về sau.
+
+Gọi trigger từ server đã xác thực event nguồn. Dùng lại `eventId` khi retry: response mới là `201`, còn duplicate là `200` với `duplicate: true`. Retry `429`, `503` và lỗi mạng bằng exponential backoff; không log header `Authorization` hoặc dữ liệu nhạy cảm.
+
+Xem [Developer API](/vi/agents/api) để tích hợp API chi tiết.
