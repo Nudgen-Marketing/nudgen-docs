@@ -156,6 +156,13 @@
                 "pages": [
                   "en/security/privacy-and-data"
                 ]
+              },
+              {
+                "group": "Legal",
+                "pages": [
+                  "en/legal/terms-of-service",
+                  "en/legal/privacy-policy"
+                ]
               }
             ]
           },
@@ -361,6 +368,13 @@
                 "pages": [
                   "ar/security/privacy-and-data"
                 ]
+              },
+              {
+                "group": "قانوني",
+                "pages": [
+                  "ar/legal/terms-of-service",
+                  "ar/legal/privacy-policy"
+                ]
               }
             ]
           }
@@ -538,6 +552,13 @@
                 "group": "安全与隐私",
                 "pages": [
                   "cn/security/privacy-and-data"
+                ]
+              },
+              {
+                "group": "法律",
+                "pages": [
+                  "cn/legal/terms-of-service",
+                  "cn/legal/privacy-policy"
                 ]
               }
             ]
@@ -717,6 +738,13 @@
                 "pages": [
                   "de/security/privacy-and-data"
                 ]
+              },
+              {
+                "group": "Rechtliches",
+                "pages": [
+                  "de/legal/terms-of-service",
+                  "de/legal/privacy-policy"
+                ]
               }
             ]
           }
@@ -894,6 +922,13 @@
                 "group": "Seguridad y privacidad",
                 "pages": [
                   "es/security/privacy-and-data"
+                ]
+              },
+              {
+                "group": "Legal",
+                "pages": [
+                  "es/legal/terms-of-service",
+                  "es/legal/privacy-policy"
                 ]
               }
             ]
@@ -1073,6 +1108,13 @@
                 "pages": [
                   "fr/security/privacy-and-data"
                 ]
+              },
+              {
+                "group": "Légal",
+                "pages": [
+                  "fr/legal/terms-of-service",
+                  "fr/legal/privacy-policy"
+                ]
               }
             ]
           }
@@ -1250,6 +1292,13 @@
                 "group": "Keamanan & Privasi",
                 "pages": [
                   "id/security/privacy-and-data"
+                ]
+              },
+              {
+                "group": "Hukum",
+                "pages": [
+                  "id/legal/terms-of-service",
+                  "id/legal/privacy-policy"
                 ]
               }
             ]
@@ -1429,6 +1478,13 @@
                 "pages": [
                   "jp/security/privacy-and-data"
                 ]
+              },
+              {
+                "group": "法的事項",
+                "pages": [
+                  "jp/legal/terms-of-service",
+                  "jp/legal/privacy-policy"
+                ]
               }
             ]
           }
@@ -1606,6 +1662,13 @@
                 "group": "보안 및 개인 정보",
                 "pages": [
                   "ko/security/privacy-and-data"
+                ]
+              },
+              {
+                "group": "법적 고지",
+                "pages": [
+                  "ko/legal/terms-of-service",
+                  "ko/legal/privacy-policy"
                 ]
               }
             ]
@@ -1785,6 +1848,13 @@
                 "pages": [
                   "ru/security/privacy-and-data"
                 ]
+              },
+              {
+                "group": "Юридическая информация",
+                "pages": [
+                  "ru/legal/terms-of-service",
+                  "ru/legal/privacy-policy"
+                ]
               }
             ]
           }
@@ -1963,6 +2033,13 @@
                 "pages": [
                   "tr/security/privacy-and-data"
                 ]
+              },
+              {
+                "group": "Yasal",
+                "pages": [
+                  "tr/legal/terms-of-service",
+                  "tr/legal/privacy-policy"
+                ]
               }
             ]
           }
@@ -2140,6 +2217,13 @@
                 "group": "Bảo mật và quyền riêng tư",
                 "pages": [
                   "vi/security/privacy-and-data"
+                ]
+              },
+              {
+                "group": "Pháp lý",
+                "pages": [
+                  "vi/legal/terms-of-service",
+                  "vi/legal/privacy-policy"
                 ]
               }
             ]
