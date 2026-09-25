@@ -9,10 +9,12 @@ description: "Emails not sending, bounces, and spam"
 
 - Sends are queued and processed in batches. Large campaigns can take time. Refresh the dashboard; if status stays “Sending” for hours, contact support.
 - Check that you haven’t hit your **daily or monthly email limit**. The app blocks new sends when you’re over cap. See [Billing](/en/billing/overview) and [Troubleshooting: billing](/en/troubleshooting/billing).
+- If **Campaign sending is paused** appears in **Settings** → **Custom domain**, read the reason, repair the sender's DNS or paid-plan access, and select **Resume sending**. Queued emails are preserved. See [Custom domain](/en/settings/sending-domains).
 
 **Test email didn’t arrive**
 
 - Check spam/junk. Add the sender to your contacts or safe senders.
+- If you use a custom sender, confirm its domain is **Ready** in **Settings** → **Custom domain**. A missing DKIM or Return-Path record can block the test send. See [Custom domain](/en/settings/sending-domains).
 - Confirm the **account email** (where tests are sent) is correct in your profile.
 - Wait a few minutes; delivery can be delayed. Try again or send to a different address.
 

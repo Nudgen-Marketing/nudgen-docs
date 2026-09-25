@@ -232,6 +232,10 @@ Lifetime triggers allow 600 requests per minute for each Team trigger API key. R
 
 For `429`, `503`, and network errors, retry with exponential backoff and the same `eventId`. The queue job is deterministic for an execution, so retries do not create duplicate email.
 
+### Sending domains
+
+Owners and admins on an active paid plan can manage one [custom sending domain](/en/settings/sending-domains) per workspace. The API reference includes list, add, edit, verify, choose default sender, remove, and resume-sending endpoints under `/api/v1/settings/sending-domains`. Every request requires a `teamId` query parameter that matches the PAT owner's active workspace. Adding a domain does not verify it; publish the DNS records returned by the list endpoint and call the verification endpoint before selecting it as the default sender.
+
 ### Brand settings
 
 | Method | Endpoint | Description |
@@ -247,7 +251,7 @@ For `429`, `503`, and network errors, retry with exponential backoff and the sam
 
 ## MCP server
 
-Use [Nudgen MCP](/en/agents/mcp) when your agent supports Model Context Protocol tools. MCP uses the same PAT as workspace management APIs, but exposes Nudgen as agent-callable tools instead of conventional HTTP endpoints.
+Use [Nudgen MCP](/en/agents/mcp) when your agent supports Model Context Protocol tools. MCP uses OAuth sign-in tied to a selected workspace; PATs remain for the REST API. MCP campaign creation saves a draft, and each launch requires separate browser approval.
 
 <Card title="MCP server setup" icon="bot" href="/en/agents/mcp">
   Install Nudgen MCP in Claude Code, Cursor, Windsurf, Codex CLI, or a generic MCP client.

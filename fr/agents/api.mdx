@@ -247,7 +247,7 @@ Pour `429`, `503` et les erreurs réseau, réessayez avec un intervalle exponent
 
 ## Serveur MCP
 
-Utilisez [Nudgen MCP](/en/agents/mcp) lorsque votre agent prend en charge les outils Model Context Protocol. MCP utilise le même PAT que les API de gestion de l'espace de travail, mais expose Nudgen en tant qu'outils appelables par agent au lieu de points de terminaison HTTP conventionnels.
+Utilisez [Nudgen MCP](/en/agents/mcp) lorsque votre agent prend en charge les outils Model Context Protocol. MCP utilise OAuth lié à l’espace de travail choisi ; chaque lancement de campagne nécessite une approbation dans le navigateur. L’API REST utilise un jeton d’accès personnel (PAT).
 
 <Card title="MCP server setup" icon="bot" href="/en/agents/mcp">
  Installez Nudgen MCP dans Claude Code, Cursor, Windsurf, Codex CLI ou un client MCP générique.

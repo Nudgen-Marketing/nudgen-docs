@@ -1,0 +1,28 @@
+---
+title: "Lifetime campaign events"
+description: "Use supported integration events to start lifetime campaigns"
+---
+
+## Why this matters
+
+An event rule can start a lifetime campaign when a supported customer event occurs in a connected app. Each rule is limited to contacts in a selected audience, so the source connection and campaign both need to be ready.
+
+## Check event availability
+
+After completing a contact sync connection, open its **Manage** page and find **Lifetime campaign events**. The event list is specific to that app and connection. An event marked **Event verification pending** cannot be selected yet. Contact sync may be available even when event monitoring is not.
+
+For a ready event, the page shows its delivery method, such as webhook delivery or polling, and may show an expected detection interval. These are estimates for detection, not a guarantee that a campaign sends at that moment. Initial imports and historical events do not start campaigns.
+
+## Add a rule
+
+1. Create and activate a compatible [lifetime campaign](/en/campaigns/lifetime).
+2. In the connected app's **Lifetime campaign events** section, select **Add a rule**.
+3. Choose a ready **Customer event**, an **Audience or segment**, and a **Lifetime campaign**. For **Lifecycle stage changed**, enter the target stage.
+4. Review the example event variables. Actual values come from each source event.
+5. Select **Save disabled rule**, then select **Enable** when you are ready for new matching events to trigger the campaign.
+
+Only workspace owners and admins can change rules. You can later **Disable** or **Remove** a rule. Removing a rule makes its pending executions ineligible.
+
+<Note>
+The events shown in the form depend on provider verification and configuration. Do not assume every listed event type is available for every app.
+</Note>

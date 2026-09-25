@@ -247,7 +247,7 @@ Untuk `429`, `503`, dan kesalahan jaringan, coba lagi dengan backoff eksponensia
 
 ## Server MCP
 
-Gunakan [Nudgen MCP](/en/agents/mcp) ketika agen Anda mendukung alat Model Context Protocol. MCP menggunakan PAT yang sama dengan API pengelolaan ruang kerja, namun menampilkan Nudgen sebagai alat yang dapat dipanggil oleh agen, bukan titik akhir HTTP konvensional.
+Gunakan [Nudgen MCP](/en/agents/mcp) ketika agen Anda mendukung alat Model Context Protocol. MCP menggunakan OAuth yang terhubung ke ruang kerja pilihan Anda; setiap peluncuran kampanye memerlukan persetujuan di browser. REST API menggunakan token akses pribadi (PAT).
 
 <Card title="MCP server setup" icon="bot" href="/en/agents/mcp">
  Instal Nudgen MCP di Claude Code, Cursor, Windsurf, Codex CLI, atau klien MCP generik.

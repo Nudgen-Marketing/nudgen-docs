@@ -247,7 +247,7 @@ curl "$NUDGEN_APP_URL/api/v1/campaigns/$CAMPAIGN_ID/executions?limit=25&status=s
 
 ## خادم MCP
 
-استخدم [Nudgen MCP](/en/agents/mcp) عندما يدعم وكيلك أدوات بروتوكول السياق النموذجي. يستخدم MCP نفس PAT مثل واجهات برمجة تطبيقات إدارة مساحة العمل، ولكنه يعرض Nudgen كأدوات يمكن استدعاء الوكيل بدلاً من نقاط نهاية HTTP التقليدية.
+استخدم [Nudgen MCP](/en/agents/mcp) عندما يدعم وكيلك أدوات بروتوكول سياق النموذج. يستخدم MCP تفويض OAuth المرتبط بمساحة العمل التي تختارها، وتتطلب كل عملية إطلاق حملة موافقة عبر المتصفح. تستخدم واجهة REST رمز وصول شخصيًا (PAT).
 
 <Card title="MCP server setup" icon="bot" href="/en/agents/mcp">
  قم بتثبيت Nudgen MCP في Claude Code، أو Cursor، أو Windsurf، أو Codex CLI، أو عميل MCP عام.

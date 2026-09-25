@@ -1,0 +1,47 @@
+---
+title: "Custom domain"
+description: "Verify a domain you own and use it as your team's campaign sender"
+---
+
+Use **Settings** → **Custom domain** to send campaigns and test emails from an address on your own domain. Without a custom domain, your team uses the Nudgen sender.
+
+## Why this matters
+
+A verified domain lets your recipients recognize your brand in the sender address. Nudgen checks the required DNS records before using it and pauses sending if the selected sender later becomes ineligible.
+
+## Why this matters
+
+A verified domain lets contacts recognize your brand in the sender address. DNS checks confirm that you control the domain and that Nudgen can authenticate email sent from it.
+
+## Before you start
+
+- Your team needs an **active paid plan** to add and use a custom sender. Free-plan teams can still view and remove domains already in their settings.
+- Only a team **owner or admin** can add, edit, verify, select, or remove a domain and resume sending. Other members can view its status and DNS records.
+- You need access to the domain's DNS provider. A team can configure **one custom domain**. To replace it, switch to **Use Nudgen sender**, remove the old domain, then add the new one.
+
+## Add and verify your domain
+
+1. Open **Settings** → **Custom domain** and enter the domain you own, such as `mail.example.com`. Enter the part of the sender email before `@` (for example, `hello`) and a sender name. The address must be on that **exact domain**: `hello@mail.example.com` for `mail.example.com`.
+2. Select **Add domain**. Open **DNS records** on the domain card and copy the **ownership TXT** host and value into your DNS provider. The host starts with `_nudgen-verify.`. Keep this record in place after verification.
+3. Select **Check DNS**. Once ownership is verified, the card displays the **DKIM TXT** and **Return-Path CNAME** records for your domain. Copy the displayed hosts and values exactly into your DNS provider. If more than one DKIM record is shown, publish each one.
+4. After saving the records, select **Check DNS** again. DNS changes can take time to propagate. The domain is **Ready** when ownership, DKIM, and Return-Path are verified.
+
+Use the record values shown in your own domain card; they are specific to your setup. **DMARC** is recommended, but its status does not block activation. Preserve any existing DMARC policy, including one inherited from a parent domain. You do not need to add a separate root SPF record for this setup.
+
+The first verified domain becomes the default sender automatically if your team has not previously chosen a sender and sending is not paused. Otherwise, select **Make default** on the ready domain card. The **Default campaign sender** section shows which sender is selected. You can choose **Use Nudgen sender** there at any time.
+
+## Manage your sender
+
+- **Edit sender** changes the address's local part or display name. The domain itself cannot be edited; replace the domain to change it.
+- **Remove** is available only when the domain is not the default sender. Choose **Use Nudgen sender** first if needed. Removing a domain frees the team's one-domain slot.
+- **Check DNS** refreshes the verification state. The card shows the last check, any verification error, and the ownership, DKIM, Return-Path, and DMARC statuses.
+
+## If campaign sending is paused
+
+If the selected custom domain loses required DNS verification or paid-plan access, campaign sending pauses. **Queued emails are preserved.** The page shows the reason under **Campaign sending is paused**.
+
+1. Repair the DNS records or restore paid access. You can also select **Use Nudgen sender**.
+2. Select **Check DNS** if you repaired records, and confirm the domain is **Ready**.
+3. Select **Resume sending**. Fixing DNS or changing the default sender alone does not clear a pause.
+
+For other delivery issues, see [Sending and deliverability](/en/troubleshooting/deliverability).

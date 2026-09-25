@@ -1,0 +1,65 @@
+---
+title: "Connect an app and sync contacts"
+description: "Choose audiences, preview contacts, and manage an integration sync"
+---
+
+## Why this matters
+
+Selecting a source audience helps you import only the contacts you intend to use. Previewing the import and confirming email permission help you catch a wrong selection before syncing.
+
+## Before you start
+
+- Sign in to the workspace that should receive the contacts.
+- Ask a workspace owner or admin to manage the connection if you do not have permission.
+- Check that the app's details show contact sync is available. [Availability labels](/en/integrations/overview) explain the other states.
+- Confirm you have permission to email the contacts you plan to import. Connecting an app does not grant that permission.
+
+## Connect and choose contacts
+
+<Steps>
+  <Step title="Connect the account">
+    In **Settings** → **Integration**, find your app and select **Connect**. Follow the provider's authorization page, then return to Nudgen. Nudgen requests read access to contact email, name, phone, audience membership, and email permission where the provider supports them. It does not change contacts in your source app.
+  </Step>
+  <Step title="Choose audiences">
+    Search for lists, segments, or tags and select up to 10 audiences. You can use **Load more audiences** if the source has more results. A contact in multiple selected audiences is imported once. Each connection supports at most 10,000 distinct source contacts, subject to your workspace's contact capacity.
+  </Step>
+  <Step title="Preview contacts">
+    Select **Preview contacts**. Review the sample and the displayed count, which may be exact, approximate, or unavailable until the first sync. Some providers require an extra step: for noCRM, choose an email column for every selected list before previewing; name and phone columns are optional.
+  </Step>
+  <Step title="Review and start">
+    Select **Continue**, check the account and audiences, confirm that you have permission to email these contacts, then select **Start syncing**. The first import is queued immediately. Later syncs are scheduled hourly.
+  </Step>
+</Steps>
+
+You can select **Save and leave** during setup and return later. Changing the selected audience or column mapping requires a new preview before you start.
+
+Nudgen retains existing contact profile values and tags where applicable. Known opt-outs, bounces, and other email restrictions remain protected. A contact appearing in a source audience is not automatically eligible to receive a campaign.
+
+## Manage a connection
+
+Open **Connected apps** → **Manage** to review the selected audiences, last and next sync times, and recent runs. Each run shows imported, updated, and skipped counts. You can select **View contacts**, **Edit audiences**, or **Sync now**. Manual sync has a 15-minute cooldown, and the control is unavailable while a run is pending. If the account needs authorization again, use **Reconnect**.
+
+Select **Disconnect** to stop future syncs. Contacts already imported into Nudgen remain in your workspace. Disconnecting a previous native connection may be required before switching that source to Composio; the setup page will show this when it applies.
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="No audiences appear">
+    Try a different search, select **Load more audiences** when offered, and check that your provider account can read the relevant lists or segments.
+  </Accordion>
+  <Accordion title="Preview expired or selection changed">
+    Return to **Choose contacts**, refresh the preview, and review it again. For noCRM, recheck the column mappings if the source columns changed.
+  </Accordion>
+  <Accordion title="Sync is blocked by a limit">
+    Choose smaller audiences if the selection exceeds 10,000 distinct source contacts. If the workspace has reached its contact limit, reduce the selection or review your plan.
+  </Accordion>
+  <Accordion title="A sync is paused or needs attention">
+    Review the run's message. Reconnect if authorization expired. For a temporary provider or Nudgen request limit, wait before retrying. Reload the page if your active workspace changed.
+  </Accordion>
+</AccordionGroup>
+
+## Related docs
+
+- [Shopify contacts and All contacts](/en/integrations/shopify)
+- [Contacts overview](/en/contacts/overview)
+- [Lifetime campaign events](/en/integrations/lifetime-events)

@@ -247,7 +247,7 @@ curl "$NUDGEN_APP_URL/api/v1/campaigns/$CAMPAIGN_ID/executions?limit=25&status=s
 
 ## Сервер MCP
 
-Используйте [Nudgen MCP](/en/agents/mcp), если ваш агент поддерживает инструменты протокола контекста модели. MCP использует тот же PAT, что и API управления рабочей областью, но предоставляет Nudgen в качестве инструментов, вызываемых агентом, вместо обычных конечных точек HTTP.
+Используйте [Nudgen MCP](/en/agents/mcp), если ваш агент поддерживает инструменты Model Context Protocol. MCP использует OAuth, связанный с выбранным рабочим пространством; каждый запуск кампании требует подтверждения в браузере. REST API использует персональный токен доступа (PAT).
 
 <Card title="MCP server setup" icon="bot" href="/en/agents/mcp">
  Установите Nudgen MCP в Claude Code, Cursor, Windsurf, Codex CLI или в обычном клиенте MCP.

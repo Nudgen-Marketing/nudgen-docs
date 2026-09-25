@@ -9,7 +9,7 @@ Create a one-shot or drip campaign from start to finish. You'll choose the audie
 
 ## Before you start
 
-- [Contacts uploaded](/en/contacts/upload)
+- Contacts added through [CSV or manual entry](/en/contacts/upload) or an [available integration](/en/integrations/connect-and-sync)
 - [Brand tone configured](/en/brand/overview)
 - A clear goal (e.g. "Re-engage users who haven't logged in for 7 days")
 
@@ -25,6 +25,8 @@ Create a one-shot or drip campaign from start to finish. You'll choose the audie
 - **Manual** — Hand-pick specific contacts.
 
 The wizard shows a **reach estimate** (how many unique contacts will receive the campaign). If it shows zero, add or import contacts or adjust your segment.
+
+If you connected a provider, finish its audience import first. A connected provider does not automatically add every customer to your Nudgen contacts.
 
 Optionally add a **CTA link** (call-to-action URL). Links in the email can be tracked; the CTA is used for click tracking and stop-on-click rules.
 
@@ -69,6 +71,8 @@ Always **Send test** before launching. We email a copy to your account email so 
 </Tip>
 
 ## Step 7: Send or schedule
+
+Check the sender before confirming. If your workspace uses a [custom sending domain](/en/settings/sending-domains), its default sender must still be verified and eligible to send. A sender hold pauses campaign delivery until you fix the cause and explicitly resume sending.
 
 - **Send now** — Emails go out immediately (within minutes, depending on queue).
 - **Schedule** — Pick date and time. Emails send automatically at that time.

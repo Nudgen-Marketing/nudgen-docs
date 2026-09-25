@@ -49,6 +49,15 @@
                 ]
               },
               {
+                "group": "Integrations",
+                "pages": [
+                  "en/integrations/overview",
+                  "en/integrations/connect-and-sync",
+                  "en/integrations/shopify",
+                  "en/integrations/lifetime-events"
+                ]
+              },
+              {
                 "group": "Campaigns",
                 "pages": [
                   "en/campaigns/overview",
@@ -76,7 +85,8 @@
                   "en/settings/account",
                   "en/settings/brand",
                   "en/settings/team",
-                  "en/settings/signatures"
+                  "en/settings/signatures",
+                  "en/settings/sending-domains"
                 ]
               },
               {
@@ -186,8 +196,22 @@
                   "PUT /api/v1/campaigns/{id}",
                   "POST /api/v1/campaigns/{id}/launch",
                   "GET /api/v1/campaigns/{id}/stats",
+                  "PATCH /api/v1/campaigns/{id}/lifecycle",
+                  "POST /api/v1/campaigns/{id}/triggers",
+                  "GET /api/v1/campaigns/{id}/executions",
                   "GET /api/v1/settings/brand",
                   "PATCH /api/v1/settings/brand",
+                  "GET /api/v1/settings/team-api-keys",
+                  "POST /api/v1/settings/team-api-keys",
+                  "POST /api/v1/settings/team-api-keys/{id}",
+                  "DELETE /api/v1/settings/team-api-keys/{id}",
+                  "GET /api/v1/settings/sending-domains",
+                  "POST /api/v1/settings/sending-domains",
+                  "PATCH /api/v1/settings/sending-domains/{id}",
+                  "DELETE /api/v1/settings/sending-domains/{id}",
+                  "POST /api/v1/settings/sending-domains/{id}/verify",
+                  "PUT /api/v1/settings/sending-domains/default",
+                  "POST /api/v1/settings/sending-domains/resume",
                   "POST /api/v1/ai/generate"
                 ]
               }

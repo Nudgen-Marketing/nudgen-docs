@@ -27,13 +27,15 @@ New accounts get a **trial** with limited contacts and emails—enough to run yo
 ## Step 2: Upload your first contacts
 
 1. In the sidebar, open **Contacts**.
-2. Click **Upload CSV** (or add a single contact if you prefer).
-3. Upload a CSV with an `email` column (and optionally `name`). Add tags if you want (e.g. `trial`, `inactive`).
-4. Confirm. Contacts are encrypted and stored. You'll see masked emails until you reveal them.
+2. Choose **Upload CSV**, add a single contact, or connect an available source through **Sync customers**.
+3. For CSV, include an `email` column (and optionally `name`). Add tags if you want (e.g. `trial`, `inactive`). For a connected source, select the audience, review the preview, confirm email permission, and start the import.
+4. Confirm that contacts appear. A connected account alone does not mean its customers have been imported.
 
 <Card title="CSV format" icon="file-csv" href="/en/contacts/upload">
   Column names, validation rules, and size limits are in the upload guide.
 </Card>
+
+See [Connect and sync an integration](/en/integrations/connect-and-sync) to import from a supported app.
 
 ## Step 3: Configure brand settings and signature
 
@@ -42,6 +44,8 @@ New accounts get a **trial** with limited contacts and emails—enough to run yo
 3. Go to **Settings** → **Signatures**. Create at least one signature; you'll attach it when creating a campaign.
 
 These steps ensure the campaign wizard can generate on-brand copy, use the correct sender info, and append a signature to every send.
+
+If you want to send from your own address, set up a [custom sending domain](/en/settings/sending-domains) before launching. An active paid plan and DNS verification are required.
 
 <CardGroup cols={2}>
   <Card title="Brand tone" icon="palette" href="/en/brand/overview">
@@ -110,4 +114,3 @@ After launching, the **Dashboard** shows clear reporting so you know which journ
     Common issues and FAQ.
   </Card>
 </CardGroup>
-

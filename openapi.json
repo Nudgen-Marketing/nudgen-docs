@@ -3,11 +3,11 @@
   "info": {
     "title": "Nudgen Developer API",
     "version": "1.0.0",
-    "description": "REST API for managing Nudgen contacts, campaigns, brand settings, and AI email drafts with Personal Access Token authentication."
+    "description": "REST API for contacts, campaigns, Lifetime triggers, sending domains, brand settings, and AI drafts. Most endpoints use a Personal Access Token; Lifetime triggers require a scoped team API key."
   },
   "servers": [
     {
-      "url": "https://nudgen.net",
+      "url": "https://app.nudgen.net",
       "description": "Production"
     }
   ],
@@ -31,6 +31,12 @@
     },
     {
       "name": "AI"
+    },
+    {
+      "name": "Team API keys"
+    },
+    {
+      "name": "Sending domains"
     }
   ],
   "paths": {
@@ -320,7 +326,7 @@
             "in": "query",
             "schema": {
               "type": "string",
-              "example": "one-time,drip"
+              "example": "one-time,drip,lifetime"
             }
           },
           {
@@ -542,6 +548,896 @@
         }
       }
     },
+    "/api/v1/campaigns/{id}/lifecycle": {
+      "patch": {
+        "tags": [
+          "Campaigns"
+        ],
+        "summary": "Change lifetime campaign status",
+        "description": "Allowed transitions: draft to active, active to paused or archived, paused to active or archived. Archived campaigns cannot resume. Pausing or archiving cancels pending and queued executions. A lifetime campaign must be created as a draft; the launch endpoint does not accept it.",
+        "operationId": "updateLifetimeCampaignLifecycle",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Id"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "status"
+                ],
+                "additionalProperties": false,
+                "properties": {
+                  "status": {
+                    "type": "string",
+                    "enum": [
+                      "active",
+                      "paused",
+                      "archived"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Updated campaign",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "campaign": {
+                      "$ref": "#/components/schemas/Campaign"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "409": {
+            "description": "Invalid transition or campaign not ready to activate",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimited"
+          }
+        }
+      }
+    },
+    "/api/v1/campaigns/{id}/executions": {
+      "get": {
+        "tags": [
+          "Campaigns"
+        ],
+        "summary": "List lifetime campaign executions",
+        "description": "Lists execution history for a lifetime campaign in the active workspace. Search treats values containing @ as an exact email lookup; other values search external contact IDs. Invalid status filters are ignored.",
+        "operationId": "listLifetimeCampaignExecutions",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Id"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100,
+              "default": 25
+            }
+          },
+          {
+            "name": "cursor",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "pending",
+                "queued",
+                "processing",
+                "sent",
+                "skipped",
+                "cancelled",
+                "failed",
+                "delivery_unknown"
+              ]
+            }
+          },
+          {
+            "name": "search",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Execution page",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "executions": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/LifetimeExecution"
+                      }
+                    },
+                    "nextCursor": {
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimited"
+          }
+        }
+      }
+    },
+    "/api/v1/campaigns/{id}/triggers": {
+      "post": {
+        "tags": [
+          "Campaigns"
+        ],
+        "summary": "Trigger a lifetime campaign",
+        "description": "Requires a team API key with campaigns:trigger scope. The key must belong to the campaign workspace. eventId is an idempotency key within this campaign: a duplicate returns the existing execution with HTTP 200. New executions return HTTP 201; suppressed contacts can produce a skipped execution. Limit: 600 requests per window per key, 64 KiB request body, 32 KiB data object, and JSON nesting depth 8.",
+        "operationId": "triggerLifetimeCampaign",
+        "security": [
+          {
+            "teamApiKey": []
+          }
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Id"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LifetimeTriggerRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "New execution created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LifetimeTriggerResponse"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Duplicate event; existing execution returned",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LifetimeTriggerResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "409": {
+            "description": "Campaign inactive or sender configuration unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "413": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "415": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "422": {
+            "description": "Trigger data does not match the campaign variable manifest",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/ErrorResponse"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "details": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "path": {
+                                "type": "string"
+                              },
+                              "code": {
+                                "type": "string",
+                                "enum": [
+                                  "required",
+                                  "type"
+                                ]
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimited"
+          },
+          "503": {
+            "description": "Unable to enqueue execution",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/settings/team-api-keys": {
+      "get": {
+        "tags": [
+          "Team API keys"
+        ],
+        "summary": "List team API keys",
+        "description": "Owner or admin only. Raw key secrets are never returned by this endpoint.",
+        "operationId": "listTeamApiKeys",
+        "responses": {
+          "200": {
+            "description": "Team API keys",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "apiKeys": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/TeamApiKey"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimited"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Team API keys"
+        ],
+        "summary": "Create team API key",
+        "description": "Owner or admin only. The new key has only the campaigns:trigger scope. Save the raw key from this response because it is shown once.",
+        "operationId": "createTeamApiKey",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "name"
+                ],
+                "additionalProperties": false,
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 80
+                  },
+                  "expiresInDays": {
+                    "type": [
+                      "integer",
+                      "null"
+                    ],
+                    "minimum": 1,
+                    "maximum": 365,
+                    "default": 90,
+                    "description": "Null creates a key without an expiry."
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Key created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "apiKey": {
+                      "$ref": "#/components/schemas/TeamApiKey"
+                    },
+                    "key": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "409": {
+            "description": "Active key name already exists",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimited"
+          }
+        }
+      }
+    },
+    "/api/v1/settings/team-api-keys/{id}": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "post": {
+        "tags": [
+          "Team API keys"
+        ],
+        "summary": "Rotate team API key",
+        "description": "Owner or admin only. Rotating invalidates the previous key immediately and returns the new raw key once. Revoked or expired keys cannot be rotated.",
+        "operationId": "rotateTeamApiKey",
+        "responses": {
+          "200": {
+            "description": "Key rotated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "apiKey": {
+                      "$ref": "#/components/schemas/TeamApiKey"
+                    },
+                    "key": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "409": {
+            "description": "Key revoked or expired",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimited"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Team API keys"
+        ],
+        "summary": "Revoke team API key",
+        "description": "Owner or admin only. Repeating the request for an already revoked key succeeds.",
+        "operationId": "revokeTeamApiKey",
+        "responses": {
+          "200": {
+            "description": "Key revoked",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimited"
+          }
+        }
+      }
+    },
+    "/api/v1/settings/sending-domains": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/TeamId"
+        }
+      ],
+      "get": {
+        "tags": [
+          "Sending domains"
+        ],
+        "summary": "List sending domains",
+        "operationId": "listSendingDomains",
+        "responses": {
+          "200": {
+            "description": "Sending domain settings",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SendingDomainsResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "409": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimited"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Sending domains"
+        ],
+        "summary": "Add sending domain",
+        "description": "Owner or admin only. Custom sender use requires an eligible paid plan.",
+        "operationId": "createSendingDomain",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "domain",
+                  "senderEmail",
+                  "senderName"
+                ],
+                "additionalProperties": false,
+                "properties": {
+                  "domain": {
+                    "type": "string",
+                    "maxLength": 253
+                  },
+                  "senderEmail": {
+                    "type": "string",
+                    "format": "email",
+                    "maxLength": 254
+                  },
+                  "senderName": {
+                    "type": "string",
+                    "maxLength": 100
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Domain added",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SuccessResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "409": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimited"
+          }
+        }
+      }
+    },
+    "/api/v1/settings/sending-domains/{id}": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/TeamId"
+        },
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "patch": {
+        "tags": [
+          "Sending domains"
+        ],
+        "summary": "Edit sending identity",
+        "description": "Owner or admin only. Updates sender email and sender name for an existing domain.",
+        "operationId": "updateSendingDomain",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "senderEmail",
+                  "senderName"
+                ],
+                "additionalProperties": false,
+                "properties": {
+                  "senderEmail": {
+                    "type": "string",
+                    "format": "email",
+                    "maxLength": 254
+                  },
+                  "senderName": {
+                    "type": "string",
+                    "maxLength": 100
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Domain updated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SuccessResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "409": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimited"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Sending domains"
+        ],
+        "summary": "Remove sending domain",
+        "description": "Owner or admin only.",
+        "operationId": "removeSendingDomain",
+        "responses": {
+          "200": {
+            "description": "Domain removed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SuccessResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "409": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimited"
+          }
+        }
+      }
+    },
+    "/api/v1/settings/sending-domains/{id}/verify": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/TeamId"
+        },
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "post": {
+        "tags": [
+          "Sending domains"
+        ],
+        "summary": "Check sending domain DNS",
+        "description": "Owner or admin only. Performs verification after the required DNS records have been published. Requires an eligible paid plan.",
+        "operationId": "verifySendingDomain",
+        "responses": {
+          "200": {
+            "description": "Verification check completed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SuccessResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "409": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimited"
+          }
+        }
+      }
+    },
+    "/api/v1/settings/sending-domains/default": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/TeamId"
+        }
+      ],
+      "put": {
+        "tags": [
+          "Sending domains"
+        ],
+        "summary": "Select default sending domain",
+        "description": "Owner or admin only. Pass null to clear the custom default.",
+        "operationId": "setDefaultSendingDomain",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "domainId"
+                ],
+                "additionalProperties": false,
+                "properties": {
+                  "domainId": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "maxLength": 100
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Default updated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SuccessResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "409": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimited"
+          }
+        }
+      }
+    },
+    "/api/v1/settings/sending-domains/resume": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/TeamId"
+        }
+      ],
+      "post": {
+        "tags": [
+          "Sending domains"
+        ],
+        "summary": "Resume campaign sending",
+        "description": "Owner or admin only. Clears an eligible sender hold after its cause has been resolved.",
+        "operationId": "resumeCampaignSending",
+        "responses": {
+          "200": {
+            "description": "Sending resumed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SuccessResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "409": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimited"
+          }
+        }
+      }
+    },
     "/api/v1/settings/brand": {
       "get": {
         "tags": ["Brand settings"],
@@ -635,6 +1531,11 @@
   },
   "components": {
     "securitySchemes": {
+      "teamApiKey": {
+        "type": "http",
+        "scheme": "bearer",
+        "description": "Scoped team API key created by an owner or admin. Required scope: campaigns:trigger. Personal Access Tokens do not authorize this endpoint."
+      },
       "bearerAuth": {
         "type": "http",
         "scheme": "bearer",
@@ -643,6 +1544,15 @@
       }
     },
     "parameters": {
+      "TeamId": {
+        "name": "teamId",
+        "in": "query",
+        "required": true,
+        "description": "ID of the currently active workspace. Must match the authenticated team.",
+        "schema": {
+          "type": "string"
+        }
+      },
       "Id": {
         "name": "id",
         "in": "path",
@@ -724,6 +1634,389 @@
       }
     },
     "schemas": {
+      "LifetimeVariableManifestEntry": {
+        "type": "object",
+        "required": [
+          "path",
+          "type",
+          "required"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "path": {
+            "type": "string",
+            "pattern": "^data\\."
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "string",
+              "number",
+              "boolean",
+              "date",
+              "url"
+            ]
+          },
+          "required": {
+            "type": "boolean"
+          },
+          "defaultValue": {
+            "type": [
+              "string",
+              "number",
+              "boolean"
+            ]
+          },
+          "description": {
+            "type": "string",
+            "maxLength": 500
+          }
+        }
+      },
+      "LifetimeTriggerRequest": {
+        "type": "object",
+        "required": [
+          "eventId",
+          "contact",
+          "data"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "eventId": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "eventName": {
+            "type": "string",
+            "maxLength": 100
+          },
+          "occurredAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "contact": {
+            "type": "object",
+            "required": [
+              "email"
+            ],
+            "properties": {
+              "email": {
+                "type": "string",
+                "format": "email"
+              },
+              "externalId": {
+                "type": "string",
+                "maxLength": 200
+              },
+              "name": {
+                "type": "string",
+                "maxLength": 200
+              },
+              "phone": {
+                "type": "string",
+                "maxLength": 50
+              },
+              "metadata": {
+                "type": "object",
+                "additionalProperties": true
+              }
+            }
+          },
+          "data": {
+            "type": "object",
+            "additionalProperties": true,
+            "description": "Must satisfy the campaign variable manifest; 32 KiB maximum."
+          }
+        }
+      },
+      "LifetimeTriggerResponse": {
+        "type": "object",
+        "properties": {
+          "execution": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "status": {
+                "type": "string"
+              }
+            }
+          },
+          "duplicate": {
+            "type": "boolean"
+          }
+        }
+      },
+      "LifetimeExecution": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "eventId": {
+            "type": "string"
+          },
+          "eventName": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "occurredAt": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time"
+          },
+          "source": {
+            "type": "string"
+          },
+          "campaignVersion": {
+            "type": "integer"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "pending",
+              "queued",
+              "processing",
+              "sent",
+              "skipped",
+              "cancelled",
+              "failed",
+              "delivery_unknown"
+            ]
+          },
+          "failureCode": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "failureMessage": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "providerMessageId": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "queuedAt": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time"
+          },
+          "processingStartedAt": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time"
+          },
+          "sentAt": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time"
+          },
+          "skippedAt": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "contact": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "email": {
+                "type": "string",
+                "format": "email"
+              },
+              "name": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "externalId": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
+            }
+          }
+        }
+      },
+      "TeamApiKey": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "keyPrefix": {
+            "type": "string"
+          },
+          "scopes": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "campaigns:trigger"
+              ]
+            }
+          },
+          "lastUsedAt": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time"
+          },
+          "expiresAt": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time"
+          },
+          "revokedAt": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "SendingDomain": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "domain": {
+            "type": "string"
+          },
+          "senderEmail": {
+            "type": "string",
+            "format": "email"
+          },
+          "senderName": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          },
+          "ownershipToken": {
+            "type": "string"
+          },
+          "ownershipVerifiedAt": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time"
+          },
+          "dnsRecords": {
+            "description": "DNS records to publish or check for this domain. Shape may vary by provider.",
+            "type": ["array", "object"],
+            "items": {},
+            "additionalProperties": true
+          },
+          "dkimVerified": {
+            "type": "boolean"
+          },
+          "returnPathVerified": {
+            "type": "boolean"
+          },
+          "dmarcStatus": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "lastCheckedAt": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time"
+          },
+          "lastError": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      },
+      "SendingDomainsResponse": {
+        "type": "object",
+        "properties": {
+          "domains": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SendingDomain"
+            }
+          },
+          "defaultDomainId": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "holdReason": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "canManage": {
+            "type": "boolean"
+          },
+          "canUseCustomSender": {
+            "type": "boolean"
+          }
+        }
+      },
+      "SuccessResponse": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          }
+        }
+      },
       "ErrorResponse": {
         "type": "object",
         "properties": {
@@ -889,11 +2182,11 @@
           },
           "type": {
             "type": "string",
-            "enum": ["one-time", "drip"]
+            "enum": ["one-time", "drip", "lifetime"]
           },
           "status": {
             "type": "string",
-            "enum": ["draft", "scheduled", "sending", "sent", "stopped"]
+            "enum": ["draft", "scheduled", "sending", "sent", "stopped", "active", "paused", "archived"]
           },
           "subject": {
             "type": "string"
@@ -941,7 +2234,8 @@
       },
       "CreateCampaignRequest": {
         "type": "object",
-        "required": ["name", "goal", "subject", "html", "link"],
+        "description": "A CTA link is required. One-time campaigns also require a goal; lifetime campaigns must be created as drafts and activated with the lifecycle endpoint.",
+        "required": ["link"],
         "properties": {
           "name": {
             "type": "string"
@@ -961,7 +2255,7 @@
           },
           "audienceType": {
             "type": "string",
-            "enum": ["all", "tags", "manual"],
+            "enum": ["all", "tags", "manual", "trigger"],
             "default": "all"
           },
           "audienceTags": {
@@ -983,6 +2277,28 @@
           "scheduledAt": {
             "type": "string",
             "format": "date-time"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "one-time",
+              "drip",
+              "lifetime"
+            ]
+          },
+          "variableManifest": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LifetimeVariableManifestEntry"
+            },
+            "description": "Lifetime campaigns only. Declares data.* template variables."
+          },
+          "generatedVariableManifest": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LifetimeVariableManifestEntry"
+            },
+            "description": "Lifetime campaigns only. Manifest associated with generated content."
           },
           "personalizationMode": {
             "type": "string",
@@ -1012,7 +2328,7 @@
           },
           "audienceType": {
             "type": "string",
-            "enum": ["all", "tags", "manual"]
+            "enum": ["all", "tags", "manual", "trigger"]
           },
           "audienceTags": {
             "type": "array",
@@ -1032,6 +2348,28 @@
           "scheduledAt": {
             "type": "string",
             "format": "date-time"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "one-time",
+              "drip",
+              "lifetime"
+            ]
+          },
+          "variableManifest": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LifetimeVariableManifestEntry"
+            },
+            "description": "Lifetime campaigns only. Declares data.* template variables."
+          },
+          "generatedVariableManifest": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LifetimeVariableManifestEntry"
+            },
+            "description": "Lifetime campaigns only. Manifest associated with generated content."
           },
           "personalizationMode": {
             "type": "string",

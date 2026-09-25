@@ -1,0 +1,42 @@
+---
+title: "Connect Shopify contacts"
+description: "Authorize Shopify and choose all customers or specific segments"
+---
+
+## Why this matters
+
+Shopify's **All contacts** option lets you import customers even if you have not created segments. Selecting specific segments gives you a narrower source audience. In both cases, Shopify's email marketing state continues to matter when Nudgen decides whether a contact may receive email.
+
+## Connect Shopify through the app directory
+
+1. Open **Settings** → **Integration** and find **Shopify**. Review the availability shown for your workspace.
+2. Select **Connect**. The Shopify setup page describes a store-specific, privately distributed app. A Shopify administrator approves the installation in Shopify Dev Dashboard during authorization.
+3. Grant only the requested `read_customers` and `read_orders` Admin API scopes. Select **Connect** to authorize Shopify through Composio. You do not need to paste an Admin API token into Nudgen.
+4. After authorization, choose **All contacts** or one or more Shopify segments, then preview, confirm permission, and start the sync. See the [connection guide](/en/integrations/connect-and-sync) for the shared steps and limits.
+
+The directory setup is separate from any existing native Shopify installation. If Nudgen shows a **Previous connection** notice, follow its prompt to disconnect that connection before connecting through Composio. Imported contacts are retained when you disconnect.
+
+## Choose the right Shopify audience
+
+| Choice | What it imports |
+| --- | --- |
+| **All contacts** | Customers across the connected Shopify store, including customers outside saved segments. |
+| Shopify segments | Customers who belong to the selected saved segments. |
+
+**All contacts** is exclusive: selecting it replaces any selected segments, and selecting a segment replaces **All contacts**. A sync still respects the 10,000 distinct source-contact limit and your workspace capacity. If Shopify cannot list segments but can still read customers, **All contacts** may remain available.
+
+Shopify customers marked subscribed can be eligible for email, subject to Nudgen's other restrictions. Unsubscribed, not subscribed, pending, invalid, and redacted marketing states are treated as blocked. A customer without a usable email permission state is not assumed to have consent. Review your preview and permission confirmation before syncing.
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="The store cannot be connected">
+    Check that a Shopify administrator approved the store-specific installation and its requested scopes. Return to the setup page and retry **Connect**. If the page says **Connection setup needed**, contact Nudgen support.
+  </Accordion>
+  <Accordion title="I expected more customers">
+    Check whether you selected a segment instead of **All contacts**. Inspect the sync run's imported, updated, and skipped counts. Shopify customers without an importable email address may not become Nudgen contacts.
+  </Accordion>
+  <Accordion title="The account needs reconnecting">
+    Open **Connected apps** → **Manage** → **Reconnect**, then authorize the same Shopify store again.
+  </Accordion>
+</AccordionGroup>

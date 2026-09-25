@@ -1,13 +1,13 @@
 ---
 title: "Developers and APIs"
-description: "Use Nudgen with Personal Access Tokens, the REST API, and MCP"
+description: "Use Nudgen with Personal Access Tokens for REST and OAuth for MCP"
 ---
 
-Nudgen now supports developer access through **Personal Access Tokens (PATs)**. Use the same token for the REST API, the MCP server, and agent workflows.
+Nudgen supports **Personal Access Tokens (PATs)** for the REST API and OAuth connections for its MCP server. Use the method that matches your client.
 
 ## Why this matters
 
-You can connect Nudgen to scripts, internal tools, and AI agents without sharing your dashboard login. Tokens are scoped to your account and active workspace, and every request is still protected by Nudgen rate limits and workspace permissions.
+You can connect Nudgen to scripts, internal tools, and AI agents without sharing a dashboard session. PAT requests use your account's active workspace. OAuth MCP connections are bound to the workspace you approve during sign-in. Workspace permissions and rate limits still apply.
 
 ## Create an API key
 
@@ -27,7 +27,7 @@ Authorization: Bearer pat_...
 Use the REST API when you want conventional HTTP endpoints for contacts, campaigns, brand settings, and AI draft generation.
 
 ```bash
-curl https://nudgen.net/api/v1/user/me \
+curl https://app.nudgen.net/api/v1/user/me \
   -H "Authorization: Bearer <your-pat>"
 ```
 
@@ -51,16 +51,16 @@ Common endpoints include:
 Use MCP when an AI agent can call tools directly instead of hand-coding REST requests. The MCP endpoint is:
 
 ```text
-https://nudgen.net/api/mcp
+https://app.nudgen.net/api/mcp
 ```
 
 The server card is available at:
 
 ```text
-https://nudgen.net/.well-known/mcp/server-card.json
+https://app.nudgen.net/.well-known/mcp/server-card.json
 ```
 
-MCP uses the same bearer PAT as the REST API.
+MCP uses browser-based OAuth sign-in, with a selected workspace and requested scopes. A PAT does not authenticate the MCP endpoint. Agent-created campaigns are drafts, and each MCP campaign launch requires separate browser approval. See the [MCP setup guide](/en/agents/mcp).
 
 ## Safety notes
 
