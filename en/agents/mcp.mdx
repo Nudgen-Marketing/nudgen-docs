@@ -1,48 +1,84 @@
 ---
 title: "MCP server"
-description: "Connect an AI assistant to Nudgen with OAuth and approve campaign launches in your browser"
+description: "Connect an AI assistant to Nudgen with OAuth, search map leads, and approve campaign launches in your browser"
 ---
 
 ## Overview
 
-Nudgen hosts an MCP server at your app origin's `/api/mcp` endpoint. Connect an MCP client that supports Streamable HTTP and OAuth. Sign in to Nudgen in your browser, choose a workspace, and approve the permissions the client requests. Your connection stays bound to that workspace, even if you later switch workspaces in the dashboard.
+Nudgen hosts an MCP server at your app origin's `/mcp` endpoint. It speaks MCP `2026-07-28` over Streamable HTTP and requires OAuth 2.1. Connect a client that supports that transport. Sign in to Nudgen in your browser, choose a workspace, and approve the permissions the client requests. Your connection stays bound to that workspace, even if you later switch workspaces in the dashboard.
 
 ## Why this matters
 
-Your assistant can read contacts and campaigns, draft content, and prepare a campaign for launch without handling a dashboard session or a Personal Access Token. You review each real send or schedule in your browser before it can proceed.
+Your assistant can read contacts and campaigns, find nearby businesses, draft content, and prepare a campaign for launch without handling a dashboard session or a Personal Access Token. You review each real send or schedule in your browser before it can proceed.
 
 ## Connect your client
 
 The production endpoint is:
 
 ```text
-https://app.nudgen.net/api/mcp
+https://app.nudgen.net/mcp
 ```
 
 Add it as a **remote HTTP MCP server** in a client with OAuth support. The client discovers Nudgen's authorization server from the endpoint and opens a browser sign-in and consent flow. Select the workspace you want the client to access and approve only the scopes it needs.
 
+Discovery documents:
+
+| Document | URL |
+| --- | --- |
+| Protected resource metadata | `https://app.nudgen.net/.well-known/oauth-protected-resource/mcp` |
+| Authorization server | `https://app.nudgen.net/mcp-oauth` |
+| Server card | `https://app.nudgen.net/.well-known/mcp/server-card.json` |
+
+The authorization server uses authorization code with PKCE S256, resource binding, and refresh-token rotation. It accepts Client ID Metadata Documents and dynamic client registration.
+
 For Codex CLI, use:
 
 ```bash
-codex mcp add nudgen --url "https://app.nudgen.net/api/mcp" --oauth-resource "https://app.nudgen.net/api/mcp"
+codex mcp add nudgen --url "https://app.nudgen.net/mcp" --oauth-resource "https://app.nudgen.net/mcp"
 codex mcp login nudgen --scopes campaigns:read,campaigns:write,campaigns:send
 ```
 
-If you only need to inspect data, request `campaigns:read`. Add `campaigns:write` for contacts, campaign drafts, brand changes, and AI drafts. Add `campaigns:send` only when the client needs to request launch approval. The `campaigns:send` scope alone never sends a campaign.
+If a client named `nudgen` is already configured, update that entry with the `/mcp` URL.
+
+| Scope | What it allows |
+| --- | --- |
+| `campaigns:read` | Inspect the workspace, contacts, campaigns, brand settings, and search map leads. |
+| `campaigns:write` | Create contacts and draft campaigns, update brand settings, generate AI drafts, and import map leads. |
+| `campaigns:send` | Request and complete a launch. This scope never sends email by itself. |
+
+If you only need to inspect data, request `campaigns:read`. Add `campaigns:write` when the client should change contacts, drafts, brand settings, or imported leads. Add `campaigns:send` only when the client needs to request launch approval.
 
 <Note>
-  Personal Access Tokens authenticate the [Developer API](/en/agents/api), but they do not authenticate `/api/mcp`. An MCP client must complete OAuth sign-in.
+  Personal Access Tokens authenticate the [Developer API](/en/agents/api), but they do not authenticate `/mcp`. An MCP client must complete OAuth sign-in.
 </Note>
 
 ## Available tools
 
-| Task | Tools |
-| --- | --- |
-| Inspect your workspace | `get_current_user`, `list_contacts`, `list_campaigns`, `get_campaign`, `get_campaign_stats`, `get_brand_settings` |
-| Create and edit | `create_contact`, `create_campaign`, `update_brand_settings`, `generate_email_draft` |
-| Request and complete a launch | `prepare_campaign_launch`, `launch_campaign` |
+| Task | Tools | Scope |
+| --- | --- | --- |
+| Inspect your workspace | `get_current_user`, `list_contacts`, `list_campaigns`, `get_campaign`, `get_campaign_stats`, `get_brand_settings` | `campaigns:read` |
+| Find nearby businesses | `search_map_leads` | `campaigns:read` |
+| Create and edit | `create_contact`, `create_campaign`, `update_brand_settings`, `generate_email_draft`, `import_map_leads` | `campaigns:write` |
+| Request and complete a launch | `prepare_campaign_launch`, `launch_campaign` | `campaigns:send` |
 
 `create_campaign` saves a **draft one-time campaign**. It cannot send or schedule directly. `get_campaign` lets you check the subject, content, link, audience, and sender before launch.
+
+The server also exposes read-only resources on `campaigns:read`:
+
+| Resource | Contents |
+| --- | --- |
+| `nudgen://api-catalog` | Names and descriptions of the hosted tools. |
+| `nudgen://team/brand` | Brand settings for the connected workspace. |
+| `nudgen://campaigns/{id}/summary` | Delivery stats for one campaign. Replace `{id}` with the campaign ID. |
+
+### Find and import map leads
+
+1. Ask the assistant to call `search_map_leads` with a location and business keywords, such as a city and `marketing agency`.
+2. Optional filters are `radiusKm` (1–100), `lat` and `lng`, and `emailOnly` to keep businesses that publish an email.
+3. When the result includes `nextPageToken`, pass it as `pageToken` to load another page.
+4. Ask the assistant to call `import_map_leads` with the same location and keywords, plus the lead objects to save. Each call accepts up to 200 leads.
+
+Import writes contacts in the connected workspace. Leads without an email are skipped. A lead that already exists is updated.
 
 ### Approve a campaign launch
 
@@ -67,9 +103,10 @@ OAuth grants last at most 90 days. Losing access to a workspace also prevents th
 
 | Symptom | What to do |
 | --- | --- |
-| Sign-in does not start | Confirm the client supports remote Streamable HTTP MCP with OAuth and uses the app endpoint above. |
+| Sign-in does not start | Confirm the client supports remote Streamable HTTP MCP with OAuth and uses `https://app.nudgen.net/mcp`. |
 | A tool needs more permission | Reconnect and approve the needed scope for that workspace. |
-| Contact search asks you to narrow results | Search scans at most 5,000 contacts after tag and status filters because contact names and addresses are encrypted. Narrow the filters. |
+| Contact search asks you to narrow results | Search matches names and email addresses, and scans at most 5,000 contacts after tag and status filters. Narrow the filters. |
+| Map lead import skips a business | Only leads with an email are saved. Search again with `emailOnly` set to true, or pick leads that already include an email. |
 | Launch approval expired or the campaign changed | Request a new approval and review the current campaign and sender. |
 | A launch is blocked | Check the campaign's draft status, sender readiness, eligible contacts, plan quota, and [sending domain](/en/settings/sending-domains). |
 
