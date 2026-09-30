@@ -1,0 +1,56 @@
+---
+title: "Ereignisse für Lifetime-Kampagnen"
+description: "Unterstützte Integrationsereignisse zum Starten von Lifetime-Kampagnen verwenden"
+---
+
+## Warum das wichtig ist
+
+Eine Ereignisregel kann eine Lifetime-Kampagne starten, wenn in einer verbundenen App ein unterstütztes Kundenereignis eintritt. Jede Regel ist auf Kontakte in einer ausgewählten Zielgruppe beschränkt. Daher müssen sowohl die Quellverbindung als auch die Kampagne bereit sein.
+
+## Ereignisverfügbarkeit prüfen
+
+Öffnen Sie nach Abschluss einer Verbindung zur Kontaktsynchronisierung deren Seite **Verwalten** und suchen Sie nach **Ereignisse für Lifetime-Kampagnen**. Die Ereignisliste gilt jeweils für diese App und Verbindung. Ein mit **Ereignisverifizierung ausstehend** gekennzeichnetes Ereignis kann noch nicht ausgewählt werden. Die Kontaktsynchronisierung kann verfügbar sein, auch wenn die Ereignisüberwachung nicht verfügbar ist.
+
+Bei einem bereiten Ereignis zeigt die Seite die Zustellungsmethode an, beispielsweise die Zustellung per Webhook oder Polling. Möglicherweise wird auch ein erwartetes Erkennungsintervall angezeigt. Dabei handelt es sich um Schätzwerte für die Erkennung und nicht um eine Garantie, dass eine Kampagne zu diesem Zeitpunkt versendet wird. Erstimporte und historische Ereignisse starten keine Kampagnen.
+
+## Regel hinzufügen
+
+1. Erstellen und aktivieren Sie eine kompatible [Lifetime-Kampagne](/de/campaigns/lifetime).
+2. Wählen Sie im Abschnitt **Ereignisse für Lifetime-Kampagnen** der verbundenen App **Regel hinzufügen**.
+3. Wählen Sie ein bereites **Kundenereignis**, eine **Zielgruppe oder ein Segment** und eine **Lifetime-Kampagne** aus. Geben Sie bei **Lebenszyklusphase geändert** die Zielphase ein.
+4. Prüfen Sie die beispielhaften Ereignisvariablen. Die tatsächlichen Werte stammen jeweils aus dem Quellereignis.
+5. Wählen Sie **Deaktivierte Regel speichern** und anschließend **Aktivieren**, wenn neue übereinstimmende Ereignisse die Kampagne auslösen dürfen.
+
+Nur Workspace-Inhaber und Administratoren können Regeln ändern. Sie können eine Regel später **Deaktivieren** oder **Entfernen**. Wenn Sie eine Regel entfernen, können ihre ausstehenden Ausführungen nicht mehr verarbeitet werden.
+
+<Note>
+Die im Formular angezeigten Ereignisse hängen von der Verifizierung und Konfiguration des Anbieters ab. Gehen Sie nicht davon aus, dass jeder aufgeführte Ereignistyp für jede App verfügbar ist.
+</Note>
+---
+title: "Ereignisse für Lifetime-Kampagnen"
+description: "Unterstützte Integrationsereignisse zum Starten von Lifetime-Kampagnen verwenden"
+---
+
+## Warum das wichtig ist
+
+Eine Ereignisregel kann eine Lifetime-Kampagne starten, wenn in einer verbundenen App ein unterstütztes Kundenereignis eintritt. Jede Regel ist auf Kontakte in einer ausgewählten Zielgruppe beschränkt. Daher müssen sowohl die Quellverbindung als auch die Kampagne bereit sein.
+
+## Ereignisverfügbarkeit prüfen
+
+Öffnen Sie nach Abschluss einer Verbindung zur Kontaktsynchronisierung deren Seite **Verwalten** und suchen Sie nach **Ereignisse für Lifetime-Kampagnen**. Die Ereignisliste gilt jeweils für diese App und Verbindung. Ein mit **Ereignisverifizierung ausstehend** gekennzeichnetes Ereignis kann noch nicht ausgewählt werden. Die Kontaktsynchronisierung kann verfügbar sein, auch wenn die Ereignisüberwachung nicht verfügbar ist.
+
+Bei einem bereiten Ereignis zeigt die Seite die Zustellungsmethode an, beispielsweise die Zustellung per Webhook oder Polling. Möglicherweise wird auch ein erwartetes Erkennungsintervall angezeigt. Dabei handelt es sich um Schätzwerte für die Erkennung und nicht um eine Garantie, dass eine Kampagne zu diesem Zeitpunkt versendet wird. Erstimporte und historische Ereignisse starten keine Kampagnen.
+
+## Regel hinzufügen
+
+1. Erstellen und aktivieren Sie eine kompatible [Lifetime-Kampagne](/de/campaigns/lifetime).
+2. Wählen Sie im Abschnitt **Ereignisse für Lifetime-Kampagnen** der verbundenen App **Regel hinzufügen**.
+3. Wählen Sie ein bereites **Kundenereignis**, eine **Zielgruppe oder ein Segment** und eine **Lifetime-Kampagne** aus. Geben Sie bei **Lebenszyklusphase geändert** die Zielphase ein.
+4. Prüfen Sie die beispielhaften Ereignisvariablen. Die tatsächlichen Werte stammen jeweils aus dem Quellereignis.
+5. Wählen Sie **Deaktivierte Regel speichern** und anschließend **Aktivieren**, wenn neue übereinstimmende Ereignisse die Kampagne auslösen dürfen.
+
+Nur Workspace-Inhaber und Administratoren können Regeln ändern. Sie können eine Regel später **Deaktivieren** oder **Entfernen**. Wenn Sie eine Regel entfernen, können ihre ausstehenden Ausführungen nicht mehr verarbeitet werden.
+
+<Note>
+Die im Formular angezeigten Ereignisse hängen von der Verifizierung und Konfiguration des Anbieters ab. Gehen Sie nicht davon aus, dass jeder aufgeführte Ereignistyp für jede App verfügbar ist.
+</Note>

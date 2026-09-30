@@ -368,7 +368,7 @@
                 "goal": "Invite contacts to try Nudgen.",
                 "subject": "Try Nudgen",
                 "html": "<p>Ready to launch smarter email?</p>",
-                "link": "https://nudgen.net",
+                "link": "https://get.nudgen.net",
                 "audienceType": "manual",
                 "audienceContactIds": ["contact_id"]
               }
@@ -1502,7 +1502,7 @@
               },
               "example": {
                 "campaignGoal": "Write a short retention email inviting users to try Nudgen.",
-                "link": "https://nudgen.net",
+                "link": "https://get.nudgen.net",
                 "personalizationMode": "off"
               }
             }

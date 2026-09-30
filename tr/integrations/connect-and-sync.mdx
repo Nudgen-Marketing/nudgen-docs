@@ -1,0 +1,65 @@
+---
+title: "Bir uygulama bağlayın ve kişileri senkronize edin"
+description: "Hedef kitleleri seçin, kişileri önizleyin ve entegrasyon senkronizasyonunu yönetin"
+---
+
+## Bu neden önemlidir
+
+Bir kaynak hedef kitle seçmek, yalnızca kullanmayı amaçladığınız kişileri içe aktarmanıza yardımcı olur. İçe aktarma işlemini önizlemek ve e-posta iznini onaylamak, yanlış bir seçimi senkronizasyondan önce fark etmenize yardımcı olur.
+
+## Başlamadan önce
+
+- Kişileri alması gereken çalışma alanında oturum açın.
+- İzniniz yoksa bir çalışma alanı sahibinden veya yöneticiden bağlantıyı yönetmesini isteyin.
+- Uygulamanın ayrıntılarında kişi senkronizasyonunun kullanılabilir olarak gösterildiğini kontrol edin. Diğer durumlar [kullanılabilirlik etiketlerinde](/tr/integrations/overview) açıklanır.
+- İçe aktarmayı planladığınız kişilere e-posta gönderme izniniz olduğunu doğrulayın. Bir uygulamayı bağlamak size bu izni vermez.
+
+## Bağlanın ve kişileri seçin
+
+<Steps>
+  <Step title="Hesabı bağlayın">
+    **Ayarlar** → **Entegrasyon** bölümünde uygulamanızı bulun ve **Bağlan** seçeneğini belirleyin. Sağlayıcının yetkilendirme sayfasındaki adımları izleyin, ardından Nudgen'a dönün. Nudgen; sağlayıcının desteklediği durumlarda kişi e-postası, ad, telefon, hedef kitle üyeliği ve e-posta izni için okuma erişimi ister. Kaynak uygulamanızdaki kişileri değiştirmez.
+  </Step>
+  <Step title="Hedef kitleleri seçin">
+    Listeleri, segmentleri veya etiketleri arayın ve en fazla 10 hedef kitle seçin. Kaynakta daha fazla sonuç varsa **Daha fazla hedef kitle yükle** seçeneğini kullanabilirsiniz. Seçilen birden fazla hedef kitlede bulunan bir kişi yalnızca bir kez içe aktarılır. Her bağlantı, çalışma alanınızın kişi kapasitesine tabi olmak üzere en fazla 10.000 farklı kaynak kişiyi destekler.
+  </Step>
+  <Step title="Kişileri önizleyin">
+    **Kişileri önizle** seçeneğini belirleyin. Örneği ve gösterilen sayıyı inceleyin; bu sayı ilk senkronizasyona kadar kesin, yaklaşık veya kullanılamaz olabilir. Bazı sağlayıcılar ek bir adım gerektirir: noCRM için önizlemeden önce seçilen her liste için bir e-posta sütunu seçin; ad ve telefon sütunları isteğe bağlıdır.
+  </Step>
+  <Step title="İnceleyin ve başlatın">
+    **Devam et** seçeneğini belirleyin, hesabı ve hedef kitleleri kontrol edin, bu kişilere e-posta gönderme izniniz olduğunu onaylayın ve ardından **Senkronizasyonu başlat** seçeneğini belirleyin. İlk içe aktarma işlemi hemen kuyruğa alınır. Sonraki senkronizasyonlar saatlik olarak planlanır.
+  </Step>
+</Steps>
+
+Kurulum sırasında **Kaydet ve çık** seçeneğini belirleyip daha sonra geri dönebilirsiniz. Seçilen hedef kitleyi veya sütun eşlemesini değiştirdiğinizde başlatmadan önce yeni bir önizleme oluşturmanız gerekir.
+
+Nudgen, uygun olduğunda mevcut kişi profili değerlerini ve etiketleri korur. Bilinen abonelikten ayrılmalar, geri dönmeler ve diğer e-posta kısıtlamaları korunmaya devam eder. Bir kişinin kaynak hedef kitlede bulunması, kampanya almaya otomatik olarak uygun olduğu anlamına gelmez.
+
+## Bir bağlantıyı yönetin
+
+Seçilen hedef kitleleri, son ve sonraki senkronizasyon zamanlarını ve son çalıştırmaları incelemek için **Bağlı uygulamalar** → **Yönet** bölümünü açın. Her çalıştırmada içe aktarılan, güncellenen ve atlanan kişi sayıları gösterilir. **Kişileri görüntüle**, **Hedef kitleleri düzenle** veya **Şimdi senkronize et** seçeneklerini belirleyebilirsiniz. Manuel senkronizasyonda 15 dakikalık bekleme süresi vardır ve bir çalıştırma beklemedeyken bu denetim kullanılamaz. Hesabın yeniden yetkilendirilmesi gerekiyorsa **Yeniden bağlan** seçeneğini kullanın.
+
+Gelecekteki senkronizasyonları durdurmak için **Bağlantıyı kes** seçeneğini belirleyin. Nudgen'a daha önce içe aktarılan kişiler çalışma alanınızda kalır. Bu kaynağı Composio'ya geçirmeden önce önceki bir yerel bağlantının kesilmesi gerekebilir; geçerli olduğunda kurulum sayfası bunu gösterir.
+
+## Sorun giderme
+
+<AccordionGroup>
+  <Accordion title="Hiçbir hedef kitle görünmüyor">
+    Farklı bir arama deneyin, sunulduğunda **Daha fazla hedef kitle yükle** seçeneğini belirleyin ve sağlayıcı hesabınızın ilgili listeleri veya segmentleri okuyabildiğini kontrol edin.
+  </Accordion>
+  <Accordion title="Önizlemenin süresi doldu veya seçim değişti">
+    **Kişileri seçin** adımına dönün, önizlemeyi yenileyin ve tekrar inceleyin. noCRM için kaynak sütunlar değiştiyse sütun eşlemelerini yeniden kontrol edin.
+  </Accordion>
+  <Accordion title="Senkronizasyon bir sınır nedeniyle engelleniyor">
+    Seçim 10.000 farklı kaynak kişiyi aşıyorsa daha küçük hedef kitleler seçin. Çalışma alanı kişi sınırına ulaştıysa seçimi azaltın veya planınızı inceleyin.
+  </Accordion>
+  <Accordion title="Senkronizasyon duraklatıldı veya ilgilenmeniz gerekiyor">
+    Çalıştırma mesajını inceleyin. Yetkilendirmenin süresi dolduysa yeniden bağlanın. Geçici bir sağlayıcı veya Nudgen istek sınırı söz konusuysa yeniden denemeden önce bekleyin. Etkin çalışma alanınız değiştiyse sayfayı yeniden yükleyin.
+  </Accordion>
+</AccordionGroup>
+
+## İlgili belgeler
+
+- [Shopify kişileri ve Tüm kişiler](/tr/integrations/shopify)
+- [Kişilere genel bakış](/tr/contacts/overview)
+- [Ömür Boyu kampanya etkinlikleri](/tr/integrations/lifetime-events)

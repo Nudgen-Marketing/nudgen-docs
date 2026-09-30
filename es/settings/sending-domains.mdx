@@ -1,0 +1,47 @@
+---
+title: "Dominio personalizado"
+description: "Verifica un dominio de tu propiedad y úsalo como remitente de las campañas de tu equipo"
+---
+
+Usa **Configuración** → **Dominio personalizado** para enviar campañas y correos de prueba desde una dirección de tu propio dominio. Sin un dominio personalizado, tu equipo utiliza el remitente de Nudgen.
+
+## Por qué esto es importante
+
+Un dominio verificado permite que tus destinatarios reconozcan tu marca en la dirección del remitente. Nudgen comprueba los registros DNS necesarios antes de usarlo y pausa los envíos si el remitente seleccionado deja de cumplir los requisitos.
+
+## Por qué esto es importante
+
+Un dominio verificado permite que los contactos reconozcan tu marca en la dirección del remitente. Las comprobaciones de DNS confirman que controlas el dominio y que Nudgen puede autenticar los correos enviados desde él.
+
+## Antes de empezar
+
+- Tu equipo necesita un **plan de pago activo** para añadir y usar un remitente personalizado. Los equipos con un plan gratuito pueden seguir viendo y eliminando los dominios que ya tengan en su configuración.
+- Solo un **owner o admin** del equipo puede añadir, editar, verificar, seleccionar o eliminar un dominio y reanudar los envíos. Los demás miembros pueden ver su estado y sus registros DNS.
+- Necesitas acceso al proveedor DNS del dominio. Un equipo puede configurar **un dominio personalizado**. Para sustituirlo, cambia a **Usar el remitente de Nudgen**, elimina el dominio anterior y añade el nuevo.
+
+## Añadir y verificar tu dominio
+
+1. Abre **Configuración** → **Dominio personalizado** e introduce el dominio que controlas, como `mail.example.com`. Introduce la parte del correo del remitente anterior a `@` (por ejemplo, `hello`) y un nombre de remitente. La dirección debe pertenecer a ese **dominio exacto**: `hello@mail.example.com` para `mail.example.com`.
+2. Selecciona **Añadir dominio**. Abre **Registros DNS** en la tarjeta del dominio y copia el host y el valor del registro **TXT de propiedad** en tu proveedor DNS. El host empieza por `_nudgen-verify.`. Mantén este registro después de la verificación.
+3. Selecciona **Comprobar DNS**. Una vez verificada la propiedad, la tarjeta muestra los registros **TXT de DKIM** y **CNAME de Return-Path** del dominio. Copia exactamente los hosts y valores mostrados en tu proveedor DNS. Si aparecen varios registros DKIM, publica todos.
+4. Después de guardar los registros, vuelve a seleccionar **Comprobar DNS**. Los cambios de DNS pueden tardar en propagarse. El dominio está **Listo** cuando se han verificado la propiedad, DKIM y Return-Path.
+
+Usa los valores de los registros que aparecen en la tarjeta de tu propio dominio, ya que son específicos de tu configuración. Se recomienda usar **DMARC**, pero su estado no bloquea la activación. Conserva cualquier política DMARC existente, incluida una heredada de un dominio superior. No necesitas añadir un registro SPF raíz independiente para esta configuración.
+
+El primer dominio verificado se convierte automáticamente en el remitente predeterminado si el equipo no ha elegido antes un remitente y los envíos no están en pausa. De lo contrario, selecciona **Establecer como predeterminado** en la tarjeta del dominio listo. La sección **Remitente predeterminado de las campañas** muestra qué remitente está seleccionado. Puedes elegir **Usar el remitente de Nudgen** en cualquier momento.
+
+## Gestionar tu remitente
+
+- **Editar remitente** cambia la parte local de la dirección o el nombre para mostrar. El dominio no se puede editar; sustitúyelo si necesitas cambiarlo.
+- **Eliminar** solo está disponible cuando el dominio no es el remitente predeterminado. Elige primero **Usar el remitente de Nudgen** si es necesario. Al eliminar un dominio, se libera el único espacio para dominios del equipo.
+- **Comprobar DNS** actualiza el estado de verificación. La tarjeta muestra la última comprobación, los posibles errores de verificación y los estados de propiedad, DKIM, Return-Path y DMARC.
+
+## Si el envío de campañas está en pausa
+
+Si el dominio personalizado seleccionado pierde la verificación DNS necesaria o el acceso a un plan de pago, el envío de campañas se pausa. **Los correos en cola se conservan.** La página muestra el motivo en **El envío de campañas está en pausa**.
+
+1. Corrige los registros DNS o restablece el acceso de pago. También puedes seleccionar **Usar el remitente de Nudgen**.
+2. Selecciona **Comprobar DNS** si has corregido los registros y confirma que el dominio esté **Listo**.
+3. Selecciona **Reanudar envíos**. Corregir el DNS o cambiar el remitente predeterminado no elimina la pausa por sí solo.
+
+Para resolver otros problemas de entrega, consulta [Envío y entregabilidad](/es/troubleshooting/deliverability).

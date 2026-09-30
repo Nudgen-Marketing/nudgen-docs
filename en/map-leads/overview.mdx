@@ -1,0 +1,224 @@
+---
+title: "Map Leads"
+description: "Find local businesses by location and category, review contact details, and import selected leads into your workspace"
+---
+
+## What this page helps you do
+
+Use **Map Leads** to find businesses in a target area, review available business contact details, and add selected leads to your Nudgen contacts. You can then organize those contacts with tags and use them as an audience for an outreach campaign.
+
+## Why this matters
+
+Building a local prospect list manually takes time. Map Leads combines map-based business search with contact enrichment, so you can move from a location and business category to a usable contact segment in one workflow.
+
+Map Leads can help you:
+
+- Find businesses near a city, neighborhood, postcode, or map point.
+- Search by a business type such as `marketing agency`, `law firm`, or `design studio`.
+- Review addresses, ratings, websites, phone numbers, emails, and social profiles when available.
+- Filter the results before selecting leads.
+- Export selected results to CSV or import them directly into your workspace.
+
+<Note>
+  Map Leads is a beta feature. Availability, search coverage, and result quality may change as the feature develops.
+</Note>
+
+## Before you start
+
+- Sign in to Nudgen and select the workspace that should receive the imported contacts.
+- Decide which location and type of business you want to target.
+- Make sure your workspace has room for new contacts under its [plan limits](/en/billing/overview).
+- Follow the outreach, privacy, and consent rules that apply to your business and recipients.
+
+## How Map Leads works
+
+Map Leads searches for businesses around the location you provide. When a business has a website, Nudgen may check publicly available pages such as its home, contact, and about pages for a published business email and social links.
+
+Each result can include:
+
+- Business name and address
+- Map location
+- Business categories
+- Rating
+- Website and domain
+- Phone number
+- Published business email
+- LinkedIn, Facebook, X/Twitter, or Instagram profile
+
+Not every business publishes all of these details. A result without an email can still be reviewed, but it cannot be selected for export or imported into Nudgen contacts.
+
+<Warning>
+  A discovered email is not a guarantee that the address is current, monitored, or appropriate for your campaign. Review your selected leads and comply with applicable anti-spam and privacy laws before contacting them.
+</Warning>
+
+## Step 1: Open Map Leads
+
+1. Open your Nudgen dashboard.
+2. Select **Map Leads** in the sidebar.
+3. Confirm that the correct workspace is active before importing anything.
+
+## Step 2: Choose a location
+
+Enter a city, neighborhood, postcode, address, or other supported place in the **Location** field. Select a suggestion when one appears so Nudgen can use the correct map area.
+
+You can also:
+
+- Click **Use my location** and allow location access in your browser.
+- Click the map before searching to choose a specific point.
+- Enter coordinates as `latitude, longitude`.
+
+If you deny browser location permission, you can still type a location or choose a point on the map.
+
+## Step 3: Enter a business keyword
+
+In the **Keywords** field, describe the kind of business you want to find. Use a specific category instead of a broad sales phrase.
+
+Good examples include:
+
+- `marketing agency`
+- `software company`
+- `accounting firm`
+- `staffing agency`
+- `real estate agency`
+
+You can also use one of the category shortcuts below the search fields. Map Leads saves recent searches in your browser so you can repeat or remove them later.
+
+## Step 4: Search and review the map
+
+Click **Search**. Results appear as map pins and lead cards.
+
+- Click a map pin to move to the matching lead card.
+- Hover over a lead card to highlight its pin.
+- Click **Load more** when another page of results is available.
+- Click a website or social icon to review the business in a new tab.
+
+Search results are ordered to prioritize businesses with useful contact data. Coverage still depends on the selected area and the information that each business publishes.
+
+## Step 5: Filter the results
+
+Use the filter controls above the lead list to narrow the current results:
+
+- **Website** — Show businesses with a website.
+- **Email** — Show businesses with a discovered email.
+- **Phone** — Show businesses with a phone number.
+- **Rating** — Set a minimum rating of 3, 4, or 4.5.
+
+The email and website filters are enabled by default. Turn them off when you want to inspect a broader set of businesses.
+
+Filters apply to the results already loaded in the page. If the list is too short, clear one or more filters, click **Load more**, or run a broader search.
+
+## Step 6: Select leads
+
+Select the checkbox on each lead card you want to keep. You can also use the checkbox above the list to select all currently visible, filtered leads.
+
+Only leads with an email can be selected for import. Before importing, check:
+
+- The business matches your intended audience.
+- The location is relevant.
+- The website belongs to the correct business.
+- The email appears suitable for business outreach.
+- The phone number, rating, and social profiles support your qualification criteria.
+
+## Step 7: Export or import
+
+### Export selected leads
+
+Click **Export** to download the selected results as a CSV file. The export includes:
+
+- Name
+- Address
+- Email
+- Phone
+- Website
+- Rating
+- Categories
+- Latitude and longitude
+
+Exporting does not add the businesses to your Nudgen contacts.
+
+### Import selected leads
+
+Click **Import** to add selected, email-bearing leads to the active workspace.
+
+During import, Nudgen:
+
+- Creates a new contact when the email is not already in the workspace.
+- Updates the existing contact when the same email is already present.
+- Skips any selected result that does not have an email.
+- Encrypts imported contact details using the same protections as other contacts.
+- Adds the `map-lead` tag.
+- Adds a location tag such as `geo:austin-tx`.
+- Adds a keyword tag such as `kw:marketing-agency`.
+- Saves source details, including the address, website, rating, search location, search keywords, and available social links.
+
+The confirmation message reports how many contacts were created or updated. Imported contacts appear under **Contacts** and follow the normal contact validation and masking behavior.
+
+## Step 8: Use imported leads in a campaign
+
+1. Open **Contacts** and review the imported records.
+2. Filter by `map-lead`, the `geo:` tag, or the `kw:` tag.
+3. Remove contacts that are not a good fit.
+4. Create a campaign and choose the relevant tags as the audience.
+5. Review the reach estimate and send a test before launch.
+
+For example, a search for marketing agencies in Austin can produce these tags:
+
+- `map-lead`
+- `geo:austin-tx`
+- `kw:marketing-agency`
+
+Use the location and keyword tags together when you want a narrowly targeted campaign.
+
+## Best practices
+
+- Start with a specific city or neighborhood and one clear business category.
+- Review businesses individually instead of importing every result.
+- Prefer role-based business addresses such as `hello@`, `info@`, or `sales@` when they are relevant.
+- Keep separate searches for different locations or business categories so their tags remain useful.
+- Personalize the campaign for the audience you found.
+- Send a test and verify your sender setup before launching.
+- Keep your suppression and unsubscribe handling enabled.
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="No businesses appear">
+    Check that both the location and keyword fields are filled in. Select a suggested location, try a broader business category, or choose a nearby point on the map.
+  </Accordion>
+  <Accordion title="The list is empty after a search">
+    The active filters may be hiding results. Clear the email, website, phone, or rating filters. You can also click **Load more** if another result page is available.
+  </Accordion>
+  <Accordion title="A business has no email">
+    The business may not publish an email on the pages Nudgen can access. You can review its website and other available details, but the result cannot be selected for export or imported into contacts.
+  </Accordion>
+  <Accordion title="Use my location does not work">
+    Allow location access for the Nudgen app in your browser or operating system. If you prefer not to share your location, type a place or click a point on the map.
+  </Accordion>
+  <Accordion title="Import created fewer contacts than I selected">
+    Results without an email are skipped. A matching email already in the workspace is updated instead of counted as a new contact. Review the import summary for created, updated, and skipped totals.
+  </Accordion>
+  <Accordion title="The same contact already exists">
+    Nudgen matches contacts by email within the active workspace. Importing the lead again updates the existing contact instead of creating a duplicate.
+  </Accordion>
+</AccordionGroup>
+
+## Use Map Leads with an AI assistant
+
+If you connect a supported AI assistant to the Nudgen MCP server, it can search Map Leads and import approved results into the connected workspace. See the [MCP server guide](/en/agents/mcp) for permissions, search options, and import limits.
+
+## Related docs
+
+<CardGroup cols={2}>
+  <Card title="Contacts overview" icon="users" href="/en/contacts/overview">
+    Learn how imported contact data is stored, masked, and segmented.
+  </Card>
+  <Card title="Create campaigns" icon="paper-plane" href="/en/campaigns/create">
+    Build a campaign for your imported lead segment.
+  </Card>
+  <Card title="MCP server" icon="robot" href="/en/agents/mcp">
+    Search and import Map Leads through an AI assistant.
+  </Card>
+  <Card title="Privacy and data" icon="shield" href="/en/security/privacy-and-data">
+    Review Nudgen's data protection practices.
+  </Card>
+</CardGroup>

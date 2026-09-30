@@ -1,0 +1,65 @@
+---
+title: "App verbinden und Kontakte synchronisieren"
+description: "Zielgruppen auswählen, Kontakte in der Vorschau prüfen und eine Integrationssynchronisierung verwalten"
+---
+
+## Warum das wichtig ist
+
+Wenn Sie eine Quellzielgruppe auswählen, importieren Sie nur die Kontakte, die Sie tatsächlich verwenden möchten. Mit einer Importvorschau und der Bestätigung der E-Mail-Einwilligung können Sie eine falsche Auswahl vor der Synchronisierung erkennen.
+
+## Bevor Sie beginnen
+
+- Melden Sie sich bei dem Workspace an, der die Kontakte erhalten soll.
+- Bitten Sie einen Workspace-Inhaber oder Administrator, die Verbindung zu verwalten, wenn Sie nicht über die erforderliche Berechtigung verfügen.
+- Prüfen Sie, ob in den App-Details die Kontaktsynchronisierung als verfügbar angezeigt wird. Die [Verfügbarkeitskennzeichnungen](/de/integrations/overview) erläutern die anderen Status.
+- Vergewissern Sie sich, dass Sie die Kontakte, die Sie importieren möchten, per E-Mail kontaktieren dürfen. Durch das Verbinden einer App erhalten Sie diese Erlaubnis nicht.
+
+## Verbinden und Kontakte auswählen
+
+<Steps>
+  <Step title="Konto verbinden">
+    Suchen Sie unter **Einstellungen** → **Integration** Ihre App und wählen Sie **Verbinden**. Folgen Sie der Autorisierungsseite des Anbieters und kehren Sie anschließend zu Nudgen zurück. Nudgen fordert Lesezugriff auf E-Mail-Adresse, Name, Telefonnummer, Zielgruppenzugehörigkeit und E-Mail-Einwilligung der Kontakte an, sofern der Anbieter diese Daten unterstützt. Kontakte in Ihrer Quell-App werden nicht verändert.
+  </Step>
+  <Step title="Zielgruppen auswählen">
+    Suchen Sie nach Listen, Segmenten oder Tags und wählen Sie bis zu 10 Zielgruppen aus. Wenn die Quelle weitere Ergebnisse enthält, können Sie **Weitere Zielgruppen laden** verwenden. Ein Kontakt, der in mehreren ausgewählten Zielgruppen vorkommt, wird nur einmal importiert. Jede Verbindung unterstützt höchstens 10.000 unterschiedliche Quellkontakte, vorbehaltlich der Kontaktkapazität Ihres Workspace.
+  </Step>
+  <Step title="Kontaktvorschau prüfen">
+    Wählen Sie **Kontaktvorschau**. Prüfen Sie die Stichprobe und die angezeigte Anzahl. Diese kann exakt oder geschätzt sein oder bis zur ersten Synchronisierung nicht verfügbar sein. Einige Anbieter erfordern einen zusätzlichen Schritt: Wählen Sie bei noCRM vor der Vorschau für jede ausgewählte Liste eine E-Mail-Spalte aus. Spalten für Name und Telefonnummer sind optional.
+  </Step>
+  <Step title="Prüfen und starten">
+    Wählen Sie **Weiter**, prüfen Sie das Konto und die Zielgruppen, bestätigen Sie, dass Sie diese Kontakte per E-Mail kontaktieren dürfen, und wählen Sie dann **Synchronisierung starten**. Der erste Import wird sofort in die Warteschlange gestellt. Weitere Synchronisierungen werden stündlich geplant.
+  </Step>
+</Steps>
+
+Sie können während der Einrichtung **Speichern und verlassen** wählen und später zurückkehren. Wenn Sie die ausgewählte Zielgruppe oder die Spaltenzuordnung ändern, müssen Sie vor dem Start eine neue Vorschau erstellen.
+
+Nudgen behält vorhandene Kontaktprofilwerte und gegebenenfalls Tags bei. Bekannte Abmeldungen, Bounces und andere E-Mail-Einschränkungen bleiben geschützt. Das Vorkommen eines Kontakts in einer Quellzielgruppe bedeutet nicht automatisch, dass er Kampagnen empfangen darf.
+
+## Verbindung verwalten
+
+Öffnen Sie **Verbundene Apps** → **Verwalten**, um die ausgewählten Zielgruppen, die Zeitpunkte der letzten und nächsten Synchronisierung sowie die letzten Durchläufe zu prüfen. Jeder Durchlauf zeigt die Anzahl der importierten, aktualisierten und übersprungenen Kontakte. Sie können **Kontakte anzeigen**, **Zielgruppen bearbeiten** oder **Jetzt synchronisieren** wählen. Für die manuelle Synchronisierung gilt eine Wartezeit von 15 Minuten. Solange ein Durchlauf aussteht, ist das Steuerelement nicht verfügbar. Wenn das Konto erneut autorisiert werden muss, verwenden Sie **Erneut verbinden**.
+
+Wählen Sie **Trennen**, um zukünftige Synchronisierungen zu beenden. Bereits in Nudgen importierte Kontakte bleiben in Ihrem Workspace erhalten. Möglicherweise müssen Sie eine frühere native Verbindung trennen, bevor Sie diese Quelle auf Composio umstellen können. Die Einrichtungsseite weist Sie gegebenenfalls darauf hin.
+
+## Fehlerbehebung
+
+<AccordionGroup>
+  <Accordion title="Es werden keine Zielgruppen angezeigt">
+    Versuchen Sie eine andere Suche, wählen Sie gegebenenfalls **Weitere Zielgruppen laden** und prüfen Sie, ob Ihr Anbieterkonto die relevanten Listen oder Segmente lesen darf.
+  </Accordion>
+  <Accordion title="Die Vorschau ist abgelaufen oder die Auswahl wurde geändert">
+    Kehren Sie zu **Kontakte auswählen** zurück, aktualisieren Sie die Vorschau und prüfen Sie sie erneut. Prüfen Sie bei noCRM die Spaltenzuordnungen erneut, wenn sich die Quellspalten geändert haben.
+  </Accordion>
+  <Accordion title="Die Synchronisierung wird durch ein Limit blockiert">
+    Wählen Sie kleinere Zielgruppen, wenn die Auswahl mehr als 10.000 unterschiedliche Quellkontakte enthält. Wenn der Workspace sein Kontaktlimit erreicht hat, verkleinern Sie die Auswahl oder prüfen Sie Ihren Tarif.
+  </Accordion>
+  <Accordion title="Eine Synchronisierung wurde angehalten oder erfordert Aufmerksamkeit">
+    Prüfen Sie die Meldung des Durchlaufs. Stellen Sie die Verbindung erneut her, wenn die Autorisierung abgelaufen ist. Warten Sie vor einem erneuten Versuch, wenn ein vorübergehendes Anfragelimit des Anbieters oder von Nudgen erreicht wurde. Laden Sie die Seite neu, wenn sich Ihr aktiver Workspace geändert hat.
+  </Accordion>
+</AccordionGroup>
+
+## Verwandte Dokumente
+
+- [Shopify-Kontakte und „Alle Kontakte“](/de/integrations/shopify)
+- [Kontakte im Überblick](/de/contacts/overview)
+- [Ereignisse für Lifetime-Kampagnen](/de/integrations/lifetime-events)

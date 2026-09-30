@@ -1,0 +1,28 @@
+---
+title: "Eventos de campañas de por vida"
+description: "Usa eventos de integraciones compatibles para iniciar campañas de por vida"
+---
+
+## Por qué esto es importante
+
+Una regla de evento puede iniciar una campaña de por vida cuando se produce un evento de cliente compatible en una aplicación conectada. Cada regla se limita a los contactos de una audiencia seleccionada, por lo que tanto la conexión de origen como la campaña deben estar listas.
+
+## Comprobar la disponibilidad de eventos
+
+Después de completar una conexión para sincronizar contactos, abre su página **Gestionar** y busca **Eventos de campañas de por vida**. La lista de eventos es específica de esa aplicación y conexión. Todavía no puedes seleccionar un evento marcado como **Verificación de evento pendiente**. La sincronización de contactos puede estar disponible aunque la supervisión de eventos no lo esté.
+
+En los eventos disponibles, la página muestra su método de entrega, como la entrega mediante webhook o el sondeo periódico, y puede indicar un intervalo de detección previsto. Son estimaciones de detección; no garantizan que una campaña se envíe en ese momento. Las importaciones iniciales y los eventos históricos no inician campañas.
+
+## Añadir una regla
+
+1. Crea y activa una [campaña de por vida](/es/campaigns/lifetime) compatible.
+2. En la sección **Eventos de campañas de por vida** de la aplicación conectada, selecciona **Añadir una regla**.
+3. Elige un **Evento de cliente** disponible, una **Audiencia o segmento** y una **Campaña de por vida**. En **Cambio de etapa del ciclo de vida**, introduce la etapa de destino.
+4. Revisa las variables de evento de ejemplo. Los valores reales proceden de cada evento de origen.
+5. Selecciona **Guardar regla desactivada** y, después, **Activar** cuando quieras que los nuevos eventos coincidentes inicien la campaña.
+
+Solo los owners y admins del workspace pueden modificar las reglas. Más adelante, puedes **Desactivar** o **Eliminar** una regla. Al eliminar una regla, sus ejecuciones pendientes dejan de ser aptas.
+
+<Note>
+Los eventos que aparecen en el formulario dependen de la verificación y la configuración del proveedor. No presupongas que todos los tipos de eventos mostrados están disponibles para todas las aplicaciones.
+</Note>

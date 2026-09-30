@@ -1,0 +1,28 @@
+---
+title: "Sự kiện chiến dịch trọn đời"
+description: "Dùng các sự kiện tích hợp được hỗ trợ để bắt đầu chiến dịch trọn đời"
+---
+
+## Tại sao điều này lại quan trọng
+
+Quy tắc sự kiện có thể bắt đầu một chiến dịch trọn đời khi sự kiện khách hàng được hỗ trợ xảy ra trong ứng dụng đã kết nối. Mỗi quy tắc chỉ áp dụng cho các liên hệ trong một đối tượng được chọn, vì vậy cả kết nối nguồn và chiến dịch đều phải sẵn sàng.
+
+## Kiểm tra trạng thái khả dụng của sự kiện
+
+Sau khi hoàn tất kết nối đồng bộ danh bạ, hãy mở trang **Quản lý** của kết nối đó và tìm **Sự kiện chiến dịch trọn đời**. Danh sách sự kiện phụ thuộc vào từng ứng dụng và kết nối. Sự kiện được đánh dấu **Đang chờ xác minh sự kiện** chưa thể được chọn. Tính năng đồng bộ danh bạ có thể khả dụng ngay cả khi tính năng giám sát sự kiện chưa sẵn sàng.
+
+Với sự kiện đã sẵn sàng, trang này hiển thị phương thức phân phối, chẳng hạn như phân phối qua webhook hoặc thăm dò, đồng thời có thể hiển thị khoảng thời gian phát hiện dự kiến. Đây là ước tính về thời điểm phát hiện, không phải bảo đảm rằng chiến dịch sẽ gửi đúng vào lúc đó. Các lần nhập ban đầu và sự kiện trong quá khứ không bắt đầu chiến dịch.
+
+## Thêm quy tắc
+
+1. Tạo và kích hoạt một [chiến dịch trọn đời](/vi/campaigns/lifetime) tương thích.
+2. Trong phần **Sự kiện chiến dịch trọn đời** của ứng dụng đã kết nối, chọn **Thêm quy tắc**.
+3. Chọn một **Sự kiện khách hàng** đã sẵn sàng, một **Đối tượng hoặc phân khúc** và một **Chiến dịch trọn đời**. Với sự kiện **Giai đoạn vòng đời đã thay đổi**, hãy nhập giai đoạn đích.
+4. Xem lại các biến sự kiện mẫu. Giá trị thực tế đến từ từng sự kiện nguồn.
+5. Chọn **Lưu quy tắc đang tắt**, sau đó chọn **Bật** khi bạn đã sẵn sàng để các sự kiện mới khớp điều kiện kích hoạt chiến dịch.
+
+Chỉ owner và admin của workspace mới có thể thay đổi quy tắc. Sau đó, bạn có thể **Tắt** hoặc **Xóa** một quy tắc. Khi xóa quy tắc, các lần thực thi đang chờ của quy tắc đó sẽ không còn đủ điều kiện.
+
+<Note>
+Các sự kiện hiển thị trong biểu mẫu phụ thuộc vào trạng thái xác minh và cấu hình của nhà cung cấp. Đừng mặc định rằng mọi loại sự kiện được liệt kê đều khả dụng cho mọi ứng dụng.
+</Note>

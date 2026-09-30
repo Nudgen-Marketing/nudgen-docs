@@ -1,0 +1,113 @@
+---
+title: "Server MCP"
+description: "Hubungkan asisten AI ke Nudgen dengan OAuth, cari prospek di peta, dan setujui peluncuran kampanye di browser Anda"
+---
+
+## Ikhtisar
+
+Nudgen menyediakan server MCP di endpoint `/mcp` pada origin aplikasi Anda. Server ini menggunakan MCP `2026-07-28` melalui Streamable HTTP dan memerlukan OAuth 2.1. Hubungkan klien yang mendukung transport tersebut. Masuk ke Nudgen di browser, pilih ruang kerja, lalu setujui izin yang diminta klien. Koneksi Anda tetap terikat ke ruang kerja tersebut, meskipun nanti Anda beralih ruang kerja di dasbor.
+
+## Mengapa hal ini penting
+
+Asisten Anda dapat membaca kontak dan kampanye, menemukan bisnis di sekitar, membuat draf konten, dan menyiapkan kampanye untuk diluncurkan tanpa menangani sesi dasbor atau Personal Access Token. Anda meninjau setiap pengiriman nyata atau penjadwalan di browser sebelum tindakan tersebut dapat dilanjutkan.
+
+## Hubungkan klien Anda
+
+Endpoint produksi adalah:
+
+```text
+https://app.nudgen.net/mcp
+```
+
+Tambahkan endpoint tersebut sebagai **server MCP HTTP jarak jauh** di klien yang mendukung OAuth. Klien akan menemukan server otorisasi Nudgen dari endpoint tersebut, lalu membuka alur masuk dan persetujuan di browser. Pilih ruang kerja yang ingin diakses klien dan setujui hanya cakupan yang diperlukan.
+
+Dokumen discovery:
+
+| Dokumen | URL |
+| --- | --- |
+| Metadata sumber daya terlindungi | `https://app.nudgen.net/.well-known/oauth-protected-resource/mcp` |
+| Server otorisasi | `https://app.nudgen.net/mcp-oauth` |
+| Kartu server | `https://app.nudgen.net/.well-known/mcp/server-card.json` |
+
+Server otorisasi menggunakan authorization code dengan PKCE S256, resource binding, dan rotasi refresh token. Server ini menerima Client ID Metadata Documents dan pendaftaran klien dinamis.
+
+Untuk Codex CLI, gunakan:
+
+```bash
+codex mcp add nudgen --url "https://app.nudgen.net/mcp" --oauth-resource "https://app.nudgen.net/mcp"
+codex mcp login nudgen --scopes campaigns:read,campaigns:write,campaigns:send
+```
+
+Jika klien bernama `nudgen` sudah dikonfigurasi, perbarui entri tersebut dengan URL `/mcp`.
+
+| Cakupan | Izin yang diberikan |
+| --- | --- |
+| `campaigns:read` | Memeriksa ruang kerja, kontak, kampanye, pengaturan merek, dan mencari prospek di peta. |
+| `campaigns:write` | Membuat kontak dan draf kampanye, memperbarui pengaturan merek, menghasilkan draf AI, dan mengimpor prospek dari peta. |
+| `campaigns:send` | Meminta dan menyelesaikan peluncuran. Cakupan ini tidak pernah mengirim email dengan sendirinya. |
+
+Jika Anda hanya perlu memeriksa data, minta `campaigns:read`. Tambahkan `campaigns:write` jika klien perlu mengubah kontak, draf, pengaturan merek, atau prospek yang diimpor. Tambahkan `campaigns:send` hanya jika klien perlu meminta persetujuan peluncuran.
+
+<Note>
+  Personal Access Token mengautentikasi [API Pengembang](/id/agents/api), tetapi tidak mengautentikasi `/mcp`. Klien MCP harus menyelesaikan proses masuk OAuth.
+</Note>
+
+## Alat yang tersedia
+
+| Tugas | Alat | Cakupan |
+| --- | --- | --- |
+| Memeriksa ruang kerja Anda | `get_current_user`, `list_contacts`, `list_campaigns`, `get_campaign`, `get_campaign_stats`, `get_brand_settings` | `campaigns:read` |
+| Menemukan bisnis di sekitar | `search_map_leads` | `campaigns:read` |
+| Membuat dan mengedit | `create_contact`, `create_campaign`, `update_brand_settings`, `generate_email_draft`, `import_map_leads` | `campaigns:write` |
+| Meminta dan menyelesaikan peluncuran | `prepare_campaign_launch`, `launch_campaign` | `campaigns:send` |
+
+`create_campaign` menyimpan **draf kampanye sekali pakai**. Alat ini tidak dapat langsung mengirim atau menjadwalkan kampanye. `get_campaign` memungkinkan Anda memeriksa subjek, konten, tautan, audiens, dan pengirim sebelum peluncuran.
+
+Server juga menyediakan sumber daya hanya-baca melalui `campaigns:read`:
+
+| Sumber daya | Isi |
+| --- | --- |
+| `nudgen://api-catalog` | Nama dan deskripsi alat yang tersedia di server. |
+| `nudgen://team/brand` | Pengaturan merek untuk ruang kerja yang terhubung. |
+| `nudgen://campaigns/{id}/summary` | Statistik pengiriman untuk satu kampanye. Ganti `{id}` dengan ID kampanye. |
+
+### Temukan dan impor prospek dari peta
+
+1. Minta asisten memanggil `search_map_leads` dengan lokasi dan kata kunci bisnis, seperti kota dan `marketing agency`.
+2. Filter opsionalnya adalah `radiusKm` (1–100), `lat` dan `lng`, serta `emailOnly` untuk mempertahankan bisnis yang mencantumkan email.
+3. Jika hasil menyertakan `nextPageToken`, teruskan nilainya sebagai `pageToken` untuk memuat halaman berikutnya.
+4. Minta asisten memanggil `import_map_leads` dengan lokasi dan kata kunci yang sama, beserta objek prospek yang akan disimpan. Setiap panggilan menerima hingga 200 prospek.
+
+Proses impor menulis kontak ke ruang kerja yang terhubung. Prospek tanpa email akan dilewati. Prospek yang sudah ada akan diperbarui.
+
+### Setujui peluncuran kampanye
+
+1. Minta asisten memeriksa draf dengan `get_campaign`.
+2. Minta asisten memanggil `prepare_campaign_launch` dengan ID kampanye dan waktu kirim sekarang atau waktu terjadwal yang persis Anda inginkan. Panggilan ini mengembalikan URL persetujuan sekali pakai; belum ada email yang dikirim.
+3. Buka URL tersebut, tinjau ruang kerja, perkiraan penerima, konten, pengirim, dan waktu, lalu klik **Setujui peluncuran**.
+4. Kembali ke klien agar klien dapat memanggil `launch_campaign` dengan ID kampanye, waktu, dan `approvalId` yang sama.
+
+Persetujuan kedaluwarsa setelah **10 menit** dan hanya dapat digunakan sekali. Jika kampanye atau pengirim berubah, minta persetujuan baru. Saat peluncuran, Nudgen kembali memeriksa kesiapan pengirim, penerima yang memenuhi syarat, langganan, kuota, dan ketersediaan antrean. Pengiriman baru dimulai setelah worker kampanye memproses peluncuran.
+
+<Warning>
+  Menyetujui dan menyelesaikan `launch_campaign` dapat mengirim email nyata. Gunakan alur kirim percobaan di dasbor untuk memeriksa pratinjau kotak masuk sebelum menyetujui audiens nyata.
+</Warning>
+
+## Kelola akses
+
+Buka **Pengaturan** → **Kunci API** → **Aplikasi MCP terhubung** untuk melihat ruang kerja dan cakupan setiap klien yang terhubung. Cabut koneksi di sana jika klien tidak lagi boleh memiliki akses. Pencabutan menonaktifkan token dan persetujuan peluncuran tertundanya. Anda dapat menghubungkannya kembali melalui OAuth nanti.
+
+Izin OAuth berlaku paling lama 90 hari. Kehilangan akses ke ruang kerja juga mencegah klien menggunakan koneksi ruang kerja tersebut.
+
+## Pemecahan masalah
+
+| Gejala | Yang harus dilakukan |
+| --- | --- |
+| Proses masuk tidak dimulai | Pastikan klien mendukung MCP Streamable HTTP jarak jauh dengan OAuth dan menggunakan `https://app.nudgen.net/mcp`. |
+| Alat memerlukan izin tambahan | Hubungkan kembali dan setujui cakupan yang diperlukan untuk ruang kerja tersebut. |
+| Pencarian kontak meminta Anda mempersempit hasil | Pencarian mencocokkan nama dan alamat email, serta memindai paling banyak 5.000 kontak setelah filter tag dan status diterapkan. Persempit filternya. |
+| Impor prospek dari peta melewati sebuah bisnis | Hanya prospek dengan email yang disimpan. Cari kembali dengan `emailOnly` bernilai true, atau pilih prospek yang sudah menyertakan email. |
+| Persetujuan peluncuran kedaluwarsa atau kampanye berubah | Minta persetujuan baru, lalu tinjau kampanye dan pengirim saat ini. |
+| Peluncuran diblokir | Periksa status draf kampanye, kesiapan pengirim, kontak yang memenuhi syarat, kuota paket, dan [domain pengiriman](/id/settings/sending-domains). |
+
+Untuk skrip yang menggunakan bearer token dan endpoint REST langsung, lihat [API Pengembang](/id/agents/api).

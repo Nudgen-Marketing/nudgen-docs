@@ -31,7 +31,7 @@ Create a new top-level group for the browser extension.
 ## Phase 4: Quality Assurance
 - [ ] **Task 4.1**: Verify all internal links point to the correct MDX files.
 - [ ] **Task 4.2**: Ensure the 50-recipient limit is prominent in the campaign guide.
-- [ ] **Task 4.3**: Confirm the Blog link in the sidebar correctly redirects to `https://nudgen.net/blog`.
+- [ ] **Task 4.3**: Confirm the Blog link in the sidebar correctly redirects to `https://get.nudgen.net/blog`.
 
 ## Final Checklist
 - [ ] All new files created in `en/` folder.

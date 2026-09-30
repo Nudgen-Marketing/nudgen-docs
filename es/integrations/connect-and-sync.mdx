@@ -1,0 +1,130 @@
+---
+title: "Conectar una aplicación y sincronizar contactos"
+description: "Elige audiencias, previsualiza contactos y gestiona la sincronización de una integración"
+---
+
+## Por qué esto es importante
+
+Seleccionar una audiencia de origen te ayuda a importar solo los contactos que quieres utilizar. La vista previa de la importación y la confirmación del permiso para enviar correos te permiten detectar una selección incorrecta antes de sincronizar.
+
+## Antes de empezar
+
+- Inicia sesión en el workspace que debe recibir los contactos.
+- Pide a un owner o admin del workspace que gestione la conexión si no tienes permiso.
+- Comprueba que los detalles de la aplicación indiquen que la sincronización de contactos está disponible. Las [etiquetas de disponibilidad](/es/integrations/overview) explican los demás estados.
+- Confirma que tienes permiso para enviar correos a los contactos que quieres importar. Conectar una aplicación no concede ese permiso.
+
+## Conectar y elegir contactos
+
+<Steps>
+  <Step title="Conecta la cuenta">
+    En **Configuración** → **Integración**, busca tu aplicación y selecciona **Conectar**. Sigue la página de autorización del proveedor y vuelve a Nudgen. Nudgen solicita acceso de lectura al correo electrónico, el nombre, el teléfono, la pertenencia a audiencias y el permiso para recibir correos de los contactos cuando el proveedor los admite. No modifica los contactos de la aplicación de origen.
+  </Step>
+  <Step title="Elige las audiencias">
+    Busca listas, segmentos o etiquetas y selecciona hasta 10 audiencias. Puedes usar **Cargar más audiencias** si el origen tiene más resultados. Un contacto presente en varias audiencias seleccionadas se importa una sola vez. Cada conexión admite como máximo 10 000 contactos de origen distintos, sujeto a la capacidad de contactos de tu workspace.
+  </Step>
+  <Step title="Previsualiza los contactos">
+    Selecciona **Previsualizar contactos**. Revisa la muestra y el recuento mostrado, que puede ser exacto, aproximado o no estar disponible hasta la primera sincronización. Algunos proveedores requieren un paso adicional: en noCRM, elige una columna de correo electrónico para cada lista seleccionada antes de generar la vista previa; las columnas de nombre y teléfono son opcionales.
+  </Step>
+  <Step title="Revisa e inicia">
+    Selecciona **Continuar**, comprueba la cuenta y las audiencias, confirma que tienes permiso para enviar correos a esos contactos y selecciona **Iniciar sincronización**. La primera importación se pone en cola de inmediato. Las sincronizaciones posteriores se programan cada hora.
+  </Step>
+</Steps>
+
+Puedes seleccionar **Guardar y salir** durante la configuración y volver más tarde. Si cambias la audiencia seleccionada o la asignación de columnas, debes generar una nueva vista previa antes de empezar.
+
+Nudgen conserva los valores existentes del perfil del contacto y las etiquetas cuando corresponde. Las bajas, los rebotes y otras restricciones de correo conocidas siguen protegidos. Que un contacto aparezca en una audiencia de origen no significa que pueda recibir una campaña automáticamente.
+
+## Gestionar una conexión
+
+Abre **Aplicaciones conectadas** → **Gestionar** para revisar las audiencias seleccionadas, las horas de la última y la próxima sincronización y las ejecuciones recientes. Cada ejecución muestra los recuentos de contactos importados, actualizados y omitidos. Puedes seleccionar **Ver contactos**, **Editar audiencias** o **Sincronizar ahora**. La sincronización manual tiene un periodo de espera de 15 minutos y el control no está disponible mientras haya una ejecución pendiente. Si la cuenta necesita una nueva autorización, usa **Volver a conectar**.
+
+Selecciona **Desconectar** para detener las sincronizaciones futuras. Los contactos ya importados en Nudgen permanecen en tu workspace. Puede ser necesario desconectar una conexión nativa anterior antes de cambiar ese origen a Composio; la página de configuración lo indicará cuando corresponda.
+
+## Solución de problemas
+
+<AccordionGroup>
+  <Accordion title="No aparece ninguna audiencia">
+    Prueba con otra búsqueda, selecciona **Cargar más audiencias** cuando se ofrezca y comprueba que tu cuenta del proveedor pueda leer las listas o los segmentos correspondientes.
+  </Accordion>
+  <Accordion title="La vista previa ha caducado o la selección ha cambiado">
+    Vuelve a **Elegir contactos**, actualiza la vista previa y revísala de nuevo. En noCRM, vuelve a comprobar la asignación de columnas si han cambiado las columnas de origen.
+  </Accordion>
+  <Accordion title="Un límite bloquea la sincronización">
+    Elige audiencias más pequeñas si la selección supera los 10 000 contactos de origen distintos. Si el workspace ha alcanzado su límite de contactos, reduce la selección o revisa tu plan.
+  </Accordion>
+  <Accordion title="Una sincronización está en pausa o necesita atención">
+    Revisa el mensaje de la ejecución. Vuelve a conectar la cuenta si la autorización ha caducado. Si se ha alcanzado un límite temporal de solicitudes del proveedor o de Nudgen, espera antes de intentarlo de nuevo. Vuelve a cargar la página si ha cambiado tu workspace activo.
+  </Accordion>
+</AccordionGroup>
+
+## Documentación relacionada
+
+- [Contactos de Shopify y Todos los contactos](/es/integrations/shopify)
+- [Resumen de contactos](/es/contacts/overview)
+- [Eventos de campañas de por vida](/es/integrations/lifetime-events)
+---
+title: "Conectar una aplicación y sincronizar contactos"
+description: "Elige audiencias, previsualiza contactos y gestiona la sincronización de una integración"
+---
+
+## Por qué esto es importante
+
+Seleccionar una audiencia de origen te ayuda a importar solo los contactos que quieres utilizar. La vista previa de la importación y la confirmación del permiso para enviar correos te permiten detectar una selección incorrecta antes de sincronizar.
+
+## Antes de empezar
+
+- Inicia sesión en el workspace que debe recibir los contactos.
+- Pide a un owner o admin del workspace que gestione la conexión si no tienes permiso.
+- Comprueba que los detalles de la aplicación indiquen que la sincronización de contactos está disponible. Las [etiquetas de disponibilidad](/es/integrations/overview) explican los demás estados.
+- Confirma que tienes permiso para enviar correos a los contactos que quieres importar. Conectar una aplicación no concede ese permiso.
+
+## Conectar y elegir contactos
+
+<Steps>
+  <Step title="Conecta la cuenta">
+    En **Configuración** → **Integración**, busca tu aplicación y selecciona **Conectar**. Sigue la página de autorización del proveedor y vuelve a Nudgen. Nudgen solicita acceso de lectura al correo electrónico, el nombre, el teléfono, la pertenencia a audiencias y el permiso para recibir correos de los contactos cuando el proveedor los admite. No modifica los contactos de la aplicación de origen.
+  </Step>
+  <Step title="Elige las audiencias">
+    Busca listas, segmentos o etiquetas y selecciona hasta 10 audiencias. Puedes usar **Cargar más audiencias** si el origen tiene más resultados. Un contacto presente en varias audiencias seleccionadas se importa una sola vez. Cada conexión admite como máximo 10 000 contactos de origen distintos, sujeto a la capacidad de contactos de tu workspace.
+  </Step>
+  <Step title="Previsualiza los contactos">
+    Selecciona **Previsualizar contactos**. Revisa la muestra y el recuento mostrado, que puede ser exacto, aproximado o no estar disponible hasta la primera sincronización. Algunos proveedores requieren un paso adicional: en noCRM, elige una columna de correo electrónico para cada lista seleccionada antes de generar la vista previa; las columnas de nombre y teléfono son opcionales.
+  </Step>
+  <Step title="Revisa e inicia">
+    Selecciona **Continuar**, comprueba la cuenta y las audiencias, confirma que tienes permiso para enviar correos a esos contactos y selecciona **Iniciar sincronización**. La primera importación se pone en cola de inmediato. Las sincronizaciones posteriores se programan cada hora.
+  </Step>
+</Steps>
+
+Puedes seleccionar **Guardar y salir** durante la configuración y volver más tarde. Si cambias la audiencia seleccionada o la asignación de columnas, debes generar una nueva vista previa antes de empezar.
+
+Nudgen conserva los valores existentes del perfil del contacto y las etiquetas cuando corresponde. Las bajas, los rebotes y otras restricciones de correo conocidas siguen protegidos. Que un contacto aparezca en una audiencia de origen no significa que pueda recibir una campaña automáticamente.
+
+## Gestionar una conexión
+
+Abre **Aplicaciones conectadas** → **Gestionar** para revisar las audiencias seleccionadas, las horas de la última y la próxima sincronización y las ejecuciones recientes. Cada ejecución muestra los recuentos de contactos importados, actualizados y omitidos. Puedes seleccionar **Ver contactos**, **Editar audiencias** o **Sincronizar ahora**. La sincronización manual tiene un periodo de espera de 15 minutos y el control no está disponible mientras haya una ejecución pendiente. Si la cuenta necesita una nueva autorización, usa **Volver a conectar**.
+
+Selecciona **Desconectar** para detener las sincronizaciones futuras. Los contactos ya importados en Nudgen permanecen en tu workspace. Puede ser necesario desconectar una conexión nativa anterior antes de cambiar ese origen a Composio; la página de configuración lo indicará cuando corresponda.
+
+## Solución de problemas
+
+<AccordionGroup>
+  <Accordion title="No aparece ninguna audiencia">
+    Prueba con otra búsqueda, selecciona **Cargar más audiencias** cuando se ofrezca y comprueba que tu cuenta del proveedor pueda leer las listas o los segmentos correspondientes.
+  </Accordion>
+  <Accordion title="La vista previa ha caducado o la selección ha cambiado">
+    Vuelve a **Elegir contactos**, actualiza la vista previa y revísala de nuevo. En noCRM, vuelve a comprobar la asignación de columnas si han cambiado las columnas de origen.
+  </Accordion>
+  <Accordion title="Un límite bloquea la sincronización">
+    Elige audiencias más pequeñas si la selección supera los 10 000 contactos de origen distintos. Si el workspace ha alcanzado su límite de contactos, reduce la selección o revisa tu plan.
+  </Accordion>
+  <Accordion title="Una sincronización está en pausa o necesita atención">
+    Revisa el mensaje de la ejecución. Vuelve a conectar la cuenta si la autorización ha caducado. Si se ha alcanzado un límite temporal de solicitudes del proveedor o de Nudgen, espera antes de intentarlo de nuevo. Vuelve a cargar la página si ha cambiado tu workspace activo.
+  </Accordion>
+</AccordionGroup>
+
+## Documentación relacionada
+
+- [Contactos de Shopify y Todos los contactos](/es/integrations/shopify)
+- [Resumen de contactos](/es/contacts/overview)
+- [Eventos de campañas de por vida](/es/integrations/lifetime-events)

@@ -1,0 +1,113 @@
+---
+title: "Serveur MCP"
+description: "Connectez un assistant IA à Nudgen avec OAuth, recherchez des prospects sur la carte et approuvez le lancement de campagnes dans votre navigateur"
+---
+
+## Présentation
+
+Nudgen héberge un serveur MCP sur le point de terminaison `/mcp` de l'origine de votre application. Il utilise MCP `2026-07-28` via Streamable HTTP et exige OAuth 2.1. Connectez un client compatible avec ce transport. Connectez-vous à Nudgen dans votre navigateur, choisissez un espace de travail et approuvez les autorisations demandées par le client. La connexion reste associée à cet espace de travail, même si vous changez ensuite d'espace de travail dans le tableau de bord.
+
+## Pourquoi c'est important
+
+Votre assistant peut consulter les contacts et les campagnes, trouver des entreprises à proximité, rédiger du contenu et préparer le lancement d'une campagne sans gérer de session du tableau de bord ni de jeton d'accès personnel. Vous examinez chaque envoi réel ou planification dans votre navigateur avant son exécution.
+
+## Connecter votre client
+
+Le point de terminaison de production est :
+
+```text
+https://app.nudgen.net/mcp
+```
+
+Ajoutez-le comme **serveur MCP HTTP distant** dans un client compatible avec OAuth. Le client découvre le serveur d'autorisation de Nudgen à partir du point de terminaison et ouvre un processus de connexion et de consentement dans le navigateur. Sélectionnez l'espace de travail auquel le client doit accéder et n'approuvez que les portées dont il a besoin.
+
+Documents de découverte :
+
+| Document | URL |
+| --- | --- |
+| Métadonnées de la ressource protégée | `https://app.nudgen.net/.well-known/oauth-protected-resource/mcp` |
+| Serveur d'autorisation | `https://app.nudgen.net/mcp-oauth` |
+| Fiche du serveur | `https://app.nudgen.net/.well-known/mcp/server-card.json` |
+
+Le serveur d'autorisation utilise le code d'autorisation avec PKCE S256, la liaison à la ressource et la rotation des jetons d'actualisation. Il accepte les documents de métadonnées d'ID client et l'enregistrement dynamique des clients.
+
+Pour Codex CLI, utilisez :
+
+```bash
+codex mcp add nudgen --url "https://app.nudgen.net/mcp" --oauth-resource "https://app.nudgen.net/mcp"
+codex mcp login nudgen --scopes campaigns:read,campaigns:write,campaigns:send
+```
+
+Si un client nommé `nudgen` est déjà configuré, mettez à jour cette entrée avec l'URL `/mcp`.
+
+| Portée | Autorisations accordées |
+| --- | --- |
+| `campaigns:read` | Consulter l'espace de travail, les contacts, les campagnes et les paramètres de marque, et rechercher des prospects sur la carte. |
+| `campaigns:write` | Créer des contacts et des brouillons de campagne, mettre à jour les paramètres de marque, générer des brouillons avec l'IA et importer des prospects depuis la carte. |
+| `campaigns:send` | Demander et finaliser un lancement. Cette portée n'envoie jamais d'e-mail à elle seule. |
+
+Si vous devez uniquement consulter des données, demandez `campaigns:read`. Ajoutez `campaigns:write` lorsque le client doit modifier des contacts, des brouillons, des paramètres de marque ou des prospects importés. Ajoutez `campaigns:send` uniquement lorsque le client doit demander l'approbation d'un lancement.
+
+<Note>
+  Les jetons d'accès personnels authentifient l'[API de développeur](/fr/agents/api), mais pas `/mcp`. Un client MCP doit suivre le processus de connexion OAuth.
+</Note>
+
+## Outils disponibles
+
+| Tâche | Outils | Portée |
+| --- | --- | --- |
+| Consulter votre espace de travail | `get_current_user`, `list_contacts`, `list_campaigns`, `get_campaign`, `get_campaign_stats`, `get_brand_settings` | `campaigns:read` |
+| Trouver des entreprises à proximité | `search_map_leads` | `campaigns:read` |
+| Créer et modifier | `create_contact`, `create_campaign`, `update_brand_settings`, `generate_email_draft`, `import_map_leads` | `campaigns:write` |
+| Demander et finaliser un lancement | `prepare_campaign_launch`, `launch_campaign` | `campaigns:send` |
+
+`create_campaign` enregistre un **brouillon de campagne ponctuelle**. Il ne peut pas envoyer ni planifier directement la campagne. `get_campaign` vous permet de vérifier l'objet, le contenu, le lien, l'audience et l'expéditeur avant le lancement.
+
+Le serveur expose également des ressources en lecture seule avec `campaigns:read` :
+
+| Ressource | Contenu |
+| --- | --- |
+| `nudgen://api-catalog` | Noms et descriptions des outils hébergés. |
+| `nudgen://team/brand` | Paramètres de marque de l'espace de travail connecté. |
+| `nudgen://campaigns/{id}/summary` | Statistiques de livraison d'une campagne. Remplacez `{id}` par l'ID de la campagne. |
+
+### Trouver et importer des prospects depuis la carte
+
+1. Demandez à l'assistant d'appeler `search_map_leads` avec un lieu et des mots-clés d'entreprise, par exemple une ville et `marketing agency`.
+2. Les filtres facultatifs sont `radiusKm` (1 à 100), `lat` et `lng`, ainsi que `emailOnly` pour ne conserver que les entreprises qui publient une adresse e-mail.
+3. Lorsque le résultat contient `nextPageToken`, transmettez-le comme `pageToken` pour charger une autre page.
+4. Demandez à l'assistant d'appeler `import_map_leads` avec les mêmes lieu et mots-clés, ainsi que les objets de prospect à enregistrer. Chaque appel accepte jusqu'à 200 prospects.
+
+L'importation crée des contacts dans l'espace de travail connecté. Les prospects sans adresse e-mail sont ignorés. Un prospect déjà existant est mis à jour.
+
+### Approuver le lancement d'une campagne
+
+1. Demandez à l'assistant d'examiner le brouillon avec `get_campaign`.
+2. Demandez-lui d'appeler `prepare_campaign_launch` avec l'ID de la campagne et l'heure exacte d'envoi immédiat ou planifié souhaitée. L'appel renvoie une URL d'approbation à usage unique ; aucun e-mail n'est encore envoyé.
+3. Ouvrez l'URL, vérifiez l'espace de travail, l'estimation du nombre de destinataires, le contenu, l'expéditeur et l'heure, puis cliquez sur **Approuver le lancement**.
+4. Revenez au client afin qu'il appelle `launch_campaign` avec le même ID de campagne, la même heure et le même `approvalId`.
+
+Une approbation expire après **10 minutes** et ne peut être utilisée qu'une fois. Si la campagne ou l'expéditeur change, demandez une nouvelle approbation. Lors du lancement, Nudgen vérifie à nouveau que l'expéditeur est prêt, que les destinataires sont admissibles, que l'abonnement et le quota sont suffisants, et que la file d'attente est disponible. La livraison ne commence qu'après le traitement du lancement par le worker de campagne.
+
+<Warning>
+  L'approbation et la finalisation de `launch_campaign` peuvent envoyer de vrais e-mails. Utilisez le processus d'envoi de test du tableau de bord pour vérifier un aperçu dans votre boîte de réception avant d'approuver l'envoi à une audience réelle.
+</Warning>
+
+## Gérer les accès
+
+Ouvrez **Paramètres** → **Clés API** → **Applications MCP connectées** pour voir l'espace de travail et les portées de chaque client connecté. Révoquez une connexion depuis cette page si elle ne doit plus avoir accès. La révocation désactive ses jetons et ses approbations de lancement en attente. Vous pourrez rétablir la connexion via OAuth ultérieurement.
+
+Les autorisations OAuth sont valides pendant 90 jours au maximum. La perte d'accès à un espace de travail empêche également le client d'utiliser la connexion associée à cet espace.
+
+## Dépannage
+
+| Symptôme | Solution |
+| --- | --- |
+| La connexion ne démarre pas | Vérifiez que le client prend en charge MCP distant via Streamable HTTP avec OAuth et utilise `https://app.nudgen.net/mcp`. |
+| Un outil nécessite une autorisation supplémentaire | Reconnectez le client et approuvez la portée requise pour cet espace de travail. |
+| La recherche de contacts vous demande d'affiner les résultats | La recherche porte sur les noms et les adresses e-mail, et analyse au maximum 5 000 contacts après application des filtres de tags et de statut. Affinez les filtres. |
+| L'importation de prospects ignore une entreprise | Seuls les prospects disposant d'une adresse e-mail sont enregistrés. Relancez la recherche avec `emailOnly` défini sur true ou choisissez des prospects qui possèdent déjà une adresse e-mail. |
+| L'approbation du lancement a expiré ou la campagne a changé | Demandez une nouvelle approbation et vérifiez la campagne et l'expéditeur actuels. |
+| Un lancement est bloqué | Vérifiez le statut de brouillon de la campagne, l'état de préparation de l'expéditeur, les contacts admissibles, le quota du forfait et le [domaine d'envoi](/fr/settings/sending-domains). |
+
+Pour les scripts qui utilisent des jetons porteurs et des points de terminaison REST directs, consultez l'[API de développeur](/fr/agents/api).

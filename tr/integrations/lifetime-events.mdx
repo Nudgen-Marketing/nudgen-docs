@@ -1,0 +1,28 @@
+---
+title: "Ömür Boyu kampanya etkinlikleri"
+description: "Ömür Boyu kampanyaları başlatmak için desteklenen entegrasyon etkinliklerini kullanın"
+---
+
+## Bu neden önemlidir
+
+Bir etkinlik kuralı, bağlı bir uygulamada desteklenen bir müşteri etkinliği gerçekleştiğinde Ömür Boyu kampanyayı başlatabilir. Her kural, seçilen bir hedef kitledeki kişilerle sınırlıdır; bu nedenle hem kaynak bağlantının hem de kampanyanın hazır olması gerekir.
+
+## Etkinlik kullanılabilirliğini kontrol edin
+
+Kişi senkronizasyonu bağlantısını tamamladıktan sonra bağlantının **Yönet** sayfasını açın ve **Ömür Boyu kampanya etkinlikleri** bölümünü bulun. Etkinlik listesi bu uygulamaya ve bağlantıya özeldir. **Etkinlik doğrulaması bekleniyor** olarak işaretlenen bir etkinlik henüz seçilemez. Etkinlik izleme kullanılamasa bile kişi senkronizasyonu kullanılabilir olabilir.
+
+Hazır bir etkinlik için sayfada webhook teslimatı veya yoklama gibi teslimat yöntemi gösterilir ve tahmini bir algılama aralığı da gösterilebilir. Bunlar algılama tahminleridir; kampanyanın o anda gönderileceğini garanti etmez. İlk içe aktarma işlemleri ve geçmiş etkinlikler kampanyaları başlatmaz.
+
+## Bir kural ekleyin
+
+1. Uyumlu bir [Ömür Boyu kampanya](/tr/campaigns/lifetime) oluşturun ve etkinleştirin.
+2. Bağlı uygulamanın **Ömür Boyu kampanya etkinlikleri** bölümünde **Kural ekle** seçeneğini belirleyin.
+3. Hazır bir **Müşteri etkinliği**, bir **Hedef kitle veya segment** ve bir **Ömür Boyu kampanya** seçin. **Yaşam döngüsü aşaması değişti** için hedef aşamayı girin.
+4. Örnek etkinlik değişkenlerini inceleyin. Gerçek değerler her kaynak etkinlikten gelir.
+5. **Devre dışı kuralı kaydet** seçeneğini belirleyin, ardından yeni eşleşen etkinliklerin kampanyayı tetiklemesine hazır olduğunuzda **Etkinleştir** seçeneğini belirleyin.
+
+Kuralları yalnızca çalışma alanı sahipleri ve yöneticiler değiştirebilir. Daha sonra bir kuralı **Devre dışı bırakabilir** veya **Kaldırabilirsiniz**. Bir kuralı kaldırmak, bekleyen yürütmelerini uygun olmaktan çıkarır.
+
+<Note>
+Formda gösterilen etkinlikler sağlayıcı doğrulamasına ve yapılandırmasına bağlıdır. Listelenen her etkinlik türünün her uygulama için kullanılabilir olduğunu varsaymayın.
+</Note>

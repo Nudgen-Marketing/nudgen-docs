@@ -49,6 +49,12 @@
                 ]
               },
               {
+                "group": "Map Leads",
+                "pages": [
+                  "en/map-leads/overview"
+                ]
+              },
+              {
                 "group": "Integrations",
                 "pages": [
                   "en/integrations/overview",
@@ -222,22 +228,22 @@
           "anchors": [
             {
               "anchor": "Home",
-              "href": "https://nudgen.net",
+              "href": "https://get.nudgen.net",
               "icon": "house"
             },
             {
               "anchor": "Pricing",
-              "href": "https://nudgen.net/pricing",
+              "href": "https://get.nudgen.net/pricing",
               "icon": "tag"
             },
             {
               "anchor": "Blog",
-              "href": "https://nudgen.net/blog",
+              "href": "https://get.nudgen.net/blog",
               "icon": "newspaper"
             },
             {
               "anchor": "Affiliate",
-              "href": "https://nudgen.net/affiliate",
+              "href": "https://get.nudgen.net/affiliate",
               "icon": "handshake"
             },
             {
@@ -257,7 +263,7 @@
           "primary": {
             "type": "button",
             "label": "Open app",
-            "href": "https://nudgen.net"
+            "href": "https://get.nudgen.net"
           }
         }
       },
@@ -283,6 +289,21 @@
                   "ar/contacts/overview",
                   "ar/contacts/upload",
                   "ar/contacts/lifecycle"
+                ]
+              },
+              {
+                "group": "Map Leads",
+                "pages": [
+                  "ar/map-leads/overview"
+                ]
+              },
+              {
+                "group": "التكاملات",
+                "pages": [
+                  "ar/integrations/overview",
+                  "ar/integrations/connect-and-sync",
+                  "ar/integrations/shopify",
+                  "ar/integrations/lifetime-events"
                 ]
               },
               {
@@ -313,7 +334,8 @@
                   "ar/settings/account",
                   "ar/settings/brand",
                   "ar/settings/team",
-                  "ar/settings/signatures"
+                  "ar/settings/signatures",
+                  "ar/settings/sending-domains"
                 ]
               },
               {
@@ -338,7 +360,8 @@
                   "ar/agents/cli/installation",
                   "ar/agents/cli/commands",
                   "ar/agents/cli/agentic-usage",
-                  "ar/agents/api"
+                  "ar/agents/api",
+                  "ar/agents/mcp"
                 ]
               },
               {
@@ -407,22 +430,22 @@
           "anchors": [
             {
               "anchor": "الرئيسية",
-              "href": "https://nudgen.net",
+              "href": "https://get.nudgen.net",
               "icon": "house"
             },
             {
               "anchor": "الأسعار",
-              "href": "https://nudgen.net/pricing",
+              "href": "https://get.nudgen.net/pricing",
               "icon": "tag"
             },
             {
               "anchor": "المدونة",
-              "href": "https://nudgen.net/blog",
+              "href": "https://get.nudgen.net/blog",
               "icon": "newspaper"
             },
             {
               "anchor": "التسويق بالعمولة",
-              "href": "https://nudgen.net/affiliate",
+              "href": "https://get.nudgen.net/affiliate",
               "icon": "handshake"
             },
             {
@@ -442,7 +465,7 @@
           "primary": {
             "type": "button",
             "label": "افتح التطبيق",
-            "href": "https://nudgen.net"
+            "href": "https://get.nudgen.net"
           }
         }
       },
@@ -468,6 +491,21 @@
                   "cn/contacts/overview",
                   "cn/contacts/upload",
                   "cn/contacts/lifecycle"
+                ]
+              },
+              {
+                "group": "Map Leads",
+                "pages": [
+                  "cn/map-leads/overview"
+                ]
+              },
+              {
+                "group": "集成",
+                "pages": [
+                  "cn/integrations/overview",
+                  "cn/integrations/connect-and-sync",
+                  "cn/integrations/shopify",
+                  "cn/integrations/lifetime-events"
                 ]
               },
               {
@@ -498,7 +536,8 @@
                   "cn/settings/account",
                   "cn/settings/brand",
                   "cn/settings/team",
-                  "cn/settings/signatures"
+                  "cn/settings/signatures",
+                  "cn/settings/sending-domains"
                 ]
               },
               {
@@ -523,7 +562,8 @@
                   "cn/agents/cli/installation",
                   "cn/agents/cli/commands",
                   "cn/agents/cli/agentic-usage",
-                  "cn/agents/api"
+                  "cn/agents/api",
+                  "cn/agents/mcp"
                 ]
               },
               {
@@ -592,22 +632,22 @@
           "anchors": [
             {
               "anchor": "主页",
-              "href": "https://nudgen.net",
+              "href": "https://get.nudgen.net",
               "icon": "house"
             },
             {
               "anchor": "定价",
-              "href": "https://nudgen.net/pricing",
+              "href": "https://get.nudgen.net/pricing",
               "icon": "tag"
             },
             {
               "anchor": "博客",
-              "href": "https://nudgen.net/blog",
+              "href": "https://get.nudgen.net/blog",
               "icon": "newspaper"
             },
             {
               "anchor": "联盟计划",
-              "href": "https://nudgen.net/affiliate",
+              "href": "https://get.nudgen.net/affiliate",
               "icon": "handshake"
             },
             {
@@ -627,7 +667,7 @@
           "primary": {
             "type": "button",
             "label": "打开应用",
-            "href": "https://nudgen.net"
+            "href": "https://get.nudgen.net"
           }
         }
       },
@@ -653,6 +693,21 @@
                   "de/contacts/overview",
                   "de/contacts/upload",
                   "de/contacts/lifecycle"
+                ]
+              },
+              {
+                "group": "Map Leads",
+                "pages": [
+                  "de/map-leads/overview"
+                ]
+              },
+              {
+                "group": "Integrationen",
+                "pages": [
+                  "de/integrations/overview",
+                  "de/integrations/connect-and-sync",
+                  "de/integrations/shopify",
+                  "de/integrations/lifetime-events"
                 ]
               },
               {
@@ -683,7 +738,8 @@
                   "de/settings/account",
                   "de/settings/brand",
                   "de/settings/team",
-                  "de/settings/signatures"
+                  "de/settings/signatures",
+                  "de/settings/sending-domains"
                 ]
               },
               {
@@ -708,7 +764,8 @@
                   "de/agents/cli/installation",
                   "de/agents/cli/commands",
                   "de/agents/cli/agentic-usage",
-                  "de/agents/api"
+                  "de/agents/api",
+                  "de/agents/mcp"
                 ]
               },
               {
@@ -777,22 +834,22 @@
           "anchors": [
             {
               "anchor": "Startseite",
-              "href": "https://nudgen.net",
+              "href": "https://get.nudgen.net",
               "icon": "house"
             },
             {
               "anchor": "Preise",
-              "href": "https://nudgen.net/pricing",
+              "href": "https://get.nudgen.net/pricing",
               "icon": "tag"
             },
             {
               "anchor": "Blog",
-              "href": "https://nudgen.net/blog",
+              "href": "https://get.nudgen.net/blog",
               "icon": "newspaper"
             },
             {
               "anchor": "Partnerprogramm",
-              "href": "https://nudgen.net/affiliate",
+              "href": "https://get.nudgen.net/affiliate",
               "icon": "handshake"
             },
             {
@@ -812,7 +869,7 @@
           "primary": {
             "type": "button",
             "label": "App öffnen",
-            "href": "https://nudgen.net"
+            "href": "https://get.nudgen.net"
           }
         }
       },
@@ -838,6 +895,21 @@
                   "es/contacts/overview",
                   "es/contacts/upload",
                   "es/contacts/lifecycle"
+                ]
+              },
+              {
+                "group": "Map Leads",
+                "pages": [
+                  "es/map-leads/overview"
+                ]
+              },
+              {
+                "group": "Integraciones",
+                "pages": [
+                  "es/integrations/overview",
+                  "es/integrations/connect-and-sync",
+                  "es/integrations/shopify",
+                  "es/integrations/lifetime-events"
                 ]
               },
               {
@@ -868,7 +940,8 @@
                   "es/settings/account",
                   "es/settings/brand",
                   "es/settings/team",
-                  "es/settings/signatures"
+                  "es/settings/signatures",
+                  "es/settings/sending-domains"
                 ]
               },
               {
@@ -893,7 +966,8 @@
                   "es/agents/cli/installation",
                   "es/agents/cli/commands",
                   "es/agents/cli/agentic-usage",
-                  "es/agents/api"
+                  "es/agents/api",
+                  "es/agents/mcp"
                 ]
               },
               {
@@ -962,22 +1036,22 @@
           "anchors": [
             {
               "anchor": "Inicio",
-              "href": "https://nudgen.net",
+              "href": "https://get.nudgen.net",
               "icon": "house"
             },
             {
               "anchor": "Precios",
-              "href": "https://nudgen.net/pricing",
+              "href": "https://get.nudgen.net/pricing",
               "icon": "tag"
             },
             {
               "anchor": "Blog",
-              "href": "https://nudgen.net/blog",
+              "href": "https://get.nudgen.net/blog",
               "icon": "newspaper"
             },
             {
               "anchor": "Afiliados",
-              "href": "https://nudgen.net/affiliate",
+              "href": "https://get.nudgen.net/affiliate",
               "icon": "handshake"
             },
             {
@@ -997,7 +1071,7 @@
           "primary": {
             "type": "button",
             "label": "Abrir app",
-            "href": "https://nudgen.net"
+            "href": "https://get.nudgen.net"
           }
         }
       },
@@ -1023,6 +1097,21 @@
                   "fr/contacts/overview",
                   "fr/contacts/upload",
                   "fr/contacts/lifecycle"
+                ]
+              },
+              {
+                "group": "Map Leads",
+                "pages": [
+                  "fr/map-leads/overview"
+                ]
+              },
+              {
+                "group": "Intégrations",
+                "pages": [
+                  "fr/integrations/overview",
+                  "fr/integrations/connect-and-sync",
+                  "fr/integrations/shopify",
+                  "fr/integrations/lifetime-events"
                 ]
               },
               {
@@ -1053,7 +1142,8 @@
                   "fr/settings/account",
                   "fr/settings/brand",
                   "fr/settings/team",
-                  "fr/settings/signatures"
+                  "fr/settings/signatures",
+                  "fr/settings/sending-domains"
                 ]
               },
               {
@@ -1078,7 +1168,8 @@
                   "fr/agents/cli/installation",
                   "fr/agents/cli/commands",
                   "fr/agents/cli/agentic-usage",
-                  "fr/agents/api"
+                  "fr/agents/api",
+                  "fr/agents/mcp"
                 ]
               },
               {
@@ -1147,22 +1238,22 @@
           "anchors": [
             {
               "anchor": "Accueil",
-              "href": "https://nudgen.net",
+              "href": "https://get.nudgen.net",
               "icon": "house"
             },
             {
               "anchor": "Tarifs",
-              "href": "https://nudgen.net/pricing",
+              "href": "https://get.nudgen.net/pricing",
               "icon": "tag"
             },
             {
               "anchor": "Blog",
-              "href": "https://nudgen.net/blog",
+              "href": "https://get.nudgen.net/blog",
               "icon": "newspaper"
             },
             {
               "anchor": "Affiliation",
-              "href": "https://nudgen.net/affiliate",
+              "href": "https://get.nudgen.net/affiliate",
               "icon": "handshake"
             },
             {
@@ -1182,7 +1273,7 @@
           "primary": {
             "type": "button",
             "label": "Ouvrir l’app",
-            "href": "https://nudgen.net"
+            "href": "https://get.nudgen.net"
           }
         }
       },
@@ -1208,6 +1299,21 @@
                   "id/contacts/overview",
                   "id/contacts/upload",
                   "id/contacts/lifecycle"
+                ]
+              },
+              {
+                "group": "Map Leads",
+                "pages": [
+                  "id/map-leads/overview"
+                ]
+              },
+              {
+                "group": "Integrasi",
+                "pages": [
+                  "id/integrations/overview",
+                  "id/integrations/connect-and-sync",
+                  "id/integrations/shopify",
+                  "id/integrations/lifetime-events"
                 ]
               },
               {
@@ -1238,7 +1344,8 @@
                   "id/settings/account",
                   "id/settings/brand",
                   "id/settings/team",
-                  "id/settings/signatures"
+                  "id/settings/signatures",
+                  "id/settings/sending-domains"
                 ]
               },
               {
@@ -1263,7 +1370,8 @@
                   "id/agents/cli/installation",
                   "id/agents/cli/commands",
                   "id/agents/cli/agentic-usage",
-                  "id/agents/api"
+                  "id/agents/api",
+                  "id/agents/mcp"
                 ]
               },
               {
@@ -1332,22 +1440,22 @@
           "anchors": [
             {
               "anchor": "Beranda",
-              "href": "https://nudgen.net",
+              "href": "https://get.nudgen.net",
               "icon": "house"
             },
             {
               "anchor": "Harga",
-              "href": "https://nudgen.net/pricing",
+              "href": "https://get.nudgen.net/pricing",
               "icon": "tag"
             },
             {
               "anchor": "Blog",
-              "href": "https://nudgen.net/blog",
+              "href": "https://get.nudgen.net/blog",
               "icon": "newspaper"
             },
             {
               "anchor": "Afiliasi",
-              "href": "https://nudgen.net/affiliate",
+              "href": "https://get.nudgen.net/affiliate",
               "icon": "handshake"
             },
             {
@@ -1367,7 +1475,7 @@
           "primary": {
             "type": "button",
             "label": "Buka aplikasi",
-            "href": "https://nudgen.net"
+            "href": "https://get.nudgen.net"
           }
         }
       },
@@ -1393,6 +1501,21 @@
                   "jp/contacts/overview",
                   "jp/contacts/upload",
                   "jp/contacts/lifecycle"
+                ]
+              },
+              {
+                "group": "Map Leads",
+                "pages": [
+                  "jp/map-leads/overview"
+                ]
+              },
+              {
+                "group": "連携",
+                "pages": [
+                  "jp/integrations/overview",
+                  "jp/integrations/connect-and-sync",
+                  "jp/integrations/shopify",
+                  "jp/integrations/lifetime-events"
                 ]
               },
               {
@@ -1423,7 +1546,8 @@
                   "jp/settings/account",
                   "jp/settings/brand",
                   "jp/settings/team",
-                  "jp/settings/signatures"
+                  "jp/settings/signatures",
+                  "jp/settings/sending-domains"
                 ]
               },
               {
@@ -1448,7 +1572,8 @@
                   "jp/agents/cli/installation",
                   "jp/agents/cli/commands",
                   "jp/agents/cli/agentic-usage",
-                  "jp/agents/api"
+                  "jp/agents/api",
+                  "jp/agents/mcp"
                 ]
               },
               {
@@ -1517,22 +1642,22 @@
           "anchors": [
             {
               "anchor": "ホーム",
-              "href": "https://nudgen.net",
+              "href": "https://get.nudgen.net",
               "icon": "house"
             },
             {
               "anchor": "料金",
-              "href": "https://nudgen.net/pricing",
+              "href": "https://get.nudgen.net/pricing",
               "icon": "tag"
             },
             {
               "anchor": "ブログ",
-              "href": "https://nudgen.net/blog",
+              "href": "https://get.nudgen.net/blog",
               "icon": "newspaper"
             },
             {
               "anchor": "アフィリエイト",
-              "href": "https://nudgen.net/affiliate",
+              "href": "https://get.nudgen.net/affiliate",
               "icon": "handshake"
             },
             {
@@ -1552,7 +1677,7 @@
           "primary": {
             "type": "button",
             "label": "アプリを開く",
-            "href": "https://nudgen.net"
+            "href": "https://get.nudgen.net"
           }
         }
       },
@@ -1578,6 +1703,21 @@
                   "ko/contacts/overview",
                   "ko/contacts/upload",
                   "ko/contacts/lifecycle"
+                ]
+              },
+              {
+                "group": "Map Leads",
+                "pages": [
+                  "ko/map-leads/overview"
+                ]
+              },
+              {
+                "group": "통합",
+                "pages": [
+                  "ko/integrations/overview",
+                  "ko/integrations/connect-and-sync",
+                  "ko/integrations/shopify",
+                  "ko/integrations/lifetime-events"
                 ]
               },
               {
@@ -1608,7 +1748,8 @@
                   "ko/settings/account",
                   "ko/settings/brand",
                   "ko/settings/team",
-                  "ko/settings/signatures"
+                  "ko/settings/signatures",
+                  "ko/settings/sending-domains"
                 ]
               },
               {
@@ -1633,7 +1774,8 @@
                   "ko/agents/cli/installation",
                   "ko/agents/cli/commands",
                   "ko/agents/cli/agentic-usage",
-                  "ko/agents/api"
+                  "ko/agents/api",
+                  "ko/agents/mcp"
                 ]
               },
               {
@@ -1702,22 +1844,22 @@
           "anchors": [
             {
               "anchor": "홈",
-              "href": "https://nudgen.net",
+              "href": "https://get.nudgen.net",
               "icon": "house"
             },
             {
               "anchor": "요금제",
-              "href": "https://nudgen.net/pricing",
+              "href": "https://get.nudgen.net/pricing",
               "icon": "tag"
             },
             {
               "anchor": "블로그",
-              "href": "https://nudgen.net/blog",
+              "href": "https://get.nudgen.net/blog",
               "icon": "newspaper"
             },
             {
               "anchor": "제휴",
-              "href": "https://nudgen.net/affiliate",
+              "href": "https://get.nudgen.net/affiliate",
               "icon": "handshake"
             },
             {
@@ -1737,7 +1879,7 @@
           "primary": {
             "type": "button",
             "label": "앱 열기",
-            "href": "https://nudgen.net"
+            "href": "https://get.nudgen.net"
           }
         }
       },
@@ -1763,6 +1905,21 @@
                   "ru/contacts/overview",
                   "ru/contacts/upload",
                   "ru/contacts/lifecycle"
+                ]
+              },
+              {
+                "group": "Map Leads",
+                "pages": [
+                  "ru/map-leads/overview"
+                ]
+              },
+              {
+                "group": "Интеграции",
+                "pages": [
+                  "ru/integrations/overview",
+                  "ru/integrations/connect-and-sync",
+                  "ru/integrations/shopify",
+                  "ru/integrations/lifetime-events"
                 ]
               },
               {
@@ -1793,7 +1950,8 @@
                   "ru/settings/account",
                   "ru/settings/brand",
                   "ru/settings/team",
-                  "ru/settings/signatures"
+                  "ru/settings/signatures",
+                  "ru/settings/sending-domains"
                 ]
               },
               {
@@ -1818,7 +1976,8 @@
                   "ru/agents/cli/installation",
                   "ru/agents/cli/commands",
                   "ru/agents/cli/agentic-usage",
-                  "ru/agents/api"
+                  "ru/agents/api",
+                  "ru/agents/mcp"
                 ]
               },
               {
@@ -1887,22 +2046,22 @@
           "anchors": [
             {
               "anchor": "Главная",
-              "href": "https://nudgen.net",
+              "href": "https://get.nudgen.net",
               "icon": "house"
             },
             {
               "anchor": "Цены",
-              "href": "https://nudgen.net/pricing",
+              "href": "https://get.nudgen.net/pricing",
               "icon": "tag"
             },
             {
               "anchor": "Блог",
-              "href": "https://nudgen.net/blog",
+              "href": "https://get.nudgen.net/blog",
               "icon": "newspaper"
             },
             {
               "anchor": "Партнерская программа",
-              "href": "https://nudgen.net/affiliate",
+              "href": "https://get.nudgen.net/affiliate",
               "icon": "handshake"
             },
             {
@@ -1922,7 +2081,7 @@
           "primary": {
             "type": "button",
             "label": "Открыть приложение",
-            "href": "https://nudgen.net"
+            "href": "https://get.nudgen.net"
           }
         }
       },
@@ -1948,6 +2107,21 @@
                   "tr/contacts/overview",
                   "tr/contacts/upload",
                   "tr/contacts/lifecycle"
+                ]
+              },
+              {
+                "group": "Map Leads",
+                "pages": [
+                  "tr/map-leads/overview"
+                ]
+              },
+              {
+                "group": "Entegrasyonlar",
+                "pages": [
+                  "tr/integrations/overview",
+                  "tr/integrations/connect-and-sync",
+                  "tr/integrations/shopify",
+                  "tr/integrations/lifetime-events"
                 ]
               },
               {
@@ -1978,7 +2152,8 @@
                   "tr/settings/account",
                   "tr/settings/brand",
                   "tr/settings/team",
-                  "tr/settings/signatures"
+                  "tr/settings/signatures",
+                  "tr/settings/sending-domains"
                 ]
               },
               {
@@ -2003,7 +2178,8 @@
                   "tr/agents/cli/installation",
                   "tr/agents/cli/commands",
                   "tr/agents/cli/agentic-usage",
-                  "tr/agents/api"
+                  "tr/agents/api",
+                  "tr/agents/mcp"
                 ]
               },
               {
@@ -2072,22 +2248,22 @@
           "anchors": [
             {
               "anchor": "Ana Sayfa",
-              "href": "https://nudgen.net",
+              "href": "https://get.nudgen.net",
               "icon": "house"
             },
             {
               "anchor": "Fiyatlandırma",
-              "href": "https://nudgen.net/pricing",
+              "href": "https://get.nudgen.net/pricing",
               "icon": "tag"
             },
             {
               "anchor": "Blog",
-              "href": "https://nudgen.net/blog",
+              "href": "https://get.nudgen.net/blog",
               "icon": "newspaper"
             },
             {
               "anchor": "Satış ortaklığı",
-              "href": "https://nudgen.net/affiliate",
+              "href": "https://get.nudgen.net/affiliate",
               "icon": "handshake"
             },
             {
@@ -2107,7 +2283,7 @@
           "primary": {
             "type": "button",
             "label": "Uygulamayı aç",
-            "href": "https://nudgen.net"
+            "href": "https://get.nudgen.net"
           }
         }
       },
@@ -2133,6 +2309,21 @@
                   "vi/contacts/overview",
                   "vi/contacts/upload",
                   "vi/contacts/lifecycle"
+                ]
+              },
+              {
+                "group": "Map Leads",
+                "pages": [
+                  "vi/map-leads/overview"
+                ]
+              },
+              {
+                "group": "Tích hợp",
+                "pages": [
+                  "vi/integrations/overview",
+                  "vi/integrations/connect-and-sync",
+                  "vi/integrations/shopify",
+                  "vi/integrations/lifetime-events"
                 ]
               },
               {
@@ -2163,7 +2354,8 @@
                   "vi/settings/account",
                   "vi/settings/brand",
                   "vi/settings/team",
-                  "vi/settings/signatures"
+                  "vi/settings/signatures",
+                  "vi/settings/sending-domains"
                 ]
               },
               {
@@ -2188,7 +2380,8 @@
                   "vi/agents/cli/installation",
                   "vi/agents/cli/commands",
                   "vi/agents/cli/agentic-usage",
-                  "vi/agents/api"
+                  "vi/agents/api",
+                  "vi/agents/mcp"
                 ]
               },
               {
@@ -2257,22 +2450,22 @@
           "anchors": [
             {
               "anchor": "Trang chủ",
-              "href": "https://nudgen.net",
+              "href": "https://get.nudgen.net",
               "icon": "house"
             },
             {
               "anchor": "Bảng giá",
-              "href": "https://nudgen.net/pricing",
+              "href": "https://get.nudgen.net/pricing",
               "icon": "tag"
             },
             {
               "anchor": "Blog",
-              "href": "https://nudgen.net/blog",
+              "href": "https://get.nudgen.net/blog",
               "icon": "newspaper"
             },
             {
               "anchor": "Tiếp thị liên kết",
-              "href": "https://nudgen.net/affiliate",
+              "href": "https://get.nudgen.net/affiliate",
               "icon": "handshake"
             },
             {
@@ -2292,7 +2485,7 @@
           "primary": {
             "type": "button",
             "label": "Mở ứng dụng",
-            "href": "https://nudgen.net"
+            "href": "https://get.nudgen.net"
           }
         }
       }
@@ -2301,7 +2494,7 @@
   "logo": {
     "light": "/logo/logo-light.svg",
     "dark": "/logo/logo-dark.svg",
-    "href": "https://nudgen.net"
+    "href": "https://get.nudgen.net"
   },
   "contextual": {
     "options": [
@@ -2317,7 +2510,7 @@
   },
   "footer": {
     "socials": {
-      "website": "https://nudgen.net"
+      "website": "https://get.nudgen.net"
     }
   }
 }

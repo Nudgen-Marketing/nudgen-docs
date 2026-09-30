@@ -1,0 +1,42 @@
+---
+title: "Hubungkan kontak Shopify"
+description: "Otorisasi Shopify dan pilih semua pelanggan atau segmen tertentu"
+---
+
+## Mengapa hal ini penting
+
+Opsi **Semua kontak** dari Shopify memungkinkan Anda mengimpor pelanggan meskipun belum membuat segmen. Memilih segmen tertentu memberi Anda audiens sumber yang lebih sempit. Dalam kedua kasus tersebut, status pemasaran email Shopify tetap dipertimbangkan saat Nudgen menentukan apakah kontak boleh menerima email.
+
+## Hubungkan Shopify melalui direktori aplikasi
+
+1. Buka **Pengaturan** → **Integrasi** dan temukan **Shopify**. Tinjau ketersediaan yang ditampilkan untuk ruang kerja Anda.
+2. Pilih **Hubungkan**. Halaman penyiapan Shopify menjelaskan aplikasi khusus toko yang didistribusikan secara privat. Administrator Shopify menyetujui penginstalan di Shopify Dev Dashboard selama proses otorisasi.
+3. Berikan hanya cakupan Admin API `read_customers` dan `read_orders` yang diminta. Pilih **Hubungkan** untuk mengotorisasi Shopify melalui Composio. Anda tidak perlu menempelkan token Admin API ke Nudgen.
+4. Setelah otorisasi, pilih **Semua kontak** atau satu maupun beberapa segmen Shopify, lalu lihat pratinjau, konfirmasikan izin, dan mulai sinkronisasi. Lihat [panduan koneksi](/id/integrations/connect-and-sync) untuk langkah dan batasan yang berlaku umum.
+
+Penyiapan melalui direktori terpisah dari penginstalan native Shopify yang mungkin sudah ada. Jika Nudgen menampilkan pemberitahuan **Koneksi sebelumnya**, ikuti petunjuknya untuk memutuskan koneksi tersebut sebelum terhubung melalui Composio. Kontak yang telah diimpor tetap dipertahankan saat Anda memutuskan koneksi.
+
+## Pilih audiens Shopify yang tepat
+
+| Pilihan | Yang diimpor |
+| --- | --- |
+| **Semua kontak** | Pelanggan di seluruh toko Shopify yang terhubung, termasuk pelanggan di luar segmen tersimpan. |
+| Segmen Shopify | Pelanggan yang termasuk dalam segmen tersimpan yang dipilih. |
+
+**Semua kontak** bersifat eksklusif: memilihnya akan menggantikan segmen yang dipilih, dan memilih segmen akan menggantikan **Semua kontak**. Sinkronisasi tetap mematuhi batas 10.000 kontak sumber unik dan kapasitas ruang kerja Anda. Jika Shopify tidak dapat menampilkan segmen tetapi masih dapat membaca pelanggan, **Semua kontak** mungkin tetap tersedia.
+
+Pelanggan Shopify yang ditandai berlangganan dapat memenuhi syarat untuk menerima email, sesuai dengan pembatasan Nudgen lainnya. Status pemasaran berhenti berlangganan, tidak berlangganan, tertunda, tidak valid, dan disunting diperlakukan sebagai diblokir. Pelanggan tanpa status izin email yang dapat digunakan tidak dianggap telah memberikan persetujuan. Tinjau pratinjau dan konfirmasi izin sebelum memulai sinkronisasi.
+
+## Pemecahan masalah
+
+<AccordionGroup>
+  <Accordion title="Toko tidak dapat dihubungkan">
+    Pastikan administrator Shopify menyetujui penginstalan khusus toko beserta cakupan yang diminta. Kembali ke halaman penyiapan dan coba lagi **Hubungkan**. Jika halaman menampilkan **Penyiapan koneksi diperlukan**, hubungi dukungan Nudgen.
+  </Accordion>
+  <Accordion title="Saya memperkirakan lebih banyak pelanggan">
+    Periksa apakah Anda memilih segmen, bukan **Semua kontak**. Tinjau jumlah kontak yang diimpor, diperbarui, dan dilewati pada proses sinkronisasi. Pelanggan Shopify tanpa alamat email yang dapat diimpor mungkin tidak dibuat sebagai kontak Nudgen.
+  </Accordion>
+  <Accordion title="Akun perlu dihubungkan kembali">
+    Buka **Aplikasi terhubung** → **Kelola** → **Hubungkan kembali**, lalu otorisasi kembali toko Shopify yang sama.
+  </Accordion>
+</AccordionGroup>

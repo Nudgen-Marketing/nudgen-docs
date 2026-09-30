@@ -1,0 +1,28 @@
+---
+title: "Événements des campagnes à vie"
+description: "Utilisez les événements d'intégration pris en charge pour démarrer des campagnes à vie"
+---
+
+## Pourquoi c'est important
+
+Une règle d'événement peut démarrer une campagne à vie lorsqu'un événement client pris en charge se produit dans une application connectée. Chaque règle est limitée aux contacts d'une audience sélectionnée. La connexion source et la campagne doivent donc toutes deux être prêtes.
+
+## Vérifier la disponibilité des événements
+
+Après avoir configuré une connexion de synchronisation des contacts, ouvrez sa page **Gérer** et recherchez **Événements des campagnes à vie**. La liste des événements est propre à cette application et à cette connexion. Un événement marqué **Vérification de l'événement en attente** ne peut pas encore être sélectionné. La synchronisation des contacts peut être disponible même si le suivi des événements ne l'est pas.
+
+Pour un événement prêt, la page indique son mode de transmission, comme l'envoi par webhook ou l'interrogation périodique, et peut afficher un intervalle de détection estimé. Il s'agit d'estimations de détection, et non de la garantie qu'une campagne sera envoyée à cet instant. Les importations initiales et les événements historiques ne démarrent pas de campagne.
+
+## Ajouter une règle
+
+1. Créez et activez une [campagne à vie](/fr/campaigns/lifetime) compatible.
+2. Dans la section **Événements des campagnes à vie** de l'application connectée, sélectionnez **Ajouter une règle**.
+3. Choisissez un **Événement client** prêt, une **Audience ou un segment** et une **Campagne à vie**. Pour **Étape du cycle de vie modifiée**, saisissez l'étape cible.
+4. Examinez les exemples de variables d'événement. Les valeurs réelles proviennent de chaque événement source.
+5. Sélectionnez **Enregistrer la règle désactivée**, puis **Activer** lorsque vous souhaitez que les nouveaux événements correspondants déclenchent la campagne.
+
+Seuls les propriétaires et les administrateurs de l'espace de travail peuvent modifier les règles. Vous pouvez ensuite **Désactiver** ou **Supprimer** une règle. La suppression d'une règle rend ses exécutions en attente non admissibles.
+
+<Note>
+Les événements affichés dans le formulaire dépendent de la vérification et de la configuration du fournisseur. Ne supposez pas que chaque type d'événement répertorié est disponible pour toutes les applications.
+</Note>

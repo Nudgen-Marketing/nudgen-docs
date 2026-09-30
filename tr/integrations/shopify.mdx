@@ -1,0 +1,42 @@
+---
+title: "Shopify kişilerini bağlayın"
+description: "Shopify'ı yetkilendirin ve tüm müşterileri veya belirli segmentleri seçin"
+---
+
+## Bu neden önemlidir
+
+Shopify'ın **Tüm kişiler** seçeneği, segment oluşturmamış olsanız bile müşterileri içe aktarmanızı sağlar. Belirli segmentleri seçmek daha dar bir kaynak hedef kitle sunar. Her iki durumda da Nudgen bir kişinin e-posta alıp alamayacağına karar verirken Shopify'ın e-posta pazarlama durumunu dikkate almaya devam eder.
+
+## Uygulama dizini üzerinden Shopify'ı bağlayın
+
+1. **Ayarlar** → **Entegrasyon** bölümünü açın ve **Shopify**'ı bulun. Çalışma alanınız için gösterilen kullanılabilirliği inceleyin.
+2. **Bağlan** seçeneğini belirleyin. Shopify kurulum sayfasında mağazaya özel, özel olarak dağıtılan bir uygulama açıklanır. Yetkilendirme sırasında bir Shopify yöneticisi Shopify Dev Dashboard'da kurulumu onaylar.
+3. Yalnızca istenen `read_customers` ve `read_orders` Admin API kapsamlarına izin verin. Shopify'ı Composio üzerinden yetkilendirmek için **Bağlan** seçeneğini belirleyin. Nudgen'a Admin API jetonu yapıştırmanız gerekmez.
+4. Yetkilendirmeden sonra **Tüm kişiler** seçeneğini veya bir ya da daha fazla Shopify segmentini belirleyin; ardından önizleyin, izni onaylayın ve senkronizasyonu başlatın. Ortak adımlar ve sınırlar için [bağlantı kılavuzuna](/tr/integrations/connect-and-sync) bakın.
+
+Dizin kurulumu, mevcut yerel Shopify kurulumlarından ayrıdır. Nudgen bir **Önceki bağlantı** bildirimi gösterirse Composio üzerinden bağlanmadan önce bu bağlantıyı kesmek için istemi izleyin. Bağlantıyı kestiğinizde içe aktarılan kişiler korunur.
+
+## Doğru Shopify hedef kitlesini seçin
+
+| Seçim | İçe aktardıkları |
+| --- | --- |
+| **Tüm kişiler** | Kaydedilmiş segmentlerin dışında bulunan müşteriler dahil, bağlı Shopify mağazasındaki müşteriler. |
+| Shopify segmentleri | Seçilen kayıtlı segmentlere ait müşteriler. |
+
+**Tüm kişiler** seçimi özeldir: bu seçeneği belirlemek seçili segmentlerin yerini alır; bir segment seçmek de **Tüm kişiler** seçiminin yerini alır. Senkronizasyon yine de 10.000 farklı kaynak kişi sınırına ve çalışma alanınızın kapasitesine tabidir. Shopify segmentleri listeleyemiyor ancak müşterileri okuyabiliyorsa **Tüm kişiler** seçeneği kullanılabilir durumda kalabilir.
+
+Shopify'da abone olarak işaretlenen müşteriler, Nudgen'ın diğer kısıtlamalarına tabi olmak üzere e-posta almaya uygun olabilir. Abonelikten ayrılmış, abone olmamış, beklemede, geçersiz ve kişisel verileri kaldırılmış pazarlama durumları engellenmiş kabul edilir. Kullanılabilir bir e-posta izin durumu olmayan bir müşterinin izin verdiği varsayılmaz. Senkronizasyondan önce önizlemenizi ve izin onayını inceleyin.
+
+## Sorun giderme
+
+<AccordionGroup>
+  <Accordion title="Mağaza bağlanamıyor">
+    Bir Shopify yöneticisinin mağazaya özel kurulumu ve istenen kapsamları onayladığını kontrol edin. Kurulum sayfasına dönün ve **Bağlan** seçeneğini yeniden deneyin. Sayfada **Bağlantı kurulumu gerekli** yazıyorsa Nudgen destek ekibiyle iletişime geçin.
+  </Accordion>
+  <Accordion title="Daha fazla müşteri bekliyordum">
+    **Tüm kişiler** yerine bir segment seçip seçmediğinizi kontrol edin. Senkronizasyon çalıştırmasının içe aktarılan, güncellenen ve atlanan sayılarını inceleyin. İçe aktarılabilir bir e-posta adresi olmayan Shopify müşterileri Nudgen kişilerine dönüşmeyebilir.
+  </Accordion>
+  <Accordion title="Hesabın yeniden bağlanması gerekiyor">
+    **Bağlı uygulamalar** → **Yönet** → **Yeniden bağlan** bölümünü açın, ardından aynı Shopify mağazasını yeniden yetkilendirin.
+  </Accordion>
+</AccordionGroup>

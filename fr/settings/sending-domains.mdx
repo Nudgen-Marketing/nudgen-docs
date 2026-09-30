@@ -1,0 +1,47 @@
+---
+title: "Domaine personnalisé"
+description: "Vérifiez un domaine qui vous appartient et utilisez-le comme expéditeur des campagnes de votre équipe"
+---
+
+Utilisez **Paramètres** → **Domaine personnalisé** pour envoyer des campagnes et des e-mails de test depuis une adresse de votre propre domaine. Sans domaine personnalisé, votre équipe utilise l'expéditeur Nudgen.
+
+## Pourquoi c'est important
+
+Un domaine vérifié permet à vos destinataires de reconnaître votre marque dans l'adresse de l'expéditeur. Nudgen vérifie les enregistrements DNS requis avant de l'utiliser et suspend les envois si l'expéditeur sélectionné cesse ensuite d'être admissible.
+
+## Pourquoi c'est important
+
+Un domaine vérifié permet aux contacts de reconnaître votre marque dans l'adresse de l'expéditeur. Les vérifications DNS confirment que vous contrôlez le domaine et que Nudgen peut authentifier les e-mails envoyés depuis celui-ci.
+
+## Avant de commencer
+
+- Votre équipe doit disposer d'un **forfait payant actif** pour ajouter et utiliser un expéditeur personnalisé. Les équipes bénéficiant du forfait gratuit peuvent toujours consulter et supprimer les domaines déjà présents dans leurs paramètres.
+- Seul un **propriétaire ou administrateur** de l'équipe peut ajouter, modifier, vérifier, sélectionner ou supprimer un domaine et reprendre les envois. Les autres membres peuvent consulter son statut et ses enregistrements DNS.
+- Vous devez avoir accès au fournisseur DNS du domaine. Une équipe peut configurer **un seul domaine personnalisé**. Pour le remplacer, choisissez **Utiliser l'expéditeur Nudgen**, supprimez l'ancien domaine, puis ajoutez le nouveau.
+
+## Ajouter et vérifier votre domaine
+
+1. Ouvrez **Paramètres** → **Domaine personnalisé** et saisissez le domaine qui vous appartient, par exemple `mail.example.com`. Saisissez la partie de l'adresse e-mail de l'expéditeur située avant `@` (par exemple `hello`) et un nom d'expéditeur. L'adresse doit appartenir à ce **domaine exact** : `hello@mail.example.com` pour `mail.example.com`.
+2. Sélectionnez **Ajouter un domaine**. Ouvrez **Enregistrements DNS** sur la fiche du domaine et copiez l'hôte et la valeur du **TXT de propriété** dans votre fournisseur DNS. L'hôte commence par `_nudgen-verify.`. Conservez cet enregistrement après la vérification.
+3. Sélectionnez **Vérifier le DNS**. Une fois la propriété vérifiée, la fiche affiche les enregistrements **TXT DKIM** et **CNAME Return-Path** de votre domaine. Copiez exactement les hôtes et les valeurs affichés dans votre fournisseur DNS. Si plusieurs enregistrements DKIM sont affichés, publiez-les tous.
+4. Après avoir enregistré les enregistrements, sélectionnez de nouveau **Vérifier le DNS**. La propagation des modifications DNS peut prendre du temps. Le domaine est **Prêt** lorsque la propriété, DKIM et Return-Path sont vérifiés.
+
+Utilisez les valeurs d'enregistrement affichées sur la fiche de votre propre domaine ; elles sont propres à votre configuration. **DMARC** est recommandé, mais son statut ne bloque pas l'activation. Conservez toute politique DMARC existante, y compris celle héritée d'un domaine parent. Vous n'avez pas besoin d'ajouter un enregistrement SPF racine distinct pour cette configuration.
+
+Le premier domaine vérifié devient automatiquement l'expéditeur par défaut si votre équipe n'a jamais choisi d'expéditeur et que les envois ne sont pas suspendus. Sinon, sélectionnez **Définir par défaut** sur la fiche du domaine prêt. La section **Expéditeur de campagne par défaut** indique l'expéditeur sélectionné. Vous pouvez y choisir **Utiliser l'expéditeur Nudgen** à tout moment.
+
+## Gérer votre expéditeur
+
+- **Modifier l'expéditeur** change la partie locale de l'adresse ou le nom affiché. Le domaine lui-même ne peut pas être modifié ; remplacez-le pour en changer.
+- **Supprimer** est disponible uniquement lorsque le domaine n'est pas l'expéditeur par défaut. Choisissez d'abord **Utiliser l'expéditeur Nudgen** si nécessaire. La suppression d'un domaine libère l'emplacement unique réservé au domaine de l'équipe.
+- **Vérifier le DNS** actualise l'état de la vérification. La fiche affiche la dernière vérification, les éventuelles erreurs et les statuts de propriété, DKIM, Return-Path et DMARC.
+
+## Si l'envoi des campagnes est suspendu
+
+Si le domaine personnalisé sélectionné perd la vérification DNS requise ou l'accès au forfait payant, l'envoi des campagnes est suspendu. **Les e-mails en file d'attente sont conservés.** La page indique la raison sous **L'envoi des campagnes est suspendu**.
+
+1. Réparez les enregistrements DNS ou rétablissez l'accès payant. Vous pouvez également sélectionner **Utiliser l'expéditeur Nudgen**.
+2. Sélectionnez **Vérifier le DNS** si vous avez corrigé les enregistrements, puis vérifiez que le domaine est **Prêt**.
+3. Sélectionnez **Reprendre les envois**. La correction du DNS ou le changement d'expéditeur par défaut ne suffit pas à lever une suspension.
+
+Pour les autres problèmes de livraison, consultez [Envoi et délivrabilité](/fr/troubleshooting/deliverability).

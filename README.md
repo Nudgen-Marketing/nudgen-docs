@@ -1,6 +1,6 @@
 # Nudgen Documentation
 
-This repository contains the documentation for [Nudgen](https://nudgen.net), a retention email automation platform for shop owners and growing SMEs to boost customer lifetime value.
+This repository contains the documentation for [Nudgen](https://get.nudgen.net), a retention email automation platform for shop owners and growing SMEs to boost customer lifetime value.
 
 The documentation is built with [Mintlify](https://mintlify.com).
 
@@ -44,5 +44,5 @@ Changes pushed to the main branch are automatically deployed via the Mintlify Gi
 
 - [Live Documentation](https://docs.nudgen.net)
 - [Mintlify Documentation](https://mintlify.com/docs)
-- [Nudgen Website](https://nudgen.net)
+- [Nudgen Website](https://get.nudgen.net)
 

@@ -1,0 +1,65 @@
+---
+title: "Connecter une application et synchroniser des contacts"
+description: "Choisissez des audiences, prévisualisez les contacts et gérez la synchronisation d'une intégration"
+---
+
+## Pourquoi c'est important
+
+La sélection d'une audience source vous aide à importer uniquement les contacts que vous souhaitez utiliser. La prévisualisation de l'importation et la confirmation de l'autorisation d'envoi vous permettent de repérer une sélection incorrecte avant la synchronisation.
+
+## Avant de commencer
+
+- Connectez-vous à l'espace de travail qui doit recevoir les contacts.
+- Demandez à un propriétaire ou à un administrateur de l'espace de travail de gérer la connexion si vous n'en avez pas l'autorisation.
+- Vérifiez que les détails de l'application indiquent que la synchronisation des contacts est disponible. Les [libellés de disponibilité](/fr/integrations/overview) expliquent les autres états.
+- Vérifiez que vous êtes autorisé à envoyer des e-mails aux contacts que vous prévoyez d'importer. La connexion d'une application ne vous accorde pas cette autorisation.
+
+## Connecter l'application et choisir les contacts
+
+<Steps>
+  <Step title="Connecter le compte">
+    Dans **Paramètres** → **Intégration**, trouvez votre application et sélectionnez **Connecter**. Suivez le processus d'autorisation du fournisseur, puis revenez dans Nudgen. Nudgen demande un accès en lecture à l'adresse e-mail, au nom et au numéro de téléphone des contacts, à leur appartenance aux audiences et à leur autorisation d'envoi lorsque le fournisseur prend en charge ces données. Nudgen ne modifie pas les contacts dans l'application source.
+  </Step>
+  <Step title="Choisir les audiences">
+    Recherchez des listes, des segments ou des tags, puis sélectionnez jusqu'à 10 audiences. Vous pouvez utiliser **Charger plus d'audiences** si la source contient davantage de résultats. Un contact présent dans plusieurs audiences sélectionnées n'est importé qu'une seule fois. Chaque connexion prend en charge au maximum 10 000 contacts sources distincts, dans la limite de la capacité de contacts de votre espace de travail.
+  </Step>
+  <Step title="Prévisualiser les contacts">
+    Sélectionnez **Prévisualiser les contacts**. Vérifiez l'échantillon et le nombre affiché, qui peut être exact, approximatif ou indisponible jusqu'à la première synchronisation. Certains fournisseurs exigent une étape supplémentaire : pour noCRM, choisissez une colonne d'adresse e-mail pour chaque liste sélectionnée avant la prévisualisation ; les colonnes de nom et de numéro de téléphone sont facultatives.
+  </Step>
+  <Step title="Vérifier et démarrer">
+    Sélectionnez **Continuer**, vérifiez le compte et les audiences, confirmez que vous êtes autorisé à envoyer des e-mails à ces contacts, puis sélectionnez **Démarrer la synchronisation**. La première importation est immédiatement placée dans la file d'attente. Les synchronisations suivantes sont planifiées toutes les heures.
+  </Step>
+</Steps>
+
+Vous pouvez sélectionner **Enregistrer et quitter** pendant la configuration et reprendre plus tard. Toute modification de l'audience sélectionnée ou de la correspondance des colonnes nécessite une nouvelle prévisualisation avant le démarrage.
+
+Nudgen conserve les valeurs de profil et les tags existants des contacts, le cas échéant. Les désabonnements, les rebonds et les autres restrictions d'envoi connues restent protégés. La présence d'un contact dans une audience source ne signifie pas automatiquement qu'il peut recevoir une campagne.
+
+## Gérer une connexion
+
+Ouvrez **Applications connectées** → **Gérer** pour consulter les audiences sélectionnées, les heures de la dernière et de la prochaine synchronisation, ainsi que les exécutions récentes. Chaque exécution indique le nombre de contacts importés, mis à jour et ignorés. Vous pouvez sélectionner **Voir les contacts**, **Modifier les audiences** ou **Synchroniser maintenant**. La synchronisation manuelle est soumise à un délai d'attente de 15 minutes et la commande est indisponible lorsqu'une exécution est en attente. Si le compte doit être autorisé à nouveau, utilisez **Reconnecter**.
+
+Sélectionnez **Déconnecter** pour arrêter les synchronisations futures. Les contacts déjà importés dans Nudgen restent dans votre espace de travail. Vous devrez peut-être déconnecter une ancienne connexion native avant de basculer cette source vers Composio ; la page de configuration vous l'indiquera le cas échéant.
+
+## Dépannage
+
+<AccordionGroup>
+  <Accordion title="Aucune audience n'apparaît">
+    Essayez une autre recherche, sélectionnez **Charger plus d'audiences** lorsque cette option est proposée et vérifiez que votre compte fournisseur peut lire les listes ou segments concernés.
+  </Accordion>
+  <Accordion title="La prévisualisation a expiré ou la sélection a changé">
+    Revenez à **Choisir les contacts**, actualisez la prévisualisation et vérifiez-la à nouveau. Pour noCRM, contrôlez de nouveau la correspondance des colonnes si les colonnes sources ont changé.
+  </Accordion>
+  <Accordion title="La synchronisation est bloquée par une limite">
+    Choisissez des audiences plus petites si la sélection dépasse 10 000 contacts sources distincts. Si l'espace de travail a atteint sa limite de contacts, réduisez la sélection ou consultez votre forfait.
+  </Accordion>
+  <Accordion title="Une synchronisation est suspendue ou nécessite votre attention">
+    Consultez le message de l'exécution. Reconnectez le compte si l'autorisation a expiré. En cas de limitation temporaire des requêtes par le fournisseur ou Nudgen, attendez avant de réessayer. Rechargez la page si votre espace de travail actif a changé.
+  </Accordion>
+</AccordionGroup>
+
+## Documents associés
+
+- [Contacts Shopify et Tous les contacts](/fr/integrations/shopify)
+- [Vue d'ensemble des contacts](/fr/contacts/overview)
+- [Événements des campagnes à vie](/fr/integrations/lifetime-events)

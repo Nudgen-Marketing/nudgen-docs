@@ -1,0 +1,42 @@
+---
+title: "Connecter les contacts Shopify"
+description: "Autorisez Shopify et choisissez tous les clients ou des segments précis"
+---
+
+## Pourquoi c'est important
+
+L'option **Tous les contacts** de Shopify vous permet d'importer des clients même si vous n'avez créé aucun segment. La sélection de segments précis vous offre une audience source plus ciblée. Dans les deux cas, le statut de marketing par e-mail de Shopify reste pris en compte lorsque Nudgen détermine si un contact peut recevoir un e-mail.
+
+## Connecter Shopify depuis l'annuaire des applications
+
+1. Ouvrez **Paramètres** → **Intégration** et recherchez **Shopify**. Consultez la disponibilité indiquée pour votre espace de travail.
+2. Sélectionnez **Connecter**. La page de configuration Shopify décrit une application propre à la boutique et distribuée de manière privée. Un administrateur Shopify approuve son installation dans Shopify Dev Dashboard lors de l'autorisation.
+3. Accordez uniquement les portées Admin API `read_customers` et `read_orders` demandées. Sélectionnez **Connecter** pour autoriser Shopify via Composio. Vous n'avez pas besoin de coller un jeton Admin API dans Nudgen.
+4. Après l'autorisation, choisissez **Tous les contacts** ou un ou plusieurs segments Shopify, puis prévisualisez les contacts, confirmez l'autorisation d'envoi et démarrez la synchronisation. Consultez le [guide de connexion](/fr/integrations/connect-and-sync) pour connaître les étapes et les limites communes.
+
+La configuration depuis l'annuaire est distincte de toute installation native existante de Shopify. Si Nudgen affiche une notification **Connexion précédente**, suivez les instructions pour déconnecter cette connexion avant d'établir la connexion via Composio. Les contacts importés sont conservés lors de la déconnexion.
+
+## Choisir la bonne audience Shopify
+
+| Choix | Éléments importés |
+| --- | --- |
+| **Tous les contacts** | Les clients de l'ensemble de la boutique Shopify connectée, y compris ceux qui ne figurent dans aucun segment enregistré. |
+| Segments Shopify | Les clients appartenant aux segments enregistrés sélectionnés. |
+
+L'option **Tous les contacts** est exclusive : la sélectionner remplace les segments sélectionnés, et sélectionner un segment remplace **Tous les contacts**. Une synchronisation reste soumise à la limite de 10 000 contacts sources distincts et à la capacité de votre espace de travail. Si Shopify ne peut pas répertorier les segments mais peut toujours lire les clients, l'option **Tous les contacts** peut rester disponible.
+
+Les clients Shopify marqués comme abonnés peuvent être autorisés à recevoir des e-mails, sous réserve des autres restrictions de Nudgen. Les statuts marketing désabonné, non abonné, en attente, non valide et expurgé sont considérés comme bloqués. Un client dépourvu de statut d'autorisation d'envoi exploitable n'est pas considéré comme ayant donné son consentement. Vérifiez votre prévisualisation et la confirmation de l'autorisation avant la synchronisation.
+
+## Dépannage
+
+<AccordionGroup>
+  <Accordion title="Impossible de connecter la boutique">
+    Vérifiez qu'un administrateur Shopify a approuvé l'installation propre à la boutique et les portées demandées. Revenez à la page de configuration et réessayez avec **Connecter**. Si la page indique **Configuration de la connexion requise**, contactez l'assistance Nudgen.
+  </Accordion>
+  <Accordion title="Je m'attendais à trouver plus de clients">
+    Vérifiez si vous avez sélectionné un segment au lieu de **Tous les contacts**. Consultez le nombre de contacts importés, mis à jour et ignorés lors de l'exécution de la synchronisation. Les clients Shopify sans adresse e-mail importable peuvent ne pas devenir des contacts Nudgen.
+  </Accordion>
+  <Accordion title="Le compte doit être reconnecté">
+    Ouvrez **Applications connectées** → **Gérer** → **Reconnecter**, puis autorisez de nouveau la même boutique Shopify.
+  </Accordion>
+</AccordionGroup>

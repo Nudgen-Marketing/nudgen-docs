@@ -1,0 +1,47 @@
+---
+title: "Özel alan adı"
+description: "Sahibi olduğunuz bir alan adını doğrulayın ve ekibinizin kampanya göndericisi olarak kullanın"
+---
+
+Kampanyaları ve test e-postalarını kendi alan adınızdaki bir adresten göndermek için **Ayarlar** → **Özel alan adı** bölümünü kullanın. Özel bir alan adı olmadan ekibiniz Nudgen göndericisini kullanır.
+
+## Bu neden önemlidir?
+
+Doğrulanmış bir alan adı, alıcılarınızın gönderici adresinde markanızı tanımasını sağlar. Nudgen, alan adını kullanmadan önce gerekli DNS kayıtlarını kontrol eder ve seçili gönderici daha sonra uygunluğunu kaybederse gönderimi duraklatır.
+
+## Bu neden önemlidir?
+
+Doğrulanmış bir alan adı, kişilerin gönderici adresinde markanızı tanımasını sağlar. DNS kontrolleri, alan adını kontrol ettiğinizi ve Nudgen'ın bu alan adından gönderilen e-postaların kimliğini doğrulayabildiğini teyit eder.
+
+## Başlamadan önce
+
+- Özel bir gönderici eklemek ve kullanmak için ekibinizin **etkin bir ücretli plana** ihtiyacı vardır. Ücretsiz plandaki ekipler, ayarlarında zaten bulunan alan adlarını görüntülemeye ve kaldırmaya devam edebilir.
+- Yalnızca ekip **sahibi veya yöneticisi** bir alan adı ekleyebilir, düzenleyebilir, doğrulayabilir, seçebilir ya da kaldırabilir ve gönderimi sürdürebilir. Diğer üyeler alan adının durumunu ve DNS kayıtlarını görüntüleyebilir.
+- Alan adının DNS sağlayıcısına erişmeniz gerekir. Bir ekip **bir özel alan adı** yapılandırabilir. Alan adını değiştirmek için **Nudgen göndericisini kullan** seçeneğine geçin, eski alan adını kaldırın ve ardından yenisini ekleyin.
+
+## Alan adınızı ekleme ve doğrulama
+
+1. **Ayarlar** → **Özel alan adı** bölümünü açın ve sahibi olduğunuz `mail.example.com` gibi bir alan adı girin. Gönderici e-postasının `@` işaretinden önceki bölümünü (örneğin `hello`) ve bir gönderici adı girin. Adres **tam olarak bu alan adında** olmalıdır: `mail.example.com` için `hello@mail.example.com`.
+2. **Alan adı ekle** seçeneğini belirleyin. Alan adı kartında **DNS kayıtları** bölümünü açın ve **sahiplik TXT** kaydının ana makine adını ve değerini DNS sağlayıcınıza kopyalayın. Ana makine adı `_nudgen-verify.` ile başlar. Doğrulamadan sonra bu kaydı yerinde tutun.
+3. **DNS'i kontrol et** seçeneğini belirleyin. Sahiplik doğrulandıktan sonra kart, alan adınız için **DKIM TXT** ve **Return-Path CNAME** kayıtlarını gösterir. Görüntülenen ana makine adlarını ve değerleri DNS sağlayıcınıza tam olarak kopyalayın. Birden fazla DKIM kaydı gösteriliyorsa her birini yayımlayın.
+4. Kayıtları kaydettikten sonra yeniden **DNS'i kontrol et** seçeneğini belirleyin. DNS değişikliklerinin yayılması zaman alabilir. Sahiplik, DKIM ve Return-Path doğrulandığında alan adı **Hazır** olur.
+
+Kendi alan adı kartınızda gösterilen kayıt değerlerini kullanın; bunlar yapılandırmanıza özeldir. **DMARC** önerilir ancak durumu etkinleştirmeyi engellemez. Üst alan adından devralınanlar dahil mevcut DMARC politikasını koruyun. Bu yapılandırma için ayrıca bir kök SPF kaydı eklemeniz gerekmez.
+
+Ekibiniz daha önce bir gönderici seçmediyse ve gönderim duraklatılmadıysa doğrulanan ilk alan adı otomatik olarak varsayılan gönderici olur. Aksi takdirde hazır alan adı kartında **Varsayılan yap** seçeneğini belirleyin. **Varsayılan kampanya göndericisi** bölümü seçili göndericiyi gösterir. Burada istediğiniz zaman **Nudgen göndericisini kullan** seçeneğini belirleyebilirsiniz.
+
+## Göndericinizi yönetme
+
+- **Göndericiyi düzenle**, adresin yerel bölümünü veya görünen adını değiştirir. Alan adının kendisi düzenlenemez; değiştirmek için alan adını yenisiyle değiştirin.
+- **Kaldır** seçeneği yalnızca alan adı varsayılan gönderici olmadığında kullanılabilir. Gerekirse önce **Nudgen göndericisini kullan** seçeneğini belirleyin. Bir alan adını kaldırmak, ekibin tek alan adı kontenjanını boşaltır.
+- **DNS'i kontrol et**, doğrulama durumunu yeniler. Kart; son kontrolü, varsa doğrulama hatasını ve sahiplik, DKIM, Return-Path ve DMARC durumlarını gösterir.
+
+## Kampanya gönderimi duraklatılırsa
+
+Seçili özel alan adı gerekli DNS doğrulamasını veya ücretli plan erişimini kaybederse kampanya gönderimi duraklatılır. **Kuyruktaki e-postalar korunur.** Sayfa, nedeni **Kampanya gönderimi duraklatıldı** bölümünde gösterir.
+
+1. DNS kayıtlarını düzeltin veya ücretli erişimi geri yükleyin. **Nudgen göndericisini kullan** seçeneğini de belirleyebilirsiniz.
+2. Kayıtları düzelttiyseniz **DNS'i kontrol et** seçeneğini belirleyin ve alan adının **Hazır** olduğunu doğrulayın.
+3. **Gönderimi sürdür** seçeneğini belirleyin. Yalnızca DNS'i düzeltmek veya varsayılan göndericiyi değiştirmek duraklatmayı kaldırmaz.
+
+Diğer teslimat sorunları için [Gönderim ve teslim edilebilirlik](/tr/troubleshooting/deliverability) bölümüne bakın.

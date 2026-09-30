@@ -1,0 +1,113 @@
+---
+title: "Máy chủ MCP"
+description: "Kết nối trợ lý AI với Nudgen bằng OAuth, tìm kiếm khách hàng tiềm năng trên bản đồ và phê duyệt việc khởi chạy chiến dịch trong trình duyệt"
+---
+
+## Tổng quan
+
+Nudgen cung cấp máy chủ MCP tại điểm cuối `/mcp` trên miền ứng dụng của bạn. Máy chủ sử dụng MCP `2026-07-28` qua Streamable HTTP và yêu cầu OAuth 2.1. Hãy kết nối một client hỗ trợ phương thức truyền tải này. Đăng nhập Nudgen trong trình duyệt, chọn một workspace và phê duyệt các quyền mà client yêu cầu. Kết nối vẫn được liên kết với workspace đó, ngay cả khi sau này bạn chuyển workspace trong dashboard.
+
+## Tại sao điều này lại quan trọng
+
+Trợ lý của bạn có thể đọc danh bạ và chiến dịch, tìm doanh nghiệp lân cận, soạn nội dung và chuẩn bị khởi chạy chiến dịch mà không cần xử lý phiên dashboard hoặc Mã thông báo truy cập cá nhân. Bạn sẽ xem xét từng lần gửi thực tế hoặc lịch gửi trong trình duyệt trước khi chiến dịch có thể tiếp tục.
+
+## Kết nối client
+
+Điểm cuối production là:
+
+```text
+https://app.nudgen.net/mcp
+```
+
+Thêm điểm cuối này dưới dạng **máy chủ MCP HTTP từ xa** trong một client hỗ trợ OAuth. Client sẽ tìm máy chủ ủy quyền của Nudgen từ điểm cuối rồi mở quy trình đăng nhập và chấp thuận trong trình duyệt. Chọn workspace mà bạn muốn client truy cập và chỉ phê duyệt các phạm vi quyền cần thiết.
+
+Các tài liệu khám phá:
+
+| Tài liệu | URL |
+| --- | --- |
+| Siêu dữ liệu tài nguyên được bảo vệ | `https://app.nudgen.net/.well-known/oauth-protected-resource/mcp` |
+| Máy chủ ủy quyền | `https://app.nudgen.net/mcp-oauth` |
+| Thẻ máy chủ | `https://app.nudgen.net/.well-known/mcp/server-card.json` |
+
+Máy chủ ủy quyền sử dụng authorization code với PKCE S256, liên kết tài nguyên và xoay vòng refresh token. Máy chủ chấp nhận Client ID Metadata Documents và đăng ký client động.
+
+Với Codex CLI, hãy dùng:
+
+```bash
+codex mcp add nudgen --url "https://app.nudgen.net/mcp" --oauth-resource "https://app.nudgen.net/mcp"
+codex mcp login nudgen --scopes campaigns:read,campaigns:write,campaigns:send
+```
+
+Nếu một client có tên `nudgen` đã được cấu hình, hãy cập nhật mục đó bằng URL `/mcp`.
+
+| Phạm vi quyền | Quyền được cấp |
+| --- | --- |
+| `campaigns:read` | Kiểm tra workspace, danh bạ, chiến dịch và cài đặt thương hiệu, đồng thời tìm kiếm khách hàng tiềm năng trên bản đồ. |
+| `campaigns:write` | Tạo liên hệ và chiến dịch nháp, cập nhật cài đặt thương hiệu, tạo bản nháp bằng AI và nhập khách hàng tiềm năng từ bản đồ. |
+| `campaigns:send` | Yêu cầu và hoàn tất việc khởi chạy. Phạm vi quyền này không tự gửi email. |
+
+Nếu chỉ cần kiểm tra dữ liệu, hãy yêu cầu `campaigns:read`. Thêm `campaigns:write` khi client cần thay đổi danh bạ, bản nháp, cài đặt thương hiệu hoặc khách hàng tiềm năng đã nhập. Chỉ thêm `campaigns:send` khi client cần yêu cầu phê duyệt khởi chạy.
+
+<Note>
+  Mã thông báo truy cập cá nhân xác thực [API nhà phát triển](/vi/agents/api), nhưng không xác thực `/mcp`. Client MCP phải hoàn tất quy trình đăng nhập OAuth.
+</Note>
+
+## Công cụ có sẵn
+
+| Tác vụ | Công cụ | Phạm vi quyền |
+| --- | --- | --- |
+| Kiểm tra workspace | `get_current_user`, `list_contacts`, `list_campaigns`, `get_campaign`, `get_campaign_stats`, `get_brand_settings` | `campaigns:read` |
+| Tìm doanh nghiệp lân cận | `search_map_leads` | `campaigns:read` |
+| Tạo và chỉnh sửa | `create_contact`, `create_campaign`, `update_brand_settings`, `generate_email_draft`, `import_map_leads` | `campaigns:write` |
+| Yêu cầu và hoàn tất việc khởi chạy | `prepare_campaign_launch`, `launch_campaign` | `campaigns:send` |
+
+`create_campaign` lưu một **chiến dịch một lần ở dạng bản nháp**. Công cụ này không thể gửi hoặc lên lịch trực tiếp. `get_campaign` cho phép bạn kiểm tra tiêu đề, nội dung, liên kết, đối tượng và người gửi trước khi khởi chạy.
+
+Máy chủ cũng cung cấp các tài nguyên chỉ đọc trong phạm vi `campaigns:read`:
+
+| Tài nguyên | Nội dung |
+| --- | --- |
+| `nudgen://api-catalog` | Tên và mô tả của các công cụ được cung cấp. |
+| `nudgen://team/brand` | Cài đặt thương hiệu của workspace đã kết nối. |
+| `nudgen://campaigns/{id}/summary` | Số liệu gửi của một chiến dịch. Thay `{id}` bằng ID chiến dịch. |
+
+### Tìm và nhập khách hàng tiềm năng trên bản đồ
+
+1. Yêu cầu trợ lý gọi `search_map_leads` với vị trí và từ khóa doanh nghiệp, chẳng hạn như một thành phố và `marketing agency`.
+2. Các bộ lọc tùy chọn gồm `radiusKm` (1–100), `lat`, `lng` và `emailOnly` để chỉ giữ lại doanh nghiệp có công khai email.
+3. Khi kết quả có `nextPageToken`, hãy truyền giá trị đó dưới dạng `pageToken` để tải trang tiếp theo.
+4. Yêu cầu trợ lý gọi `import_map_leads` với cùng vị trí và từ khóa, cùng các đối tượng khách hàng tiềm năng cần lưu. Mỗi lần gọi chấp nhận tối đa 200 khách hàng tiềm năng.
+
+Thao tác nhập sẽ ghi liên hệ vào workspace đã kết nối. Khách hàng tiềm năng không có email sẽ bị bỏ qua. Khách hàng tiềm năng đã tồn tại sẽ được cập nhật.
+
+### Phê duyệt việc khởi chạy chiến dịch
+
+1. Yêu cầu trợ lý kiểm tra bản nháp bằng `get_campaign`.
+2. Yêu cầu trợ lý gọi `prepare_campaign_launch` với ID chiến dịch và thời điểm gửi ngay hoặc thời gian lên lịch chính xác mà bạn muốn. Công cụ trả về URL phê duyệt dùng một lần; chưa có email nào được gửi.
+3. Mở URL, xem lại workspace, số người nhận ước tính, nội dung, người gửi và thời gian, sau đó nhấp vào **Phê duyệt khởi chạy**.
+4. Quay lại client để client gọi `launch_campaign` với cùng ID chiến dịch, thời gian và `approvalId`.
+
+Phê duyệt hết hạn sau **10 phút** và chỉ có thể dùng một lần. Nếu chiến dịch hoặc người gửi thay đổi, hãy yêu cầu phê duyệt mới. Khi khởi chạy, Nudgen kiểm tra lại trạng thái sẵn sàng của người gửi, người nhận đủ điều kiện, gói đăng ký, hạn mức và tình trạng hàng đợi. Việc gửi chỉ bắt đầu sau khi worker chiến dịch xử lý lệnh khởi chạy.
+
+<Warning>
+  Việc phê duyệt và hoàn tất `launch_campaign` có thể gửi email thực. Hãy dùng quy trình gửi thử trên dashboard để kiểm tra bản xem trước trong hộp thư trước khi phê duyệt gửi đến đối tượng thực.
+</Warning>
+
+## Quản lý quyền truy cập
+
+Mở **Cài đặt** → **Khóa API** → **Ứng dụng MCP đã kết nối** để xem workspace và phạm vi quyền của từng client đã kết nối. Thu hồi kết nối tại đây nếu client không còn cần quyền truy cập. Việc thu hồi sẽ vô hiệu hóa token và các phê duyệt khởi chạy đang chờ. Sau đó, bạn vẫn có thể kết nối lại qua OAuth.
+
+Quyền cấp OAuth có hiệu lực tối đa 90 ngày. Khi mất quyền truy cập một workspace, client cũng không thể sử dụng kết nối của workspace đó.
+
+## Khắc phục sự cố
+
+| Triệu chứng | Cách xử lý |
+| --- | --- |
+| Quy trình đăng nhập không bắt đầu | Xác nhận client hỗ trợ MCP từ xa qua Streamable HTTP với OAuth và sử dụng `https://app.nudgen.net/mcp`. |
+| Một công cụ cần thêm quyền | Kết nối lại và phê duyệt phạm vi quyền cần thiết cho workspace đó. |
+| Tìm kiếm liên hệ yêu cầu thu hẹp kết quả | Tìm kiếm khớp theo tên và địa chỉ email, đồng thời quét tối đa 5.000 liên hệ sau khi áp dụng bộ lọc tag và trạng thái. Hãy thu hẹp bộ lọc. |
+| Thao tác nhập khách hàng tiềm năng bỏ qua một doanh nghiệp | Chỉ khách hàng tiềm năng có email mới được lưu. Tìm kiếm lại với `emailOnly` được đặt thành true hoặc chọn khách hàng tiềm năng đã có email. |
+| Phê duyệt khởi chạy đã hết hạn hoặc chiến dịch đã thay đổi | Yêu cầu phê duyệt mới và xem lại chiến dịch cùng người gửi hiện tại. |
+| Việc khởi chạy bị chặn | Kiểm tra trạng thái bản nháp của chiến dịch, trạng thái sẵn sàng của người gửi, liên hệ đủ điều kiện, hạn mức gói và [miền gửi](/vi/settings/sending-domains). |
+
+Đối với tập lệnh dùng bearer token và các điểm cuối REST trực tiếp, hãy xem [API nhà phát triển](/vi/agents/api).

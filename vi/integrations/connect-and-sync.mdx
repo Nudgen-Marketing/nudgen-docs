@@ -1,0 +1,65 @@
+---
+title: "Kết nối ứng dụng và đồng bộ danh bạ"
+description: "Chọn đối tượng, xem trước danh bạ và quản lý quá trình đồng bộ tích hợp"
+---
+
+## Tại sao điều này lại quan trọng
+
+Việc chọn đối tượng nguồn giúp bạn chỉ nhập những liên hệ mà bạn dự định sử dụng. Xem trước dữ liệu nhập và xác nhận quyền gửi email giúp bạn phát hiện lựa chọn sai trước khi đồng bộ.
+
+## Trước khi bắt đầu
+
+- Đăng nhập vào workspace sẽ nhận danh bạ.
+- Nhờ owner hoặc admin của workspace quản lý kết nối nếu bạn không có quyền.
+- Kiểm tra thông tin chi tiết của ứng dụng để xác nhận tính năng đồng bộ danh bạ khả dụng. [Nhãn trạng thái khả dụng](/vi/integrations/overview) giải thích các trạng thái khác.
+- Xác nhận rằng bạn có quyền gửi email cho những liên hệ định nhập. Việc kết nối ứng dụng không tự động cấp quyền đó.
+
+## Kết nối và chọn danh bạ
+
+<Steps>
+  <Step title="Kết nối tài khoản">
+    Trong **Cài đặt** → **Tích hợp**, tìm ứng dụng của bạn rồi chọn **Kết nối**. Làm theo hướng dẫn trên trang ủy quyền của nhà cung cấp, sau đó quay lại Nudgen. Nudgen yêu cầu quyền đọc email, tên, số điện thoại, tư cách thành viên trong đối tượng và quyền nhận email của liên hệ nếu nhà cung cấp hỗ trợ. Nudgen không thay đổi danh bạ trong ứng dụng nguồn của bạn.
+  </Step>
+  <Step title="Chọn đối tượng">
+    Tìm kiếm danh sách, phân khúc hoặc tag rồi chọn tối đa 10 đối tượng. Bạn có thể dùng **Tải thêm đối tượng** nếu nguồn còn kết quả khác. Một liên hệ nằm trong nhiều đối tượng đã chọn chỉ được nhập một lần. Mỗi kết nối hỗ trợ tối đa 10.000 liên hệ nguồn riêng biệt, tùy thuộc vào dung lượng danh bạ của workspace.
+  </Step>
+  <Step title="Xem trước danh bạ">
+    Chọn **Xem trước danh bạ**. Kiểm tra mẫu và số lượng hiển thị; số lượng này có thể là chính xác, ước tính hoặc chưa có cho đến lần đồng bộ đầu tiên. Một số nhà cung cấp yêu cầu thêm một bước: với noCRM, hãy chọn một cột email cho từng danh sách đã chọn trước khi xem trước; cột tên và số điện thoại là tùy chọn.
+  </Step>
+  <Step title="Kiểm tra và bắt đầu">
+    Chọn **Tiếp tục**, kiểm tra tài khoản và đối tượng, xác nhận rằng bạn có quyền gửi email cho những liên hệ này, rồi chọn **Bắt đầu đồng bộ**. Lần nhập đầu tiên được đưa vào hàng đợi ngay lập tức. Các lần đồng bộ sau được lên lịch mỗi giờ.
+  </Step>
+</Steps>
+
+Bạn có thể chọn **Lưu và rời đi** trong quá trình thiết lập rồi quay lại sau. Nếu thay đổi đối tượng đã chọn hoặc ánh xạ cột, bạn phải tạo bản xem trước mới trước khi bắt đầu.
+
+Nudgen giữ lại các giá trị hồ sơ và tag hiện có của liên hệ khi phù hợp. Các trường hợp từ chối nhận email, bounce đã biết và những hạn chế email khác vẫn được bảo vệ. Việc một liên hệ xuất hiện trong đối tượng nguồn không có nghĩa là liên hệ đó tự động đủ điều kiện nhận chiến dịch.
+
+## Quản lý kết nối
+
+Mở **Ứng dụng đã kết nối** → **Quản lý** để xem đối tượng đã chọn, thời gian đồng bộ gần nhất và tiếp theo, cùng các lần chạy gần đây. Mỗi lần chạy hiển thị số lượng đã nhập, đã cập nhật và đã bỏ qua. Bạn có thể chọn **Xem danh bạ**, **Chỉnh sửa đối tượng** hoặc **Đồng bộ ngay**. Đồng bộ thủ công có thời gian chờ 15 phút và nút điều khiển sẽ không khả dụng khi một lần chạy đang chờ xử lý. Nếu tài khoản cần được ủy quyền lại, hãy dùng **Kết nối lại**.
+
+Chọn **Ngắt kết nối** để dừng các lần đồng bộ trong tương lai. Những liên hệ đã nhập vào Nudgen vẫn còn trong workspace. Bạn có thể phải ngắt một kết nối gốc trước đó trước khi chuyển nguồn đó sang Composio; trang thiết lập sẽ thông báo khi điều này áp dụng.
+
+## Khắc phục sự cố
+
+<AccordionGroup>
+  <Accordion title="Không có đối tượng nào xuất hiện">
+    Hãy thử từ khóa tìm kiếm khác, chọn **Tải thêm đối tượng** khi tùy chọn này xuất hiện và kiểm tra xem tài khoản nhà cung cấp của bạn có quyền đọc các danh sách hoặc phân khúc liên quan hay không.
+  </Accordion>
+  <Accordion title="Bản xem trước đã hết hạn hoặc lựa chọn đã thay đổi">
+    Quay lại **Chọn danh bạ**, làm mới bản xem trước rồi kiểm tra lại. Với noCRM, hãy kiểm tra lại ánh xạ cột nếu các cột nguồn đã thay đổi.
+  </Accordion>
+  <Accordion title="Quá trình đồng bộ bị chặn do giới hạn">
+    Chọn đối tượng nhỏ hơn nếu lựa chọn vượt quá 10.000 liên hệ nguồn riêng biệt. Nếu workspace đã đạt giới hạn danh bạ, hãy giảm lựa chọn hoặc xem lại gói của bạn.
+  </Accordion>
+  <Accordion title="Quá trình đồng bộ bị tạm dừng hoặc cần xử lý">
+    Xem thông báo của lần chạy. Kết nối lại nếu phiên ủy quyền đã hết hạn. Nếu giới hạn yêu cầu tạm thời của nhà cung cấp hoặc Nudgen đã bị chạm, hãy chờ trước khi thử lại. Tải lại trang nếu workspace đang hoạt động của bạn đã thay đổi.
+  </Accordion>
+</AccordionGroup>
+
+## Tài liệu liên quan
+
+- [Danh bạ Shopify và Tất cả danh bạ](/vi/integrations/shopify)
+- [Tổng quan danh bạ](/vi/contacts/overview)
+- [Sự kiện chiến dịch trọn đời](/vi/integrations/lifetime-events)

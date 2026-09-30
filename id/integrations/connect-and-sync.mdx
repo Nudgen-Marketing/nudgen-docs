@@ -1,0 +1,65 @@
+---
+title: "Hubungkan aplikasi dan sinkronkan kontak"
+description: "Pilih audiens, pratinjau kontak, dan kelola sinkronisasi integrasi"
+---
+
+## Mengapa hal ini penting
+
+Memilih audiens sumber membantu Anda hanya mengimpor kontak yang memang ingin digunakan. Dengan meninjau pratinjau impor dan mengonfirmasi izin email, Anda dapat menemukan pilihan yang keliru sebelum sinkronisasi dimulai.
+
+## Sebelum memulai
+
+- Masuk ke ruang kerja yang akan menerima kontak.
+- Minta pemilik atau admin ruang kerja mengelola koneksi jika Anda tidak memiliki izin.
+- Pastikan detail aplikasi menunjukkan bahwa sinkronisasi kontak tersedia. [Label ketersediaan](/id/integrations/overview) menjelaskan status lainnya.
+- Pastikan Anda memiliki izin untuk mengirim email kepada kontak yang akan diimpor. Menghubungkan aplikasi tidak memberikan izin tersebut.
+
+## Hubungkan dan pilih kontak
+
+<Steps>
+  <Step title="Hubungkan akun">
+    Di **Pengaturan** → **Integrasi**, temukan aplikasi Anda lalu pilih **Hubungkan**. Ikuti halaman otorisasi penyedia, kemudian kembali ke Nudgen. Nudgen meminta akses baca ke email, nama, telepon, keanggotaan audiens, dan izin email kontak jika didukung oleh penyedia. Nudgen tidak mengubah kontak di aplikasi sumber Anda.
+  </Step>
+  <Step title="Pilih audiens">
+    Cari daftar, segmen, atau tag, lalu pilih hingga 10 audiens. Anda dapat menggunakan **Muat lebih banyak audiens** jika sumber memiliki lebih banyak hasil. Kontak yang berada di beberapa audiens terpilih hanya diimpor sekali. Setiap koneksi mendukung paling banyak 10.000 kontak sumber unik, sesuai dengan kapasitas kontak ruang kerja Anda.
+  </Step>
+  <Step title="Pratinjau kontak">
+    Pilih **Pratinjau kontak**. Tinjau sampel dan jumlah yang ditampilkan, yang mungkin tepat, berupa perkiraan, atau tidak tersedia hingga sinkronisasi pertama. Beberapa penyedia memerlukan langkah tambahan: untuk noCRM, pilih kolom email bagi setiap daftar terpilih sebelum melihat pratinjau; kolom nama dan telepon bersifat opsional.
+  </Step>
+  <Step title="Tinjau dan mulai">
+    Pilih **Lanjutkan**, periksa akun dan audiens, konfirmasikan bahwa Anda memiliki izin untuk mengirim email kepada kontak tersebut, lalu pilih **Mulai sinkronisasi**. Impor pertama langsung masuk antrean. Sinkronisasi berikutnya dijadwalkan setiap jam.
+  </Step>
+</Steps>
+
+Anda dapat memilih **Simpan dan keluar** selama penyiapan, lalu kembali lagi nanti. Jika audiens terpilih atau pemetaan kolom diubah, Anda harus membuat pratinjau baru sebelum memulai.
+
+Nudgen mempertahankan nilai profil dan tag kontak yang sudah ada jika berlaku. Kontak yang diketahui memilih keluar, mengalami pantulan, atau memiliki pembatasan email lainnya tetap terlindungi. Munculnya kontak dalam audiens sumber tidak otomatis membuatnya memenuhi syarat untuk menerima kampanye.
+
+## Kelola koneksi
+
+Buka **Aplikasi terhubung** → **Kelola** untuk meninjau audiens terpilih, waktu sinkronisasi terakhir dan berikutnya, serta proses terbaru. Setiap proses menampilkan jumlah kontak yang diimpor, diperbarui, dan dilewati. Anda dapat memilih **Lihat kontak**, **Edit audiens**, atau **Sinkronkan sekarang**. Sinkronisasi manual memiliki masa tunggu 15 menit, dan kontrol ini tidak tersedia saat proses masih tertunda. Jika akun perlu diotorisasi ulang, gunakan **Hubungkan kembali**.
+
+Pilih **Putuskan koneksi** untuk menghentikan sinkronisasi berikutnya. Kontak yang sudah diimpor ke Nudgen tetap berada di ruang kerja Anda. Anda mungkin perlu memutuskan koneksi native sebelumnya sebelum mengalihkan sumber tersebut ke Composio; halaman penyiapan akan menampilkannya jika diperlukan.
+
+## Pemecahan masalah
+
+<AccordionGroup>
+  <Accordion title="Tidak ada audiens yang muncul">
+    Coba pencarian lain, pilih **Muat lebih banyak audiens** jika tersedia, dan pastikan akun penyedia Anda dapat membaca daftar atau segmen yang relevan.
+  </Accordion>
+  <Accordion title="Pratinjau kedaluwarsa atau pilihan berubah">
+    Kembali ke **Pilih kontak**, segarkan pratinjau, lalu tinjau kembali. Untuk noCRM, periksa ulang pemetaan kolom jika kolom sumber berubah.
+  </Accordion>
+  <Accordion title="Sinkronisasi diblokir oleh batas">
+    Pilih audiens yang lebih kecil jika pilihan melebihi 10.000 kontak sumber unik. Jika ruang kerja telah mencapai batas kontak, kurangi pilihan atau tinjau paket Anda.
+  </Accordion>
+  <Accordion title="Sinkronisasi dijeda atau memerlukan perhatian">
+    Tinjau pesan proses. Hubungkan kembali jika otorisasi kedaluwarsa. Jika batas permintaan penyedia atau Nudgen bersifat sementara, tunggu sebelum mencoba lagi. Muat ulang halaman jika ruang kerja aktif Anda berubah.
+  </Accordion>
+</AccordionGroup>
+
+## Dokumen terkait
+
+- [Kontak Shopify dan Semua kontak](/id/integrations/shopify)
+- [Ikhtisar kontak](/id/contacts/overview)
+- [Peristiwa kampanye Seumur Hidup](/id/integrations/lifetime-events)

@@ -26,7 +26,7 @@ This plan outlines the steps to add comprehensive documentation for the `/email-
 ## Phase 4: Verification
 - [ ] Run `mint dev` (locally if applicable) to preview the new documentation.
 - [ ] Check for broken links using `mint broken-links`.
-- [ ] Verify that the "Open App" links point correctly to `https://nudgen.net/email-deliverability-audit`.
+- [ ] Verify that the "Open App" links point correctly to `https://get.nudgen.net/email-deliverability-audit`.
 
 ## Agent Assignments
 | Agent | Task |

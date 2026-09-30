@@ -1,0 +1,47 @@
+---
+title: "Tên miền tùy chỉnh"
+description: "Xác minh tên miền bạn sở hữu và dùng tên miền đó làm địa chỉ gửi chiến dịch của nhóm"
+---
+
+Dùng **Cài đặt** → **Tên miền tùy chỉnh** để gửi chiến dịch và email thử từ một địa chỉ thuộc tên miền của riêng bạn. Nếu không có tên miền tùy chỉnh, nhóm của bạn sẽ dùng địa chỉ gửi của Nudgen.
+
+## Tại sao điều này lại quan trọng
+
+Tên miền đã xác minh giúp người nhận nhận ra thương hiệu của bạn trong địa chỉ người gửi. Nudgen kiểm tra các bản ghi DNS bắt buộc trước khi sử dụng tên miền và tạm dừng gửi nếu địa chỉ gửi đã chọn sau đó không còn đủ điều kiện.
+
+## Tại sao điều này lại quan trọng
+
+Tên miền đã xác minh giúp liên hệ nhận ra thương hiệu của bạn trong địa chỉ người gửi. Việc kiểm tra DNS xác nhận rằng bạn kiểm soát tên miền và Nudgen có thể xác thực email được gửi từ tên miền đó.
+
+## Trước khi bắt đầu
+
+- Nhóm của bạn cần có **gói trả phí đang hoạt động** để thêm và dùng địa chỉ gửi tùy chỉnh. Nhóm dùng gói miễn phí vẫn có thể xem và xóa các tên miền đã có trong phần cài đặt.
+- Chỉ **owner hoặc admin** của nhóm mới có thể thêm, chỉnh sửa, xác minh, chọn hoặc xóa tên miền và tiếp tục gửi. Các thành viên khác có thể xem trạng thái và bản ghi DNS.
+- Bạn cần quyền truy cập vào nhà cung cấp DNS của tên miền. Mỗi nhóm có thể cấu hình **một tên miền tùy chỉnh**. Để thay thế tên miền, hãy chuyển sang **Dùng địa chỉ gửi của Nudgen**, xóa tên miền cũ rồi thêm tên miền mới.
+
+## Thêm và xác minh tên miền
+
+1. Mở **Cài đặt** → **Tên miền tùy chỉnh** và nhập tên miền bạn sở hữu, chẳng hạn như `mail.example.com`. Nhập phần đứng trước `@` của địa chỉ email người gửi (ví dụ: `hello`) và tên người gửi. Địa chỉ phải thuộc **chính xác tên miền đó**: `hello@mail.example.com` đối với `mail.example.com`.
+2. Chọn **Thêm tên miền**. Mở **Bản ghi DNS** trên thẻ tên miền rồi sao chép host và giá trị **TXT xác minh quyền sở hữu** vào nhà cung cấp DNS. Host bắt đầu bằng `_nudgen-verify.`. Giữ nguyên bản ghi này sau khi xác minh.
+3. Chọn **Kiểm tra DNS**. Sau khi quyền sở hữu được xác minh, thẻ sẽ hiển thị các bản ghi **DKIM TXT** và **Return-Path CNAME** cho tên miền của bạn. Sao chép chính xác các host và giá trị được hiển thị vào nhà cung cấp DNS. Nếu có nhiều bản ghi DKIM, hãy công bố từng bản ghi.
+4. Sau khi lưu các bản ghi, chọn lại **Kiểm tra DNS**. Các thay đổi DNS có thể cần thời gian để được cập nhật. Tên miền ở trạng thái **Sẵn sàng** khi quyền sở hữu, DKIM và Return-Path đã được xác minh.
+
+Hãy dùng các giá trị bản ghi hiển thị trên thẻ tên miền của riêng bạn vì chúng dành riêng cho cấu hình đó. **DMARC** được khuyến nghị, nhưng trạng thái của bản ghi này không chặn việc kích hoạt. Giữ nguyên mọi chính sách DMARC hiện có, bao gồm cả chính sách được kế thừa từ tên miền cha. Bạn không cần thêm một bản ghi SPF gốc riêng cho cấu hình này.
+
+Tên miền đầu tiên được xác minh sẽ tự động trở thành địa chỉ gửi mặc định nếu trước đó nhóm của bạn chưa chọn địa chỉ gửi và việc gửi không bị tạm dừng. Nếu không, hãy chọn **Đặt làm mặc định** trên thẻ tên miền đã sẵn sàng. Phần **Địa chỉ gửi chiến dịch mặc định** cho biết địa chỉ gửi nào đang được chọn. Bạn có thể chọn **Dùng địa chỉ gửi của Nudgen** tại đây bất cứ lúc nào.
+
+## Quản lý địa chỉ gửi
+
+- **Chỉnh sửa địa chỉ gửi** thay đổi phần đứng trước `@` hoặc tên hiển thị. Không thể chỉnh sửa chính tên miền; hãy thay thế tên miền nếu muốn đổi.
+- **Xóa** chỉ khả dụng khi tên miền không phải là địa chỉ gửi mặc định. Chọn **Dùng địa chỉ gửi của Nudgen** trước nếu cần. Việc xóa tên miền sẽ giải phóng một vị trí tên miền duy nhất của nhóm.
+- **Kiểm tra DNS** làm mới trạng thái xác minh. Thẻ hiển thị lần kiểm tra gần nhất, mọi lỗi xác minh và trạng thái quyền sở hữu, DKIM, Return-Path cùng DMARC.
+
+## Nếu việc gửi chiến dịch bị tạm dừng
+
+Nếu tên miền tùy chỉnh đã chọn mất trạng thái xác minh DNS bắt buộc hoặc quyền truy cập gói trả phí, việc gửi chiến dịch sẽ bị tạm dừng. **Email đã xếp hàng vẫn được giữ nguyên.** Trang hiển thị lý do trong phần **Việc gửi chiến dịch bị tạm dừng**.
+
+1. Sửa các bản ghi DNS hoặc khôi phục quyền truy cập trả phí. Bạn cũng có thể chọn **Dùng địa chỉ gửi của Nudgen**.
+2. Chọn **Kiểm tra DNS** nếu bạn đã sửa bản ghi và xác nhận tên miền ở trạng thái **Sẵn sàng**.
+3. Chọn **Tiếp tục gửi**. Chỉ sửa DNS hoặc thay đổi địa chỉ gửi mặc định sẽ không tự xóa trạng thái tạm dừng.
+
+Đối với các vấn đề gửi khác, hãy xem [Gửi và khả năng vào hộp thư](/vi/troubleshooting/deliverability).

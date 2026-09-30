@@ -1,0 +1,113 @@
+---
+title: "MCP 服务器"
+description: "通过 OAuth 将 AI 助手连接到 Nudgen，搜索地图潜在客户，并在浏览器中批准活动启动"
+---
+
+## 概览
+
+Nudgen 在应用来源的 `/mcp` 端点托管 MCP 服务器。该服务器通过 Streamable HTTP 使用 MCP `2026-07-28`，并要求 OAuth 2.1。请连接支持此传输方式的客户端。在浏览器中登录 Nudgen，选择一个工作区，并批准客户端请求的权限。即使你之后在仪表盘中切换工作区，该连接仍会绑定到原先选择的工作区。
+
+## 为什么这很重要
+
+你的助手无需处理仪表盘会话或个人访问令牌，即可读取联系人和活动、查找附近商家、起草内容，以及准备启动活动。每次实际发送或排期都必须由你在浏览器中审核后才能继续。
+
+## 连接客户端
+
+生产环境端点为：
+
+```text
+https://app.nudgen.net/mcp
+```
+
+在支持 OAuth 的客户端中，将其添加为**远程 HTTP MCP 服务器**。客户端会从该端点发现 Nudgen 的授权服务器，并在浏览器中打开登录和授权流程。选择你希望客户端访问的工作区，并且只批准其需要的权限范围。
+
+发现文档：
+
+| 文档 | URL |
+| --- | --- |
+| 受保护资源元数据 | `https://app.nudgen.net/.well-known/oauth-protected-resource/mcp` |
+| 授权服务器 | `https://app.nudgen.net/mcp-oauth` |
+| 服务器卡片 | `https://app.nudgen.net/.well-known/mcp/server-card.json` |
+
+授权服务器使用带 PKCE S256 的授权码流程、资源绑定和刷新令牌轮换。它接受客户端 ID 元数据文档和动态客户端注册。
+
+对于 Codex CLI，请使用：
+
+```bash
+codex mcp add nudgen --url "https://app.nudgen.net/mcp" --oauth-resource "https://app.nudgen.net/mcp"
+codex mcp login nudgen --scopes campaigns:read,campaigns:write,campaigns:send
+```
+
+如果已经配置名为 `nudgen` 的客户端，请将该条目的 URL 更新为 `/mcp`。
+
+| 权限范围 | 允许的操作 |
+| --- | --- |
+| `campaigns:read` | 查看工作区、联系人、活动和品牌设置，以及搜索地图潜在客户。 |
+| `campaigns:write` | 创建联系人和活动草稿、更新品牌设置、生成 AI 草稿，以及导入地图潜在客户。 |
+| `campaigns:send` | 请求并完成活动启动。此权限范围本身绝不会发送邮件。 |
+
+如果只需查看数据，请请求 `campaigns:read`。如果客户端需要更改联系人、草稿、品牌设置或已导入的潜在客户，请添加 `campaigns:write`。只有当客户端需要请求活动启动批准时，才添加 `campaigns:send`。
+
+<Note>
+  个人访问令牌用于验证[开发人员 API](/cn/agents/api)，但不能用于验证 `/mcp`。MCP 客户端必须完成 OAuth 登录。
+</Note>
+
+## 可用工具
+
+| 任务 | 工具 | 权限范围 |
+| --- | --- | --- |
+| 查看工作区 | `get_current_user`, `list_contacts`, `list_campaigns`, `get_campaign`, `get_campaign_stats`, `get_brand_settings` | `campaigns:read` |
+| 查找附近商家 | `search_map_leads` | `campaigns:read` |
+| 创建和编辑 | `create_contact`, `create_campaign`, `update_brand_settings`, `generate_email_draft`, `import_map_leads` | `campaigns:write` |
+| 请求并完成活动启动 | `prepare_campaign_launch`, `launch_campaign` | `campaigns:send` |
+
+`create_campaign` 会保存一个**一次性活动草稿**，不能直接发送或排期。通过 `get_campaign`，你可以在启动前检查主题、内容、链接、受众和发件人。
+
+服务器还通过 `campaigns:read` 提供只读资源：
+
+| 资源 | 内容 |
+| --- | --- |
+| `nudgen://api-catalog` | 托管工具的名称和说明。 |
+| `nudgen://team/brand` | 已连接工作区的品牌设置。 |
+| `nudgen://campaigns/{id}/summary` | 单个活动的送达统计数据。请将 `{id}` 替换为活动 ID。 |
+
+### 查找并导入地图潜在客户
+
+1. 让助手使用地点和商家关键词调用 `search_map_leads`，例如某个城市和 `marketing agency`。
+2. 可选筛选条件包括 `radiusKm`（1–100）、`lat`、`lng`，以及仅保留公开邮箱商家的 `emailOnly`。
+3. 如果结果包含 `nextPageToken`，请将其作为 `pageToken` 传入以加载下一页。
+4. 让助手使用相同的地点和关键词调用 `import_map_leads`，并附上要保存的潜在客户对象。每次调用最多接受 200 个潜在客户。
+
+导入操作会在已连接的工作区中写入联系人。没有邮箱的潜在客户会被跳过；已经存在的潜在客户会被更新。
+
+### 批准活动启动
+
+1. 让助手通过 `get_campaign` 检查草稿。
+2. 让助手使用活动 ID 以及你指定的立即发送时间或确切排期时间调用 `prepare_campaign_launch`。该调用会返回一次性批准 URL，此时尚未发送任何邮件。
+3. 打开该 URL，检查工作区、预计收件人数、内容、发件人和发送时间，然后点击**批准启动**。
+4. 返回客户端，让它使用相同的活动 ID、发送时间和 `approvalId` 调用 `launch_campaign`。
+
+批准将在 **10 分钟**后过期，并且只能使用一次。如果活动或发件人发生变化，请请求新的批准。启动时，Nudgen 会再次检查发件人就绪状态、符合条件的收件人、订阅、配额和队列可用性。只有活动工作进程处理启动任务后，邮件才会开始投递。
+
+<Warning>
+  批准并完成 `launch_campaign` 可能会发送真实邮件。在批准向真实受众发送前，请先使用仪表盘中的测试发送流程检查收件箱预览。
+</Warning>
+
+## 管理访问权限
+
+打开**设置** → **API 密钥** → **已连接的 MCP 应用**，查看每个已连接客户端的工作区和权限范围。如果某个连接不应再拥有访问权限，可在此将其撤销。撤销后，其令牌和待处理的活动启动批准都会失效。之后你仍可通过 OAuth 重新连接。
+
+OAuth 授权最长有效 90 天。如果你失去某个工作区的访问权限，客户端也将无法继续使用该工作区的连接。
+
+## 故障排除
+
+| 问题 | 处理方法 |
+| --- | --- |
+| 登录流程未启动 | 确认客户端支持带 OAuth 的远程 Streamable HTTP MCP，并使用 `https://app.nudgen.net/mcp`。 |
+| 工具需要更多权限 | 重新连接，并为该工作区批准所需的权限范围。 |
+| 联系人搜索要求缩小结果范围 | 搜索会匹配姓名和邮箱地址，并且在应用标签和状态筛选后最多扫描 5,000 个联系人。请缩小筛选范围。 |
+| 导入地图潜在客户时跳过某个商家 | 只有包含邮箱的潜在客户才会被保存。请将 `emailOnly` 设为 true 后重新搜索，或选择已经包含邮箱的潜在客户。 |
+| 活动启动批准已过期或活动发生变化 | 请求新的批准，并检查当前活动和发件人。 |
+| 活动启动被阻止 | 检查活动是否为草稿、发件人是否就绪、是否有符合条件的联系人、套餐配额，以及[发件域名](/cn/settings/sending-domains)。 |
+
+如需在脚本中使用 Bearer 令牌和直接 REST 端点，请参阅[开发人员 API](/cn/agents/api)。

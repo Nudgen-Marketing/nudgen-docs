@@ -1,0 +1,94 @@
+---
+title: "Domain kustom"
+description: "Verifikasi domain milik Anda dan gunakan sebagai pengirim kampanye tim"
+---
+
+Gunakan **Pengaturan** → **Domain kustom** untuk mengirim kampanye dan email percobaan dari alamat di domain Anda sendiri. Tanpa domain kustom, tim Anda menggunakan pengirim Nudgen.
+
+## Mengapa hal ini penting
+
+Domain terverifikasi memungkinkan penerima mengenali merek Anda dari alamat pengirim. Nudgen memeriksa catatan DNS yang diperlukan sebelum menggunakannya dan menjeda pengiriman jika pengirim yang dipilih kemudian tidak lagi memenuhi syarat.
+
+## Mengapa hal ini penting
+
+Domain terverifikasi memungkinkan kontak mengenali merek Anda dari alamat pengirim. Pemeriksaan DNS memastikan bahwa Anda mengendalikan domain dan Nudgen dapat mengautentikasi email yang dikirim darinya.
+
+## Sebelum memulai
+
+- Tim Anda memerlukan **paket berbayar aktif** untuk menambahkan dan menggunakan pengirim kustom. Tim dengan paket gratis tetap dapat melihat dan menghapus domain yang sudah ada di pengaturannya.
+- Hanya **pemilik atau admin** tim yang dapat menambahkan, mengedit, memverifikasi, memilih, atau menghapus domain serta melanjutkan pengiriman. Anggota lain dapat melihat status dan catatan DNS.
+- Anda memerlukan akses ke penyedia DNS domain. Tim dapat mengonfigurasi **satu domain kustom**. Untuk menggantinya, beralihlah ke **Gunakan pengirim Nudgen**, hapus domain lama, lalu tambahkan domain baru.
+
+## Tambahkan dan verifikasi domain Anda
+
+1. Buka **Pengaturan** → **Domain kustom** dan masukkan domain milik Anda, seperti `mail.example.com`. Masukkan bagian alamat email pengirim sebelum `@` (misalnya, `hello`) dan nama pengirim. Alamat harus berada di **domain yang persis sama**: `hello@mail.example.com` untuk `mail.example.com`.
+2. Pilih **Tambahkan domain**. Buka **Catatan DNS** pada kartu domain, lalu salin host dan nilai **TXT kepemilikan** ke penyedia DNS Anda. Host diawali dengan `_nudgen-verify.`. Pertahankan catatan ini setelah verifikasi.
+3. Pilih **Periksa DNS**. Setelah kepemilikan terverifikasi, kartu menampilkan catatan **DKIM TXT** dan **Return-Path CNAME** untuk domain Anda. Salin host dan nilai yang ditampilkan secara persis ke penyedia DNS. Jika lebih dari satu catatan DKIM ditampilkan, publikasikan semuanya.
+4. Setelah menyimpan catatan, pilih **Periksa DNS** lagi. Perubahan DNS dapat memerlukan waktu untuk tersebar. Domain berstatus **Siap** ketika kepemilikan, DKIM, dan Return-Path telah terverifikasi.
+
+Gunakan nilai catatan yang ditampilkan pada kartu domain Anda sendiri; nilai tersebut khusus untuk penyiapan Anda. **DMARC** direkomendasikan, tetapi statusnya tidak menghalangi aktivasi. Pertahankan kebijakan DMARC yang sudah ada, termasuk kebijakan yang diwarisi dari domain induk. Anda tidak perlu menambahkan catatan SPF root terpisah untuk penyiapan ini.
+
+Domain pertama yang terverifikasi otomatis menjadi pengirim default jika tim Anda belum pernah memilih pengirim dan pengiriman tidak sedang dijeda. Jika tidak, pilih **Jadikan default** pada kartu domain yang siap. Bagian **Pengirim kampanye default** menunjukkan pengirim yang dipilih. Anda dapat memilih **Gunakan pengirim Nudgen** di sana kapan saja.
+
+## Kelola pengirim Anda
+
+- **Edit pengirim** mengubah bagian lokal alamat atau nama tampilan. Domain itu sendiri tidak dapat diedit; ganti domain untuk mengubahnya.
+- **Hapus** hanya tersedia jika domain bukan pengirim default. Pilih **Gunakan pengirim Nudgen** terlebih dahulu jika diperlukan. Menghapus domain membebaskan satu slot domain tim.
+- **Periksa DNS** memperbarui status verifikasi. Kartu menampilkan pemeriksaan terakhir, kesalahan verifikasi jika ada, serta status kepemilikan, DKIM, Return-Path, dan DMARC.
+
+## Jika pengiriman kampanye dijeda
+
+Jika domain kustom yang dipilih kehilangan verifikasi DNS yang diwajibkan atau akses paket berbayar, pengiriman kampanye akan dijeda. **Email dalam antrean tetap dipertahankan.** Halaman menampilkan alasannya di bagian **Pengiriman kampanye dijeda**.
+
+1. Perbaiki catatan DNS atau pulihkan akses berbayar. Anda juga dapat memilih **Gunakan pengirim Nudgen**.
+2. Pilih **Periksa DNS** jika Anda memperbaiki catatan, lalu pastikan domain berstatus **Siap**.
+3. Pilih **Lanjutkan pengiriman**. Memperbaiki DNS atau mengganti pengirim default saja tidak menghapus status jeda.
+
+Untuk masalah pengiriman lainnya, lihat [Pengiriman dan keterkiriman](/id/troubleshooting/deliverability).
+---
+title: "Domain kustom"
+description: "Verifikasi domain milik Anda dan gunakan sebagai pengirim kampanye tim"
+---
+
+Gunakan **Pengaturan** → **Domain kustom** untuk mengirim kampanye dan email percobaan dari alamat di domain Anda sendiri. Tanpa domain kustom, tim Anda menggunakan pengirim Nudgen.
+
+## Mengapa hal ini penting
+
+Domain terverifikasi memungkinkan penerima mengenali merek Anda dari alamat pengirim. Nudgen memeriksa catatan DNS yang diperlukan sebelum menggunakannya dan menjeda pengiriman jika pengirim yang dipilih kemudian tidak lagi memenuhi syarat.
+
+## Mengapa hal ini penting
+
+Domain terverifikasi memungkinkan kontak mengenali merek Anda dari alamat pengirim. Pemeriksaan DNS memastikan bahwa Anda mengendalikan domain dan Nudgen dapat mengautentikasi email yang dikirim darinya.
+
+## Sebelum memulai
+
+- Tim Anda memerlukan **paket berbayar aktif** untuk menambahkan dan menggunakan pengirim kustom. Tim dengan paket gratis tetap dapat melihat dan menghapus domain yang sudah ada di pengaturannya.
+- Hanya **pemilik atau admin** tim yang dapat menambahkan, mengedit, memverifikasi, memilih, atau menghapus domain serta melanjutkan pengiriman. Anggota lain dapat melihat status dan catatan DNS.
+- Anda memerlukan akses ke penyedia DNS domain. Tim dapat mengonfigurasi **satu domain kustom**. Untuk menggantinya, beralihlah ke **Gunakan pengirim Nudgen**, hapus domain lama, lalu tambahkan domain baru.
+
+## Tambahkan dan verifikasi domain Anda
+
+1. Buka **Pengaturan** → **Domain kustom** dan masukkan domain milik Anda, seperti `mail.example.com`. Masukkan bagian alamat email pengirim sebelum `@` (misalnya, `hello`) dan nama pengirim. Alamat harus berada di **domain yang persis sama**: `hello@mail.example.com` untuk `mail.example.com`.
+2. Pilih **Tambahkan domain**. Buka **Catatan DNS** pada kartu domain, lalu salin host dan nilai **TXT kepemilikan** ke penyedia DNS Anda. Host diawali dengan `_nudgen-verify.`. Pertahankan catatan ini setelah verifikasi.
+3. Pilih **Periksa DNS**. Setelah kepemilikan terverifikasi, kartu menampilkan catatan **DKIM TXT** dan **Return-Path CNAME** untuk domain Anda. Salin host dan nilai yang ditampilkan secara persis ke penyedia DNS. Jika lebih dari satu catatan DKIM ditampilkan, publikasikan semuanya.
+4. Setelah menyimpan catatan, pilih **Periksa DNS** lagi. Perubahan DNS dapat memerlukan waktu untuk tersebar. Domain berstatus **Siap** ketika kepemilikan, DKIM, dan Return-Path telah terverifikasi.
+
+Gunakan nilai catatan yang ditampilkan pada kartu domain Anda sendiri; nilai tersebut khusus untuk penyiapan Anda. **DMARC** direkomendasikan, tetapi statusnya tidak menghalangi aktivasi. Pertahankan kebijakan DMARC yang sudah ada, termasuk kebijakan yang diwarisi dari domain induk. Anda tidak perlu menambahkan catatan SPF root terpisah untuk penyiapan ini.
+
+Domain pertama yang terverifikasi otomatis menjadi pengirim default jika tim Anda belum pernah memilih pengirim dan pengiriman tidak sedang dijeda. Jika tidak, pilih **Jadikan default** pada kartu domain yang siap. Bagian **Pengirim kampanye default** menunjukkan pengirim yang dipilih. Anda dapat memilih **Gunakan pengirim Nudgen** di sana kapan saja.
+
+## Kelola pengirim Anda
+
+- **Edit pengirim** mengubah bagian lokal alamat atau nama tampilan. Domain itu sendiri tidak dapat diedit; ganti domain untuk mengubahnya.
+- **Hapus** hanya tersedia jika domain bukan pengirim default. Pilih **Gunakan pengirim Nudgen** terlebih dahulu jika diperlukan. Menghapus domain membebaskan satu slot domain tim.
+- **Periksa DNS** memperbarui status verifikasi. Kartu menampilkan pemeriksaan terakhir, kesalahan verifikasi jika ada, serta status kepemilikan, DKIM, Return-Path, dan DMARC.
+
+## Jika pengiriman kampanye dijeda
+
+Jika domain kustom yang dipilih kehilangan verifikasi DNS yang diwajibkan atau akses paket berbayar, pengiriman kampanye akan dijeda. **Email dalam antrean tetap dipertahankan.** Halaman menampilkan alasannya di bagian **Pengiriman kampanye dijeda**.
+
+1. Perbaiki catatan DNS atau pulihkan akses berbayar. Anda juga dapat memilih **Gunakan pengirim Nudgen**.
+2. Pilih **Periksa DNS** jika Anda memperbaiki catatan, lalu pastikan domain berstatus **Siap**.
+3. Pilih **Lanjutkan pengiriman**. Memperbaiki DNS atau mengganti pengirim default saja tidak menghapus status jeda.
+
+Untuk masalah pengiriman lainnya, lihat [Pengiriman dan keterkiriman](/id/troubleshooting/deliverability).

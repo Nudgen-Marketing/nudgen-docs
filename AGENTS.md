@@ -6,7 +6,7 @@
 
 ## About this project
 
-- This is the documentation site for [Nudgen](https://nudgen.net), built on [Mintlify](https://mintlify.com)
+- This is the documentation site for [Nudgen](https://get.nudgen.net), built on [Mintlify](https://mintlify.com)
 - Pages are MDX files with YAML frontmatter
 - Configuration lives in `docs.json`
 - Run `mint dev` to preview locally

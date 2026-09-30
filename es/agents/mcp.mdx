@@ -1,0 +1,113 @@
+---
+title: "Servidor MCP"
+description: "Conecta un asistente de IA con Nudgen mediante OAuth, busca leads en el mapa y aprueba lanzamientos de campañas en el navegador"
+---
+
+## Descripción general
+
+Nudgen aloja un servidor MCP en el endpoint `/mcp` del origen de tu aplicación. Usa MCP `2026-07-28` mediante Streamable HTTP y requiere OAuth 2.1. Conecta un cliente compatible con ese transporte. Inicia sesión en Nudgen desde el navegador, elige un workspace y aprueba los permisos que solicita el cliente. La conexión permanece vinculada a ese workspace, aunque más adelante cambies de workspace en el panel.
+
+## Por qué esto es importante
+
+Tu asistente puede consultar contactos y campañas, encontrar negocios cercanos, preparar contenido y dejar una campaña lista para lanzarla sin gestionar una sesión del panel ni un token de acceso personal. Tú revisas cada envío real o programación en el navegador antes de que pueda continuar.
+
+## Conectar tu cliente
+
+El endpoint de producción es:
+
+```text
+https://app.nudgen.net/mcp
+```
+
+Añádelo como **servidor MCP HTTP remoto** en un cliente compatible con OAuth. El cliente descubre el servidor de autorización de Nudgen desde el endpoint y abre un flujo de inicio de sesión y consentimiento en el navegador. Selecciona el workspace al que quieres que acceda el cliente y aprueba únicamente los scopes que necesita.
+
+Documentos de descubrimiento:
+
+| Documento | URL |
+| --- | --- |
+| Metadatos del recurso protegido | `https://app.nudgen.net/.well-known/oauth-protected-resource/mcp` |
+| Servidor de autorización | `https://app.nudgen.net/mcp-oauth` |
+| Tarjeta del servidor | `https://app.nudgen.net/.well-known/mcp/server-card.json` |
+
+El servidor de autorización usa el flujo de código de autorización con PKCE S256, vinculación de recursos y rotación de tokens de actualización. Admite documentos de metadatos de ID de cliente y el registro dinámico de clientes.
+
+Para Codex CLI, usa:
+
+```bash
+codex mcp add nudgen --url "https://app.nudgen.net/mcp" --oauth-resource "https://app.nudgen.net/mcp"
+codex mcp login nudgen --scopes campaigns:read,campaigns:write,campaigns:send
+```
+
+Si ya hay configurado un cliente llamado `nudgen`, actualiza esa entrada con la URL `/mcp`.
+
+| Scope | Qué permite |
+| --- | --- |
+| `campaigns:read` | Consultar el workspace, los contactos, las campañas y la configuración de marca, así como buscar leads en el mapa. |
+| `campaigns:write` | Crear contactos y borradores de campañas, actualizar la configuración de marca, generar borradores con IA e importar leads del mapa. |
+| `campaigns:send` | Solicitar y completar un lanzamiento. Este scope nunca envía correos por sí solo. |
+
+Si solo necesitas consultar datos, solicita `campaigns:read`. Añade `campaigns:write` cuando el cliente deba modificar contactos, borradores, la configuración de marca o leads importados. Añade `campaigns:send` solo cuando el cliente necesite solicitar la aprobación de un lanzamiento.
+
+<Note>
+  Los tokens de acceso personal autentican la [API de desarrollador](/es/agents/api), pero no autentican `/mcp`. Un cliente MCP debe completar el inicio de sesión mediante OAuth.
+</Note>
+
+## Herramientas disponibles
+
+| Tarea | Herramientas | Scope |
+| --- | --- | --- |
+| Consultar tu workspace | `get_current_user`, `list_contacts`, `list_campaigns`, `get_campaign`, `get_campaign_stats`, `get_brand_settings` | `campaigns:read` |
+| Encontrar negocios cercanos | `search_map_leads` | `campaigns:read` |
+| Crear y editar | `create_contact`, `create_campaign`, `update_brand_settings`, `generate_email_draft`, `import_map_leads` | `campaigns:write` |
+| Solicitar y completar un lanzamiento | `prepare_campaign_launch`, `launch_campaign` | `campaigns:send` |
+
+`create_campaign` guarda una **campaña única como borrador**. No puede enviarla ni programarla directamente. `get_campaign` te permite comprobar el asunto, el contenido, el enlace, la audiencia y el remitente antes del lanzamiento.
+
+El servidor también expone recursos de solo lectura mediante `campaigns:read`:
+
+| Recurso | Contenido |
+| --- | --- |
+| `nudgen://api-catalog` | Nombres y descripciones de las herramientas alojadas. |
+| `nudgen://team/brand` | Configuración de marca del workspace conectado. |
+| `nudgen://campaigns/{id}/summary` | Estadísticas de entrega de una campaña. Sustituye `{id}` por el ID de la campaña. |
+
+### Buscar e importar leads del mapa
+
+1. Pide al asistente que llame a `search_map_leads` con una ubicación y palabras clave del negocio, como una ciudad y `marketing agency`.
+2. Los filtros opcionales son `radiusKm` (1–100), `lat`, `lng` y `emailOnly` para conservar los negocios que publican un correo electrónico.
+3. Cuando el resultado incluya `nextPageToken`, pásalo como `pageToken` para cargar otra página.
+4. Pide al asistente que llame a `import_map_leads` con la misma ubicación y las mismas palabras clave, además de los objetos de leads que quieres guardar. Cada llamada admite hasta 200 leads.
+
+La importación crea contactos en el workspace conectado. Se omiten los leads sin correo electrónico. Si un lead ya existe, se actualiza.
+
+### Aprobar el lanzamiento de una campaña
+
+1. Pide al asistente que consulte el borrador con `get_campaign`.
+2. Pídele que llame a `prepare_campaign_launch` con el ID de la campaña y la hora exacta de envío inmediato o programado que quieras. La llamada devuelve una URL de aprobación de un solo uso; todavía no se envía ningún correo.
+3. Abre la URL, revisa el workspace, la estimación de destinatarios, el contenido, el remitente y la hora y, después, haz clic en **Aprobar lanzamiento**.
+4. Vuelve al cliente para que pueda llamar a `launch_campaign` con el mismo ID de campaña, la misma hora y el mismo `approvalId`.
+
+Una aprobación caduca a los **10 minutos** y solo puede usarse una vez. Si cambia la campaña o el remitente, solicita una nueva aprobación. Nudgen vuelve a comprobar la disponibilidad del remitente, los destinatarios aptos, la suscripción, la cuota y la disponibilidad de la cola al realizar el lanzamiento. La entrega solo empieza después de que el worker de campañas procese el lanzamiento.
+
+<Warning>
+  Aprobar y completar `launch_campaign` puede enviar correos reales. Usa el flujo de envío de prueba del panel para comprobar una vista previa en la bandeja de entrada antes de aprobar una audiencia real.
+</Warning>
+
+## Gestionar el acceso
+
+Abre **Configuración** → **Claves API** → **Aplicaciones MCP conectadas** para ver el workspace y los scopes de cada cliente conectado. Revoca allí una conexión si ya no debe tener acceso. La revocación desactiva sus tokens y las aprobaciones de lanzamiento pendientes. Puedes volver a conectarla mediante OAuth más adelante.
+
+Las concesiones de OAuth duran como máximo 90 días. Perder el acceso a un workspace también impide que el cliente use la conexión de ese workspace.
+
+## Solución de problemas
+
+| Síntoma | Qué hacer |
+| --- | --- |
+| El inicio de sesión no comienza | Confirma que el cliente sea compatible con MCP remoto mediante Streamable HTTP y OAuth, y que use `https://app.nudgen.net/mcp`. |
+| Una herramienta necesita más permisos | Vuelve a conectar el cliente y aprueba el scope necesario para ese workspace. |
+| La búsqueda de contactos te pide acotar los resultados | La búsqueda compara nombres y direcciones de correo, y examina como máximo 5000 contactos después de aplicar los filtros de etiquetas y estado. Acota los filtros. |
+| La importación de leads del mapa omite un negocio | Solo se guardan los leads con correo electrónico. Repite la búsqueda con `emailOnly` establecido en true o elige leads que ya incluyan un correo. |
+| La aprobación del lanzamiento ha caducado o la campaña ha cambiado | Solicita una nueva aprobación y revisa la campaña y el remitente actuales. |
+| Un lanzamiento está bloqueado | Comprueba el estado de borrador de la campaña, la disponibilidad del remitente, los contactos aptos, la cuota del plan y el [dominio de envío](/es/settings/sending-domains). |
+
+Para scripts que usen tokens bearer y endpoints REST directos, consulta la [API de desarrollador](/es/agents/api).

@@ -11,7 +11,7 @@ You can connect Nudgen to scripts, internal tools, and AI agents without sharing
 
 ## Create an API key
 
-1. Open [nudgen.net](https://nudgen.net).
+1. Open [get.nudgen.net](https://get.nudgen.net).
 2. Go to **Settings -> API Keys**.
 3. Create a Personal Access Token.
 4. Copy the token once and store it securely.
@@ -27,7 +27,7 @@ Authorization: Bearer pat_...
 Use the REST API when you want conventional HTTP endpoints for contacts, campaigns, brand settings, and AI draft generation.
 
 ```bash
-curl https://nudgen.net/api/v1/user/me \
+curl https://get.nudgen.net/api/v1/user/me \
   -H "Authorization: Bearer <your-pat>"
 ```
 
@@ -51,13 +51,13 @@ Common endpoints include:
 Use MCP when an AI agent can call tools directly instead of hand-coding REST requests. The MCP endpoint is:
 
 ```text
-https://nudgen.net/api/mcp
+https://get.nudgen.net/api/mcp
 ```
 
 The server card is available at:
 
 ```text
-https://nudgen.net/.well-known/mcp/server-card.json
+https://get.nudgen.net/.well-known/mcp/server-card.json
 ```
 
 MCP uses the same bearer PAT as the REST API.

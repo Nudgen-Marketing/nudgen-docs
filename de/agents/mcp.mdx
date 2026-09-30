@@ -1,0 +1,113 @@
+---
+title: "MCP-Server"
+description: "Verbinden Sie einen KI-Assistenten per OAuth mit Nudgen, suchen Sie Karten-Leads und genehmigen Sie Kampagnenstarts im Browser"
+---
+
+## Übersicht
+
+Nudgen stellt unter dem Endpunkt `/mcp` Ihrer App-Origin einen MCP-Server bereit. Er verwendet MCP `2026-07-28` über Streamable HTTP und erfordert OAuth 2.1. Verbinden Sie einen Client, der diesen Transport unterstützt. Melden Sie sich im Browser bei Nudgen an, wählen Sie einen Workspace und genehmigen Sie die vom Client angeforderten Berechtigungen. Ihre Verbindung bleibt an diesen Workspace gebunden, auch wenn Sie später im Dashboard den Workspace wechseln.
+
+## Warum das wichtig ist
+
+Ihr Assistent kann Kontakte und Kampagnen lesen, Unternehmen in der Nähe finden, Inhalte entwerfen und eine Kampagne für den Start vorbereiten, ohne eine Dashboard-Sitzung oder ein persönliches Zugriffstoken zu verwenden. Jeden echten Versand und jede Planung prüfen Sie vor der Ausführung im Browser.
+
+## Client verbinden
+
+Der Produktionsendpunkt lautet:
+
+```text
+https://app.nudgen.net/mcp
+```
+
+Fügen Sie ihn in einem Client mit OAuth-Unterstützung als **Remote-HTTP-MCP-Server** hinzu. Der Client ermittelt den Autorisierungsserver von Nudgen über den Endpunkt und öffnet einen Anmelde- und Zustimmungsablauf im Browser. Wählen Sie den Workspace aus, auf den der Client zugreifen soll, und genehmigen Sie nur die benötigten Bereiche.
+
+Discovery-Dokumente:
+
+| Dokument | URL |
+| --- | --- |
+| Metadaten der geschützten Ressource | `https://app.nudgen.net/.well-known/oauth-protected-resource/mcp` |
+| Autorisierungsserver | `https://app.nudgen.net/mcp-oauth` |
+| Serverkarte | `https://app.nudgen.net/.well-known/mcp/server-card.json` |
+
+Der Autorisierungsserver verwendet den Authorization Code Flow mit PKCE S256, Ressourcenbindung und Refresh-Token-Rotation. Er akzeptiert Client-ID-Metadatendokumente und die dynamische Clientregistrierung.
+
+Verwenden Sie für Codex CLI:
+
+```bash
+codex mcp add nudgen --url "https://app.nudgen.net/mcp" --oauth-resource "https://app.nudgen.net/mcp"
+codex mcp login nudgen --scopes campaigns:read,campaigns:write,campaigns:send
+```
+
+Wenn bereits ein Client namens `nudgen` konfiguriert ist, aktualisieren Sie diesen Eintrag mit der URL `/mcp`.
+
+| Bereich | Zulässige Aktionen |
+| --- | --- |
+| `campaigns:read` | Workspace, Kontakte, Kampagnen und Markeneinstellungen prüfen sowie Karten-Leads suchen. |
+| `campaigns:write` | Kontakte und Kampagnenentwürfe erstellen, Markeneinstellungen aktualisieren, KI-Entwürfe generieren und Karten-Leads importieren. |
+| `campaigns:send` | Einen Start anfordern und abschließen. Dieser Bereich versendet niemals selbstständig E-Mails. |
+
+Wenn Sie Daten nur prüfen möchten, fordern Sie `campaigns:read` an. Fügen Sie `campaigns:write` hinzu, wenn der Client Kontakte, Entwürfe, Markeneinstellungen oder importierte Leads ändern soll. Fügen Sie `campaigns:send` nur hinzu, wenn der Client eine Startfreigabe anfordern muss.
+
+<Note>
+  Persönliche Zugriffstoken authentifizieren die [Entwickler-API](/de/agents/api), aber nicht `/mcp`. Ein MCP-Client muss die OAuth-Anmeldung abschließen.
+</Note>
+
+## Verfügbare Tools
+
+| Aufgabe | Tools | Bereich |
+| --- | --- | --- |
+| Workspace prüfen | `get_current_user`, `list_contacts`, `list_campaigns`, `get_campaign`, `get_campaign_stats`, `get_brand_settings` | `campaigns:read` |
+| Unternehmen in der Nähe finden | `search_map_leads` | `campaigns:read` |
+| Erstellen und bearbeiten | `create_contact`, `create_campaign`, `update_brand_settings`, `generate_email_draft`, `import_map_leads` | `campaigns:write` |
+| Einen Start anfordern und abschließen | `prepare_campaign_launch`, `launch_campaign` | `campaigns:send` |
+
+`create_campaign` speichert eine **einmalige Kampagne als Entwurf**. Das Tool kann sie nicht direkt versenden oder planen. Mit `get_campaign` können Sie vor dem Start Betreff, Inhalt, Link, Zielgruppe und Absender prüfen.
+
+Der Server stellt außerdem schreibgeschützte Ressourcen unter `campaigns:read` bereit:
+
+| Ressource | Inhalt |
+| --- | --- |
+| `nudgen://api-catalog` | Namen und Beschreibungen der bereitgestellten Tools. |
+| `nudgen://team/brand` | Markeneinstellungen des verbundenen Workspace. |
+| `nudgen://campaigns/{id}/summary` | Zustellungsstatistiken für eine Kampagne. Ersetzen Sie `{id}` durch die Kampagnen-ID. |
+
+### Karten-Leads finden und importieren
+
+1. Bitten Sie den Assistenten, `search_map_leads` mit einem Standort und Suchbegriffen für Unternehmen aufzurufen, beispielsweise mit einer Stadt und `marketing agency`.
+2. Optionale Filter sind `radiusKm` (1–100), `lat` und `lng` sowie `emailOnly`, um nur Unternehmen zu behalten, die eine E-Mail-Adresse veröffentlichen.
+3. Wenn das Ergebnis `nextPageToken` enthält, übergeben Sie es als `pageToken`, um eine weitere Seite zu laden.
+4. Bitten Sie den Assistenten, `import_map_leads` mit demselben Standort und denselben Suchbegriffen sowie den zu speichernden Lead-Objekten aufzurufen. Jeder Aufruf akzeptiert bis zu 200 Leads.
+
+Beim Import werden Kontakte im verbundenen Workspace gespeichert. Leads ohne E-Mail-Adresse werden übersprungen. Ein bereits vorhandener Lead wird aktualisiert.
+
+### Kampagnenstart genehmigen
+
+1. Bitten Sie den Assistenten, den Entwurf mit `get_campaign` zu prüfen.
+2. Bitten Sie ihn, `prepare_campaign_launch` mit der Kampagnen-ID und dem gewünschten exakten Zeitpunkt für den sofortigen oder geplanten Versand aufzurufen. Dadurch wird eine einmalig verwendbare Freigabe-URL zurückgegeben; es wird noch keine E-Mail versendet.
+3. Öffnen Sie die URL, prüfen Sie Workspace, geschätzte Empfängerzahl, Inhalt, Absender und Zeitpunkt und klicken Sie dann auf **Start genehmigen**.
+4. Kehren Sie zum Client zurück, damit er `launch_campaign` mit derselben Kampagnen-ID, demselben Zeitpunkt und derselben `approvalId` aufrufen kann.
+
+Eine Freigabe läuft nach **10 Minuten** ab und kann nur einmal verwendet werden. Wenn sich die Kampagne oder der Absender ändert, fordern Sie eine neue Freigabe an. Nudgen prüft beim Start erneut die Absenderbereitschaft, berechtigte Empfänger, Abonnement, Kontingent und Verfügbarkeit der Warteschlange. Die Zustellung beginnt erst, nachdem der Kampagnen-Worker den Start verarbeitet hat.
+
+<Warning>
+  Wenn Sie `launch_campaign` genehmigen und abschließen, können echte E-Mails versendet werden. Verwenden Sie den Testversand im Dashboard, um eine Posteingangsvorschau zu prüfen, bevor Sie den Versand an eine echte Zielgruppe genehmigen.
+</Warning>
+
+## Zugriff verwalten
+
+Öffnen Sie **Einstellungen** → **API-Schlüssel** → **Verbundene MCP-Apps**, um für jeden verbundenen Client den Workspace und die Bereiche anzuzeigen. Widerrufen Sie dort eine Verbindung, wenn sie keinen Zugriff mehr haben soll. Durch den Widerruf werden ihre Token und ausstehenden Startfreigaben deaktiviert. Sie können die Verbindung später erneut über OAuth herstellen.
+
+OAuth-Berechtigungen gelten höchstens 90 Tage. Wenn Sie den Zugriff auf einen Workspace verlieren, kann der Client die Verbindung dieses Workspace ebenfalls nicht mehr verwenden.
+
+## Fehlerbehebung
+
+| Symptom | Vorgehensweise |
+| --- | --- |
+| Die Anmeldung startet nicht | Prüfen Sie, ob der Client Remote-MCP über Streamable HTTP mit OAuth unterstützt und `https://app.nudgen.net/mcp` verwendet. |
+| Ein Tool benötigt weitere Berechtigungen | Stellen Sie die Verbindung erneut her und genehmigen Sie den benötigten Bereich für diesen Workspace. |
+| Die Kontaktsuche fordert Sie auf, die Ergebnisse einzugrenzen | Die Suche gleicht Namen und E-Mail-Adressen ab und durchsucht nach Anwendung von Tag- und Statusfiltern höchstens 5.000 Kontakte. Grenzen Sie die Filter ein. |
+| Beim Import von Karten-Leads wird ein Unternehmen übersprungen | Es werden nur Leads mit einer E-Mail-Adresse gespeichert. Suchen Sie erneut mit `emailOnly` auf `true` oder wählen Sie Leads aus, die bereits eine E-Mail-Adresse enthalten. |
+| Die Startfreigabe ist abgelaufen oder die Kampagne wurde geändert | Fordern Sie eine neue Freigabe an und prüfen Sie die aktuelle Kampagne und den Absender. |
+| Ein Start wird blockiert | Prüfen Sie den Entwurfsstatus der Kampagne, die Absenderbereitschaft, berechtigte Kontakte, das Plankontingent und die [Versanddomain](/de/settings/sending-domains). |
+
+Informationen zu Skripten mit Bearer-Token und direkten REST-Endpunkten finden Sie in der [Entwickler-API](/de/agents/api).

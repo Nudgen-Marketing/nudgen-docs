@@ -1,0 +1,42 @@
+---
+title: "Kết nối danh bạ Shopify"
+description: "Ủy quyền Shopify và chọn tất cả khách hàng hoặc các phân khúc cụ thể"
+---
+
+## Tại sao điều này lại quan trọng
+
+Tùy chọn **Tất cả danh bạ** của Shopify cho phép bạn nhập khách hàng ngay cả khi chưa tạo phân khúc. Việc chọn các phân khúc cụ thể giúp thu hẹp đối tượng nguồn. Trong cả hai trường hợp, trạng thái tiếp thị qua email của Shopify vẫn được xét đến khi Nudgen xác định liệu một liên hệ có thể nhận email hay không.
+
+## Kết nối Shopify qua danh mục ứng dụng
+
+1. Mở **Cài đặt** → **Tích hợp** và tìm **Shopify**. Kiểm tra trạng thái khả dụng được hiển thị cho workspace của bạn.
+2. Chọn **Kết nối**. Trang thiết lập Shopify mô tả một ứng dụng dành riêng cho cửa hàng và được phân phối riêng tư. Admin Shopify phê duyệt việc cài đặt trong Shopify Dev Dashboard trong quá trình ủy quyền.
+3. Chỉ cấp các phạm vi Admin API `read_customers` và `read_orders` được yêu cầu. Chọn **Kết nối** để ủy quyền Shopify thông qua Composio. Bạn không cần dán token Admin API vào Nudgen.
+4. Sau khi ủy quyền, chọn **Tất cả danh bạ** hoặc một hay nhiều phân khúc Shopify, sau đó xem trước, xác nhận quyền và bắt đầu đồng bộ. Xem [hướng dẫn kết nối](/vi/integrations/connect-and-sync) để biết các bước và giới hạn dùng chung.
+
+Quy trình thiết lập trong danh mục tách biệt với mọi cài đặt Shopify gốc hiện có. Nếu Nudgen hiển thị thông báo **Kết nối trước đó**, hãy làm theo hướng dẫn để ngắt kết nối đó trước khi kết nối qua Composio. Danh bạ đã nhập vẫn được giữ lại khi bạn ngắt kết nối.
+
+## Chọn đúng đối tượng Shopify
+
+| Lựa chọn | Nội dung được nhập |
+| --- | --- |
+| **Tất cả danh bạ** | Khách hàng trong toàn bộ cửa hàng Shopify đã kết nối, bao gồm cả khách hàng không thuộc các phân khúc đã lưu. |
+| Phân khúc Shopify | Khách hàng thuộc các phân khúc đã lưu được chọn. |
+
+**Tất cả danh bạ** là lựa chọn độc quyền: chọn tùy chọn này sẽ thay thế mọi phân khúc đã chọn, còn chọn một phân khúc sẽ thay thế **Tất cả danh bạ**. Quá trình đồng bộ vẫn tuân theo giới hạn 10.000 liên hệ nguồn riêng biệt và dung lượng workspace của bạn. Nếu Shopify không thể liệt kê phân khúc nhưng vẫn có thể đọc khách hàng, tùy chọn **Tất cả danh bạ** có thể vẫn khả dụng.
+
+Khách hàng Shopify được đánh dấu là đã đăng ký có thể đủ điều kiện nhận email, tùy thuộc vào các hạn chế khác của Nudgen. Các trạng thái tiếp thị đã hủy đăng ký, chưa đăng ký, đang chờ xử lý, không hợp lệ và đã biên tập được xem là bị chặn. Khách hàng không có trạng thái quyền nhận email hợp lệ sẽ không được mặc định là đã đồng ý. Hãy kiểm tra bản xem trước và xác nhận quyền trước khi đồng bộ.
+
+## Khắc phục sự cố
+
+<AccordionGroup>
+  <Accordion title="Không thể kết nối cửa hàng">
+    Kiểm tra xem admin Shopify đã phê duyệt việc cài đặt dành riêng cho cửa hàng và các phạm vi được yêu cầu hay chưa. Quay lại trang thiết lập rồi thử lại **Kết nối**. Nếu trang hiển thị **Cần thiết lập kết nối**, hãy liên hệ bộ phận hỗ trợ Nudgen.
+  </Accordion>
+  <Accordion title="Tôi nghĩ phải có nhiều khách hàng hơn">
+    Kiểm tra xem bạn có chọn một phân khúc thay vì **Tất cả danh bạ** hay không. Xem số lượng đã nhập, đã cập nhật và đã bỏ qua trong lần chạy đồng bộ. Khách hàng Shopify không có địa chỉ email có thể nhập sẽ không trở thành liên hệ trong Nudgen.
+  </Accordion>
+  <Accordion title="Tài khoản cần được kết nối lại">
+    Mở **Ứng dụng đã kết nối** → **Quản lý** → **Kết nối lại**, rồi ủy quyền lại cùng cửa hàng Shopify đó.
+  </Accordion>
+</AccordionGroup>

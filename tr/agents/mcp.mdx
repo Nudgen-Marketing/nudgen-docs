@@ -1,0 +1,113 @@
+---
+title: "MCP sunucusu"
+description: "Bir yapay zeka asistanını OAuth ile Nudgen'a bağlayın, harita potansiyel müşterilerini arayın ve kampanya başlatmalarını tarayıcınızda onaylayın"
+---
+
+## Genel bakış
+
+Nudgen, uygulama origin'inizin `/mcp` uç noktasında bir MCP sunucusu barındırır. Sunucu, Streamable HTTP üzerinden MCP `2026-07-28` protokolünü kullanır ve OAuth 2.1 gerektirir. Bu aktarımı destekleyen bir istemci bağlayın. Tarayıcınızda Nudgen'da oturum açın, bir çalışma alanı seçin ve istemcinin istediği izinleri onaylayın. Daha sonra kontrol panelinde çalışma alanını değiştirseniz bile bağlantınız bu çalışma alanına bağlı kalır.
+
+## Bu neden önemlidir
+
+Asistanınız, bir kontrol paneli oturumunu veya Kişisel Erişim Jetonunu kullanmadan kişileri ve kampanyaları okuyabilir, yakındaki işletmeleri bulabilir, içerik taslakları hazırlayabilir ve bir kampanyayı başlatılmaya hazırlayabilir. Her gerçek gönderimi veya zamanlamayı devam etmeden önce tarayıcınızda incelersiniz.
+
+## İstemcinizi bağlayın
+
+Üretim uç noktası:
+
+```text
+https://app.nudgen.net/mcp
+```
+
+Bu uç noktayı OAuth destekli bir istemciye **uzak HTTP MCP sunucusu** olarak ekleyin. İstemci, uç noktadan Nudgen'ın yetkilendirme sunucusunu keşfeder ve tarayıcıda oturum açma ve izin verme akışını açar. İstemcinin erişmesini istediğiniz çalışma alanını seçin ve yalnızca ihtiyaç duyduğu kapsamları onaylayın.
+
+Keşif belgeleri:
+
+| Belge | URL |
+| --- | --- |
+| Korumalı kaynak meta verileri | `https://app.nudgen.net/.well-known/oauth-protected-resource/mcp` |
+| Yetkilendirme sunucusu | `https://app.nudgen.net/mcp-oauth` |
+| Sunucu kartı | `https://app.nudgen.net/.well-known/mcp/server-card.json` |
+
+Yetkilendirme sunucusu; PKCE S256, kaynak bağlama ve yenileme jetonu rotasyonu ile yetkilendirme kodu akışını kullanır. Client ID Metadata Documents ve dinamik istemci kaydını kabul eder.
+
+Codex CLI için şunları kullanın:
+
+```bash
+codex mcp add nudgen --url "https://app.nudgen.net/mcp" --oauth-resource "https://app.nudgen.net/mcp"
+codex mcp login nudgen --scopes campaigns:read,campaigns:write,campaigns:send
+```
+
+`nudgen` adlı bir istemci zaten yapılandırılmışsa bu kaydı `/mcp` URL'siyle güncelleyin.
+
+| Kapsam | Sağladığı izin |
+| --- | --- |
+| `campaigns:read` | Çalışma alanını, kişileri, kampanyaları ve marka ayarlarını inceleme ve harita potansiyel müşterilerini arama. |
+| `campaigns:write` | Kişiler ve kampanya taslakları oluşturma, marka ayarlarını güncelleme, yapay zeka taslakları oluşturma ve harita potansiyel müşterilerini içe aktarma. |
+| `campaigns:send` | Bir başlatma isteğinde bulunma ve başlatmayı tamamlama. Bu kapsam tek başına hiçbir zaman e-posta göndermez. |
+
+Yalnızca verileri incelemeniz gerekiyorsa `campaigns:read` kapsamını isteyin. İstemcinin kişileri, taslakları, marka ayarlarını veya içe aktarılan potansiyel müşterileri değiştirmesi gerektiğinde `campaigns:write` ekleyin. `campaigns:send` kapsamını yalnızca istemcinin başlatma onayı istemesi gerektiğinde ekleyin.
+
+<Note>
+  Kişisel Erişim Jetonları [Geliştirici API'sinde](/tr/agents/api) kimlik doğrulaması yapar ancak `/mcp` için kimlik doğrulaması yapmaz. Bir MCP istemcisi OAuth oturum açma işlemini tamamlamalıdır.
+</Note>
+
+## Kullanılabilir araçlar
+
+| Görev | Araçlar | Kapsam |
+| --- | --- | --- |
+| Çalışma alanınızı inceleme | `get_current_user`, `list_contacts`, `list_campaigns`, `get_campaign`, `get_campaign_stats`, `get_brand_settings` | `campaigns:read` |
+| Yakındaki işletmeleri bulma | `search_map_leads` | `campaigns:read` |
+| Oluşturma ve düzenleme | `create_contact`, `create_campaign`, `update_brand_settings`, `generate_email_draft`, `import_map_leads` | `campaigns:write` |
+| Başlatma isteme ve tamamlama | `prepare_campaign_launch`, `launch_campaign` | `campaigns:send` |
+
+`create_campaign`, **tek seferlik bir kampanya taslağı** kaydeder. Doğrudan gönderim yapamaz veya zamanlama oluşturamaz. `get_campaign`, başlatmadan önce konuyu, içeriği, bağlantıyı, hedef kitleyi ve göndereni kontrol etmenizi sağlar.
+
+Sunucu ayrıca `campaigns:read` kapsamında salt okunur kaynaklar sunar:
+
+| Kaynak | İçerik |
+| --- | --- |
+| `nudgen://api-catalog` | Barındırılan araçların adları ve açıklamaları. |
+| `nudgen://team/brand` | Bağlı çalışma alanının marka ayarları. |
+| `nudgen://campaigns/{id}/summary` | Bir kampanyanın teslimat istatistikleri. `{id}` yerine kampanya kimliğini yazın. |
+
+### Harita potansiyel müşterilerini bulun ve içe aktarın
+
+1. Asistandan `search_map_leads` aracını bir konum ve işletme anahtar kelimeleriyle, örneğin bir şehir ve `marketing agency` ile çağırmasını isteyin.
+2. İsteğe bağlı filtreler; `radiusKm` (1–100), `lat` ve `lng` ile yalnızca e-posta adresi yayımlayan işletmeleri tutmak için `emailOnly` alanlarıdır.
+3. Sonuçta `nextPageToken` varsa başka bir sayfa yüklemek için bunu `pageToken` olarak iletin.
+4. Asistandan aynı konum ve anahtar kelimelerin yanı sıra kaydedilecek potansiyel müşteri nesneleriyle `import_map_leads` aracını çağırmasını isteyin. Her çağrı en fazla 200 potansiyel müşteri kabul eder.
+
+İçe aktarma işlemi, bağlı çalışma alanına kişiler yazar. E-posta adresi olmayan potansiyel müşteriler atlanır. Zaten mevcut olan bir potansiyel müşteri güncellenir.
+
+### Kampanya başlatmasını onaylayın
+
+1. Asistandan taslağı `get_campaign` ile incelemesini isteyin.
+2. Asistandan kampanya kimliği ve istediğiniz tam hemen gönderim veya planlanmış zamanla `prepare_campaign_launch` aracını çağırmasını isteyin. Bu işlem tek kullanımlık bir onay URL'si döndürür; henüz e-posta gönderilmez.
+3. URL'yi açın; çalışma alanını, tahmini alıcı sayısını, içeriği, göndereni ve zamanlamayı inceleyin, ardından **Başlatmayı onayla** seçeneğine tıklayın.
+4. İstemciye dönün; istemci aynı kampanya kimliği, zamanlama ve `approvalId` ile `launch_campaign` aracını çağırabilir.
+
+Bir onayın süresi **10 dakika** sonra dolar ve onay yalnızca bir kez kullanılabilir. Kampanya veya gönderen değişirse yeni bir onay isteyin. Nudgen, başlatma sırasında gönderenin hazır olma durumunu, uygun alıcıları, aboneliği, kotayı ve kuyruk kullanılabilirliğini yeniden kontrol eder. Teslimat yalnızca kampanya çalışanı başlatmayı işledikten sonra başlar.
+
+<Warning>
+  `launch_campaign` işlemini onaylamak ve tamamlamak gerçek e-posta gönderebilir. Gerçek bir hedef kitleyi onaylamadan önce gelen kutusu önizlemesini kontrol etmek için kontrol panelindeki test gönderimi akışını kullanın.
+</Warning>
+
+## Erişimi yönetin
+
+Bağlı her istemcinin çalışma alanını ve kapsamlarını görmek için **Ayarlar** → **API Anahtarları** → **Bağlı MCP uygulamaları** bölümünü açın. Artık erişmemesi gereken bir bağlantıyı buradan iptal edin. İptal işlemi, bağlantının jetonlarını ve bekleyen başlatma onaylarını devre dışı bırakır. Daha sonra OAuth üzerinden yeniden bağlanabilirsiniz.
+
+OAuth izinleri en fazla 90 gün geçerlidir. Bir çalışma alanına erişimin kaybedilmesi de istemcinin bu çalışma alanına ait bağlantıyı kullanmasını engeller.
+
+## Sorun giderme
+
+| Belirti | Yapılması gereken |
+| --- | --- |
+| Oturum açma başlamıyor | İstemcinin OAuth ile uzak Streamable HTTP MCP'yi desteklediğini ve `https://app.nudgen.net/mcp` kullandığını doğrulayın. |
+| Bir araç daha fazla izin istiyor | Yeniden bağlanın ve bu çalışma alanı için gerekli kapsamı onaylayın. |
+| Kişi araması sonuçları daraltmanızı istiyor | Arama, adları ve e-posta adreslerini eşleştirir; etiket ve durum filtrelerinden sonra en fazla 5.000 kişiyi tarar. Filtreleri daraltın. |
+| Harita potansiyel müşteri içe aktarma işlemi bir işletmeyi atlıyor | Yalnızca e-posta adresi olan potansiyel müşteriler kaydedilir. `emailOnly` değerini true olarak ayarlayıp yeniden arayın veya zaten e-posta adresi içeren potansiyel müşterileri seçin. |
+| Başlatma onayının süresi doldu veya kampanya değişti | Yeni bir onay isteyin ve güncel kampanya ile göndereni inceleyin. |
+| Başlatma engelleniyor | Kampanyanın taslak durumunu, gönderenin hazır olma durumunu, uygun kişileri, plan kotasını ve [gönderim alan adını](/tr/settings/sending-domains) kontrol edin. |
+
+Taşıyıcı jetonlar ve doğrudan REST uç noktaları kullanan komut dosyaları için [Geliştirici API'sine](/tr/agents/api) bakın.

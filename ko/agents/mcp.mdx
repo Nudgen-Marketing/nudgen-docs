@@ -1,0 +1,113 @@
+---
+title: "MCP 서버"
+description: "OAuth로 AI 어시스턴트를 Nudgen에 연결하고, 지도 리드를 검색하며, 브라우저에서 캠페인 시작을 승인하세요"
+---
+
+## 개요
+
+Nudgen은 앱 출처의 `/mcp` 엔드포인트에서 MCP 서버를 호스팅합니다. 이 서버는 Streamable HTTP를 통해 MCP `2026-07-28`을 사용하며 OAuth 2.1이 필요합니다. 해당 전송 방식을 지원하는 클라이언트를 연결하세요. 브라우저에서 Nudgen에 로그인하고 워크스페이스를 선택한 다음 클라이언트가 요청하는 권한을 승인하세요. 이후 대시보드에서 워크스페이스를 전환하더라도 연결은 선택한 워크스페이스에 계속 귀속됩니다.
+
+## 이것이 중요한 이유
+
+어시스턴트는 대시보드 세션이나 개인 액세스 토큰을 다루지 않고도 연락처와 캠페인을 읽고, 주변 비즈니스를 찾고, 콘텐츠 초안을 만들며, 캠페인 시작을 준비할 수 있습니다. 실제 발송이나 예약은 진행되기 전에 매번 브라우저에서 검토합니다.
+
+## 클라이언트 연결
+
+프로덕션 엔드포인트는 다음과 같습니다.
+
+```text
+https://app.nudgen.net/mcp
+```
+
+OAuth를 지원하는 클라이언트에 **원격 HTTP MCP 서버**로 추가하세요. 클라이언트는 엔드포인트에서 Nudgen의 인증 서버를 검색하고 브라우저 로그인 및 동의 절차를 엽니다. 클라이언트가 액세스할 워크스페이스를 선택하고 필요한 범위만 승인하세요.
+
+검색 문서:
+
+| 문서 | URL |
+| --- | --- |
+| 보호된 리소스 메타데이터 | `https://app.nudgen.net/.well-known/oauth-protected-resource/mcp` |
+| 인증 서버 | `https://app.nudgen.net/mcp-oauth` |
+| 서버 카드 | `https://app.nudgen.net/.well-known/mcp/server-card.json` |
+
+인증 서버는 PKCE S256, 리소스 바인딩, 새로 고침 토큰 순환이 포함된 인증 코드 방식을 사용합니다. Client ID Metadata Documents와 동적 클라이언트 등록을 지원합니다.
+
+Codex CLI에서는 다음 명령을 사용하세요.
+
+```bash
+codex mcp add nudgen --url "https://app.nudgen.net/mcp" --oauth-resource "https://app.nudgen.net/mcp"
+codex mcp login nudgen --scopes campaigns:read,campaigns:write,campaigns:send
+```
+
+`nudgen`이라는 클라이언트가 이미 구성되어 있다면 해당 항목을 `/mcp` URL로 업데이트하세요.
+
+| 범위 | 허용되는 작업 |
+| --- | --- |
+| `campaigns:read` | 워크스페이스, 연락처, 캠페인, 브랜드 설정을 조회하고 지도 리드를 검색합니다. |
+| `campaigns:write` | 연락처와 캠페인 초안을 만들고, 브랜드 설정을 업데이트하고, AI 초안을 생성하며, 지도 리드를 가져옵니다. |
+| `campaigns:send` | 캠페인 시작을 요청하고 완료합니다. 이 범위만으로 이메일이 발송되지는 않습니다. |
+
+데이터 조회만 필요하다면 `campaigns:read`를 요청하세요. 클라이언트가 연락처, 초안, 브랜드 설정 또는 가져온 리드를 변경해야 한다면 `campaigns:write`를 추가하세요. 클라이언트가 시작 승인을 요청해야 하는 경우에만 `campaigns:send`를 추가하세요.
+
+<Note>
+  개인 액세스 토큰은 [개발자 API](/ko/agents/api)를 인증하지만 `/mcp` 인증에는 사용할 수 없습니다. MCP 클라이언트는 OAuth 로그인을 완료해야 합니다.
+</Note>
+
+## 사용 가능한 도구
+
+| 작업 | 도구 | 범위 |
+| --- | --- | --- |
+| 워크스페이스 조회 | `get_current_user`, `list_contacts`, `list_campaigns`, `get_campaign`, `get_campaign_stats`, `get_brand_settings` | `campaigns:read` |
+| 주변 비즈니스 찾기 | `search_map_leads` | `campaigns:read` |
+| 생성 및 편집 | `create_contact`, `create_campaign`, `update_brand_settings`, `generate_email_draft`, `import_map_leads` | `campaigns:write` |
+| 시작 요청 및 완료 | `prepare_campaign_launch`, `launch_campaign` | `campaigns:send` |
+
+`create_campaign`은 **일회성 캠페인 초안**을 저장합니다. 직접 발송하거나 예약할 수 없습니다. `get_campaign`을 사용하면 시작 전에 제목, 콘텐츠, 링크, 오디언스, 발신자를 확인할 수 있습니다.
+
+서버는 `campaigns:read`에서 읽기 전용 리소스도 제공합니다.
+
+| 리소스 | 내용 |
+| --- | --- |
+| `nudgen://api-catalog` | 호스팅된 도구의 이름과 설명입니다. |
+| `nudgen://team/brand` | 연결된 워크스페이스의 브랜드 설정입니다. |
+| `nudgen://campaigns/{id}/summary` | 한 캠페인의 전송 통계입니다. `{id}`를 캠페인 ID로 바꾸세요. |
+
+### 지도 리드 찾기 및 가져오기
+
+1. 어시스턴트에게 도시와 `marketing agency` 같은 비즈니스 키워드 등 위치와 비즈니스 키워드를 사용해 `search_map_leads`를 호출하도록 요청하세요.
+2. 선택적 필터로는 `radiusKm`(1~100), `lat`, `lng`, 이메일을 공개한 비즈니스만 유지하는 `emailOnly`가 있습니다.
+3. 결과에 `nextPageToken`이 포함되면 이를 `pageToken`으로 전달해 다음 페이지를 불러오세요.
+4. 어시스턴트에게 동일한 위치와 키워드, 저장할 리드 객체를 사용해 `import_map_leads`를 호출하도록 요청하세요. 호출당 최대 200개의 리드를 받을 수 있습니다.
+
+가져오기는 연결된 워크스페이스에 연락처를 생성합니다. 이메일이 없는 리드는 건너뜁니다. 이미 존재하는 리드는 업데이트됩니다.
+
+### 캠페인 시작 승인
+
+1. 어시스턴트에게 `get_campaign`으로 초안을 조회하도록 요청하세요.
+2. 캠페인 ID와 원하는 정확한 즉시 발송 또는 예약 시간을 사용해 `prepare_campaign_launch`를 호출하도록 요청하세요. 일회용 승인 URL이 반환되며 아직 이메일은 발송되지 않습니다.
+3. URL을 열어 워크스페이스, 예상 수신자 수, 콘텐츠, 발신자, 발송 시점을 검토한 다음 **시작 승인**을 클릭하세요.
+4. 클라이언트로 돌아가 동일한 캠페인 ID, 발송 시점, `approvalId`를 사용해 `launch_campaign`을 호출하도록 하세요.
+
+승인은 **10분** 후 만료되며 한 번만 사용할 수 있습니다. 캠페인이나 발신자가 변경되면 새 승인을 요청하세요. Nudgen은 시작 시 발신자 준비 상태, 적격 수신자, 구독, 할당량, 대기열 가용성을 다시 확인합니다. 캠페인 작업자가 시작 요청을 처리한 후에만 전송이 시작됩니다.
+
+<Warning>
+  `launch_campaign`을 승인하고 완료하면 실제 이메일이 발송될 수 있습니다. 실제 오디언스에 대한 발송을 승인하기 전에 대시보드의 테스트 발송 절차로 받은편지함 미리보기를 확인하세요.
+</Warning>
+
+## 액세스 관리
+
+**설정** → **API 키** → **연결된 MCP 앱**을 열어 각 연결된 클라이언트의 워크스페이스와 범위를 확인하세요. 더 이상 액세스할 필요가 없는 연결은 여기에서 취소하세요. 연결을 취소하면 해당 토큰과 대기 중인 시작 승인이 비활성화됩니다. 나중에 OAuth를 통해 다시 연결할 수 있습니다.
+
+OAuth 권한 부여는 최대 90일간 유지됩니다. 워크스페이스에 대한 액세스 권한을 잃으면 클라이언트도 해당 워크스페이스의 연결을 사용할 수 없습니다.
+
+## 문제 해결
+
+| 증상 | 해결 방법 |
+| --- | --- |
+| 로그인이 시작되지 않음 | 클라이언트가 OAuth를 사용하는 원격 Streamable HTTP MCP를 지원하고 `https://app.nudgen.net/mcp`를 사용하는지 확인하세요. |
+| 도구에 더 많은 권한이 필요함 | 다시 연결하고 해당 워크스페이스에 필요한 범위를 승인하세요. |
+| 연락처 검색에서 결과를 좁히라는 메시지가 표시됨 | 검색은 이름과 이메일 주소를 일치시키며 태그 및 상태 필터 적용 후 최대 5,000개의 연락처를 검사합니다. 필터 범위를 좁히세요. |
+| 지도 리드를 가져올 때 비즈니스를 건너뜀 | 이메일이 있는 리드만 저장됩니다. `emailOnly`를 true로 설정해 다시 검색하거나 이미 이메일이 포함된 리드를 선택하세요. |
+| 시작 승인이 만료되었거나 캠페인이 변경됨 | 새 승인을 요청하고 현재 캠페인과 발신자를 검토하세요. |
+| 시작이 차단됨 | 캠페인의 초안 상태, 발신자 준비 상태, 적격 연락처, 플랜 할당량, [발송 도메인](/ko/settings/sending-domains)을 확인하세요. |
+
+전달자 토큰과 직접 REST 엔드포인트를 사용하는 스크립트에 대해서는 [개발자 API](/ko/agents/api)를 참조하세요.

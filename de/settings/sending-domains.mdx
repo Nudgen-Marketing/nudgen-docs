@@ -1,0 +1,47 @@
+---
+title: "Benutzerdefinierte Domain"
+description: "Verifizieren Sie eine eigene Domain und verwenden Sie sie als Absender für die Kampagnen Ihres Teams"
+---
+
+Unter **Einstellungen** → **Benutzerdefinierte Domain** können Sie Kampagnen und Test-E-Mails von einer Adresse auf Ihrer eigenen Domain senden. Ohne benutzerdefinierte Domain verwendet Ihr Team den Nudgen-Absender.
+
+## Warum das wichtig ist
+
+Mit einer verifizierten Domain erkennen Empfänger Ihre Marke an der Absenderadresse. Nudgen prüft die erforderlichen DNS-Einträge, bevor die Domain verwendet wird, und pausiert den Versand, wenn der ausgewählte Absender später nicht mehr berechtigt ist.
+
+## Warum das wichtig ist
+
+Mit einer verifizierten Domain erkennen Kontakte Ihre Marke an der Absenderadresse. DNS-Prüfungen bestätigen, dass Sie die Domain kontrollieren und Nudgen von dieser Domain gesendete E-Mails authentifizieren kann.
+
+## Bevor Sie beginnen
+
+- Ihr Team benötigt einen **aktiven kostenpflichtigen Tarif**, um einen benutzerdefinierten Absender hinzuzufügen und zu verwenden. Teams im kostenlosen Tarif können Domains, die bereits in ihren Einstellungen hinterlegt sind, weiterhin anzeigen und entfernen.
+- Nur ein **Inhaber oder Administrator** des Teams kann eine Domain hinzufügen, bearbeiten, verifizieren, auswählen oder entfernen und den Versand fortsetzen. Andere Mitglieder können den Status und die DNS-Einträge einsehen.
+- Sie benötigen Zugriff auf den DNS-Anbieter der Domain. Ein Team kann **eine benutzerdefinierte Domain** konfigurieren. Um sie zu ersetzen, wechseln Sie zu **Nudgen-Absender verwenden**, entfernen die alte Domain und fügen anschließend die neue hinzu.
+
+## Domain hinzufügen und verifizieren
+
+1. Öffnen Sie **Einstellungen** → **Benutzerdefinierte Domain** und geben Sie eine Domain ein, die Ihnen gehört, zum Beispiel `mail.example.com`. Geben Sie den Teil der Absenderadresse vor dem `@` (zum Beispiel `hello`) und einen Absendernamen ein. Die Adresse muss sich auf **genau dieser Domain** befinden: `hello@mail.example.com` für `mail.example.com`.
+2. Wählen Sie **Domain hinzufügen**. Öffnen Sie auf der Domain-Karte die **DNS-Einträge** und kopieren Sie Host und Wert des **TXT-Eintrags für den Eigentumsnachweis** zu Ihrem DNS-Anbieter. Der Host beginnt mit `_nudgen-verify.`. Lassen Sie diesen Eintrag auch nach der Verifizierung bestehen.
+3. Wählen Sie **DNS prüfen**. Sobald das Eigentum verifiziert ist, zeigt die Karte die Einträge **DKIM TXT** und **Return-Path CNAME** für Ihre Domain an. Kopieren Sie die angezeigten Hosts und Werte exakt zu Ihrem DNS-Anbieter. Wenn mehrere DKIM-Einträge angezeigt werden, veröffentlichen Sie jeden davon.
+4. Wählen Sie nach dem Speichern der Einträge erneut **DNS prüfen**. Es kann einige Zeit dauern, bis DNS-Änderungen übernommen werden. Die Domain ist **Bereit**, wenn Eigentum, DKIM und Return-Path verifiziert sind.
+
+Verwenden Sie die Eintragswerte, die auf Ihrer eigenen Domain-Karte angezeigt werden. Sie gelten ausschließlich für Ihre Konfiguration. **DMARC** wird empfohlen, sein Status verhindert die Aktivierung jedoch nicht. Behalten Sie eine vorhandene DMARC-Richtlinie bei, einschließlich einer von einer übergeordneten Domain geerbten Richtlinie. Für diese Konfiguration müssen Sie keinen separaten SPF-Eintrag für die Root-Domain hinzufügen.
+
+Die erste verifizierte Domain wird automatisch zum Standardabsender, wenn Ihr Team zuvor keinen Absender ausgewählt hat und der Versand nicht pausiert ist. Wählen Sie andernfalls auf der Karte der bereiten Domain **Als Standard festlegen**. Im Abschnitt **Standardabsender für Kampagnen** wird der ausgewählte Absender angezeigt. Dort können Sie jederzeit **Nudgen-Absender verwenden** auswählen.
+
+## Absender verwalten
+
+- Mit **Absender bearbeiten** ändern Sie den lokalen Teil der Adresse oder den Anzeigenamen. Die Domain selbst kann nicht bearbeitet werden. Ersetzen Sie die Domain, um sie zu ändern.
+- **Entfernen** ist nur verfügbar, wenn die Domain nicht der Standardabsender ist. Wählen Sie bei Bedarf zuerst **Nudgen-Absender verwenden**. Durch das Entfernen einer Domain wird der einzige Domain-Platz des Teams wieder frei.
+- **DNS prüfen** aktualisiert den Verifizierungsstatus. Die Karte zeigt die letzte Prüfung, etwaige Verifizierungsfehler sowie den Status von Eigentum, DKIM, Return-Path und DMARC.
+
+## Wenn der Kampagnenversand pausiert ist
+
+Wenn die ausgewählte benutzerdefinierte Domain die erforderliche DNS-Verifizierung oder den Zugriff auf einen kostenpflichtigen Tarif verliert, wird der Kampagnenversand pausiert. **E-Mails in der Warteschlange bleiben erhalten.** Die Seite zeigt den Grund unter **Kampagnenversand ist pausiert** an.
+
+1. Korrigieren Sie die DNS-Einträge oder stellen Sie den kostenpflichtigen Zugriff wieder her. Sie können auch **Nudgen-Absender verwenden** auswählen.
+2. Wählen Sie **DNS prüfen**, wenn Sie die Einträge korrigiert haben, und vergewissern Sie sich, dass die Domain **Bereit** ist.
+3. Wählen Sie **Versand fortsetzen**. Das Korrigieren der DNS-Einträge oder das Ändern des Standardabsenders allein hebt die Pause nicht auf.
+
+Informationen zu anderen Zustellungsproblemen finden Sie unter [Versand und Zustellbarkeit](/de/troubleshooting/deliverability).

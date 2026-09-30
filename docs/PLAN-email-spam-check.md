@@ -3,7 +3,7 @@
 Plan for documenting the **Email Spam Checker** tool in the `nudgen-docs` repository.
 
 ## 1. Context & Requirements
-- **Goal**: Add a dedicated documentation page for the Email Spam Checker tool (`https://nudgen.net/email-spam-checker`).
+- **Goal**: Add a dedicated documentation page for the Email Spam Checker tool (`https://get.nudgen.net/email-spam-checker`).
 - **Location**: A new "Spam Checker" section in the navigation.
 - **Content**: How the tool works, explanation of the "Spam Score," and how it helps with deliverability.
 
@@ -25,7 +25,7 @@ Plan for documenting the **Email Spam Checker** tool in the `nudgen-docs` reposi
     - **Spam Score**: Explain the radial gauge and risk levels (Good, Caution, Risky).
     - **Spam Triggers**: How Nudgen identifies words that trigger spam filters.
     - **Best Practices**: Tips for improving deliverability based on the tool's output.
-- [ ] Add a "Try it out" link pointing to `https://nudgen.net/email-spam-checker`.
+- [ ] Add a "Try it out" link pointing to `https://get.nudgen.net/email-spam-checker`.
 
 ### Phase 3: Verification
 - [ ] Run `mint dev` to preview the new page and navigation.
