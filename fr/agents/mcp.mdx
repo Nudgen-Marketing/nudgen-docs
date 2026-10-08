@@ -57,7 +57,7 @@ Si vous devez uniquement consulter des données, demandez `campaigns:read`. Ajou
 | Tâche | Outils | Portée |
 | --- | --- | --- |
 | Consulter votre espace de travail | `get_current_user`, `list_contacts`, `list_campaigns`, `get_campaign`, `get_campaign_stats`, `get_brand_settings` | `campaigns:read` |
-| Trouver des entreprises à proximité | `search_map_leads` | `campaigns:read` |
+| Trouver des entreprises à proximité | `search_map_leads`, `retry_map_leads_enrichment` | `campaigns:read` |
 | Créer et modifier | `create_contact`, `create_campaign`, `update_brand_settings`, `generate_email_draft`, `import_map_leads` | `campaigns:write` |
 | Demander et finaliser un lancement | `prepare_campaign_launch`, `launch_campaign` | `campaigns:send` |
 
@@ -111,3 +111,11 @@ Les autorisations OAuth sont valides pendant 90 jours au maximum. La perte d'acc
 | Un lancement est bloqué | Vérifiez le statut de brouillon de la campagne, l'état de préparation de l'expéditeur, les contacts admissibles, le quota du forfait et le [domaine d'envoi](/fr/settings/sending-domains). |
 
 Pour les scripts qui utilisent des jetons porteurs et des points de terminaison REST directs, consultez l'[API de développeur](/fr/agents/api).
+
+### Rayon de recherche et enrichissement
+
+Les recherches API et MCP utilisent 5 km par défaut et acceptent un entier `radiusKm` de 1 à 100, sans dialogue de confirmation. Conservez les mêmes paramètres avec `pageToken` fourni par `nextPageToken`. Une page vide peut encore avoir une page suivante.
+
+`enrichmentPending` indique une recherche de site encore en cours. Consultez `businessSummary` et `businessSources` lorsqu’ils sont disponibles. Le contexte importé peut aider à personnaliser les introductions des campagnes. Une adresse e-mail absente peut encore être en cours de recherche.
+
+Avec `enrichmentRetryToken`, appelez `retry_map_leads_enrichment` avec `token` et la portée `campaigns:read`. Le jeton est lié au workspace connecté, expire après 15 minutes et ne sert qu’une fois. Fusionnez par `placeId` avant import. `emailOnly` filtre la réponse actuelle ; des leads peuvent apparaître après la nouvelle tentative.

@@ -252,3 +252,45 @@ curl "$NUDGEN_APP_URL/api/v1/campaigns/$CAMPAIGN_ID/executions?limit=25&status=s
 <Card title="MCP server setup" icon="bot" href="/en/agents/mcp">
  Установите Nudgen MCP в Claude Code, Cursor, Windsurf, Codex CLI или в обычном клиенте MCP.
 </Card>
+
+## API Map Leads
+
+Используйте PAT активного workspace. Новый поиск расходует суточную квоту; следующие страницы и повтор обогащения не расходуют. Сброс в полночь UTC. Увеличение радиуса создаёт новый поиск. Ошибка поставщика освобождает резерв; отмена принятого поиска не освобождает.
+
+API и MCP используют 5 км по умолчанию и принимают целое `radiusKm` от 1 до 100 без диалога подтверждения панели. Сохраняйте параметры при передаче `nextPageToken` как `pageToken`. Даже пустая страница может иметь следующую.
+
+`enrichmentPending` означает незавершённое исследование сайта. Проверяйте доступные `businessSummary` и `businessSources`. Импортированный контекст помогает персонализировать вступления кампаний. Отсутствующий email может ещё находиться в процессе поиска.
+
+| Method | Endpoint |
+| --- | --- |
+| `POST` | `/api/v1/map-leads/suggest` |
+| `POST` | `/api/v1/map-leads/place` |
+| `POST` | `/api/v1/map-leads/search` |
+| `POST` | `/api/v1/map-leads/enrichment-retry` |
+| `POST` | `/api/v1/map-leads/import` |
+| `GET` | `/api/v1/map-leads/quota` |
+| `GET` | `/api/v1/map-leads/geolocate` |
+
+```bash
+curl -X POST "$NUDGEN_APP_URL/api/v1/map-leads/search" \
+  -H "Authorization: Bearer $NUDGEN_PAT" \
+  -H "Content-Type: application/json" \
+  --data '{"location":"Austin, TX","keywords":"marketing agency","radiusKm":5}'
+```
+
+При наличии `enrichmentRetryToken` вызовите `POST /api/v1/map-leads/enrichment-retry` с `token` и правом PAT. Токен привязан к подключённому workspace, действует 15 минут и используется один раз. Перед импортом объедините результаты по `placeId`.
+
+Передайте `Accept: application/x-ndjson` для поиска или повтора. Каждая строка JSON содержит `type`: `progress`, `complete` или `error`. Объединяйте `data.leads` по `placeId`. Итоговый результат — `complete.data`, ошибка — `error`. Без заголовка возвращается JSON. `POST /place` разрешает подсказку местоположения; `GET /geolocate` возвращает фиксированный центр Хошимина и не определяет ваше положение.
+
+```bash
+curl -N -X POST "$NUDGEN_APP_URL/api/v1/map-leads/search" \
+  -H "Authorization: Bearer $NUDGEN_PAT" \
+  -H "Content-Type: application/json" \
+  -H "Accept: application/x-ndjson" \
+  --data '{"location":"Austin, TX","keywords":"marketing agency","radiusKm":5}'
+
+curl -X POST "$NUDGEN_APP_URL/api/v1/map-leads/enrichment-retry" \
+  -H "Authorization: Bearer $NUDGEN_PAT" \
+  -H "Content-Type: application/json" \
+  --data "{\"token\":\"$ENRICHMENT_RETRY_TOKEN\"}"
+```

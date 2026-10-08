@@ -57,7 +57,7 @@ Yalnızca verileri incelemeniz gerekiyorsa `campaigns:read` kapsamını isteyin.
 | Görev | Araçlar | Kapsam |
 | --- | --- | --- |
 | Çalışma alanınızı inceleme | `get_current_user`, `list_contacts`, `list_campaigns`, `get_campaign`, `get_campaign_stats`, `get_brand_settings` | `campaigns:read` |
-| Yakındaki işletmeleri bulma | `search_map_leads` | `campaigns:read` |
+| Yakındaki işletmeleri bulma | `search_map_leads`, `retry_map_leads_enrichment` | `campaigns:read` |
 | Oluşturma ve düzenleme | `create_contact`, `create_campaign`, `update_brand_settings`, `generate_email_draft`, `import_map_leads` | `campaigns:write` |
 | Başlatma isteme ve tamamlama | `prepare_campaign_launch`, `launch_campaign` | `campaigns:send` |
 
@@ -111,3 +111,11 @@ OAuth izinleri en fazla 90 gün geçerlidir. Bir çalışma alanına erişimin k
 | Başlatma engelleniyor | Kampanyanın taslak durumunu, gönderenin hazır olma durumunu, uygun kişileri, plan kotasını ve [gönderim alan adını](/tr/settings/sending-domains) kontrol edin. |
 
 Taşıyıcı jetonlar ve doğrudan REST uç noktaları kullanan komut dosyaları için [Geliştirici API'sine](/tr/agents/api) bakın.
+
+### Arama yarıçapı ve zenginleştirme
+
+API ve MCP varsayılan olarak 5 km kullanır, 1–100 arasında tam sayı `radiusKm` kabul eder ve panel onay iletişim kutusunu göstermez. `nextPageToken` değerini `pageToken` olarak gönderirken arama parametrelerini koruyun. Boş sayfanın da sonraki sayfası olabilir.
+
+`enrichmentPending` tamamlanmamış web sitesi araştırmasını gösterir. Varsa `businessSummary` ve `businessSources` alanlarını inceleyin. İçe aktarılan işletme bağlamı kişiselleştirilmiş kampanya girişlerine yardımcı olabilir. Eksik e-posta hâlâ araştırılıyor olabilir.
+
+`enrichmentRetryToken` varsa `campaigns:read` ile `retry_map_leads_enrichment` aracına `token` gönderin. Token bağlı çalışma alanına özeldir, 15 dakikada sona erer ve bir kez kullanılır. İçe aktarmadan önce sonuçları `placeId` ile birleştirin. `emailOnly` geçerli yanıtı filtreler; yeniden denemeden sonra yeni potansiyel müşteriler görünebilir.

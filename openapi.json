@@ -3,7 +3,7 @@
   "info": {
     "title": "Nudgen Developer API",
     "version": "1.0.0",
-    "description": "REST API for contacts, campaigns, Lifetime triggers, sending domains, brand settings, and AI drafts. Most endpoints use a Personal Access Token; Lifetime triggers require a scoped team API key."
+    "description": "REST API for contacts, campaigns, Lifetime triggers, sending domains, brand settings, AI drafts, and local Map Leads search/import. Most endpoints use a Personal Access Token; Lifetime triggers require a scoped team API key."
   },
   "servers": [
     {
@@ -17,6 +17,7 @@
     }
   ],
   "tags": [
+    {"name": "Map Leads"},
     {
       "name": "Identity"
     },
@@ -40,6 +41,683 @@
     }
   ],
   "paths": {
+    "/api/v1/map-leads/search": {
+      "post": {
+        "tags": [
+          "Map Leads"
+        ],
+        "summary": "Search local businesses",
+        "operationId": "searchMapLeads",
+        "description": "PAT uses the active workspace. Defaults to a strict 5 km circle; integer radiusKm 1–100 is explicit. Preserve location, keywords, center, place ID and radius on pagination. Empty filtered pages can still have nextPageToken. Only new searches consume daily quota; pagination does not. Increasing radius starts a new search. Provider failures refund reservations; cancelling an accepted search does not. For NDJSON, parse each line as progress/complete with data, or error with error text. The complete event is authoritative and includes quota and any retry token. Progress snapshots may omit those fields.",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MapLeadsSearchResult"
+                }
+              },
+              "application/x-ndjson": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "{\"type\":\"progress\",\"data\":{\"leads\":[]}}\n{\"type\":\"complete\",\"data\":{\"leads\":[]}}\n"
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MapLeadsError"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized or no active workspace",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MapLeadsError"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Daily search quota or contact plan limit reached",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MapLeadsError"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Rate limit exceeded",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MapLeadsError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Provider failure",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MapLeadsError"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MapLeadsSearchInput"
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "Accept",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Set application/x-ndjson for streamed progress; otherwise application/json."
+          }
+        ]
+      }
+    },
+    "/api/v1/map-leads/enrichment-retry": {
+      "post": {
+        "tags": [
+          "Map Leads"
+        ],
+        "summary": "Retry pending website enrichment",
+        "operationId": "retryMapLeadsEnrichment",
+        "description": "Use enrichmentRetryToken from search. Workspace-bound, single-use, expires after 15 minutes; up to 20 server-discovered pending businesses. Does not consume search quota. Merge leads by placeId. A retry may finish without finding an email. Streaming emits progress/complete with data or error with error text. Token is consumed when the retry begins.",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MapLeadsRetryResult"
+                }
+              },
+              "application/x-ndjson": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "{\"type\":\"progress\",\"data\":{\"leads\":[]}}\n{\"type\":\"complete\",\"data\":{\"leads\":[]}}\n"
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MapLeadsError"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized or no active workspace",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MapLeadsError"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Retry token expired, consumed, or unavailable for this workspace",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MapLeadsError"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Rate limit exceeded",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MapLeadsError"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Retry unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MapLeadsError"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "token": {
+                    "type": "string",
+                    "format": "uuid"
+                  }
+                },
+                "required": [
+                  "token"
+                ]
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "Accept",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Set application/x-ndjson for streamed progress; otherwise application/json."
+          }
+        ]
+      }
+    },
+    "/api/v1/map-leads/import": {
+      "post": {
+        "tags": [
+          "Map Leads"
+        ],
+        "summary": "Import map leads as contacts",
+        "operationId": "importMapLeads",
+        "description": "Import 1–200 businesses into the active workspace. Invalid/missing emails are skipped; existing emails are updated. Stores available business summary/sources and source details. Adds map-lead, location and keyword tags. Contact plan limits apply.",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "summary": {
+                      "type": "object",
+                      "properties": {
+                        "created": {
+                          "type": "integer"
+                        },
+                        "updated": {
+                          "type": "integer"
+                        },
+                        "skipped": {
+                          "type": "integer"
+                        },
+                        "skippedReasons": {
+                          "type": "object",
+                          "additionalProperties": {
+                            "type": "integer"
+                          }
+                        }
+                      },
+                      "required": [
+                        "created",
+                        "updated",
+                        "skipped",
+                        "skippedReasons"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "summary"
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MapLeadsError"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized or no active workspace",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MapLeadsError"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Daily search quota or contact plan limit reached",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MapLeadsError"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Rate limit exceeded",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MapLeadsError"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "location": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 300
+                  },
+                  "keywords": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 200
+                  },
+                  "leads": {
+                    "type": "array",
+                    "minItems": 1,
+                    "maxItems": 200,
+                    "items": {
+                      "$ref": "#/components/schemas/MapLeadImport"
+                    }
+                  },
+                  "tags": {
+                    "type": "array",
+                    "maxItems": 10,
+                    "items": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 25
+                    },
+                    "description": "Optional manual tags, normalized to lowercase. sync: and crm:hubspot: prefixes are reserved."
+                  }
+                },
+                "required": [
+                  "location",
+                  "keywords",
+                  "leads"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/map-leads/quota": {
+      "get": {
+        "tags": [
+          "Map Leads"
+        ],
+        "summary": "Get daily map search quota",
+        "operationId": "getMapLeadsQuota",
+        "description": "Quota belongs to the active workspace and resets at midnight UTC. Null limit and remaining mean unlimited.",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "quota": {
+                      "$ref": "#/components/schemas/MapLeadsQuota"
+                    }
+                  },
+                  "required": [
+                    "quota"
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized or no active workspace",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MapLeadsError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/map-leads/suggest": {
+      "post": {
+        "tags": [
+          "Map Leads"
+        ],
+        "summary": "Suggest search locations",
+        "operationId": "suggestMapLeadsLocations",
+        "description": "Autocomplete locations. Reuse the sessionToken when resolving the selected place.",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "suggestions": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "placeId": {
+                            "type": "string"
+                          },
+                          "description": {
+                            "type": "string"
+                          },
+                          "lat": {
+                            "type": "number",
+                            "minimum": -90,
+                            "maximum": 90
+                          },
+                          "lng": {
+                            "type": "number",
+                            "minimum": -180,
+                            "maximum": 180
+                          },
+                          "resultType": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "placeId",
+                          "description"
+                        ]
+                      }
+                    }
+                  },
+                  "required": [
+                    "suggestions"
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MapLeadsError"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized or no active workspace",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MapLeadsError"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Daily search quota or contact plan limit reached",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MapLeadsError"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Rate limit exceeded",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MapLeadsError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Provider failure",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MapLeadsError"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "input": {
+                    "type": "string",
+                    "description": "Fewer than two trimmed characters returns an empty list."
+                  },
+                  "sessionToken": {
+                    "type": "string"
+                  },
+                  "language": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "input"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/map-leads/place": {
+      "post": {
+        "tags": [
+          "Map Leads"
+        ],
+        "summary": "Resolve a location suggestion",
+        "operationId": "resolveMapLeadsPlace",
+        "description": "Resolve an autocomplete place ID to search coordinates. This is location resolution, not business contact enrichment.",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "placeId": {
+                      "type": "string"
+                    },
+                    "description": {
+                      "type": "string"
+                    },
+                    "lat": {
+                      "type": "number",
+                      "minimum": -90,
+                      "maximum": 90
+                    },
+                    "lng": {
+                      "type": "number",
+                      "minimum": -180,
+                      "maximum": 180
+                    },
+                    "resultType": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "placeId",
+                    "description",
+                    "lat",
+                    "lng"
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MapLeadsError"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized or no active workspace",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MapLeadsError"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Rate limit exceeded",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MapLeadsError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Provider failure",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MapLeadsError"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "placeId": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 512
+                  },
+                  "sessionToken": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 128
+                  }
+                },
+                "required": [
+                  "placeId"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/map-leads/geolocate": {
+      "get": {
+        "tags": [
+          "Map Leads"
+        ],
+        "summary": "Get default map center",
+        "operationId": "getMapLeadsDefaultCenter",
+        "description": "Returns the fixed fallback center Ho Chi Minh City (10.82, 106.63), VN. Does not locate the caller or use browser GPS.",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "lat": {
+                      "type": "number",
+                      "minimum": -90,
+                      "maximum": 90
+                    },
+                    "lng": {
+                      "type": "number",
+                      "minimum": -180,
+                      "maximum": 180
+                    },
+                    "city": {
+                      "type": "string"
+                    },
+                    "country": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "lat",
+                    "lng",
+                    "city",
+                    "country"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "security": []
+      }
+    },
     "/api/v1/user/me": {
       "get": {
         "tags": ["Identity"],
@@ -1634,6 +2312,466 @@
       }
     },
     "schemas": {
+      "MapLeadImport": {
+        "type": "object",
+        "properties": {
+          "placeId": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 512
+          },
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 300
+          },
+          "address": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 500
+          },
+          "lat": {
+            "type": "number",
+            "minimum": -90,
+            "maximum": 90
+          },
+          "lng": {
+            "type": "number",
+            "minimum": -180,
+            "maximum": 180
+          },
+          "website": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "maxLength": 2048
+          },
+          "domain": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "maxLength": 253
+          },
+          "phone": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "maxLength": 64
+          },
+          "rating": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "minimum": 0,
+            "maximum": 5
+          },
+          "categories": {
+            "type": "array",
+            "maxItems": 30,
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 80
+            }
+          },
+          "email": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "maxLength": 254
+          },
+          "socials": {
+            "type": [
+              "object",
+              "null"
+            ],
+            "properties": {
+              "linkedin": {
+                "type": "string",
+                "maxLength": 2048
+              },
+              "facebook": {
+                "type": "string",
+                "maxLength": 2048
+              },
+              "twitter": {
+                "type": "string",
+                "maxLength": 2048
+              },
+              "instagram": {
+                "type": "string",
+                "maxLength": 2048
+              }
+            }
+          },
+          "businessSummary": {
+            "type": "string",
+            "maxLength": 1200
+          },
+          "businessSources": {
+            "type": "array",
+            "maxItems": 4,
+            "items": {
+              "type": "object",
+              "properties": {
+                "url": {
+                  "type": "string",
+                  "format": "uri",
+                  "maxLength": 2048,
+                  "pattern": "^https?://"
+                },
+                "title": {
+                  "type": "string",
+                  "maxLength": 300
+                }
+              },
+              "required": [
+                "url",
+                "title"
+              ]
+            }
+          }
+        },
+        "required": [
+          "placeId",
+          "name",
+          "address",
+          "lat",
+          "lng",
+          "website",
+          "domain",
+          "phone",
+          "rating",
+          "categories",
+          "email"
+        ]
+      },
+      "MapLead": {
+        "type": "object",
+        "properties": {
+          "placeId": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 512
+          },
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 300
+          },
+          "address": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 500
+          },
+          "lat": {
+            "type": "number",
+            "minimum": -90,
+            "maximum": 90
+          },
+          "lng": {
+            "type": "number",
+            "minimum": -180,
+            "maximum": 180
+          },
+          "website": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "maxLength": 2048
+          },
+          "domain": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "maxLength": 253
+          },
+          "phone": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "maxLength": 64
+          },
+          "rating": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "minimum": 0,
+            "maximum": 5
+          },
+          "categories": {
+            "type": "array",
+            "maxItems": 30,
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 80
+            }
+          },
+          "email": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "maxLength": 254
+          },
+          "socials": {
+            "type": [
+              "object",
+              "null"
+            ],
+            "properties": {
+              "linkedin": {
+                "type": "string",
+                "maxLength": 2048
+              },
+              "facebook": {
+                "type": "string",
+                "maxLength": 2048
+              },
+              "twitter": {
+                "type": "string",
+                "maxLength": 2048
+              },
+              "instagram": {
+                "type": "string",
+                "maxLength": 2048
+              }
+            }
+          },
+          "businessSummary": {
+            "type": "string",
+            "maxLength": 1200
+          },
+          "businessSources": {
+            "type": "array",
+            "maxItems": 4,
+            "items": {
+              "type": "object",
+              "properties": {
+                "url": {
+                  "type": "string",
+                  "format": "uri",
+                  "maxLength": 2048,
+                  "pattern": "^https?://"
+                },
+                "title": {
+                  "type": "string",
+                  "maxLength": 300
+                }
+              },
+              "required": [
+                "url",
+                "title"
+              ]
+            }
+          },
+          "enrichmentPending": {
+            "type": "boolean",
+            "description": "Website enrichment did not finish during the initial search; false after retry does not guarantee an email was found."
+          }
+        },
+        "required": [
+          "placeId",
+          "name",
+          "address",
+          "lat",
+          "lng",
+          "website",
+          "domain",
+          "phone",
+          "rating",
+          "categories",
+          "email",
+          "socials"
+        ]
+      },
+      "MapLeadsQuota": {
+        "type": "object",
+        "properties": {
+          "plan": {
+            "type": "string"
+          },
+          "limit": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "used": {
+            "type": "integer"
+          },
+          "remaining": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "resetAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Next midnight UTC."
+          }
+        },
+        "required": [
+          "plan",
+          "limit",
+          "used",
+          "remaining",
+          "resetAt"
+        ]
+      },
+      "MapLeadsSearchInput": {
+        "type": "object",
+        "properties": {
+          "location": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 300
+          },
+          "keywords": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200
+          },
+          "radiusKm": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "minimum": 1,
+            "maximum": 100,
+            "default": 5
+          },
+          "pageToken": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "minLength": 1,
+            "maxLength": 8192
+          },
+          "locationPlaceId": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "minLength": 1,
+            "maxLength": 512
+          },
+          "lat": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "minimum": -90,
+            "maximum": 90
+          },
+          "lng": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "minimum": -180,
+            "maximum": 180
+          }
+        },
+        "required": [
+          "location",
+          "keywords"
+        ]
+      },
+      "MapLeadsSearchResult": {
+        "type": "object",
+        "properties": {
+          "center": {
+            "type": "object",
+            "properties": {
+              "lat": {
+                "type": "number",
+                "minimum": -90,
+                "maximum": 90
+              },
+              "lng": {
+                "type": "number",
+                "minimum": -180,
+                "maximum": 180
+              }
+            },
+            "required": [
+              "lat",
+              "lng"
+            ]
+          },
+          "leads": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MapLead"
+            }
+          },
+          "nextPageToken": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "quota": {
+            "$ref": "#/components/schemas/MapLeadsQuota"
+          },
+          "enrichmentRetryToken": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "uuid"
+          }
+        },
+        "required": [
+          "center",
+          "leads",
+          "nextPageToken"
+        ]
+      },
+      "MapLeadsRetryResult": {
+        "type": "object",
+        "properties": {
+          "leads": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MapLead"
+            }
+          }
+        },
+        "required": [
+          "leads"
+        ]
+      },
+      "MapLeadsError": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string"
+          },
+          "code": {
+            "type": "string"
+          },
+          "quota": {
+            "$ref": "#/components/schemas/MapLeadsQuota"
+          }
+        },
+        "required": [
+          "error"
+        ]
+      },
       "LifetimeVariableManifestEntry": {
         "type": "object",
         "required": [

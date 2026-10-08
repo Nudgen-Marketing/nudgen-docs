@@ -57,7 +57,7 @@ codex mcp login nudgen --scopes campaigns:read,campaigns:write,campaigns:send
 | 任务 | 工具 | 权限范围 |
 | --- | --- | --- |
 | 查看工作区 | `get_current_user`, `list_contacts`, `list_campaigns`, `get_campaign`, `get_campaign_stats`, `get_brand_settings` | `campaigns:read` |
-| 查找附近商家 | `search_map_leads` | `campaigns:read` |
+| 查找附近商家 | `search_map_leads`, `retry_map_leads_enrichment` | `campaigns:read` |
 | 创建和编辑 | `create_contact`, `create_campaign`, `update_brand_settings`, `generate_email_draft`, `import_map_leads` | `campaigns:write` |
 | 请求并完成活动启动 | `prepare_campaign_launch`, `launch_campaign` | `campaigns:send` |
 
@@ -111,3 +111,11 @@ OAuth 授权最长有效 90 天。如果你失去某个工作区的访问权限�
 | 活动启动被阻止 | 检查活动是否为草稿、发件人是否就绪、是否有符合条件的联系人、套餐配额，以及[发件域名](/cn/settings/sending-domains)。 |
 
 如需在脚本中使用 Bearer 令牌和直接 REST 端点，请参阅[开发人员 API](/cn/agents/api)。
+
+### 搜索半径与信息补充
+
+API和MCP默认使用5 km，接受整数 `radiusKm` 1–100，不显示仪表板确认对话框。将 `nextPageToken` 作为 `pageToken` 传递时保持搜索参数不变。空页面仍可能有下一页。
+
+`enrichmentPending`表示网站调查尚未完成。查看可用的 `businessSummary` 和 `businessSources`。导入的企业背景可帮助个性化营销活动的开场内容。没有邮箱可能是调查仍在等待完成。
+
+收到 `enrichmentRetryToken` 时，使用 `campaigns:read` 权限调用 `retry_map_leads_enrichment` 并传入 `token`。令牌绑定已连接的工作空间，15分钟后过期，只能使用一次。导入前按 `placeId` 合并结果。`emailOnly`筛选当前响应；重试后可能出现更多潜在客户。

@@ -252,3 +252,45 @@ Sử dụng [Nudgen MCP](/en/agents/mcp) khi tác nhân của bạn hỗ trợ c
 <Card title="MCP server setup" icon="bot" href="/en/agents/mcp">
  Cài đặt Nudgen MCP trong Claude Code, Cursor, Windsurf, Codex CLI hoặc MCP chung client.
 </Card>
+
+## API Map Leads
+
+Dùng PAT của không gian làm việc đang hoạt động. Tìm kiếm mới dùng hạn mức hằng ngày; phân trang và thử bổ sung thông tin không dùng hạn mức. Hạn mức đặt lại lúc nửa đêm UTC. Bán kính lớn hơn bắt đầu tìm kiếm mới. Lỗi nhà cung cấp hoàn lại lượt đã giữ; hủy tìm kiếm đã chấp nhận không hoàn lại.
+
+Tìm kiếm API và MCP mặc định 5 km, chấp nhận số nguyên `radiusKm` từ 1 đến 100 và không hiển thị hộp thoại xác nhận của bảng điều khiển. Giữ nguyên tham số khi truyền `nextPageToken` thành `pageToken`; một trang không có kết quả phù hợp vẫn có thể có trang tiếp theo.
+
+Thông tin liên hệ có thể được bổ sung sau khi doanh nghiệp xuất hiện. `enrichmentPending` đánh dấu việc nghiên cứu website chưa hoàn tất. Xem `businessSummary` và `businessSources` khi có; ngữ cảnh doanh nghiệp được nhập có thể hỗ trợ lời mở đầu cá nhân hóa. Chưa có email có thể do nghiên cứu còn đang chờ.
+
+| Method | Endpoint |
+| --- | --- |
+| `POST` | `/api/v1/map-leads/suggest` |
+| `POST` | `/api/v1/map-leads/place` |
+| `POST` | `/api/v1/map-leads/search` |
+| `POST` | `/api/v1/map-leads/enrichment-retry` |
+| `POST` | `/api/v1/map-leads/import` |
+| `GET` | `/api/v1/map-leads/quota` |
+| `GET` | `/api/v1/map-leads/geolocate` |
+
+```bash
+curl -X POST "$NUDGEN_APP_URL/api/v1/map-leads/search" \
+  -H "Authorization: Bearer $NUDGEN_PAT" \
+  -H "Content-Type: application/json" \
+  --data '{"location":"Austin, TX","keywords":"marketing agency","radiusKm":5}'
+```
+
+Nếu có `enrichmentRetryToken`, gọi `POST /api/v1/map-leads/enrichment-retry` với `token`. Công cụ cần PAT, gắn với không gian làm việc đã kết nối, hết hạn sau 15 phút và chỉ dùng một lần. Hợp nhất kết quả theo `placeId` trước khi nhập.
+
+Đặt `Accept: application/x-ndjson` khi tìm kiếm hoặc thử bổ sung thông tin để nhận kết quả dần. Mỗi dòng JSON có `type` là `progress`, `complete` hoặc `error`. Hợp nhất `data.leads` theo `placeId`; dùng `complete.data` cuối cùng làm kết quả chính thức. Lỗi nằm trong `error`. Không có header này, phản hồi là JSON thông thường. `POST /place` phân giải gợi ý vị trí, không lấy liên hệ doanh nghiệp. `GET /geolocate` trả vị trí mặc định cố định tại Thành phố Hồ Chí Minh, không xác định vị trí của bạn.
+
+```bash
+curl -N -X POST "$NUDGEN_APP_URL/api/v1/map-leads/search" \
+  -H "Authorization: Bearer $NUDGEN_PAT" \
+  -H "Content-Type: application/json" \
+  -H "Accept: application/x-ndjson" \
+  --data '{"location":"Austin, TX","keywords":"marketing agency","radiusKm":5}'
+
+curl -X POST "$NUDGEN_APP_URL/api/v1/map-leads/enrichment-retry" \
+  -H "Authorization: Bearer $NUDGEN_PAT" \
+  -H "Content-Type: application/json" \
+  --data "{\"token\":\"$ENRICHMENT_RETRY_TOKEN\"}"
+```

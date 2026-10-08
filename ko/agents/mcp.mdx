@@ -57,7 +57,7 @@ codex mcp login nudgen --scopes campaigns:read,campaigns:write,campaigns:send
 | 작업 | 도구 | 범위 |
 | --- | --- | --- |
 | 워크스페이스 조회 | `get_current_user`, `list_contacts`, `list_campaigns`, `get_campaign`, `get_campaign_stats`, `get_brand_settings` | `campaigns:read` |
-| 주변 비즈니스 찾기 | `search_map_leads` | `campaigns:read` |
+| 주변 비즈니스 찾기 | `search_map_leads`, `retry_map_leads_enrichment` | `campaigns:read` |
 | 생성 및 편집 | `create_contact`, `create_campaign`, `update_brand_settings`, `generate_email_draft`, `import_map_leads` | `campaigns:write` |
 | 시작 요청 및 완료 | `prepare_campaign_launch`, `launch_campaign` | `campaigns:send` |
 
@@ -111,3 +111,11 @@ OAuth 권한 부여는 최대 90일간 유지됩니다. 워크스페이스에 �
 | 시작이 차단됨 | 캠페인의 초안 상태, 발신자 준비 상태, 적격 연락처, 플랜 할당량, [발송 도메인](/ko/settings/sending-domains)을 확인하세요. |
 
 전달자 토큰과 직접 REST 엔드포인트를 사용하는 스크립트에 대해서는 [개발자 API](/ko/agents/api)를 참조하세요.
+
+### 검색 반경 및 정보 보강
+
+API와 MCP의 기본값은 5 km이며 정수 `radiusKm` 1~100을 지원합니다. 대시보드 확인 대화상자는 표시하지 않습니다. `nextPageToken`을 `pageToken`으로 전달할 때 같은 검색 조건을 유지하세요. 빈 페이지에도 다음 페이지가 있을 수 있습니다.
+
+`enrichmentPending`은 완료되지 않은 웹사이트 조사를 나타냅니다. 제공되는 `businessSummary`와 `businessSources`를 검토하세요. 가져온 비즈니스 정보는 개인화된 캠페인 소개에 도움이 됩니다. 이메일이 없으면 조사가 진행 중일 수 있습니다.
+
+`enrichmentRetryToken`이 있으면 `campaigns:read` 권한으로 `retry_map_leads_enrichment`에 `token`을 전달하세요. 토큰은 연결된 워크스페이스 전용이며 15분 후 만료되고 한 번만 사용됩니다. 가져오기 전에 `placeId`로 결과를 병합하세요. `emailOnly`는 현재 응답을 필터링하므로 재시도 후 리드가 나타날 수 있습니다.

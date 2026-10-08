@@ -57,7 +57,7 @@ If you only need to inspect data, request `campaigns:read`. Add `campaigns:write
 | Task | Tools | Scope |
 | --- | --- | --- |
 | Inspect your workspace | `get_current_user`, `list_contacts`, `list_campaigns`, `get_campaign`, `get_campaign_stats`, `get_brand_settings` | `campaigns:read` |
-| Find nearby businesses | `search_map_leads` | `campaigns:read` |
+| Find nearby businesses | `search_map_leads`, `retry_map_leads_enrichment` | `campaigns:read` |
 | Create and edit | `create_contact`, `create_campaign`, `update_brand_settings`, `generate_email_draft`, `import_map_leads` | `campaigns:write` |
 | Request and complete a launch | `prepare_campaign_launch`, `launch_campaign` | `campaigns:send` |
 
@@ -111,3 +111,11 @@ OAuth grants last at most 90 days. Losing access to a workspace also prevents th
 | A launch is blocked | Check the campaign's draft status, sender readiness, eligible contacts, plan quota, and [sending domain](/en/settings/sending-domains). |
 
 For scripts using bearer tokens and direct REST endpoints, see the [Developer API](/en/agents/api).
+
+### Search radius and enrichment
+
+API and MCP searches default to 5 km and accept an explicit integer `radiusKm` from 1 to 100. They do not show the dashboard confirmation dialog. Keep the same search inputs when passing `nextPageToken` as `pageToken`; a page can contain no matching leads and still have another page.
+
+Contact enrichment may finish after businesses first appear. `enrichmentPending` marks unfinished website research. Review `businessSummary` and `businessSources` when available; imported business context can support personalized campaign introductions. A missing email can mean research is still pending.
+
+If `enrichmentRetryToken` is present, call `retry_map_leads_enrichment` with `token` to retry pending website research. It requires `campaigns:read`, is bound to the connected workspace, expires after 15 minutes, and can be used once. Merge returned leads by `placeId` before importing. `emailOnly` filters the current response; pending leads may appear after retry.

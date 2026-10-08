@@ -252,3 +252,45 @@ curl "$NUDGEN_APP_URL/api/v1/campaigns/$CAMPAIGN_ID/executions?limit=25&status=s
 <Card title="MCP server setup" icon="bot" href="/en/agents/mcp">
  在 Claude Code、Cursor、Windsurf、Codex CLI 或通用 MCP 客户端中安装 Nudgen MCP。
 </Card>
+
+## Map Leads API
+
+使用当前工作空间的PAT。新搜索消耗每日配额，分页和信息补充重试不消耗。配额在UTC午夜重置。扩大半径会开始新搜索。供应商错误会释放预留配额，取消已接受的搜索则不会。
+
+API和MCP默认使用5 km，接受整数 `radiusKm` 1–100，不显示仪表板确认对话框。将 `nextPageToken` 作为 `pageToken` 传递时保持搜索参数不变。空页面仍可能有下一页。
+
+`enrichmentPending`表示网站调查尚未完成。查看可用的 `businessSummary` 和 `businessSources`。导入的企业背景可帮助个性化营销活动的开场内容。没有邮箱可能是调查仍在等待完成。
+
+| Method | Endpoint |
+| --- | --- |
+| `POST` | `/api/v1/map-leads/suggest` |
+| `POST` | `/api/v1/map-leads/place` |
+| `POST` | `/api/v1/map-leads/search` |
+| `POST` | `/api/v1/map-leads/enrichment-retry` |
+| `POST` | `/api/v1/map-leads/import` |
+| `GET` | `/api/v1/map-leads/quota` |
+| `GET` | `/api/v1/map-leads/geolocate` |
+
+```bash
+curl -X POST "$NUDGEN_APP_URL/api/v1/map-leads/search" \
+  -H "Authorization: Bearer $NUDGEN_PAT" \
+  -H "Content-Type: application/json" \
+  --data '{"location":"Austin, TX","keywords":"marketing agency","radiusKm":5}'
+```
+
+收到 `enrichmentRetryToken` 时，使用 PAT 权限调用 `POST /api/v1/map-leads/enrichment-retry` 并传入 `token`。令牌绑定已连接的工作空间，15分钟后过期，只能使用一次。导入前按 `placeId` 合并结果。
+
+搜索或重试时设置 `Accept: application/x-ndjson` 可接收逐步结果。每行JSON的 `type` 为 `progress`、`complete` 或 `error`。按 `placeId` 合并 `data.leads`，以最终 `complete.data` 为完整结果；错误文本位于 `error`。无此请求头时返回普通JSON。`POST /place`解析位置建议；`GET /geolocate`返回胡志明市的固定默认中心，不会确定您的位置。
+
+```bash
+curl -N -X POST "$NUDGEN_APP_URL/api/v1/map-leads/search" \
+  -H "Authorization: Bearer $NUDGEN_PAT" \
+  -H "Content-Type: application/json" \
+  -H "Accept: application/x-ndjson" \
+  --data '{"location":"Austin, TX","keywords":"marketing agency","radiusKm":5}'
+
+curl -X POST "$NUDGEN_APP_URL/api/v1/map-leads/enrichment-retry" \
+  -H "Authorization: Bearer $NUDGEN_PAT" \
+  -H "Content-Type: application/json" \
+  --data "{\"token\":\"$ENRICHMENT_RETRY_TOKEN\"}"
+```

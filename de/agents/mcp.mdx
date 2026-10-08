@@ -57,7 +57,7 @@ Wenn Sie Daten nur prüfen möchten, fordern Sie `campaigns:read` an. Fügen Sie
 | Aufgabe | Tools | Bereich |
 | --- | --- | --- |
 | Workspace prüfen | `get_current_user`, `list_contacts`, `list_campaigns`, `get_campaign`, `get_campaign_stats`, `get_brand_settings` | `campaigns:read` |
-| Unternehmen in der Nähe finden | `search_map_leads` | `campaigns:read` |
+| Unternehmen in der Nähe finden | `search_map_leads`, `retry_map_leads_enrichment` | `campaigns:read` |
 | Erstellen und bearbeiten | `create_contact`, `create_campaign`, `update_brand_settings`, `generate_email_draft`, `import_map_leads` | `campaigns:write` |
 | Einen Start anfordern und abschließen | `prepare_campaign_launch`, `launch_campaign` | `campaigns:send` |
 
@@ -111,3 +111,11 @@ OAuth-Berechtigungen gelten höchstens 90 Tage. Wenn Sie den Zugriff auf einen W
 | Ein Start wird blockiert | Prüfen Sie den Entwurfsstatus der Kampagne, die Absenderbereitschaft, berechtigte Kontakte, das Plankontingent und die [Versanddomain](/de/settings/sending-domains). |
 
 Informationen zu Skripten mit Bearer-Token und direkten REST-Endpunkten finden Sie in der [Entwickler-API](/de/agents/api).
+
+### Suchradius und Anreicherung
+
+API- und MCP-Suchen verwenden standardmäßig 5 km und akzeptieren eine ganze Zahl `radiusKm` von 1 bis 100, ohne Dashboard-Bestätigung. Behalten Sie die Suchparameter bei, wenn Sie `nextPageToken` als `pageToken` übergeben. Auch eine leere Seite kann eine Folgeseite haben.
+
+`enrichmentPending` kennzeichnet noch laufende Website-Recherche. Prüfen Sie verfügbare `businessSummary` und `businessSources`. Importierter Geschäftskontext kann personalisierte Kampagneneinleitungen unterstützen. Eine fehlende E-Mail kann noch recherchiert werden.
+
+Bei `enrichmentRetryToken` rufen Sie `retry_map_leads_enrichment` mit `token` und `campaigns:read` auf. Der Token gilt für den verbundenen Workspace, läuft nach 15 Minuten ab und ist einmal verwendbar. Ergebnisse vor dem Import anhand von `placeId` zusammenführen. `emailOnly` filtert die aktuelle Antwort; weitere Leads können nach dem Wiederholen erscheinen.

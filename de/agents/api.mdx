@@ -252,3 +252,45 @@ Verwenden Sie [Nudgen MCP](/en/agents/mcp), wenn Ihr Agent Model Context Protoco
 <Card title="MCP server setup" icon="bot" href="/en/agents/mcp">
  Installieren Sie Nudgen MCP in Claude Code, Cursor, Windsurf, Codex CLI oder einem generischen MCP-Client.
 </Card>
+
+## Map Leads API
+
+Verwenden Sie einen PAT für den aktiven Workspace. Neue Suchen verbrauchen das tägliche Kontingent; Folgeseiten und Anreicherungsversuche nicht. Zurücksetzung um Mitternacht UTC. Ein größerer Radius startet eine neue Suche. Anbieterfehler geben die Reservierung frei; Abbruch einer angenommenen Suche nicht.
+
+API- und MCP-Suchen verwenden standardmäßig 5 km und akzeptieren eine ganze Zahl `radiusKm` von 1 bis 100, ohne Dashboard-Bestätigung. Behalten Sie die Suchparameter bei, wenn Sie `nextPageToken` als `pageToken` übergeben. Auch eine leere Seite kann eine Folgeseite haben.
+
+`enrichmentPending` kennzeichnet noch laufende Website-Recherche. Prüfen Sie verfügbare `businessSummary` und `businessSources`. Importierter Geschäftskontext kann personalisierte Kampagneneinleitungen unterstützen. Eine fehlende E-Mail kann noch recherchiert werden.
+
+| Method | Endpoint |
+| --- | --- |
+| `POST` | `/api/v1/map-leads/suggest` |
+| `POST` | `/api/v1/map-leads/place` |
+| `POST` | `/api/v1/map-leads/search` |
+| `POST` | `/api/v1/map-leads/enrichment-retry` |
+| `POST` | `/api/v1/map-leads/import` |
+| `GET` | `/api/v1/map-leads/quota` |
+| `GET` | `/api/v1/map-leads/geolocate` |
+
+```bash
+curl -X POST "$NUDGEN_APP_URL/api/v1/map-leads/search" \
+  -H "Authorization: Bearer $NUDGEN_PAT" \
+  -H "Content-Type: application/json" \
+  --data '{"location":"Austin, TX","keywords":"marketing agency","radiusKm":5}'
+```
+
+Bei `enrichmentRetryToken` rufen Sie `POST /api/v1/map-leads/enrichment-retry` mit `token` und PAT auf. Der Token gilt für den verbundenen Workspace, läuft nach 15 Minuten ab und ist einmal verwendbar. Ergebnisse vor dem Import anhand von `placeId` zusammenführen.
+
+Setzen Sie `Accept: application/x-ndjson` für Suche oder Wiederholung. Jede JSON-Zeile hat `type`: `progress`, `complete` oder `error`. Führen Sie `data.leads` über `placeId` zusammen. Das endgültige Ergebnis steht in `complete.data`, Fehler in `error`. Ohne Header erhalten Sie JSON. `POST /place` löst einen Standortvorschlag auf; `GET /geolocate` liefert einen festen Mittelpunkt in Ho-Chi-Minh-Stadt und ortet Sie nicht.
+
+```bash
+curl -N -X POST "$NUDGEN_APP_URL/api/v1/map-leads/search" \
+  -H "Authorization: Bearer $NUDGEN_PAT" \
+  -H "Content-Type: application/json" \
+  -H "Accept: application/x-ndjson" \
+  --data '{"location":"Austin, TX","keywords":"marketing agency","radiusKm":5}'
+
+curl -X POST "$NUDGEN_APP_URL/api/v1/map-leads/enrichment-retry" \
+  -H "Authorization: Bearer $NUDGEN_PAT" \
+  -H "Content-Type: application/json" \
+  --data "{\"token\":\"$ENRICHMENT_RETRY_TOKEN\"}"
+```

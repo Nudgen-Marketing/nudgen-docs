@@ -256,3 +256,45 @@ Use [Nudgen MCP](/en/agents/mcp) when your agent supports Model Context Protocol
 <Card title="MCP server setup" icon="bot" href="/en/agents/mcp">
   Install Nudgen MCP in Claude Code, Cursor, Windsurf, Codex CLI, or a generic MCP client.
 </Card>
+
+## Map Leads API
+
+Use a PAT for the active workspace. New searches consume the daily search quota; pagination and enrichment retries do not. Quota resets at midnight UTC. An explicit larger radius starts a new search. Provider failures release a reserved search; cancelling an accepted search does not.
+
+API and MCP searches default to 5 km and accept an explicit integer `radiusKm` from 1 to 100. They do not show the dashboard confirmation dialog. Keep the same search inputs when passing `nextPageToken` as `pageToken`; a page can contain no matching leads and still have another page.
+
+Contact enrichment may finish after businesses first appear. `enrichmentPending` marks unfinished website research. Review `businessSummary` and `businessSources` when available; imported business context can support personalized campaign introductions. A missing email can mean research is still pending.
+
+| Method | Endpoint |
+| --- | --- |
+| `POST` | `/api/v1/map-leads/suggest` |
+| `POST` | `/api/v1/map-leads/place` |
+| `POST` | `/api/v1/map-leads/search` |
+| `POST` | `/api/v1/map-leads/enrichment-retry` |
+| `POST` | `/api/v1/map-leads/import` |
+| `GET` | `/api/v1/map-leads/quota` |
+| `GET` | `/api/v1/map-leads/geolocate` |
+
+```bash
+curl -X POST "$NUDGEN_APP_URL/api/v1/map-leads/search" \
+  -H "Authorization: Bearer $NUDGEN_PAT" \
+  -H "Content-Type: application/json" \
+  --data '{"location":"Austin, TX","keywords":"marketing agency","radiusKm":5}'
+```
+
+If `enrichmentRetryToken` is present, call `POST /api/v1/map-leads/enrichment-retry` with `token` to retry pending website research. It requires PAT, is bound to the connected workspace, expires after 15 minutes, and can be used once. Merge returned leads by `placeId` before importing.
+
+Set `Accept: application/x-ndjson` on search or enrichment retry for incremental results. Each line is JSON: `type` is `progress`, `complete`, or `error`. Merge leads in `data.leads` by `placeId`. Use the final `complete.data` as the authoritative result; errors use `error`. Without this header, the response is ordinary JSON. `POST /place` resolves a location suggestion, not a business contact record. `GET /geolocate` returns a fixed Ho Chi Minh City fallback; it does not determine your location.
+
+```bash
+curl -N -X POST "$NUDGEN_APP_URL/api/v1/map-leads/search" \
+  -H "Authorization: Bearer $NUDGEN_PAT" \
+  -H "Content-Type: application/json" \
+  -H "Accept: application/x-ndjson" \
+  --data '{"location":"Austin, TX","keywords":"marketing agency","radiusKm":5}'
+
+curl -X POST "$NUDGEN_APP_URL/api/v1/map-leads/enrichment-retry" \
+  -H "Authorization: Bearer $NUDGEN_PAT" \
+  -H "Content-Type: application/json" \
+  --data "{\"token\":\"$ENRICHMENT_RETRY_TOKEN\"}"
+```

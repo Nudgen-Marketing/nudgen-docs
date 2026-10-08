@@ -57,7 +57,7 @@ codex mcp login nudgen --scopes campaigns:read,campaigns:write,campaigns:send
 | タスク | ツール | スコープ |
 | --- | --- | --- |
 | ワークスペースを確認する | `get_current_user`, `list_contacts`, `list_campaigns`, `get_campaign`, `get_campaign_stats`, `get_brand_settings` | `campaigns:read` |
-| 近隣ビジネスを検索する | `search_map_leads` | `campaigns:read` |
+| 近隣ビジネスを検索する | `search_map_leads`, `retry_map_leads_enrichment` | `campaigns:read` |
 | 作成と編集 | `create_contact`, `create_campaign`, `update_brand_settings`, `generate_email_draft`, `import_map_leads` | `campaigns:write` |
 | キャンペーン開始をリクエストして完了する | `prepare_campaign_launch`, `launch_campaign` | `campaigns:send` |
 
@@ -111,3 +111,11 @@ OAuth の認可は最長 90 日間有効です。ワークスペースへのア�
 | 開始がブロックされる | キャンペーンが下書きであること、送信者の準備状態、対象連絡先、プランのクォータ、[カスタム ドメイン](/jp/settings/sending-domains)を確認します。 |
 
 Bearer トークンと直接 REST エンドポイントを使用するスクリプトについては、[開発者 API](/jp/agents/api) を参照してください。
+
+### 検索範囲と情報補完
+
+APIとMCPは既定で5 kmを使用し、整数の `radiusKm` 1～100を受け付けます。ダッシュボードの確認画面は表示しません。`nextPageToken` を `pageToken` に渡す際は同じ検索条件を維持してください。空のページにも次のページがある場合があります。
+
+`enrichmentPending` は未完了のWebサイト調査を示します。利用可能な `businessSummary` と `businessSources` を確認してください。インポートした情報はキャンペーンの導入文の個別化に役立ちます。メールがない場合、調査が続いている可能性があります。
+
+`enrichmentRetryToken` がある場合、`campaigns:read` 権限で `retry_map_leads_enrichment` に `token` を渡します。トークンは接続したワークスペース専用で、有効期間15分、1回限りです。インポート前に `placeId` で結果を統合してください。`emailOnly` は現在の応答を絞り込むため、再試行後にリードが増える場合があります。

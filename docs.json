@@ -218,7 +218,14 @@
                   "POST /api/v1/settings/sending-domains/{id}/verify",
                   "PUT /api/v1/settings/sending-domains/default",
                   "POST /api/v1/settings/sending-domains/resume",
-                  "POST /api/v1/ai/generate"
+                  "POST /api/v1/ai/generate",
+                  "POST /api/v1/map-leads/search",
+                  "POST /api/v1/map-leads/enrichment-retry",
+                  "POST /api/v1/map-leads/import",
+                  "GET /api/v1/map-leads/quota",
+                  "POST /api/v1/map-leads/suggest",
+                  "POST /api/v1/map-leads/place",
+                  "GET /api/v1/map-leads/geolocate"
                 ]
               }
             ]

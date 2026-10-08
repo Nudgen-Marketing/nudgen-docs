@@ -57,7 +57,7 @@ codex mcp login nudgen --scopes campaigns:read,campaigns:write,campaigns:send
 | المهمة | الأدوات | النطاق |
 | --- | --- | --- |
 | فحص مساحة عملك | `get_current_user`، `list_contacts`، `list_campaigns`، `get_campaign`، `get_campaign_stats`، `get_brand_settings` | `campaigns:read` |
-| العثور على أنشطة تجارية قريبة | `search_map_leads` | `campaigns:read` |
+| العثور على أنشطة تجارية قريبة | `search_map_leads`, `retry_map_leads_enrichment` | `campaigns:read` |
 | الإنشاء والتعديل | `create_contact`، `create_campaign`، `update_brand_settings`، `generate_email_draft`، `import_map_leads` | `campaigns:write` |
 | طلب إطلاق وإكماله | `prepare_campaign_launch`، `launch_campaign` | `campaigns:send` |
 
@@ -111,3 +111,11 @@ codex mcp login nudgen --scopes campaigns:read,campaigns:write,campaigns:send
 | تم حظر إطلاق | تحقق من حالة مسودة الحملة وجاهزية المرسل وجهات الاتصال المؤهلة وحصة الباقة و[نطاق الإرسال](/ar/settings/sending-domains). |
 
 للنصوص البرمجية التي تستخدم رموز Bearer ونقاط نهاية REST المباشرة، راجع [واجهة برمجة تطبيقات المطور](/ar/agents/api).
+
+### نطاق البحث وإثراء البيانات
+
+تستخدم API وMCP نطاق 5 كم افتراضيًا وتقبل عددًا صحيحًا `radiusKm` من 1 إلى 100 دون نافذة تأكيد لوحة التحكم. حافظ على المعلمات عند تمرير `nextPageToken` باسم `pageToken`. قد تحتوي صفحة فارغة على صفحة تالية.
+
+يشير `enrichmentPending` إلى أن البحث في الموقع لم يكتمل. راجع `businessSummary` و`businessSources` عند توفرهما. يمكن لسياق الشركة المستورد دعم مقدمات حملات مخصصة. قد يكون البريد المفقود قيد البحث.
+
+عند توفر `enrichmentRetryToken` استدعِ `retry_map_leads_enrichment` مع `token` وصلاحية `campaigns:read`. الرمز مرتبط بمساحة العمل المتصلة وينتهي بعد 15 دقيقة ويستخدم مرة واحدة. ادمج النتائج حسب `placeId` قبل الاستيراد. يرشح `emailOnly` الرد الحالي؛ قد تظهر نتائج بعد إعادة المحاولة.

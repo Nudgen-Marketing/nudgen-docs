@@ -252,3 +252,45 @@ curl "$NUDGEN_APP_URL/api/v1/campaigns/$CAMPAIGN_ID/executions?limit=25&status=s
 <Card title="MCP server setup" icon="bot" href="/en/agents/mcp">
  Claude Code, Cursor, Windsurf, Codex CLI 또는 일반 MCP 클라이언트에 Nudgen MCP를 설치하세요.
 </Card>
+
+## Map Leads API
+
+활성 워크스페이스의 PAT를 사용하세요. 새 검색은 일일 할당량을 사용하지만 추가 페이지와 보강 재시도는 사용하지 않습니다. UTC 자정에 초기화됩니다. 반경 확대는 새 검색입니다. 공급자 오류는 예약을 반환하지만 승인된 검색 취소는 반환하지 않습니다.
+
+API와 MCP의 기본값은 5 km이며 정수 `radiusKm` 1~100을 지원합니다. 대시보드 확인 대화상자는 표시하지 않습니다. `nextPageToken`을 `pageToken`으로 전달할 때 같은 검색 조건을 유지하세요. 빈 페이지에도 다음 페이지가 있을 수 있습니다.
+
+`enrichmentPending`은 완료되지 않은 웹사이트 조사를 나타냅니다. 제공되는 `businessSummary`와 `businessSources`를 검토하세요. 가져온 비즈니스 정보는 개인화된 캠페인 소개에 도움이 됩니다. 이메일이 없으면 조사가 진행 중일 수 있습니다.
+
+| Method | Endpoint |
+| --- | --- |
+| `POST` | `/api/v1/map-leads/suggest` |
+| `POST` | `/api/v1/map-leads/place` |
+| `POST` | `/api/v1/map-leads/search` |
+| `POST` | `/api/v1/map-leads/enrichment-retry` |
+| `POST` | `/api/v1/map-leads/import` |
+| `GET` | `/api/v1/map-leads/quota` |
+| `GET` | `/api/v1/map-leads/geolocate` |
+
+```bash
+curl -X POST "$NUDGEN_APP_URL/api/v1/map-leads/search" \
+  -H "Authorization: Bearer $NUDGEN_PAT" \
+  -H "Content-Type: application/json" \
+  --data '{"location":"Austin, TX","keywords":"marketing agency","radiusKm":5}'
+```
+
+`enrichmentRetryToken`이 있으면 PAT 권한으로 `POST /api/v1/map-leads/enrichment-retry`에 `token`을 전달하세요. 토큰은 연결된 워크스페이스 전용이며 15분 후 만료되고 한 번만 사용됩니다. 가져오기 전에 `placeId`로 결과를 병합하세요.
+
+검색이나 재시도에서 `Accept: application/x-ndjson`을 지정하면 단계별 결과를 받습니다. 각 JSON 줄의 `type`은 `progress`, `complete`, `error`입니다. `data.leads`를 `placeId`로 병합하고 최종 `complete.data`를 확정 결과로 사용하세요. 오류는 `error`에 있습니다. 헤더가 없으면 일반 JSON입니다. `POST /place`는 위치 제안을 확인하고 `GET /geolocate`는 호찌민시의 고정 위치를 반환하며 현재 위치를 찾지 않습니다.
+
+```bash
+curl -N -X POST "$NUDGEN_APP_URL/api/v1/map-leads/search" \
+  -H "Authorization: Bearer $NUDGEN_PAT" \
+  -H "Content-Type: application/json" \
+  -H "Accept: application/x-ndjson" \
+  --data '{"location":"Austin, TX","keywords":"marketing agency","radiusKm":5}'
+
+curl -X POST "$NUDGEN_APP_URL/api/v1/map-leads/enrichment-retry" \
+  -H "Authorization: Bearer $NUDGEN_PAT" \
+  -H "Content-Type: application/json" \
+  --data "{\"token\":\"$ENRICHMENT_RETRY_TOKEN\"}"
+```

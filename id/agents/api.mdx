@@ -252,3 +252,45 @@ Gunakan [Nudgen MCP](/en/agents/mcp) ketika agen Anda mendukung alat Model Conte
 <Card title="MCP server setup" icon="bot" href="/en/agents/mcp">
  Instal Nudgen MCP di Claude Code, Cursor, Windsurf, Codex CLI, atau klien MCP generik.
 </Card>
+
+## API Map Leads
+
+Gunakan PAT ruang kerja aktif. Pencarian baru memakai kuota harian; halaman lanjutan dan pengayaan ulang tidak. Kuota direset pada tengah malam UTC. Radius lebih besar memulai pencarian baru. Kegagalan penyedia mengembalikan reservasi; membatalkan pencarian yang diterima tidak.
+
+API dan MCP memakai 5 km secara default dan menerima bilangan bulat `radiusKm` 1–100 tanpa dialog konfirmasi dasbor. Pertahankan parameter saat mengirim `nextPageToken` sebagai `pageToken`. Halaman kosong masih dapat memiliki halaman berikutnya.
+
+`enrichmentPending` menandai riset situs yang belum selesai. Tinjau `businessSummary` dan `businessSources` jika tersedia. Konteks bisnis yang diimpor dapat membantu pembuka kampanye yang dipersonalisasi. Email yang belum ada mungkin masih diteliti.
+
+| Method | Endpoint |
+| --- | --- |
+| `POST` | `/api/v1/map-leads/suggest` |
+| `POST` | `/api/v1/map-leads/place` |
+| `POST` | `/api/v1/map-leads/search` |
+| `POST` | `/api/v1/map-leads/enrichment-retry` |
+| `POST` | `/api/v1/map-leads/import` |
+| `GET` | `/api/v1/map-leads/quota` |
+| `GET` | `/api/v1/map-leads/geolocate` |
+
+```bash
+curl -X POST "$NUDGEN_APP_URL/api/v1/map-leads/search" \
+  -H "Authorization: Bearer $NUDGEN_PAT" \
+  -H "Content-Type: application/json" \
+  --data '{"location":"Austin, TX","keywords":"marketing agency","radiusKm":5}'
+```
+
+Jika ada `enrichmentRetryToken`, panggil `POST /api/v1/map-leads/enrichment-retry` dengan `token` dan PAT. Token terikat ke ruang kerja tersambung, berlaku 15 menit, dan hanya sekali pakai. Gabungkan hasil berdasarkan `placeId` sebelum impor.
+
+Gunakan `Accept: application/x-ndjson` untuk pencarian atau percobaan ulang. Setiap baris JSON memiliki `type`: `progress`, `complete`, atau `error`. Gabungkan `data.leads` berdasarkan `placeId`. Hasil akhir ada di `complete.data`, kesalahan di `error`. Tanpa header ini respons berupa JSON. `POST /place` menyelesaikan saran lokasi; `GET /geolocate` mengembalikan pusat tetap Kota Ho Chi Minh, bukan lokasi Anda.
+
+```bash
+curl -N -X POST "$NUDGEN_APP_URL/api/v1/map-leads/search" \
+  -H "Authorization: Bearer $NUDGEN_PAT" \
+  -H "Content-Type: application/json" \
+  -H "Accept: application/x-ndjson" \
+  --data '{"location":"Austin, TX","keywords":"marketing agency","radiusKm":5}'
+
+curl -X POST "$NUDGEN_APP_URL/api/v1/map-leads/enrichment-retry" \
+  -H "Authorization: Bearer $NUDGEN_PAT" \
+  -H "Content-Type: application/json" \
+  --data "{\"token\":\"$ENRICHMENT_RETRY_TOKEN\"}"
+```

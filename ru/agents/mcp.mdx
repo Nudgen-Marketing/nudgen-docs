@@ -57,7 +57,7 @@ codex mcp login nudgen --scopes campaigns:read,campaigns:write,campaigns:send
 | Задача | Инструменты | Область доступа |
 | --- | --- | --- |
 | Просмотр рабочего пространства | `get_current_user`, `list_contacts`, `list_campaigns`, `get_campaign`, `get_campaign_stats`, `get_brand_settings` | `campaigns:read` |
-| Поиск компаний поблизости | `search_map_leads` | `campaigns:read` |
+| Поиск компаний поблизости | `search_map_leads`, `retry_map_leads_enrichment` | `campaigns:read` |
 | Создание и редактирование | `create_contact`, `create_campaign`, `update_brand_settings`, `generate_email_draft`, `import_map_leads` | `campaigns:write` |
 | Запрос и завершение запуска | `prepare_campaign_launch`, `launch_campaign` | `campaigns:send` |
 
@@ -111,3 +111,11 @@ codex mcp login nudgen --scopes campaigns:read,campaigns:write,campaigns:send
 | Запуск заблокирован | Проверьте статус черновика кампании, готовность отправителя, подходящие контакты, квоту тарифного плана и [домен отправителя](/ru/settings/sending-domains). |
 
 Для сценариев, использующих bearer-токены и прямые конечные точки REST, см. [API разработчика](/ru/agents/api).
+
+### Радиус поиска и обогащение
+
+API и MCP используют 5 км по умолчанию и принимают целое `radiusKm` от 1 до 100 без диалога подтверждения панели. Сохраняйте параметры при передаче `nextPageToken` как `pageToken`. Даже пустая страница может иметь следующую.
+
+`enrichmentPending` означает незавершённое исследование сайта. Проверяйте доступные `businessSummary` и `businessSources`. Импортированный контекст помогает персонализировать вступления кампаний. Отсутствующий email может ещё находиться в процессе поиска.
+
+При наличии `enrichmentRetryToken` вызовите `retry_map_leads_enrichment` с `token` и правом `campaigns:read`. Токен привязан к подключённому workspace, действует 15 минут и используется один раз. Перед импортом объедините результаты по `placeId`. `emailOnly` фильтрует текущий ответ; лиды могут появиться после повтора.

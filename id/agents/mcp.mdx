@@ -57,7 +57,7 @@ Jika Anda hanya perlu memeriksa data, minta `campaigns:read`. Tambahkan `campaig
 | Tugas | Alat | Cakupan |
 | --- | --- | --- |
 | Memeriksa ruang kerja Anda | `get_current_user`, `list_contacts`, `list_campaigns`, `get_campaign`, `get_campaign_stats`, `get_brand_settings` | `campaigns:read` |
-| Menemukan bisnis di sekitar | `search_map_leads` | `campaigns:read` |
+| Menemukan bisnis di sekitar | `search_map_leads`, `retry_map_leads_enrichment` | `campaigns:read` |
 | Membuat dan mengedit | `create_contact`, `create_campaign`, `update_brand_settings`, `generate_email_draft`, `import_map_leads` | `campaigns:write` |
 | Meminta dan menyelesaikan peluncuran | `prepare_campaign_launch`, `launch_campaign` | `campaigns:send` |
 
@@ -111,3 +111,11 @@ Izin OAuth berlaku paling lama 90 hari. Kehilangan akses ke ruang kerja juga men
 | Peluncuran diblokir | Periksa status draf kampanye, kesiapan pengirim, kontak yang memenuhi syarat, kuota paket, dan [domain pengiriman](/id/settings/sending-domains). |
 
 Untuk skrip yang menggunakan bearer token dan endpoint REST langsung, lihat [API Pengembang](/id/agents/api).
+
+### Radius pencarian dan pengayaan
+
+API dan MCP memakai 5 km secara default dan menerima bilangan bulat `radiusKm` 1–100 tanpa dialog konfirmasi dasbor. Pertahankan parameter saat mengirim `nextPageToken` sebagai `pageToken`. Halaman kosong masih dapat memiliki halaman berikutnya.
+
+`enrichmentPending` menandai riset situs yang belum selesai. Tinjau `businessSummary` dan `businessSources` jika tersedia. Konteks bisnis yang diimpor dapat membantu pembuka kampanye yang dipersonalisasi. Email yang belum ada mungkin masih diteliti.
+
+Jika ada `enrichmentRetryToken`, panggil `retry_map_leads_enrichment` dengan `token` dan `campaigns:read`. Token terikat ke ruang kerja tersambung, berlaku 15 menit, dan hanya sekali pakai. Gabungkan hasil berdasarkan `placeId` sebelum impor. `emailOnly` menyaring respons saat ini; lead dapat muncul setelah percobaan ulang.

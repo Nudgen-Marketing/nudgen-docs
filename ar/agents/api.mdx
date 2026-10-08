@@ -252,3 +252,45 @@ curl "$NUDGEN_APP_URL/api/v1/campaigns/$CAMPAIGN_ID/executions?limit=25&status=s
 <Card title="MCP server setup" icon="bot" href="/en/agents/mcp">
  قم بتثبيت Nudgen MCP في Claude Code، أو Cursor، أو Windsurf، أو Codex CLI، أو عميل MCP عام.
 </Card>
+
+## واجهة Map Leads API
+
+استخدم PAT لمساحة العمل النشطة. يستهلك البحث الجديد الحصة اليومية، بينما لا تستهلكها الصفحات التالية وإعادة الإثراء. تتجدد الحصة عند منتصف الليل UTC. توسيع النطاق يبدأ بحثًا جديدًا. أخطاء المزود تعيد الحصة المحجوزة، لكن إلغاء بحث مقبول لا يعيدها.
+
+تستخدم API وMCP نطاق 5 كم افتراضيًا وتقبل عددًا صحيحًا `radiusKm` من 1 إلى 100 دون نافذة تأكيد لوحة التحكم. حافظ على المعلمات عند تمرير `nextPageToken` باسم `pageToken`. قد تحتوي صفحة فارغة على صفحة تالية.
+
+يشير `enrichmentPending` إلى أن البحث في الموقع لم يكتمل. راجع `businessSummary` و`businessSources` عند توفرهما. يمكن لسياق الشركة المستورد دعم مقدمات حملات مخصصة. قد يكون البريد المفقود قيد البحث.
+
+| Method | Endpoint |
+| --- | --- |
+| `POST` | `/api/v1/map-leads/suggest` |
+| `POST` | `/api/v1/map-leads/place` |
+| `POST` | `/api/v1/map-leads/search` |
+| `POST` | `/api/v1/map-leads/enrichment-retry` |
+| `POST` | `/api/v1/map-leads/import` |
+| `GET` | `/api/v1/map-leads/quota` |
+| `GET` | `/api/v1/map-leads/geolocate` |
+
+```bash
+curl -X POST "$NUDGEN_APP_URL/api/v1/map-leads/search" \
+  -H "Authorization: Bearer $NUDGEN_PAT" \
+  -H "Content-Type: application/json" \
+  --data '{"location":"Austin, TX","keywords":"marketing agency","radiusKm":5}'
+```
+
+عند توفر `enrichmentRetryToken` استدعِ `POST /api/v1/map-leads/enrichment-retry` مع `token` وصلاحية PAT. الرمز مرتبط بمساحة العمل المتصلة وينتهي بعد 15 دقيقة ويستخدم مرة واحدة. ادمج النتائج حسب `placeId` قبل الاستيراد.
+
+استخدم `Accept: application/x-ndjson` للبحث أو إعادة المحاولة. كل سطر JSON يحتوي `type` بقيمة `progress` أو `complete` أو `error`. ادمج `data.leads` حسب `placeId` واعتمد `complete.data` النهائي؛ رسالة الخطأ في `error`. دون الترويسة يعود JSON عادي. يحلل `POST /place` اقتراح الموقع؛ يعيد `GET /geolocate` مركزًا ثابتًا في مدينة هو تشي منه ولا يحدد موقعك.
+
+```bash
+curl -N -X POST "$NUDGEN_APP_URL/api/v1/map-leads/search" \
+  -H "Authorization: Bearer $NUDGEN_PAT" \
+  -H "Content-Type: application/json" \
+  -H "Accept: application/x-ndjson" \
+  --data '{"location":"Austin, TX","keywords":"marketing agency","radiusKm":5}'
+
+curl -X POST "$NUDGEN_APP_URL/api/v1/map-leads/enrichment-retry" \
+  -H "Authorization: Bearer $NUDGEN_PAT" \
+  -H "Content-Type: application/json" \
+  --data "{\"token\":\"$ENRICHMENT_RETRY_TOKEN\"}"
+```
