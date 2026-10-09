@@ -61,7 +61,7 @@ Jika Anda hanya perlu memeriksa data, minta `campaigns:read`. Tambahkan `campaig
 | Membuat dan mengedit | `create_contact`, `create_campaign`, `update_brand_settings`, `generate_email_draft`, `import_map_leads` | `campaigns:write` |
 | Meminta dan menyelesaikan peluncuran | `prepare_campaign_launch`, `launch_campaign` | `campaigns:send` |
 
-`create_campaign` menyimpan **draf kampanye sekali pakai**. Alat ini tidak dapat langsung mengirim atau menjadwalkan kampanye. `get_campaign` memungkinkan Anda memeriksa subjek, konten, tautan, audiens, dan pengirim sebelum peluncuran.
+`create_campaign` menyimpan **draf kampanye (`one-time`, `drip`, atau `lifetime`)**. Alat ini tidak dapat langsung mengirim atau menjadwalkan kampanye. `get_campaign` memungkinkan Anda memeriksa subjek, konten, tautan, audiens, dan pengirim sebelum peluncuran.
 
 Server juga menyediakan sumber daya hanya-baca melalui `campaigns:read`:
 
@@ -119,3 +119,12 @@ API dan MCP memakai 5 km secara default dan menerima bilangan bulat `radiusKm` 1
 `enrichmentPending` menandai riset situs yang belum selesai. Tinjau `businessSummary` dan `businessSources` jika tersedia. Konteks bisnis yang diimpor dapat membantu pembuka kampanye yang dipersonalisasi. Email yang belum ada mungkin masih diteliti.
 
 Jika ada `enrichmentRetryToken`, panggil `retry_map_leads_enrichment` dengan `token` dan `campaigns:read`. Token terikat ke ruang kerja tersambung, berlaku 15 menit, dan hanya sekali pakai. Gabungkan hasil berdasarkan `placeId` sebelum impor. `emailOnly` menyaring respons saat ini; lead dapat muncul setelah percobaan ulang.
+
+
+## Mengedit draf dan cakupan produk
+
+Gunakan `update_campaign` untuk mengedit draf yang ada dan `delete_campaign` untuk menghapus draf. Keduanya memerlukan `campaigns:write`; keduanya tidak mengirim atau menjadwalkan email. Area produk baru memerlukan izin OAuth tersendiri. Hubungkan kembali dan setujui izin tersebut saat diminta.
+
+Daftar alat menampilkan alat yang tersedia beserta argumennya. Pengalihan ke browser tidak menjalankan tindakan: selesaikan pembayaran, otorisasi penyedia, pengiriman undangan, perpindahan ruang kerja, dan pengaturan pencairan sensitif di browser. Koneksi MCP tetap terikat pada ruang kerja yang diotorisasi. Administrasi, kredensial, webhook, callback pelacakan, dan asisten internal tidak disertakan.
+
+Gunakan `get_api_capabilities` untuk memeriksa cakupan API. Untuk pengiriman uji, aktivasi lifetime, atau peristiwa lifetime, minta persetujuan browser terlebih dahulu melalui `prepare_campaign_action`. Lalu gunakan `send_test_email`, `activate_lifetime_campaign`, atau `trigger_lifetime_campaign` dengan argumen yang sama. Persetujuan berlaku sepuluh menit dan hanya sekali pakai.

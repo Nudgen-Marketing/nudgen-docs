@@ -61,7 +61,7 @@ Nếu chỉ cần kiểm tra dữ liệu, hãy yêu cầu `campaigns:read`. Thê
 | Tạo và chỉnh sửa | `create_contact`, `create_campaign`, `update_brand_settings`, `generate_email_draft`, `import_map_leads` | `campaigns:write` |
 | Yêu cầu và hoàn tất việc khởi chạy | `prepare_campaign_launch`, `launch_campaign` | `campaigns:send` |
 
-`create_campaign` lưu một **chiến dịch một lần ở dạng bản nháp**. Công cụ này không thể gửi hoặc lên lịch trực tiếp. `get_campaign` cho phép bạn kiểm tra tiêu đề, nội dung, liên kết, đối tượng và người gửi trước khi khởi chạy.
+`create_campaign` lưu một **chiến dịch ở dạng bản nháp (`one-time`, `drip` hoặc `lifetime`)**. Công cụ này không thể gửi hoặc lên lịch trực tiếp. `get_campaign` cho phép bạn kiểm tra tiêu đề, nội dung, liên kết, đối tượng và người gửi trước khi khởi chạy.
 
 Máy chủ cũng cung cấp các tài nguyên chỉ đọc trong phạm vi `campaigns:read`:
 
@@ -119,3 +119,12 @@ Tìm kiếm API và MCP mặc định 5 km, chấp nhận số nguyên `radiusKm
 Thông tin liên hệ có thể được bổ sung sau khi doanh nghiệp xuất hiện. `enrichmentPending` đánh dấu việc nghiên cứu website chưa hoàn tất. Xem `businessSummary` và `businessSources` khi có; ngữ cảnh doanh nghiệp được nhập có thể hỗ trợ lời mở đầu cá nhân hóa. Chưa có email có thể do nghiên cứu còn đang chờ.
 
 Nếu có `enrichmentRetryToken`, gọi `retry_map_leads_enrichment` với `token`. Công cụ cần `campaigns:read`, gắn với không gian làm việc đã kết nối, hết hạn sau 15 phút và chỉ dùng một lần. Hợp nhất kết quả theo `placeId` trước khi nhập. `emailOnly` lọc phản hồi hiện tại; khách hàng đang chờ có thể xuất hiện sau khi thử lại.
+
+
+## Sửa bản nháp và phạm vi công cụ
+
+Dùng `update_campaign` để sửa bản nháp hiện có và `delete_campaign` để xóa bản nháp. Cả hai yêu cầu `campaigns:write`; không công cụ nào gửi hoặc lên lịch email. Các nhóm chức năng mới yêu cầu quyền OAuth riêng. Kết nối lại và phê duyệt các quyền đó khi được yêu cầu.
+
+Danh sách công cụ cung cấp các công cụ có sẵn và tham số tương ứng. Chuyển sang trình duyệt không tự thực hiện hành động: hãy hoàn tất thanh toán, cấp quyền nhà cung cấp, gửi lời mời, chuyển không gian làm việc và cài đặt chi trả nhạy cảm trong trình duyệt. Kết nối MCP vẫn gắn với không gian làm việc đã được cấp quyền. Các chức năng quản trị, thông tin xác thực, webhook, callback theo dõi và trợ lý nội bộ không được cung cấp.
+
+Dùng `get_api_capabilities` để kiểm tra phạm vi API. Với email thử nghiệm, kích hoạt chiến dịch lifetime hoặc sự kiện lifetime, hãy yêu cầu phê duyệt trên trình duyệt bằng `prepare_campaign_action`, rồi gọi `send_test_email`, `activate_lifetime_campaign` hoặc `trigger_lifetime_campaign` với cùng tham số. Phê duyệt hết hạn sau mười phút và chỉ dùng một lần.

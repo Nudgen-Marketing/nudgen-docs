@@ -61,7 +61,7 @@ codex mcp login nudgen --scopes campaigns:read,campaigns:write,campaigns:send
 | 생성 및 편집 | `create_contact`, `create_campaign`, `update_brand_settings`, `generate_email_draft`, `import_map_leads` | `campaigns:write` |
 | 시작 요청 및 완료 | `prepare_campaign_launch`, `launch_campaign` | `campaigns:send` |
 
-`create_campaign`은 **일회성 캠페인 초안**을 저장합니다. 직접 발송하거나 예약할 수 없습니다. `get_campaign`을 사용하면 시작 전에 제목, 콘텐츠, 링크, 오디언스, 발신자를 확인할 수 있습니다.
+`create_campaign`은 **캠페인 초안 (`one-time`, `drip`, `lifetime`)**을 저장합니다. 직접 발송하거나 예약할 수 없습니다. `get_campaign`을 사용하면 시작 전에 제목, 콘텐츠, 링크, 오디언스, 발신자를 확인할 수 있습니다.
 
 서버는 `campaigns:read`에서 읽기 전용 리소스도 제공합니다.
 
@@ -119,3 +119,12 @@ API와 MCP의 기본값은 5 km이며 정수 `radiusKm` 1~100을 지원합니다
 `enrichmentPending`은 완료되지 않은 웹사이트 조사를 나타냅니다. 제공되는 `businessSummary`와 `businessSources`를 검토하세요. 가져온 비즈니스 정보는 개인화된 캠페인 소개에 도움이 됩니다. 이메일이 없으면 조사가 진행 중일 수 있습니다.
 
 `enrichmentRetryToken`이 있으면 `campaigns:read` 권한으로 `retry_map_leads_enrichment`에 `token`을 전달하세요. 토큰은 연결된 워크스페이스 전용이며 15분 후 만료되고 한 번만 사용됩니다. 가져오기 전에 `placeId`로 결과를 병합하세요. `emailOnly`는 현재 응답을 필터링하므로 재시도 후 리드가 나타날 수 있습니다.
+
+
+## 초안 편집 및 지원 범위
+
+`update_campaign`으로 기존 초안을 편집하고 `delete_campaign`으로 초안을 삭제하세요. 두 도구 모두 `campaigns:write`가 필요하며 이메일을 보내거나 예약하지 않습니다. 새로운 제품 영역에는 별도의 OAuth 권한이 필요합니다. 요청 시 다시 연결하고 해당 권한을 승인하세요.
+
+도구 목록에서 사용 가능한 도구와 인수를 확인할 수 있습니다. 브라우저 안내 자체는 작업을 실행하지 않습니다. 결제, 공급자 인증, 초대 전송, 워크스페이스 전환, 민감한 지급 설정은 브라우저에서 완료하세요. MCP 연결은 승인한 워크스페이스에 계속 연결됩니다. 관리 기능, 인증 정보, 웹훅, 추적 콜백, 내부 도우미는 제외됩니다.
+
+`get_api_capabilities`로 API 지원 범위를 확인하세요. 테스트 발송, lifetime 활성화 또는 lifetime 이벤트에는 먼저 `prepare_campaign_action`으로 브라우저 승인을 요청한 뒤 동일한 인수로 `send_test_email`, `activate_lifetime_campaign` 또는 `trigger_lifetime_campaign`을 호출하세요. 승인은 10분 후 만료되며 한 번만 사용할 수 있습니다.

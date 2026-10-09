@@ -61,7 +61,7 @@ codex mcp login nudgen --scopes campaigns:read,campaigns:write,campaigns:send
 | 作成と編集 | `create_contact`, `create_campaign`, `update_brand_settings`, `generate_email_draft`, `import_map_leads` | `campaigns:write` |
 | キャンペーン開始をリクエストして完了する | `prepare_campaign_launch`, `launch_campaign` | `campaigns:send` |
 
-`create_campaign` は、**ワンショット キャンペーンの下書き**を保存します。直接送信または予約することはできません。`get_campaign` を使うと、開始前に件名、内容、リンク、オーディエンス、送信者を確認できます。
+`create_campaign` は、**キャンペーンの下書き（`one-time`、`drip`、`lifetime`）**を保存します。直接送信または予約することはできません。`get_campaign` を使うと、開始前に件名、内容、リンク、オーディエンス、送信者を確認できます。
 
 サーバーは、`campaigns:read` で次の読み取り専用リソースも公開します。
 
@@ -119,3 +119,12 @@ APIとMCPは既定で5 kmを使用し、整数の `radiusKm` 1～100を受け付
 `enrichmentPending` は未完了のWebサイト調査を示します。利用可能な `businessSummary` と `businessSources` を確認してください。インポートした情報はキャンペーンの導入文の個別化に役立ちます。メールがない場合、調査が続いている可能性があります。
 
 `enrichmentRetryToken` がある場合、`campaigns:read` 権限で `retry_map_leads_enrichment` に `token` を渡します。トークンは接続したワークスペース専用で、有効期間15分、1回限りです。インポート前に `placeId` で結果を統合してください。`emailOnly` は現在の応答を絞り込むため、再試行後にリードが増える場合があります。
+
+
+## 下書きの編集と対応範囲
+
+既存の下書きは `update_campaign` で編集し、`delete_campaign` で削除できます。どちらも `campaigns:write` が必要で、メールの送信や予約は行いません。新しい製品機能には専用の OAuth 権限が必要です。要求された場合は再接続して権限を承認してください。
+
+ツール一覧で利用可能なツールと引数を確認できます。ブラウザーへの案内だけでは操作は実行されません。支払い、プロバイダーの認可、招待の送信、ワークスペースの切り替え、機密性の高い支払い先設定はブラウザーで完了してください。MCP 接続は認可したワークスペースに固定されます。管理機能、認証情報、Webhook、追跡コールバック、内部アシスタントは対象外です。
+
+`get_api_capabilities` で API の対応範囲を確認できます。テスト送信、lifetime の有効化、lifetime イベントには、まず `prepare_campaign_action` でブラウザー承認を取得し、同じ引数で `send_test_email`、`activate_lifetime_campaign`、`trigger_lifetime_campaign` を呼び出してください。承認の有効期限は10分で、1回のみ使用できます。

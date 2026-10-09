@@ -61,7 +61,7 @@ Si vous devez uniquement consulter des données, demandez `campaigns:read`. Ajou
 | Créer et modifier | `create_contact`, `create_campaign`, `update_brand_settings`, `generate_email_draft`, `import_map_leads` | `campaigns:write` |
 | Demander et finaliser un lancement | `prepare_campaign_launch`, `launch_campaign` | `campaigns:send` |
 
-`create_campaign` enregistre un **brouillon de campagne ponctuelle**. Il ne peut pas envoyer ni planifier directement la campagne. `get_campaign` vous permet de vérifier l'objet, le contenu, le lien, l'audience et l'expéditeur avant le lancement.
+`create_campaign` enregistre un **brouillon de campagne (`one-time`, `drip` ou `lifetime`)**. Il ne peut pas envoyer ni planifier directement la campagne. `get_campaign` vous permet de vérifier l'objet, le contenu, le lien, l'audience et l'expéditeur avant le lancement.
 
 Le serveur expose également des ressources en lecture seule avec `campaigns:read` :
 
@@ -119,3 +119,12 @@ Les recherches API et MCP utilisent 5 km par défaut et acceptent un entier `rad
 `enrichmentPending` indique une recherche de site encore en cours. Consultez `businessSummary` et `businessSources` lorsqu’ils sont disponibles. Le contexte importé peut aider à personnaliser les introductions des campagnes. Une adresse e-mail absente peut encore être en cours de recherche.
 
 Avec `enrichmentRetryToken`, appelez `retry_map_leads_enrichment` avec `token` et la portée `campaigns:read`. Le jeton est lié au workspace connecté, expire après 15 minutes et ne sert qu’une fois. Fusionnez par `placeId` avant import. `emailOnly` filtre la réponse actuelle ; des leads peuvent apparaître après la nouvelle tentative.
+
+
+## Modifier les brouillons et couverture
+
+Utilisez `update_campaign` pour modifier un brouillon existant et `delete_campaign` pour le supprimer. Les deux nécessitent `campaigns:write` ; aucun ne lance ni ne programme d’envoi. Les nouveaux domaines du produit nécessitent leurs propres autorisations OAuth. Reconnectez-vous et approuvez ces autorisations lorsque cela vous est demandé.
+
+La liste des outils indique les outils disponibles et leurs paramètres. Les liens vers le navigateur n’exécutent aucune action : effectuez les paiements, l’autorisation des fournisseurs, l’envoi d’invitations, le changement d’espace de travail et les réglages de versement sensibles dans le navigateur. La connexion MCP reste liée à l’espace autorisé. L’administration, les identifiants, les webhooks, les callbacks de suivi et l’assistant interne sont exclus.
+
+Utilisez `get_api_capabilities` pour consulter la couverture API. Pour un envoi de test, une activation lifetime ou un événement lifetime, demandez d’abord une approbation dans le navigateur avec `prepare_campaign_action`. Appelez ensuite `send_test_email`, `activate_lifetime_campaign` ou `trigger_lifetime_campaign` avec les mêmes paramètres. L’approbation expire après dix minutes et ne sert qu’une fois.

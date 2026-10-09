@@ -61,7 +61,7 @@ codex mcp login nudgen --scopes campaigns:read,campaigns:write,campaigns:send
 | الإنشاء والتعديل | `create_contact`، `create_campaign`، `update_brand_settings`، `generate_email_draft`، `import_map_leads` | `campaigns:write` |
 | طلب إطلاق وإكماله | `prepare_campaign_launch`، `launch_campaign` | `campaigns:send` |
 
-يحفظ `create_campaign` **مسودة حملة لمرة واحدة**. ولا يمكنه الإرسال أو الجدولة مباشرةً. يتيح لك `get_campaign` التحقق من الموضوع والمحتوى والرابط والجمهور والمرسل قبل الإطلاق.
+يحفظ `create_campaign` **مسودة حملة (`one-time` أو `drip` أو `lifetime`)**. ولا يمكنه الإرسال أو الجدولة مباشرةً. يتيح لك `get_campaign` التحقق من الموضوع والمحتوى والرابط والجمهور والمرسل قبل الإطلاق.
 
 يعرض الخادم أيضًا موارد للقراءة فقط ضمن `campaigns:read`:
 
@@ -119,3 +119,12 @@ codex mcp login nudgen --scopes campaigns:read,campaigns:write,campaigns:send
 يشير `enrichmentPending` إلى أن البحث في الموقع لم يكتمل. راجع `businessSummary` و`businessSources` عند توفرهما. يمكن لسياق الشركة المستورد دعم مقدمات حملات مخصصة. قد يكون البريد المفقود قيد البحث.
 
 عند توفر `enrichmentRetryToken` استدعِ `retry_map_leads_enrichment` مع `token` وصلاحية `campaigns:read`. الرمز مرتبط بمساحة العمل المتصلة وينتهي بعد 15 دقيقة ويستخدم مرة واحدة. ادمج النتائج حسب `placeId` قبل الاستيراد. يرشح `emailOnly` الرد الحالي؛ قد تظهر نتائج بعد إعادة المحاولة.
+
+
+## تعديل المسودات ونطاق التغطية
+
+استخدم `update_campaign` لتعديل مسودة موجودة و`delete_campaign` لحذف مسودة. تتطلب الأداتان `campaigns:write`؛ ولا ترسلان البريد أو تجدولانه. تتطلب مجالات المنتج الجديدة أذونات OAuth مستقلة. أعد الاتصال ووافق على هذه الأذونات عند طلبها.
+
+تعرض قائمة الأدوات الأدوات المتاحة ومعاملاتها. لا ينفّذ الانتقال إلى المتصفح الإجراء تلقائيًا: أكمل المدفوعات وتفويض المزوّد وإرسال الدعوات وتبديل مساحة العمل وإعدادات الدفعات الحساسة في المتصفح. يظل اتصال MCP مرتبطًا بمساحة العمل التي فوّضتها. تُستثنى وظائف الإدارة وبيانات الاعتماد وwebhooks واستدعاءات التتبّع والمساعد الداخلي.
+
+استخدم `get_api_capabilities` لفحص تغطية API. لإرسال اختبار أو تفعيل lifetime أو تشغيل حدث lifetime، اطلب أولًا موافقة المتصفح عبر `prepare_campaign_action`، ثم استخدم `send_test_email` أو `activate_lifetime_campaign` أو `trigger_lifetime_campaign` بالمعاملات نفسها. تنتهي صلاحية الموافقة بعد عشر دقائق ولا تُستخدم إلا مرة واحدة.

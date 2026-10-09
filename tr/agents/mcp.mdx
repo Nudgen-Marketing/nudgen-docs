@@ -61,7 +61,7 @@ Yalnızca verileri incelemeniz gerekiyorsa `campaigns:read` kapsamını isteyin.
 | Oluşturma ve düzenleme | `create_contact`, `create_campaign`, `update_brand_settings`, `generate_email_draft`, `import_map_leads` | `campaigns:write` |
 | Başlatma isteme ve tamamlama | `prepare_campaign_launch`, `launch_campaign` | `campaigns:send` |
 
-`create_campaign`, **tek seferlik bir kampanya taslağı** kaydeder. Doğrudan gönderim yapamaz veya zamanlama oluşturamaz. `get_campaign`, başlatmadan önce konuyu, içeriği, bağlantıyı, hedef kitleyi ve göndereni kontrol etmenizi sağlar.
+`create_campaign`, **kampanya taslağı (`one-time`, `drip` veya `lifetime`)** kaydeder. Doğrudan gönderim yapamaz veya zamanlama oluşturamaz. `get_campaign`, başlatmadan önce konuyu, içeriği, bağlantıyı, hedef kitleyi ve göndereni kontrol etmenizi sağlar.
 
 Sunucu ayrıca `campaigns:read` kapsamında salt okunur kaynaklar sunar:
 
@@ -119,3 +119,12 @@ API ve MCP varsayılan olarak 5 km kullanır, 1–100 arasında tam sayı `radiu
 `enrichmentPending` tamamlanmamış web sitesi araştırmasını gösterir. Varsa `businessSummary` ve `businessSources` alanlarını inceleyin. İçe aktarılan işletme bağlamı kişiselleştirilmiş kampanya girişlerine yardımcı olabilir. Eksik e-posta hâlâ araştırılıyor olabilir.
 
 `enrichmentRetryToken` varsa `campaigns:read` ile `retry_map_leads_enrichment` aracına `token` gönderin. Token bağlı çalışma alanına özeldir, 15 dakikada sona erer ve bir kez kullanılır. İçe aktarmadan önce sonuçları `placeId` ile birleştirin. `emailOnly` geçerli yanıtı filtreler; yeniden denemeden sonra yeni potansiyel müşteriler görünebilir.
+
+
+## Taslak düzenleme ve ürün kapsamı
+
+Mevcut bir taslağı düzenlemek için `update_campaign`, silmek için `delete_campaign` kullanın. İkisi de `campaigns:write` gerektirir; e-posta göndermez veya zamanlamaz. Yeni ürün alanları kendi OAuth izinlerini gerektirir. İstendiğinde yeniden bağlanıp bu izinleri onaylayın.
+
+Araç listesi kullanılabilir araçları ve parametrelerini gösterir. Tarayıcıya yönlendirme işlemi gerçekleştirmez: ödemeleri, sağlayıcı yetkilendirmesini, davet göndermeyi, çalışma alanı değiştirmeyi ve hassas ödeme ayarlarını tarayıcıda tamamlayın. MCP bağlantısı yetkilendirdiğiniz çalışma alanına bağlı kalır. Yönetim işlevleri, kimlik bilgileri, webhook’lar, izleme geri çağrıları ve dahili asistan kapsam dışındadır.
+
+API kapsamını `get_api_capabilities` ile inceleyin. Test gönderimi, lifetime etkinleştirme veya lifetime olayları için önce `prepare_campaign_action` ile tarayıcı onayı isteyin. Ardından aynı parametrelerle `send_test_email`, `activate_lifetime_campaign` veya `trigger_lifetime_campaign` çağırın. Onay on dakika geçerlidir ve yalnızca bir kez kullanılabilir.

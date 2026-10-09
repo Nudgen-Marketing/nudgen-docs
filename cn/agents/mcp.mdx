@@ -61,7 +61,7 @@ codex mcp login nudgen --scopes campaigns:read,campaigns:write,campaigns:send
 | 创建和编辑 | `create_contact`, `create_campaign`, `update_brand_settings`, `generate_email_draft`, `import_map_leads` | `campaigns:write` |
 | 请求并完成活动启动 | `prepare_campaign_launch`, `launch_campaign` | `campaigns:send` |
 
-`create_campaign` 会保存一个**一次性活动草稿**，不能直接发送或排期。通过 `get_campaign`，你可以在启动前检查主题、内容、链接、受众和发件人。
+`create_campaign` 会保存一个**活动草稿（`one-time`、`drip` 或 `lifetime`）**，不能直接发送或排期。通过 `get_campaign`，你可以在启动前检查主题、内容、链接、受众和发件人。
 
 服务器还通过 `campaigns:read` 提供只读资源：
 
@@ -119,3 +119,12 @@ API和MCP默认使用5 km，接受整数 `radiusKm` 1–100，不显示仪表板
 `enrichmentPending`表示网站调查尚未完成。查看可用的 `businessSummary` 和 `businessSources`。导入的企业背景可帮助个性化营销活动的开场内容。没有邮箱可能是调查仍在等待完成。
 
 收到 `enrichmentRetryToken` 时，使用 `campaigns:read` 权限调用 `retry_map_leads_enrichment` 并传入 `token`。令牌绑定已连接的工作空间，15分钟后过期，只能使用一次。导入前按 `placeId` 合并结果。`emailOnly`筛选当前响应；重试后可能出现更多潜在客户。
+
+
+## 编辑草稿与功能覆盖
+
+使用 `update_campaign` 编辑现有草稿，使用 `delete_campaign` 删除草稿。两者均需要 `campaigns:write`，不会发送或安排邮件。新增产品领域需要独立的 OAuth 权限。收到提示时，请重新连接并批准这些权限。
+
+工具列表提供可用工具及其参数。跳转浏览器不会执行操作：请在浏览器中完成付款、提供商授权、发送邀请、切换工作区及敏感收款设置。MCP 连接始终绑定到已授权的工作区。管理功能、凭据、Webhook、跟踪回调和内部助手不在范围内。
+
+使用 `get_api_capabilities` 查看 API 覆盖范围。测试发送、lifetime 激活或 lifetime 事件需要先通过 `prepare_campaign_action` 请求浏览器批准，再以相同参数调用 `send_test_email`、`activate_lifetime_campaign` 或 `trigger_lifetime_campaign`。批准十分钟后失效，且只能使用一次。

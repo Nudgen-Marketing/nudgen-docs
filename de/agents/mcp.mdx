@@ -61,7 +61,7 @@ Wenn Sie Daten nur prüfen möchten, fordern Sie `campaigns:read` an. Fügen Sie
 | Erstellen und bearbeiten | `create_contact`, `create_campaign`, `update_brand_settings`, `generate_email_draft`, `import_map_leads` | `campaigns:write` |
 | Einen Start anfordern und abschließen | `prepare_campaign_launch`, `launch_campaign` | `campaigns:send` |
 
-`create_campaign` speichert eine **einmalige Kampagne als Entwurf**. Das Tool kann sie nicht direkt versenden oder planen. Mit `get_campaign` können Sie vor dem Start Betreff, Inhalt, Link, Zielgruppe und Absender prüfen.
+`create_campaign` speichert eine **Kampagne als Entwurf (`one-time`, `drip` oder `lifetime`)**. Das Tool kann sie nicht direkt versenden oder planen. Mit `get_campaign` können Sie vor dem Start Betreff, Inhalt, Link, Zielgruppe und Absender prüfen.
 
 Der Server stellt außerdem schreibgeschützte Ressourcen unter `campaigns:read` bereit:
 
@@ -119,3 +119,12 @@ API- und MCP-Suchen verwenden standardmäßig 5 km und akzeptieren eine ganze Za
 `enrichmentPending` kennzeichnet noch laufende Website-Recherche. Prüfen Sie verfügbare `businessSummary` und `businessSources`. Importierter Geschäftskontext kann personalisierte Kampagneneinleitungen unterstützen. Eine fehlende E-Mail kann noch recherchiert werden.
 
 Bei `enrichmentRetryToken` rufen Sie `retry_map_leads_enrichment` mit `token` und `campaigns:read` auf. Der Token gilt für den verbundenen Workspace, läuft nach 15 Minuten ab und ist einmal verwendbar. Ergebnisse vor dem Import anhand von `placeId` zusammenführen. `emailOnly` filtert die aktuelle Antwort; weitere Leads können nach dem Wiederholen erscheinen.
+
+
+## Entwürfe bearbeiten und Funktionsumfang
+
+Mit `update_campaign` bearbeitest du einen vorhandenen Entwurf; mit `delete_campaign` löschst du ihn. Beide benötigen `campaigns:write` und versenden oder planen keine E-Mails. Neue Funktionsbereiche benötigen eigene OAuth-Berechtigungen. Verbinde dich erneut und bestätige diese Berechtigungen, wenn du dazu aufgefordert wirst.
+
+Die Werkzeugliste zeigt verfügbare Werkzeuge und Argumente. Browser-Übergaben führen keine Aktion aus: Schließe Zahlungen, Anbieterautorisierung, Einladungsversand, Workspace-Wechsel und vertrauliche Auszahlungseinstellungen im Browser ab. Deine MCP-Verbindung bleibt an den autorisierten Workspace gebunden. Administration, Zugangsdaten, Webhooks, Tracking-Callbacks und der interne Assistent sind ausgeschlossen.
+
+Mit `get_api_capabilities` prüfst du die API-Abdeckung. Fordere für Testsendungen, Lifetime-Aktivierung oder Lifetime-Ereignisse zuerst mit `prepare_campaign_action` eine Browserfreigabe an. Rufe danach `send_test_email`, `activate_lifetime_campaign` oder `trigger_lifetime_campaign` mit denselben Argumenten auf. Die Freigabe gilt zehn Minuten und nur einmal.

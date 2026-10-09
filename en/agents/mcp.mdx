@@ -61,7 +61,7 @@ If you only need to inspect data, request `campaigns:read`. Add `campaigns:write
 | Create and edit | `create_contact`, `create_campaign`, `update_brand_settings`, `generate_email_draft`, `import_map_leads` | `campaigns:write` |
 | Request and complete a launch | `prepare_campaign_launch`, `launch_campaign` | `campaigns:send` |
 
-`create_campaign` saves a **draft one-time campaign**. It cannot send or schedule directly. `get_campaign` lets you check the subject, content, link, audience, and sender before launch.
+`create_campaign` saves a **draft campaign (`one-time`, `drip`, or `lifetime`)**. It cannot send or schedule directly. `get_campaign` lets you check the subject, content, link, audience, and sender before launch.
 
 The server also exposes read-only resources on `campaigns:read`:
 
@@ -119,3 +119,12 @@ API and MCP searches default to 5 km and accept an explicit integer `radiusKm` f
 Contact enrichment may finish after businesses first appear. `enrichmentPending` marks unfinished website research. Review `businessSummary` and `businessSources` when available; imported business context can support personalized campaign introductions. A missing email can mean research is still pending.
 
 If `enrichmentRetryToken` is present, call `retry_map_leads_enrichment` with `token` to retry pending website research. It requires `campaigns:read`, is bound to the connected workspace, expires after 15 minutes, and can be used once. Merge returned leads by `placeId` before importing. `emailOnly` filters the current response; pending leads may appear after retry.
+
+
+## Edit drafts and product coverage
+
+Use `update_campaign` to edit an existing draft and `delete_campaign` to delete a draft. Both require `campaigns:write`; neither sends or schedules email. New product domains require their own OAuth permissions. Reconnect and approve those permissions when requested.
+
+Tool discovery lists the available tools and their arguments. Browser handoffs do not perform the action: complete payments, provider authorization, invitation sending, workspace switching, and sensitive payout settings in the browser. Your MCP connection remains bound to the workspace you authorized. Administrative functions, credentials, webhooks, tracking callbacks, and the internal assistant are excluded.
+
+Use `get_api_capabilities` to inspect API coverage. For test sends or lifetime activation and events, first request browser approval with `prepare_campaign_action`, then use `send_test_email`, `activate_lifetime_campaign`, or `trigger_lifetime_campaign` with the same arguments. Approval expires after ten minutes and can be used once.
