@@ -1,6 +1,6 @@
 ---
 title: "Servidor MCP"
-description: "Conecta un asistente de IA con Nudgen mediante OAuth, busca leads en el mapa y aprueba lanzamientos de campañas en el navegador"
+description: "Conecta un asistente mediante OAuth, crea borradores y autoriza envíos en el chat"
 ---
 
 ## Descripción general
@@ -9,7 +9,7 @@ Nudgen aloja un servidor MCP en el endpoint `/mcp` del origen de tu aplicación.
 
 ## Por qué esto es importante
 
-Tu asistente puede consultar contactos y campañas, encontrar negocios cercanos, preparar contenido y dejar una campaña lista para lanzarla sin gestionar una sesión del panel ni un token de acceso personal. Tú revisas cada envío real o programación en el navegador antes de que pueda continuar.
+Tu asistente puede consultar contactos, buscar empresas y crear borradores de campañas. Autoriza el envío o la programación en el chat; el asistente ejecuta la acción directamente sin enlaces de aprobación en el navegador.
 
 ## Conectar tu cliente
 
@@ -44,9 +44,9 @@ Si ya hay configurado un cliente llamado `nudgen`, actualiza esa entrada con la 
 | --- | --- |
 | `campaigns:read` | Consultar el workspace, los contactos, las campañas y la configuración de marca, así como buscar leads en el mapa. |
 | `campaigns:write` | Crear contactos y borradores de campañas, actualizar la configuración de marca, generar borradores con IA e importar leads del mapa. |
-| `campaigns:send` | Solicitar y completar un lanzamiento. Este scope nunca envía correos por sí solo. |
+| `campaigns:send` | Lanzar una campaña en borrador. |
 
-Si solo necesitas consultar datos, solicita `campaigns:read`. Añade `campaigns:write` cuando el cliente deba modificar contactos, borradores, la configuración de marca o leads importados. Añade `campaigns:send` solo cuando el cliente necesite solicitar la aprobación de un lanzamiento.
+Usa `campaigns:read` para consultar, `campaigns:write` para borradores y cambios, y `campaigns:send` para acciones de correo autorizadas. El consentimiento OAuth sigue siendo necesario.
 
 <Note>
   Los tokens de acceso personal autentican la [API de desarrollador](/es/agents/api), pero no autentican `/mcp`. Un cliente MCP debe completar el inicio de sesión mediante OAuth.
@@ -59,7 +59,7 @@ Si solo necesitas consultar datos, solicita `campaigns:read`. Añade `campaigns:
 | Consultar tu workspace | `get_current_user`, `list_contacts`, `list_campaigns`, `get_campaign`, `get_campaign_stats`, `get_brand_settings` | `campaigns:read` |
 | Encontrar negocios cercanos | `search_map_leads`, `retry_map_leads_enrichment` | `campaigns:read` |
 | Crear y editar | `create_contact`, `create_campaign`, `update_brand_settings`, `generate_email_draft`, `import_map_leads` | `campaigns:write` |
-| Solicitar y completar un lanzamiento | `prepare_campaign_launch`, `launch_campaign` | `campaigns:send` |
+| Lanzar una campaña en borrador | `launch_campaign`, `send_test_email`, `activate_lifetime_campaign`, `trigger_lifetime_campaign` | `campaigns:send` |
 
 `create_campaign` guarda una **campaña como borrador (`one-time`, `drip` o `lifetime`)**. No puede enviarla ni programarla directamente. `get_campaign` te permite comprobar el asunto, el contenido, el enlace, la audiencia y el remitente antes del lanzamiento.
 
@@ -80,24 +80,17 @@ El servidor también expone recursos de solo lectura mediante `campaigns:read`:
 
 La importación crea contactos en el workspace conectado. Se omiten los leads sin correo electrónico. Si un lead ya existe, se actualiza.
 
-### Aprobar el lanzamiento de una campaña
+### Lanzar una campaña en borrador
 
-1. Pide al asistente que consulte el borrador con `get_campaign`.
-2. Pídele que llame a `prepare_campaign_launch` con el ID de la campaña y la hora exacta de envío inmediato o programado que quieras. La llamada devuelve una URL de aprobación de un solo uso; todavía no se envía ningún correo.
-3. Abre la URL, revisa el workspace, la estimación de destinatarios, el contenido, el remitente y la hora y, después, haz clic en **Aprobar lanzamiento**.
-4. Vuelve al cliente para que pueda llamar a `launch_campaign` con el mismo ID de campaña, la misma hora y el mismo `approvalId`.
+1. Revisa nombre, asunto, contenido, remitente efectivo, estimación de destinatarios y horario con `get_campaign`.
+2. Autoriza la acción en el chat. El asistente llama directamente a `launch_campaign` con el ID y `sendNow: true` para enviar ahora o `scheduledAt` con una fecha futura y zona horaria. No combines horarios contradictorios. Una autorización existente no requiere otra confirmación.
+3. Revisa el estado, la hora programada y el enlace al dashboard. En cola o programado no significa entregado. Consulta `get_campaign` y `get_campaign_stats` antes de reintentar un resultado incierto.
 
-Una aprobación caduca a los **10 minutos** y solo puede usarse una vez. Si cambia la campaña o el remitente, solicita una nueva aprobación. Nudgen vuelve a comprobar la disponibilidad del remitente, los destinatarios aptos, la suscripción, la cuota y la disponibilidad de la cola al realizar el lanzamiento. La entrega solo empieza después de que el worker de campañas procese el lanzamiento.
-
-<Warning>
-  Aprobar y completar `launch_campaign` puede enviar correos reales. Usa el flujo de envío de prueba del panel para comprobar una vista previa en la bandeja de entrada antes de aprobar una audiencia real.
-</Warning>
+Nudgen sigue comprobando permisos del workspace, remitente, destinatarios aptos, suscripción, cuota, versión de campaña y cola. Crear y editar solo guarda borradores; la entrega requiere el worker de campañas.
 
 ## Gestionar el acceso
 
-Abre **Configuración** → **Claves API** → **Aplicaciones MCP conectadas** para ver el workspace y los scopes de cada cliente conectado. Revoca allí una conexión si ya no debe tener acceso. La revocación desactiva sus tokens y las aprobaciones de lanzamiento pendientes. Puedes volver a conectarla mediante OAuth más adelante.
-
-Las concesiones de OAuth duran como máximo 90 días. Perder el acceso a un workspace también impide que el cliente use la conexión de ese workspace.
+Abre **Configuración** → **Claves API** → **Aplicaciones MCP conectadas** para revisar o revocar acceso. Revocar desactiva los tokens. Perder la membresía del workspace también bloquea el acceso. Vuelve a conectar mediante OAuth cuando sea necesario.
 
 ## Solución de problemas
 
@@ -107,7 +100,7 @@ Las concesiones de OAuth duran como máximo 90 días. Perder el acceso a un work
 | Una herramienta necesita más permisos | Vuelve a conectar el cliente y aprueba el scope necesario para ese workspace. |
 | La búsqueda de contactos te pide acotar los resultados | La búsqueda compara nombres y direcciones de correo, y examina como máximo 5000 contactos después de aplicar los filtros de etiquetas y estado. Acota los filtros. |
 | La importación de leads del mapa omite un negocio | Solo se guardan los leads con correo electrónico. Repite la búsqueda con `emailOnly` establecido en true o elige leads que ya incluyan un correo. |
-| La aprobación del lanzamiento ha caducado o la campaña ha cambiado | Solicita una nueva aprobación y revisa la campaña y el remitente actuales. |
+| Enlace o herramienta de aprobación antigua | Actualiza la lista de herramientas y autoriza la acción directa en el chat; los enlaces antiguos no pueden lanzar campañas. |
 | Un lanzamiento está bloqueado | Comprueba el estado de borrador de la campaña, la disponibilidad del remitente, los contactos aptos, la cuota del plan y el [dominio de envío](/es/settings/sending-domains). |
 
 Para scripts que usen tokens bearer y endpoints REST directos, consulta la [API de desarrollador](/es/agents/api).
@@ -120,11 +113,10 @@ API y MCP usan 5 km por defecto y aceptan un entero `radiusKm` de 1 a 100, sin d
 
 Si recibes `enrichmentRetryToken`, llama a `retry_map_leads_enrichment` con `token` y `campaigns:read`. El token está vinculado al workspace conectado, caduca en 15 minutos y se usa una vez. Combina los resultados por `placeId` antes de importar. `emailOnly` filtra la respuesta actual; pueden aparecer leads después del reintento.
 
-
 ## Editar borradores y cobertura
 
 Usa `update_campaign` para editar un borrador existente y `delete_campaign` para eliminarlo. Ambos requieren `campaigns:write`; ninguno envía ni programa correos. Las nuevas áreas del producto requieren permisos OAuth propios. Vuelve a conectarte y aprueba esos permisos cuando se soliciten.
 
 La lista de herramientas muestra las herramientas disponibles y sus argumentos. Los enlaces al navegador no ejecutan acciones: completa los pagos, la autorización de proveedores, el envío de invitaciones, el cambio de espacio de trabajo y los datos confidenciales de cobro en el navegador. La conexión MCP sigue vinculada al espacio autorizado. Se excluyen la administración, las credenciales, los webhooks, los callbacks de seguimiento y el asistente interno.
 
-Usa `get_api_capabilities` para consultar la cobertura de la API. Para pruebas de envío, activación lifetime o eventos lifetime, solicita primero aprobación en el navegador con `prepare_campaign_action`. Después usa `send_test_email`, `activate_lifetime_campaign` o `trigger_lifetime_campaign` con los mismos argumentos. La aprobación vence en diez minutos y solo se usa una vez.
+Usa `get_api_capabilities` para consultar la cobertura. Tras autorizar en el chat, llama directamente a `send_test_email`, `activate_lifetime_campaign` o `trigger_lifetime_campaign`. Las pruebas solo se envían al correo de la cuenta. Activar lifetime permite futuros envíos automáticos. No se requiere aprobación del navegador ni ID de aprobación. Ante un resultado incierto, revisa el estado o historial antes de reintentar.

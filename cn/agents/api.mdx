@@ -247,7 +247,7 @@ curl "$NUDGEN_APP_URL/api/v1/campaigns/$CAMPAIGN_ID/executions?limit=25&status=s
 
 ## MCP 服务器
 
-当您的代理支持模型上下文协议工具时，请使用 [Nudgen MCP](/en/agents/mcp)。MCP 使用与所选工作区关联的 OAuth 授权，每次启动营销活动都需要在浏览器中批准。REST API 使用个人访问令牌（PAT）。
+当您的代理支持模型上下文协议工具时，请使用 [Nudgen MCP](/en/agents/mcp)。MCP 使用与所选工作区关联的 OAuth 授权，新活动始终保存为草稿；在聊天中授权发送或排期后，助手会直接启动活动。REST API 使用个人访问令牌（PAT）。
 
 <Card title="MCP server setup" icon="bot" href="/en/agents/mcp">
  在 Claude Code、Cursor、Windsurf、Codex CLI 或通用 MCP 客户端中安装 Nudgen MCP。

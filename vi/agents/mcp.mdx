@@ -1,6 +1,6 @@
 ---
 title: "Máy chủ MCP"
-description: "Kết nối trợ lý AI với Nudgen bằng OAuth, tìm kiếm khách hàng tiềm năng trên bản đồ và phê duyệt việc khởi chạy chiến dịch trong trình duyệt"
+description: "Kết nối trợ lý qua OAuth, tạo bản nháp và cho phép gửi ngay trong cuộc trò chuyện"
 ---
 
 ## Tổng quan
@@ -9,7 +9,7 @@ Nudgen cung cấp máy chủ MCP tại điểm cuối `/mcp` trên miền ứng 
 
 ## Tại sao điều này lại quan trọng
 
-Trợ lý của bạn có thể đọc danh bạ và chiến dịch, tìm doanh nghiệp lân cận, soạn nội dung và chuẩn bị khởi chạy chiến dịch mà không cần xử lý phiên dashboard hoặc Mã thông báo truy cập cá nhân. Bạn sẽ xem xét từng lần gửi thực tế hoặc lịch gửi trong trình duyệt trước khi chiến dịch có thể tiếp tục.
+Trợ lý có thể xem danh bạ, tìm doanh nghiệp và tạo chiến dịch nháp. Bạn cho phép gửi hoặc lên lịch ngay trong cuộc trò chuyện; trợ lý thực hiện trực tiếp, không cần liên kết phê duyệt trên trình duyệt.
 
 ## Kết nối client
 
@@ -44,9 +44,9 @@ Nếu một client có tên `nudgen` đã được cấu hình, hãy cập nhậ
 | --- | --- |
 | `campaigns:read` | Kiểm tra workspace, danh bạ, chiến dịch và cài đặt thương hiệu, đồng thời tìm kiếm khách hàng tiềm năng trên bản đồ. |
 | `campaigns:write` | Tạo liên hệ và chiến dịch nháp, cập nhật cài đặt thương hiệu, tạo bản nháp bằng AI và nhập khách hàng tiềm năng từ bản đồ. |
-| `campaigns:send` | Yêu cầu và hoàn tất việc khởi chạy. Phạm vi quyền này không tự gửi email. |
+| `campaigns:send` | Khởi chạy chiến dịch nháp. |
 
-Nếu chỉ cần kiểm tra dữ liệu, hãy yêu cầu `campaigns:read`. Thêm `campaigns:write` khi client cần thay đổi danh bạ, bản nháp, cài đặt thương hiệu hoặc khách hàng tiềm năng đã nhập. Chỉ thêm `campaigns:send` khi client cần yêu cầu phê duyệt khởi chạy.
+Dùng `campaigns:read` để xem dữ liệu, `campaigns:write` để tạo và sửa bản nháp, và `campaigns:send` cho các thao tác gửi đã được bạn cho phép. Vẫn cần cấp quyền OAuth khi kết nối.
 
 <Note>
   Mã thông báo truy cập cá nhân xác thực [API nhà phát triển](/vi/agents/api), nhưng không xác thực `/mcp`. Client MCP phải hoàn tất quy trình đăng nhập OAuth.
@@ -59,7 +59,7 @@ Nếu chỉ cần kiểm tra dữ liệu, hãy yêu cầu `campaigns:read`. Thê
 | Kiểm tra workspace | `get_current_user`, `list_contacts`, `list_campaigns`, `get_campaign`, `get_campaign_stats`, `get_brand_settings` | `campaigns:read` |
 | Tìm doanh nghiệp lân cận | `search_map_leads`, `retry_map_leads_enrichment` | `campaigns:read` |
 | Tạo và chỉnh sửa | `create_contact`, `create_campaign`, `update_brand_settings`, `generate_email_draft`, `import_map_leads` | `campaigns:write` |
-| Yêu cầu và hoàn tất việc khởi chạy | `prepare_campaign_launch`, `launch_campaign` | `campaigns:send` |
+| Khởi chạy chiến dịch nháp | `launch_campaign`, `send_test_email`, `activate_lifetime_campaign`, `trigger_lifetime_campaign` | `campaigns:send` |
 
 `create_campaign` lưu một **chiến dịch ở dạng bản nháp (`one-time`, `drip` hoặc `lifetime`)**. Công cụ này không thể gửi hoặc lên lịch trực tiếp. `get_campaign` cho phép bạn kiểm tra tiêu đề, nội dung, liên kết, đối tượng và người gửi trước khi khởi chạy.
 
@@ -80,24 +80,17 @@ Máy chủ cũng cung cấp các tài nguyên chỉ đọc trong phạm vi `camp
 
 Thao tác nhập sẽ ghi liên hệ vào workspace đã kết nối. Khách hàng tiềm năng không có email sẽ bị bỏ qua. Khách hàng tiềm năng đã tồn tại sẽ được cập nhật.
 
-### Phê duyệt việc khởi chạy chiến dịch
+### Khởi chạy chiến dịch nháp
 
-1. Yêu cầu trợ lý kiểm tra bản nháp bằng `get_campaign`.
-2. Yêu cầu trợ lý gọi `prepare_campaign_launch` với ID chiến dịch và thời điểm gửi ngay hoặc thời gian lên lịch chính xác mà bạn muốn. Công cụ trả về URL phê duyệt dùng một lần; chưa có email nào được gửi.
-3. Mở URL, xem lại workspace, số người nhận ước tính, nội dung, người gửi và thời gian, sau đó nhấp vào **Phê duyệt khởi chạy**.
-4. Quay lại client để client gọi `launch_campaign` với cùng ID chiến dịch, thời gian và `approvalId`.
+1. Xem tên chiến dịch, tiêu đề, nội dung, người gửi thực tế, số người nhận ước tính và thời gian bằng `get_campaign`.
+2. Cho phép thao tác trong cuộc trò chuyện. Trợ lý gọi trực tiếp `launch_campaign` với ID chiến dịch và `sendNow: true` để gửi ngay hoặc `scheduledAt` với thời điểm tương lai kèm múi giờ. Không truyền các lựa chọn thời gian mâu thuẫn. Không cần xác nhận lại nếu bạn đã cho phép.
+3. Xem trạng thái, thời gian lên lịch và liên kết dashboard trả về. Đã xếp hàng hoặc đã lên lịch không có nghĩa là đã gửi đến người nhận. Kiểm tra `get_campaign` và `get_campaign_stats` trước khi thử lại nếu kết quả chưa rõ.
 
-Phê duyệt hết hạn sau **10 phút** và chỉ có thể dùng một lần. Nếu chiến dịch hoặc người gửi thay đổi, hãy yêu cầu phê duyệt mới. Khi khởi chạy, Nudgen kiểm tra lại trạng thái sẵn sàng của người gửi, người nhận đủ điều kiện, gói đăng ký, hạn mức và tình trạng hàng đợi. Việc gửi chỉ bắt đầu sau khi worker chiến dịch xử lý lệnh khởi chạy.
-
-<Warning>
-  Việc phê duyệt và hoàn tất `launch_campaign` có thể gửi email thực. Hãy dùng quy trình gửi thử trên dashboard để kiểm tra bản xem trước trong hộp thư trước khi phê duyệt gửi đến đối tượng thực.
-</Warning>
+Nudgen vẫn kiểm tra quyền workspace, người gửi, người nhận đủ điều kiện, gói đăng ký, hạn mức, phiên bản chiến dịch và hàng đợi. Tạo và sửa chiến dịch chỉ lưu bản nháp; việc gửi cần worker chiến dịch.
 
 ## Quản lý quyền truy cập
 
-Mở **Cài đặt** → **Khóa API** → **Ứng dụng MCP đã kết nối** để xem workspace và phạm vi quyền của từng client đã kết nối. Thu hồi kết nối tại đây nếu client không còn cần quyền truy cập. Việc thu hồi sẽ vô hiệu hóa token và các phê duyệt khởi chạy đang chờ. Sau đó, bạn vẫn có thể kết nối lại qua OAuth.
-
-Quyền cấp OAuth có hiệu lực tối đa 90 ngày. Khi mất quyền truy cập một workspace, client cũng không thể sử dụng kết nối của workspace đó.
+Mở **Cài đặt** → **Khóa API** → **Ứng dụng MCP đã kết nối** để xem và thu hồi quyền. Thu hồi sẽ vô hiệu hóa token. Mất tư cách thành viên workspace cũng chặn quyền truy cập. Kết nối lại qua OAuth khi cần.
 
 ## Khắc phục sự cố
 
@@ -107,7 +100,7 @@ Quyền cấp OAuth có hiệu lực tối đa 90 ngày. Khi mất quyền truy 
 | Một công cụ cần thêm quyền | Kết nối lại và phê duyệt phạm vi quyền cần thiết cho workspace đó. |
 | Tìm kiếm liên hệ yêu cầu thu hẹp kết quả | Tìm kiếm khớp theo tên và địa chỉ email, đồng thời quét tối đa 5.000 liên hệ sau khi áp dụng bộ lọc tag và trạng thái. Hãy thu hẹp bộ lọc. |
 | Thao tác nhập khách hàng tiềm năng bỏ qua một doanh nghiệp | Chỉ khách hàng tiềm năng có email mới được lưu. Tìm kiếm lại với `emailOnly` được đặt thành true hoặc chọn khách hàng tiềm năng đã có email. |
-| Phê duyệt khởi chạy đã hết hạn hoặc chiến dịch đã thay đổi | Yêu cầu phê duyệt mới và xem lại chiến dịch cùng người gửi hiện tại. |
+| Liên kết hoặc công cụ phê duyệt cũ | Làm mới danh sách công cụ và cho phép thao tác trực tiếp trong cuộc trò chuyện; liên kết cũ không thể khởi chạy chiến dịch. |
 | Việc khởi chạy bị chặn | Kiểm tra trạng thái bản nháp của chiến dịch, trạng thái sẵn sàng của người gửi, liên hệ đủ điều kiện, hạn mức gói và [miền gửi](/vi/settings/sending-domains). |
 
 Đối với tập lệnh dùng bearer token và các điểm cuối REST trực tiếp, hãy xem [API nhà phát triển](/vi/agents/api).
@@ -120,11 +113,10 @@ Thông tin liên hệ có thể được bổ sung sau khi doanh nghiệp xuất
 
 Nếu có `enrichmentRetryToken`, gọi `retry_map_leads_enrichment` với `token`. Công cụ cần `campaigns:read`, gắn với không gian làm việc đã kết nối, hết hạn sau 15 phút và chỉ dùng một lần. Hợp nhất kết quả theo `placeId` trước khi nhập. `emailOnly` lọc phản hồi hiện tại; khách hàng đang chờ có thể xuất hiện sau khi thử lại.
 
-
 ## Sửa bản nháp và phạm vi công cụ
 
 Dùng `update_campaign` để sửa bản nháp hiện có và `delete_campaign` để xóa bản nháp. Cả hai yêu cầu `campaigns:write`; không công cụ nào gửi hoặc lên lịch email. Các nhóm chức năng mới yêu cầu quyền OAuth riêng. Kết nối lại và phê duyệt các quyền đó khi được yêu cầu.
 
 Danh sách công cụ cung cấp các công cụ có sẵn và tham số tương ứng. Chuyển sang trình duyệt không tự thực hiện hành động: hãy hoàn tất thanh toán, cấp quyền nhà cung cấp, gửi lời mời, chuyển không gian làm việc và cài đặt chi trả nhạy cảm trong trình duyệt. Kết nối MCP vẫn gắn với không gian làm việc đã được cấp quyền. Các chức năng quản trị, thông tin xác thực, webhook, callback theo dõi và trợ lý nội bộ không được cung cấp.
 
-Dùng `get_api_capabilities` để kiểm tra phạm vi API. Với email thử nghiệm, kích hoạt chiến dịch lifetime hoặc sự kiện lifetime, hãy yêu cầu phê duyệt trên trình duyệt bằng `prepare_campaign_action`, rồi gọi `send_test_email`, `activate_lifetime_campaign` hoặc `trigger_lifetime_campaign` với cùng tham số. Phê duyệt hết hạn sau mười phút và chỉ dùng một lần.
+Dùng `get_api_capabilities` để xem phạm vi API. Sau khi được bạn cho phép trong cuộc trò chuyện, gọi trực tiếp `send_test_email`, `activate_lifetime_campaign` hoặc `trigger_lifetime_campaign`. Email thử chỉ gửi đến email tài khoản. Kích hoạt lifetime cho phép tự động gửi về sau. Không cần phê duyệt trên trình duyệt hoặc mã phê duyệt. Kiểm tra trạng thái hoặc lịch sử thực thi trước khi thử lại nếu kết quả chưa rõ.

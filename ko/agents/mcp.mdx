@@ -1,6 +1,6 @@
 ---
 title: "MCP 서버"
-description: "OAuth로 AI 어시스턴트를 Nudgen에 연결하고, 지도 리드를 검색하며, 브라우저에서 캠페인 시작을 승인하세요"
+description: "OAuth로 어시스턴트를 연결하고 초안을 만든 뒤 채팅에서 발송을 허용하세요"
 ---
 
 ## 개요
@@ -9,7 +9,7 @@ Nudgen은 앱 출처의 `/mcp` 엔드포인트에서 MCP 서버를 호스팅합�
 
 ## 이것이 중요한 이유
 
-어시스턴트는 대시보드 세션이나 개인 액세스 토큰을 다루지 않고도 연락처와 캠페인을 읽고, 주변 비즈니스를 찾고, 콘텐츠 초안을 만들며, 캠페인 시작을 준비할 수 있습니다. 실제 발송이나 예약은 진행되기 전에 매번 브라우저에서 검토합니다.
+어시스턴트는 연락처 확인, 업체 검색, 캠페인 초안 작성을 할 수 있습니다. 채팅에서 발송이나 예약을 허용하면 브라우저 승인 링크 없이 직접 실행합니다.
 
 ## 클라이언트 연결
 
@@ -44,9 +44,9 @@ codex mcp login nudgen --scopes campaigns:read,campaigns:write,campaigns:send
 | --- | --- |
 | `campaigns:read` | 워크스페이스, 연락처, 캠페인, 브랜드 설정을 조회하고 지도 리드를 검색합니다. |
 | `campaigns:write` | 연락처와 캠페인 초안을 만들고, 브랜드 설정을 업데이트하고, AI 초안을 생성하며, 지도 리드를 가져옵니다. |
-| `campaigns:send` | 캠페인 시작을 요청하고 완료합니다. 이 범위만으로 이메일이 발송되지는 않습니다. |
+| `campaigns:send` | 캠페인 초안 시작하기. |
 
-데이터 조회만 필요하다면 `campaigns:read`를 요청하세요. 클라이언트가 연락처, 초안, 브랜드 설정 또는 가져온 리드를 변경해야 한다면 `campaigns:write`를 추가하세요. 클라이언트가 시작 승인을 요청해야 하는 경우에만 `campaigns:send`를 추가하세요.
+조회는 `campaigns:read`, 초안과 수정은 `campaigns:write`, 허용한 이메일 작업은 `campaigns:send`를 사용하세요. 연결 시 OAuth 동의는 계속 필요합니다.
 
 <Note>
   개인 액세스 토큰은 [개발자 API](/ko/agents/api)를 인증하지만 `/mcp` 인증에는 사용할 수 없습니다. MCP 클라이언트는 OAuth 로그인을 완료해야 합니다.
@@ -59,7 +59,7 @@ codex mcp login nudgen --scopes campaigns:read,campaigns:write,campaigns:send
 | 워크스페이스 조회 | `get_current_user`, `list_contacts`, `list_campaigns`, `get_campaign`, `get_campaign_stats`, `get_brand_settings` | `campaigns:read` |
 | 주변 비즈니스 찾기 | `search_map_leads`, `retry_map_leads_enrichment` | `campaigns:read` |
 | 생성 및 편집 | `create_contact`, `create_campaign`, `update_brand_settings`, `generate_email_draft`, `import_map_leads` | `campaigns:write` |
-| 시작 요청 및 완료 | `prepare_campaign_launch`, `launch_campaign` | `campaigns:send` |
+| 캠페인 초안 시작하기 | `launch_campaign`, `send_test_email`, `activate_lifetime_campaign`, `trigger_lifetime_campaign` | `campaigns:send` |
 
 `create_campaign`은 **캠페인 초안 (`one-time`, `drip`, `lifetime`)**을 저장합니다. 직접 발송하거나 예약할 수 없습니다. `get_campaign`을 사용하면 시작 전에 제목, 콘텐츠, 링크, 오디언스, 발신자를 확인할 수 있습니다.
 
@@ -80,24 +80,17 @@ codex mcp login nudgen --scopes campaigns:read,campaigns:write,campaigns:send
 
 가져오기는 연결된 워크스페이스에 연락처를 생성합니다. 이메일이 없는 리드는 건너뜁니다. 이미 존재하는 리드는 업데이트됩니다.
 
-### 캠페인 시작 승인
+### 캠페인 초안 시작하기
 
-1. 어시스턴트에게 `get_campaign`으로 초안을 조회하도록 요청하세요.
-2. 캠페인 ID와 원하는 정확한 즉시 발송 또는 예약 시간을 사용해 `prepare_campaign_launch`를 호출하도록 요청하세요. 일회용 승인 URL이 반환되며 아직 이메일은 발송되지 않습니다.
-3. URL을 열어 워크스페이스, 예상 수신자 수, 콘텐츠, 발신자, 발송 시점을 검토한 다음 **시작 승인**을 클릭하세요.
-4. 클라이언트로 돌아가 동일한 캠페인 ID, 발송 시점, `approvalId`를 사용해 `launch_campaign`을 호출하도록 하세요.
+1. `get_campaign`으로 캠페인 이름, 제목, 내용, 실제 발신자, 예상 수신자 수와 발송 시간을 확인하세요.
+2. 채팅에서 작업을 허용하세요. 어시스턴트가 캠페인 ID와 즉시 발송을 위한 `sendNow: true` 또는 시간대가 포함된 미래 시간의 `scheduledAt`을 지정하여 `launch_campaign`을 직접 호출합니다. 서로 모순되는 시간 인수를 지정하지 마세요. 이미 허용한 작업은 다시 확인할 필요가 없습니다.
+3. 반환된 상태, 예약 시간, 대시보드 링크를 확인하세요. 대기열에 있거나 예약된 상태는 전달 완료가 아닙니다. 결과가 불확실하면 재시도 전에 `get_campaign`과 `get_campaign_stats`를 확인하세요.
 
-승인은 **10분** 후 만료되며 한 번만 사용할 수 있습니다. 캠페인이나 발신자가 변경되면 새 승인을 요청하세요. Nudgen은 시작 시 발신자 준비 상태, 적격 수신자, 구독, 할당량, 대기열 가용성을 다시 확인합니다. 캠페인 작업자가 시작 요청을 처리한 후에만 전송이 시작됩니다.
-
-<Warning>
-  `launch_campaign`을 승인하고 완료하면 실제 이메일이 발송될 수 있습니다. 실제 오디언스에 대한 발송을 승인하기 전에 대시보드의 테스트 발송 절차로 받은편지함 미리보기를 확인하세요.
-</Warning>
+Nudgen은 워크스페이스 권한, 발신자 준비 상태, 적격 수신자, 구독, 할당량, 캠페인 버전과 대기열을 계속 검사합니다. 생성과 수정은 초안만 저장하며 발송에는 캠페인 워커가 필요합니다.
 
 ## 액세스 관리
 
-**설정** → **API 키** → **연결된 MCP 앱**을 열어 각 연결된 클라이언트의 워크스페이스와 범위를 확인하세요. 더 이상 액세스할 필요가 없는 연결은 여기에서 취소하세요. 연결을 취소하면 해당 토큰과 대기 중인 시작 승인이 비활성화됩니다. 나중에 OAuth를 통해 다시 연결할 수 있습니다.
-
-OAuth 권한 부여는 최대 90일간 유지됩니다. 워크스페이스에 대한 액세스 권한을 잃으면 클라이언트도 해당 워크스페이스의 연결을 사용할 수 없습니다.
+**설정** → **API 키** → **연결된 MCP 앱**에서 접근 권한을 확인하거나 철회하세요. 철회하면 토큰이 비활성화됩니다. 워크스페이스 멤버 자격을 잃어도 접근이 차단됩니다. 필요하면 OAuth로 다시 연결하세요.
 
 ## 문제 해결
 
@@ -107,7 +100,7 @@ OAuth 권한 부여는 최대 90일간 유지됩니다. 워크스페이스에 �
 | 도구에 더 많은 권한이 필요함 | 다시 연결하고 해당 워크스페이스에 필요한 범위를 승인하세요. |
 | 연락처 검색에서 결과를 좁히라는 메시지가 표시됨 | 검색은 이름과 이메일 주소를 일치시키며 태그 및 상태 필터 적용 후 최대 5,000개의 연락처를 검사합니다. 필터 범위를 좁히세요. |
 | 지도 리드를 가져올 때 비즈니스를 건너뜀 | 이메일이 있는 리드만 저장됩니다. `emailOnly`를 true로 설정해 다시 검색하거나 이미 이메일이 포함된 리드를 선택하세요. |
-| 시작 승인이 만료되었거나 캠페인이 변경됨 | 새 승인을 요청하고 현재 캠페인과 발신자를 검토하세요. |
+| 이전 승인 링크 또는 도구 | 도구 목록을 새로고침하고 채팅에서 직접 작업을 허용하세요. 이전 링크로는 캠페인을 시작할 수 없습니다. |
 | 시작이 차단됨 | 캠페인의 초안 상태, 발신자 준비 상태, 적격 연락처, 플랜 할당량, [발송 도메인](/ko/settings/sending-domains)을 확인하세요. |
 
 전달자 토큰과 직접 REST 엔드포인트를 사용하는 스크립트에 대해서는 [개발자 API](/ko/agents/api)를 참조하세요.
@@ -120,11 +113,10 @@ API와 MCP의 기본값은 5 km이며 정수 `radiusKm` 1~100을 지원합니다
 
 `enrichmentRetryToken`이 있으면 `campaigns:read` 권한으로 `retry_map_leads_enrichment`에 `token`을 전달하세요. 토큰은 연결된 워크스페이스 전용이며 15분 후 만료되고 한 번만 사용됩니다. 가져오기 전에 `placeId`로 결과를 병합하세요. `emailOnly`는 현재 응답을 필터링하므로 재시도 후 리드가 나타날 수 있습니다.
 
-
 ## 초안 편집 및 지원 범위
 
 `update_campaign`으로 기존 초안을 편집하고 `delete_campaign`으로 초안을 삭제하세요. 두 도구 모두 `campaigns:write`가 필요하며 이메일을 보내거나 예약하지 않습니다. 새로운 제품 영역에는 별도의 OAuth 권한이 필요합니다. 요청 시 다시 연결하고 해당 권한을 승인하세요.
 
 도구 목록에서 사용 가능한 도구와 인수를 확인할 수 있습니다. 브라우저 안내 자체는 작업을 실행하지 않습니다. 결제, 공급자 인증, 초대 전송, 워크스페이스 전환, 민감한 지급 설정은 브라우저에서 완료하세요. MCP 연결은 승인한 워크스페이스에 계속 연결됩니다. 관리 기능, 인증 정보, 웹훅, 추적 콜백, 내부 도우미는 제외됩니다.
 
-`get_api_capabilities`로 API 지원 범위를 확인하세요. 테스트 발송, lifetime 활성화 또는 lifetime 이벤트에는 먼저 `prepare_campaign_action`으로 브라우저 승인을 요청한 뒤 동일한 인수로 `send_test_email`, `activate_lifetime_campaign` 또는 `trigger_lifetime_campaign`을 호출하세요. 승인은 10분 후 만료되며 한 번만 사용할 수 있습니다.
+`get_api_capabilities`로 API 지원 범위를 확인하세요. 채팅에서 허용한 후 `send_test_email`, `activate_lifetime_campaign`, `trigger_lifetime_campaign`을 직접 호출하세요. 테스트는 계정 이메일로만 발송됩니다. lifetime 활성화는 향후 자동 발송을 허용합니다. 브라우저 승인이나 승인 ID는 필요하지 않습니다. 결과가 불확실하면 재시도 전에 상태나 실행 기록을 확인하세요.

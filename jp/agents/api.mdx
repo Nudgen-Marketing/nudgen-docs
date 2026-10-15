@@ -247,7 +247,7 @@ curl "$NUDGEN_APP_URL/api/v1/campaigns/$CAMPAIGN_ID/executions?limit=25&status=s
 
 ## MCP サーバー
 
-エージェントが Model Context Protocol ツールに対応している場合は、[Nudgen MCP](/en/agents/mcp) を使用します。MCP は選択したワークスペースに紐づく OAuth 認可を使用し、キャンペーンを開始するたびにブラウザーでの承認が必要です。REST API は個人アクセストークン（PAT）を使用します。
+エージェントが Model Context Protocol ツールに対応している場合は、[Nudgen MCP](/en/agents/mcp) を使用します。MCP は選択したワークスペースに紐づく OAuth 認可を使用し、新しいキャンペーンは下書きとして保存されます。チャットで送信や予約を許可すると、アシスタントが直接開始します。REST API は個人アクセストークン（PAT）を使用します。
 
 <Card title="MCP server setup" icon="bot" href="/en/agents/mcp">
  Nudgen MCP を Claude Code、Cursor、Windsurf、Codex CLI、または汎用 MCP クライアントにインストールします。

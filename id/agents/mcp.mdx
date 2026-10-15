@@ -1,6 +1,6 @@
 ---
 title: "Server MCP"
-description: "Hubungkan asisten AI ke Nudgen dengan OAuth, cari prospek di peta, dan setujui peluncuran kampanye di browser Anda"
+description: "Hubungkan asisten melalui OAuth, buat draf, dan izinkan pengiriman melalui chat"
 ---
 
 ## Ikhtisar
@@ -9,7 +9,7 @@ Nudgen menyediakan server MCP di endpoint `/mcp` pada origin aplikasi Anda. Serv
 
 ## Mengapa hal ini penting
 
-Asisten Anda dapat membaca kontak dan kampanye, menemukan bisnis di sekitar, membuat draf konten, dan menyiapkan kampanye untuk diluncurkan tanpa menangani sesi dasbor atau Personal Access Token. Anda meninjau setiap pengiriman nyata atau penjadwalan di browser sebelum tindakan tersebut dapat dilanjutkan.
+Asisten dapat memeriksa kontak, mencari bisnis, dan membuat draf kampanye. Izinkan pengiriman atau penjadwalan di chat. Asisten langsung menjalankan tindakan tanpa tautan persetujuan browser.
 
 ## Hubungkan klien Anda
 
@@ -44,9 +44,9 @@ Jika klien bernama `nudgen` sudah dikonfigurasi, perbarui entri tersebut dengan 
 | --- | --- |
 | `campaigns:read` | Memeriksa ruang kerja, kontak, kampanye, pengaturan merek, dan mencari prospek di peta. |
 | `campaigns:write` | Membuat kontak dan draf kampanye, memperbarui pengaturan merek, menghasilkan draf AI, dan mengimpor prospek dari peta. |
-| `campaigns:send` | Meminta dan menyelesaikan peluncuran. Cakupan ini tidak pernah mengirim email dengan sendirinya. |
+| `campaigns:send` | Luncurkan draf kampanye. |
 
-Jika Anda hanya perlu memeriksa data, minta `campaigns:read`. Tambahkan `campaigns:write` jika klien perlu mengubah kontak, draf, pengaturan merek, atau prospek yang diimpor. Tambahkan `campaigns:send` hanya jika klien perlu meminta persetujuan peluncuran.
+Gunakan `campaigns:read` untuk membaca, `campaigns:write` untuk draf dan perubahan, serta `campaigns:send` untuk tindakan email yang Anda izinkan. Persetujuan OAuth tetap diperlukan.
 
 <Note>
   Personal Access Token mengautentikasi [API Pengembang](/id/agents/api), tetapi tidak mengautentikasi `/mcp`. Klien MCP harus menyelesaikan proses masuk OAuth.
@@ -59,7 +59,7 @@ Jika Anda hanya perlu memeriksa data, minta `campaigns:read`. Tambahkan `campaig
 | Memeriksa ruang kerja Anda | `get_current_user`, `list_contacts`, `list_campaigns`, `get_campaign`, `get_campaign_stats`, `get_brand_settings` | `campaigns:read` |
 | Menemukan bisnis di sekitar | `search_map_leads`, `retry_map_leads_enrichment` | `campaigns:read` |
 | Membuat dan mengedit | `create_contact`, `create_campaign`, `update_brand_settings`, `generate_email_draft`, `import_map_leads` | `campaigns:write` |
-| Meminta dan menyelesaikan peluncuran | `prepare_campaign_launch`, `launch_campaign` | `campaigns:send` |
+| Luncurkan draf kampanye | `launch_campaign`, `send_test_email`, `activate_lifetime_campaign`, `trigger_lifetime_campaign` | `campaigns:send` |
 
 `create_campaign` menyimpan **draf kampanye (`one-time`, `drip`, atau `lifetime`)**. Alat ini tidak dapat langsung mengirim atau menjadwalkan kampanye. `get_campaign` memungkinkan Anda memeriksa subjek, konten, tautan, audiens, dan pengirim sebelum peluncuran.
 
@@ -80,24 +80,17 @@ Server juga menyediakan sumber daya hanya-baca melalui `campaigns:read`:
 
 Proses impor menulis kontak ke ruang kerja yang terhubung. Prospek tanpa email akan dilewati. Prospek yang sudah ada akan diperbarui.
 
-### Setujui peluncuran kampanye
+### Luncurkan draf kampanye
 
-1. Minta asisten memeriksa draf dengan `get_campaign`.
-2. Minta asisten memanggil `prepare_campaign_launch` dengan ID kampanye dan waktu kirim sekarang atau waktu terjadwal yang persis Anda inginkan. Panggilan ini mengembalikan URL persetujuan sekali pakai; belum ada email yang dikirim.
-3. Buka URL tersebut, tinjau ruang kerja, perkiraan penerima, konten, pengirim, dan waktu, lalu klik **Setujui peluncuran**.
-4. Kembali ke klien agar klien dapat memanggil `launch_campaign` dengan ID kampanye, waktu, dan `approvalId` yang sama.
+1. Tinjau nama kampanye, subjek, isi, pengirim efektif, perkiraan penerima, dan waktu melalui `get_campaign`.
+2. Izinkan tindakan di chat. Asisten langsung memanggil `launch_campaign` dengan ID kampanye dan `sendNow: true` untuk mengirim sekarang atau `scheduledAt` dengan waktu mendatang beserta zona waktu. Jangan gabungkan waktu yang bertentangan. Izin yang sudah diberikan tidak perlu dikonfirmasi lagi.
+3. Periksa status, waktu terjadwal, dan tautan dashboard yang dikembalikan. Masuk antrean atau terjadwal belum berarti terkirim. Periksa `get_campaign` dan `get_campaign_stats` sebelum mengulang hasil yang belum pasti.
 
-Persetujuan kedaluwarsa setelah **10 menit** dan hanya dapat digunakan sekali. Jika kampanye atau pengirim berubah, minta persetujuan baru. Saat peluncuran, Nudgen kembali memeriksa kesiapan pengirim, penerima yang memenuhi syarat, langganan, kuota, dan ketersediaan antrean. Pengiriman baru dimulai setelah worker kampanye memproses peluncuran.
-
-<Warning>
-  Menyetujui dan menyelesaikan `launch_campaign` dapat mengirim email nyata. Gunakan alur kirim percobaan di dasbor untuk memeriksa pratinjau kotak masuk sebelum menyetujui audiens nyata.
-</Warning>
+Nudgen tetap memeriksa izin workspace, kesiapan pengirim, penerima yang memenuhi syarat, langganan, kuota, versi kampanye, dan antrean. Pembuatan serta pengeditan hanya menyimpan draf; pengiriman memerlukan worker kampanye.
 
 ## Kelola akses
 
-Buka **Pengaturan** → **Kunci API** → **Aplikasi MCP terhubung** untuk melihat ruang kerja dan cakupan setiap klien yang terhubung. Cabut koneksi di sana jika klien tidak lagi boleh memiliki akses. Pencabutan menonaktifkan token dan persetujuan peluncuran tertundanya. Anda dapat menghubungkannya kembali melalui OAuth nanti.
-
-Izin OAuth berlaku paling lama 90 hari. Kehilangan akses ke ruang kerja juga mencegah klien menggunakan koneksi ruang kerja tersebut.
+Buka **Pengaturan** → **Kunci API** → **Aplikasi MCP terhubung** untuk memeriksa atau mencabut akses. Pencabutan menonaktifkan token. Kehilangan keanggotaan workspace juga memblokir akses. Hubungkan kembali melalui OAuth bila diperlukan.
 
 ## Pemecahan masalah
 
@@ -107,7 +100,7 @@ Izin OAuth berlaku paling lama 90 hari. Kehilangan akses ke ruang kerja juga men
 | Alat memerlukan izin tambahan | Hubungkan kembali dan setujui cakupan yang diperlukan untuk ruang kerja tersebut. |
 | Pencarian kontak meminta Anda mempersempit hasil | Pencarian mencocokkan nama dan alamat email, serta memindai paling banyak 5.000 kontak setelah filter tag dan status diterapkan. Persempit filternya. |
 | Impor prospek dari peta melewati sebuah bisnis | Hanya prospek dengan email yang disimpan. Cari kembali dengan `emailOnly` bernilai true, atau pilih prospek yang sudah menyertakan email. |
-| Persetujuan peluncuran kedaluwarsa atau kampanye berubah | Minta persetujuan baru, lalu tinjau kampanye dan pengirim saat ini. |
+| Tautan atau alat persetujuan lama | Perbarui daftar alat dan izinkan tindakan langsung di chat; tautan lama tidak dapat meluncurkan kampanye. |
 | Peluncuran diblokir | Periksa status draf kampanye, kesiapan pengirim, kontak yang memenuhi syarat, kuota paket, dan [domain pengiriman](/id/settings/sending-domains). |
 
 Untuk skrip yang menggunakan bearer token dan endpoint REST langsung, lihat [API Pengembang](/id/agents/api).
@@ -120,11 +113,10 @@ API dan MCP memakai 5 km secara default dan menerima bilangan bulat `radiusKm` 1
 
 Jika ada `enrichmentRetryToken`, panggil `retry_map_leads_enrichment` dengan `token` dan `campaigns:read`. Token terikat ke ruang kerja tersambung, berlaku 15 menit, dan hanya sekali pakai. Gabungkan hasil berdasarkan `placeId` sebelum impor. `emailOnly` menyaring respons saat ini; lead dapat muncul setelah percobaan ulang.
 
-
 ## Mengedit draf dan cakupan produk
 
 Gunakan `update_campaign` untuk mengedit draf yang ada dan `delete_campaign` untuk menghapus draf. Keduanya memerlukan `campaigns:write`; keduanya tidak mengirim atau menjadwalkan email. Area produk baru memerlukan izin OAuth tersendiri. Hubungkan kembali dan setujui izin tersebut saat diminta.
 
 Daftar alat menampilkan alat yang tersedia beserta argumennya. Pengalihan ke browser tidak menjalankan tindakan: selesaikan pembayaran, otorisasi penyedia, pengiriman undangan, perpindahan ruang kerja, dan pengaturan pencairan sensitif di browser. Koneksi MCP tetap terikat pada ruang kerja yang diotorisasi. Administrasi, kredensial, webhook, callback pelacakan, dan asisten internal tidak disertakan.
 
-Gunakan `get_api_capabilities` untuk memeriksa cakupan API. Untuk pengiriman uji, aktivasi lifetime, atau peristiwa lifetime, minta persetujuan browser terlebih dahulu melalui `prepare_campaign_action`. Lalu gunakan `send_test_email`, `activate_lifetime_campaign`, atau `trigger_lifetime_campaign` dengan argumen yang sama. Persetujuan berlaku sepuluh menit dan hanya sekali pakai.
+Gunakan `get_api_capabilities` untuk memeriksa cakupan API. Setelah izin di chat, panggil langsung `send_test_email`, `activate_lifetime_campaign`, atau `trigger_lifetime_campaign`. Pengujian hanya dikirim ke email akun. Aktivasi lifetime mengizinkan pengiriman otomatis berikutnya. Tidak diperlukan persetujuan browser atau ID persetujuan. Periksa status atau riwayat eksekusi sebelum mengulang hasil yang belum pasti.

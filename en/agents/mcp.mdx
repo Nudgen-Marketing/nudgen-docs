@@ -1,6 +1,6 @@
 ---
 title: "MCP server"
-description: "Connect an AI assistant to Nudgen with OAuth, search map leads, and approve campaign launches in your browser"
+description: "Connect an AI assistant through OAuth, create drafts, and authorize sending in chat"
 ---
 
 ## Overview
@@ -9,7 +9,7 @@ Nudgen hosts an MCP server at your app origin's `/mcp` endpoint. It speaks MCP `
 
 ## Why this matters
 
-Your assistant can read contacts and campaigns, find nearby businesses, draft content, and prepare a campaign for launch without handling a dashboard session or a Personal Access Token. You review each real send or schedule in your browser before it can proceed.
+Your assistant can inspect contacts, find businesses, and create campaign drafts. Authorize sending or scheduling in chat, and the assistant runs the action directly without a browser approval link.
 
 ## Connect your client
 
@@ -44,9 +44,9 @@ If a client named `nudgen` is already configured, update that entry with the `/m
 | --- | --- |
 | `campaigns:read` | Inspect the workspace, contacts, campaigns, brand settings, and search map leads. |
 | `campaigns:write` | Create contacts and draft campaigns, update brand settings, generate AI drafts, and import map leads. |
-| `campaigns:send` | Request and complete a launch. This scope never sends email by itself. |
+| `campaigns:send` | Launch a draft campaign. |
 
-If you only need to inspect data, request `campaigns:read`. Add `campaigns:write` when the client should change contacts, drafts, brand settings, or imported leads. Add `campaigns:send` only when the client needs to request launch approval.
+Request `campaigns:read` for inspection, `campaigns:write` for drafts and edits, and `campaigns:send` for authorized email actions. OAuth consent remains required.
 
 <Note>
   Personal Access Tokens authenticate the [Developer API](/en/agents/api), but they do not authenticate `/mcp`. An MCP client must complete OAuth sign-in.
@@ -59,7 +59,7 @@ If you only need to inspect data, request `campaigns:read`. Add `campaigns:write
 | Inspect your workspace | `get_current_user`, `list_contacts`, `list_campaigns`, `get_campaign`, `get_campaign_stats`, `get_brand_settings` | `campaigns:read` |
 | Find nearby businesses | `search_map_leads`, `retry_map_leads_enrichment` | `campaigns:read` |
 | Create and edit | `create_contact`, `create_campaign`, `update_brand_settings`, `generate_email_draft`, `import_map_leads` | `campaigns:write` |
-| Request and complete a launch | `prepare_campaign_launch`, `launch_campaign` | `campaigns:send` |
+| Launch a draft campaign | `launch_campaign`, `send_test_email`, `activate_lifetime_campaign`, `trigger_lifetime_campaign` | `campaigns:send` |
 
 `create_campaign` saves a **draft campaign (`one-time`, `drip`, or `lifetime`)**. It cannot send or schedule directly. `get_campaign` lets you check the subject, content, link, audience, and sender before launch.
 
@@ -80,24 +80,17 @@ The server also exposes read-only resources on `campaigns:read`:
 
 Import writes contacts in the connected workspace. Leads without an email are skipped. A lead that already exists is updated.
 
-### Approve a campaign launch
+### Launch a draft campaign
 
-1. Ask the assistant to inspect the draft with `get_campaign`.
-2. Ask it to call `prepare_campaign_launch` with the campaign ID and the exact send-now or scheduled time you want. This returns a one-time approval URL; no email is sent yet.
-3. Open the URL, review the workspace, recipient estimate, content, sender, and timing, then click **Approve launch**.
-4. Return to the client so it can call `launch_campaign` with the same campaign ID, timing, and `approvalId`.
+1. Review the campaign name, subject, content, effective sender, audience estimate, and timing with `get_campaign`.
+2. Authorize the action in chat. The assistant calls `launch_campaign` directly with the campaign ID and either `sendNow: true` or `scheduledAt` with a future timestamp and timezone. Do not supply contradictory timing arguments. Existing authorization does not require another confirmation.
+3. Review the returned status, scheduled time, and dashboard link. Queued or scheduled does not mean delivered. Check `get_campaign` and `get_campaign_stats` before retrying an uncertain outcome.
 
-An approval expires after **10 minutes** and can be used once. If the campaign or sender changes, request a new approval. Nudgen checks sender readiness, eligible recipients, subscription, quota, and queue availability again when launching. Delivery begins only after the campaign worker processes the launch.
-
-<Warning>
-  Approving and completing `launch_campaign` can send real email. Use the dashboard's test-send flow to check an inbox preview before approving a real audience.
-</Warning>
+Nudgen still checks workspace permissions, sender readiness, eligible recipients, subscription, quota, campaign version, and queue availability. Creation and editing remain draft-only; delivery requires the campaign worker.
 
 ## Manage access
 
-Open **Settings** → **API Keys** → **Connected MCP apps** to see each connected client's workspace and scopes. Revoke a connection there if it should no longer have access. Revocation disables its tokens and pending launch approvals. You can reconnect through OAuth later.
-
-OAuth grants last at most 90 days. Losing access to a workspace also prevents the client from using that workspace's connection.
+Open **Settings** → **API Keys** → **Connected MCP apps** to inspect and revoke access. Revocation disables the connection tokens. Losing workspace membership also blocks access. Reconnect through OAuth when needed.
 
 ## Troubleshooting
 
@@ -107,7 +100,7 @@ OAuth grants last at most 90 days. Losing access to a workspace also prevents th
 | A tool needs more permission | Reconnect and approve the needed scope for that workspace. |
 | Contact search asks you to narrow results | Search matches names and email addresses, and scans at most 5,000 contacts after tag and status filters. Narrow the filters. |
 | Map lead import skips a business | Only leads with an email are saved. Search again with `emailOnly` set to true, or pick leads that already include an email. |
-| Launch approval expired or the campaign changed | Request a new approval and review the current campaign and sender. |
+| Old approval link or tool | Refresh tool discovery and authorize the direct action in chat; old links cannot launch campaigns. |
 | A launch is blocked | Check the campaign's draft status, sender readiness, eligible contacts, plan quota, and [sending domain](/en/settings/sending-domains). |
 
 For scripts using bearer tokens and direct REST endpoints, see the [Developer API](/en/agents/api).
@@ -120,11 +113,10 @@ Contact enrichment may finish after businesses first appear. `enrichmentPending`
 
 If `enrichmentRetryToken` is present, call `retry_map_leads_enrichment` with `token` to retry pending website research. It requires `campaigns:read`, is bound to the connected workspace, expires after 15 minutes, and can be used once. Merge returned leads by `placeId` before importing. `emailOnly` filters the current response; pending leads may appear after retry.
 
-
 ## Edit drafts and product coverage
 
 Use `update_campaign` to edit an existing draft and `delete_campaign` to delete a draft. Both require `campaigns:write`; neither sends or schedules email. New product domains require their own OAuth permissions. Reconnect and approve those permissions when requested.
 
 Tool discovery lists the available tools and their arguments. Browser handoffs do not perform the action: complete payments, provider authorization, invitation sending, workspace switching, and sensitive payout settings in the browser. Your MCP connection remains bound to the workspace you authorized. Administrative functions, credentials, webhooks, tracking callbacks, and the internal assistant are excluded.
 
-Use `get_api_capabilities` to inspect API coverage. For test sends or lifetime activation and events, first request browser approval with `prepare_campaign_action`, then use `send_test_email`, `activate_lifetime_campaign`, or `trigger_lifetime_campaign` with the same arguments. Approval expires after ten minutes and can be used once.
+Use `get_api_capabilities` to inspect API coverage. After authorization in chat, call `send_test_email`, `activate_lifetime_campaign`, or `trigger_lifetime_campaign` directly. Test sends go only to the account email. Lifetime activation enables future automated delivery. No browser approval or approval ID is required. Check status or execution history before retrying an uncertain outcome.

@@ -1,6 +1,6 @@
 ---
 title: "Serveur MCP"
-description: "Connectez un assistant IA à Nudgen avec OAuth, recherchez des prospects sur la carte et approuvez le lancement de campagnes dans votre navigateur"
+description: "Connectez un assistant via OAuth, créez des brouillons et autorisez les envois dans le chat"
 ---
 
 ## Présentation
@@ -9,7 +9,7 @@ Nudgen héberge un serveur MCP sur le point de terminaison `/mcp` de l'origine d
 
 ## Pourquoi c'est important
 
-Votre assistant peut consulter les contacts et les campagnes, trouver des entreprises à proximité, rédiger du contenu et préparer le lancement d'une campagne sans gérer de session du tableau de bord ni de jeton d'accès personnel. Vous examinez chaque envoi réel ou planification dans votre navigateur avant son exécution.
+Votre assistant peut consulter les contacts, rechercher des entreprises et créer des brouillons de campagnes. Autorisez un envoi ou une programmation dans le chat. Il exécute directement votre demande, sans lien d’approbation dans le navigateur.
 
 ## Connecter votre client
 
@@ -44,9 +44,9 @@ Si un client nommé `nudgen` est déjà configuré, mettez à jour cette entrée
 | --- | --- |
 | `campaigns:read` | Consulter l'espace de travail, les contacts, les campagnes et les paramètres de marque, et rechercher des prospects sur la carte. |
 | `campaigns:write` | Créer des contacts et des brouillons de campagne, mettre à jour les paramètres de marque, générer des brouillons avec l'IA et importer des prospects depuis la carte. |
-| `campaigns:send` | Demander et finaliser un lancement. Cette portée n'envoie jamais d'e-mail à elle seule. |
+| `campaigns:send` | Lancer une campagne en brouillon. |
 
-Si vous devez uniquement consulter des données, demandez `campaigns:read`. Ajoutez `campaigns:write` lorsque le client doit modifier des contacts, des brouillons, des paramètres de marque ou des prospects importés. Ajoutez `campaigns:send` uniquement lorsque le client doit demander l'approbation d'un lancement.
+Utilisez `campaigns:read` pour consulter, `campaigns:write` pour les brouillons et modifications, et `campaigns:send` pour les actions d’envoi autorisées. Le consentement OAuth reste obligatoire.
 
 <Note>
   Les jetons d'accès personnels authentifient l'[API de développeur](/fr/agents/api), mais pas `/mcp`. Un client MCP doit suivre le processus de connexion OAuth.
@@ -59,7 +59,7 @@ Si vous devez uniquement consulter des données, demandez `campaigns:read`. Ajou
 | Consulter votre espace de travail | `get_current_user`, `list_contacts`, `list_campaigns`, `get_campaign`, `get_campaign_stats`, `get_brand_settings` | `campaigns:read` |
 | Trouver des entreprises à proximité | `search_map_leads`, `retry_map_leads_enrichment` | `campaigns:read` |
 | Créer et modifier | `create_contact`, `create_campaign`, `update_brand_settings`, `generate_email_draft`, `import_map_leads` | `campaigns:write` |
-| Demander et finaliser un lancement | `prepare_campaign_launch`, `launch_campaign` | `campaigns:send` |
+| Lancer une campagne en brouillon | `launch_campaign`, `send_test_email`, `activate_lifetime_campaign`, `trigger_lifetime_campaign` | `campaigns:send` |
 
 `create_campaign` enregistre un **brouillon de campagne (`one-time`, `drip` ou `lifetime`)**. Il ne peut pas envoyer ni planifier directement la campagne. `get_campaign` vous permet de vérifier l'objet, le contenu, le lien, l'audience et l'expéditeur avant le lancement.
 
@@ -80,24 +80,17 @@ Le serveur expose également des ressources en lecture seule avec `campaigns:rea
 
 L'importation crée des contacts dans l'espace de travail connecté. Les prospects sans adresse e-mail sont ignorés. Un prospect déjà existant est mis à jour.
 
-### Approuver le lancement d'une campagne
+### Lancer une campagne en brouillon
 
-1. Demandez à l'assistant d'examiner le brouillon avec `get_campaign`.
-2. Demandez-lui d'appeler `prepare_campaign_launch` avec l'ID de la campagne et l'heure exacte d'envoi immédiat ou planifié souhaitée. L'appel renvoie une URL d'approbation à usage unique ; aucun e-mail n'est encore envoyé.
-3. Ouvrez l'URL, vérifiez l'espace de travail, l'estimation du nombre de destinataires, le contenu, l'expéditeur et l'heure, puis cliquez sur **Approuver le lancement**.
-4. Revenez au client afin qu'il appelle `launch_campaign` avec le même ID de campagne, la même heure et le même `approvalId`.
+1. Vérifiez le nom, l’objet, le contenu, l’expéditeur effectif, le nombre estimé de destinataires et l’horaire avec `get_campaign`.
+2. Autorisez l’action dans le chat. L’assistant appelle directement `launch_campaign` avec l’ID et soit `sendNow: true`, soit `scheduledAt` avec une date future et un fuseau horaire. Ne combinez pas des horaires contradictoires. Une autorisation déjà donnée ne nécessite pas de nouvelle confirmation.
+3. Consultez le statut, l’horaire programmé et le lien vers le dashboard retournés. En file ou programmé ne signifie pas livré. Vérifiez `get_campaign` et `get_campaign_stats` avant de réessayer si le résultat est incertain.
 
-Une approbation expire après **10 minutes** et ne peut être utilisée qu'une fois. Si la campagne ou l'expéditeur change, demandez une nouvelle approbation. Lors du lancement, Nudgen vérifie à nouveau que l'expéditeur est prêt, que les destinataires sont admissibles, que l'abonnement et le quota sont suffisants, et que la file d'attente est disponible. La livraison ne commence qu'après le traitement du lancement par le worker de campagne.
-
-<Warning>
-  L'approbation et la finalisation de `launch_campaign` peuvent envoyer de vrais e-mails. Utilisez le processus d'envoi de test du tableau de bord pour vérifier un aperçu dans votre boîte de réception avant d'approuver l'envoi à une audience réelle.
-</Warning>
+Nudgen vérifie toujours les droits du workspace, l’expéditeur, les destinataires admissibles, l’abonnement, le quota, la version de campagne et la file. Créer ou modifier enregistre uniquement un brouillon ; la livraison nécessite le worker de campagnes.
 
 ## Gérer les accès
 
-Ouvrez **Paramètres** → **Clés API** → **Applications MCP connectées** pour voir l'espace de travail et les portées de chaque client connecté. Révoquez une connexion depuis cette page si elle ne doit plus avoir accès. La révocation désactive ses jetons et ses approbations de lancement en attente. Vous pourrez rétablir la connexion via OAuth ultérieurement.
-
-Les autorisations OAuth sont valides pendant 90 jours au maximum. La perte d'accès à un espace de travail empêche également le client d'utiliser la connexion associée à cet espace.
+Ouvrez **Paramètres** → **Clés API** → **Applications MCP connectées** pour consulter ou révoquer l’accès. La révocation désactive les tokens. Perdre l’appartenance au workspace bloque aussi l’accès. Reconnectez-vous via OAuth si nécessaire.
 
 ## Dépannage
 
@@ -107,7 +100,7 @@ Les autorisations OAuth sont valides pendant 90 jours au maximum. La perte d'acc
 | Un outil nécessite une autorisation supplémentaire | Reconnectez le client et approuvez la portée requise pour cet espace de travail. |
 | La recherche de contacts vous demande d'affiner les résultats | La recherche porte sur les noms et les adresses e-mail, et analyse au maximum 5 000 contacts après application des filtres de tags et de statut. Affinez les filtres. |
 | L'importation de prospects ignore une entreprise | Seuls les prospects disposant d'une adresse e-mail sont enregistrés. Relancez la recherche avec `emailOnly` défini sur true ou choisissez des prospects qui possèdent déjà une adresse e-mail. |
-| L'approbation du lancement a expiré ou la campagne a changé | Demandez une nouvelle approbation et vérifiez la campagne et l'expéditeur actuels. |
+| Ancien lien ou outil d’approbation | Actualisez la liste des outils et autorisez l’action directe dans le chat ; les anciens liens ne peuvent pas lancer de campagnes. |
 | Un lancement est bloqué | Vérifiez le statut de brouillon de la campagne, l'état de préparation de l'expéditeur, les contacts admissibles, le quota du forfait et le [domaine d'envoi](/fr/settings/sending-domains). |
 
 Pour les scripts qui utilisent des jetons porteurs et des points de terminaison REST directs, consultez l'[API de développeur](/fr/agents/api).
@@ -120,11 +113,10 @@ Les recherches API et MCP utilisent 5 km par défaut et acceptent un entier `rad
 
 Avec `enrichmentRetryToken`, appelez `retry_map_leads_enrichment` avec `token` et la portée `campaigns:read`. Le jeton est lié au workspace connecté, expire après 15 minutes et ne sert qu’une fois. Fusionnez par `placeId` avant import. `emailOnly` filtre la réponse actuelle ; des leads peuvent apparaître après la nouvelle tentative.
 
-
 ## Modifier les brouillons et couverture
 
 Utilisez `update_campaign` pour modifier un brouillon existant et `delete_campaign` pour le supprimer. Les deux nécessitent `campaigns:write` ; aucun ne lance ni ne programme d’envoi. Les nouveaux domaines du produit nécessitent leurs propres autorisations OAuth. Reconnectez-vous et approuvez ces autorisations lorsque cela vous est demandé.
 
 La liste des outils indique les outils disponibles et leurs paramètres. Les liens vers le navigateur n’exécutent aucune action : effectuez les paiements, l’autorisation des fournisseurs, l’envoi d’invitations, le changement d’espace de travail et les réglages de versement sensibles dans le navigateur. La connexion MCP reste liée à l’espace autorisé. L’administration, les identifiants, les webhooks, les callbacks de suivi et l’assistant interne sont exclus.
 
-Utilisez `get_api_capabilities` pour consulter la couverture API. Pour un envoi de test, une activation lifetime ou un événement lifetime, demandez d’abord une approbation dans le navigateur avec `prepare_campaign_action`. Appelez ensuite `send_test_email`, `activate_lifetime_campaign` ou `trigger_lifetime_campaign` avec les mêmes paramètres. L’approbation expire après dix minutes et ne sert qu’une fois.
+Consultez la couverture avec `get_api_capabilities`. Après autorisation dans le chat, appelez directement `send_test_email`, `activate_lifetime_campaign` ou `trigger_lifetime_campaign`. Les tests sont envoyés uniquement à l’adresse du compte. Activer lifetime permet les futurs envois automatiques. Aucun lien ni ID d’approbation n’est nécessaire. Vérifiez le statut ou l’historique avant de réessayer un résultat incertain.

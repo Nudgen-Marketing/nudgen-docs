@@ -1,6 +1,6 @@
 ---
 title: "MCP 服务器"
-description: "通过 OAuth 将 AI 助手连接到 Nudgen，搜索地图潜在客户，并在浏览器中批准活动启动"
+description: "通过 OAuth 连接助手，创建草稿，并在聊天中授权发送"
 ---
 
 ## 概览
@@ -9,7 +9,7 @@ Nudgen 在应用来源的 `/mcp` 端点托管 MCP 服务器。该服务器通过
 
 ## 为什么这很重要
 
-你的助手无需处理仪表盘会话或个人访问令牌，即可读取联系人和活动、查找附近商家、起草内容，以及准备启动活动。每次实际发送或排期都必须由你在浏览器中审核后才能继续。
+助手可以查看联系人、查找企业并创建活动草稿。在聊天中授权发送或排期后，助手会直接执行，无需浏览器批准链接。
 
 ## 连接客户端
 
@@ -44,9 +44,9 @@ codex mcp login nudgen --scopes campaigns:read,campaigns:write,campaigns:send
 | --- | --- |
 | `campaigns:read` | 查看工作区、联系人、活动和品牌设置，以及搜索地图潜在客户。 |
 | `campaigns:write` | 创建联系人和活动草稿、更新品牌设置、生成 AI 草稿，以及导入地图潜在客户。 |
-| `campaigns:send` | 请求并完成活动启动。此权限范围本身绝不会发送邮件。 |
+| `campaigns:send` | 启动活动草稿. |
 
-如果只需查看数据，请请求 `campaigns:read`。如果客户端需要更改联系人、草稿、品牌设置或已导入的潜在客户，请添加 `campaigns:write`。只有当客户端需要请求活动启动批准时，才添加 `campaigns:send`。
+使用 `campaigns:read` 查看数据，`campaigns:write` 创建和编辑草稿，`campaigns:send` 执行已授权的邮件操作。连接时仍需 OAuth 授权。
 
 <Note>
   个人访问令牌用于验证[开发人员 API](/cn/agents/api)，但不能用于验证 `/mcp`。MCP 客户端必须完成 OAuth 登录。
@@ -59,7 +59,7 @@ codex mcp login nudgen --scopes campaigns:read,campaigns:write,campaigns:send
 | 查看工作区 | `get_current_user`, `list_contacts`, `list_campaigns`, `get_campaign`, `get_campaign_stats`, `get_brand_settings` | `campaigns:read` |
 | 查找附近商家 | `search_map_leads`, `retry_map_leads_enrichment` | `campaigns:read` |
 | 创建和编辑 | `create_contact`, `create_campaign`, `update_brand_settings`, `generate_email_draft`, `import_map_leads` | `campaigns:write` |
-| 请求并完成活动启动 | `prepare_campaign_launch`, `launch_campaign` | `campaigns:send` |
+| 启动活动草稿 | `launch_campaign`, `send_test_email`, `activate_lifetime_campaign`, `trigger_lifetime_campaign` | `campaigns:send` |
 
 `create_campaign` 会保存一个**活动草稿（`one-time`、`drip` 或 `lifetime`）**，不能直接发送或排期。通过 `get_campaign`，你可以在启动前检查主题、内容、链接、受众和发件人。
 
@@ -80,24 +80,17 @@ codex mcp login nudgen --scopes campaigns:read,campaigns:write,campaigns:send
 
 导入操作会在已连接的工作区中写入联系人。没有邮箱的潜在客户会被跳过；已经存在的潜在客户会被更新。
 
-### 批准活动启动
+### 启动活动草稿
 
-1. 让助手通过 `get_campaign` 检查草稿。
-2. 让助手使用活动 ID 以及你指定的立即发送时间或确切排期时间调用 `prepare_campaign_launch`。该调用会返回一次性批准 URL，此时尚未发送任何邮件。
-3. 打开该 URL，检查工作区、预计收件人数、内容、发件人和发送时间，然后点击**批准启动**。
-4. 返回客户端，让它使用相同的活动 ID、发送时间和 `approvalId` 调用 `launch_campaign`。
+1. 使用 `get_campaign` 查看活动名称、主题、内容、实际发件人、预计收件人数和发送时间。
+2. 在聊天中授权操作。助手直接调用 `launch_campaign`，提供活动 ID，并设置 `sendNow: true` 立即发送，或通过 `scheduledAt` 指定附带时区的未来时间。不要提供相互矛盾的时间参数。已有授权无需再次确认。
+3. 查看返回的状态、计划时间和仪表板链接。已排队或已排期不代表已送达。结果不确定时，先查看 `get_campaign` 和 `get_campaign_stats`，再决定是否重试。
 
-批准将在 **10 分钟**后过期，并且只能使用一次。如果活动或发件人发生变化，请请求新的批准。启动时，Nudgen 会再次检查发件人就绪状态、符合条件的收件人、订阅、配额和队列可用性。只有活动工作进程处理启动任务后，邮件才会开始投递。
-
-<Warning>
-  批准并完成 `launch_campaign` 可能会发送真实邮件。在批准向真实受众发送前，请先使用仪表盘中的测试发送流程检查收件箱预览。
-</Warning>
+Nudgen 仍会检查工作区权限、发件人状态、符合条件的收件人、订阅、配额、活动版本和队列。创建和编辑仅保存草稿；投递需要活动工作进程。
 
 ## 管理访问权限
 
-打开**设置** → **API 密钥** → **已连接的 MCP 应用**，查看每个已连接客户端的工作区和权限范围。如果某个连接不应再拥有访问权限，可在此将其撤销。撤销后，其令牌和待处理的活动启动批准都会失效。之后你仍可通过 OAuth 重新连接。
-
-OAuth 授权最长有效 90 天。如果你失去某个工作区的访问权限，客户端也将无法继续使用该工作区的连接。
+打开 **设置** → **API 密钥** → **已连接的 MCP 应用** 查看或撤销访问。撤销会使令牌失效。失去工作区成员资格也会阻止访问。需要时通过 OAuth 重新连接。
 
 ## 故障排除
 
@@ -107,7 +100,7 @@ OAuth 授权最长有效 90 天。如果你失去某个工作区的访问权限�
 | 工具需要更多权限 | 重新连接，并为该工作区批准所需的权限范围。 |
 | 联系人搜索要求缩小结果范围 | 搜索会匹配姓名和邮箱地址，并且在应用标签和状态筛选后最多扫描 5,000 个联系人。请缩小筛选范围。 |
 | 导入地图潜在客户时跳过某个商家 | 只有包含邮箱的潜在客户才会被保存。请将 `emailOnly` 设为 true 后重新搜索，或选择已经包含邮箱的潜在客户。 |
-| 活动启动批准已过期或活动发生变化 | 请求新的批准，并检查当前活动和发件人。 |
+| 旧的批准链接或工具 | 刷新工具列表并在聊天中授权直接操作；旧链接无法启动活动。 |
 | 活动启动被阻止 | 检查活动是否为草稿、发件人是否就绪、是否有符合条件的联系人、套餐配额，以及[发件域名](/cn/settings/sending-domains)。 |
 
 如需在脚本中使用 Bearer 令牌和直接 REST 端点，请参阅[开发人员 API](/cn/agents/api)。
@@ -120,11 +113,10 @@ API和MCP默认使用5 km，接受整数 `radiusKm` 1–100，不显示仪表板
 
 收到 `enrichmentRetryToken` 时，使用 `campaigns:read` 权限调用 `retry_map_leads_enrichment` 并传入 `token`。令牌绑定已连接的工作空间，15分钟后过期，只能使用一次。导入前按 `placeId` 合并结果。`emailOnly`筛选当前响应；重试后可能出现更多潜在客户。
 
-
 ## 编辑草稿与功能覆盖
 
 使用 `update_campaign` 编辑现有草稿，使用 `delete_campaign` 删除草稿。两者均需要 `campaigns:write`，不会发送或安排邮件。新增产品领域需要独立的 OAuth 权限。收到提示时，请重新连接并批准这些权限。
 
 工具列表提供可用工具及其参数。跳转浏览器不会执行操作：请在浏览器中完成付款、提供商授权、发送邀请、切换工作区及敏感收款设置。MCP 连接始终绑定到已授权的工作区。管理功能、凭据、Webhook、跟踪回调和内部助手不在范围内。
 
-使用 `get_api_capabilities` 查看 API 覆盖范围。测试发送、lifetime 激活或 lifetime 事件需要先通过 `prepare_campaign_action` 请求浏览器批准，再以相同参数调用 `send_test_email`、`activate_lifetime_campaign` 或 `trigger_lifetime_campaign`。批准十分钟后失效，且只能使用一次。
+使用 `get_api_capabilities` 查看 API 覆盖范围。在聊天中授权后，直接调用 `send_test_email`、`activate_lifetime_campaign` 或 `trigger_lifetime_campaign`。测试邮件仅发送到帐户邮箱。启用 lifetime 会允许后续自动发送。无需浏览器批准或批准 ID。结果不确定时，先检查状态或执行历史，再决定是否重试。

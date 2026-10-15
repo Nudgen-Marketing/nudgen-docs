@@ -1,6 +1,6 @@
 ---
 title: "MCP-Server"
-description: "Verbinden Sie einen KI-Assistenten per OAuth mit Nudgen, suchen Sie Karten-Leads und genehmigen Sie Kampagnenstarts im Browser"
+description: "KI-Assistenten per OAuth verbinden, Entwürfe erstellen und Versand im Chat freigeben"
 ---
 
 ## Übersicht
@@ -9,7 +9,7 @@ Nudgen stellt unter dem Endpunkt `/mcp` Ihrer App-Origin einen MCP-Server bereit
 
 ## Warum das wichtig ist
 
-Ihr Assistent kann Kontakte und Kampagnen lesen, Unternehmen in der Nähe finden, Inhalte entwerfen und eine Kampagne für den Start vorbereiten, ohne eine Dashboard-Sitzung oder ein persönliches Zugriffstoken zu verwenden. Jeden echten Versand und jede Planung prüfen Sie vor der Ausführung im Browser.
+Ihr Assistent kann Kontakte prüfen, Unternehmen finden und Kampagnenentwürfe erstellen. Geben Sie Versand oder Planung im Chat frei. Der Assistent führt die Aktion direkt ohne Freigabelink im Browser aus.
 
 ## Client verbinden
 
@@ -44,9 +44,9 @@ Wenn bereits ein Client namens `nudgen` konfiguriert ist, aktualisieren Sie dies
 | --- | --- |
 | `campaigns:read` | Workspace, Kontakte, Kampagnen und Markeneinstellungen prüfen sowie Karten-Leads suchen. |
 | `campaigns:write` | Kontakte und Kampagnenentwürfe erstellen, Markeneinstellungen aktualisieren, KI-Entwürfe generieren und Karten-Leads importieren. |
-| `campaigns:send` | Einen Start anfordern und abschließen. Dieser Bereich versendet niemals selbstständig E-Mails. |
+| `campaigns:send` | Kampagnenentwurf starten. |
 
-Wenn Sie Daten nur prüfen möchten, fordern Sie `campaigns:read` an. Fügen Sie `campaigns:write` hinzu, wenn der Client Kontakte, Entwürfe, Markeneinstellungen oder importierte Leads ändern soll. Fügen Sie `campaigns:send` nur hinzu, wenn der Client eine Startfreigabe anfordern muss.
+Nutzen Sie `campaigns:read` zum Lesen, `campaigns:write` für Entwürfe und Änderungen und `campaigns:send` für freigegebene E-Mail-Aktionen. OAuth-Zustimmung bleibt erforderlich.
 
 <Note>
   Persönliche Zugriffstoken authentifizieren die [Entwickler-API](/de/agents/api), aber nicht `/mcp`. Ein MCP-Client muss die OAuth-Anmeldung abschließen.
@@ -59,7 +59,7 @@ Wenn Sie Daten nur prüfen möchten, fordern Sie `campaigns:read` an. Fügen Sie
 | Workspace prüfen | `get_current_user`, `list_contacts`, `list_campaigns`, `get_campaign`, `get_campaign_stats`, `get_brand_settings` | `campaigns:read` |
 | Unternehmen in der Nähe finden | `search_map_leads`, `retry_map_leads_enrichment` | `campaigns:read` |
 | Erstellen und bearbeiten | `create_contact`, `create_campaign`, `update_brand_settings`, `generate_email_draft`, `import_map_leads` | `campaigns:write` |
-| Einen Start anfordern und abschließen | `prepare_campaign_launch`, `launch_campaign` | `campaigns:send` |
+| Kampagnenentwurf starten | `launch_campaign`, `send_test_email`, `activate_lifetime_campaign`, `trigger_lifetime_campaign` | `campaigns:send` |
 
 `create_campaign` speichert eine **Kampagne als Entwurf (`one-time`, `drip` oder `lifetime`)**. Das Tool kann sie nicht direkt versenden oder planen. Mit `get_campaign` können Sie vor dem Start Betreff, Inhalt, Link, Zielgruppe und Absender prüfen.
 
@@ -80,24 +80,17 @@ Der Server stellt außerdem schreibgeschützte Ressourcen unter `campaigns:read`
 
 Beim Import werden Kontakte im verbundenen Workspace gespeichert. Leads ohne E-Mail-Adresse werden übersprungen. Ein bereits vorhandener Lead wird aktualisiert.
 
-### Kampagnenstart genehmigen
+### Kampagnenentwurf starten
 
-1. Bitten Sie den Assistenten, den Entwurf mit `get_campaign` zu prüfen.
-2. Bitten Sie ihn, `prepare_campaign_launch` mit der Kampagnen-ID und dem gewünschten exakten Zeitpunkt für den sofortigen oder geplanten Versand aufzurufen. Dadurch wird eine einmalig verwendbare Freigabe-URL zurückgegeben; es wird noch keine E-Mail versendet.
-3. Öffnen Sie die URL, prüfen Sie Workspace, geschätzte Empfängerzahl, Inhalt, Absender und Zeitpunkt und klicken Sie dann auf **Start genehmigen**.
-4. Kehren Sie zum Client zurück, damit er `launch_campaign` mit derselben Kampagnen-ID, demselben Zeitpunkt und derselben `approvalId` aufrufen kann.
+1. Prüfen Sie Kampagnenname, Betreff, Inhalt, tatsächlichen Absender, geschätzte Empfängerzahl und Zeitpunkt mit `get_campaign`.
+2. Geben Sie die Aktion im Chat frei. Der Assistent ruft `launch_campaign` direkt mit Kampagnen-ID und entweder `sendNow: true` oder `scheduledAt` mit einem zukünftigen Zeitstempel und Zeitzone auf. Widersprüchliche Zeitangaben sind unzulässig. Eine vorhandene Freigabe braucht keine erneute Bestätigung.
+3. Prüfen Sie Status, geplanten Zeitpunkt und Dashboard-Link im Ergebnis. Eingereiht oder geplant bedeutet noch nicht zugestellt. Prüfen Sie bei unklarem Ergebnis vor einem erneuten Versuch `get_campaign` und `get_campaign_stats`.
 
-Eine Freigabe läuft nach **10 Minuten** ab und kann nur einmal verwendet werden. Wenn sich die Kampagne oder der Absender ändert, fordern Sie eine neue Freigabe an. Nudgen prüft beim Start erneut die Absenderbereitschaft, berechtigte Empfänger, Abonnement, Kontingent und Verfügbarkeit der Warteschlange. Die Zustellung beginnt erst, nachdem der Kampagnen-Worker den Start verarbeitet hat.
-
-<Warning>
-  Wenn Sie `launch_campaign` genehmigen und abschließen, können echte E-Mails versendet werden. Verwenden Sie den Testversand im Dashboard, um eine Posteingangsvorschau zu prüfen, bevor Sie den Versand an eine echte Zielgruppe genehmigen.
-</Warning>
+Nudgen prüft weiterhin Workspace-Berechtigungen, Absenderbereitschaft, geeignete Empfänger, Abonnement, Kontingent, Kampagnenversion und Warteschlange. Erstellung und Bearbeitung speichern nur Entwürfe; der Versand benötigt den Kampagnen-Worker.
 
 ## Zugriff verwalten
 
-Öffnen Sie **Einstellungen** → **API-Schlüssel** → **Verbundene MCP-Apps**, um für jeden verbundenen Client den Workspace und die Bereiche anzuzeigen. Widerrufen Sie dort eine Verbindung, wenn sie keinen Zugriff mehr haben soll. Durch den Widerruf werden ihre Token und ausstehenden Startfreigaben deaktiviert. Sie können die Verbindung später erneut über OAuth herstellen.
-
-OAuth-Berechtigungen gelten höchstens 90 Tage. Wenn Sie den Zugriff auf einen Workspace verlieren, kann der Client die Verbindung dieses Workspace ebenfalls nicht mehr verwenden.
+Öffnen Sie **Einstellungen** → **API-Schlüssel** → **Verbundene MCP-Apps**, um Zugriffe zu prüfen oder zu widerrufen. Widerruf deaktiviert die Tokens. Fehlende Workspace-Mitgliedschaft blockiert den Zugriff ebenfalls. Verbinden Sie sich bei Bedarf erneut über OAuth.
 
 ## Fehlerbehebung
 
@@ -107,7 +100,7 @@ OAuth-Berechtigungen gelten höchstens 90 Tage. Wenn Sie den Zugriff auf einen W
 | Ein Tool benötigt weitere Berechtigungen | Stellen Sie die Verbindung erneut her und genehmigen Sie den benötigten Bereich für diesen Workspace. |
 | Die Kontaktsuche fordert Sie auf, die Ergebnisse einzugrenzen | Die Suche gleicht Namen und E-Mail-Adressen ab und durchsucht nach Anwendung von Tag- und Statusfiltern höchstens 5.000 Kontakte. Grenzen Sie die Filter ein. |
 | Beim Import von Karten-Leads wird ein Unternehmen übersprungen | Es werden nur Leads mit einer E-Mail-Adresse gespeichert. Suchen Sie erneut mit `emailOnly` auf `true` oder wählen Sie Leads aus, die bereits eine E-Mail-Adresse enthalten. |
-| Die Startfreigabe ist abgelaufen oder die Kampagne wurde geändert | Fordern Sie eine neue Freigabe an und prüfen Sie die aktuelle Kampagne und den Absender. |
+| Alter Freigabelink oder altes Tool | Aktualisieren Sie die Tool-Liste und geben Sie die direkte Aktion im Chat frei; alte Links können keine Kampagnen starten. |
 | Ein Start wird blockiert | Prüfen Sie den Entwurfsstatus der Kampagne, die Absenderbereitschaft, berechtigte Kontakte, das Plankontingent und die [Versanddomain](/de/settings/sending-domains). |
 
 Informationen zu Skripten mit Bearer-Token und direkten REST-Endpunkten finden Sie in der [Entwickler-API](/de/agents/api).
@@ -120,11 +113,10 @@ API- und MCP-Suchen verwenden standardmäßig 5 km und akzeptieren eine ganze Za
 
 Bei `enrichmentRetryToken` rufen Sie `retry_map_leads_enrichment` mit `token` und `campaigns:read` auf. Der Token gilt für den verbundenen Workspace, läuft nach 15 Minuten ab und ist einmal verwendbar. Ergebnisse vor dem Import anhand von `placeId` zusammenführen. `emailOnly` filtert die aktuelle Antwort; weitere Leads können nach dem Wiederholen erscheinen.
 
-
 ## Entwürfe bearbeiten und Funktionsumfang
 
 Mit `update_campaign` bearbeitest du einen vorhandenen Entwurf; mit `delete_campaign` löschst du ihn. Beide benötigen `campaigns:write` und versenden oder planen keine E-Mails. Neue Funktionsbereiche benötigen eigene OAuth-Berechtigungen. Verbinde dich erneut und bestätige diese Berechtigungen, wenn du dazu aufgefordert wirst.
 
 Die Werkzeugliste zeigt verfügbare Werkzeuge und Argumente. Browser-Übergaben führen keine Aktion aus: Schließe Zahlungen, Anbieterautorisierung, Einladungsversand, Workspace-Wechsel und vertrauliche Auszahlungseinstellungen im Browser ab. Deine MCP-Verbindung bleibt an den autorisierten Workspace gebunden. Administration, Zugangsdaten, Webhooks, Tracking-Callbacks und der interne Assistent sind ausgeschlossen.
 
-Mit `get_api_capabilities` prüfst du die API-Abdeckung. Fordere für Testsendungen, Lifetime-Aktivierung oder Lifetime-Ereignisse zuerst mit `prepare_campaign_action` eine Browserfreigabe an. Rufe danach `send_test_email`, `activate_lifetime_campaign` oder `trigger_lifetime_campaign` mit denselben Argumenten auf. Die Freigabe gilt zehn Minuten und nur einmal.
+Prüfen Sie mit `get_api_capabilities` die API-Abdeckung. Rufen Sie nach Freigabe im Chat `send_test_email`, `activate_lifetime_campaign` oder `trigger_lifetime_campaign` direkt auf. Tests gehen nur an die Konto-E-Mail. Lifetime-Aktivierung ermöglicht künftigen automatischen Versand. Browserfreigabe und Freigabe-ID entfallen. Prüfen Sie bei unklarem Ergebnis vor einem erneuten Versuch Status oder Ausführungsverlauf.

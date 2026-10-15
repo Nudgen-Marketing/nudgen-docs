@@ -1,6 +1,6 @@
 ---
 title: "MCP sunucusu"
-description: "Bir yapay zeka asistanını OAuth ile Nudgen'a bağlayın, harita potansiyel müşterilerini arayın ve kampanya başlatmalarını tarayıcınızda onaylayın"
+description: "Asistanı OAuth ile bağlayın, taslak oluşturun ve gönderime sohbette izin verin"
 ---
 
 ## Genel bakış
@@ -9,7 +9,7 @@ Nudgen, uygulama origin'inizin `/mcp` uç noktasında bir MCP sunucusu barındı
 
 ## Bu neden önemlidir
 
-Asistanınız, bir kontrol paneli oturumunu veya Kişisel Erişim Jetonunu kullanmadan kişileri ve kampanyaları okuyabilir, yakındaki işletmeleri bulabilir, içerik taslakları hazırlayabilir ve bir kampanyayı başlatılmaya hazırlayabilir. Her gerçek gönderimi veya zamanlamayı devam etmeden önce tarayıcınızda incelersiniz.
+Asistanınız kişileri inceleyebilir, işletme arayabilir ve kampanya taslakları oluşturabilir. Gönderime veya zamanlamaya sohbette izin verin; asistan tarayıcı onay bağlantısı olmadan doğrudan işlemi yürütür.
 
 ## İstemcinizi bağlayın
 
@@ -44,9 +44,9 @@ codex mcp login nudgen --scopes campaigns:read,campaigns:write,campaigns:send
 | --- | --- |
 | `campaigns:read` | Çalışma alanını, kişileri, kampanyaları ve marka ayarlarını inceleme ve harita potansiyel müşterilerini arama. |
 | `campaigns:write` | Kişiler ve kampanya taslakları oluşturma, marka ayarlarını güncelleme, yapay zeka taslakları oluşturma ve harita potansiyel müşterilerini içe aktarma. |
-| `campaigns:send` | Bir başlatma isteğinde bulunma ve başlatmayı tamamlama. Bu kapsam tek başına hiçbir zaman e-posta göndermez. |
+| `campaigns:send` | Kampanya taslağını başlatın. |
 
-Yalnızca verileri incelemeniz gerekiyorsa `campaigns:read` kapsamını isteyin. İstemcinin kişileri, taslakları, marka ayarlarını veya içe aktarılan potansiyel müşterileri değiştirmesi gerektiğinde `campaigns:write` ekleyin. `campaigns:send` kapsamını yalnızca istemcinin başlatma onayı istemesi gerektiğinde ekleyin.
+Okumak için `campaigns:read`, taslak ve düzenleme için `campaigns:write`, izin verilen e-posta işlemleri için `campaigns:send` kullanın. OAuth izni hâlâ gereklidir.
 
 <Note>
   Kişisel Erişim Jetonları [Geliştirici API'sinde](/tr/agents/api) kimlik doğrulaması yapar ancak `/mcp` için kimlik doğrulaması yapmaz. Bir MCP istemcisi OAuth oturum açma işlemini tamamlamalıdır.
@@ -59,7 +59,7 @@ Yalnızca verileri incelemeniz gerekiyorsa `campaigns:read` kapsamını isteyin.
 | Çalışma alanınızı inceleme | `get_current_user`, `list_contacts`, `list_campaigns`, `get_campaign`, `get_campaign_stats`, `get_brand_settings` | `campaigns:read` |
 | Yakındaki işletmeleri bulma | `search_map_leads`, `retry_map_leads_enrichment` | `campaigns:read` |
 | Oluşturma ve düzenleme | `create_contact`, `create_campaign`, `update_brand_settings`, `generate_email_draft`, `import_map_leads` | `campaigns:write` |
-| Başlatma isteme ve tamamlama | `prepare_campaign_launch`, `launch_campaign` | `campaigns:send` |
+| Kampanya taslağını başlatın | `launch_campaign`, `send_test_email`, `activate_lifetime_campaign`, `trigger_lifetime_campaign` | `campaigns:send` |
 
 `create_campaign`, **kampanya taslağı (`one-time`, `drip` veya `lifetime`)** kaydeder. Doğrudan gönderim yapamaz veya zamanlama oluşturamaz. `get_campaign`, başlatmadan önce konuyu, içeriği, bağlantıyı, hedef kitleyi ve göndereni kontrol etmenizi sağlar.
 
@@ -80,24 +80,17 @@ Sunucu ayrıca `campaigns:read` kapsamında salt okunur kaynaklar sunar:
 
 İçe aktarma işlemi, bağlı çalışma alanına kişiler yazar. E-posta adresi olmayan potansiyel müşteriler atlanır. Zaten mevcut olan bir potansiyel müşteri güncellenir.
 
-### Kampanya başlatmasını onaylayın
+### Kampanya taslağını başlatın
 
-1. Asistandan taslağı `get_campaign` ile incelemesini isteyin.
-2. Asistandan kampanya kimliği ve istediğiniz tam hemen gönderim veya planlanmış zamanla `prepare_campaign_launch` aracını çağırmasını isteyin. Bu işlem tek kullanımlık bir onay URL'si döndürür; henüz e-posta gönderilmez.
-3. URL'yi açın; çalışma alanını, tahmini alıcı sayısını, içeriği, göndereni ve zamanlamayı inceleyin, ardından **Başlatmayı onayla** seçeneğine tıklayın.
-4. İstemciye dönün; istemci aynı kampanya kimliği, zamanlama ve `approvalId` ile `launch_campaign` aracını çağırabilir.
+1. Kampanya adını, konuyu, içeriği, gerçek göndereni, tahmini alıcı sayısını ve zamanı `get_campaign` ile inceleyin.
+2. İşleme sohbette izin verin. Asistan kampanya kimliğiyle birlikte hemen gönderim için `sendNow: true` veya saat dilimi içeren gelecekteki bir zaman için `scheduledAt` belirterek `launch_campaign` aracını doğrudan çağırır. Çelişen zaman bilgileri vermeyin. Önceden verilen izin için tekrar onay gerekmez.
+3. Dönen durumu, planlanan zamanı ve panel bağlantısını inceleyin. Kuyrukta veya planlanmış olması teslim edildiği anlamına gelmez. Sonuç belirsizse yeniden denemeden önce `get_campaign` ve `get_campaign_stats` ile kontrol edin.
 
-Bir onayın süresi **10 dakika** sonra dolar ve onay yalnızca bir kez kullanılabilir. Kampanya veya gönderen değişirse yeni bir onay isteyin. Nudgen, başlatma sırasında gönderenin hazır olma durumunu, uygun alıcıları, aboneliği, kotayı ve kuyruk kullanılabilirliğini yeniden kontrol eder. Teslimat yalnızca kampanya çalışanı başlatmayı işledikten sonra başlar.
-
-<Warning>
-  `launch_campaign` işlemini onaylamak ve tamamlamak gerçek e-posta gönderebilir. Gerçek bir hedef kitleyi onaylamadan önce gelen kutusu önizlemesini kontrol etmek için kontrol panelindeki test gönderimi akışını kullanın.
-</Warning>
+Nudgen çalışma alanı izinlerini, gönderen hazırlığını, uygun alıcıları, aboneliği, kotayı, kampanya sürümünü ve kuyruğu kontrol etmeye devam eder. Oluşturma ve düzenleme yalnızca taslak kaydeder; teslimat kampanya çalışanını gerektirir.
 
 ## Erişimi yönetin
 
-Bağlı her istemcinin çalışma alanını ve kapsamlarını görmek için **Ayarlar** → **API Anahtarları** → **Bağlı MCP uygulamaları** bölümünü açın. Artık erişmemesi gereken bir bağlantıyı buradan iptal edin. İptal işlemi, bağlantının jetonlarını ve bekleyen başlatma onaylarını devre dışı bırakır. Daha sonra OAuth üzerinden yeniden bağlanabilirsiniz.
-
-OAuth izinleri en fazla 90 gün geçerlidir. Bir çalışma alanına erişimin kaybedilmesi de istemcinin bu çalışma alanına ait bağlantıyı kullanmasını engeller.
+Erişimi incelemek veya kaldırmak için **Ayarlar** → **API Anahtarları** → **Bağlı MCP uygulamaları** bölümünü açın. Erişimi kaldırmak tokenları devre dışı bırakır. Çalışma alanı üyeliğinin kaybı da erişimi engeller. Gerekirse OAuth ile yeniden bağlanın.
 
 ## Sorun giderme
 
@@ -107,7 +100,7 @@ OAuth izinleri en fazla 90 gün geçerlidir. Bir çalışma alanına erişimin k
 | Bir araç daha fazla izin istiyor | Yeniden bağlanın ve bu çalışma alanı için gerekli kapsamı onaylayın. |
 | Kişi araması sonuçları daraltmanızı istiyor | Arama, adları ve e-posta adreslerini eşleştirir; etiket ve durum filtrelerinden sonra en fazla 5.000 kişiyi tarar. Filtreleri daraltın. |
 | Harita potansiyel müşteri içe aktarma işlemi bir işletmeyi atlıyor | Yalnızca e-posta adresi olan potansiyel müşteriler kaydedilir. `emailOnly` değerini true olarak ayarlayıp yeniden arayın veya zaten e-posta adresi içeren potansiyel müşterileri seçin. |
-| Başlatma onayının süresi doldu veya kampanya değişti | Yeni bir onay isteyin ve güncel kampanya ile göndereni inceleyin. |
+| Eski onay bağlantısı veya aracı | Araç listesini yenileyin ve doğrudan işleme sohbette izin verin; eski bağlantılar kampanya başlatamaz. |
 | Başlatma engelleniyor | Kampanyanın taslak durumunu, gönderenin hazır olma durumunu, uygun kişileri, plan kotasını ve [gönderim alan adını](/tr/settings/sending-domains) kontrol edin. |
 
 Taşıyıcı jetonlar ve doğrudan REST uç noktaları kullanan komut dosyaları için [Geliştirici API'sine](/tr/agents/api) bakın.
@@ -120,11 +113,10 @@ API ve MCP varsayılan olarak 5 km kullanır, 1–100 arasında tam sayı `radiu
 
 `enrichmentRetryToken` varsa `campaigns:read` ile `retry_map_leads_enrichment` aracına `token` gönderin. Token bağlı çalışma alanına özeldir, 15 dakikada sona erer ve bir kez kullanılır. İçe aktarmadan önce sonuçları `placeId` ile birleştirin. `emailOnly` geçerli yanıtı filtreler; yeniden denemeden sonra yeni potansiyel müşteriler görünebilir.
 
-
 ## Taslak düzenleme ve ürün kapsamı
 
 Mevcut bir taslağı düzenlemek için `update_campaign`, silmek için `delete_campaign` kullanın. İkisi de `campaigns:write` gerektirir; e-posta göndermez veya zamanlamaz. Yeni ürün alanları kendi OAuth izinlerini gerektirir. İstendiğinde yeniden bağlanıp bu izinleri onaylayın.
 
 Araç listesi kullanılabilir araçları ve parametrelerini gösterir. Tarayıcıya yönlendirme işlemi gerçekleştirmez: ödemeleri, sağlayıcı yetkilendirmesini, davet göndermeyi, çalışma alanı değiştirmeyi ve hassas ödeme ayarlarını tarayıcıda tamamlayın. MCP bağlantısı yetkilendirdiğiniz çalışma alanına bağlı kalır. Yönetim işlevleri, kimlik bilgileri, webhook’lar, izleme geri çağrıları ve dahili asistan kapsam dışındadır.
 
-API kapsamını `get_api_capabilities` ile inceleyin. Test gönderimi, lifetime etkinleştirme veya lifetime olayları için önce `prepare_campaign_action` ile tarayıcı onayı isteyin. Ardından aynı parametrelerle `send_test_email`, `activate_lifetime_campaign` veya `trigger_lifetime_campaign` çağırın. Onay on dakika geçerlidir ve yalnızca bir kez kullanılabilir.
+API kapsamını `get_api_capabilities` ile inceleyin. Sohbette izin verdikten sonra `send_test_email`, `activate_lifetime_campaign` veya `trigger_lifetime_campaign` aracını doğrudan çağırın. Testler yalnızca hesap e-postasına gönderilir. Lifetime etkinleştirme gelecekteki otomatik gönderimleri açar. Tarayıcı onayı veya onay kimliği gerekmez. Sonuç belirsizse yeniden denemeden önce durumu veya işlem geçmişini kontrol edin.
