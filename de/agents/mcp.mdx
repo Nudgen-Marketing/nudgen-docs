@@ -5,7 +5,28 @@ description: "KI-Assistenten per OAuth verbinden, Entwürfe erstellen und Versan
 
 ## Übersicht
 
-Nudgen stellt unter dem Endpunkt `/mcp` Ihrer App-Origin einen MCP-Server bereit. Er verwendet MCP `2026-07-28` über Streamable HTTP und erfordert OAuth 2.1. Verbinden Sie einen Client, der diesen Transport unterstützt. Melden Sie sich im Browser bei Nudgen an, wählen Sie einen Workspace und genehmigen Sie die vom Client angeforderten Berechtigungen. Ihre Verbindung bleibt an diesen Workspace gebunden, auch wenn Sie später im Dashboard den Workspace wechseln.
+Nudgen stellt unter `/mcp` Ihrer App-Origin einen MCP-Server bereit. Er unterstützt MCP `2026-07-28` über Streamable HTTP und benötigt OAuth 2.1. Melden Sie sich im Browser an und bestätigen Sie die angeforderten Berechtigungen. Wenn verfügbar, wählen Sie einen Workspace oder erlauben ausdrücklich den Zugriff auf alle aktuellen und zukünftigen Workspaces, denen Sie angehören. Ein Wechsel im Dashboard ändert den MCP-Standard nicht.
+
+## Mit mehreren Workspaces arbeiten
+
+Bestehende Verbindungen bleiben auf ihren ursprünglichen Workspace beschränkt, bis Sie sich erneut verbinden und den erweiterten Zugriff bestätigen. Bei Zugriff auf alle Workspaces werden neue Mitgliedschaften automatisch verfügbar. Nach Ende einer Mitgliedschaft werden weitere Aktionen dort blockiert. Rollen, Abonnements und Kontingente gelten weiterhin pro Workspace.
+
+Mit `list_workspaces`, `page` und `pageSize` erhalten Sie IDs, Namen, Slugs, Rollen und den Standard-Workspace. Dafür ist `teams:read` erforderlich. Geben Sie bei einem Workspace-Werkzeug `workspaceId` an, um nur diesen Aufruf auf einen anderen Workspace zu richten. Ohne Angabe gilt der Verbindungsstandard. Verwenden Sie beim Prüfen und Versenden einer Kampagne dieselbe explizite Workspace-ID.
+
+Wählen Sie den Standard bei der OAuth-Zustimmung. Ändern Sie ihn unter **Einstellungen → API-Schlüssel → Verbundene MCP-Apps** oder mit `set_default_workspace`, `workspaceId` und `teams:write`. Die Änderung gilt für alle Chats mit dieser Verbindung. Ein einzelner Aufruf mit anderer ID ändert den Standard nicht. Ist der Standard gelöscht oder nicht mehr zugänglich, geben Sie eine andere ID an oder aktualisieren Sie den Standard. Nudgen wählt nie stillschweigend einen Ersatz.
+
+```jsonl
+{"name":"list_workspaces","arguments":{"page":1,"pageSize":25}}
+{"name":"list_campaigns","arguments":{"workspaceId":"workspace_b"}}
+{"name":"set_default_workspace","arguments":{"workspaceId":"workspace_b"}}
+```
+
+Bestehende Ressourcen-URIs verwenden den Standard-Workspace. Diese Vorlagen wählen einen Workspace ausdrücklich:
+
+```text
+nudgen://workspaces/{workspaceId}/brand
+nudgen://workspaces/{workspaceId}/campaigns/{id}/summary
+```
 
 ## Warum das wichtig ist
 
@@ -35,7 +56,7 @@ Verwenden Sie für Codex CLI:
 
 ```bash
 codex mcp add nudgen --url "https://app.nudgen.net/mcp" --oauth-resource "https://app.nudgen.net/mcp"
-codex mcp login nudgen --scopes campaigns:read,campaigns:write,campaigns:send
+codex mcp login nudgen --scopes campaigns:read,campaigns:write,campaigns:send,teams:read,teams:write
 ```
 
 Wenn bereits ein Client namens `nudgen` konfiguriert ist, aktualisieren Sie diesen Eintrag mit der URL `/mcp`.
@@ -90,7 +111,7 @@ Nudgen prüft weiterhin Workspace-Berechtigungen, Absenderbereitschaft, geeignet
 
 ## Zugriff verwalten
 
-Öffnen Sie **Einstellungen** → **API-Schlüssel** → **Verbundene MCP-Apps**, um Zugriffe zu prüfen oder zu widerrufen. Widerruf deaktiviert die Tokens. Fehlende Workspace-Mitgliedschaft blockiert den Zugriff ebenfalls. Verbinden Sie sich bei Bedarf erneut über OAuth.
+Unter **Einstellungen → API-Schlüssel → Verbundene MCP-Apps** können Sie Zugriffe prüfen, den Standard ändern oder die Verbindung trennen. Das Trennen einer Verbindung für mehrere Workspaces widerruft deren Tokens und ausstehende Autorisierungscodes für alle Workspaces. Separate REST-Verbindungen bleiben bestehen. REST OAuth und der Assistent in der App behalten ihre bisherigen Workspace-Grenzen.
 
 ## Fehlerbehebung
 
@@ -117,6 +138,6 @@ Bei `enrichmentRetryToken` rufen Sie `retry_map_leads_enrichment` mit `token` un
 
 Mit `update_campaign` bearbeitest du einen vorhandenen Entwurf; mit `delete_campaign` löschst du ihn. Beide benötigen `campaigns:write` und versenden oder planen keine E-Mails. Neue Funktionsbereiche benötigen eigene OAuth-Berechtigungen. Verbinde dich erneut und bestätige diese Berechtigungen, wenn du dazu aufgefordert wirst.
 
-Die Werkzeugliste zeigt verfügbare Werkzeuge und Argumente. Browser-Übergaben führen keine Aktion aus: Schließe Zahlungen, Anbieterautorisierung, Einladungsversand, Workspace-Wechsel und vertrauliche Auszahlungseinstellungen im Browser ab. Deine MCP-Verbindung bleibt an den autorisierten Workspace gebunden. Administration, Zugangsdaten, Webhooks, Tracking-Callbacks und der interne Assistent sind ausgeschlossen.
+Die Werkzeugliste zeigt verfügbare Werkzeuge und Argumente. Browser-Übergaben führen keine Aktion aus. Nutzen Sie den Browser für Zahlungen, Anbieterautorisierung, Einladungen, das Erstellen/Löschen/Beitreten von Workspaces und vertrauliche Auszahlungseinstellungen. MCP-Zielauswahl und Standardänderungen wechseln den Dashboard-Workspace nicht. Administration, Zugangsdaten, Webhooks, Tracking-Callbacks und der interne Assistent sind ausgeschlossen.
 
 Prüfen Sie mit `get_api_capabilities` die API-Abdeckung. Rufen Sie nach Freigabe im Chat `send_test_email`, `activate_lifetime_campaign` oder `trigger_lifetime_campaign` direkt auf. Tests gehen nur an die Konto-E-Mail. Lifetime-Aktivierung ermöglicht künftigen automatischen Versand. Browserfreigabe und Freigabe-ID entfallen. Prüfen Sie bei unklarem Ergebnis vor einem erneuten Versuch Status oder Ausführungsverlauf.

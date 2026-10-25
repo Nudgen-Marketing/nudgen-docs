@@ -5,7 +5,28 @@ description: "Kết nối trợ lý qua OAuth, tạo bản nháp và cho phép g
 
 ## Tổng quan
 
-Nudgen cung cấp máy chủ MCP tại điểm cuối `/mcp` trên miền ứng dụng của bạn. Máy chủ sử dụng MCP `2026-07-28` qua Streamable HTTP và yêu cầu OAuth 2.1. Hãy kết nối một client hỗ trợ phương thức truyền tải này. Đăng nhập Nudgen trong trình duyệt, chọn một workspace và phê duyệt các quyền mà client yêu cầu. Kết nối vẫn được liên kết với workspace đó, ngay cả khi sau này bạn chuyển workspace trong dashboard.
+Nudgen cung cấp máy chủ MCP tại điểm cuối `/mcp` trên miền ứng dụng. Máy chủ hỗ trợ MCP `2026-07-28` qua Streamable HTTP và yêu cầu OAuth 2.1. Đăng nhập qua trình duyệt và phê duyệt các quyền được yêu cầu. Khi tính năng có sẵn, bạn có thể chọn một workspace hoặc cấp quyền rõ ràng cho tất cả workspace hiện tại và tương lai mà bạn là thành viên. Đổi workspace trong dashboard không đổi workspace mặc định của MCP.
+
+## Làm việc với nhiều workspace
+
+Kết nối hiện có vẫn chỉ truy cập workspace ban đầu cho đến khi bạn kết nối lại và cấp quyền rộng hơn. Với quyền truy cập tất cả workspace, các workspace bạn tham gia sau này tự động khả dụng; mất tư cách thành viên sẽ chặn các thao tác tiếp theo trong workspace đó. Vai trò, gói đăng ký và hạn mức vẫn áp dụng riêng cho từng workspace.
+
+Dùng `list_workspaces` với `page` và `pageSize` để xem ID, tên, slug, vai trò và workspace mặc định. Công cụ yêu cầu `teams:read`. Thêm `workspaceId` vào lời gọi công cụ để chọn workspace cho riêng thao tác đó. Nếu bỏ qua, công cụ dùng workspace mặc định của kết nối. Khi xem và gửi chiến dịch, hãy truyền cùng một ID workspace cụ thể.
+
+Chọn workspace mặc định khi cấp quyền OAuth. Đổi lựa chọn trong **Cài đặt → Khóa API → Ứng dụng MCP đã kết nối** hoặc gọi `set_default_workspace` với `workspaceId` và quyền `teams:write`. Thay đổi này áp dụng cho mọi cuộc trò chuyện dùng cùng kết nối. Chọn workspace cho riêng một thao tác không đổi mặc định. Nếu workspace mặc định bị xóa hoặc không còn truy cập được, hãy truyền một ID khác hoặc cập nhật mặc định; Nudgen không tự chọn workspace thay thế.
+
+```jsonl
+{"name":"list_workspaces","arguments":{"page":1,"pageSize":25}}
+{"name":"list_campaigns","arguments":{"workspaceId":"workspace_b"}}
+{"name":"set_default_workspace","arguments":{"workspaceId":"workspace_b"}}
+```
+
+URI tài nguyên hiện có dùng workspace mặc định. Các mẫu sau chọn workspace cụ thể:
+
+```text
+nudgen://workspaces/{workspaceId}/brand
+nudgen://workspaces/{workspaceId}/campaigns/{id}/summary
+```
 
 ## Tại sao điều này lại quan trọng
 
@@ -35,7 +56,7 @@ Với Codex CLI, hãy dùng:
 
 ```bash
 codex mcp add nudgen --url "https://app.nudgen.net/mcp" --oauth-resource "https://app.nudgen.net/mcp"
-codex mcp login nudgen --scopes campaigns:read,campaigns:write,campaigns:send
+codex mcp login nudgen --scopes campaigns:read,campaigns:write,campaigns:send,teams:read,teams:write
 ```
 
 Nếu một client có tên `nudgen` đã được cấu hình, hãy cập nhật mục đó bằng URL `/mcp`.
@@ -90,7 +111,7 @@ Nudgen vẫn kiểm tra quyền workspace, người gửi, người nhận đủ
 
 ## Quản lý quyền truy cập
 
-Mở **Cài đặt** → **Khóa API** → **Ứng dụng MCP đã kết nối** để xem và thu hồi quyền. Thu hồi sẽ vô hiệu hóa token. Mất tư cách thành viên workspace cũng chặn quyền truy cập. Kết nối lại qua OAuth khi cần.
+Mở **Cài đặt → Khóa API → Ứng dụng MCP đã kết nối** để xem quyền, đổi mặc định hoặc ngắt kết nối. Ngắt kết nối nhiều workspace sẽ thu hồi token và mã cấp quyền đang chờ của kết nối đó trên mọi workspace, không ngắt các kết nối REST riêng. OAuth REST và trợ lý trong ứng dụng giữ nguyên phạm vi workspace hiện có.
 
 ## Khắc phục sự cố
 
@@ -117,6 +138,6 @@ Nếu có `enrichmentRetryToken`, gọi `retry_map_leads_enrichment` với `toke
 
 Dùng `update_campaign` để sửa bản nháp hiện có và `delete_campaign` để xóa bản nháp. Cả hai yêu cầu `campaigns:write`; không công cụ nào gửi hoặc lên lịch email. Các nhóm chức năng mới yêu cầu quyền OAuth riêng. Kết nối lại và phê duyệt các quyền đó khi được yêu cầu.
 
-Danh sách công cụ cung cấp các công cụ có sẵn và tham số tương ứng. Chuyển sang trình duyệt không tự thực hiện hành động: hãy hoàn tất thanh toán, cấp quyền nhà cung cấp, gửi lời mời, chuyển không gian làm việc và cài đặt chi trả nhạy cảm trong trình duyệt. Kết nối MCP vẫn gắn với không gian làm việc đã được cấp quyền. Các chức năng quản trị, thông tin xác thực, webhook, callback theo dõi và trợ lý nội bộ không được cung cấp.
+Danh sách công cụ cho biết công cụ và tham số khả dụng. Chuyển sang trình duyệt không tự thực hiện thao tác: dùng trình duyệt để thanh toán, cấp quyền nhà cung cấp, gửi lời mời, tạo/xóa/tham gia workspace và sửa thông tin chi trả nhạy cảm. Chọn workspace hoặc đổi mặc định qua MCP không đổi workspace của dashboard. Chức năng quản trị, thông tin xác thực, webhook, callback theo dõi và trợ lý nội bộ không được cung cấp.
 
 Dùng `get_api_capabilities` để xem phạm vi API. Sau khi được bạn cho phép trong cuộc trò chuyện, gọi trực tiếp `send_test_email`, `activate_lifetime_campaign` hoặc `trigger_lifetime_campaign`. Email thử chỉ gửi đến email tài khoản. Kích hoạt lifetime cho phép tự động gửi về sau. Không cần phê duyệt trên trình duyệt hoặc mã phê duyệt. Kiểm tra trạng thái hoặc lịch sử thực thi trước khi thử lại nếu kết quả chưa rõ.

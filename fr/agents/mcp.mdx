@@ -5,7 +5,28 @@ description: "Connectez un assistant via OAuth, créez des brouillons et autoris
 
 ## Présentation
 
-Nudgen héberge un serveur MCP sur le point de terminaison `/mcp` de l'origine de votre application. Il utilise MCP `2026-07-28` via Streamable HTTP et exige OAuth 2.1. Connectez un client compatible avec ce transport. Connectez-vous à Nudgen dans votre navigateur, choisissez un espace de travail et approuvez les autorisations demandées par le client. La connexion reste associée à cet espace de travail, même si vous changez ensuite d'espace de travail dans le tableau de bord.
+Nudgen héberge un serveur MCP sur `/mcp` à l’origine de votre application. Il prend en charge MCP `2026-07-28` via Streamable HTTP et exige OAuth 2.1. Connectez-vous dans le navigateur et approuvez les autorisations demandées. Lorsque cette option est disponible, choisissez un espace de travail ou autorisez explicitement tous les espaces actuels et futurs dont vous êtes membre. Changer d’espace dans le tableau de bord ne modifie pas celui utilisé par défaut par MCP.
+
+## Travailler dans plusieurs espaces
+
+Les connexions existantes restent limitées à leur espace initial jusqu’à une nouvelle connexion avec un consentement élargi. Avec l’accès à tous les espaces, les nouvelles adhésions deviennent automatiquement disponibles. La perte d’une adhésion bloque les actions suivantes dans cet espace. Les rôles, abonnements et quotas restent propres à chaque espace.
+
+Utilisez `list_workspaces` avec `page` et `pageSize` pour consulter les identifiants, noms, slugs, rôles et l’espace par défaut. La portée `teams:read` est requise. Ajoutez `workspaceId` à un appel d’outil pour choisir un espace uniquement pour cette action. Sans cet argument, la connexion utilise son espace par défaut. Utilisez le même identifiant explicite pour examiner et envoyer une campagne.
+
+Choisissez l’espace par défaut lors du consentement OAuth. Modifiez-le dans **Paramètres → Clés API → Applications MCP connectées** ou avec `set_default_workspace`, `workspaceId` et la portée `teams:write`. Ce changement s’applique à toutes les conversations utilisant la connexion. Un choix ponctuel ne modifie pas la valeur par défaut. Si cet espace est supprimé ou inaccessible, indiquez un autre identifiant ou modifiez la valeur par défaut. Nudgen ne choisit jamais un remplacement silencieusement.
+
+```jsonl
+{"name":"list_workspaces","arguments":{"page":1,"pageSize":25}}
+{"name":"list_campaigns","arguments":{"workspaceId":"workspace_b"}}
+{"name":"set_default_workspace","arguments":{"workspaceId":"workspace_b"}}
+```
+
+Les URI existants utilisent l’espace par défaut. Ces modèles ciblent un espace explicitement :
+
+```text
+nudgen://workspaces/{workspaceId}/brand
+nudgen://workspaces/{workspaceId}/campaigns/{id}/summary
+```
 
 ## Pourquoi c'est important
 
@@ -35,7 +56,7 @@ Pour Codex CLI, utilisez :
 
 ```bash
 codex mcp add nudgen --url "https://app.nudgen.net/mcp" --oauth-resource "https://app.nudgen.net/mcp"
-codex mcp login nudgen --scopes campaigns:read,campaigns:write,campaigns:send
+codex mcp login nudgen --scopes campaigns:read,campaigns:write,campaigns:send,teams:read,teams:write
 ```
 
 Si un client nommé `nudgen` est déjà configuré, mettez à jour cette entrée avec l'URL `/mcp`.
@@ -90,7 +111,7 @@ Nudgen vérifie toujours les droits du workspace, l’expéditeur, les destinata
 
 ## Gérer les accès
 
-Ouvrez **Paramètres** → **Clés API** → **Applications MCP connectées** pour consulter ou révoquer l’accès. La révocation désactive les tokens. Perdre l’appartenance au workspace bloque aussi l’accès. Reconnectez-vous via OAuth si nécessaire.
+Ouvrez **Paramètres → Clés API → Applications MCP connectées** pour consulter l’accès, changer l’espace par défaut ou déconnecter l’application. Déconnecter une connexion multi-espaces révoque ses jetons et codes d’autorisation en attente pour tous les espaces sans déconnecter les connexions REST distinctes. OAuth REST et l’assistant intégré conservent leurs limites actuelles.
 
 ## Dépannage
 
@@ -117,6 +138,6 @@ Avec `enrichmentRetryToken`, appelez `retry_map_leads_enrichment` avec `token` e
 
 Utilisez `update_campaign` pour modifier un brouillon existant et `delete_campaign` pour le supprimer. Les deux nécessitent `campaigns:write` ; aucun ne lance ni ne programme d’envoi. Les nouveaux domaines du produit nécessitent leurs propres autorisations OAuth. Reconnectez-vous et approuvez ces autorisations lorsque cela vous est demandé.
 
-La liste des outils indique les outils disponibles et leurs paramètres. Les liens vers le navigateur n’exécutent aucune action : effectuez les paiements, l’autorisation des fournisseurs, l’envoi d’invitations, le changement d’espace de travail et les réglages de versement sensibles dans le navigateur. La connexion MCP reste liée à l’espace autorisé. L’administration, les identifiants, les webhooks, les callbacks de suivi et l’assistant interne sont exclus.
+La liste des outils indique les outils disponibles et leurs paramètres. Un lien vers le navigateur n’exécute aucune action. Utilisez le navigateur pour les paiements, l’autorisation des fournisseurs, les invitations, la création/suppression/adhésion aux espaces et les réglages de versement sensibles. Le ciblage MCP et son espace par défaut ne changent pas l’espace du tableau de bord. L’administration, les identifiants, les webhooks, les callbacks de suivi et l’assistant interne sont exclus.
 
 Consultez la couverture avec `get_api_capabilities`. Après autorisation dans le chat, appelez directement `send_test_email`, `activate_lifetime_campaign` ou `trigger_lifetime_campaign`. Les tests sont envoyés uniquement à l’adresse du compte. Activer lifetime permet les futurs envois automatiques. Aucun lien ni ID d’approbation n’est nécessaire. Vérifiez le statut ou l’historique avant de réessayer un résultat incertain.

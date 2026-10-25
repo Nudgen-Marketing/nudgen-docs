@@ -5,7 +5,28 @@ description: "Conecta un asistente mediante OAuth, crea borradores y autoriza en
 
 ## Descripción general
 
-Nudgen aloja un servidor MCP en el endpoint `/mcp` del origen de tu aplicación. Usa MCP `2026-07-28` mediante Streamable HTTP y requiere OAuth 2.1. Conecta un cliente compatible con ese transporte. Inicia sesión en Nudgen desde el navegador, elige un workspace y aprueba los permisos que solicita el cliente. La conexión permanece vinculada a ese workspace, aunque más adelante cambies de workspace en el panel.
+Nudgen aloja un servidor MCP en `/mcp` del origen de tu aplicación. Admite MCP `2026-07-28` mediante Streamable HTTP y requiere OAuth 2.1. Inicia sesión en el navegador y aprueba los permisos solicitados. Cuando esté disponible, elige un espacio de trabajo o autoriza explícitamente todos los espacios actuales y futuros a los que pertenezcas. Cambiar de espacio en el panel no cambia el predeterminado de MCP.
+
+## Trabaja con varios espacios
+
+Las conexiones existentes siguen limitadas a su espacio original hasta que vuelvas a conectarlas y apruebes un acceso más amplio. Con acceso a todos los espacios, las nuevas membresías están disponibles automáticamente. Perder la membresía bloquea las siguientes acciones en ese espacio. Los roles, suscripciones y cuotas se aplican por separado en cada espacio.
+
+Usa `list_workspaces` con `page` y `pageSize` para consultar identificadores, nombres, slugs, roles y el espacio predeterminado. Requiere `teams:read`. Añade `workspaceId` a una llamada para elegir otro espacio solo para esa acción. Si lo omites, se usa el predeterminado de la conexión. Al revisar y enviar una campaña, pasa el mismo identificador explícito.
+
+Elige el espacio predeterminado durante el consentimiento OAuth. Cámbialo en **Configuración → Claves API → Aplicaciones MCP conectadas** o llama a `set_default_workspace` con `workspaceId` y el permiso `teams:write`. El cambio afecta a todos los chats que usan esa conexión. Una selección para una sola llamada no cambia el predeterminado. Si se elimina el espacio o pierdes acceso, indica otro identificador o actualiza el predeterminado. Nudgen nunca elige un sustituto sin avisar.
+
+```jsonl
+{"name":"list_workspaces","arguments":{"page":1,"pageSize":25}}
+{"name":"list_campaigns","arguments":{"workspaceId":"workspace_b"}}
+{"name":"set_default_workspace","arguments":{"workspaceId":"workspace_b"}}
+```
+
+Los URI existentes usan el espacio predeterminado. Estas plantillas seleccionan un espacio explícitamente:
+
+```text
+nudgen://workspaces/{workspaceId}/brand
+nudgen://workspaces/{workspaceId}/campaigns/{id}/summary
+```
 
 ## Por qué esto es importante
 
@@ -35,7 +56,7 @@ Para Codex CLI, usa:
 
 ```bash
 codex mcp add nudgen --url "https://app.nudgen.net/mcp" --oauth-resource "https://app.nudgen.net/mcp"
-codex mcp login nudgen --scopes campaigns:read,campaigns:write,campaigns:send
+codex mcp login nudgen --scopes campaigns:read,campaigns:write,campaigns:send,teams:read,teams:write
 ```
 
 Si ya hay configurado un cliente llamado `nudgen`, actualiza esa entrada con la URL `/mcp`.
@@ -90,7 +111,7 @@ Nudgen sigue comprobando permisos del workspace, remitente, destinatarios aptos,
 
 ## Gestionar el acceso
 
-Abre **Configuración** → **Claves API** → **Aplicaciones MCP conectadas** para revisar o revocar acceso. Revocar desactiva los tokens. Perder la membresía del workspace también bloquea el acceso. Vuelve a conectar mediante OAuth cuando sea necesario.
+Abre **Configuración → Claves API → Aplicaciones MCP conectadas** para revisar el acceso, cambiar el predeterminado o desconectar. Desconectar una conexión de varios espacios revoca sus tokens y códigos de autorización pendientes en todos los espacios sin desconectar conexiones REST independientes. OAuth REST y el asistente integrado conservan sus límites actuales.
 
 ## Solución de problemas
 
@@ -117,6 +138,6 @@ Si recibes `enrichmentRetryToken`, llama a `retry_map_leads_enrichment` con `tok
 
 Usa `update_campaign` para editar un borrador existente y `delete_campaign` para eliminarlo. Ambos requieren `campaigns:write`; ninguno envía ni programa correos. Las nuevas áreas del producto requieren permisos OAuth propios. Vuelve a conectarte y aprueba esos permisos cuando se soliciten.
 
-La lista de herramientas muestra las herramientas disponibles y sus argumentos. Los enlaces al navegador no ejecutan acciones: completa los pagos, la autorización de proveedores, el envío de invitaciones, el cambio de espacio de trabajo y los datos confidenciales de cobro en el navegador. La conexión MCP sigue vinculada al espacio autorizado. Se excluyen la administración, las credenciales, los webhooks, los callbacks de seguimiento y el asistente interno.
+La lista de herramientas muestra las herramientas disponibles y sus argumentos. Los enlaces al navegador no ejecutan acciones. Usa el navegador para pagos, autorización de proveedores, invitaciones, creación/eliminación/ingreso a espacios y datos confidenciales de cobro. Seleccionar un espacio o cambiar el predeterminado por MCP no cambia el espacio del panel. Se excluyen la administración, las credenciales, los webhooks, los callbacks de seguimiento y el asistente interno.
 
 Usa `get_api_capabilities` para consultar la cobertura. Tras autorizar en el chat, llama directamente a `send_test_email`, `activate_lifetime_campaign` o `trigger_lifetime_campaign`. Las pruebas solo se envían al correo de la cuenta. Activar lifetime permite futuros envíos automáticos. No se requiere aprobación del navegador ni ID de aprobación. Ante un resultado incierto, revisa el estado o historial antes de reintentar.

@@ -5,7 +5,28 @@ description: "Connect an AI assistant through OAuth, create drafts, and authoriz
 
 ## Overview
 
-Nudgen hosts an MCP server at your app origin's `/mcp` endpoint. It speaks MCP `2026-07-28` over Streamable HTTP and requires OAuth 2.1. Connect a client that supports that transport. Sign in to Nudgen in your browser, choose a workspace, and approve the permissions the client requests. Your connection stays bound to that workspace, even if you later switch workspaces in the dashboard.
+Nudgen hosts an MCP server at your app origin's `/mcp` endpoint. It supports MCP `2026-07-28` over Streamable HTTP and requires OAuth 2.1. Sign in through your browser and approve the requested permissions. When available, choose access to one workspace or explicitly authorize all current and future workspaces you belong to. Dashboard workspace changes do not change the MCP default.
+
+## Work across workspaces
+
+Existing connections stay limited to their original workspace until you reconnect and approve broader access. With all-workspace access, new memberships become available automatically; losing membership blocks subsequent actions in that workspace. Roles, subscriptions, and quotas still apply separately in each workspace.
+
+Use `list_workspaces` with `page` and `pageSize` to find workspace IDs, names, slugs, roles, and the default. It requires `teams:read`. Add `workspaceId` to a workspace tool call to override the default for that action. Omit it to use the connection default. Pass the same explicit workspace ID when reviewing and sending a campaign.
+
+Choose the default during OAuth consent. Change it in **Settings → API Keys → Connected MCP apps** or call `set_default_workspace` with `workspaceId` and the `teams:write` scope. This changes the default for every chat using that connection. An individual override does not change it. If the default is deleted or inaccessible, select another with an explicit override or update the default; Nudgen never silently picks a replacement.
+
+```jsonl
+{"name":"list_workspaces","arguments":{"page":1,"pageSize":25}}
+{"name":"list_campaigns","arguments":{"workspaceId":"workspace_b"}}
+{"name":"set_default_workspace","arguments":{"workspaceId":"workspace_b"}}
+```
+
+Existing resource URIs use the default workspace. These resource templates target a workspace explicitly:
+
+```text
+nudgen://workspaces/{workspaceId}/brand
+nudgen://workspaces/{workspaceId}/campaigns/{id}/summary
+```
 
 ## Why this matters
 
@@ -35,7 +56,7 @@ For Codex CLI, use:
 
 ```bash
 codex mcp add nudgen --url "https://app.nudgen.net/mcp" --oauth-resource "https://app.nudgen.net/mcp"
-codex mcp login nudgen --scopes campaigns:read,campaigns:write,campaigns:send
+codex mcp login nudgen --scopes campaigns:read,campaigns:write,campaigns:send,teams:read,teams:write
 ```
 
 If a client named `nudgen` is already configured, update that entry with the `/mcp` URL.
@@ -90,7 +111,7 @@ Nudgen still checks workspace permissions, sender readiness, eligible recipients
 
 ## Manage access
 
-Open **Settings** → **API Keys** → **Connected MCP apps** to inspect and revoke access. Revocation disables the connection tokens. Losing workspace membership also blocks access. Reconnect through OAuth when needed.
+Open **Settings → API Keys → Connected MCP apps** to inspect access, change the default, or disconnect. Disconnecting a multi-workspace connection revokes its tokens and pending authorization codes across all workspaces without disconnecting separate REST connections. REST OAuth and the in-app assistant retain their existing workspace boundaries.
 
 ## Troubleshooting
 
@@ -117,6 +138,6 @@ If `enrichmentRetryToken` is present, call `retry_map_leads_enrichment` with `to
 
 Use `update_campaign` to edit an existing draft and `delete_campaign` to delete a draft. Both require `campaigns:write`; neither sends or schedules email. New product domains require their own OAuth permissions. Reconnect and approve those permissions when requested.
 
-Tool discovery lists the available tools and their arguments. Browser handoffs do not perform the action: complete payments, provider authorization, invitation sending, workspace switching, and sensitive payout settings in the browser. Your MCP connection remains bound to the workspace you authorized. Administrative functions, credentials, webhooks, tracking callbacks, and the internal assistant are excluded.
+Tool discovery lists available tools and arguments. Browser handoffs do not complete actions: use the browser for payments, provider authorization, invitation sending, workspace creation/deletion/joining, and sensitive payout settings. MCP workspace targeting and default changes do not switch the dashboard workspace. Administrative functions, credentials, webhooks, tracking callbacks, and the internal assistant are excluded.
 
 Use `get_api_capabilities` to inspect API coverage. After authorization in chat, call `send_test_email`, `activate_lifetime_campaign`, or `trigger_lifetime_campaign` directly. Test sends go only to the account email. Lifetime activation enables future automated delivery. No browser approval or approval ID is required. Check status or execution history before retrying an uncertain outcome.

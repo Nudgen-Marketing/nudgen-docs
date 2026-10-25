@@ -5,7 +5,28 @@ description: "Hubungkan asisten melalui OAuth, buat draf, dan izinkan pengiriman
 
 ## Ikhtisar
 
-Nudgen menyediakan server MCP di endpoint `/mcp` pada origin aplikasi Anda. Server ini menggunakan MCP `2026-07-28` melalui Streamable HTTP dan memerlukan OAuth 2.1. Hubungkan klien yang mendukung transport tersebut. Masuk ke Nudgen di browser, pilih ruang kerja, lalu setujui izin yang diminta klien. Koneksi Anda tetap terikat ke ruang kerja tersebut, meskipun nanti Anda beralih ruang kerja di dasbor.
+Nudgen menyediakan server MCP di `/mcp` pada origin aplikasi Anda. Server mendukung MCP `2026-07-28` melalui Streamable HTTP dan memerlukan OAuth 2.1. Masuk melalui browser dan setujui izin yang diminta. Jika tersedia, pilih satu ruang kerja atau izinkan secara eksplisit semua ruang kerja saat ini dan mendatang yang Anda ikuti. Beralih ruang kerja di dasbor tidak mengubah default MCP.
+
+## Bekerja di beberapa ruang kerja
+
+Koneksi yang sudah ada tetap terbatas pada ruang kerja awal sampai Anda menghubungkan ulang dan menyetujui akses yang lebih luas. Dengan akses semua ruang kerja, keanggotaan baru tersedia otomatis. Kehilangan keanggotaan memblokir tindakan berikutnya di ruang kerja tersebut. Peran, langganan, dan kuota tetap berlaku per ruang kerja.
+
+Gunakan `list_workspaces` dengan `page` dan `pageSize` untuk melihat ID, nama, slug, peran, dan ruang kerja default. Cakupan `teams:read` diperlukan. Tambahkan `workspaceId` ke pemanggilan alat untuk memilih ruang kerja hanya bagi tindakan itu. Jika dihilangkan, default koneksi digunakan. Saat meninjau dan mengirim kampanye, berikan ID ruang kerja eksplisit yang sama.
+
+Pilih default saat persetujuan OAuth. Ubah melalui **Pengaturan → Kunci API → Aplikasi MCP terhubung** atau panggil `set_default_workspace` dengan `workspaceId` dan cakupan `teams:write`. Perubahan berlaku untuk semua chat yang memakai koneksi itu. Pilihan per panggilan tidak mengubah default. Jika default dihapus atau tidak dapat diakses, berikan ID lain atau perbarui default. Nudgen tidak diam-diam memilih pengganti.
+
+```jsonl
+{"name":"list_workspaces","arguments":{"page":1,"pageSize":25}}
+{"name":"list_campaigns","arguments":{"workspaceId":"workspace_b"}}
+{"name":"set_default_workspace","arguments":{"workspaceId":"workspace_b"}}
+```
+
+URI sumber daya yang sudah ada memakai ruang kerja default. Template berikut menargetkan ruang kerja secara eksplisit:
+
+```text
+nudgen://workspaces/{workspaceId}/brand
+nudgen://workspaces/{workspaceId}/campaigns/{id}/summary
+```
 
 ## Mengapa hal ini penting
 
@@ -35,7 +56,7 @@ Untuk Codex CLI, gunakan:
 
 ```bash
 codex mcp add nudgen --url "https://app.nudgen.net/mcp" --oauth-resource "https://app.nudgen.net/mcp"
-codex mcp login nudgen --scopes campaigns:read,campaigns:write,campaigns:send
+codex mcp login nudgen --scopes campaigns:read,campaigns:write,campaigns:send,teams:read,teams:write
 ```
 
 Jika klien bernama `nudgen` sudah dikonfigurasi, perbarui entri tersebut dengan URL `/mcp`.
@@ -90,7 +111,7 @@ Nudgen tetap memeriksa izin workspace, kesiapan pengirim, penerima yang memenuhi
 
 ## Kelola akses
 
-Buka **Pengaturan** → **Kunci API** → **Aplikasi MCP terhubung** untuk memeriksa atau mencabut akses. Pencabutan menonaktifkan token. Kehilangan keanggotaan workspace juga memblokir akses. Hubungkan kembali melalui OAuth bila diperlukan.
+Buka **Pengaturan → Kunci API → Aplikasi MCP terhubung** untuk memeriksa akses, mengubah default, atau memutuskan koneksi. Memutuskan koneksi beberapa ruang kerja mencabut token dan kode otorisasi tertundanya di semua ruang kerja tanpa memutus koneksi REST terpisah. OAuth REST dan asisten dalam aplikasi mempertahankan batas ruang kerja yang ada.
 
 ## Pemecahan masalah
 
@@ -117,6 +138,6 @@ Jika ada `enrichmentRetryToken`, panggil `retry_map_leads_enrichment` dengan `to
 
 Gunakan `update_campaign` untuk mengedit draf yang ada dan `delete_campaign` untuk menghapus draf. Keduanya memerlukan `campaigns:write`; keduanya tidak mengirim atau menjadwalkan email. Area produk baru memerlukan izin OAuth tersendiri. Hubungkan kembali dan setujui izin tersebut saat diminta.
 
-Daftar alat menampilkan alat yang tersedia beserta argumennya. Pengalihan ke browser tidak menjalankan tindakan: selesaikan pembayaran, otorisasi penyedia, pengiriman undangan, perpindahan ruang kerja, dan pengaturan pencairan sensitif di browser. Koneksi MCP tetap terikat pada ruang kerja yang diotorisasi. Administrasi, kredensial, webhook, callback pelacakan, dan asisten internal tidak disertakan.
+Daftar alat menunjukkan alat dan argumen yang tersedia. Pengalihan ke browser tidak menjalankan tindakan. Gunakan browser untuk pembayaran, otorisasi penyedia, undangan, membuat/menghapus/bergabung ke ruang kerja, dan pengaturan pencairan sensitif. Target dan default MCP tidak mengubah ruang kerja dasbor. Administrasi, kredensial, webhook, callback pelacakan, dan asisten internal tidak disertakan.
 
 Gunakan `get_api_capabilities` untuk memeriksa cakupan API. Setelah izin di chat, panggil langsung `send_test_email`, `activate_lifetime_campaign`, atau `trigger_lifetime_campaign`. Pengujian hanya dikirim ke email akun. Aktivasi lifetime mengizinkan pengiriman otomatis berikutnya. Tidak diperlukan persetujuan browser atau ID persetujuan. Periksa status atau riwayat eksekusi sebelum mengulang hasil yang belum pasti.

@@ -5,7 +5,28 @@ description: "通过 OAuth 连接助手，创建草稿，并在聊天中授权�
 
 ## 概览
 
-Nudgen 在应用来源的 `/mcp` 端点托管 MCP 服务器。该服务器通过 Streamable HTTP 使用 MCP `2026-07-28`，并要求 OAuth 2.1。请连接支持此传输方式的客户端。在浏览器中登录 Nudgen，选择一个工作区，并批准客户端请求的权限。即使你之后在仪表盘中切换工作区，该连接仍会绑定到原先选择的工作区。
+Nudgen 在应用来源的 `/mcp` 端点托管 MCP 服务器，支持通过 Streamable HTTP 使用 MCP `2026-07-28`，并要求 OAuth 2.1。在浏览器中登录并批准所需权限。功能可用时，你可以选择一个工作区，或明确授权访问你当前及未来加入的所有工作区。在仪表盘切换工作区不会改变 MCP 的默认工作区。
+
+## 使用多个工作区
+
+现有连接仍限于原先的工作区，直到你重新连接并批准更广泛的访问。授权所有工作区后，新加入的工作区会自动可用；失去成员资格后，该工作区中的后续操作将被阻止。角色、订阅和配额仍分别按工作区执行。
+
+使用带有 `page` 和 `pageSize` 的 `list_workspaces` 查看工作区 ID、名称、slug、角色及默认状态。需要 `teams:read` 权限。为工作区工具调用添加 `workspaceId` 可仅为本次操作指定目标；省略时使用连接的默认工作区。检查和发送同一营销活动时，请明确传入相同的工作区 ID。
+
+在 OAuth 授权时选择默认工作区。通过 **设置 → API 密钥 → 已连接的 MCP 应用**，或使用 `workspaceId` 和 `teams:write` 权限调用 `set_default_workspace` 来修改。此修改影响使用该连接的所有聊天；单次调用指定目标不会修改默认值。如果默认工作区被删除或无法访问，请明确指定其他工作区或更新默认值。Nudgen 不会悄悄选择替代工作区。
+
+```jsonl
+{"name":"list_workspaces","arguments":{"page":1,"pageSize":25}}
+{"name":"list_campaigns","arguments":{"workspaceId":"workspace_b"}}
+{"name":"set_default_workspace","arguments":{"workspaceId":"workspace_b"}}
+```
+
+现有资源 URI 使用默认工作区。以下模板可明确指定工作区：
+
+```text
+nudgen://workspaces/{workspaceId}/brand
+nudgen://workspaces/{workspaceId}/campaigns/{id}/summary
+```
 
 ## 为什么这很重要
 
@@ -35,7 +56,7 @@ https://app.nudgen.net/mcp
 
 ```bash
 codex mcp add nudgen --url "https://app.nudgen.net/mcp" --oauth-resource "https://app.nudgen.net/mcp"
-codex mcp login nudgen --scopes campaigns:read,campaigns:write,campaigns:send
+codex mcp login nudgen --scopes campaigns:read,campaigns:write,campaigns:send,teams:read,teams:write
 ```
 
 如果已经配置名为 `nudgen` 的客户端，请将该条目的 URL 更新为 `/mcp`。
@@ -90,7 +111,7 @@ Nudgen 仍会检查工作区权限、发件人状态、符合条件的收件人�
 
 ## 管理访问权限
 
-打开 **设置** → **API 密钥** → **已连接的 MCP 应用** 查看或撤销访问。撤销会使令牌失效。失去工作区成员资格也会阻止访问。需要时通过 OAuth 重新连接。
+打开 **设置 → API 密钥 → 已连接的 MCP 应用** 查看访问范围、修改默认工作区或断开连接。断开多工作区连接会撤销该连接在所有工作区的令牌和待兑换授权码，不影响独立的 REST 连接。REST OAuth 和应用内助手保持现有工作区边界。
 
 ## 故障排除
 
@@ -117,6 +138,6 @@ API和MCP默认使用5 km，接受整数 `radiusKm` 1–100，不显示仪表板
 
 使用 `update_campaign` 编辑现有草稿，使用 `delete_campaign` 删除草稿。两者均需要 `campaigns:write`，不会发送或安排邮件。新增产品领域需要独立的 OAuth 权限。收到提示时，请重新连接并批准这些权限。
 
-工具列表提供可用工具及其参数。跳转浏览器不会执行操作：请在浏览器中完成付款、提供商授权、发送邀请、切换工作区及敏感收款设置。MCP 连接始终绑定到已授权的工作区。管理功能、凭据、Webhook、跟踪回调和内部助手不在范围内。
+工具列表提供可用工具及参数。跳转浏览器本身不会执行操作。付款、提供商授权、邀请、创建/删除/加入工作区及敏感收款设置仍需在浏览器完成。MCP 目标选择和默认值更改不会切换仪表盘工作区。管理功能、凭据、Webhook、跟踪回调和内部助手不在范围内。
 
 使用 `get_api_capabilities` 查看 API 覆盖范围。在聊天中授权后，直接调用 `send_test_email`、`activate_lifetime_campaign` 或 `trigger_lifetime_campaign`。测试邮件仅发送到帐户邮箱。启用 lifetime 会允许后续自动发送。无需浏览器批准或批准 ID。结果不确定时，先检查状态或执行历史，再决定是否重试。

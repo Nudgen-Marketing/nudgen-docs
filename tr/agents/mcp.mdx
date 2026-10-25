@@ -5,7 +5,28 @@ description: "Asistanı OAuth ile bağlayın, taslak oluşturun ve gönderime so
 
 ## Genel bakış
 
-Nudgen, uygulama origin'inizin `/mcp` uç noktasında bir MCP sunucusu barındırır. Sunucu, Streamable HTTP üzerinden MCP `2026-07-28` protokolünü kullanır ve OAuth 2.1 gerektirir. Bu aktarımı destekleyen bir istemci bağlayın. Tarayıcınızda Nudgen'da oturum açın, bir çalışma alanı seçin ve istemcinin istediği izinleri onaylayın. Daha sonra kontrol panelinde çalışma alanını değiştirseniz bile bağlantınız bu çalışma alanına bağlı kalır.
+Nudgen, uygulama origin’inizin `/mcp` uç noktasında MCP sunucusu barındırır. Streamable HTTP üzerinden MCP `2026-07-28` desteklenir ve OAuth 2.1 gerekir. Tarayıcıda oturum açıp istenen izinleri onaylayın. Kullanılabilir olduğunda tek bir çalışma alanını seçin veya üyesi olduğunuz mevcut ve gelecekteki tüm çalışma alanlarına açıkça erişim verin. Kontrol panelinde alan değiştirmek MCP varsayılanını değiştirmez.
+
+## Birden fazla çalışma alanıyla çalışın
+
+Mevcut bağlantılar, yeniden bağlanıp daha geniş erişimi onaylayana kadar ilk çalışma alanıyla sınırlı kalır. Tüm alanlara erişimde yeni üyelikler otomatik kullanılabilir. Üyelik sona erdiğinde o alandaki sonraki işlemler engellenir. Roller, abonelikler ve kotalar her çalışma alanında ayrı uygulanır.
+
+Kimlikleri, adları, slug değerlerini, rolleri ve varsayılan alanı görmek için `list_workspaces` aracını `page` ve `pageSize` ile kullanın. `teams:read` gerekir. Yalnızca belirli bir işlem için alan seçmek üzere araç çağrısına `workspaceId` ekleyin. Eklenmezse bağlantının varsayılanı kullanılır. Kampanyayı incelerken ve gönderirken aynı açık çalışma alanı kimliğini iletin.
+
+OAuth onayı sırasında varsayılanı seçin. **Ayarlar → API Anahtarları → Bağlı MCP uygulamaları** bölümünden veya `workspaceId` ve `teams:write` izniyle `set_default_workspace` çağırarak değiştirin. Bu değişiklik bağlantıyı kullanan tüm sohbetleri etkiler. Tek çağrılık seçim varsayılanı değiştirmez. Varsayılan silinirse veya erişilemezse başka bir kimlik belirtin ya da varsayılanı güncelleyin. Nudgen sessizce başka bir alan seçmez.
+
+```jsonl
+{"name":"list_workspaces","arguments":{"page":1,"pageSize":25}}
+{"name":"list_campaigns","arguments":{"workspaceId":"workspace_b"}}
+{"name":"set_default_workspace","arguments":{"workspaceId":"workspace_b"}}
+```
+
+Mevcut kaynak URI’leri varsayılan alanı kullanır. Bu şablonlar belirli bir alanı açıkça hedefler:
+
+```text
+nudgen://workspaces/{workspaceId}/brand
+nudgen://workspaces/{workspaceId}/campaigns/{id}/summary
+```
 
 ## Bu neden önemlidir
 
@@ -35,7 +56,7 @@ Codex CLI için şunları kullanın:
 
 ```bash
 codex mcp add nudgen --url "https://app.nudgen.net/mcp" --oauth-resource "https://app.nudgen.net/mcp"
-codex mcp login nudgen --scopes campaigns:read,campaigns:write,campaigns:send
+codex mcp login nudgen --scopes campaigns:read,campaigns:write,campaigns:send,teams:read,teams:write
 ```
 
 `nudgen` adlı bir istemci zaten yapılandırılmışsa bu kaydı `/mcp` URL'siyle güncelleyin.
@@ -90,7 +111,7 @@ Nudgen çalışma alanı izinlerini, gönderen hazırlığını, uygun alıcıla
 
 ## Erişimi yönetin
 
-Erişimi incelemek veya kaldırmak için **Ayarlar** → **API Anahtarları** → **Bağlı MCP uygulamaları** bölümünü açın. Erişimi kaldırmak tokenları devre dışı bırakır. Çalışma alanı üyeliğinin kaybı da erişimi engeller. Gerekirse OAuth ile yeniden bağlanın.
+Erişimi görmek, varsayılanı değiştirmek veya bağlantıyı kesmek için **Ayarlar → API Anahtarları → Bağlı MCP uygulamaları** bölümünü açın. Çok alanlı bağlantıyı kesmek, ayrı REST bağlantılarını etkilemeden tüm alanlardaki tokenlarını ve bekleyen yetkilendirme kodlarını iptal eder. REST OAuth ve uygulama içi asistan mevcut alan sınırlarını korur.
 
 ## Sorun giderme
 
@@ -117,6 +138,6 @@ API ve MCP varsayılan olarak 5 km kullanır, 1–100 arasında tam sayı `radiu
 
 Mevcut bir taslağı düzenlemek için `update_campaign`, silmek için `delete_campaign` kullanın. İkisi de `campaigns:write` gerektirir; e-posta göndermez veya zamanlamaz. Yeni ürün alanları kendi OAuth izinlerini gerektirir. İstendiğinde yeniden bağlanıp bu izinleri onaylayın.
 
-Araç listesi kullanılabilir araçları ve parametrelerini gösterir. Tarayıcıya yönlendirme işlemi gerçekleştirmez: ödemeleri, sağlayıcı yetkilendirmesini, davet göndermeyi, çalışma alanı değiştirmeyi ve hassas ödeme ayarlarını tarayıcıda tamamlayın. MCP bağlantısı yetkilendirdiğiniz çalışma alanına bağlı kalır. Yönetim işlevleri, kimlik bilgileri, webhook’lar, izleme geri çağrıları ve dahili asistan kapsam dışındadır.
+Araç listesi kullanılabilir araçları ve parametreleri gösterir. Tarayıcı yönlendirmeleri işlem gerçekleştirmez. Ödemeler, sağlayıcı yetkilendirmesi, davetler, alan oluşturma/silme/katılma ve hassas ödeme ayarları için tarayıcıyı kullanın. MCP hedefi veya varsayılanı kontrol panelindeki alanı değiştirmez. Yönetim, kimlik bilgileri, webhook’lar, izleme geri çağrıları ve dahili asistan kapsam dışındadır.
 
 API kapsamını `get_api_capabilities` ile inceleyin. Sohbette izin verdikten sonra `send_test_email`, `activate_lifetime_campaign` veya `trigger_lifetime_campaign` aracını doğrudan çağırın. Testler yalnızca hesap e-postasına gönderilir. Lifetime etkinleştirme gelecekteki otomatik gönderimleri açar. Tarayıcı onayı veya onay kimliği gerekmez. Sonuç belirsizse yeniden denemeden önce durumu veya işlem geçmişini kontrol edin.
